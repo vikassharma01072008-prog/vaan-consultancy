@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VAA Gyms — Member Check-in</title>
+<meta name="description" content="VAA Gyms — QR member check-in with streak tracking and expiry alerts.">
+<meta name="theme-color" content="#0a0e1a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#0a0e1a;color:#f5f5f5;-webkit-tap-highlight-color:transparent;min-height:100vh;display:flex;flex-direction:column;line-height:1.55;padding-top:44px}
+a{text-decoration:none;color:inherit}
+:root{--gold:#ffd400;--red:#e11d2a;--orange:#ff6b35;--card:#12192a;--card-2:#0d1220;--line:rgba(255,212,0,.15);--line-soft:rgba(255,255,255,.08);--white:#f5f5f5;--muted:#8a8f9c;--green:#25b46e}
+
+/* DEMO BANNER */
+.demo-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(90deg,#ffd400,#ffa726);color:#0a0e1a;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;font-weight:850}
+.demo-banner-txt{display:flex;align-items:center;gap:8px}
+.demo-banner .dot{width:8px;height:8px;background:#0a0e1a;border-radius:50%;animation:pulseDot 1.5s infinite}
+@keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.4}}
+.demo-banner a{background:#0a0e1a;color:var(--gold);padding:6px 12px;border-radius:99px;font-size:11px;font-weight:900;letter-spacing:.5px;white-space:nowrap}
+.demo-banner .close{background:transparent;border:0;color:#0a0e1a;font-size:18px;cursor:pointer;padding:2px 6px;font-weight:900}
+
+/* HEADER */
+header{padding:36px 20px 24px;text-align:center;position:relative;border-bottom:1px solid var(--line-soft);background:radial-gradient(ellipse at 50% 0%,rgba(225,29,42,.12),transparent 60%),#0a0e1a}
+.plates{display:flex;justify-content:center;gap:6px;margin-bottom:14px}
+.plate{width:14px;height:14px;border-radius:50%;border:2.5px solid var(--red)}
+.plate.solid{background:var(--red)}
+.brand{font-size:clamp(26px,5vw,36px);font-weight:950;letter-spacing:-1.5px;line-height:1;color:var(--white);text-transform:uppercase}
+.brand .red{color:var(--red)}
+.tagline{color:var(--muted);font-size:10px;letter-spacing:4px;font-weight:900;margin-top:8px;text-transform:uppercase}
+.location{color:var(--muted);font-size:11px;margin-top:6px;font-weight:600}
+
+/* HOURS BAR */
+.hours{background:var(--card);border-bottom:1px solid var(--line-soft);padding:10px 16px;display:flex;justify-content:center;gap:20px;font-size:11px;font-weight:800;letter-spacing:.5px;flex-wrap:wrap}
+.hours span{color:var(--muted)}
+.hours b{color:var(--white)}
+.hours .dot{width:6px;height:6px;background:var(--green);border-radius:50%;display:inline-block;margin-right:6px;animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* MAIN */
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:30px 20px;min-height:60vh}
+.card{background:var(--card);border:1px solid var(--line-soft);border-radius:22px;padding:34px 26px;width:100%;max-width:440px;text-align:center;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--orange),var(--red))}
+
+/* LOADING */
+.loading{padding:40px 20px;text-align:center;color:var(--muted)}
+.spinner{width:40px;height:40px;border:3px solid var(--line-soft);border-top-color:var(--red);border-radius:50%;margin:0 auto 18px;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ICONS */
+.icon-big{font-size:52px;margin-bottom:18px;display:block;line-height:1}
+
+/* TITLES */
+h2{font-size:24px;font-weight:950;margin:0 0 10px;letter-spacing:-.6px;text-transform:uppercase}
+h2 .red{color:var(--red)}
+p.sub{color:var(--muted);font-size:14px;line-height:1.6;margin:0 0 24px}
+
+/* INPUT */
+input[type="tel"]{width:100%;padding:18px;background:#0a0e1a;border:2px solid var(--line-soft);border-radius:14px;color:var(--white);font-size:17px;font-family:inherit;font-weight:800;letter-spacing:2px;text-align:center;transition:.2s;margin-bottom:14px}
+input[type="tel"]:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 4px rgba(225,29,42,.15)}
+input[type="tel"]::placeholder{color:#4a4a52;font-weight:600;letter-spacing:1px}
+
+/* BUTTON */
+button.primary{width:100%;padding:18px;background:linear-gradient(135deg,var(--red),#c4161f);color:white;border:0;border-radius:14px;font-weight:950;font-size:15px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:.25s;box-shadow:0 10px 30px rgba(225,29,42,.35)}
+button.primary:active{transform:scale(.98)}
+button.primary:disabled{opacity:.6;cursor:not-allowed}
+.err{color:var(--red);font-size:12px;font-weight:800;margin-top:12px;display:none}
+
+/* SUCCESS STATE */
+.streak-tag{display:inline-block;background:rgba(37,180,110,.12);color:var(--green);border:1px solid var(--green);padding:7px 18px;border-radius:99px;font-size:11px;font-weight:950;letter-spacing:3px;text-transform:uppercase;margin-bottom:22px}
+.streak{font-size:84px;font-weight:950;color:var(--red);line-height:1;margin:8px 0;letter-spacing:-4px;text-shadow:0 0 40px rgba(225,29,42,.5)}
+.streak-label{color:var(--muted);font-size:11px;letter-spacing:5px;font-weight:900;text-transform:uppercase;margin-bottom:24px}
+.name-big{font-size:26px;font-weight:950;margin:12px 0 6px;text-transform:uppercase;letter-spacing:-.5px}
+.msg{color:var(--muted);font-size:13px;line-height:1.6;margin:16px 0 22px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.stat{background:#0a0e1a;border:1px solid var(--line-soft);border-radius:14px;padding:16px 12px}
+.stat b{display:block;font-size:26px;font-weight:950;color:var(--white);letter-spacing:-1px;line-height:1}
+.stat span{display:block;color:var(--muted);font-size:9px;letter-spacing:2px;font-weight:900;text-transform:uppercase;margin-top:6px}
+
+/* WARNING */
+.warning{background:linear-gradient(135deg,rgba(225,29,42,.15),rgba(255,107,53,.1));border:2px solid var(--red);border-radius:16px;padding:20px;margin-top:24px;text-align:center}
+.warning .ico{font-size:32px;margin-bottom:8px;display:block}
+.warning h3{margin:0 0 6px;font-size:15px;color:var(--red);text-transform:uppercase;letter-spacing:1.5px;font-weight:950}
+.warning p{margin:0;font-size:13px;color:var(--white);line-height:1.5;font-weight:600}
+
+/* EXPIRED / ERROR */
+.expired-card{border:2px solid var(--red);background:rgba(225,29,42,.08)}
+.expired-card .icon-big{color:var(--red)}
+
+/* FOOTER */
+footer{text-align:center;padding:30px 20px;color:var(--muted);font-size:11px;border-top:1px solid var(--line-soft);line-height:1.7}
+footer b{color:var(--red)}
+footer a{color:var(--gold);border-bottom:1px solid rgba(255,212,0,.4)}
+footer .powered{margin-top:12px;font-size:10px;letter-spacing:3px;font-weight:900;text-transform:uppercase;color:#3a4152}
+
+@media(max-width:600px){
+  .demo-banner{font-size:11px;padding:8px 12px}
+  .demo-banner a{padding:5px 10px;font-size:10px}
+  header{padding:26px 16px 20px}
+  .card{padding:28px 20px}
+  .streak{font-size:68px;letter-spacing:-3px}
+  .name-big{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<!-- DEMO BANNER -->
+<div class="demo-banner" id="demoBanner">
+  <div class="demo-banner-txt">
+    <span class="dot"></span>
+    <span>Live Demo · by VAAN Consultancy</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:6px">
+    <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20a%20gym%20check-in%20system%20like%20this." target="_blank">Get This →</a>
+    <button class="close" onclick="document.getElementById('demoBanner').style.display='none'">✕</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="plates">
+    <span class="plate solid"></span>
+    <span class="plate"></span>
+    <span class="plate solid"></span>
+    <span class="plate"></span>
+    <span class="plate solid"></span>
+  </div>
+  <h1 class="brand">VAA <span class="red">Gyms</span></h1>
+  <div class="tagline">Track · Train · Transform</div>
+  <div class="location">📍 Karnal · Demo Gym</div>
+</header>
+
+<!-- HOURS BAR -->
+<div class="hours">
+  <span><span class="dot"></span>MORNING <b>4AM – 10AM</b></span>
+  <span>EVENING <b>3PM – 9PM</b></span>
+</div>
+
+<!-- MAIN -->
+<main id="main">
+  <div class="card">
+    <div class="loading"><div class="spinner"></div>Loading...</div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div><b>VAA Gyms</b> — Demo</div>
+  <div style="margin-top:6px">This is a live demo. Try any of these numbers:</div>
+  <div style="margin-top:10px;color:var(--white);font-weight:800">9876543210 · 9876543211 · 9876543212 · 9876543213</div>
+  <div class="powered">Powered by <a href="../index.html">VAAN Consultancy</a></div>
+  </footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ==========================================================
+   VAA GYMS DEMO — SCRIPT
+   ========================================================== */
+const SUPABASE_URL = "https://xvtxpllmfwgnlrffbcqz.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2dHhwbGxtZndnbmxyZmZiY3F6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA2MDE0OTYsImV4cCI6MjEwNjAxNDY5Nn0.JC1Za7PdNGLngpupBovq_DqI-vHRVBOovLdEe-w1Ap0";
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const STORAGE_KEY = "vaa_gym_demo_phone";
+const mainEl = document.getElementById("main");
+
+function esc(v){return String(v||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function show(html){ mainEl.innerHTML = html; }
+function showLoading(){ show('<div class="card"><div class="loading"><div class="spinner"></div>Loading...</div></div>'); }
+
+/* ====== IST HELPERS ====== */
+function getISTNow(){
+  return new Date(new Date().getTime() + (5.5 * 60 * 60 * 1000));
+}
+function getISTDateKey(date){
+  const d = date || getISTNow();
+  return d.toISOString().slice(0, 10);
+}
+
+/* ====== INIT ====== */
+async function init(){
+  showLoading();
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved){
+    await handleCheckIn(saved, true);
+  } else {
+    showLoginScreen();
+  }
+}
+
+/* ====== LOGIN SCREEN ====== */
+function showLoginScreen(){
+  show(`<div class="card">
+    <span class="icon-big">🏋️</span>
+    <h2>CHECK <span class="red">IN</span></h2>
+    <p class="sub">Enter your phone number to log your session. You only need to do this once on this phone.</p>
+    <input id="phone" type="tel" inputmode="numeric" placeholder="Enter 10-digit number" maxlength="10" autocomplete="off">
+    <button class="primary" id="checkBtn" onclick="submitPhone()">Log My Lift</button>
+    <div class="err" id="errMsg">Please enter a valid 10-digit number</div>
+    <div style="margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);font-size:11px;color:#8a8f9c;line-height:1.7">
+      <b style="color:#ffd400;display:block;margin-bottom:6px;letter-spacing:1px">TRY THESE DEMO NUMBERS</b>
+      9876543210 · 9876543211<br>
+      9876543212 · 9876543213
+    </div>
+  </div>`);
+  const inp = document.getElementById("phone");
+  inp.focus();
+  inp.addEventListener("keydown", e => { if (e.key === "Enter") submitPhone(); });
+}
+
+async function submitPhone(){
+  const inp = document.getElementById("phone");
+  const btn = document.getElementById("checkBtn");
+  const err = document.getElementById("errMsg");
+  const phone = (inp.value || "").replace(/\D/g, "");
+  if (phone.length !== 10){
+    err.style.display = "block";
+    return;
+  }
+  err.style.display = "none";
+  btn.disabled = true;
+  btn.textContent = "Checking...";
+  await handleCheckIn(phone, false);
+}
+
+/* ====== CHECK-IN LOGIC ====== */
+async function handleCheckIn(phone, isAuto){
+  try {
+    const { data: members, error } = await sb.from("vaa_gym_members").select("*").eq("phone", phone).limit(1);
+    if (error) throw error;
+
+    if (!members || members.length === 0){
+      if (isAuto) localStorage.removeItem(STORAGE_KEY);
+      showNotRegistered(phone);
+      return;
+    }
+
+    const member = members[0];
+
+    /* Gym hours check (IST) */
+    const istNow = getISTNow();
+    const currentHour = istNow.getUTCHours();
+    const currentMin = istNow.getUTCMinutes();
+    const currentTime = currentHour * 60 + currentMin;
+
+    const morningOpen = 4 * 60;
+    const morningClose = 10 * 60;
+    const eveningOpen = 15 * 60;
+    const eveningClose = 21 * 60;
+
+    const isMorningOpen = currentTime >= morningOpen && currentTime < morningClose;
+    const isEveningOpen = currentTime >= eveningOpen && currentTime < eveningClose;
+
+    if (!isMorningOpen && !isEveningOpen){
+      showClosed();
+      return;
+    }
+
+    /* Expiry check */
+    const expiry = new Date(member.expiry_date);
+    const today = new Date();
+    expiry.setHours(23, 59, 59, 999);
+    const daysLeft = Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
+
+    if (daysLeft < 0){
+      showExpired(member, daysLeft);
+      return;
+    }
+
+    /* Check if already checked in today (IST) */
+    const todayKey = getISTDateKey(istNow);
+    const { data: allCheckins } = await sb.from("vaa_gym_checkins")
+      .select("checked_in_at")
+      .eq("phone", phone);
+
+    const alreadyToday = (allCheckins || []).some(c => {
+      const d = new Date(c.checked_in_at);
+      const istShifted = new Date(d.getTime() + (5.5 * 60 * 60 * 1000));
+      return istShifted.toISOString().slice(0, 10) === todayKey;
+    });
+
+    if (!alreadyToday){
+      const istTimestamp = new Date(new Date().getTime() + (5.5 * 60 * 60 * 1000)).toISOString();
+      await sb.from("vaa_gym_checkins").insert({
+        member_id: member.id,
+        phone: phone,
+        checked_in_at: istTimestamp
+      });
+    }
+
+    const stats = await getStats(phone);
+    localStorage.setItem(STORAGE_KEY, phone);
+    showSuccess(member, stats, daysLeft);
+  } catch (err){
+    console.error(err);
+    showError("Something went wrong. Please try again.");
+  }
+}
+
+/* ====== STATS (STREAK / MONTH / BEST) ====== */
+async function getStats(phone){
+  const { data: all } = await sb.from("vaa_gym_checkins")
+    .select("checked_in_at")
+    .eq("phone", phone)
+    .order("checked_in_at", { ascending: false });
+
+  if (!all || all.length === 0) return { streak: 0, best: 0, month: 0, total: 0 };
+
+  /* All timestamps stored IST-shifted */
+  const dates = [...new Set(all.map(c => String(c.checked_in_at).slice(0, 10)))].sort().reverse();
+  const todayKey = getISTDateKey();
+
+  /* Current streak */
+  let streak = 0;
+  let check = todayKey;
+  while (dates.includes(check)){
+    streak++;
+    const d = new Date(check + "T00:00:00Z");
+    d.setUTCDate(d.getUTCDate() - 1);
+    check = d.toISOString().slice(0, 10);
+  }
+
+  /* Best streak ever */
+  let best = 0, curr = 0, prev = null;
+  const sortedAsc = [...dates].sort();
+  for (const d of sortedAsc){
+    if (prev){
+      const prevDate = new Date(prev + "T00:00:00Z");
+      const currDate = new Date(d + "T00:00:00Z");
+      const diff = (currDate - prevDate) / (1000 * 60 * 60 * 24);
+      if (diff === 1) curr++;
+      else { if (curr > best) best = curr; curr = 1; }
+    } else { curr = 1; }
+    prev = d;
+  }
+  if (curr > best) best = curr;
+
+  /* This month */
+  const monthKey = todayKey.slice(0, 7);
+  const monthCount = dates.filter(d => d.startsWith(monthKey)).length;
+
+  return { streak, best, month: monthCount, total: dates.length };
+}
+
+/* ====== SCREENS ====== */
+function showSuccess(member, stats, daysLeft){
+  const firstName = member.name.split(" ")[0];
+  let warningHTML = "";
+  if (daysLeft <= 3){
+    warningHTML = `<div class="warning">
+      <span class="ico">⚠️</span>
+      <h3>Membership expires in ${daysLeft} day${daysLeft === 1 ? '' : 's'}</h3>
+      <p>Don't break the chain. Renew at reception.</p>
+    </div>`;
+  }
+
+  const message = stats.streak >= 7
+    ? "Consistency builds monsters."
+    : stats.streak >= 3
+      ? "Keep the chain alive."
+      : stats.streak === 2
+        ? "Day 2. The chain begins."
+        : "Day 1 done. Come back tomorrow.";
+
+  show(`<div class="card">
+    <div class="streak-tag">✅ LIFT LOGGED</div>
+    <div class="streak">${stats.streak}</div>
+    <div class="streak-label">Day Streak 🔥</div>
+    <div class="name-big">${esc(firstName)}</div>
+    <p class="msg">${message}</p>
+    <div class="stats">
+      <div class="stat"><b>${stats.month}</b><span>This Month</span></div>
+      <div class="stat"><b>${stats.best}</b><span>Best Streak</span></div>
+    </div>
+    ${warningHTML}
+  </div>`);
+}
+
+function showExpired(member, daysLeft){
+  const firstName = member.name.split(" ")[0];
+  const daysAgo = Math.abs(daysLeft);
+  show(`<div class="card expired-card">
+    <span class="icon-big">⛔</span>
+    <h2>Membership <span class="red">Expired</span></h2>
+    <p class="sub">${esc(firstName)}, your membership ended ${daysAgo} day${daysAgo === 1 ? '' : 's'} ago. Please renew at reception to continue.</p>
+    <button class="primary" onclick="logout()">Renew at Reception</button>
+  </div>`);
+}
+
+function showNotRegistered(phone){
+  show(`<div class="card">
+    <span class="icon-big">🤔</span>
+    <h2>Not <span class="red">Registered</span></h2>
+    <p class="sub">We couldn't find a membership for <b>${esc(phone)}</b>. Try one of the demo numbers or ask at reception.</p>
+    <div style="margin-top:14px;padding:14px;background:#0a0e1a;border:1px solid rgba(255,255,255,.08);border-radius:12px;font-size:12px;color:#8a8f9c;line-height:1.8">
+      <b style="color:#ffd400">DEMO NUMBERS:</b><br>
+      9876543210 · 9876543211<br>
+      9876543212 · 9876543213
+    </div>
+    <button class="primary" onclick="logout()" style="margin-top:20px">Try Again</button>
+  </div>`);
+}
+
+function showClosed(){
+  const istNow = getISTNow();
+  const hour = istNow.getUTCHours();
+  const min = istNow.getUTCMinutes();
+  const ampm = hour >= 12 ? "PM" : "AM";
+  const h12 = hour % 12 === 0 ? 12 : hour % 12;
+  const timeStr = h12 + ":" + String(min).padStart(2, '0') + " " + ampm;
+
+  show(`<div class="card">
+    <span class="icon-big">🕐</span>
+    <h2>Gym <span class="red">Closed</span></h2>
+    <p class="sub">Check-in is only available during gym hours:</p>
+    <div style="background:#0a0e1a;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px;margin:16px 0;font-size:14px;font-weight:800;line-height:1.9">
+      🌅 Morning: <b style="color:#e11d2a">4:00 AM – 10:00 AM</b><br>
+      🌆 Evening: <b style="color:#e11d2a">3:00 PM – 9:00 PM</b>
+    </div>
+    <p class="sub" style="font-size:12px">Current time: ${timeStr}</p>
+    <button class="primary" onclick="init()">Try Again</button>
+  </div>`);
+}
+
+function showError(msg){
+  show(`<div class="card">
+    <span class="icon-big">⚠️</span>
+    <h2>Oops</h2>
+    <p class="sub">${esc(msg)}</p>
+    <button class="primary" onclick="init()">Try Again</button>
+  </div>`);
+}
+
+function logout(){
+  localStorage.removeItem(STORAGE_KEY);
+  init();
+}
+
+/* ====== START ====== */
+init();
+</script>
+
+</body>
+  </html>
