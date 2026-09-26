@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VAA Restaurants — Menu</title>
+<meta name="description" content="VAA Restaurants — Fresh food, honest prices. Digital menu.">
+<meta name="theme-color" content="#0a0e1a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#0a0e1a;color:#f5f5f5;-webkit-tap-highlight-color:transparent;padding-bottom:100px;line-height:1.55;padding-top:44px}
+a{text-decoration:none;color:inherit}
+:root{--gold:#ffd400;--blue:#4f8fff;--card:#12192a;--line:rgba(255,212,0,.15);--line-soft:rgba(255,255,255,.08);--white:#f5f5f5;--muted:#8a8f9c;--green:#25b46e;--red:#e11d2a}
+
+/* DEMO BANNER */
+.demo-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(90deg,#ffd400,#ffa726);color:#0a0e1a;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;font-weight:850}
+.demo-banner-txt{display:flex;align-items:center;gap:8px}
+.demo-banner .dot{width:8px;height:8px;background:#0a0e1a;border-radius:50%;animation:pulseDot 1.5s infinite}
+@keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.4}}
+.demo-banner a{background:#0a0e1a;color:var(--gold);padding:6px 12px;border-radius:99px;font-size:11px;font-weight:900;letter-spacing:.5px;white-space:nowrap}
+.demo-banner .close{background:transparent;border:0;color:#0a0e1a;font-size:18px;cursor:pointer;padding:2px 6px;font-weight:900}
+
+/* HEADER */
+.header{padding:60px 20px 26px;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 0%,rgba(255,212,0,.1),transparent 60%),#0a0e1a;border-bottom:1px solid var(--line-soft)}
+.logo-wrap{width:78px;height:78px;margin:0 auto 18px;border-radius:22px;background:linear-gradient(145deg,#1a2136,#0d1220);border:2px solid rgba(255,212,0,.4);display:flex;align-items:center;justify-content:center;font-size:38px;box-shadow:0 0 40px rgba(255,212,0,.2)}
+.rest-name{font-size:clamp(28px,5vw,42px);font-weight:950;letter-spacing:-1.5px;margin-bottom:6px}
+.rest-name span{color:var(--gold)}
+.rest-tag{color:var(--muted);font-size:12px;letter-spacing:3px;text-transform:uppercase;font-weight:800}
+.rest-status{display:inline-flex;align-items:center;gap:6px;background:rgba(37,180,110,.12);color:var(--green);padding:7px 14px;border-radius:99px;font-size:11px;font-weight:850;margin-top:14px}
+.rest-status::before{content:"";width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 10px var(--green)}
+.rest-meta{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:16px;color:var(--muted);font-size:12px}
+
+/* SEARCH */
+.search-wrap{padding:20px 20px 0;max-width:800px;margin:0 auto}
+.search-box{position:relative}
+.search-box input{width:100%;padding:15px 20px 15px 48px;background:var(--card);border:1px solid var(--line-soft);border-radius:14px;color:var(--white);font:inherit;font-size:14px;font-weight:600}
+.search-box input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(255,212,0,.1)}
+.search-icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--muted);pointer-events:none}
+
+/* FILTERS */
+.filters-sticky{position:sticky;top:44px;z-index:100;background:rgba(10,14,26,.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--line-soft);padding:14px 0;margin-top:20px}
+.filters-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:0 16px}
+.veg-toggle{display:inline-flex;gap:4px;background:var(--card);border:1px solid var(--line-soft);border-radius:99px;padding:4px;margin-bottom:10px}
+.veg-toggle button{background:transparent;border:0;color:var(--muted);padding:8px 14px;border-radius:99px;font-weight:800;font-size:11px;font-family:inherit;cursor:pointer;transition:.2s;letter-spacing:.5px}
+.veg-toggle button.active{background:var(--gold);color:#0a0e1a}
+.veg-toggle button.veg.active{background:var(--green);color:#fff}
+.veg-toggle button.nonveg.active{background:var(--red);color:#fff}
+.cat-btn{background:var(--card);border:1px solid var(--line-soft);color:var(--white);padding:9px 16px;border-radius:99px;font-weight:800;font-size:12px;font-family:inherit;cursor:pointer;transition:.2s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.cat-btn:hover{border-color:var(--gold)}
+.cat-btn.active{background:var(--gold);color:#0a0e1a;border-color:var(--gold);box-shadow:0 6px 20px rgba(255,212,0,.3)}
+
+/* MENU */
+.menu{max-width:1000px;margin:0 auto;padding:30px 20px 0}
+.cat-section{margin-bottom:50px}
+.cat-header{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.cat-header .line{flex:1;height:1px;background:linear-gradient(90deg,var(--line-soft) 30%,transparent)}
+.cat-header h2{font-size:15px;font-weight:950;letter-spacing:3px;white-space:nowrap;color:var(--gold);text-transform:uppercase}
+.cat-header .count{background:var(--card);border:1px solid var(--line-soft);color:var(--muted);padding:2px 10px;border-radius:99px;font-size:11px;font-weight:900}
+
+.menu-grid{display:grid;gap:12px}
+.item{background:var(--card);border:1px solid var(--line-soft);border-radius:16px;padding:18px 20px;display:flex;gap:16px;justify-content:space-between;align-items:flex-start;transition:.25s;position:relative;overflow:hidden}
+.item:hover{border-color:rgba(255,212,0,.35);transform:translateY(-2px)}
+.item.bestseller{border-color:rgba(255,212,0,.4);background:linear-gradient(145deg,#1a2136,#0d1220)}
+.item.bestseller::before{content:"⭐ BESTSELLER";position:absolute;top:0;right:0;background:var(--gold);color:#0a0e1a;font-size:9px;font-weight:900;letter-spacing:1px;padding:4px 10px;border-bottom-left-radius:10px}
+.item-info{flex:1;min-width:0}
+.item-name{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.item-name h3{font-size:16px;font-weight:850;letter-spacing:-.3px;line-height:1.3}
+.veg-badge{width:16px;height:16px;border-radius:3px;border:2px solid;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.veg-badge.veg{border-color:var(--green)}
+.veg-badge.veg::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--green)}
+.veg-badge.nonveg{border-color:var(--red)}
+.veg-badge.nonveg::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--red)}
+.item-desc{color:var(--muted);font-size:13px;line-height:1.55}
+.item-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px;flex-shrink:0}
+.item-price{font-size:18px;font-weight:950;color:var(--gold);letter-spacing:-.5px;white-space:nowrap}
+.item-actions{display:flex;gap:6px}
+.item-btn{background:rgba(255,255,255,.06);border:1px solid var(--line-soft);color:var(--white);padding:7px 12px;border-radius:9px;font-size:11px;font-weight:800;cursor:pointer;font-family:inherit;transition:.2s;text-decoration:none;white-space:nowrap}
+.item-btn:hover{background:rgba(255,212,0,.15);border-color:var(--gold);color:var(--gold)}
+
+.empty{padding:60px 20px;text-align:center;color:var(--muted)}
+.empty b{display:block;color:var(--white);font-size:16px;margin-bottom:8px}
+.loading-state{padding:60px 20px;text-align:center;color:var(--muted)}
+.spinner{width:40px;height:40px;border:3px solid rgba(255,212,0,.1);border-top-color:var(--gold);border-radius:50%;margin:0 auto 16px;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* FOOTER */
+.demo-footer{text-align:center;padding:60px 20px 40px;color:var(--muted);font-size:11px;line-height:1.7;border-top:1px solid var(--line-soft);margin-top:40px}
+.demo-footer b{color:var(--gold)}
+.demo-footer a{color:var(--gold);border-bottom:1px solid rgba(255,212,0,.4)}
+.demo-footer .powered{margin-top:14px;font-size:10px;letter-spacing:3px;font-weight:900;text-transform:uppercase;color:#3a4152}
+
+/* BOTTOM BAR */
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(10,14,26,.98);backdrop-filter:blur(20px);border-top:1px solid var(--line-soft);padding:14px 20px;display:flex;gap:10px;z-index:500}
+.bottom-bar a{flex:1;padding:14px;border-radius:12px;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-family:inherit;transition:.2s}
+.bottom-bar .call{background:var(--card);color:var(--white);border:1px solid var(--line-soft)}
+.bottom-bar .wa{background:linear-gradient(135deg,#ffd400,#ffa726);color:#0a0e1a;box-shadow:0 8px 25px rgba(255,212,0,.3)}
+.bottom-bar a:active{transform:scale(.98)}
+
+@media(max-width:600px){
+  .demo-banner{font-size:11px;padding:8px 12px}
+  .demo-banner a{padding:5px 10px;font-size:10px}
+  .header{padding:50px 16px 22px}
+  .logo-wrap{width:64px;height:64px;font-size:30px}
+  .item{flex-direction:column;gap:10px;padding:16px}
+  .item-right{width:100%;flex-direction:row;justify-content:space-between;align-items:center}
+  .filters-sticky{top:40px}
+  .cat-btn{padding:8px 13px;font-size:11px}
+}
+</style>
+</head>
+<body>
+
+<!-- DEMO BANNER -->
+<div class="demo-banner" id="demoBanner">
+  <div class="demo-banner-txt"><span class="dot"></span><span>Live Demo · by VAAN Consultancy</span></div>
+  <div style="display:flex;align-items:center;gap:6px">
+    <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20a%20QR%20menu%20like%20this%20for%20my%20restaurant." target="_blank">Get This →</a>
+    <button class="close" onclick="document.getElementById('demoBanner').style.display='none'">✕</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo-wrap">🍽️</div>
+  <h1 class="rest-name" id="restName">VAA <span>Restaurants</span></h1>
+  <div class="rest-tag" id="restTagline">Fresh Food · Honest Prices</div>
+  <div class="rest-status" id="restStatus">Open Now · 11:00 AM – 11:00 PM</div>
+  <div class="rest-meta">
+    <span id="restAddress">📍 Near Kalandri Gate, Karnal</span>
+    <span id="restPhone">📞 9671163712</span>
+  </div>
+</header>
+
+<!-- SEARCH -->
+<div class="search-wrap">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input id="searchInput" type="text" placeholder="Search dishes, ingredients..." autocomplete="off">
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-sticky">
+  <div style="text-align:center;margin-bottom:6px">
+    <div class="veg-toggle">
+      <button class="active" data-veg="all" onclick="setVeg('all', this)">All</button>
+      <button class="veg" data-veg="veg" onclick="setVeg('veg', this)">🟢 Veg</button>
+      <button class="nonveg" data-veg="nonveg" onclick="setVeg('nonveg', this)">🔴 Non-Veg</button>
+    </div>
+  </div>
+  <div class="filters-row" id="catFilters"></div>
+</div>
+
+<!-- MENU -->
+<div class="menu" id="menu">
+  <div class="loading-state"><div class="spinner"></div>Loading menu...</div>
+</div>
+
+<!-- FOOTER -->
+<div class="demo-footer">
+  <div><b>VAA Restaurants</b> — Demo</div>
+  <div style="margin-top:6px">This is a live demo. Not a real restaurant.</div>
+  <div class="powered">Powered by <a href="../index.html">VAAN Consultancy</a></div>
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="bottom-bar">
+  <a class="call" id="callBtn" href="tel:9671163712">📞 Call</a>
+  <a class="wa" id="waBtn" href="https://wa.me/919671163712" target="_blank">💬 Order on WhatsApp</a>
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ==========================================================
+   VAA RESTAURANTS DEMO — SCRIPT
+   ========================================================== */
+const SUPABASE_URL = "https://xvtxpllmfwgnlrffbcqz.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2dHhwbGxtZndnbmxyZmZiY3F6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0Mzg2OTYsImV4cCI6MjEwNjAxNDY5Nn0.JC1Za7PdNGLngpupBovq_DqI-vHRVBOovLdEe-w1Ap0";
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let allMenu = [];
+let restaurantInfo = null;
+let currentCat = "all";
+let currentVeg = "all";
+let searchQuery = "";
+
+const CATEGORY_ICONS = {
+  "Starters": "🥗",
+  "Main Course": "🍛",
+  "Breads": "🫓",
+  "Rice & Biryani": "🍚",
+  "Desserts": "🍮",
+  "Drinks": "🥤"
+};
+
+function esc(v){return String(v||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function formatPrice(n){ return "₹" + Number(n||0).toLocaleString("en-IN"); }
+
+/* ====== LOAD ====== */
+async function loadAll(){
+  try {
+    const [menuRes, infoRes] = await Promise.all([
+      sb.from("vaa_restaurant_menu").select("*").eq("is_available", true).order("display_order", { ascending: true }),
+      sb.from("vaa_restaurant_info").select("*").limit(1)
+    ]);
+
+    if (menuRes.error) throw menuRes.error;
+    if (infoRes.error) throw infoRes.error;
+
+    allMenu = menuRes.data || [];
+    restaurantInfo = (infoRes.data && infoRes.data[0]) || null;
+
+    if (restaurantInfo){
+      document.getElementById("restName").innerHTML = (restaurantInfo.restaurant_name || "VAA Restaurants").replace("Restaurants", "<span>Restaurants</span>");
+      document.getElementById("restTagline").textContent = restaurantInfo.tagline || "Fresh Food · Honest Prices";
+      document.getElementById("restStatus").textContent = "Open Now · " + (restaurantInfo.hours || "11:00 AM – 11:00 PM");
+      document.getElementById("restAddress").textContent = "📍 " + (restaurantInfo.address || "Near Kalandri Gate, Karnal");
+      document.getElementById("restPhone").textContent = "📞 " + (restaurantInfo.phone || "9671163712");
+      document.getElementById("callBtn").href = "tel:" + (restaurantInfo.phone || "9671163712");
+      document.getElementById("waBtn").href = "https://wa.me/" + (restaurantInfo.whatsapp || "919671163712");
+    }
+
+    buildCategoryFilters();
+    renderMenu();
+  } catch (err){
+    console.error(err);
+    document.getElementById("menu").innerHTML = '<div class="empty"><b>⚠️ Could not load menu</b>Please refresh the page.</div>';
+  }
+}
+
+/* ====== CATEGORY FILTERS ====== */
+function buildCategoryFilters(){
+  const cats = [...new Set(allMenu.map(m => m.category))];
+  const wrap = document.getElementById("catFilters");
+  const btns = ['<button class="cat-btn active" onclick="setCat(\'all\', this)">✨ All</button>'];
+  cats.forEach(c => {
+    const icon = CATEGORY_ICONS[c] || "🍴";
+    btns.push('<button class="cat-btn" onclick="setCat(\'' + esc(c).replace(/'/g, "\\'") + '\', this)">' + icon + ' ' + esc(c) + '</button>');
+  });
+  wrap.innerHTML = btns.join("");
+}
+
+function setCat(cat, btn){
+  currentCat = cat;
+  document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  renderMenu();
+}
+
+function setVeg(val, btn){
+  currentVeg = val;
+  document.querySelectorAll(".veg-toggle button").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  renderMenu();
+}
+
+document.getElementById("searchInput").addEventListener("input", e => {
+  searchQuery = e.target.value.trim().toLowerCase();
+  renderMenu();
+});
+
+/* ====== RENDER MENU ====== */
+function renderMenu(){
+  const menu = document.getElementById("menu");
+
+  let items = allMenu.slice();
+  if (currentCat !== "all") items = items.filter(m => m.category === currentCat);
+  if (currentVeg === "veg") items = items.filter(m => m.is_veg);
+  else if (currentVeg === "nonveg") items = items.filter(m => !m.is_veg);
+  if (searchQuery){
+    items = items.filter(m =>
+      (m.item_name || "").toLowerCase().includes(searchQuery) ||
+      (m.description || "").toLowerCase().includes(searchQuery)
+    );
+  }
+
+  if (items.length === 0){
+    menu.innerHTML = '<div class="empty"><b>No dishes found</b>Try a different search or filter.</div>';
+    return;
+  }
+
+  const grouped = {};
+  items.forEach(m => {
+    if (!grouped[m.category]) grouped[m.category] = [];
+    grouped[m.category].push(m);
+  });
+
+  menu.innerHTML = Object.keys(grouped).map(cat => {
+    const catItems = grouped[cat];
+    const icon = CATEGORY_ICONS[cat] || "🍴";
+    return '<div class="cat-section">' +
+      '<div class="cat-header">' +
+        '<span style="font-size:22px">' + icon + '</span>' +
+        '<h2>' + esc(cat) + '</h2>' +
+        '<span class="count">' + catItems.length + '</span>' +
+        '<div class="line"></div>' +
+      '</div>' +
+      '<div class="menu-grid">' +
+        catItems.map(m => renderItem(m)).join("") +
+      '</div>' +
+    '</div>';
+  }).join("");
+}
+
+function renderItem(m){
+  const vegBadge = m.is_veg
+    ? '<span class="veg-badge veg" title="Veg"></span>'
+    : '<span class="veg-badge nonveg" title="Non-Veg"></span>';
+
+  const waNumber = restaurantInfo?.whatsapp || "919671163712";
+  const waText = encodeURIComponent("Hi, I want to order " + m.item_name + " (" + formatPrice(m.price) + ") from VAA Restaurants.");
+
+  return '<div class="item ' + (m.is_bestseller ? 'bestseller' : '') + '">' +
+    '<div class="item-info">' +
+      '<div class="item-name">' + vegBadge + '<h3>' + esc(m.item_name) + '</h3></div>' +
+      (m.description ? '<div class="item-desc">' + esc(m.description) + '</div>' : '') +
+    '</div>' +
+    '<div class="item-right">' +
+      '<div class="item-price">' + formatPrice(m.price) + '</div>' +
+      '<div class="item-actions">' +
+        '<a class="item-btn" href="https://wa.me/' + waNumber + '?text=' + waText + '" target="_blank">Order</a>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+loadAll();
+</script>
+
+</body>
+</html>
