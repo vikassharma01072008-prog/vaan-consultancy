@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VAA Academies — Live Teacher Board</title>
+<meta name="theme-color" content="#0a0e1a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#0a0e1a;color:#f5f5f5;-webkit-tap-highlight-color:transparent;line-height:1.55;padding-top:44px;padding-bottom:40px}
+a{text-decoration:none;color:inherit}
+:root{--gold:#ffd400;--blue:#4f8fff;--card:#12192a;--line:rgba(255,212,0,.15);--line-soft:rgba(255,255,255,.08);--white:#f5f5f5;--muted:#8a8f9c;--green:#25b46e;--red:#e11d2a;--orange:#ff6b35}
+
+.demo-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(90deg,#ffd400,#ffa726);color:#0a0e1a;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;font-weight:850}
+.demo-banner-txt{display:flex;align-items:center;gap:8px}
+.demo-banner .dot{width:8px;height:8px;background:#0a0e1a;border-radius:50%;animation:pulseDot 1.5s infinite}
+@keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.4}}
+.demo-banner a{background:#0a0e1a;color:var(--gold);padding:6px 12px;border-radius:99px;font-size:11px;font-weight:900;white-space:nowrap}
+.demo-banner .close{background:transparent;border:0;color:#0a0e1a;font-size:18px;cursor:pointer;padding:2px 6px;font-weight:900}
+
+header{padding:40px 20px 24px;text-align:center;position:relative;border-bottom:1px solid var(--line-soft);background:radial-gradient(ellipse at 50% 0%,rgba(79,143,255,.12),transparent 60%),#0a0e1a}
+.logo{width:78px;height:78px;margin:0 auto 16px;border-radius:22px;background:linear-gradient(145deg,#1a2136,#0d1220);border:2px solid rgba(79,143,255,.4);display:flex;align-items:center;justify-content:center;font-size:38px;box-shadow:0 0 40px rgba(79,143,255,.2)}
+.brand{font-size:clamp(26px,5vw,38px);font-weight:950;letter-spacing:-1.5px;line-height:1;color:var(--white)}
+.brand .blue{color:var(--blue)}
+.tagline{color:var(--muted);font-size:11px;letter-spacing:3px;font-weight:900;margin-top:10px;text-transform:uppercase}
+.location{color:var(--muted);font-size:12px;margin-top:8px;font-weight:600}
+.live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(37,180,110,.12);color:var(--green);padding:7px 14px;border-radius:99px;font-size:11px;font-weight:850;margin-top:14px}
+.live-badge::before{content:"";width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 10px var(--green);animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.back-link{display:inline-block;margin-top:16px;color:var(--muted);font-size:12px;font-weight:700;border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:2px}
+.back-link:hover{color:var(--gold);border-color:var(--gold)}
+
+main{max-width:960px;margin:0 auto;padding:30px 20px}
+.section-label{display:flex;align-items:center;gap:10px;margin-bottom:16px;font-size:12px;letter-spacing:3px;font-weight:900;color:var(--gold);text-transform:uppercase}
+.section-label::before{content:"";width:4px;height:16px;background:var(--gold);border-radius:2px}
+.notices-section{margin-bottom:36px}
+.notices-card{background:linear-gradient(145deg,#1a2136,#12192a);border:1px solid rgba(255,212,0,.25);border-radius:18px;padding:8px;overflow:hidden}
+.notice{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-bottom:1px solid var(--line-soft);font-size:14px;line-height:1.55;color:#e5e9ee;position:relative}
+.notice:last-child{border-bottom:0}
+.notice.new::before{content:"NEW";position:absolute;top:14px;right:14px;background:var(--red);color:white;font-size:9px;font-weight:900;letter-spacing:1px;padding:3px 8px;border-radius:99px}
+
+.teachers-section{margin-bottom:36px}
+.teachers-section.busy-section .section-label{color:var(--orange)}
+.teachers-section.busy-section .section-label::before{background:var(--orange)}
+.teacher-grid{display:grid;gap:12px}
+.teacher-card{background:var(--card);border:1px solid var(--line-soft);border-radius:18px;padding:20px;display:flex;gap:16px;align-items:center;transition:.25s;position:relative;overflow:hidden}
+.teacher-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px}
+.teacher-card.free::before{background:var(--green)}
+.teacher-card.busy::before{background:var(--orange)}
+.teacher-card.free:hover{border-color:rgba(37,180,110,.4)}
+.teacher-card.busy:hover{border-color:rgba(255,107,53,.4)}
+.teacher-icon{width:56px;height:56px;border-radius:14px;background:linear-gradient(145deg,#1a2136,#0d1220);border:1px solid var(--line-soft);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;flex-shrink:0}
+.teacher-card.free .teacher-icon{border-color:rgba(37,180,110,.4);color:var(--green)}
+.teacher-card.busy .teacher-icon{border-color:rgba(255,107,53,.4);color:var(--orange)}
+.teacher-info{flex:1;min-width:0}
+.teacher-name{font-size:17px;font-weight:900;letter-spacing:-.3px;margin-bottom:4px}
+.teacher-subject{color:var(--blue);font-size:11px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.teacher-meta{color:var(--muted);font-size:12px;display:flex;gap:12px;flex-wrap:wrap}
+.teacher-status{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
+.status-pill{padding:6px 14px;border-radius:99px;font-size:11px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap}
+.status-pill.free{background:rgba(37,180,110,.15);color:var(--green);border:1px solid rgba(37,180,110,.4)}
+.status-pill.busy{background:rgba(255,107,53,.15);color:var(--orange);border:1px solid rgba(255,107,53,.4)}
+.student-count{background:var(--orange);color:#0a0e1a;padding:2px 6px;border-radius:99px;margin-left:4px;font-size:10px}
+
+.loading-state{padding:60px 20px;text-align:center;color:var(--muted)}
+.spinner{width:44px;height:44px;border:3px solid rgba(255,212,0,.1);border-top-color:var(--gold);border-radius:50%;margin:0 auto 16px;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+footer{text-align:center;padding:30px 20px;color:var(--muted);font-size:11px;line-height:1.7;border-top:1px solid var(--line-soft)}
+footer b{color:var(--blue)}
+footer a{color:var(--gold);border-bottom:1px solid rgba(255,212,0,.4)}
+footer .powered{margin-top:12px;font-size:10px;letter-spacing:3px;font-weight:900;text-transform:uppercase;color:#3a4152}
+
+@media(max-width:600px){
+  .demo-banner{font-size:11px;padding:8px 12px}
+  .demo-banner a{padding:5px 10px;font-size:10px}
+  header{padding:30px 16px 20px}
+  .logo{width:64px;height:64px;font-size:30px;border-radius:18px}
+  .teacher-card{padding:16px;gap:12px}
+  .teacher-icon{width:48px;height:48px;font-size:17px}
+  .teacher-name{font-size:15px}
+}
+</style>
+</head>
+<body>
+
+<div class="demo-banner" id="demoBanner">
+  <div class="demo-banner-txt"><span class="dot"></span><span>Live Demo · by VAAN Consultancy</span></div>
+  <div style="display:flex;align-items:center;gap:6px">
+    <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20an%20academy%20teacher%20board%20like%20this." target="_blank">Get This →</a>
+    <button class="close" onclick="document.getElementById('demoBanner').style.display='none'">✕</button>
+  </div>
+</div>
+
+<header>
+  <div class="logo">📚</div>
+  <h1 class="brand">VAA <span class="blue">Academies</span></h1>
+  <div class="tagline">Smart Learning · Live Availability</div>
+  <div class="location">📍 Sector 12, Karnal · 4 PM – 9 PM (Mon-Sat)</div>
+  <div class="live-badge">Live Board · Updates every 30 sec</div>
+  <a href="index.html" class="back-link">← Back to choice</a>
+</header>
+
+<main id="main">
+  <div class="loading-state"><div class="spinner"></div>Loading teacher board...</div>
+</main>
+
+<footer>
+  <div><b>VAA Academies</b> — Demo</div>
+  <div style="margin-top:6px">Live demo showing teacher availability board</div>
+  <div class="powered">Powered by <a href="index.html">VAAN Consultancy</a></div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://xvtxpllmfwgnlrffbcqz.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2dHhwbGxtZndnbmxyZmZiY3F6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0Mzg2OTYsImV4cCI6MjEwNjAxNDY5Nn0.JC1Za7PdNGLngpupBovq_DqI-vHRVBOovLdEe-w1Ap0";
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let teachers = [];
+let notices = [];
+
+const SUBJECT_ICONS = {
+  "Physics": "⚛️", "Chemistry": "🧪", "Mathematics": "📐", "Maths": "📐",
+  "Biology": "🧬", "English": "📖", "Computer Science": "💻",
+  "Hindi": "📝", "History": "🏛️", "Geography": "🌍"
+};
+
+function esc(v){return String(v||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function getSubjectIcon(subject){ return SUBJECT_ICONS[subject] || "📚"; }
+
+async function loadAll(){
+  try {
+    const [teachersRes, noticesRes] = await Promise.all([
+      sb.from("vaa_academy_teachers").select("*").order("display_order", { ascending: true }),
+      sb.from("vaa_academy_notices").select("*").eq("active", true).order("created", { ascending: false }).limit(10)
+    ]);
+
+    if (teachersRes.error) throw teachersRes.error;
+    if (noticesRes.error) throw noticesRes.error;
+
+    teachers = teachersRes.data || [];
+    notices = noticesRes.data || [];
+    renderAll();
+  } catch (err){
+    console.error(err);
+    document.getElementById("main").innerHTML = '<div class="loading-state">⚠️ Could not load board. Please refresh.</div>';
+  }
+}
+
+function renderAll(){
+  const main = document.getElementById("main");
+  const freeTeachers = teachers.filter(t => t.status === "free");
+  const busyTeachers = teachers.filter(t => t.status === "busy");
+  let html = "";
+
+  if (notices.length > 0){
+    html += '<div class="notices-section">';
+    html += '<div class="section-label">📢 Notices</div>';
+    html += '<div class="notices-card">';
+    html += notices.map((n, i) => {
+      const isNew = i < 2;
+      return '<div class="notice' + (isNew ? ' new' : '') + '"><span>📌</span><span>' + esc(n.message) + '</span></div>';
+    }).join("");
+    html += '</div></div>';
+  }
+
+  if (freeTeachers.length > 0){
+    html += '<div class="teachers-section">';
+    html += '<div class="section-label">🟢 Available Now — ' + freeTeachers.length + '</div>';
+    html += '<div class="teacher-grid">' + freeTeachers.map(t => renderTeacherCard(t)).join("") + '</div>';
+    html += '</div>';
+  }
+
+  if (busyTeachers.length > 0){
+    html += '<div class="teachers-section busy-section">';
+    html += '<div class="section-label">🔴 Currently Busy — ' + busyTeachers.length + '</div>';
+    html += '<div class="teacher-grid">' + busyTeachers.map(t => renderTeacherCard(t)).join("") + '</div>';
+    html += '</div>';
+  }
+
+  if (teachers.length === 0) html = '<div class="loading-state">No teachers yet.</div>';
+  main.innerHTML = html;
+}
+
+function renderTeacherCard(t){
+  const icon = getSubjectIcon(t.subject);
+  const initials = (t.name || "")
+    .replace(/^(Mr\.|Ms\.|Mrs\.|Dr\.)\s*/i, "")
+    .split(" ")
+    .map(w => w[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+
+  const isFree = t.status === "free";
+  const statusPill = isFree
+    ? '<span class="status-pill free">🟢 Free</span>'
+    : '<span class="status-pill busy">🔴 Busy' + (t.student_count > 0 ? '<span class="student-count">' + t.student_count + '</span>' : '') + '</span>';
+
+  const meta = '<span>🏫 ' + esc(t.room || 'Room') + '</span>' +
+    (isFree ? '<span>✅ Ready to help</span>' : (t.student_count > 0 ? '<span>👥 ' + t.student_count + ' student' + (t.student_count === 1 ? '' : 's') + '</span>' : '<span>⏳ In session</span>'));
+
+  return '<div class="teacher-card ' + (isFree ? 'free' : 'busy') + '">' +
+    '<div class="teacher-icon">' + initials + '</div>' +
+    '<div class="teacher-info">' +
+      '<div class="teacher-subject">' + icon + ' ' + esc(t.subject) + '</div>' +
+      '<div class="teacher-name">' + esc(t.name) + '</div>' +
+      '<div class="teacher-meta">' + meta + '</div>' +
+    '</div>' +
+    '<div class="teacher-status">' + statusPill + '</div>' +
+  '</div>';
+}
+
+setInterval(() => { loadAll(); }, 30000);
+loadAll();
+</script>
+
+</body>
+</html>
