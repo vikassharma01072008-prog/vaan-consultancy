@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VAA Social — Instagram & Content Design</title>
+<meta name="description" content="VAA Social — premium Instagram setup and monthly content design for local businesses.">
+<meta name="theme-color" content="#0a0e1a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#0a0e1a;color:#f5f5f5;-webkit-tap-highlight-color:transparent;line-height:1.55;padding-top:44px;padding-bottom:40px}
+a{text-decoration:none;color:inherit}
+:root{--gold:#ffd400;--blue:#4f8fff;--pink:#ec4899;--purple:#a855f7;--card:#12192a;--card-2:#0d1220;--line:rgba(255,212,0,.15);--line-soft:rgba(255,255,255,.08);--white:#f5f5f5;--muted:#8a8f9c;--green:#25b46e}
+
+/* DEMO BANNER */
+.demo-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(90deg,#ffd400,#ffa726);color:#0a0e1a;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;font-weight:850}
+.demo-banner-txt{display:flex;align-items:center;gap:8px}
+.demo-banner .dot{width:8px;height:8px;background:#0a0e1a;border-radius:50%;animation:pulseDot 1.5s infinite}
+@keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.4}}
+.demo-banner a{background:#0a0e1a;color:var(--gold);padding:6px 12px;border-radius:99px;font-size:11px;font-weight:900;letter-spacing:.5px;white-space:nowrap}
+.demo-banner .close{background:transparent;border:0;color:#0a0e1a;font-size:18px;cursor:pointer;padding:2px 6px;font-weight:900}
+
+/* HEADER */
+header{padding:44px 20px 34px;text-align:center;position:relative;border-bottom:1px solid var(--line-soft);background:radial-gradient(ellipse at 50% 0%,rgba(236,72,153,.12),transparent 60%),radial-gradient(ellipse at 30% 80%,rgba(168,85,247,.1),transparent 55%),#0a0e1a}
+.logo{width:84px;height:84px;margin:0 auto 16px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#a855f7);display:flex;align-items:center;justify-content:center;font-size:42px;box-shadow:0 0 50px rgba(236,72,153,.4)}
+.brand{font-size:clamp(28px,5vw,42px);font-weight:950;letter-spacing:-1.5px;line-height:1;color:var(--white)}
+.brand .grad{background:linear-gradient(135deg,#ec4899,#a855f7);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.tagline{color:var(--muted);font-size:12px;letter-spacing:3px;font-weight:900;margin-top:12px;text-transform:uppercase}
+.sub-hero{color:#c8cdd8;font-size:15px;max-width:560px;margin:18px auto 0;line-height:1.6}
+
+/* MAIN */
+main{max-width:1100px;margin:0 auto;padding:40px 20px 0}
+section.block{margin-bottom:56px}
+.block-header{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.block-header::before{content:"";width:4px;height:22px;background:linear-gradient(180deg,var(--pink),var(--purple));border-radius:2px}
+.block-header h2{font-size:22px;font-weight:950;letter-spacing:-.6px}
+.block-header p{color:var(--muted);font-size:13px;margin-left:auto;text-align:right;max-width:340px}
+
+/* INSTAGRAM PROFILE PREVIEW */
+.ig-profile{background:linear-gradient(145deg,#1a2136,#12192a);border:1px solid var(--line-soft);border-radius:22px;padding:28px;position:relative;overflow:hidden}
+.ig-profile-head{display:flex;align-items:center;gap:22px;margin-bottom:24px;flex-wrap:wrap}
+.ig-avatar{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#a855f7);display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:950;color:white;flex-shrink:0;position:relative;padding:3px}
+.ig-avatar-inner{width:100%;height:100%;border-radius:50%;background:#0a0e1a;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:950;color:white}
+.ig-meta{flex:1;min-width:200px}
+.ig-handle{font-size:18px;font-weight:850;letter-spacing:-.3px;display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.verified{width:18px;height:18px;background:var(--blue);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:900}
+.ig-stats{display:flex;gap:22px;flex-wrap:wrap;margin-top:10px}
+.ig-stat{font-size:13px}
+.ig-stat b{font-weight:900;color:var(--white)}
+.ig-stat span{color:var(--muted);margin-left:4px}
+.ig-bio{margin-top:12px;color:#c8cdd8;font-size:13.5px;line-height:1.55}
+.ig-bio .gold{color:var(--gold)}
+
+/* IG GRID */
+.ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;border-radius:14px;overflow:hidden}
+.ig-post{aspect-ratio:1;background:linear-gradient(145deg,#1f2a44,#0d1220);border:1px solid var(--line-soft);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:relative;overflow:hidden;transition:.25s;cursor:pointer}
+.ig-post:hover{transform:scale(1.03);border-color:var(--pink)}
+.ig-post::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,var(--pink),var(--purple));opacity:0;transition:.3s}
+.ig-post:hover::before{opacity:.15}
+.ig-post-emoji{font-size:38px;position:relative;z-index:1}
+.ig-post-label{font-size:9px;letter-spacing:1.5px;font-weight:900;color:var(--muted);text-transform:uppercase;position:relative;z-index:1}
+
+/* CONTENT CALENDAR */
+.calendar{background:linear-gradient(145deg,#1a2136,#12192a);border:1px solid var(--line-soft);border-radius:22px;padding:22px;overflow-x:auto}
+.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(70px,1fr));gap:6px;min-width:520px}
+.cal-day{text-align:center;font-size:10px;font-weight:900;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;padding:8px 0}
+.cal-cell{aspect-ratio:1;background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:10px;padding:8px;font-size:11px;display:flex;flex-direction:column;gap:4px;transition:.2s}
+.cal-cell:hover{border-color:rgba(236,72,153,.5);background:rgba(236,72,153,.05)}
+.cal-cell.empty{background:transparent;border:0}
+.cal-date{font-size:10px;color:var(--muted);font-weight:900;margin-bottom:2px}
+.cal-post{background:linear-gradient(135deg,rgba(236,72,153,.15),rgba(168,85,247,.15));border:1px solid rgba(236,72,153,.3);border-radius:6px;padding:3px 6px;font-size:9px;font-weight:800;color:#f5a5d0;text-align:center;letter-spacing:.3px}
+
+/* REELS COVERS */
+.reels-scroll{display:flex;gap:12px;overflow-x:auto;padding:4px 0 12px;scrollbar-width:none}
+.reels-scroll::-webkit-scrollbar{display:none}
+.reel-cover{flex-shrink:0;width:140px;height:240px;border-radius:18px;background:linear-gradient(145deg,#1f2a44,#0d1220);border:1px solid var(--line-soft);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:16px;transition:.25s}
+.reel-cover:hover{transform:translateY(-4px);border-color:var(--pink)}
+.reel-cover::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.8))}
+.reel-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;background:rgba(255,255,255,.15);backdrop-filter:blur(10px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;color:white;border:1px solid rgba(255,255,255,.2)}
+.reel-label{font-size:11px;font-weight:900;color:white;position:relative;z-index:1;letter-spacing:.3px}
+.reel-stat{position:absolute;top:14px;right:14px;font-size:10px;font-weight:900;color:white;background:rgba(0,0,0,.5);padding:4px 8px;border-radius:99px;z-index:1}
+
+/* WHAT'S INCLUDED */
+.included-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.included-card{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:20px;transition:.25s;display:flex;gap:14px;align-items:flex-start}
+.included-card:hover{border-color:rgba(236,72,153,.4);transform:translateY(-3px)}
+.included-icon{font-size:24px;flex-shrink:0;line-height:1}
+.included-info b{font-size:14px;font-weight:850;display:block;margin-bottom:4px}
+.included-info span{color:var(--muted);font-size:12px;line-height:1.5;display:block}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.price-card{background:linear-gradient(145deg,#1a2136,#12192a);border:1px solid var(--line-soft);border-radius:20px;padding:28px 24px;display:flex;flex-direction:column;transition:.3s;position:relative;overflow:hidden}
+.price-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pink),var(--purple));opacity:0;transition:.3s}
+.price-card:hover{transform:translateY(-6px);border-color:rgba(236,72,153,.4);box-shadow:0 30px 60px rgba(0,0,0,.4)}
+.price-card:hover::before{opacity:1}
+.price-card.featured{border-color:rgba(255,212,0,.4);background:linear-gradient(145deg,#232c44,#12192a)}
+.price-card.featured::after{content:"POPULAR";position:absolute;top:14px;right:14px;background:var(--gold);color:#0a0e1a;font-size:9px;font-weight:900;letter-spacing:1.5px;padding:5px 10px;border-radius:99px}
+.price-label{font-size:11px;letter-spacing:2px;font-weight:900;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
+.price-name{font-size:20px;font-weight:950;letter-spacing:-.5px;margin-bottom:6px}
+.price-tagline{color:var(--muted);font-size:12px;margin-bottom:18px}
+.price-amt{font-size:36px;font-weight:950;letter-spacing:-2px;color:var(--gold);line-height:1;margin-bottom:4px}
+.price-amt small{font-size:13px;color:var(--muted);font-weight:700;letter-spacing:0}
+.price-features{list-style:none;padding:0;margin:22px 0;display:grid;gap:9px;flex:1}
+.price-features li{display:flex;gap:9px;align-items:flex-start;color:#c8cdd8;font-size:13px;line-height:1.5}
+.price-features li::before{content:"✓";color:var(--pink);font-weight:900;flex-shrink:0}
+.price-cta{background:linear-gradient(135deg,var(--pink),var(--purple));color:white;padding:14px;border-radius:12px;font-weight:900;font-size:13px;text-align:center;transition:.2s;display:block;letter-spacing:.5px}
+.price-cta:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(236,72,153,.35)}
+
+/* CTA BOX */
+.cta-box{background:linear-gradient(135deg,#1f2a44,#0d1220);border:1px solid rgba(236,72,153,.3);border-radius:24px;padding:48px 32px;text-align:center;position:relative;overflow:hidden}
+.cta-box::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(236,72,153,.15),transparent 55%),radial-gradient(circle at 70% 80%,rgba(168,85,247,.12),transparent 55%);pointer-events:none}
+.cta-box h2{font-size:clamp(24px,4vw,36px);font-weight:950;letter-spacing:-1.5px;margin-bottom:14px;position:relative}
+.cta-box h2 .grad{background:linear-gradient(135deg,#ec4899,#a855f7);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cta-box p{color:#c8cdd8;font-size:15px;max-width:520px;margin:0 auto 28px;line-height:1.6;position:relative}
+.cta-box .btn{background:linear-gradient(135deg,var(--pink),var(--purple));color:white;padding:16px 32px;border-radius:12px;font-weight:900;font-size:14px;letter-spacing:1px;text-decoration:none;display:inline-block;transition:.25s;position:relative;box-shadow:0 12px 40px rgba(236,72,153,.4)}
+.cta-box .btn:hover{transform:translateY(-3px);box-shadow:0 18px 50px rgba(236,72,153,.55)}
+
+/* FOOTER */
+footer{text-align:center;padding:40px 20px 30px;color:var(--muted);font-size:11px;line-height:1.7;border-top:1px solid var(--line-soft);margin-top:60px}
+footer b{color:var(--pink)}
+footer a{color:var(--gold);border-bottom:1px solid rgba(255,212,0,.4)}
+footer .powered{margin-top:12px;font-size:10px;letter-spacing:3px;font-weight:900;text-transform:uppercase;color:#3a4152}
+
+@media(max-width:800px){
+  .ig-grid{grid-template-columns:repeat(3,1fr)}
+  .included-grid{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr}
+  .block-header{flex-wrap:wrap}
+  .block-header p{margin-left:0;text-align:left;max-width:100%}
+}
+@media(max-width:500px){
+  .demo-banner{font-size:11px;padding:8px 12px}
+  .demo-banner a{padding:5px 10px;font-size:10px}
+  header{padding:34px 16px 26px}
+  .logo{width:72px;height:72px;font-size:36px}
+  .ig-avatar{width:72px;height:72px;font-size:30px}
+  .ig-avatar-inner{font-size:30px}
+  .ig-post-emoji{font-size:28px}
+  .reel-cover{width:120px;height:210px}
+}
+</style>
+</head>
+<body>
+
+<!-- DEMO BANNER -->
+<div class="demo-banner" id="demoBanner">
+  <div class="demo-banner-txt">
+    <span class="dot"></span>
+    <span>Live Demo · by VAAN Consultancy</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:6px">
+    <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20social%20media%20management%20for%20my%20business." target="_blank">Get This →</a>
+    <button class="close" onclick="document.getElementById('demoBanner').style.display='none'">✕</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">📱</div>
+  <h1 class="brand">VAA <span class="grad">Social</span></h1>
+  <div class="tagline">Premium Social · Without Agency Price</div>
+  <p class="sub-hero">Full Instagram setup + monthly content design. Look premium everywhere — posts, stories, reels covers, all handled.</p>
+</header>
+
+<!-- MAIN -->
+<main>
+
+  <!-- INSTAGRAM PROFILE PREVIEW -->
+  <section class="block">
+    <div class="block-header">
+      <h2>Your Instagram, Reimagined</h2>
+      <p>Sample of what your profile could look like</p>
+    </div>
+    <div class="ig-profile">
+      <div class="ig-profile-head">
+        <div class="ig-avatar">
+          <div class="ig-avatar-inner">VA</div>
+        </div>
+        <div class="ig-meta">
+          <div class="ig-handle">@yourbusiness <span class="verified">✓</span></div>
+          <div class="ig-stats">
+            <div class="ig-stat"><b>2,847</b><span>followers</span></div>
+            <div class="ig-stat"><b>312</b><span>posts</span></div>
+            <div class="ig-stat"><b>4.8</b><span>avg. engagement</span></div>
+          </div>
+          <div class="ig-bio">
+            <span class="gold">✨ Your Business</span><br>
+            📍 Your City, India<br>
+            💬 DM for orders<br>
+            ⬇️ Order now: wa.me/yourbusiness
+          </div>
+        </div>
+      </div>
+
+      <div class="ig-grid">
+        <div class="ig-post"><div class="ig-post-emoji">🍽️</div><div class="ig-post-label">Post 01</div></div>
+        <div class="ig-post"><div class="ig-post-emoji">🎉</div><div class="ig-post-label">Post 02</div></div>
+        <div class="ig-post"><div class="ig-post-emoji">⭐</div><div class="ig-post-label">Post 03</div></div>
+        <div class="ig-post"><div class="ig-post-emoji">💼</div><div class="ig-post-label">Post 04</div></div>
+        <div class="ig-post"><div class="ig-post-emoji">🔥</div><div class="ig-post-label">Post 05</div></div>
+        <div class="ig-post"><div class="ig-post-emoji">💬</div><div class="ig-post-label">Post 06</div></div>
+        <div class="ig-post"><div class="ig-post-emoji">🎨</div><div class="ig-post-label">Post 07</div></div>
+        <div class="ig-post"><div class="ig-post-emoji">📸</div><div class="ig-post-label">Post 08</div></div>
+        <div class="ig-post"><div class="ig-post-emoji">🏆</div><div class="ig-post-label">Post 09</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT CALENDAR -->
+  <section class="block">
+    <div class="block-header">
+      <h2>Monthly Content Calendar</h2>
+      <p>Plan 20+ posts a month in advance</p>
+    </div>
+    <div class="calendar">
+      <div class="cal-grid">
+        <div class="cal-day">Mon</div><div class="cal-day">Tue</div><div class="cal-day">Wed</div><div class="cal-day">Thu</div><div class="cal-day">Fri</div><div class="cal-day">Sat</div><div class="cal-day">Sun</div>
+
+        <div class="cal-cell"><div class="cal-date">1</div><div class="cal-post">Post</div></div>
+        <div class="cal-cell"><div class="cal-date">2</div></div>
+        <div class="cal-cell"><div class="cal-date">3</div><div class="cal-post">Post</div><div class="cal-post">Story</div></div>
+        <div class="cal-cell"><div class="cal-date">4</div></div>
+        <div class="cal-cell"><div class="cal-date">5</div><div class="cal-post">Post</div></div>
+        <div class="cal-cell"><div class="cal-date">6</div><div class="cal-post">Reel</div></div>
+        <div class="cal-cell"><div class="cal-date">7</div></div>
+
+        <div class="cal-cell"><div class="cal-date">8</div><div class="cal-post">Post</div></div>
+        <div class="cal-cell"><div class="cal-date">9</div><div class="cal-post">Story</div></div>
+        <div class="cal-cell"><div class="cal-date">10</div><div class="cal-post">Post</div></div>
+        <div class="cal-cell"><div class="cal-date">11</div></div>
+        <div class="cal-cell"><div class="cal-date">12</div><div class="cal-post">Post</div></div>
+        <div class="cal-cell"><div class="cal-date">13</div><div class="cal-post">Reel</div></div>
+        <div class="cal-cell"><div class="cal-date">14</div></div>
+
+        <div class="cal-cell"><div class="cal-date">15</div><div class="cal-post">Post</div><div class="cal-post">Story</div></div>
+        <div class="cal-cell"><div class="cal-date">16</div></div>
+        <div class="cal-cell"><div class="cal-date">17</div><div class="cal-post">Post</div></div>
+        <div class="cal-cell"><div class="cal-date">18</div><div class="cal-post">Reel</div></div>
+        <div class="cal-cell"><div class="cal-date">19</div><div class="cal-post">Post</div></div>
+        <div class="cal-cell"><div class="cal-date">20</div><div class="cal-post">Story</div></div>
+        <div class="cal-cell"><div class="cal-date">21</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REELS COVERS -->
+  <section class="block">
+    <div class="block-header">
+      <h2>Reels Covers</h2>
+      <p>Scroll to see →</p>
+    </div>
+    <div class="reels-scroll">
+      <div class="reel-cover">
+        <div class="reel-stat">12.5K</div>
+        <div class="reel-play">▶</div>
+        <div class="reel-label">Behind the scenes</div>
+      </div>
+      <div class="reel-cover">
+        <div class="reel-stat">8.2K</div>
+        <div class="reel-play">▶</div>
+        <div class="reel-label">Customer story</div>
+      </div>
+      <div class="reel-cover">
+        <div class="reel-stat">24.1K</div>
+        <div class="reel-play">▶</div>
+        <div class="reel-label">New arrival</div>
+      </div>
+      <div class="reel-cover">
+        <div class="reel-stat">6.7K</div>
+        <div class="reel-play">▶</div>
+        <div class="reel-label">Tip of the day</div>
+      </div>
+      <div class="reel-cover">
+        <div class="reel-stat">15.3K</div>
+        <div class="reel-play">▶</div>
+        <div class="reel-label">Trending now</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED -->
+  <section class="block">
+    <div class="block-header">
+      <h2>What's Included</h2>
+    </div>
+    <div class="included-grid">
+      <div class="included-card">
+        <div class="included-icon">📱</div>
+        <div class="included-info"><b>Profile Setup & Optimization</b><span>Bio, highlights, links, business profile complete</span></div>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">🎨</div>
+        <div class="included-info"><b>20+ Custom Posts / Month</b><span>Designed in your brand colours and style</span></div>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">🎬</div>
+        <div class="included-info"><b>Reels Covers</b><span>Cover designs for every reel you post</span></div>
+      </div>
+      <div class="included-card">
+                <div class="included-icon">📅</div>
+        <div class="included-info"><b>Content Calendar</b><span>Know exactly what to post, when</span></div>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">✍️</div>
+        <div class="included-info"><b>Caption Writing</b><span>Engaging captions with hashtag strategy</span></div>
+      </div>
+      <div class="included-card">
+        <div class="included-icon">📊</div>
+        <div class="included-info"><b>Monthly Report</b><span>See your growth — followers, reach, engagement</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="block">
+    <div class="block-header">
+      <h2>Simple Pricing</h2>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-label">Basic</div>
+        <div class="price-name">Starter</div>
+        <div class="price-tagline">For new businesses</div>
+        <div class="price-amt">₹4,999<small>/month</small></div>
+        <ul class="price-features">
+          <li>12 custom posts / month</li>
+          <li>Profile setup included</li>
+          <li>Caption + hashtags</li>
+          <li>Basic analytics report</li>
+        </ul>
+        <a class="price-cta" href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20am%20interested%20in%20Starter%20social%20media%20package." target="_blank">Get Started</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-label">Most Popular</div>
+        <div class="price-name">Growth</div>
+        <div class="price-tagline">Best for growing brands</div>
+        <div class="price-amt">₹7,999<small>/month</small></div>
+        <ul class="price-features">
+          <li>20 custom posts / month</li>
+          <li>Full profile optimization</li>
+          <li>Reels covers</li>
+          <li>Content calendar</li>
+          <li>Engagement strategy</li>
+          <li>Detailed monthly report</li>
+        </ul>
+        <a class="price-cta" href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20am%20interested%20in%20Growth%20social%20media%20package." target="_blank">Get Started</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-label">Premium</div>
+        <div class="price-name">Elite</div>
+        <div class="price-tagline">For established brands</div>
+        <div class="price-amt">₹14,999<small>/month</small></div>
+        <ul class="price-features">
+          <li>30+ custom posts / month</li>
+          <li>Daily story designs</li>
+          <li>Reels covers + scripts</li>
+          <li>Complete content strategy</li>
+          <li>Influencer collaborations</li>
+          <li>Weekly analytics</li>
+          <li>Priority support</li>
+        </ul>
+        <a class="price-cta" href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20am%20interested%20in%20Elite%20social%20media%20package." target="_blank">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="block">
+    <div class="cta-box">
+      <h2>Ready to look <span class="grad">premium</span> online?</h2>
+      <p>Free 15-minute consultation. We'll look at your current Instagram and suggest exactly what to fix.</p>
+      <a class="btn" href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20a%20free%20Instagram%20audit." target="_blank">💬 Free Instagram Audit</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div><b>VAA Social</b> — Demo</div>
+  <div style="margin-top:6px">Premium social media management by VAAN Consultancy</div>
+  <div class="powered">Powered by <a href="../index.html">VAAN Consultancy</a></div>
+</footer>
+
+</body>
+          </html>
