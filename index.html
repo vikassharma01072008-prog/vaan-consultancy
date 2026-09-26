@@ -1,0 +1,878 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VAAN Consultancy — Websites & QR Systems for Modern Businesses</title>
+<meta name="description" content="VAAN Consultancy builds premium websites and QR systems for restaurants, hotels, gyms, academies, salons and businesses across India and worldwide.">
+<meta name="keywords" content="VAAN Consultancy, website design Karnal, QR menu system, QR code business, hotel QR concierge, gym check-in system, academy portal">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0a0e1a">
+<meta property="og:title" content="VAAN Consultancy — Vision · Automation · Advancement · Network">
+<meta property="og:description" content="We build websites and QR systems that work while you sleep.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://vikassharma01072008-prog.github.io/vaan-consultancy/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#0a0e1a;color:#f5f5f5;overflow-x:hidden;line-height:1.6;-webkit-tap-highlight-color:transparent}
+
+:root{
+  --bg-dark:#0a0e1a;
+  --bg-dark2:#0f1520;
+  --card:#12192a;
+  --line:rgba(255,212,0,.15);
+  --line-soft:rgba(255,255,255,.08);
+  --gold:#ffd400;
+  --gold-soft:rgba(255,212,0,.15);
+  --blue:#4f8fff;
+  --blue-soft:rgba(79,143,255,.15);
+  --white:#f5f5f5;
+  --muted:#8a8f9c;
+  --red:#e11d2a;
+  --green:#25b46e;
+}
+
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+/* ====== NAVBAR ====== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;background:rgba(10,14,26,.75);backdrop-filter:blur(20px);border-bottom:1px solid var(--line-soft);transition:.3s}
+.nav-in{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:950;letter-spacing:-1.5px;font-size:22px;color:#fff}
+.brand-logo{width:36px;height:36px;position:relative;display:flex;align-items:center;justify-content:center}
+.brand-logo svg{width:100%;height:100%;filter:drop-shadow(0 0 12px rgba(255,212,0,.5))}
+.brand-text{display:flex;flex-direction:column;line-height:1}
+.brand-text b{font-size:19px;letter-spacing:-1px}
+.brand-text small{font-size:9px;letter-spacing:2px;color:var(--muted);margin-top:3px;font-weight:600}
+.nav-links{display:flex;align-items:center;gap:28px;font-size:14px;font-weight:600}
+.nav-links a{color:var(--white);opacity:.85;transition:.2s;position:relative}
+.nav-links a:hover{opacity:1;color:var(--gold)}
+.nav-links a::after{content:"";position:absolute;bottom:-6px;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:.3s;transform-origin:left}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{background:var(--gold);color:#0a0e1a !important;padding:11px 20px;border-radius:99px;font-weight:800;font-size:13px;letter-spacing:.3px;transition:.3s;opacity:1 !important;box-shadow:0 8px 24px rgba(255,212,0,.25)}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,212,0,.45)}
+.nav-cta::after{display:none !important}
+.hamburger{display:none;background:transparent;border:0;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+.hamburger span{width:24px;height:2px;background:var(--white);border-radius:2px;transition:.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ====== HERO ====== */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;overflow:hidden}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.9}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 30%,rgba(79,143,255,.12),transparent 55%),radial-gradient(ellipse at 80% 70%,rgba(255,212,0,.10),transparent 55%),linear-gradient(180deg,#0a0e1a 0%,#0f1520 100%);z-index:-1}
+.hero-in{max-width:1280px;margin:0 auto;padding:0 24px;position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;width:100%}
+
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(79,143,255,.1);border:1px solid rgba(79,143,255,.3);color:#8bb4ff;padding:8px 16px;border-radius:99px;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px}
+.hero-badge::before{content:"";width:6px;height:6px;background:var(--blue);border-radius:50%;box-shadow:0 0 12px var(--blue);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.4)}}
+
+.hero h1{font-size:clamp(40px,6vw,72px);font-weight:950;line-height:1;letter-spacing:-3px;margin-bottom:24px}
+.hero h1 .gold{color:var(--gold);text-shadow:0 0 60px rgba(255,212,0,.4)}
+.hero h1 .blue{color:var(--blue);text-shadow:0 0 60px rgba(79,143,255,.4)}
+.hero p.lead{font-size:17px;color:#b8becc;max-width:580px;margin-bottom:36px;line-height:1.65}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px}
+.btn{border:0;border-radius:12px;padding:16px 28px;font-weight:800;font-size:14px;cursor:pointer;font-family:inherit;transition:all .25s cubic-bezier(.2,.9,.3,1.2);display:inline-flex;align-items:center;gap:8px;letter-spacing:.3px;text-decoration:none}
+.btn-primary{background:var(--gold);color:#0a0e1a;box-shadow:0 10px 30px rgba(255,212,0,.3)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(255,212,0,.5)}
+.btn-secondary{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.15)}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+
+.hero-stats{display:flex;gap:36px;flex-wrap:wrap}
+.hero-stat b{display:block;font-size:32px;font-weight:950;letter-spacing:-1.5px;background:linear-gradient(135deg,var(--gold),#ffa726);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero-stat span{display:block;color:var(--muted);font-size:11px;letter-spacing:1.5px;font-weight:800;text-transform:uppercase;margin-top:4px}
+
+.hero-visual{position:relative;height:520px}
+.hero-visual-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+
+/* ====== SECTION BASE ====== */
+section{padding:100px 0;position:relative}
+.sec-in{max-width:1280px;margin:0 auto;padding:0 24px}
+.sec-eyebrow{display:inline-block;color:var(--blue);font-size:11px;letter-spacing:3px;font-weight:800;text-transform:uppercase;margin-bottom:14px}
+.sec-title{font-size:clamp(32px,4.5vw,52px);font-weight:950;letter-spacing:-2px;line-height:1.05;margin-bottom:18px}
+.sec-title .gold{color:var(--gold)}
+.sec-sub{color:#b8becc;font-size:17px;max-width:680px;line-height:1.65;margin-bottom:56px}
+
+/* ====== SERVICES GRID ====== */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.svc-card{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:20px;padding:32px 28px;position:relative;overflow:hidden;transition:all .35s cubic-bezier(.2,.9,.3,1.1);cursor:pointer}
+.svc-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--blue));transform:scaleX(0);transition:.4s;transform-origin:left}
+.svc-card:hover{transform:translateY(-8px);border-color:rgba(255,212,0,.35);box-shadow:0 30px 60px rgba(0,0,0,.4)}
+.svc-card:hover::before{transform:scaleX(1)}
+.svc-icon{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,rgba(255,212,0,.15),rgba(79,143,255,.1));border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:22px;position:relative}
+.svc-icon::after{content:"";position:absolute;inset:-6px;border-radius:20px;background:radial-gradient(circle,rgba(255,212,0,.15),transparent 70%);opacity:0;transition:.4s}
+.svc-card:hover .svc-icon::after{opacity:1}
+.svc-card h3{font-size:21px;font-weight:850;letter-spacing:-.5px;margin-bottom:10px}
+.svc-card p{color:#a8aebc;font-size:14px;line-height:1.6;margin-bottom:20px;min-height:66px}
+.svc-tag{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:12px;font-weight:800;letter-spacing:.5px}
+.svc-tag::after{content:"→";transition:.3s}
+.svc-card:hover .svc-tag::after{transform:translateX(4px)}
+
+/* ====== WHY VAAN SECTION ====== */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px}
+.why-card{background:rgba(18,25,42,.6);border:1px solid var(--line-soft);border-radius:16px;padding:26px 22px;backdrop-filter:blur(10px)}
+.why-icon{width:44px;height:44px;border-radius:12px;background:var(--gold-soft);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
+.why-card h4{font-size:16px;font-weight:800;margin-bottom:8px;letter-spacing:-.3px}
+.why-card p{color:#8a8f9c;font-size:13px;line-height:1.55}
+
+/* ====== CTA SECTION ====== */
+.cta-section{background:linear-gradient(135deg,#0f1520,#0a0e1a);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);text-align:center;padding:100px 24px}
+.cta-section h2{font-size:clamp(30px,4vw,48px);font-weight:950;letter-spacing:-2px;margin-bottom:16px;line-height:1.1}
+.cta-section h2 .gold{color:var(--gold)}
+.cta-section p{color:#b8becc;font-size:17px;max-width:560px;margin:0 auto 36px}
+
+/* ====== FOOTER ====== */
+footer{background:#070a14;border-top:1px solid var(--line-soft);padding:60px 24px 30px}
+.foot-in{max-width:1280px;margin:0 auto}
+.foot-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;margin-bottom:48px}
+.foot-brand{display:flex;align-items:center;gap:12px;margin-bottom:18px;font-weight:950;font-size:20px;letter-spacing:-1px}
+.foot-brand svg{width:32px;height:32px}
+.foot-desc{color:#8a8f9c;font-size:13px;line-height:1.7;max-width:300px;margin-bottom:20px}
+.foot-vaan{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.foot-vaan span{font-size:10px;letter-spacing:1.5px;font-weight:800;color:var(--muted);padding:4px 8px;background:rgba(255,255,255,.04);border-radius:4px;text-transform:uppercase}
+.foot-col h5{font-size:12px;letter-spacing:2px;font-weight:900;text-transform:uppercase;color:var(--white);margin-bottom:18px}
+.foot-col a{display:block;color:#8a8f9c;font-size:13px;padding:6px 0;transition:.2s}
+.foot-col a:hover{color:var(--gold)}
+.foot-bot{border-top:1px solid var(--line-soft);padding-top:24px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;color:#5a6172;font-size:12px}
+.foot-bot a{color:var(--gold)}
+.foot-bot strong{color:var(--white)}
+
+/* ====== RESPONSIVE ====== */
+@media(max-width:1000px){
+  .hero-in{grid-template-columns:1fr;gap:20px}
+  .hero-visual{height:400px;order:-1}
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-top{grid-template-columns:1fr 1fr;gap:32px}
+}
+@media(max-width:700px){
+  .nav-links{position:fixed;top:70px;left:0;right:0;background:rgba(10,14,26,.98);backdrop-filter:blur(20px);flex-direction:column;padding:24px;gap:20px;border-bottom:1px solid var(--line-soft);transform:translateY(-150%);transition:.4s cubic-bezier(.2,.9,.3,1.1)}
+  .nav-links.open{transform:translateY(0)}
+  .hamburger{display:flex}
+  .svc-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .foot-top{grid-template-columns:1fr}
+  section{padding:70px 0}
+  .hero{padding:100px 0 60px;min-height:auto}
+  .hero-visual{height:340px}
+  .hero-stats{gap:24px}
+  .hero-stat b{font-size:26px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="nav" id="nav">
+  <div class="nav-in">
+    <a href="index.html" class="brand">
+      <span class="brand-logo">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 8 L92 92 L74 92 L50 42 L26 92 L8 92 Z" fill="url(#g1)"/>
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ffd400"/>
+              <stop offset="100%" stop-color="#4f8fff"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <b>VAAN</b>
+        <small>CONSULTANCY</small>
+      </span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#why">Why VAAN</a>
+      <a href="#contact">Contact</a>
+      <a href="tel:9671163712" class="nav-cta">📞 9671163712</a>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-in">
+    <div>
+      <span class="hero-badge">Vision · Automation · Advancement · Network</span>
+      <h1>We build <span class="gold">systems</span><br>that work while<br>you <span class="blue">sleep</span>.</h1>
+      <p class="lead">Premium websites and QR systems for restaurants, hotels, gyms, academies and modern businesses — built in Karnal, trusted across India and worldwide.</p>
+      <div class="hero-ctas">
+        <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20know%20more%20about%20your%20services." class="btn btn-primary" target="_blank">💬 Start a Project</a>
+        <a href="#services" class="btn btn-secondary">Explore Services →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>15+</b><span>Business Partners</span></div>
+        <div class="hero-stat"><b>₹0</b><span>Setup Cost</span></div>
+        <div class="hero-stat"><b>24h</b><span>Response Time</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-visual-inner" id="heroVisualInner">
+        <!-- 3D scene is rendered in the canvas above -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="sec-in">
+    <span class="sec-eyebrow">WHAT WE BUILD</span>
+    <h2 class="sec-title">Two things we do <span class="gold">exceptionally well</span>.</h2>
+    <p class="sec-sub">Premium websites and smart QR systems — crafted for local businesses and modern brands. Every project designed to convert, not just look good.</p>
+
+    <div class="svc-grid">
+      <div class="svc-card">
+        <div class="svc-icon">💻</div>
+        <h3>Custom Websites</h3>
+        <p>Business sites, portfolios, booking systems, e-commerce — built for speed, search ranking and conversions.</p>
+        <span class="svc-tag">Explore websites</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">📱</div>
+        <h3>QR Systems</h3>
+        <p>Restaurant menus, hotel concierge, gym check-in, academy portals, salon bookings — all in one scan.</p>
+        <span class="svc-tag">Explore QR systems</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🎨</div>
+        <h3>Branding & Social</h3>
+        <p>Logos, brand identity, Instagram setup, content design — everything to make you look premium online.</p>
+        <span class="svc-tag">Explore branding</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="sec-in">
+    <span class="sec-eyebrow">WHY VAAN</span>
+    <h2 class="sec-title">Built for <span class="gold">results</span>, not just looks.</h2>
+    <p class="sec-sub">Four reasons businesses across India and abroad choose VAAN over agencies 10x our size.</p>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <h4>Fast Delivery</h4>
+        <p>Most projects live in 3–5 days. No endless revisions. We ship.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💎</div>
+        <h4>Premium Quality</h4>
+        <p>Agency-grade design at freelancer prices. Every project looks like a ₹1,00,000 build.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🌍</div>
+        <h4>Global Reach</h4>
+        <p>We work with clients across India, UAE, US and UK — flexible time zones, English-first.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🤝</div>
+        <h4>Long-Term Support</h4>
+        <p>Every project includes updates, fixes and support. We don't disappear after delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Ready to build something <span class="gold">remarkable?</span></h2>
+  <p>Free consultation. Honest pricing. Deliver in days, not weeks.</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+    <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20discuss%20a%20project." class="btn btn-primary" target="_blank">💬 WhatsApp Now</a>
+    <a href="tel:9671163712" class="btn btn-secondary">📞 Call 9671163712</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-in">
+    <div class="foot-top">
+      <div>
+        <div class="foot-brand">
+          <svg viewBox="0 0 100 100" fill="none"><path d="M50 8 L92 92 L74 92 L50 42 L26 92 L8 92 Z" fill="url(#g2)"/><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffd400"/><stop offset="100%" stop-color="#4f8fff"/></linearGradient></defs></svg>
+          VAAN CONSULTANCY
+        </div>
+        <p class="foot-desc">Digital solutions for modern businesses. Websites, QR systems, and branding that actually work.</p>
+        <div class="foot-vaan">
+          <span>Vision</span><span>Automation</span><span>Advancement</span><span>Network</span>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Services</h5>
+        <a href="#services">Websites</a>
+        <a href="#services">QR Systems</a>
+        <a href="#services">Branding</a>
+        <a href="#services">Social Media</a>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="#why">Why VAAN</a>
+        <a href="#">Portfolio</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="foot-col">
+        <h5>Connect</h5>
+        <a href="tel:9671163712">📞 9671163712</a>
+        <a href="https://wa.me/919671163712" target="_blank">💬 WhatsApp</a>
+        <a href="https://instagram.com/vaa_enterprises" target="_blank">📸 Instagram</a>
+        <a href="#">📍 Karnal, Haryana</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div>© 2026 <strong>VAAN Consultancy</strong> — All rights reserved.</div>
+      <div>Made with <span style="color:var(--gold)">▲</span> in Karnal, India</div>
+    </div>
+  </div>
+  </footer>
+<!-- ====== LIBRARIES (CDN, no download needed) ====== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+/* ==========================================================
+   VAAN CONSULTANCY — CORE SCRIPT
+   ========================================================== */
+
+const SUPABASE_URL = "https://xvtxpllmfwgnlrffbcqz.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2dHhwbGxtZndnbmxyZmZiY3F6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0Mzg2OTYsImV4cCI6MjEwNjAxNDY5Nn0.JC1Za7PdNGLngpupBovq_DqI-vHRVBOovLdEe-w1Ap0";
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+/* ====== NAV TOGGLE (mobile) ====== */
+function toggleNav(){
+  document.getElementById("navLinks").classList.toggle("open");
+  document.getElementById("hamburger").classList.toggle("open");
+}
+document.querySelectorAll(".nav-links a").forEach(a => {
+  a.addEventListener("click", () => {
+    document.getElementById("navLinks").classList.remove("open");
+    document.getElementById("hamburger").classList.remove("open");
+  });
+});
+
+/* ====== NAV SHRINK ON SCROLL ====== */
+window.addEventListener("scroll", () => {
+  const nav = document.getElementById("nav");
+  if (window.scrollY > 60) {
+    nav.style.padding = "10px 0";
+    nav.style.background = "rgba(10,14,26,.92)";
+  } else {
+    nav.style.padding = "16px 0";
+    nav.style.background = "rgba(10,14,26,.75)";
+  }
+});
+
+/* ==========================================================
+   3D HERO — LAYERED HOLOGRAM SCENE
+   (floating 3D objects that break apart and reassemble)
+   ========================================================== */
+(function(){
+  if (typeof THREE === "undefined") return;
+
+  const canvas = document.getElementById("heroCanvas");
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 1000);
+  camera.position.set(0, 0, 18);
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  /* --- Lighting --- */
+  const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+  scene.add(ambient);
+
+  const goldLight = new THREE.PointLight(0xffd400, 2.5, 60);
+  goldLight.position.set(-10, 6, 8);
+  scene.add(goldLight);
+
+  const blueLight = new THREE.PointLight(0x4f8fff, 2.5, 60);
+  blueLight.position.set(10, -6, 8);
+  scene.add(blueLight);
+
+  const backLight = new THREE.PointLight(0xffffff, 1, 40);
+  backLight.position.set(0, 0, -10);
+  scene.add(backLight);
+
+  /* --- Group that holds all floating objects --- */
+  const world = new THREE.Group();
+  scene.add(world);
+
+  /* --- Create layered hologram objects (break apart style) --- */
+  const layers = [];
+
+  /* Core wireframe sphere (hologram core) */
+  const coreGeo = new THREE.IcosahedronGeometry(1.8, 2);
+  const coreMat = new THREE.MeshBasicMaterial({
+    color: 0xffd400,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.85
+  });
+  const core = new THREE.Mesh(coreGeo, coreMat);
+  world.add(core);
+  layers.push({ mesh: core, baseY: 0, driftSpeed: 0.3 });
+
+  /* Inner glow sphere (soft blue) */
+  const glowGeo = new THREE.SphereGeometry(1.2, 32, 32);
+  const glowMat = new THREE.MeshBasicMaterial({
+    color: 0x4f8fff,
+    transparent: true,
+    opacity: 0.15
+  });
+  const glow = new THREE.Mesh(glowGeo, glowMat);
+  world.add(glow);
+  layers.push({ mesh: glow, baseY: 0, driftSpeed: 0.2 });
+
+  /* Floating cubes (QR cube style) */
+  const cubeData = [
+    { size: 1.2, pos: [-4, 2.5, 0], color: 0xffd400, speed: 0.6 },
+    { size: 0.9, pos: [4, 2.8, -1], color: 0x4f8fff, speed: 0.8 },
+    { size: 1.0, pos: [-3.8, -2.5, 1], color: 0x4f8fff, speed: 0.5 },
+    { size: 0.8, pos: [3.8, -2.8, 0.5], color: 0xffd400, speed: 0.7 },
+    { size: 0.7, pos: [0, 4, -1], color: 0xffffff, speed: 0.9 }
+  ];
+
+  const cubes = [];
+  cubeData.forEach(c => {
+    const geo = new THREE.BoxGeometry(c.size, c.size, c.size);
+    const mat = new THREE.MeshBasicMaterial({
+      color: c.color,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.7
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(c.pos[0], c.pos[1], c.pos[2]);
+    world.add(mesh);
+    cubes.push({ mesh, basePos: [...c.pos], speed: c.speed });
+  });
+
+  /* Floating particles (dust/hologram particles) */
+  const particleCount = 180;
+  const particleGeo = new THREE.BufferGeometry();
+  const positions = new Float32Array(particleCount * 3);
+  for (let i = 0; i < particleCount * 3; i++){
+    positions[i] = (Math.random() - 0.5) * 40;
+  }
+  particleGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  const particleMat = new THREE.PointsMaterial({
+    color: 0xffd400,
+    size: 0.06,
+    transparent: true,
+    opacity: 0.6,
+    sizeAttenuation: true
+  });
+  const particles = new THREE.Points(particleGeo, particleMat);
+  world.add(particles);
+
+  /* Floating rings (orbit rings) */
+  const ringGeo1 = new THREE.TorusGeometry(3.5, 0.02, 16, 100);
+  const ringMat1 = new THREE.MeshBasicMaterial({ color: 0xffd400, transparent: true, opacity: 0.35 });
+  const ring1 = new THREE.Mesh(ringGeo1, ringMat1);
+  ring1.rotation.x = Math.PI / 2.3;
+  world.add(ring1);
+
+  const ringGeo2 = new THREE.TorusGeometry(4.5, 0.015, 16, 100);
+  const ringMat2 = new THREE.MeshBasicMaterial({ color: 0x4f8fff, transparent: true, opacity: 0.25 });
+  const ring2 = new THREE.Mesh(ringGeo2, ringMat2);
+  ring2.rotation.x = -Math.PI / 2.6;
+  ring2.rotation.z = 0.4;
+  world.add(ring2);
+
+  /* --- Mouse parallax --- */
+  let mx = 0, my = 0;
+  let tx = 0, ty = 0;
+  window.addEventListener("mousemove", e => {
+    mx = (e.clientX / window.innerWidth - 0.5) * 2;
+    my = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+  window.addEventListener("touchmove", e => {
+    if (e.touches[0]){
+      mx = (e.touches[0].clientX / window.innerWidth - 0.5) * 2;
+      my = (e.touches[0].clientY / window.innerHeight - 0.5) * 2;
+    }
+  }, { passive: true });
+
+  /* --- Scroll-driven layer split (hologram breakdown effect) --- */
+  let scrollProgress = 0;
+  window.addEventListener("scroll", () => {
+    const heroHeight = window.innerHeight;
+    scrollProgress = Math.min(window.scrollY / heroHeight, 1);
+  });
+
+  /* --- Animate --- */
+  const clock = new THREE.Clock();
+  function animate(){
+    const t = clock.getElapsedTime();
+    requestAnimationFrame(animate);
+
+    /* Smooth mouse follow */
+    tx += (mx - tx) * 0.05;
+    ty += (my - ty) * 0.05;
+
+    /* Rotate the whole world slowly */
+    world.rotation.y = t * 0.15 + tx * 0.3;
+    world.rotation.x = ty * 0.2;
+
+    /* Core pulse */
+    const pulse = 1 + Math.sin(t * 2) * 0.05;
+    core.scale.set(pulse, pulse, pulse);
+    core.rotation.x = t * 0.3;
+    core.rotation.z = t * 0.2;
+
+    /* Glow pulse */
+    const glowPulse = 1 + Math.sin(t * 2 + 0.5) * 0.1;
+    glow.scale.set(glowPulse, glowPulse, glowPulse);
+
+    /* Floating cubes — drift up/down + spin */
+    cubes.forEach((c, i) => {
+      c.mesh.position.y = c.basePos[1] + Math.sin(t * c.speed + i) * 0.35;
+      c.mesh.position.x = c.basePos[0] + Math.cos(t * c.speed * 0.7 + i) * 0.25;
+      c.mesh.rotation.x = t * c.speed * 0.5;
+      c.mesh.rotation.y = t * c.speed * 0.7;
+    });
+
+    /* Layer breakdown on scroll — layers separate outward */
+    if (scrollProgress > 0) {
+      const split = scrollProgress * 3;
+      core.position.y = split * 2;
+      core.position.z = -split * 1.5;
+      glow.position.y = -split * 1.5;
+      glow.position.z = split * 2;
+      cubes.forEach((c, i) => {
+        c.mesh.position.x = c.basePos[0] * (1 + split * 0.5);
+        c.mesh.position.y = c.basePos[1] * (1 + split * 0.3);
+      });
+    } else {
+      /* Return to base when scrolled to top */
+      core.position.y *= 0.9;
+      core.position.z *= 0.9;
+      glow.position.y *= 0.9;
+      glow.position.z *= 0.9;
+      cubes.forEach(c => {
+        c.mesh.position.x = c.basePos[0] * 0.98 + c.mesh.position.x * 0.02;
+        c.mesh.position.y = c.basePos[1] + Math.sin(t * c.speed) * 0.35;
+      });
+    }
+
+    /* Rings rotate */
+    ring1.rotation.z = t * 0.25;
+    ring2.rotation.z = -t * 0.2 + 0.4;
+
+    /* Particles slow rotate */
+    particles.rotation.y = t * 0.05;
+    particles.rotation.x = t * 0.03;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  /* --- Resize --- */
+  window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  });
+})();
+
+/* ==========================================================
+   GSAP SCROLL REVEALS
+   ========================================================== */
+if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined"){
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.utils.toArray("section").forEach(section => {
+    gsap.from(section.querySelectorAll(".sec-eyebrow, .sec-title, .sec-sub"), {
+      y: 40, opacity: 0, duration: 1, stagger: 0.15, ease: "power3.out",
+      scrollTrigger: { trigger: section, start: "top 80%" }
+    });
+  });
+
+  gsap.utils.toArray(".svc-card").forEach((card, i) => {
+    gsap.from(card, {
+      y: 60, opacity: 0, duration: 0.9, delay: i * 0.1, ease: "power3.out",
+      scrollTrigger: { trigger: card, start: "top 88%" }
+    });
+  });
+
+  gsap.utils.toArray(".why-card").forEach((card, i) => {
+    gsap.from(card, {
+      y: 50, opacity: 0, duration: 0.8, delay: i * 0.08, ease: "power3.out",
+      scrollTrigger: { trigger: card, start: "top 88%" }
+    });
+  });
+}
+
+/* ==========================================================
+   AI CHAT WIDGET (VAAN-branded, powered by Gemini via Supabase)
+   ========================================================== */
+(function(){
+  const html = `
+    <div id="vaanChatBtn" onclick="vaanChatToggle()">
+      💬<span id="vaanChatBadge">AI</span>
+    </div>
+    <div id="vaanChatBox">
+      <div id="vaanChatHeader">
+        <div>
+          <b>VAAN Assistant</b>
+          <small>Powered by AI · Always online</small>
+        </div>
+        <button onclick="vaanChatToggle()">✕</button>
+      </div>
+      <div id="vaanChatMessages">
+        <div class="vaan-msg vaan-bot">Namaste! 🙏 I'm VAAN's AI assistant. Ask me about websites, QR systems, pricing, or anything else.</div>
+      </div>
+      <form id="vaanChatForm" onsubmit="vaanChatSend(event)">
+        <input id="vaanChatInput" placeholder="Type your message..." autocomplete="off" required>
+        <button type="submit">➤</button>
+      </form>
+    </div>
+  `;
+  document.body.insertAdjacentHTML("beforeend", html);
+
+  const css = `
+    #vaanChatBtn{position:fixed !important;bottom:24px !important;right:24px !important;width:60px !important;height:60px !important;border-radius:50% !important;background:linear-gradient(135deg,#ffd400,#ffa726) !important;display:flex !important;align-items:center !important;justify-content:center !important;cursor:pointer !important;z-index:99998 !important;box-shadow:0 12px 40px rgba(255,212,0,.5) !important;font-size:26px !important;margin:0 !important;padding:0 !important;animation:none !important;transition:transform .25s ease !important}
+    #vaanChatBtn:hover{transform:scale(1.08) !important}
+    #vaanChatBadge{position:absolute !important;top:-3px !important;right:-3px !important;background:#0a0e1a !important;color:#ffd400 !important;font-size:10px !important;font-weight:900 !important;padding:3px 6px !important;border-radius:99px !important;border:2px solid #ffd400 !important}
+    #vaanChatBox{position:fixed !important;bottom:100px !important;right:24px !important;width:min(400px,92vw) !important;height:min(580px,80vh) !important;background:#0f1520 !important;border:1px solid rgba(255,212,0,.25) !important;border-radius:20px !important;display:none !important;flex-direction:column !important;overflow:hidden !important;z-index:99999 !important;box-shadow:0 30px 80px rgba(0,0,0,.8) !important;margin:0 !important;padding:0 !important}
+    #vaanChatBox.vaan-open{display:flex !important}
+    #vaanChatHeader{background:linear-gradient(135deg,#12192a,#0d1220) !important;color:white !important;padding:16px 18px !important;display:flex !important;justify-content:space-between !important;align-items:center !important;border-bottom:1px solid rgba(255,212,0,.15) !important}
+    #vaanChatHeader b{font-size:15px !important;color:#fff !important;display:block !important}
+    #vaanChatHeader small{color:#8a8f9c !important;font-size:11px !important;display:block !important;margin-top:2px !important}
+    #vaanChatHeader button{background:transparent !important;border:0 !important;color:#8a8f9c !important;font-size:18px !important;cursor:pointer !important;padding:6px !important}
+    #vaanChatMessages{flex:1 !important;overflow-y:auto !important;padding:18px !important;display:flex !important;flex-direction:column !important;gap:12px !important;background:#0a0e1a !important}
+    .vaan-msg{max-width:82% !important;padding:12px 16px !important;border-radius:14px !important;font-size:13.5px !important;line-height:1.55 !important;word-wrap:break-word !important;margin:0 !important;font-family:Inter,sans-serif !important}
+    .vaan-bot{background:#12192a !important;color:#e5e9ee !important;align-self:flex-start !important;border:1px solid rgba(255,212,0,.1) !important}
+    .vaan-user{background:linear-gradient(135deg,#ffd400,#ffa726) !important;color:#0a0e1a !important;align-self:flex-end !important;font-weight:600 !important}
+    .vaan-typing{background:#12192a !important;color:#8a8f9c !important;align-self:flex-start !important;padding:14px 18px !important;border-radius:14px !important;font-size:13px !important;border:1px solid rgba(255,212,0,.1) !important}
+    .vaan-typing::after{content:"...";animation:vaanDots 1.2s infinite}
+    @keyframes vaanDots{0%,20%{content:"."}40%{content:".."}60%,100%{content:"..."}}
+    #vaanChatForm{display:flex !important;gap:8px !important;padding:12px !important;background:#12192a !important;border-top:1px solid rgba(255,212,0,.15) !important}
+    #vaanChatInput{flex:1 !important;padding:13px 16px !important;border:1px solid rgba(255,255,255,.1) !important;border-radius:12px !important;background:#0a0e1a !important;color:#fff !important;font:inherit !important;font-size:14px !important;font-family:Inter,sans-serif !important}
+    #vaanChatInput:focus{outline:none !important;border-color:#ffd400 !important}
+    #vaanChatForm button{background:linear-gradient(135deg,#ffd400,#ffa726) !important;color:#0a0e1a !important;border:0 !important;border-radius:12px !important;padding:0 20px !important;font-weight:900 !important;font-size:16px !important;cursor:pointer !important}
+    #vaanChatForm button:disabled{opacity:.5 !important;cursor:not-allowed !important}
+    @media(max-width:600px){
+      #vaanChatBtn{bottom:16px !important;right:16px !important;width:54px !important;height:54px !important;font-size:22px !important}
+      #vaanChatBox{bottom:82px !important;right:8px !important;left:8px !important;width:auto !important;height:min(540px,78vh) !important}
+    }
+  `;
+  const styleEl = document.createElement("style");
+  styleEl.textContent = css;
+  document.head.appendChild(styleEl);
+
+  /* Chat widget logic — uses Supabase Edge Function (to be deployed) */
+  const CHAT_FN_URL = "https://xvtxpllmfwgnlrffbcqz.supabase.co/functions/v1/vaan-chat";
+  let vaanHistory = [];
+
+  window.vaanChatToggle = function(){
+    const box = document.getElementById("vaanChatBox");
+    box.classList.toggle("vaan-open");
+    if (box.classList.contains("vaan-open")) document.getElementById("vaanChatInput").focus();
+  };
+
+  function vaanAddMsg(text, cls){
+    const wrap = document.getElementById("vaanChatMessages");
+    const div = document.createElement("div");
+    div.className = "vaan-msg " + cls;
+    div.textContent = text;
+    wrap.appendChild(div);
+    wrap.scrollTop = wrap.scrollHeight;
+  }
+  function vaanAddTyping(){
+    const wrap = document.getElementById("vaanChatMessages");
+    const d = document.createElement("div");
+    d.className = "vaan-typing";
+    d.id = "vaanTyping";
+    d.textContent = "Thinking";
+    wrap.appendChild(d);
+    wrap.scrollTop = wrap.scrollHeight;
+  }
+  function vaanRemoveTyping(){
+    const t = document.getElementById("vaanTyping");
+    if (t) t.remove();
+  }
+
+  window.vaanChatSend = async function(e){
+    e.preventDefault();
+    const input = document.getElementById("vaanChatInput");
+    const text = input.value.trim();
+    if (!text) return;
+    vaanAddMsg(text, "vaan-user");
+    input.value = "";
+    input.disabled = true;
+    vaanAddTyping();
+    vaanHistory.push({ role: "user", parts: [{ text }] });
+
+    try {
+      const res = await fetch(CHAT_FN_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + SUPABASE_KEY,
+          "apikey": SUPABASE_KEY
+        },
+        body: JSON.stringify({ messages: vaanHistory })
+      });
+      const data = await res.json();
+      vaanRemoveTyping();
+      const reply = data?.reply || "Sorry, please WhatsApp us at 9671163712.";
+      vaanAddMsg(reply, "vaan-bot");
+      vaanHistory.push({ role: "model", parts: [{ text: reply }] });
+      if (vaanHistory.length > 20) vaanHistory = vaanHistory.slice(-20);
+    } catch (err){
+      console.error(err);
+      vaanRemoveTyping();
+      vaanAddMsg("Connection issue. Please WhatsApp 9671163712.", "vaan-bot");
+    } finally {
+      input.disabled = false;
+      input.focus();
+    }
+  };
+})();
+
+/* ==========================================================
+   FLOATING FEEDBACK BUTTON
+   ========================================================== */
+(function(){
+  const html = `
+    <div id="vaanFbBtn" onclick="vaanOpenFeedback()">
+      ⭐<span id="vaanFbBadge">Feedback</span>
+    </div>
+    <div id="vaanFbModal">
+      <div id="vaanFbBox">
+        <div id="vaanFbHead">
+          <b>Share Your Feedback</b>
+          <button onclick="vaanCloseFeedback()">✕</button>
+        </div>
+        <form id="vaanFbForm" onsubmit="vaanSubmitFeedback(event)">
+          <p style="color:#8a8f9c;font-size:13px;margin-bottom:18px;line-height:1.5">Help us improve. Your feedback is read personally.</p>
+          <label>Your Name</label>
+          <input id="fbName" placeholder="e.g. Rahul Sharma" required>
+          <label>Rating</label>
+          <div class="vaan-stars" id="fbStars">
+            <span data-r="1">★</span><span data-r="2">★</span><span data-r="3">★</span><span data-r="4">★</span><span data-r="5">★</span>
+          </div>
+          <label>Your Feedback</label>
+          <textarea id="fbFeedback" placeholder="What did you like? What can we improve?" required></textarea>
+          <button type="submit" class="vaan-fb-submit">Submit Feedback</button>
+        </form>
+      </div>
+    </div>
+  `;
+  
+  document.body.insertAdjacentHTML("beforeend", html);
+
+  const css = `
+    #vaanFbBtn{position:fixed !important;bottom:24px !important;left:24px !important;background:#12192a !important;border:1px solid rgba(255,212,0,.3) !important;color:#ffd400 !important;padding:12px 18px !important;border-radius:99px !important;font-weight:800 !important;font-size:13px !important;cursor:pointer !important;z-index:99997 !important;display:flex !important;align-items:center !important;gap:8px !important;box-shadow:0 10px 30px rgba(0,0,0,.5) !important;font-family:Inter,sans-serif !important;transition:.25s !important}
+    #vaanFbBtn:hover{transform:translateY(-3px) !important;border-color:#ffd400 !important}
+    #vaanFbBadge{font-size:11px !important;letter-spacing:.5px !important}
+    #vaanFbModal{display:none !important;position:fixed !important;inset:0 !important;background:rgba(0,0,0,.7) !important;backdrop-filter:blur(8px) !important;z-index:100000 !important;align-items:center !important;justify-content:center !important;padding:20px !important}
+    #vaanFbModal.vaan-open{display:flex !important}
+    #vaanFbBox{background:#0f1520 !important;border:1px solid rgba(255,212,0,.25) !important;border-radius:20px !important;padding:28px 24px !important;width:min(440px,100%) !important;max-height:90vh !important;overflow:auto !important;position:relative !important}
+    #vaanFbHead{display:flex !important;justify-content:space-between !important;align-items:center !important;margin-bottom:6px !important}
+    #vaanFbHead b{font-size:19px !important;color:#fff !important;font-weight:900 !important}
+    #vaanFbHead button{background:transparent !important;border:0 !important;color:#8a8f9c !important;font-size:20px !important;cursor:pointer !important;padding:4px !important}
+    #vaanFbForm label{display:block !important;color:#8a8f9c !important;font-size:11px !important;font-weight:800 !important;letter-spacing:1px !important;text-transform:uppercase !important;margin:16px 0 6px !important}
+    #vaanFbForm input,#vaanFbForm textarea{width:100% !important;background:#0a0e1a !important;border:1px solid rgba(255,255,255,.1) !important;border-radius:10px !important;padding:12px 14px !important;color:#fff !important;font:inherit !important;font-size:14px !important;font-family:Inter,sans-serif !important}
+    #vaanFbForm input:focus,#vaanFbForm textarea:focus{outline:none !important;border-color:#ffd400 !important}
+    #vaanFbForm textarea{min-height:88px !important;resize:vertical !important}
+    .vaan-stars{display:flex !important;gap:6px !important;margin-top:4px !important}
+    .vaan-stars span{font-size:28px !important;color:#3a4152 !important;cursor:pointer !important;transition:.2s !important;line-height:1 !important}
+    .vaan-stars span.active,.vaan-stars span:hover{color:#ffd400 !important;text-shadow:0 0 12px rgba(255,212,0,.6) !important}
+    .vaan-fb-submit{width:100% !important;margin-top:20px !important;background:linear-gradient(135deg,#ffd400,#ffa726) !important;color:#0a0e1a !important;border:0 !important;border-radius:11px !important;padding:14px !important;font-weight:900 !important;font-size:14px !important;cursor:pointer !important;font-family:Inter,sans-serif !important;transition:.2s !important}
+    .vaan-fb-submit:hover{transform:translateY(-2px) !important;box-shadow:0 10px 30px rgba(255,212,0,.35) !important}
+    @media(max-width:600px){
+      #vaanFbBtn{bottom:80px !important;left:16px !important;font-size:11px !important;padding:10px 14px !important}
+    }
+  `;
+  const styleEl = document.createElement("style");
+  styleEl.textContent = css;
+  document.head.appendChild(styleEl);
+
+  let selectedRating = 5;
+
+  document.querySelectorAll("#fbStars span").forEach(s => {
+    s.addEventListener("click", () => {
+      selectedRating = parseInt(s.dataset.r);
+      document.querySelectorAll("#fbStars span").forEach(x => x.classList.remove("active"));
+      for (let i = 1; i <= selectedRating; i++){
+        document.querySelector(`#fbStars span[data-r="${i}"]`).classList.add("active");
+      }
+    });
+  });
+  document.querySelectorAll("#fbStars span").forEach(x => x.classList.add("active"));
+
+  window.vaanOpenFeedback = () => document.getElementById("vaanFbModal").classList.add("vaan-open");
+  window.vaanCloseFeedback = () => document.getElementById("vaanFbModal").classList.remove("vaan-open");
+
+  window.vaanSubmitFeedback = async function(e){
+    e.preventDefault();
+    const name = document.getElementById("fbName").value.trim();
+    const feedback = document.getElementById("fbFeedback").value.trim();
+    if (!name || !feedback) return;
+
+    const btn = e.target.querySelector(".vaan-fb-submit");
+    btn.disabled = true;
+    btn.textContent = "Sending...";
+
+    const { error } = await sb.from("vaan_feedback").insert({
+      name,
+      rating: selectedRating,
+      feedback,
+      source_page: window.location.pathname
+    });
+
+    btn.disabled = false;
+    btn.textContent = "Submit Feedback";
+
+    if (error){
+      alert("Could not submit. Please try again.");
+      return;
+    }
+
+    document.getElementById("vaanFbForm").reset();
+    document.querySelectorAll("#fbStars span").forEach(x => x.classList.add("active"));
+    window.vaanCloseFeedback();
+  };
+})();
+
+/* ==========================================================
+   SMOOTH SCROLL FOR ANCHORS
+   ========================================================== */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener("click", e => {
+    const id = a.getAttribute("href");
+    if (id.length > 1){
+      const el = document.querySelector(id);
+      if (el){ e.preventDefault(); el.scrollIntoView({ behavior: "smooth", block: "start" }); }
+    }
+  });
+});
+</script>
+
+</body>
+</html>
