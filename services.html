@@ -379,7 +379,16 @@ const SUPABASE_URL = "https://xvtxpllmfwgnlrffbcqz.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2dHhwbGxtZndnbmxyZmZiY3F6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0Mzg2OTYsImV4cCI6MjEwNjAxNDY5Nn0.JC1Za7PdNGLngpupBovq_DqI-vHRVBOovLdEe-w1Ap0";
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-let allServices = [];
+const DEMO_LINKS = {
+  "qr-restaurant": "demos/vaa-restaurants/",
+  "qr-gym": "demos/vaa-gyms/",
+  "qr-hotel": "demos/vaa-hotels/",
+  "qr-academy": "demos/vaa-academies/",
+  "qr-salon": "demos/vaa-salons/",
+  "qr-google": "demos/vaa-reviews/"
+};
+  
+  let allServices = [];
 
 /* ====== NAV TOGGLE ====== */
 function toggleNav(){
@@ -1079,9 +1088,10 @@ function renderCards(containerId, items){
         features.slice(0, 6).map(f => '<li>' + f.trim() + '</li>').join("") +
       '</ul>' +
       '<div class="svc-cta">' +
-        '<a href="https://wa.me/919671163712?text=' + encodeURIComponent("Hi VAAN, I am interested in " + item.service_name) + '" target="_blank" class="btn btn-primary">Get Quote</a>' +
-        '<button class="btn btn-outline" onclick="openDetails(' + item.id + ')">Details</button>' +
-      '</div>' +
+  '<a href="https://wa.me/919671163712?text=' + encodeURIComponent("Hi VAAN, I am interested in " + item.service_name) + '" target="_blank" class="btn btn-primary">Get Quote</a>' +
+  '<button class="btn btn-outline" onclick="openDetails(' + item.id + ')">Details</button>' +
+  (DEMO_LINKS[item.service_key] ? '<a href="' + DEMO_LINKS[item.service_key] + '" target="_blank" class="btn btn-outline">View Demo</a>' : '') +
+'</div>' +
     '</div>';
   }).join("");
 }
