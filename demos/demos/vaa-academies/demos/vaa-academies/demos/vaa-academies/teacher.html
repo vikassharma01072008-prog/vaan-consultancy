@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VAA Academies — Teacher Login</title>
+<meta name="theme-color" content="#0a0e1a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#0a0e1a;color:#f5f5f5;-webkit-tap-highlight-color:transparent;min-height:100vh;display:flex;flex-direction:column;line-height:1.55;padding-top:44px}
+a{text-decoration:none;color:inherit}
+:root{--gold:#ffd400;--blue:#4f8fff;--card:#12192a;--card-2:#0d1220;--line:rgba(255,212,0,.15);--line-soft:rgba(255,255,255,.08);--white:#f5f5f5;--muted:#8a8f9c;--green:#25b46e;--red:#e11d2a;--orange:#ff6b35}
+
+/* DEMO BANNER */
+.demo-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(90deg,#ffd400,#ffa726);color:#0a0e1a;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;font-weight:850}
+.demo-banner-txt{display:flex;align-items:center;gap:8px}
+.demo-banner .dot{width:8px;height:8px;background:#0a0e1a;border-radius:50%;animation:pulseDot 1.5s infinite}
+@keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.4}}
+.demo-banner a{background:#0a0e1a;color:var(--gold);padding:6px 12px;border-radius:99px;font-size:11px;font-weight:900;letter-spacing:.5px;white-space:nowrap}
+.demo-banner .close{background:transparent;border:0;color:#0a0e1a;font-size:18px;cursor:pointer;padding:2px 6px;font-weight:900}
+
+/* MAIN */
+main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;position:relative}
+
+.back-link{display:inline-block;color:var(--muted);font-size:12px;font-weight:700;margin-bottom:22px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:2px;transition:.2s}
+.back-link:hover{color:var(--gold);border-color:var(--gold)}
+
+/* LOGIN CARD */
+.login-card{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid rgba(255,212,0,.25);border-radius:24px;padding:40px 28px;max-width:440px;width:100%;text-align:center;position:relative;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.login-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),#ffa726)}
+.logo-circle{width:76px;height:76px;margin:0 auto 20px;border-radius:22px;background:linear-gradient(145deg,#1a2136,#0d1220);border:2px solid rgba(255,212,0,.4);display:flex;align-items:center;justify-content:center;font-size:36px;box-shadow:0 0 40px rgba(255,212,0,.2)}
+.login-title{font-size:24px;font-weight:950;letter-spacing:-.6px;margin-bottom:8px;text-transform:uppercase}
+.login-title span{color:var(--gold)}
+.login-sub{color:var(--muted);font-size:13px;margin-bottom:28px;line-height:1.55}
+
+label{display:block;text-align:left;color:var(--muted);font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+select,input[type="password"]{width:100%;padding:15px 18px;background:#0a0e1a;border:2px solid var(--line-soft);border-radius:12px;color:var(--white);font:inherit;font-size:15px;font-weight:700;margin-bottom:18px;transition:.2s;font-family:inherit;-webkit-appearance:none;appearance:none;text-align:center;letter-spacing:1px}
+select:focus,input[type="password"]:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(255,212,0,.15)}
+select{cursor:pointer;background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238a8f9c' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center;padding-right:40px;letter-spacing:.5px;text-align:left}
+input[type="password"]{letter-spacing:8px;font-size:20px}
+input[type="password"]::placeholder{letter-spacing:2px;font-size:14px;color:#4a4a52}
+
+button.primary{width:100%;padding:17px;background:linear-gradient(135deg,var(--gold),#ffa726);color:#0a0e1a;border:0;border-radius:12px;font-weight:950;font-size:14px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:.25s;box-shadow:0 10px 30px rgba(255,212,0,.3)}
+button.primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(255,212,0,.5)}
+button.primary:active{transform:none}
+button.primary:disabled{opacity:.6;cursor:not-allowed}
+
+.err{color:var(--red);font-size:12px;font-weight:800;margin-top:14px;display:none}
+
+/* PIN HINT */
+.pin-hint{margin-top:24px;padding-top:22px;border-top:1px solid var(--line-soft);text-align:left}
+.pin-hint-title{color:var(--gold);font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.pin-hint-title::before{content:"🔑";font-size:14px;letter-spacing:0}
+.pin-list{display:grid;gap:8px}
+.pin-row{display:flex;justify-content:space-between;align-items:center;background:rgba(255,212,0,.06);border:1px solid rgba(255,212,0,.15);border-radius:10px;padding:10px 14px}
+.pin-row .name{font-size:13px;font-weight:850;color:var(--white)}
+.pin-row .pin{font-size:14px;font-weight:900;color:var(--gold);font-family:'Courier New',monospace;letter-spacing:2px;background:#0a0e1a;padding:4px 10px;border-radius:6px;border:1px solid rgba(255,212,0,.3)}
+
+/* DASHBOARD (after login) */
+.dashboard{display:none;width:100%;max-width:520px}
+.dash-card{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid rgba(255,212,0,.25);border-radius:24px;padding:32px 28px;text-align:center;position:relative;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.dash-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),#ffa726)}
+.dash-hello{color:var(--muted);font-size:12px;letter-spacing:2px;font-weight:900;text-transform:uppercase;margin-bottom:6px}
+.dash-name{font-size:26px;font-weight:950;letter-spacing:-.6px;margin-bottom:6px}
+.dash-subject{color:var(--blue);font-size:13px;font-weight:850;letter-spacing:1px;text-transform:uppercase;margin-bottom:28px}
+.dash-room{color:var(--muted);font-size:12px;margin-bottom:28px}
+
+/* TOGGLE */
+.toggle-section{margin-bottom:28px}
+.toggle-label{color:var(--muted);font-size:11px;letter-spacing:2px;font-weight:900;text-transform:uppercase;margin-bottom:14px}
+.status-toggle{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.toggle-btn{padding:22px 16px;border-radius:16px;border:2px solid var(--line-soft);background:var(--card);color:var(--white);font-family:inherit;font-weight:950;font-size:14px;cursor:pointer;transition:.25s;letter-spacing:1px}
+.toggle-btn .tb-icon{display:block;font-size:28px;margin-bottom:8px}
+.toggle-btn.free-btn:hover,.toggle-btn.free-btn.active{background:linear-gradient(135deg,rgba(37,180,110,.2),rgba(37,180,110,.1));border-color:var(--green);color:var(--green)}
+.toggle-btn.busy-btn:hover,.toggle-btn.busy-btn.active{background:linear-gradient(135deg,rgba(255,107,53,.2),rgba(255,107,53,.1));border-color:var(--orange);color:var(--orange)}
+.toggle-btn.active{transform:scale(1.02)}
+.toggle-btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* STUDENT COUNT */
+.student-count-section{margin-bottom:28px}
+.student-count-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.count-btn{padding:12px 4px;background:var(--card);border:1px solid var(--line-soft);color:var(--white);font-weight:900;font-size:14px;border-radius:10px;cursor:pointer;font-family:inherit;transition:.2s}
+.count-btn:hover{border-color:var(--gold)}
+.count-btn.active{background:linear-gradient(135deg,var(--gold),#ffa726);color:#0a0e1a;border-color:var(--gold);box-shadow:0 6px 20px rgba(255,212,0,.3)}
+
+/* ROOM */
+.room-section{margin-bottom:28px}
+.room-section input{width:100%;padding:14px 16px;background:#0a0e1a;border:1px solid var(--line-soft);border-radius:10px;color:var(--white);font:inherit;font-size:14px;font-weight:800;text-align:center;margin:0}
+.room-section input:focus{outline:none;border-color:var(--gold)}
+
+/* SAVE */
+.save-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--gold),#ffa726);color:#0a0e1a;border:0;border-radius:12px;font-weight:950;font-size:14px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:.25s;box-shadow:0 10px 30px rgba(255,212,0,.3);margin-bottom:12px}
+.save-btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(255,212,0,.5)}
+.save-btn:disabled{opacity:.5;cursor:not-allowed}
+.logout-btn{background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--muted);padding:12px;border-radius:12px;font-weight:800;font-size:12px;cursor:pointer;font-family:inherit;width:100%;letter-spacing:1px;transition:.2s;text-transform:uppercase}
+.logout-btn:hover{border-color:var(--red);color:var(--red)}
+
+/* STATUS BANNER */
+.status-banner{background:rgba(255,255,255,.04);border:1px solid var(--line-soft);border-radius:12px;padding:14px;margin-bottom:24px;font-size:12px;color:var(--muted);line-height:1.5}
+.status-banner b{color:var(--gold)}
+
+/* FOOTER */
+footer{text-align:center;padding:30px 20px;color:var(--muted);font-size:11px;border-top:1px solid var(--line-soft);line-height:1.7}
+footer b{color:var(--gold)}
+footer a{color:var(--gold);border-bottom:1px solid rgba(255,212,0,.4)}
+footer .powered{margin-top:12px;font-size:10px;letter-spacing:3px;font-weight:900;text-transform:uppercase;color:#3a4152}
+
+@media(max-width:600px){
+  .demo-banner{font-size:11px;padding:8px 12px}
+  .demo-banner a{padding:5px 10px;font-size:10px}
+  .login-card,.dash-card{padding:30px 22px}
+  .logo-circle{width:64px;height:64px;font-size:30px}
+  .login-title{font-size:20px}
+  .dash-name{font-size:22px}
+  .toggle-btn{padding:18px 10px;font-size:12px}
+  .toggle-btn .tb-icon{font-size:24px}
+  .student-count-grid{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- DEMO BANNER -->
+<div class="demo-banner" id="demoBanner">
+  <div class="demo-banner-txt"><span class="dot"></span><span>Live Demo · by VAAN Consultancy</span></div>
+  <div style="display:flex;align-items:center;gap:6px">
+    <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20an%20academy%20system%20like%20this." target="_blank">Get This →</a>
+    <button class="close" onclick="document.getElementById('demoBanner').style.display='none'">✕</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+  <a href="index.html" class="back-link">← Back to choice</a>
+
+  <!-- LOGIN SCREEN -->
+  <div class="login-card" id="loginCard">
+    <div class="logo-circle">👨‍🏫</div>
+    <h1 class="login-title">Teacher <span>Login</span></h1>
+    <p class="login-sub">Select your name and enter your PIN to update your status.</p>
+
+    <label>Select your name</label>
+    <select id="teacherSelect">
+      <option value="">-- Choose your name --</option>
+    </select>
+
+    <label>Enter your PIN</label>
+    <input id="pinInput" type="password" inputmode="numeric" maxlength="6" placeholder="4-digit PIN" autocomplete="off">
+
+    <button class="primary" onclick="login()" id="loginBtn">Login</button>
+    <div class="err" id="errMsg">Wrong PIN. Please try again.</div>
+
+    <div class="pin-hint">
+      <div class="pin-hint-title">Demo PINs</div>
+      <div class="pin-list" id="pinList">
+        <div class="pin-row"><span class="name">Loading...</span><span class="pin">----</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD SCREEN -->
+  <div class="dashboard" id="dashboard">
+    <div class="dash-card">
+      <div class="dash-hello">Welcome</div>
+      <div class="dash-name" id="dashName">Mr. Sharma</div>
+      <div class="dash-subject" id="dashSubject">Physics</div>
+      <div class="dash-room">📍 <span id="dashRoom">Room 2</span></div>
+
+      <div class="status-banner">
+        Your status is currently: <b id="currentStatus">FREE</b><br>
+        <span style="font-size:11px">Tap below to change your status. Students see it live.</span>
+      </div>
+
+      <div class="toggle-section">
+        <div class="toggle-label">Set Your Status</div>
+        <div class="status-toggle">
+          <button class="toggle-btn free-btn" onclick="setStatus('free')" id="btnFree">
+            <span class="tb-icon">🟢</span>
+            I'M FREE
+          </button>
+          <button class="toggle-btn busy-btn" onclick="setStatus('busy')" id="btnBusy">
+            <span class="tb-icon">🔴</span>
+            I'M BUSY
+          </button>
+        </div>
+      </div>
+
+      <div class="student-count-section" id="studentCountSection" style="display:none">
+        <div class="toggle-label">Students with you right now</div>
+        <div class="student-count-grid" id="studentCountGrid">
+          <button class="count-btn" onclick="setCount(0, this)">0</button>
+          <button class="count-btn" onclick="setCount(1, this)">1</button>
+          <button class="count-btn" onclick="setCount(2, this)">2</button>
+          <button class="count-btn" onclick="setCount(3, this)">3</button>
+          <button class="count-btn" onclick="setCount(4, this)">4</button>
+          <button class="count-btn" onclick="setCount(5, this)">5</button>
+          <button class="count-btn" onclick="setCount(6, this)">6</button>
+          <button class="count-btn" onclick="setCount(7, this)">7</button>
+          <button class="count-btn" onclick="setCount(8, this)">8</button>
+          <button class="count-btn" onclick="setCount(9, this)">9</button>
+          <button class="count-btn" onclick="setCount(10, this)">10+</button>
+        </div>
+      </div>
+
+      <div class="room-section">
+        <div class="toggle-label">Room Number</div>
+        <input id="roomInput" placeholder="e.g. Room 2" maxlength="20">
+      </div>
+
+      <button class="save-btn" onclick="saveChanges()" id="saveBtn">💾 Save Changes</button>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div><b>VAA Academies</b> — Teacher Panel Demo</div>
+  <div style="margin-top:6px">Update your status — students see it live</div>
+  <div class="powered">Powered by <a href="../index.html">VAAN Consultancy</a></div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ==========================================================
+   VAA ACADEMIES — TEACHER PANEL
+   ========================================================== */
+const SUPABASE_URL = "https://xvtxpllmfwgnlrffbcqz.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2dHhwbGxtZndnbmxyZmZiY3F6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0Mzg2OTYsImV4cCI6MjEwNjAxNDY5Nn0.JC1Za7PdNGLngpupBovq_DqI-vHRVBOovLdEe-w1Ap0";
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const STORAGE_KEY = "vaa_teacher_demo";
+
+let allTeachers = [];
+let currentTeacher = null;
+let pendingStatus = null;
+let pendingCount = 0;
+
+function esc(v){return String(v||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+
+/* ====== LOAD TEACHERS ====== */
+async function loadTeachers(){
+  const { data, error } = await sb.from("vaa_academy_teachers").select("*").order("display_order", { ascending: true });
+  if (error){
+    console.error(error);
+    return;
+  }
+  allTeachers = data || [];
+
+  /* Populate dropdown */
+  const sel = document.getElementById("teacherSelect");
+  sel.innerHTML = '<option value="">-- Choose your name --</option>' +
+    allTeachers.map(t => '<option value="' + t.id + '">' + esc(t.name) + ' — ' + esc(t.subject) + '</option>').join("");
+
+  /* Populate PIN hints */
+  const pinList = document.getElementById("pinList");
+  pinList.innerHTML = allTeachers.map(t =>
+    '<div class="pin-row"><span class="name">' + esc(t.name) + '</span><span class="pin">' + esc(t.pin) + '</span></div>'
+  ).join("");
+}
+
+/* ====== LOGIN ====== */
+async function login(){
+  const sel = document.getElementById("teacherSelect");
+  const pinInput = document.getElementById("pinInput");
+  const err = document.getElementById("errMsg");
+  const btn = document.getElementById("loginBtn");
+
+  const teacherId = sel.value;
+  const pin = pinInput.value.trim();
+
+  if (!teacherId){ err.textContent = "Please select your name"; err.style.display = "block"; return; }
+  if (!pin){ err.textContent = "Please enter your PIN"; err.style.display = "block"; return; }
+
+  btn.disabled = true;
+  btn.textContent = "Checking...";
+
+  const teacher = allTeachers.find(t => String(t.id) === String(teacherId));
+  if (!teacher || teacher.pin !== pin){
+    err.textContent = "Wrong PIN. Please try again.";
+    err.style.display = "block";
+    pinInput.value = "";
+    btn.disabled = false;
+    btn.textContent = "Login";
+    return;
+  }
+
+  /* Success */
+  currentTeacher = teacher;
+  pendingStatus = teacher.status;
+  pendingCount = teacher.student_count || 0;
+  localStorage.setItem(STORAGE_KEY, String(teacher.id));
+  err.style.display = "none";
+  showDashboard();
+  btn.disabled = false;
+  btn.textContent = "Login";
+}
+
+/* ====== AUTO-LOGIN ====== */
+async function tryAutoLogin(){
+  const savedId = localStorage.getItem(STORAGE_KEY);
+  if (!savedId) return false;
+  const teacher = allTeachers.find(t => String(t.id) === savedId);
+  if (!teacher) return false;
+  currentTeacher = teacher;
+  pendingStatus = teacher.status;
+  pendingCount = teacher.student_count || 0;
+  showDashboard();
+  return true;
+}
+
+/* ====== SHOW DASHBOARD ====== */
+function showDashboard(){
+  document.getElementById("loginCard").style.display = "none";
+  document.getElementById("dashboard").style.display = "block";
+
+  document.getElementById("dashName").textContent = currentTeacher.name;
+  document.getElementById("dashSubject").textContent = currentTeacher.subject;
+  document.getElementById("dashRoom").textContent = currentTeacher.room || "Room";
+  document.getElementById("roomInput").value = currentTeacher.room || "";
+
+  updateUI();
+}
+
+/* ====== UPDATE UI ====== */
+function updateUI(){
+  /* Status banner */
+  document.getElementById("currentStatus").textContent = pendingStatus === "free" ? "🟢 FREE" : "🔴 BUSY";
+
+  /* Toggle buttons */
+  document.getElementById("btnFree").classList.toggle("active", pendingStatus === "free");
+  document.getElementById("btnBusy").classList.toggle("active", pendingStatus === "busy");
+
+  /* Student count section - only if busy */
+  const countSection = document.getElementById("studentCountSection");
+  if (pendingStatus === "busy"){
+    countSection.style.display = "block";
+    document.querySelectorAll("#studentCountGrid .count-btn").forEach(btn => {
+      const val = parseInt(btn.textContent);
+      btn.classList.toggle("active", val === pendingCount);
+    });
+  } else {
+    countSection.style.display = "none";
+  }
+}
+
+/* ====== SET STATUS ====== */
+function setStatus(status){
+  pendingStatus = status;
+  if (status === "free") pendingCount = 0;
+  updateUI();
+}
+
+function setCount(count, btn){
+  pendingCount = count;
+  document.querySelectorAll("#studentCountGrid .count-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+}
+
+/* ====== SAVE CHANGES ====== */
+async function saveChanges(){
+  if (!currentTeacher) return;
+
+  const btn = document.getElementById("saveBtn");
+  btn.disabled = true;
+  btn.textContent = "Saving...";
+
+  const room = document.getElementById("roomInput").value.trim() || currentTeacher.room;
+
+  const { error } = await sb.from("vaa_academy_teachers").update({
+    status: pendingStatus,
+    student_count: pendingCount,
+    room: room,
+    status_changed_at: new Date().toISOString()
+  }).eq("id", currentTeacher.id);
+
+  btn.disabled = false;
+  btn.textContent = "💾 Save Changes";
+
+  if (error){
+    alert("Error saving: " + error.message);
+    return;
+  }
+
+  /* Update local copy */
+  currentTeacher.status = pendingStatus;
+  currentTeacher.student_count = pendingCount;
+  currentTeacher.room = room;
+
+  /* Success feedback */
+  btn.textContent = "✅ Saved!";
+  setTimeout(() => { btn.textContent = "💾 Save Changes"; }, 1500);
+}
+
+/* ====== LOGOUT ====== */
+function logout(){
+  localStorage.removeItem(STORAGE_KEY);
+  currentTeacher = null;
+  document.getElementById("dashboard").style.display = "none";
+  document.getElementById("loginCard").style.display = "block";
+  document.getElementById("teacherSelect").value = "";
+  document.getElementById("pinInput").value = "";
+  document.getElementById("errMsg").style.display = "none";
+}
+
+/* ====== INIT ====== */
+(async function init(){
+  await loadTeachers();
+  const autoLoggedIn = await tryAutoLogin();
+  if (!autoLoggedIn){
+    /* Focus on select */
+    setTimeout(() => document.getElementById("teacherSelect").focus(), 200);
+  }
+})();
+
+/* Enter key support */
+document.addEventListener("keydown", e => {
+  if (e.key === "Enter" && document.getElementById("loginCard").style.display !== "none"){
+    login();
+  }
+});
+</script>
+
+</body>
+</html>
