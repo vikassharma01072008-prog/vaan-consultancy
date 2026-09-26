@@ -4,23 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Services — VAAN Consultancy | Websites, QR Systems & Branding</title>
-<meta name="description" content="Explore all VAAN Consultancy services — business websites, e-commerce, restaurant QR menus, hotel concierge, gym systems, academy portals, branding and more.">
-<meta name="keywords" content="VAAN Consultancy services, website design Karnal, QR menu systems, restaurant menu QR, gym check-in system, hotel QR concierge">
+<meta name="description" content="Explore all VAAN Consultancy services — websites, QR systems, branding. Built for modern businesses across India and worldwide.">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#0a0e1a">
 <link rel="canonical" href="https://vikassharma01072008-prog.github.io/vaan-consultancy/services.html">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#0a0e1a;color:#f5f5f5;overflow-x:hidden;line-height:1.6;-webkit-tap-highlight-color:transparent}
 a{text-decoration:none;color:inherit}
 img{max-width:100%;display:block}
-:root{--bg-dark:#0a0e1a;--bg-dark2:#0f1520;--card:#12192a;--line:rgba(255,212,0,.15);--line-soft:rgba(255,255,255,.08);--gold:#ffd400;--gold-soft:rgba(255,212,0,.15);--blue:#4f8fff;--blue-soft:rgba(79,143,255,.15);--white:#f5f5f5;--muted:#8a8f9c;--green:#25b46e;--red:#e11d2a}
+:root{--bg-dark:#0a0e1a;--bg-dark2:#0f1520;--card:#12192a;--line:rgba(255,212,0,.15);--line-soft:rgba(255,255,255,.08);--gold:#ffd400;--gold-soft:rgba(255,212,0,.15);--blue:#4f8fff;--blue-soft:rgba(79,143,255,.15);--white:#f5f5f5;--muted:#8a8f9c;--green:#25b46e}
 
 /* ====== NAV ====== */
 .nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;background:rgba(10,14,26,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--line-soft);transition:.3s}
@@ -43,37 +40,48 @@ img{max-width:100%;display:block}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-/* ====== HERO ====== */
-.page-hero{padding:140px 24px 80px;position:relative;overflow:hidden;text-align:center}
-.page-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(79,143,255,.12),transparent 55%),radial-gradient(ellipse at 70% 80%,rgba(255,212,0,.08),transparent 55%);z-index:0}
-.page-hero-in{max-width:900px;margin:0 auto;position:relative;z-index:1}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(79,143,255,.1);border:1px solid rgba(79,143,255,.3);color:#8bb4ff;padding:8px 16px;border-radius:99px;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px}
-.hero-badge::before{content:"";width:6px;height:6px;background:var(--blue);border-radius:50%;box-shadow:0 0 12px var(--blue);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.4)}}
-.page-hero h1{font-size:clamp(40px,6vw,72px);font-weight:950;line-height:1;letter-spacing:-3px;margin-bottom:24px}
-.page-hero h1 .gold{color:var(--gold);text-shadow:0 0 60px rgba(255,212,0,.4)}
-.page-hero h1 .blue{color:var(--blue);text-shadow:0 0 60px rgba(79,143,255,.4)}
-.page-hero p{font-size:17px;color:#b8becc;max-width:640px;margin:0 auto 36px;line-height:1.65}
+/* ====== 3D HERO ====== */
+.hero-3d{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:120px 24px 80px}
+#heroCanvas3D{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(10,14,26,.5) 90%);z-index:1;pointer-events:none}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:900px;margin:0 auto;pointer-events:none}
+.hero-content .btn{pointer-events:auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(79,143,255,.1);border:1px solid rgba(79,143,255,.3);color:#8bb4ff;padding:8px 16px;border-radius:99px;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px;backdrop-filter:blur(10px)}
+.hero-eyebrow::before{content:"";width:6px;height:6px;background:var(--gold);border-radius:50%;box-shadow:0 0 12px var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero-content h1{font-size:clamp(42px,7vw,84px);font-weight:950;line-height:.95;letter-spacing:-4px;margin-bottom:24px;text-shadow:0 4px 40px rgba(0,0,0,.6)}
+.hero-content h1 .gold{color:var(--gold);text-shadow:0 0 60px rgba(255,212,0,.6)}
+.hero-content h1 .blue{color:var(--blue);text-shadow:0 0 60px rgba(79,143,255,.6)}
+.hero-content p{font-size:17px;color:#c8cdd8;max-width:620px;margin:0 auto 36px;line-height:1.65;text-shadow:0 2px 20px rgba(0,0,0,.6)}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+
+/* ====== BUTTONS ====== */
+.btn{border:0;border-radius:12px;padding:16px 28px;font-weight:800;font-size:14px;cursor:pointer;font-family:inherit;transition:all .25s cubic-bezier(.2,.9,.3,1.2);display:inline-flex;align-items:center;gap:8px;letter-spacing:.3px;text-decoration:none}
+.btn-primary{background:var(--gold);color:#0a0e1a;box-shadow:0 10px 30px rgba(255,212,0,.3)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(255,212,0,.5)}
+.btn-secondary{background:rgba(255,255,255,.08);color:var(--white);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(10px)}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+.btn-outline{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.15)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
 
 /* ====== CATEGORY TABS ====== */
-.cat-tabs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:0 24px 60px;max-width:1280px;margin:0 auto;position:relative;z-index:1}
+.cat-tabs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:60px 24px 60px;max-width:1280px;margin:0 auto}
 .cat-tab{background:var(--card);border:1px solid var(--line-soft);color:var(--white);padding:14px 26px;border-radius:99px;font-weight:800;font-size:14px;cursor:pointer;font-family:inherit;transition:.3s;display:inline-flex;align-items:center;gap:10px}
 .cat-tab:hover{border-color:var(--gold);transform:translateY(-2px)}
 .cat-tab.active{background:var(--gold);color:#0a0e1a;border-color:var(--gold);box-shadow:0 10px 30px rgba(255,212,0,.3)}
 .cat-tab .count{background:rgba(0,0,0,.15);padding:2px 8px;border-radius:99px;font-size:11px}
-.cat-tab.active .count{background:rgba(0,0,0,.2)}
 
 /* ====== SECTIONS ====== */
-section{padding:40px 0 80px}
+section.cat-section{padding:40px 0 80px}
 .sec-in{max-width:1280px;margin:0 auto;padding:0 24px}
-.cat-header{margin-bottom:36px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.cat-header h2{font-size:clamp(28px,4vw,42px);font-weight:950;letter-spacing:-2px;line-height:1.05}
+.cat-header{margin-bottom:36px}
+.cat-header h2{font-size:clamp(28px,4vw,42px);font-weight:950;letter-spacing:-2px;line-height:1.05;margin-bottom:12px}
 .cat-header h2 .gold{color:var(--gold)}
-.cat-header p{color:var(--muted);font-size:15px;max-width:560px;line-height:1.6}
+.cat-header p{color:var(--muted);font-size:15px;max-width:660px;line-height:1.6}
 
 /* ====== SERVICE CARDS ====== */
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.svc-card{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:22px;padding:32px 28px;position:relative;overflow:hidden;transition:all .35s cubic-bezier(.2,.9,.3,1.1);display:flex;flex-direction:column;cursor:pointer}
+.svc-card{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:22px;padding:32px 28px;position:relative;overflow:hidden;transition:all .35s cubic-bezier(.2,.9,.3,1.1);display:flex;flex-direction:column}
 .svc-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--blue));transform:scaleX(0);transition:.4s;transform-origin:left}
 .svc-card:hover{transform:translateY(-8px);border-color:rgba(255,212,0,.4);box-shadow:0 30px 60px rgba(0,0,0,.5)}
 .svc-card:hover::before{transform:scaleX(1)}
@@ -81,35 +89,23 @@ section{padding:40px 0 80px}
 .svc-card.popular::after{content:attr(data-badge);position:absolute;top:20px;right:20px;background:var(--gold);color:#0a0e1a;padding:5px 12px;border-radius:99px;font-size:10px;font-weight:900;letter-spacing:1px}
 .svc-header{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:16px}
 .svc-icon{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,rgba(255,212,0,.15),rgba(79,143,255,.08));border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
-.svc-meta{text-align:right}
-.svc-pages{display:inline-block;background:rgba(79,143,255,.12);color:#8bb4ff;font-size:10px;font-weight:900;letter-spacing:1px;padding:4px 10px;border-radius:99px;text-transform:uppercase;margin-bottom:8px}
+.svc-pages{display:inline-block;background:rgba(79,143,255,.12);color:#8bb4ff;font-size:10px;font-weight:900;letter-spacing:1px;padding:4px 10px;border-radius:99px;text-transform:uppercase}
 .svc-card h3{font-size:22px;font-weight:900;letter-spacing:-.6px;margin-bottom:6px}
 .svc-desc{color:var(--muted);font-size:13.5px;line-height:1.6;margin-bottom:20px;min-height:44px}
-
-.svc-price-block{background:rgba(0,0,0,.25);border-radius:14px;padding:18px;margin-bottom:20px;position:relative}
+.svc-price-block{background:rgba(0,0,0,.25);border-radius:14px;padding:18px;margin-bottom:20px}
 .svc-price-label{color:var(--muted);font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
 .svc-price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .svc-price .current{font-size:32px;font-weight:950;letter-spacing:-1.5px;color:var(--gold);line-height:1}
 .svc-price .strike{color:var(--muted);text-decoration:line-through;font-size:15px;font-weight:600}
-.svc-price .plus{color:var(--muted);font-size:13px;font-weight:700}
-
 .svc-features{list-style:none;padding:0;margin:0 0 22px;flex:1}
 .svc-features li{display:flex;gap:10px;align-items:flex-start;color:#c8cdd8;font-size:13px;line-height:1.5;padding:6px 0}
 .svc-features li::before{content:"✓";color:var(--gold);font-weight:900;flex-shrink:0}
-
 .svc-cta{display:flex;gap:10px;margin-top:auto}
-.btn{border:0;border-radius:11px;padding:14px 20px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit;transition:all .25s;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;flex:1}
-.btn-primary{background:var(--gold);color:#0a0e1a;box-shadow:0 8px 20px rgba(255,212,0,.2)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(255,212,0,.4)}
-.btn-outline{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.15)}
-.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.svc-cta .btn{flex:1;padding:13px 18px;font-size:12px}
 
-/* ====== CATEGORY SECTION ====== */
 .cat-section{display:none}
 .cat-section.show{display:block}
-
-/* ====== LOADING ====== */
-.loading-state{text-align:center;padding:80px 24px;color:var(--muted)}
+.loading-state{text-align:center;padding:80px 24px;color:var(--muted);grid-column:1/-1}
 .spinner{width:44px;height:44px;border:3px solid rgba(255,212,0,.1);border-top-color:var(--gold);border-radius:50%;margin:0 auto 20px;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
@@ -136,28 +132,53 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:60px 24p
 .foot-bot{border-top:1px solid var(--line-soft);padding-top:24px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:#5a6172;font-size:12px}
 .foot-bot strong{color:var(--white)}
 
+/* ====== DETAILS MODAL ====== */
+.modal-overlay{position:fixed;inset:0;background:rgba(5,8,16,.85);backdrop-filter:blur(10px);z-index:100000;display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+.modal-overlay.open{display:flex}
+.modal-box{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid rgba(255,212,0,.25);border-radius:24px;width:min(600px,100%);max-height:90vh;overflow-y:auto;position:relative;animation:modalIn .35s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes modalIn{from{opacity:0;transform:translateY(30px) scale(.96)}to{opacity:1;transform:none}}
+.modal-box::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--blue))}
+.modal-head{padding:28px 28px 20px;border-bottom:1px solid var(--line-soft);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;position:sticky;top:0;background:linear-gradient(180deg,#12192a 80%,rgba(18,25,42,0));z-index:2}
+.modal-icon{font-size:42px;margin-bottom:10px}
+.modal-head h3{font-size:24px;font-weight:950;letter-spacing:-.8px;margin-bottom:6px}
+.modal-head p{color:var(--muted);font-size:14px;line-height:1.5}
+.modal-close{background:rgba(255,255,255,.06);border:0;color:var(--muted);width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.2s}
+.modal-close:hover{background:rgba(255,212,0,.15);color:var(--gold)}
+.modal-body{padding:24px 28px 28px}
+.modal-price{background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:24px}
+.modal-price-label{color:var(--muted);font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.modal-price-value{font-size:36px;font-weight:950;letter-spacing:-2px;color:var(--gold);line-height:1}
+.modal-price-value .strike{font-size:16px;color:var(--muted);text-decoration:line-through;margin-left:10px;font-weight:500}
+.modal-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+.modal-meta-item{background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:12px;padding:14px}
+.modal-meta-item .lbl{color:var(--muted);font-size:10px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
+.modal-meta-item .val{color:var(--white);font-size:14px;font-weight:700}
+.modal-section{margin-bottom:24px}
+.modal-section h4{font-size:13px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.modal-features{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.modal-features li{display:flex;gap:12px;align-items:flex-start;color:#d0d5de;font-size:14px;line-height:1.55}
+.modal-features li::before{content:"✓";color:var(--gold);font-weight:900;flex-shrink:0;font-size:16px}
+.modal-actions{display:flex;gap:10px;margin-top:28px}
+.modal-actions .btn{flex:1;padding:16px}
+
 /* ====== RESPONSIVE ====== */
-@media(max-width:1000px){
-  .svc-grid{grid-template-columns:repeat(2,1fr)}
-  .foot-top{grid-template-columns:1fr 1fr}
-}
+@media(max-width:1000px){.svc-grid{grid-template-columns:repeat(2,1fr)}.foot-top{grid-template-columns:1fr 1fr}}
 @media(max-width:700px){
   .nav-links{position:fixed;top:70px;left:0;right:0;background:rgba(10,14,26,.98);backdrop-filter:blur(20px);flex-direction:column;padding:24px;gap:20px;border-bottom:1px solid var(--line-soft);transform:translateY(-150%);transition:.4s cubic-bezier(.2,.9,.3,1.1)}
   .nav-links.open{transform:translateY(0)}
   .hamburger{display:flex}
   .svc-grid{grid-template-columns:1fr}
   .foot-top{grid-template-columns:1fr}
-  section{padding:30px 0 60px}
-  .page-hero{padding:120px 20px 60px}
-  .cat-tabs{padding:0 20px 40px}
-  .cat-tab{padding:11px 18px;font-size:13px}
-  .cat-header{flex-direction:column;align-items:flex-start}
+  section.cat-section{padding:30px 0 60px}
+  .cat-tabs{padding:40px 20px}
   .cta-banner{padding:40px 24px}
+  .modal-meta{grid-template-columns:1fr}
+  .modal-head,.modal-body{padding-left:20px;padding-right:20px}
+  .hero-3d{min-height:auto;padding:130px 20px 60px}
 }
 </style>
 </head>
 <body>
-
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-in">
@@ -178,20 +199,25 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:60px 24p
   </div>
 </nav>
 
-<!-- PAGE HERO -->
-<section class="page-hero">
-  <div class="page-hero-bg"></div>
-  <div class="page-hero-in">
-    <span class="hero-badge">Our Services</span>
-    <h1>Everything you need to <span class="gold">grow online.</span></h1>
-    <p>Websites, QR systems and branding — built for modern businesses across India and worldwide. Every service crafted to deliver real results.</p>
+<!-- 3D HERO -->
+<section class="hero-3d">
+  <canvas id="heroCanvas3D"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Our Services</span>
+    <h1>Watch your business <span class="gold">go</span> <span class="blue">online.</span></h1>
+    <p>Websites, QR systems, and branding — every service crafted to transform how your business connects with customers.</p>
+    <div class="hero-ctas">
+      <a href="#services" class="btn btn-primary">Explore Services ↓</a>
+      <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20know%20more%20about%20your%20services." class="btn btn-secondary" target="_blank">💬 Free Consultation</a>
+    </div>
   </div>
 </section>
 
 <!-- CATEGORY TABS -->
-<div class="cat-tabs" id="catTabs">
+<div class="cat-tabs" id="services">
   <button class="cat-tab active" data-cat="all" onclick="filterCat('all', this)">
-    All Services <span class="count" id="countAll">0</span>
+    ✨ All Services <span class="count" id="countAll">0</span>
   </button>
   <button class="cat-tab" data-cat="website" onclick="filterCat('website', this)">
     💻 Websites <span class="count" id="countWebsite">0</span>
@@ -204,14 +230,12 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:60px 24p
   </button>
 </div>
 
-<!-- WEBSITES SECTION -->
+<!-- WEBSITES -->
 <section class="cat-section show" id="sec-website">
   <div class="sec-in">
     <div class="cat-header">
-      <div>
-        <h2>Custom <span class="gold">Websites</span></h2>
-        <p>Fast, mobile-first websites built for conversions and search ranking. From simple business sites to full-scale platforms.</p>
-      </div>
+      <h2>Custom <span class="gold">Websites</span></h2>
+      <p>Fast, mobile-first websites built for conversions and search ranking. From simple business sites to full-scale platforms.</p>
     </div>
     <div class="svc-grid" id="gridWebsite">
       <div class="loading-state"><div class="spinner"></div>Loading website services...</div>
@@ -219,14 +243,12 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:60px 24p
   </div>
 </section>
 
-<!-- QR SECTION -->
+<!-- QR SYSTEMS -->
 <section class="cat-section show" id="sec-qr">
   <div class="sec-in">
     <div class="cat-header">
-      <div>
-        <h2>QR <span class="gold">Systems</span></h2>
-        <p>One scan. Instant info. QR-powered systems for restaurants, hotels, gyms, academies, salons and reviews.</p>
-      </div>
+      <h2>QR <span class="gold">Systems</span></h2>
+      <p>One scan. Instant info. QR-powered systems for restaurants, hotels, gyms, academies, salons and reviews.</p>
     </div>
     <div class="svc-grid" id="gridQr">
       <div class="loading-state"><div class="spinner"></div>Loading QR services...</div>
@@ -234,14 +256,12 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:60px 24p
   </div>
 </section>
 
-<!-- BRANDING SECTION -->
+<!-- BRANDING -->
 <section class="cat-section show" id="sec-branding">
   <div class="sec-in">
     <div class="cat-header">
-      <div>
-        <h2>Branding & <span class="gold">Social</span></h2>
-        <p>Logos, Instagram setup and content design to make your brand look premium everywhere.</p>
-      </div>
+      <h2>Branding & <span class="gold">Social</span></h2>
+      <p>Logos, Instagram setup and content design to make your brand look premium everywhere.</p>
     </div>
     <div class="svc-grid" id="gridBranding">
       <div class="loading-state"><div class="spinner"></div>Loading branding services...</div>
@@ -250,12 +270,12 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:60px 24p
 </section>
 
 <!-- CTA BANNER -->
-<section>
+<section style="padding:20px 0 60px">
   <div class="sec-in">
     <div class="cta-banner">
       <h3>Not sure which service <span class="gold">fits your business?</span></h3>
       <p>Free 10-minute consultation. We'll suggest the right service for your needs and budget — no obligation.</p>
-      <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20need%20help%20choosing%20a%20service." class="btn btn-primary" target="_blank" style="padding:16px 28px;font-size:14px">💬 Free Consultation</a>
+      <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20need%20help%20choosing%20a%20service." class="btn btn-primary" target="_blank">💬 Free Consultation</a>
     </div>
   </div>
 </section>
@@ -299,7 +319,53 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:60px 24p
       <div>Made with <span style="color:var(--gold)">▲</span> in Karnal, India</div>
     </div>
   </div>
-  </footer>
+</footer>
+
+<!-- DETAILS MODAL -->
+<div class="modal-overlay" id="detailsModal" onclick="if(event.target===this)closeDetails()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <div class="modal-icon" id="modalIcon">✨</div>
+        <h3 id="modalTitle">Service Name</h3>
+        <p id="modalDesc">Description</p>
+      </div>
+      <button class="modal-close" onclick="closeDetails()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-price">
+        <div class="modal-price-label">Starting from</div>
+        <div class="modal-price-value" id="modalPrice">₹0</div>
+      </div>
+
+      <div class="modal-meta">
+        <div class="modal-meta-item">
+          <div class="lbl">⏱ Delivery</div>
+          <div class="val" id="modalDelivery">2-3 days</div>
+        </div>
+        <div class="modal-meta-item">
+          <div class="lbl">🔄 Support</div>
+          <div class="val" id="modalSupport">1 year included</div>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <h4>📦 What's Included</h4>
+        <ul class="modal-features" id="modalFeatures"></ul>
+      </div>
+
+      <div class="modal-section">
+        <h4>🎯 Perfect For</h4>
+        <p style="color:#c8cdd8;font-size:14px;line-height:1.6" id="modalPerfectFor">Businesses looking to grow online.</p>
+      </div>
+
+      <div class="modal-actions">
+        <a href="#" id="modalWhatsapp" target="_blank" class="btn btn-primary">💬 Get Quote</a>
+        <button class="btn btn-outline" onclick="closeDetails()">Close</button>
+      </div>
+    </div>
+  </div>
+  </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -307,13 +373,13 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:60px 24p
 
 <script>
 /* ==========================================================
-   VAAN SERVICES PAGE — CORE SCRIPT
+   VAAN SERVICES PAGE — CONFIG
    ========================================================== */
-
 const SUPABASE_URL = "https://xvtxpllmfwgnlrffbcqz.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2dHhwbGxtZndnbmxyZmZiY3F6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0Mzg2OTYsImV4cCI6MjEwNjAxNDY5Nn0.JC1Za7PdNGLngpupBovq_DqI-vHRVBOovLdEe-w1Ap0";
-
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let allServices = [];
 
 /* ====== NAV TOGGLE ====== */
 function toggleNav(){
@@ -331,7 +397,6 @@ document.querySelectorAll(".nav-links a").forEach(a => {
 function filterCat(cat, btn){
   document.querySelectorAll(".cat-tab").forEach(t => t.classList.remove("active"));
   btn.classList.add("active");
-
   if (cat === "all") {
     document.querySelectorAll(".cat-section").forEach(s => s.classList.add("show"));
   } else {
@@ -339,29 +404,618 @@ function filterCat(cat, btn){
     const target = document.getElementById("sec-" + cat);
     if (target) target.classList.add("show");
   }
-  window.scrollTo({ top: 300, behavior: "smooth" });
+  window.scrollTo({ top: 500, behavior: "smooth" });
 }
 
-/* ====== ICONS FOR SERVICES ====== */
+/* ==========================================================
+   3D SCENE — CONCEPT 3 "THE TRANSFORMATION"
+   Scene setup: camera, lights, objects
+   ========================================================== */
+const VAAN_3D = (function(){
+  const canvas = document.getElementById("heroCanvas3D");
+  if (!canvas || typeof THREE === "undefined") return null;
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x0a0e1a, 0.035);
+
+  const container = canvas.parentElement;
+  let W = container.offsetWidth;
+  let H = container.offsetHeight;
+
+  const camera = new THREE.PerspectiveCamera(45, W/H, 0.1, 200);
+  camera.position.set(0, 2, 16);
+  camera.lookAt(0, 0.5, 0);
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  /* ====== LIGHTS ====== */
+  scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+
+  const keyLight = new THREE.DirectionalLight(0xffffff, 0.7);
+  keyLight.position.set(5, 8, 6);
+  scene.add(keyLight);
+
+  const goldLight = new THREE.PointLight(0xffd400, 2.5, 30);
+  goldLight.position.set(-6, 3, 4);
+  scene.add(goldLight);
+
+  const blueLight = new THREE.PointLight(0x4f8fff, 2.5, 30);
+  blueLight.position.set(6, -2, 4);
+  scene.add(blueLight);
+
+  const backGlow = new THREE.PointLight(0xffd400, 1.5, 40);
+  backGlow.position.set(0, 3, -6);
+  scene.add(backGlow);
+
+  /* ====== ROOT GROUP ====== */
+  const world = new THREE.Group();
+  scene.add(world);
+
+  /* ====== 1. SHOP BUILDING (wireframe → solid) ====== */
+  const shopGroup = new THREE.Group();
+  shopGroup.position.set(0, -1.5, 0);
+
+  /* Base */
+  const shopBaseGeo = new THREE.BoxGeometry(4, 3, 3);
+  const shopBaseMat = new THREE.MeshStandardMaterial({
+    color: 0x1a2136,
+    emissive: 0x0a0e1a,
+    metalness: 0.3,
+    roughness: 0.7,
+    transparent: true,
+    opacity: 0.85
+  });
+  const shopBase = new THREE.Mesh(shopBaseGeo, shopBaseMat);
+  shopBase.position.y = 1.5;
+  shopGroup.add(shopBase);
+
+  /* Wireframe overlay */
+  const shopWireMat = new THREE.MeshBasicMaterial({
+    color: 0x4f8fff,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.4
+  });
+  const shopWire = new THREE.Mesh(shopBaseGeo, shopWireMat);
+  shopWire.position.y = 1.5;
+  shopWire.scale.set(1.001, 1.001, 1.001);
+  shopGroup.add(shopWire);
+
+  /* Roof */
+  const roofGeo = new THREE.ConeGeometry(3, 1.2, 4);
+  const roofMat = new THREE.MeshStandardMaterial({ color: 0x2a3450, emissive: 0x0a0e1a, metalness: 0.4, roughness: 0.6 });
+  const roof = new THREE.Mesh(roofGeo, roofMat);
+  roof.position.y = 3.7;
+  roof.rotation.y = Math.PI / 4;
+  shopGroup.add(roof);
+
+  /* Door */
+  const doorGeo = new THREE.PlaneGeometry(0.9, 1.4);
+  const doorMat = new THREE.MeshStandardMaterial({ color: 0x0a0e1a, emissive: 0xffd400, emissiveIntensity: 0.3 });
+  const door = new THREE.Mesh(doorGeo, doorMat);
+  door.position.set(0, 0.7, 1.51);
+  shopGroup.add(door);
+
+  /* Windows */
+  const windowMat = new THREE.MeshStandardMaterial({ color: 0x0a0e1a, emissive: 0x4f8fff, emissiveIntensity: 0.4 });
+  const w1 = new THREE.Mesh(new THREE.PlaneGeometry(0.7, 0.7), windowMat);
+  w1.position.set(-1.3, 1.8, 1.51);
+  shopGroup.add(w1);
+  const w2 = w1.clone();
+  w2.position.x = 1.3;
+  shopGroup.add(w2);
+
+  /* CLOSED sign */
+  const closedCanvas = document.createElement("canvas");
+  closedCanvas.width = 256;
+  closedCanvas.height = 64;
+  const cctx = closedCanvas.getContext("2d");
+  cctx.fillStyle = "#0a0e1a";
+  cctx.fillRect(0, 0, 256, 64);
+  cctx.fillStyle = "#8a8f9c";
+  cctx.font = "bold 32px Inter,Arial";
+  cctx.textAlign = "center";
+  cctx.textBaseline = "middle";
+  cctx.fillText("CLOSED", 128, 34);
+  const closedTex = new THREE.CanvasTexture(closedCanvas);
+  const closedMat = new THREE.MeshBasicMaterial({ map: closedTex, transparent: true });
+  const closedSign = new THREE.Mesh(new THREE.PlaneGeometry(1.6, 0.4), closedMat);
+  closedSign.position.set(0, 3, 1.52);
+  shopGroup.add(closedSign);
+
+  world.add(shopGroup);
+
+  /* ====== 2. QR CODE CUBE (floating center) ====== */
+  const qrCanvas = document.createElement("canvas");
+  qrCanvas.width = 256;
+  qrCanvas.height = 256;
+  const qctx = qrCanvas.getContext("2d");
+  qctx.fillStyle = "#ffffff";
+  qctx.fillRect(0, 0, 256, 256);
+  qctx.fillStyle = "#0a0e1a";
+  /* Draw a fake QR pattern */
+  const qrSize = 21;
+  const cellSize = 256 / qrSize;
+  for (let y = 0; y < qrSize; y++){
+    for (let x = 0; x < qrSize; x++){
+      if (Math.random() > 0.55) {
+        qctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+      }
+    }
+  }
+  /* Corner markers */
+  function marker(px, py){
+    qctx.fillStyle = "#0a0e1a";
+    qctx.fillRect(px, py, cellSize * 7, cellSize * 7);
+    qctx.fillStyle = "#ffffff";
+    qctx.fillRect(px + cellSize, py + cellSize, cellSize * 5, cellSize * 5);
+    qctx.fillStyle = "#0a0e1a";
+    qctx.fillRect(px + cellSize * 2, py + cellSize * 2, cellSize * 3, cellSize * 3);
+  }
+  marker(0, 0);
+  marker(256 - cellSize * 7, 0);
+  marker(0, 256 - cellSize * 7);
+  const qrTex = new THREE.CanvasTexture(qrCanvas);
+
+  const qrGroup = new THREE.Group();
+  qrGroup.position.set(0, 1, 2.5);
+
+  const qrCubeGeo = new THREE.BoxGeometry(1.5, 1.5, 0.15);
+  const qrMatSides = new THREE.MeshStandardMaterial({ color: 0xffd400, emissive: 0xffd400, emissiveIntensity: 0.4 });
+  const qrMatFace = new THREE.MeshBasicMaterial({ map: qrTex });
+  const qrMaterials = [qrMatSides, qrMatSides, qrMatSides, qrMatSides, qrMatFace, qrMatFace];
+  const qrCube = new THREE.Mesh(qrCubeGeo, qrMaterials);
+  qrGroup.add(qrCube);
+
+  /* QR glow ring */
+  const qrRingGeo = new THREE.TorusGeometry(1.2, 0.03, 16, 64);
+  const qrRingMat = new THREE.MeshBasicMaterial({ color: 0xffd400, transparent: true, opacity: 0.6 });
+  const qrRing = new THREE.Mesh(qrRingGeo, qrRingMat);
+  qrRing.rotation.x = Math.PI / 2;
+  qrGroup.add(qrRing);
+
+  world.add(qrGroup);
+
+  /* ====== 3. WEBSITE CARD (floats to left) ====== */
+  const siteCanvas = document.createElement("canvas");
+  siteCanvas.width = 512;
+  siteCanvas.height = 320;
+  const sctx = siteCanvas.getContext("2d");
+  sctx.fillStyle = "#0f1520";
+  sctx.fillRect(0, 0, 512, 320);
+  /* Browser bar */
+  sctx.fillStyle = "#1a2136";
+  sctx.fillRect(0, 0, 512, 32);
+  sctx.fillStyle = "#ff5b6a"; sctx.beginPath(); sctx.arc(18, 16, 5, 0, Math.PI * 2); sctx.fill();
+  sctx.fillStyle = "#ffd400"; sctx.beginPath(); sctx.arc(36, 16, 5, 0, Math.PI * 2); sctx.fill();
+  sctx.fillStyle = "#25b46e"; sctx.beginPath(); sctx.arc(54, 16, 5, 0, Math.PI * 2); sctx.fill();
+  /* Hero content */
+  sctx.fillStyle = "#ffd400"; sctx.font = "bold 28px Inter,Arial"; sctx.fillText("Your Business", 30, 90);
+  sctx.fillStyle = "#ffffff"; sctx.font = "bold 28px Inter,Arial"; sctx.fillText("Online.", 30, 125);
+  sctx.fillStyle = "#8a8f9c"; sctx.font = "14px Inter,Arial"; sctx.fillText("Fast · Modern · Mobile-first", 30, 155);
+  /* CTA button */
+  sctx.fillStyle = "#ffd400"; sctx.fillRect(30, 175, 120, 32);
+  sctx.fillStyle = "#0a0e1a"; sctx.font = "bold 14px Inter,Arial"; sctx.fillText("Get Started", 48, 196);
+  /* Cards */
+  sctx.fillStyle = "#1a2136"; sctx.fillRect(280, 80, 100, 70);
+  sctx.fillStyle = "#1a2136"; sctx.fillRect(390, 80, 100, 70);
+  sctx.fillStyle = "#1a2136"; sctx.fillRect(280, 165, 100, 70);
+  sctx.fillStyle = "#1a2136"; sctx.fillRect(390, 165, 100, 70);
+  const siteTex = new THREE.CanvasTexture(siteCanvas);
+
+  const siteCard = new THREE.Mesh(
+    new THREE.PlaneGeometry(3.2, 2),
+    new THREE.MeshBasicMaterial({ map: siteTex, transparent: true })
+  );
+  siteCard.position.set(-4.5, 1.5, 1);
+  siteCard.rotation.y = 0.3;
+  world.add(siteCard);
+
+  /* ====== 4. PHONE MOCKUP (floats to right) ====== */
+  const phoneGroup = new THREE.Group();
+  phoneGroup.position.set(4.5, 1.2, 1);
+
+  const phoneBody = new THREE.Mesh(
+    new THREE.BoxGeometry(1.4, 2.6, 0.1),
+    new THREE.MeshStandardMaterial({ color: 0x0a0e1a, metalness: 0.8, roughness: 0.3 })
+  );
+  phoneGroup.add(phoneBody);
+
+  const phoneScreenMat = new THREE.MeshBasicMaterial({ color: 0x4f8fff, transparent: true, opacity: 0.9 });
+  const phoneScreen = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 2.4), phoneScreenMat);
+  phoneScreen.position.z = 0.06;
+  phoneGroup.add(phoneScreen);
+
+  /* Small QR on phone screen */
+  const miniQR = new THREE.Mesh(
+    new THREE.PlaneGeometry(0.6, 0.6),
+    new THREE.MeshBasicMaterial({ map: qrTex })
+  );
+  miniQR.position.set(0, 0.3, 0.07);
+  phoneGroup.add(miniQR);
+
+  phoneGroup.rotation.y = -0.3;
+  world.add(phoneGroup);
+
+  /* ====== 5. FLOATING SERVICE ICONS (6 orbiters) ====== */
+  const ICONS = ["🍽️","🏨","🏋️","📚","💇","⭐"];
+  const iconGroups = [];
+
+  ICONS.forEach((emoji, i) => {
+    const iconCanvas = document.createElement("canvas");
+    iconCanvas.width = 128;
+    iconCanvas.height = 128;
+    const ictx = iconCanvas.getContext("2d");
+    ictx.fillStyle = "rgba(255,212,0,0.1)";
+    ictx.beginPath();
+    ictx.arc(64, 64, 60, 0, Math.PI * 2);
+    ictx.fill();
+    ictx.strokeStyle = "rgba(255,212,0,0.6)";
+    ictx.lineWidth = 3;
+    ictx.stroke();
+    ictx.font = "64px Arial";
+    ictx.textAlign = "center";
+    ictx.textBaseline = "middle";
+    ictx.fillText(emoji, 64, 68);
+
+    const iconTex = new THREE.CanvasTexture(iconCanvas);
+    const iconMesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.9, 0.9),
+      new THREE.MeshBasicMaterial({ map: iconTex, transparent: true })
+    );
+
+    const angle = (i / ICONS.length) * Math.PI * 2;
+    const radius = 5.5;
+    iconMesh.position.set(
+      Math.cos(angle) * radius,
+      Math.sin(angle * 0.7) * 0.8 + 0.5,
+      Math.sin(angle) * radius * 0.4
+    );
+
+    iconMesh.userData = {
+      baseAngle: angle,
+      radius: radius,
+      speed: 0.15 + Math.random() * 0.1,
+      baseY: iconMesh.position.y,
+      bobSpeed: 0.5 + Math.random() * 0.5
+    };
+
+    world.add(iconMesh);
+    iconGroups.push(iconMesh);
+  });
+
+  /* ====== 6. PARTICLE FIELD ====== */
+  const particleCount = 200;
+  const particlesGeo = new THREE.BufferGeometry();
+  const positions = new Float32Array(particleCount * 3);
+  for (let i = 0; i < particleCount * 3; i += 3){
+    positions[i] = (Math.random() - 0.5) * 24;
+    positions[i+1] = (Math.random() - 0.5) * 14;
+    positions[i+2] = (Math.random() - 0.5) * 12;
+  }
+  particlesGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  const particlesMat = new THREE.PointsMaterial({
+    color: 0xffd400,
+    size: 0.05,
+    transparent: true,
+    opacity: 0.5,
+    sizeAttenuation: true
+  });
+  const particles = new THREE.Points(particlesGeo, particlesMat);
+  world.add(particles);
+
+  /* ====== 7. GLOWING SPHERE (transformation spark) ====== */
+  const orbGeo = new THREE.SphereGeometry(0.4, 32, 32);
+  const orbMat = new THREE.MeshBasicMaterial({ color: 0xffd400, transparent: true, opacity: 0 });
+  const orb = new THREE.Mesh(orbGeo, orbMat);
+  orb.position.set(0, 0.5, 2);
+  world.add(orb);
+
+  /* Orb halo */
+  const haloGeo = new THREE.SphereGeometry(0.7, 32, 32);
+  const haloMat = new THREE.MeshBasicMaterial({ color: 0xffd400, transparent: true, opacity: 0, wireframe: true });
+  const halo = new THREE.Mesh(haloGeo, haloMat);
+  halo.position.copy(orb.position);
+  world.add(halo);
+
+  /* ====== 8. RIPPLE RINGS (transform waves) ====== */
+  const ripples = [];
+  for (let i = 0; i < 3; i++){
+    const rGeo = new THREE.RingGeometry(0.5, 0.55, 64);
+    const rMat = new THREE.MeshBasicMaterial({ color: 0xffd400, transparent: true, opacity: 0, side: THREE.DoubleSide });
+    const rMesh = new THREE.Mesh(rGeo, rMat);
+    rMesh.rotation.x = -Math.PI / 2;
+    rMesh.position.set(0, -1.4, 0);
+    world.add(rMesh);
+    ripples.push(rMesh);
+  }
+
+  /* ====== MOUSE / TOUCH PARALLAX ====== */
+  let mx = 0, my = 0, tx = 0, ty = 0;
+  window.addEventListener("mousemove", e => {
+    mx = (e.clientX / window.innerWidth - 0.5) * 2;
+    my = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+  window.addEventListener("touchmove", e => {
+    if (e.touches[0]){
+      mx = (e.touches[0].clientX / window.innerWidth - 0.5) * 2;
+      my = (e.touches[0].clientY / window.innerHeight - 0.5) * 2;
+    }
+  }, { passive: true });
+
+  /* ====== RESIZE ====== */
+  window.addEventListener("resize", () => {
+    W = container.offsetWidth;
+    H = container.offsetHeight;
+    camera.aspect = W / H;
+    camera.updateProjectionMatrix();
+    renderer.setSize(W, H);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  });
+
+  /* ====== RETURN API ====== */
+  return {
+    scene, camera, renderer, world,
+    shopGroup, shopBase, shopWire, roof, door, closedSign,
+    qrGroup, qrCube, qrRing,
+    siteCard,
+    phoneGroup, phoneScreen, miniQR,
+    iconGroups,
+    particles,
+    orb, halo, ripples,
+    camera_target: { x: 0, y: 2, z: 16 },
+    parallax: () => ({ mx: mx - tx, my: my - ty }),
+    updateParallax: () => {
+      tx += (mx - tx) * 0.05;
+      ty += (my - ty) * 0.05;
+    },
+    isMobile: () => window.innerWidth < 768
+  };
+})();
+/* ==========================================================
+   3D ANIMATION — 5-PHASE CINEMATIC TIMELINE
+   ========================================================== */
+(function animate3D(){
+  const S = VAAN_3D;
+  if (!S) return;
+
+  const { scene, camera, renderer, world, parallax, updateParallax } = S;
+  const clock = new THREE.Clock();
+
+  /* ====== RENDER LOOP (continuous motion) ====== */
+  function renderLoop(){
+    requestAnimationFrame(renderLoop);
+    const t = clock.getElapsedTime();
+
+    /* Parallax smoothing */
+    updateParallax();
+    const p = parallax();
+
+    /* Camera float */
+    camera.position.x = Math.sin(t * 0.15) * 0.6 + p.mx * 1.5;
+    camera.position.y = 2 + Math.sin(t * 0.2) * 0.3 + p.my * 0.6;
+    camera.lookAt(0, 0.5, 0);
+
+    /* World subtle rotation */
+    world.rotation.y = Math.sin(t * 0.1) * 0.08 + p.mx * 0.15;
+
+    /* QR ring spin */
+    if (S.qrRing) S.qrRing.rotation.z = t * 0.5;
+
+    /* Icons orbit + bob */
+    S.iconGroups.forEach((icon, i) => {
+      const a = icon.userData.baseAngle + t * icon.userData.speed * 0.3;
+      const r = icon.userData.radius;
+      icon.position.x = Math.cos(a) * r;
+      icon.position.z = Math.sin(a) * r * 0.4;
+      icon.position.y = icon.userData.baseY + Math.sin(t * icon.userData.bobSpeed + i) * 0.3;
+      /* Billboard: always face camera */
+      icon.lookAt(camera.position);
+    });
+
+    /* Phone float */
+    if (S.phoneGroup) {
+      S.phoneGroup.position.y = 1.2 + Math.sin(t * 0.8) * 0.15;
+      S.phoneGroup.rotation.y = -0.3 + Math.sin(t * 0.5) * 0.1;
+    }
+
+    /* Website card float */
+    if (S.siteCard) {
+      S.siteCard.position.y = 1.5 + Math.sin(t * 0.7 + 1) * 0.15;
+      S.siteCard.rotation.y = 0.3 + Math.sin(t * 0.4) * 0.08;
+    }
+
+    /* QR cube gentle rotation (idle) */
+    if (S.qrCube) {
+      S.qrCube.rotation.y = Math.sin(t * 0.6) * 0.3;
+      S.qrCube.rotation.x = Math.sin(t * 0.4) * 0.1;
+    }
+
+    /* Particles drift */
+    if (S.particles) {
+      S.particles.rotation.y = t * 0.03;
+    }
+
+    /* Orb pulse (during spark phase) */
+    if (S.orb.material.opacity > 0) {
+      const pulse = 1 + Math.sin(t * 4) * 0.15;
+      S.orb.scale.set(pulse, pulse, pulse);
+      S.halo.rotation.x = t * 0.8;
+      S.halo.rotation.y = t * 0.6;
+    }
+
+    renderer.render(scene, camera);
+  }
+  renderLoop();
+
+  /* ====== INITIAL STATE (Phase 1) ====== */
+  function resetToWireframe(){
+    gsap.set(S.shopBase.material, { opacity: 0.25 });
+    gsap.set(S.shopBase.material, { color: new THREE.Color(0x1a2136) });
+    gsap.set(S.shopWire.material, { opacity: 0.7 });
+    gsap.set(S.roof.material, { opacity: 0.3 });
+    gsap.set(S.door.material, { emissiveIntensity: 0 });
+    gsap.set(S.closedSign.material, { opacity: 0.4 });
+    gsap.set(S.qrGroup.scale, { x: 0.01, y: 0.01, z: 0.01 });
+    gsap.set(S.qrGroup.position, { y: 1, z: 2.5 });
+    gsap.set(S.qrRing.material, { opacity: 0 });
+    gsap.set(S.siteCard.material, { opacity: 0 });
+    gsap.set(S.siteCard.position, { x: -4.5, y: 1.5, z: 1 });
+    gsap.set(S.siteCard.scale, { x: 0.8, y: 0.8, z: 0.8 });
+    gsap.set(S.phoneGroup.position, { x: 4.5, y: 1.2, z: 1 });
+    gsap.set(S.phoneGroup.scale, { x: 0.01, y: 0.01, z: 0.01 });
+    gsap.set(S.phoneScreen.material, { opacity: 0 });
+    gsap.set(S.miniQR.material, { opacity: 0 });
+    S.iconGroups.forEach(icon => {
+      gsap.set(icon.scale, { x: 0, y: 0, z: 0 });
+      gsap.set(icon.material, { opacity: 0 });
+    });
+    gsap.set(S.orb.material, { opacity: 0 });
+    gsap.set(S.halo.material, { opacity: 0 });
+    gsap.set(S.orb.scale, { x: 1, y: 1, z: 1 });
+    S.ripples.forEach(r => {
+      gsap.set(r.material, { opacity: 0 });
+      gsap.set(r.scale, { x: 0.5, y: 0.5, z: 0.5 });
+    });
+    /* Dim lighting */
+    gsap.set(S.shopGroup.position, { y: -1.5 });
+    gsap.set(world.rotation, { y: 0 });
+  }
+
+  /* ====== MASTER TIMELINE ====== */
+  function buildTimeline(){
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
+
+    /* ====== PHASE 1: THE OLD WORLD (0-3s) ====== */
+    tl.addLabel("oldWorld", 0);
+    tl.to(S.closedSign.material, { opacity: 1, duration: 0.8 }, 0.3);
+    tl.to(S.closedSign.material, { opacity: 0.4, duration: 1.5, yoyo: true, repeat: 1 }, 1.2);
+
+    /* ====== PHASE 2: THE SPARK (3-6s) ====== */
+    tl.addLabel("spark", 3);
+    /* Orb appears at door */
+    tl.to(S.orb.material, { opacity: 1, duration: 0.4 }, 3);
+    tl.to(S.halo.material, { opacity: 0.6, duration: 0.4 }, 3.1);
+    /* Ripples emanate */
+    S.ripples.forEach((r, i) => {
+      tl.fromTo(r.scale, { x: 0.5, y: 0.5, z: 0.5 }, { x: 4, y: 4, z: 4, duration: 2, ease: "power2.out" }, 3.2 + i * 0.3);
+      tl.fromTo(r.material, { opacity: 0.8 }, { opacity: 0, duration: 2, ease: "power2.out" }, 3.2 + i * 0.3);
+    });
+    /* QR appears */
+    tl.to(S.qrGroup.scale, { x: 1, y: 1, z: 1, duration: 0.8, ease: "back.out(1.7)" }, 4);
+    tl.to(S.qrRing.material, { opacity: 0.7, duration: 0.6 }, 4.5);
+
+    /* ====== PHASE 3: THE REBUILD (6-9s) ====== */
+    tl.addLabel("rebuild", 6);
+    /* Shop fills with color */
+    tl.to(S.shopBase.material, { opacity: 0.95, duration: 0.8 }, 6);
+    tl.to(S.shopBase.material, { color: new THREE.Color(0x2a3450), duration: 0.8 }, 6);
+    tl.to(S.shopWire.material, { opacity: 0.15, duration: 0.8 }, 6.2);
+    tl.to(S.roof.material, { opacity: 1, duration: 0.8 }, 6);
+    /* Door lights up */
+    tl.to(S.door.material, { emissiveIntensity: 0.9, duration: 0.6 }, 6.4);
+    /* CLOSED → LIVE */
+    tl.to(S.closedSign.material, { opacity: 0, duration: 0.4 }, 6.5);
+    /* Website card materializes left */
+    tl.to(S.siteCard.material, { opacity: 1, duration: 0.8 }, 6.8);
+    tl.to(S.siteCard.scale, { x: 1, y: 1, z: 1, duration: 0.8, ease: "back.out(1.5)" }, 6.8);
+    tl.to(S.siteCard.position, { x: -5, duration: 0.8, ease: "power2.out" }, 6.8);
+    /* Phone materializes right */
+    tl.to(S.phoneGroup.scale, { x: 1, y: 1, z: 1, duration: 0.8, ease: "back.out(1.7)" }, 7);
+    tl.to(S.phoneScreen.material, { opacity: 1, duration: 0.6 }, 7.2);
+    tl.to(S.miniQR.material, { opacity: 1, duration: 0.5 }, 7.4);
+    tl.to(S.phoneGroup.position, { x: 5, duration: 0.8, ease: "power2.out" }, 7);
+    /* Icons fly in one by one */
+    S.iconGroups.forEach((icon, i) => {
+      tl.to(icon.scale, { x: 1, y: 1, z: 1, duration: 0.5, ease: "back.out(2)" }, 7.5 + i * 0.15);
+      tl.to(icon.material, { opacity: 1, duration: 0.4 }, 7.5 + i * 0.15);
+    });
+
+    /* ====== PHASE 4: THE LIVE (9-12s) ====== */
+    tl.addLabel("live", 9);
+    /* Orb fades, everything glows */
+    tl.to(S.orb.material, { opacity: 0, duration: 0.6 }, 9);
+    tl.to(S.halo.material, { opacity: 0, duration: 0.6 }, 9);
+    /* QR pulses */
+    tl.to(S.qrCube.scale, { x: 1.15, y: 1.15, z: 1.15, duration: 0.4, yoyo: true, repeat: 1 }, 9.2);
+    /* Website card subtle scale */
+    tl.to(S.siteCard.scale, { x: 1.05, y: 1.05, z: 1.05, duration: 0.8, yoyo: true, repeat: 1 }, 9.5);
+    /* Phone subtle rotation */
+    tl.to(S.phoneGroup.rotation, { y: -0.15, duration: 1, ease: "sine.inOut" }, 9.5);
+    /* Light intensify */
+    tl.to({}, { duration: 2 }, 9);
+
+    /* ====== PHASE 5: THE LOOP (12-14s) ====== */
+    tl.addLabel("loop", 12);
+    /* Fade everything back */
+    tl.to(S.siteCard.material, { opacity: 0, duration: 0.8 }, 12);
+    tl.to(S.phoneScreen.material, { opacity: 0, duration: 0.8 }, 12);
+    tl.to(S.phoneGroup.scale, { x: 0.01, y: 0.01, z: 0.01, duration: 0.8 }, 12.1);
+    tl.to(S.qrGroup.scale, { x: 0.01, y: 0.01, z: 0.01, duration: 0.8 }, 12.2);
+    S.iconGroups.forEach((icon, i) => {
+      tl.to(icon.scale, { x: 0, y: 0, z: 0, duration: 0.5 }, 12 + i * 0.05);
+    });
+    tl.to(S.shopBase.material, { opacity: 0.25, duration: 0.8 }, 12.5);
+    tl.to(S.shopBase.material, { color: new THREE.Color(0x1a2136), duration: 0.8 }, 12.5);
+    tl.to(S.shopWire.material, { opacity: 0.7, duration: 0.8 }, 12.5);
+    tl.to(S.door.material, { emissiveIntensity: 0, duration: 0.6 }, 12.5);
+    tl.to(S.siteCard.position, { x: -4.5, y: 1.5, z: 1, duration: 0.6 }, 12.5);
+    tl.to(S.phoneGroup.position, { x: 4.5, duration: 0.6 }, 12.5);
+
+    return tl;
+  }
+
+  /* ====== START ====== */
+  resetToWireframe();
+  setTimeout(() => buildTimeline(), 800);
+})();
+
+/* ==========================================================
+   PAGE LOAD LOGIC — will continue in Chunk 5
+   ========================================================== */
+/* ==========================================================
+   SUPABASE — LOAD PRICING
+   ========================================================== */
 const SERVICE_ICONS = {
-  "basic": "🌱",
-  "starter": "🚀",
-  "business": "🏢",
-  "professional": "⭐",
-  "premium": "💎",
-  "enterprise": "🏛️",
-  "qr-restaurant": "🍽️",
-  "qr-gym": "🏋️",
-  "qr-hotel": "🏨",
-  "qr-academy": "📚",
-  "qr-salon": "💇",
-  "qr-google": "⭐",
-  "logo": "🎨",
-  "instagram": "📸",
-  "social-content": "📱"
+  "basic": "🌱", "starter": "🚀", "business": "🏢",
+  "professional": "⭐", "premium": "💎", "enterprise": "🏛️",
+  "qr-restaurant": "🍽️", "qr-gym": "🏋️", "qr-hotel": "🏨",
+  "qr-academy": "📚", "qr-salon": "💇", "qr-google": "⭐",
+  "logo": "🎨", "instagram": "📸", "social-content": "📱"
 };
 
-/* ====== LOAD PRICING FROM SUPABASE ====== */
+const DELIVERY_INFO = {
+  "basic":"3-5 days","starter":"4-6 days","business":"5-7 days",
+  "professional":"7-10 days","premium":"10-14 days","enterprise":"2-4 weeks",
+  "qr-restaurant":"2-3 days","qr-gym":"2-3 days","qr-hotel":"2-3 days",
+  "qr-academy":"3-4 days","qr-salon":"2-3 days","qr-google":"1 day",
+  "logo":"3-5 days","instagram":"2-3 days","social-content":"5-7 days"
+};
+
+const PERFECT_FOR = {
+  "basic":"Personal projects, portfolios, and very small businesses starting their online presence.",
+  "starter":"Small businesses and local shops wanting a professional online presence.",
+  "business":"Growing businesses wanting to establish a strong brand presence online.",
+  "professional":"Established businesses that want a premium, animated look with advanced features.",
+  "premium":"Brands that want premium design, animations, and full content management.",
+  "enterprise":"Large businesses with complex requirements, multiple pages, and custom integrations.",
+  "qr-restaurant":"Restaurants, cafes, cloud kitchens, dhabas, and any food business wanting a modern digital menu.",
+  "qr-gym":"Gyms, fitness studios, and yoga centres wanting to track member attendance and engagement.",
+  "qr-hotel":"Hotels, guest houses, resorts, and homestays wanting to automate guest services.",
+  "qr-academy":"Coaching centres, tuition classes, academies, and training institutes.",
+  "qr-salon":"Salons, spas, beauty parlours, and grooming studios wanting easy bookings.",
+  "qr-google":"Any business wanting to boost their Google reviews with minimal effort.",
+  "logo":"New businesses, rebrands, and anyone wanting a professional, memorable identity.",
+  "instagram":"New brands, personal creators, and businesses establishing their Instagram presence.",
+  "social-content":"Brands wanting consistent, professional content without hiring an in-house designer."
+};
+
+function formatPrice(n){
+  return "₹" + Number(n).toLocaleString("en-IN");
+}
+
 async function loadPricing(){
   const { data, error } = await sb
     .from("vaan_pricing")
@@ -375,21 +1029,22 @@ async function loadPricing(){
     return;
   }
 
-  const website = data.filter(p => p.category === "website");
-  const qr = data.filter(p => p.category === "qr");
-  const branding = data.filter(p => p.category === "branding");
+  allServices = data || [];
+
+  const website = allServices.filter(p => p.category === "website");
+  const qr = allServices.filter(p => p.category === "qr");
+  const branding = allServices.filter(p => p.category === "branding");
 
   renderCards("gridWebsite", website);
   renderCards("gridQr", qr);
   renderCards("gridBranding", branding);
 
-  document.getElementById("countAll").textContent = data.length;
+  document.getElementById("countAll").textContent = allServices.length;
   document.getElementById("countWebsite").textContent = website.length;
   document.getElementById("countQr").textContent = qr.length;
   document.getElementById("countBranding").textContent = branding.length;
 }
 
-/* ====== RENDER CARDS ====== */
 function renderCards(containerId, items){
   const grid = document.getElementById(containerId);
   if (!grid) return;
@@ -404,137 +1059,70 @@ function renderCards(containerId, items){
     const features = (item.features || "").split("|").filter(f => f.trim());
     const popular = item.popular ? "popular" : "";
     const badge = item.badge || "POPULAR";
+    const strikePrice = item.original_price ? '<span class="strike">' + formatPrice(item.original_price) + '</span>' : '';
 
-    const strikePrice = item.original_price ? `<span class="strike">₹${formatPrice(item.original_price)}</span>` : "";
-    const plusText = item.service_key === "qr-restaurant" || item.service_key === "qr-gym" || item.service_key === "qr-hotel" ? `<span class="plus">one-time</span>` : "";
-
-    return `
-      <div class="svc-card ${popular}" data-badge="${badge}" onclick="goToService('${item.service_key}')">
-        <div class="svc-header">
-          <div class="svc-icon">${icon}</div>
-          <div class="svc-meta">
-            ${item.pages ? `<span class="svc-pages">${item.pages}</span>` : ""}
-          </div>
-        </div>
-        <h3>${item.service_name}</h3>
-        <p class="svc-desc">${item.description || ""}</p>
-        <div class="svc-price-block">
-          <div class="svc-price-label">Starting from</div>
-          <div class="svc-price">
-            <span class="current">₹${formatPrice(item.price)}</span>
-            ${strikePrice}
-            ${plusText}
-          </div>
-        </div>
-        <ul class="svc-features">
-          ${features.slice(0, 6).map(f => `<li>${f.trim()}</li>`).join("")}
-        </ul>
-        <div class="svc-cta">
-          <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20am%20interested%20in%20${encodeURIComponent(item.service_name)}" target="_blank" class="btn btn-primary" onclick="event.stopPropagation()">Get Quote</a>
-          <button class="btn btn-outline" onclick="event.stopPropagation(); goToService('${item.service_key}')">Details</button>
-        </div>
-      </div>
-    `;
+    return '<div class="svc-card ' + popular + '" data-badge="' + badge + '">' +
+      '<div class="svc-header">' +
+        '<div class="svc-icon">' + icon + '</div>' +
+        (item.pages ? '<span class="svc-pages">' + item.pages + '</span>' : '') +
+      '</div>' +
+      '<h3>' + item.service_name + '</h3>' +
+      '<p class="svc-desc">' + (item.description || "") + '</p>' +
+      '<div class="svc-price-block">' +
+        '<div class="svc-price-label">Starting from</div>' +
+        '<div class="svc-price">' +
+          '<span class="current">' + formatPrice(item.price) + '</span>' +
+          strikePrice +
+        '</div>' +
+      '</div>' +
+      '<ul class="svc-features">' +
+        features.slice(0, 6).map(f => '<li>' + f.trim() + '</li>').join("") +
+      '</ul>' +
+      '<div class="svc-cta">' +
+        '<a href="https://wa.me/919671163712?text=' + encodeURIComponent("Hi VAAN, I am interested in " + item.service_name) + '" target="_blank" class="btn btn-primary">Get Quote</a>' +
+        '<button class="btn btn-outline" onclick="openDetails(' + item.id + ')">Details</button>' +
+      '</div>' +
+    '</div>';
   }).join("");
 }
 
-function formatPrice(n){
-  return Number(n).toLocaleString("en-IN");
+function openDetails(id){
+  const item = allServices.find(s => s.id === id);
+  if (!item) return;
+
+  const icon = SERVICE_ICONS[item.service_key] || "✨";
+  const features = (item.features || "").split("|").filter(f => f.trim());
+
+  document.getElementById("modalIcon").textContent = icon;
+  document.getElementById("modalTitle").textContent = item.service_name;
+  document.getElementById("modalDesc").textContent = item.description || "";
+  document.getElementById("modalPrice").innerHTML = formatPrice(item.price) +
+    (item.original_price ? '<span class="strike">' + formatPrice(item.original_price) + '</span>' : "");
+  document.getElementById("modalDelivery").textContent = DELIVERY_INFO[item.service_key] || "3-5 days";
+  document.getElementById("modalSupport").textContent = "1 year included";
+  document.getElementById("modalPerfectFor").textContent = PERFECT_FOR[item.service_key] || "Businesses looking to grow online.";
+  document.getElementById("modalFeatures").innerHTML = features.map(f => '<li>' + f.trim() + '</li>').join("");
+  document.getElementById("modalWhatsapp").href =
+    "https://wa.me/919671163712?text=" + encodeURIComponent("Hi VAAN, I am interested in " + item.service_name + " (starting from " + formatPrice(item.price) + "). Please share more details.");
+
+  document.getElementById("detailsModal").classList.add("open");
+  document.body.style.overflow = "hidden";
 }
 
-function goToService(key){
-  /* Placeholder — sub-pages to be built. For now, WhatsApp. */
-  const url = `https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20know%20more%20about%20${encodeURIComponent(key.replace("-", " "))}`;
-  window.open(url, "_blank");
+function closeDetails(){
+  document.getElementById("detailsModal").classList.remove("open");
+  document.body.style.overflow = "";
 }
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeDetails();
+});
 
 function showPricingError(){
-  document.getElementById("gridWebsite").innerHTML = '<div class="loading-state">⚠️ Could not load pricing. Please refresh or WhatsApp us at 9671163712.</div>';
+  const msg = '<div class="loading-state">⚠️ Could not load pricing. Please refresh or WhatsApp us at 9671163712.</div>';
+  document.getElementById("gridWebsite").innerHTML = msg;
   document.getElementById("gridQr").innerHTML = "";
   document.getElementById("gridBranding").innerHTML = "";
-}
-
-/* ====== 3D ANIMATED BACKGROUND FOR HERO ====== */
-(function(){
-  if (typeof THREE === "undefined") return;
-  const hero = document.querySelector(".page-hero");
-  if (!hero) return;
-
-  const canvas = document.createElement("canvas");
-  canvas.style.cssText = "position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.55;pointer-events:none";
-  hero.insertBefore(canvas, hero.firstChild);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, hero.offsetWidth / hero.offsetHeight, 0.1, 100);
-  camera.position.z = 12;
-
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setSize(hero.offsetWidth, hero.offsetHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-  /* Lights */
-  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-  const gold = new THREE.PointLight(0xffd400, 2, 40); gold.position.set(-6, 4, 5); scene.add(gold);
-  const blue = new THREE.PointLight(0x4f8fff, 2, 40); blue.position.set(6, -4, 5); scene.add(blue);
-
-  /* Floating wireframe objects */
-  const objects = [];
-  const shapes = [
-    new THREE.BoxGeometry(1.4, 1.4, 1.4),
-    new THREE.OctahedronGeometry(0.9),
-    new THREE.TetrahedronGeometry(1),
-    new THREE.IcosahedronGeometry(0.9),
-    new THREE.TorusGeometry(0.8, 0.15, 12, 24)
-  ];
-  const colors = [0xffd400, 0x4f8fff, 0xffffff, 0xffd400, 0x4f8fff];
-
-  for (let i = 0; i < 14; i++){
-    const geo = shapes[i % shapes.length];
-    const mat = new THREE.MeshBasicMaterial({ color: colors[i % colors.length], wireframe: true, transparent: true, opacity: 0.5 });
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.position.set((Math.random() - 0.5) * 16, (Math.random() - 0.5) * 10, (Math.random() - 0.5) * 6);
-    mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
-    mesh.userData = {
-      speed: 0.15 + Math.random() * 0.35,
-      floatSpeed: 0.3 + Math.random() * 0.6,
-      baseY: mesh.position.y,
-      baseX: mesh.position.x
-    };
-    scene.add(mesh);
-    objects.push(mesh);
-  }
-
-  const clock = new THREE.Clock();
-  function animate(){
-    requestAnimationFrame(animate);
-    const t = clock.getElapsedTime();
-    objects.forEach(o => {
-      o.rotation.x += 0.003 * o.userData.speed;
-      o.rotation.y += 0.004 * o.userData.speed;
-      o.position.y = o.userData.baseY + Math.sin(t * o.userData.floatSpeed) * 0.6;
-      o.position.x = o.userData.baseX + Math.cos(t * o.userData.floatSpeed * 0.7) * 0.4;
-    });
-    renderer.render(scene, camera);
-  }
-  animate();
-
-  window.addEventListener("resize", () => {
-    const w = hero.offsetWidth, h = hero.offsetHeight;
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-    renderer.setSize(w, h);
-  });
-})();
-
-/* ====== GSAP SCROLL REVEALS ====== */
-if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined"){
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.utils.toArray(".svc-card").forEach((card, i) => {
-    gsap.from(card, {
-      y: 60, opacity: 0, duration: 0.9, delay: (i % 6) * 0.08, ease: "power3.out",
-      scrollTrigger: { trigger: card, start: "top 90%" }
-    });
-  });
 }
 
 /* ==========================================================
@@ -672,14 +1260,13 @@ if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined"){
     #vaanFbBtn{position:fixed !important;bottom:24px !important;left:24px !important;background:#12192a !important;border:1px solid rgba(255,212,0,.3) !important;color:#ffd400 !important;padding:12px 18px !important;border-radius:99px !important;font-weight:800 !important;font-size:13px !important;cursor:pointer !important;z-index:99997 !important;display:flex !important;align-items:center !important;gap:8px !important;box-shadow:0 10px 30px rgba(0,0,0,.5) !important;font-family:Inter,sans-serif !important;transition:.25s !important}
     #vaanFbBtn:hover{transform:translateY(-3px) !important;border-color:#ffd400 !important}
     #vaanFbBtn span{font-size:11px !important}
-    #vaanFbModal{display:none !important;position:fixed !important;inset:0 !important;background:rgba(0,0,0,.7) !important;backdrop-filter:blur(8px) !important;z-index:100000 !important;align-items:center !important;justify-content:center !important;padding:20px !important}
+    #vaanFbModal{display:none !important;position:fixed !important;inset:0 !important;background:rgba(0,0,0,.7) !important;backdrop-filter:blur(8px) !important;z-index:100001 !important;align-items:center !important;justify-content:center !important;padding:20px !important}
     #vaanFbModal.vaan-open{display:flex !important}
     #vaanFbBox{background:#0f1520 !important;border:1px solid rgba(255,212,0,.25) !important;border-radius:20px !important;padding:28px 24px !important;width:min(440px,100%) !important;max-height:90vh !important;overflow:auto !important}
     #vaanFbHead{display:flex !important;justify-content:space-between !important;align-items:center !important;margin-bottom:6px !important}
     #vaanFbHead b{font-size:19px !important;color:#fff !important;font-weight:900 !important}
     #vaanFbHead button{background:transparent !important;border:0 !important;color:#8a8f9c !important;font-size:20px !important;cursor:pointer !important}
     #vaanFbForm label{display:block !important;color:#8a8f9c !important;font-size:11px !important;font-weight:800 !important;letter-spacing:1px !important;text-transform:uppercase !important;margin:16px 0 6px !important}
-    #vaanFbForm input,#vaanFbForm textarea{width:100% !important;background:#0a0e1a !important;border:1px solid rgba(255,255,255,.1) !important;border-radius:10px !important;padding:12px 14px !important;color:#fff !important;font:inherit !important;font-size:14px !important;font-family:Inter,sans-serif !important}
     #vaanFbForm input,#vaanFbForm textarea{width:100% !important;background:#0a0e1a !important;border:1px solid rgba(255,255,255,.1) !important;border-radius:10px !important;padding:12px 14px !important;color:#fff !important;font:inherit !important;font-size:14px !important;font-family:Inter,sans-serif !important}
     #vaanFbForm input:focus,#vaanFbForm textarea:focus{outline:none !important;border-color:#ffd400 !important}
     #vaanFbForm textarea{min-height:88px !important;resize:vertical !important}
@@ -710,7 +1297,7 @@ if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined"){
     e.preventDefault();
     const name = document.getElementById("fbName").value.trim();
     const feedback = document.getElementById("fbFeedback").value.trim();
-    if (!name || !feedback) return;
+        if (!name || !feedback) return;
     const btn = e.target.querySelector(".vaan-fb-submit");
     btn.disabled = true; btn.textContent = "Sending...";
     const { error } = await sb.from("vaan_feedback").insert({ name, rating: selectedRating, feedback, source_page: window.location.pathname });
@@ -722,9 +1309,9 @@ if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined"){
   };
 })();
 
-/* ====== LOAD PRICING ON PAGE LOAD ====== */
+/* ====== INIT ====== */
 loadPricing();
 </script>
 
 </body>
-</html>
+  </html>
