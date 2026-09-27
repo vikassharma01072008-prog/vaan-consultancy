@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Live Demos — VAAN Consultancy</title>
-<meta name="description" content="Explore live demos of VAAN Consultancy's QR systems and digital products — restaurants, gyms, hotels, academies, salons and more.">
+<meta name="description" content="Explore live demos of VAAN Consultancy — websites for hospitals, jewellery, hotels & more, plus QR systems for restaurants, gyms, salons.">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#0a0e1a">
 <link rel="canonical" href="https://vikassharma01072008-prog.github.io/vaan-consultancy/demos/">
@@ -16,7 +16,7 @@
 html{scroll-behavior:smooth}
 body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#0a0e1a;color:#f5f5f5;overflow-x:hidden;line-height:1.6;-webkit-tap-highlight-color:transparent}
 a{text-decoration:none;color:inherit}
-:root{--gold:#ffd400;--blue:#4f8fff;--card:#12192a;--card-2:#0d1220;--line:rgba(255,212,0,.15);--line-soft:rgba(255,255,255,.08);--white:#f5f5f5;--muted:#8a8f9c;--green:#25b46e}
+:root{--gold:#ffd400;--blue:#4f8fff;--card:#12192a;--card-2:#0d1220;--line:rgba(255,212,0,.15);--line-soft:rgba(255,255,255,.08);--white:#f5f5f5;--muted:#8a8f9c;--green:#25b46e;--purple:#a78bfa}
 
 /* ====== NAV ====== */
 .nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;background:rgba(10,14,26,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--line-soft)}
@@ -36,14 +36,18 @@ a{text-decoration:none;color:inherit}
 .hamburger span{width:24px;height:2px;background:var(--white);border-radius:2px}
 .nav-links.open{transform:translateY(0) !important}
 
-/* ====== HERO ====== */
-.hero{padding:150px 24px 80px;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 30% 20%,rgba(79,143,255,.1),transparent 55%),radial-gradient(ellipse at 70% 80%,rgba(255,212,0,.08),transparent 55%),linear-gradient(180deg,#0a0e1a 0%,#0f1520 100%)}
+/* ====== HERO WITH 3D ====== */
+.hero-3d{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 24px 60px;overflow:hidden;background:radial-gradient(ellipse at 30% 20%,rgba(79,143,255,.12),transparent 55%),radial-gradient(ellipse at 70% 80%,rgba(255,212,0,.1),transparent 55%),linear-gradient(180deg,#0a0e1a 0%,#0f1520 100%)}
+#crystalCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(10,14,26,.6) 90%);z-index:1;pointer-events:none}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:900px;margin:0 auto;padding-top:40px}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,212,0,.1);border:1px solid rgba(255,212,0,.3);color:var(--gold);padding:8px 18px;border-radius:99px;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
 .hero-badge::before{content:"";width:7px;height:7px;background:var(--gold);border-radius:50%;box-shadow:0 0 12px var(--gold);animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
-.hero h1{font-size:clamp(40px,6vw,72px);font-weight:950;line-height:1;letter-spacing:-3px;margin-bottom:22px}
-.hero h1 .gold{color:var(--gold);text-shadow:0 0 60px rgba(255,212,0,.4)}
-.hero p{font-size:17px;color:#b8becc;max-width:640px;margin:0 auto 36px;line-height:1.65}
+.hero-content h1{font-size:clamp(38px,6vw,72px);font-weight:950;line-height:1;letter-spacing:-3px;margin-bottom:22px;text-shadow:0 4px 40px rgba(0,0,0,.5)}
+.hero-content h1 .gold{color:var(--gold);text-shadow:0 0 60px rgba(255,212,0,.5)}
+.hero-content h1 .blue{color:var(--blue);text-shadow:0 0 60px rgba(79,143,255,.5)}
+.hero-content p{font-size:17px;color:#b8becc;max-width:620px;margin:0 auto 36px;line-height:1.65}
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
 
 .btn{border:0;border-radius:12px;padding:15px 26px;font-weight:800;font-size:14px;cursor:pointer;font-family:inherit;transition:all .25s;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
@@ -52,37 +56,54 @@ a{text-decoration:none;color:inherit}
 .btn-secondary{background:rgba(255,255,255,.06);color:var(--white);border:1px solid rgba(255,255,255,.15)}
 .btn-secondary:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
 
-/* ====== DEMO GRID ====== */
-.demos{padding:60px 24px 100px}
-.demos-in{max-width:1300px;margin:0 auto}
+/* ====== CHOICE SECTION ====== */
+.choice{padding:60px 24px 100px}
+.choice-in{max-width:1200px;margin:0 auto}
 .section-head{text-align:center;margin-bottom:56px}
 .section-head .eyebrow{display:inline-block;color:var(--blue);font-size:11px;letter-spacing:3px;font-weight:900;text-transform:uppercase;margin-bottom:14px}
 .section-head h2{font-size:clamp(30px,4.5vw,50px);font-weight:950;letter-spacing:-2px;line-height:1.05;margin-bottom:16px}
 .section-head h2 .gold{color:var(--gold)}
 .section-head p{color:var(--muted);font-size:16px;max-width:640px;margin:0 auto;line-height:1.6}
 
+.choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:60px}
+.choice-card{background:linear-gradient(145deg,#12192a,#0d1220);border:2px solid var(--line-soft);border-radius:22px;padding:40px 28px;cursor:pointer;transition:all .35s cubic-bezier(.2,.9,.3,1.1);text-align:center;position:relative;overflow:hidden}
+.choice-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--blue));transform:scaleX(0);transition:.4s;transform-origin:left}
+.choice-card:hover{transform:translateY(-6px);border-color:rgba(255,212,0,.4);box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.choice-card:hover::before{transform:scaleX(1)}
+.choice-card.active{border-color:var(--gold);background:linear-gradient(145deg,#1a2136,#0d1220)}
+.choice-card.active::before{transform:scaleX(1)}
+.choice-icon{width:80px;height:80px;border-radius:20px;background:linear-gradient(135deg,rgba(255,212,0,.15),rgba(79,143,255,.08));border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 22px}
+.choice-card h3{font-size:24px;font-weight:950;letter-spacing:-.8px;margin-bottom:10px}
+.choice-card p{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:16px}
+.choice-count{display:inline-block;background:rgba(79,143,255,.12);color:#8bb4ff;font-size:11px;font-weight:900;letter-spacing:1px;padding:5px 12px;border-radius:99px;text-transform:uppercase}
+
+/* ====== DEMO GRID ====== */
+.demo-area{padding-top:20px;display:none}
+.demo-area.show{display:block;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.demo-area-head{text-align:center;margin-bottom:40px;padding:20px}
+.demo-area-head h3{font-size:clamp(24px,3.5vw,36px);font-weight:950;letter-spacing:-1.5px;margin-bottom:10px}
+.demo-area-head h3 .gold{color:var(--gold)}
+.demo-area-head p{color:var(--muted);font-size:15px}
+
 .demo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.demo-card{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:22px;padding:32px 26px;position:relative;overflow:hidden;transition:all .35s cubic-bezier(.2,.9,.3,1.1);display:flex;flex-direction:column;cursor:pointer}
+.demo-card{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:22px;padding:32px 26px;position:relative;overflow:hidden;transition:all .35s cubic-bezier(.2,.9,.3,1.1);display:flex;flex-direction:column}
 .demo-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--blue));transform:scaleX(0);transition:.4s;transform-origin:left}
 .demo-card:hover{transform:translateY(-8px);border-color:rgba(255,212,0,.4);box-shadow:0 30px 60px rgba(0,0,0,.5)}
 .demo-card:hover::before{transform:scaleX(1)}
-.demo-card.soon{opacity:.65;cursor:not-allowed}
-.demo-card.soon:hover{transform:none;border-color:var(--line-soft);box-shadow:none}
-.demo-card.soon:hover::before{transform:scaleX(0)}
-
 .demo-status{position:absolute;top:20px;right:20px;font-size:9px;font-weight:900;letter-spacing:1.5px;padding:5px 10px;border-radius:99px;text-transform:uppercase}
 .demo-status.live{background:rgba(37,180,110,.15);color:var(--green);border:1px solid rgba(37,180,110,.4)}
 .demo-status.soon{background:rgba(138,143,156,.15);color:var(--muted);border:1px solid var(--line-soft)}
-
 .demo-icon{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,rgba(255,212,0,.15),rgba(79,143,255,.08));border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:22px}
-.demo-card h3{font-size:22px;font-weight:900;letter-spacing:-.6px;margin-bottom:8px}
+.demo-card h4{font-size:20px;font-weight:900;letter-spacing:-.6px;margin-bottom:8px}
 .demo-card .cat{font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
-.demo-card p{color:var(--muted);font-size:13.5px;line-height:1.6;margin-bottom:18px;flex:1}
-.demo-features{list-style:none;padding:0;margin:0 0 20px;display:grid;gap:8px}
+.demo-card p{color:var(--muted);font-size:13px;line-height:1.6;margin-bottom:18px;flex:1}
+.demo-features{list-style:none;padding:0;margin:0 0 20px;display:grid;gap:7px}
 .demo-features li{display:flex;gap:8px;align-items:flex-start;color:#c8cdd8;font-size:12.5px;line-height:1.5}
 .demo-features li::before{content:"✓";color:var(--gold);font-weight:900;flex-shrink:0}
 .demo-cta{margin-top:auto}
-.demo-cta .btn{width:100%;justify-content:center;padding:14px 20px;font-size:13px}
+.demo-cta .btn{width:100%;justify-content:center;padding:13px 18px;font-size:13px}
 .demo-cta .btn:disabled{opacity:.5;cursor:not-allowed;background:rgba(255,255,255,.05);color:var(--muted);box-shadow:none}
 
 /* ====== CTA ====== */
@@ -103,18 +124,18 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:50px 24p
 .foot-meta a{color:var(--gold)}
 
 /* ====== RESPONSIVE ====== */
-@media(max-width:1000px){.demo-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1000px){.demo-grid{grid-template-columns:repeat(2,1fr)}.choice-grid{grid-template-columns:1fr;gap:18px}}
 @media(max-width:700px){
   .nav-links{position:fixed;top:70px;left:0;right:0;background:rgba(10,14,26,.98);backdrop-filter:blur(20px);flex-direction:column;padding:24px;gap:20px;border-bottom:1px solid var(--line-soft);transform:translateY(-150%);transition:.4s cubic-bezier(.2,.9,.3,1.1)}
   .hamburger{display:flex}
   .demo-grid{grid-template-columns:1fr}
-  .hero{padding:120px 20px 60px}
+  .hero-3d{padding:100px 20px 40px;min-height:auto}
+  .choice-card{padding:32px 24px}
   .cta-box{padding:44px 24px}
   .foot-in{justify-content:center;text-align:center}
 }
 </style>
-</head>
-<body>
+</head><body>
 
 <!-- NAV -->
 <nav class="nav">
@@ -136,29 +157,82 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:50px 24p
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <span class="hero-badge">Live Interactive Demos</span>
-  <h1>See VAAN's systems <span class="gold">in action.</span></h1>
-  <p>Explore live, working demos of every product we build — from restaurant menus to gym check-ins, hotel concierge and more. No signup. No download. Just tap and try.</p>
-  <div class="hero-ctas">
-    <a href="#demos" class="btn btn-primary">Explore Demos ↓</a>
-    <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20a%20demo%20for%20my%20business." class="btn btn-secondary" target="_blank">💬 Request Custom Demo</a>
+<!-- HERO WITH 3D -->
+<section class="hero-3d">
+  <canvas id="crystalCanvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-badge">Live Interactive Demos</span>
+    <h1>See VAAN's work <span class="gold">in</span> <span class="blue">action.</span></h1>
+    <p>Explore live, working demos of every product we build — websites for hospitals, jewellery, hotels, and smart QR systems for restaurants, gyms, salons. No signup. Just tap and try.</p>
+    <div class="hero-ctas">
+      <a href="#choice" class="btn btn-primary">Choose What to See ↓</a>
+      <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20a%20custom%20demo%20for%20my%20business." class="btn btn-secondary" target="_blank">💬 Request Custom Demo</a>
+    </div>
   </div>
 </section>
 
-<!-- DEMOS -->
-<section class="demos" id="demos">
-  <div class="demos-in">
+<!-- CHOICE SECTION -->
+<section class="choice" id="choice">
+  <div class="choice-in">
     <div class="section-head">
-      <span class="eyebrow">7 Live Demos</span>
-      <h2>Every system, ready to <span class="gold">try.</span></h2>
-      <p>Tap any demo to see exactly what your customers would experience. All demos work on mobile and desktop.</p>
+      <span class="eyebrow">Pick a Category</span>
+      <h2>What would you like to <span class="gold">see?</span></h2>
+      <p>Tap any category below to see the live demos. Each one is a working product you can interact with.</p>
     </div>
 
-    <div class="demo-grid" id="demoGrid">
-      <!-- Demos rendered by JS below -->
+    <div class="choice-grid">
+      <div class="choice-card" data-target="websites" onclick="showDemos('websites', this)">
+        <div class="choice-icon">💻</div>
+        <h3>Website Demos</h3>
+        <p>Full websites for hospitals, jewellery, hotels, real estate, coaching, car dealers, gyms & travel agencies.</p>
+        <span class="choice-count">8 Live Demos</span>
+      </div>
+
+      <div class="choice-card" data-target="qr" onclick="showDemos('qr', this)">
+        <div class="choice-icon">📱</div>
+        <h3>QR System Demos</h3>
+        <p>Smart QR systems for restaurants, gyms, hotels, academies, salons, Google reviews, and more.</p>
+        <span class="choice-count">7 Live Demos</span>
+      </div>
+
+      <div class="choice-card" data-target="branding" onclick="showDemos('branding', this)">
+        <div class="choice-icon">✨</div>
+        <h3>Branding & Social</h3>
+        <p>Logo design, Instagram setup, and content design — everything to make your brand look premium.</p>
+        <span class="choice-count" style="background:rgba(138,143,156,.15);color:var(--muted)">Coming Soon</span>
+      </div>
     </div>
+
+    <!-- WEBSITE DEMOS AREA -->
+    <div class="demo-area" id="area-websites">
+      <div class="demo-area-head">
+        <h3>🌐 Website <span class="gold">Demos</span></h3>
+        <p>Real, working websites for 8 different industries. Tap any to explore.</p>
+      </div>
+      <div class="demo-grid" id="grid-websites"></div>
+    </div>
+
+    <!-- QR DEMOS AREA -->
+    <div class="demo-area" id="area-qr">
+      <div class="demo-area-head">
+        <h3>📱 QR System <span class="gold">Demos</span></h3>
+        <p>Smart QR systems businesses use daily. Tap any to explore.</p>
+      </div>
+      <div class="demo-grid" id="grid-qr"></div>
+    </div>
+
+    <!-- BRANDING AREA -->
+    <div class="demo-area" id="area-branding">
+      <div class="demo-area-head">
+        <h3>✨ Branding & <span class="gold">Social</span></h3>
+        <p>Coming soon — logo design, Instagram setup, content design. Message us for a custom quote.</p>
+      </div>
+      <div style="text-align:center;padding:40px 20px">
+        <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20know%20about%20branding%20%26%20social%20media%20services." class="btn btn-primary" target="_blank">💬 Request Branding Quote</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -182,7 +256,9 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:50px 24p
       Made with <span style="color:var(--gold)">▲</span> in Karnal · <a href="tel:9671163712">9671163712</a>
     </div>
   </div>
-  </footer>
+                          </footer><!-- ====== THREE.JS CDN ====== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
 <script>
 /* ====== NAV TOGGLE ====== */
 function toggleNav(){
@@ -190,101 +266,168 @@ function toggleNav(){
 }
 
 /* ====== DEMO DATA ====== */
-const DEMOS = [
-  {
-    icon: "🍽️",
-    name: "VAA Restaurants",
-    category: "QR Menu System",
-    description: "Digital menu customers scan with their phone. Update prices anytime — no reprinting.",
-    features: ["Full menu with categories", "Veg / Non-veg badges", "Call + WhatsApp order", "Admin panel for updates"],
-    url: "vaa-restaurants/",
-    status: "live"
-  },
-  {
-    icon: "🏋️",
-    name: "VAA Gyms",
-    category: "Check-in System",
-    description: "QR check-in with member streaks, expiry warnings, and a full admin dashboard.",
-    features: ["Member check-in QR", "Day streak counter", "Expiry reminders", "Ghost member detection"],
-    url: "vaa-gyms/",
-    status: "live"
-  },
-  {
-    icon: "🏨",
-    name: "VAA Hotels",
-    category: "Room Concierge",
-    description: "In-room QR giving guests instant access to WiFi, timings, room service, and nearby info.",
-    features: ["Room QR cards", "WiFi + timings", "Room service dialer", "Nearby places + maps"],
-    url: "vaa-hotels/",
-    status: "live"
-  },
-  {
-    icon: "📚",
-    name: "VAA Academies",
-    category: "Student Portal",
-    description: "Teacher availability board with live status. Students see who's free — no more messages.",
-    features: ["Teacher FREE / BUSY", "Subject-wise board", "Student count", "Notices"],
-    url: "vaa-academies/",
-    status: "live"
-  },
-  {
-    icon: "💇",
-    name: "VAA Salons",
-    category: "Service Menu + Booking",
-    description: "Customers scan, see all services with rates, and book directly on WhatsApp.",
-    features: ["Full service list", "Prices upfront", "WhatsApp booking", "Instagram link"],
-    url: "vaa-salons/",
-    status: "live"
-  },
-  {
-    icon: "⭐",
-    name: "VAA Reviews",
-    category: "Google Feedback QR",
-    description: "Turn happy customers into 5-star Google reviews with one simple QR scan.",
-    features: ["Direct Google review link", "Branded page", "Works on any phone", "Setup in 1 day"],
-    url: "vaa-reviews/",
-    status: "live"
-  },
-  {
-    icon: "📱",
-    name: "VAA Social",
-    category: "Instagram + Content",
-    description: "Full Instagram setup + monthly content design. Premium brand presence without an in-house designer.",
-    features: ["Profile optimization", "Grid design", "Content calendar", "Reels covers"],
-    url: "vaa-social/",
-    status: "live"
-  }
+const WEBSITE_DEMOS = [
+  { icon: "🏥", name: "VAA Hospital", category: "Multispeciality", description: "Full hospital website with departments, doctors, facilities, and appointment booking.", features: ["Department showcase", "Doctor profiles", "Appointment form", "24x7 emergency info"], url: "vaa-website-hospital/", status: "live" },
+  { icon: "💎", name: "VAA Jewellers", category: "Jewellery Shop", description: "Premium jewellery website with collections, live gold rates, and custom design enquiry.", features: ["Live gold rate widget", "Collections gallery", "Featured pieces", "Book showroom visit"], url: "vaa-website-jewellery/", status: "live" },
+  { icon: "🏨", name: "VAA Hotel", category: "Hospitality", description: "Hotel website with room categories, amenities, banquet halls, and instant booking.", features: ["Room pricing tiers", "Amenities showcase", "Banquet enquiries", "Booking form"], url: "vaa-website-hotel/", status: "live" },
+  { icon: "🏢", name: "VAA Properties", category: "Real Estate", description: "Real estate website with featured listings, search filters, and free consultation.", features: ["Property listings", "Search by budget", "Featured badges", "Consultation form"], url: "vaa-website-realestate/", status: "live" },
+  { icon: "🎓", name: "VAA Academy", category: "Coaching Institute", description: "Coaching academy website with courses, faculty, results, and free demo class booking.", features: ["Course listings", "Faculty profiles", "Toppers showcase", "Free demo booking"], url: "vaa-website-coaching/", status: "live" },
+  { icon: "🚗", name: "VAA Motors", category: "Car Showroom", description: "Car dealership website with featured cars, brand showcase, and home test drive booking.", features: ["Featured cars", "Brand grid", "Finance info", "Home test drive"], url: "vaa-website-car-dealer/", status: "live" },
+  { icon: "💪", name: "VAA Gym", category: "Fitness Center", description: "Gym website with programs, trainers, membership plans, and free trial signup.", features: ["Program listings", "Trainer profiles", "Pricing plans", "Free trial form"], url: "vaa-website-gym/", status: "live" },
+  { icon: "✈️", name: "VAA Travels", category: "Travel Agency", description: "Travel agency website with tour packages, destinations, and instant quote requests.", features: ["Package cards", "Destination grid", "Trip planner form", "Visa assistance"], url: "vaa-website-travel/", status: "live" }
 ];
 
-/* ====== RENDER DEMOS ====== */
-function renderDemos(){
-  const grid = document.getElementById("demoGrid");
-  grid.innerHTML = DEMOS.map(d => {
+const QR_DEMOS = [
+  { icon: "🍽️", name: "VAA Restaurants", category: "QR Menu System", description: "Digital menu customers scan with their phone. Update prices anytime — no reprinting.", features: ["Full menu with categories", "Veg / Non-veg badges", "Call + WhatsApp order", "Admin panel for updates"], url: "vaa-restaurants/", status: "live" },
+  { icon: "🏋️", name: "VAA Gyms", category: "Check-in System", description: "QR check-in with member streaks, expiry warnings, and a full admin dashboard.", features: ["Member check-in QR", "Day streak counter", "Expiry reminders", "Ghost member detection"], url: "vaa-gyms/", status: "live" },
+  { icon: "🏨", name: "VAA Hotels", category: "Room Concierge", description: "In-room QR giving guests instant access to WiFi, timings, room service, and nearby info.", features: ["Room QR cards", "WiFi + timings", "Room service dialer", "Nearby places + maps"], url: "vaa-hotels/", status: "live" },
+  { icon: "📚", name: "VAA Academies", category: "Student Portal", description: "Teacher availability board with live status. Students see who's free — no more messages.", features: ["Teacher FREE / BUSY", "Subject-wise board", "Student count", "Notices"], url: "vaa-academies/", status: "live" },
+  { icon: "💇", name: "VAA Salons", category: "Service Menu + Booking", description: "Customers scan, see all services with rates, and book directly on WhatsApp.", features: ["Full service list", "Prices upfront", "WhatsApp booking", "Instagram link"], url: "vaa-salons/", status: "live" },
+  { icon: "⭐", name: "VAA Reviews", category: "Google Feedback QR", description: "Turn happy customers into 5-star Google reviews with one simple QR scan.", features: ["Direct Google review link", "Branded page", "Works on any phone", "Setup in 1 day"], url: "vaa-reviews/", status: "live" },
+  { icon: "📱", name: "VAA Social", category: "Instagram + Content", description: "Full Instagram setup + monthly content design. Premium brand presence without an in-house designer.", features: ["Profile optimization", "Grid design", "Content calendar", "Reels covers"], url: "vaa-social/", status: "live" }
+];
+
+/* ====== RENDER DEMO CARDS ====== */
+function renderCards(list, containerId){
+  const grid = document.getElementById(containerId);
+  grid.innerHTML = list.map(d => {
     const isLive = d.status === "live";
     const statusBadge = isLive
       ? '<span class="demo-status live">● Live</span>'
       : '<span class="demo-status soon">Coming Soon</span>';
-
     const ctaButton = isLive
       ? '<a href="' + d.url + '" class="btn btn-primary">View Live Demo →</a>'
       : '<button class="btn btn-primary" disabled>Coming Soon</button>';
-
-    return '<div class="demo-card ' + (isLive ? '' : 'soon') + '">' +
+    return '<div class="demo-card">' +
       statusBadge +
       '<div class="demo-icon">' + d.icon + '</div>' +
       '<div class="cat">' + d.category + '</div>' +
-      '<h3>' + d.name + '</h3>' +
+      '<h4>' + d.name + '</h4>' +
       '<p>' + d.description + '</p>' +
-      '<ul class="demo-features">' +
-        d.features.map(f => '<li>' + f + '</li>').join("") +
-      '</ul>' +
+      '<ul class="demo-features">' + d.features.map(f => '<li>' + f + '</li>').join("") + '</ul>' +
       '<div class="demo-cta">' + ctaButton + '</div>' +
     '</div>';
   }).join("");
 }
 
-renderDemos();
+renderCards(WEBSITE_DEMOS, "grid-websites");
+renderCards(QR_DEMOS, "grid-qr");
+
+/* ====== CHOICE TOGGLE ====== */
+function showDemos(target, card){
+  document.querySelectorAll(".choice-card").forEach(c => c.classList.remove("active"));
+  card.classList.add("active");
+
+  document.querySelectorAll(".demo-area").forEach(a => a.classList.remove("show"));
+  const area = document.getElementById("area-" + target);
+  if (area){
+    area.classList.add("show");
+    setTimeout(() => area.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+  }
+}
+
+/* ====== 3D CRYSTAL SCENE ====== */
+(function initCrystal(){
+  const canvas = document.getElementById("crystalCanvas");
+  if (!canvas || typeof THREE === "undefined") return;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.z = 5;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  /* Gold-blue gradient crystal */
+  const geometry = new THREE.IcosahedronGeometry(1.5, 1);
+  const material = new THREE.MeshPhysicalMaterial({
+    color: 0xffd400,
+    emissive: 0x4f8fff,
+    emissiveIntensity: 0.15,
+    metalness: 0.9,
+    roughness: 0.15,
+    clearcoat: 1,
+    clearcoatRoughness: 0.1,
+    flatShading: true,
+    transparent: true,
+    opacity: 0.9
+  });
+  const crystal = new THREE.Mesh(geometry, material);
+  scene.add(crystal);
+
+  /* Wireframe overlay for depth */
+  const wireframe = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(1.51, 1),
+    new THREE.MeshBasicMaterial({ color: 0xffd400, wireframe: true, transparent: true, opacity: 0.15 })
+  );
+  scene.add(wireframe);
+
+  /* Lights */
+  scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+  const light1 = new THREE.PointLight(0xffd400, 1.5, 20);
+  light1.position.set(3, 3, 3);
+  scene.add(light1);
+  const light2 = new THREE.PointLight(0x4f8fff, 1.5, 20);
+  light2.position.set(-3, -2, 2);
+  scene.add(light2);
+
+  /* Particle dust */
+  const particleCount = 200;
+  const positions = new Float32Array(particleCount * 3);
+  for (let i = 0; i < particleCount * 3; i += 3){
+    positions[i] = (Math.random() - 0.5) * 20;
+    positions[i + 1] = (Math.random() - 0.5) * 20;
+    positions[i + 2] = (Math.random() - 0.5) * 20;
+  }
+  const particleGeo = new THREE.BufferGeometry();
+  particleGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  const particles = new THREE.Points(particleGeo, new THREE.PointsMaterial({
+    color: 0xffd400, size: 0.03, transparent: true, opacity: 0.6, sizeAttenuation: true
+  }));
+  scene.add(particles);
+
+  /* Mouse interaction */
+  let mouseX = 0, mouseY = 0;
+  window.addEventListener("mousemove", e => {
+    mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+    mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+  });
+  window.addEventListener("touchmove", e => {
+    if (e.touches[0]){
+      mouseX = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+      mouseY = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+    }
+  });
+
+  /* Animation loop */
+  let t = 0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t += 0.01;
+    crystal.rotation.x += 0.003;
+    crystal.rotation.y += 0.005;
+    wireframe.rotation.copy(crystal.rotation);
+    crystal.position.y = Math.sin(t) * 0.15;
+    wireframe.position.y = crystal.position.y;
+    particles.rotation.y += 0.0005;
+    crystal.rotation.x += mouseY * 0.001;
+    crystal.rotation.y += mouseX * 0.001;
+    camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.05;
+    camera.position.y += (mouseY * 0.3 - camera.position.y) * 0.05;
+    camera.lookAt(scene.position);
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  /* Resize */
+  window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+})();
 </script>
 
 </body>
-</html>
+  </html>
