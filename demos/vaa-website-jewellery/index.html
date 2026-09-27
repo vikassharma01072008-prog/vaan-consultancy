@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VAA Jewellers — Hallmark Gold & Diamond Jewellery in Karnal</title>
+<meta name="description" content="VAA Jewellers — BIS Hallmark gold, certified diamonds, bridal collections. Trusted since 1995 in Karnal.">
+<meta name="theme-color" content="#1a1208">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#faf6ed;color:#1a1208;line-height:1.6;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+:root{
+  --gold:#b8860b;
+  --gold-light:#d4af37;
+  --gold-dark:#8b6508;
+  --gold-soft:#f7f0dc;
+  --dark:#1a1208;
+  --brown:#4a3820;
+  --cream:#faf6ed;
+  --white:#ffffff;
+  --ink:#1a1208;
+  --muted:#7a6a4f;
+  --line:#e8ddc4;
+  --green:#12b76a;
+  --red:#c8102e;
+}
+
+/* ====== TOP BAR ====== */
+.topbar{background:var(--dark);color:#fff;font-size:12px;padding:8px 0}
+.topbar-in{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.topbar-left{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.topbar a{color:#fff;font-weight:600}
+.topbar .gold{color:var(--gold-light);font-weight:800}
+
+/* ====== NAV ====== */
+.nav{background:#fff;box-shadow:0 2px 16px rgba(184,134,11,.08);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--line)}
+.nav-in{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.5px}
+.brand-icon{width:48px;height:48px;background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;flex-shrink:0;box-shadow:0 6px 18px rgba(184,134,11,.3)}
+.brand-txt{line-height:1.1}
+.brand-txt b{font-family:'Playfair Display',serif;font-size:22px;color:var(--dark);display:block;letter-spacing:-.5px}
+.brand-txt small{font-size:10px;color:var(--gold);letter-spacing:2px;font-weight:800}
+.nav-links{display:flex;gap:28px;font-size:14px;font-weight:600}
+.nav-links a{color:var(--ink);transition:.2s;position:relative}
+.nav-links a:hover{color:var(--gold)}
+.nav-actions{display:flex;gap:10px;align-items:center}
+.btn{border:0;border-radius:10px;padding:13px 22px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;transition:.25s;display:inline-flex;align-items:center;gap:8px;letter-spacing:.2px}
+.btn-gold{background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));color:#fff;box-shadow:0 8px 20px rgba(184,134,11,.3)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(184,134,11,.45)}
+.btn-outline{background:transparent;color:var(--gold-dark);border:2px solid var(--gold)}
+.btn-outline:hover{background:var(--gold);color:#fff}
+.btn-lg{padding:16px 28px;font-size:15px}
+
+/* ====== HERO ====== */
+.hero{background:linear-gradient(135deg,#1a1208 0%,#2d2010 50%,#1a1208 100%);padding:80px 0 100px;position:relative;overflow:hidden;color:#fff}
+.hero::before{content:"";position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(212,175,55,.2),transparent 70%);border-radius:50%}
+.hero::after{content:"";position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(212,175,55,.12),transparent 70%);border-radius:50%}
+.hero-in{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,175,55,.15);border:1px solid rgba(212,175,55,.4);color:var(--gold-light);padding:8px 16px;border-radius:99px;font-size:12px;font-weight:800;letter-spacing:1px;margin-bottom:22px}
+.hero-badge::before{content:"";width:8px;height:8px;background:var(--gold-light);border-radius:50%;box-shadow:0 0 0 4px rgba(212,175,55,.2);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5.5vw,60px);font-weight:800;line-height:1.05;letter-spacing:-1px;color:#fff;margin-bottom:20px}
+.hero h1 .gold{color:var(--gold-light)}
+.hero p{font-size:17px;color:#c8b88a;max-width:540px;margin-bottom:32px;line-height:1.65}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.hero-stats{display:flex;gap:32px;flex-wrap:wrap;padding-top:24px;border-top:1px solid rgba(212,175,55,.2)}
+.hero-stat b{display:block;font-family:'Playfair Display',serif;font-size:30px;font-weight:800;color:var(--gold-light);letter-spacing:-1px}
+.hero-stat span{display:block;color:#a89870;font-size:11px;letter-spacing:1.5px;font-weight:700;text-transform:uppercase;margin-top:4px}
+
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
+.hero-card{background:linear-gradient(145deg,rgba(212,175,55,.15),rgba(212,175,55,.05));border:1px solid rgba(212,175,55,.3);border-radius:24px;padding:28px;backdrop-filter:blur(10px);width:100%;max-width:400px}
+.hero-card-head{display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid rgba(212,175,55,.2);margin-bottom:18px}
+.hero-card-icon{width:48px;height:48px;background:rgba(212,175,55,.2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.hero-card-head b{font-size:15px;font-weight:800;color:#fff;display:block}
+.hero-card-head small{color:#a89870;font-size:12px}
+.hero-card-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(212,175,55,.15);font-size:14px}
+.hero-card-row:last-child{border-bottom:0}
+.hero-card-row span{color:#a89870}
+.hero-card-row b{color:#fff;font-weight:700}
+.hero-card-row b.gold{color:var(--gold-light)}
+.hero-card-row b.green{color:#4ade80}
+
+@media(max-width:900px){
+  .hero-in{grid-template-columns:1fr;gap:32px}
+  .nav-links{display:none}
+  .topbar-in{justify-content:center;text-align:center}
+}
+</style>
+</head><body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="topbar-left">
+      <span>📞 <a href="tel:01842221111">0184-222-1111</a></span>
+      <span class="gold">🪙 Gold: ₹7,245/g · Silver: ₹92/g</span>
+    </div>
+    <div>
+      <a href="#visit">📍 Visit Showroom</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <a href="#" class="brand">
+      <span class="brand-icon">💎</span>
+      <span class="brand-txt">
+        <b>VAA Jewellers</b>
+        <small>SINCE 1995 · KARNAL</small>
+      </span>
+    </a>
+    <div class="nav-links">
+      <a href="#collections">Collections</a>
+      <a href="#featured">Featured</a>
+      <a href="#why">Why Us</a>
+      <a href="#visit">Visit Us</a>
+    </div>
+    <div class="nav-actions">
+      <a href="#visit" class="btn btn-gold">📅 Book Visit</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-in">
+    <div>
+      <span class="hero-badge">BIS Hallmark · Certified Diamonds</span>
+      <h1>Timeless elegance,<br><span class="gold">crafted for you.</span></h1>
+      <p>From bridal sets to everyday elegance — VAA Jewellers brings you BIS Hallmark gold, certified diamonds, and designs that last generations.</p>
+      <div class="hero-ctas">
+        <a href="#collections" class="btn btn-gold btn-lg">✨ Explore Collections</a>
+        <a href="tel:01842221111" class="btn btn-outline btn-lg" style="border-color:var(--gold-light);color:var(--gold-light)">📞 Call Now</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>30+</b><span>Years Trusted</span></div>
+        <div class="hero-stat"><b>5000+</b><span>Happy Families</span></div>
+        <div class="hero-stat"><b>100%</b><span>Hallmark Certified</span></div>
+        <div class="hero-stat"><b>Lifetime</b><span>Exchange Policy</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-head">
+          <div class="hero-card-icon">🪙</div>
+          <div>
+            <b>Live Gold Rate</b>
+            <small>Updated today</small>
+          </div>
+        </div>
+        <div class="hero-card-row">
+          <span>24K Gold (per gram)</span>
+          <b class="gold">₹7,245</b>
+        </div>
+        <div class="hero-card-row">
+          <span>22K Gold (per gram)</span>
+          <b class="gold">₹6,645</b>
+        </div>
+        <div class="hero-card-row">
+          <span>Silver (per gram)</span>
+          <b class="gold">₹92</b>
+        </div>
+        <div class="hero-card-row">
+          <span>Making Charges</span>
+          <b class="green">Starting ₹0</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section style="background:#fff;padding:28px 0;border-bottom:1px solid var(--line)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-around;flex-wrap:wrap;gap:24px;text-align:center">
+    <div><b style="font-size:14px;color:var(--dark);display:block">BIS Hallmark</b><span style="font-size:11px;color:var(--muted);font-weight:700">Govt. Certified Gold</span></div>
+    <div><b style="font-size:14px;color:var(--dark);display:block">IGI Certified</b><span style="font-size:11px;color:var(--muted);font-weight:700">Diamond Authenticity</span></div>
+    <div><b style="font-size:14px;color:var(--dark);display:block">Lifetime Exchange</b><span style="font-size:11px;color:var(--muted);font-weight:700">100% Value Back</span></div>
+    <div><b style="font-size:14px;color:var(--dark);display:block">Free Cleaning</b><span style="font-size:11px;color:var(--muted);font-weight:700">Lifetime Service</span></div>
+  </div>
+  </section><!-- COLLECTIONS -->
+<section id="collections" style="padding:80px 0;background:#fff">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--gold);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Our Collections</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--dark);margin:14px 0 16px;line-height:1.1">Crafted for <span style="color:var(--gold)">every occasion</span>.</h2>
+      <p style="color:var(--muted);font-size:16px;max-width:620px;margin:0 auto">Bridal, daily wear, festive, silver and more — every piece designed to feel special.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="col-grid">
+      <div style="background:linear-gradient(145deg,#1a1208,#2d2010);border-radius:18px;padding:40px 28px;position:relative;overflow:hidden;min-height:220px;display:flex;flex-direction:column;justify-content:flex-end">
+        <div style="position:absolute;top:20px;right:20px;font-size:60px;opacity:.15">💍</div>
+        <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:24px;font-weight:700;margin-bottom:8px">Bridal Sets</h3>
+        <p style="color:#c8b88a;font-size:13px;line-height:1.5">Complete wedding sets in gold & diamond. Custom designs available.</p>
+      </div>
+
+      <div style="background:linear-gradient(145deg,#2d2010,#1a1208);border-radius:18px;padding:40px 28px;position:relative;overflow:hidden;min-height:220px;display:flex;flex-direction:column;justify-content:flex-end">
+        <div style="position:absolute;top:20px;right:20px;font-size:60px;opacity:.15">📿</div>
+        <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:24px;font-weight:700;margin-bottom:8px">Daily Wear Gold</h3>
+        <p style="color:#c8b88a;font-size:13px;line-height:1.5">Light-weight chains, rings, earrings — elegant and easy to wear.</p>
+      </div>
+
+      <div style="background:linear-gradient(145deg,#1a1208,#2d2010);border-radius:18px;padding:40px 28px;position:relative;overflow:hidden;min-height:220px;display:flex;flex-direction:column;justify-content:flex-end">
+        <div style="position:absolute;top:20px;right:20px;font-size:60px;opacity:.15">💎</div>
+        <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:24px;font-weight:700;margin-bottom:8px">Diamond Jewellery</h3>
+        <p style="color:#c8b88a;font-size:13px;line-height:1.5">IGI certified diamonds in rings, pendants, and engagement sets.</p>
+      </div>
+
+      <div style="background:linear-gradient(145deg,#2d2010,#1a1208);border-radius:18px;padding:40px 28px;position:relative;overflow:hidden;min-height:220px;display:flex;flex-direction:column;justify-content:flex-end">
+        <div style="position:absolute;top:20px;right:20px;font-size:60px;opacity:.15">🥈</div>
+        <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:24px;font-weight:700;margin-bottom:8px">Silver Collection</h3>
+        <p style="color:#c8b88a;font-size:13px;line-height:1.5">Elegant silver jewellery and gifting items for every budget.</p>
+      </div>
+
+      <div style="background:linear-gradient(145deg,#1a1208,#2d2010);border-radius:18px;padding:40px 28px;position:relative;overflow:hidden;min-height:220px;display:flex;flex-direction:column;justify-content:flex-end">
+        <div style="position:absolute;top:20px;right:20px;font-size:60px;opacity:.15">🪙</div>
+        <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:24px;font-weight:700;margin-bottom:8px">Gold Coins & Bars</h3>
+        <p style="color:#c8b88a;font-size:13px;line-height:1.5">24K certified coins and bars — perfect for investment and gifting.</p>
+      </div>
+
+      <div style="background:linear-gradient(145deg,#2d2010,#1a1208);border-radius:18px;padding:40px 28px;position:relative;overflow:hidden;min-height:220px;display:flex;flex-direction:column;justify-content:flex-end">
+        <div style="position:absolute;top:20px;right:20px;font-size:60px;opacity:.15">👶</div>
+        <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:24px;font-weight:700;margin-bottom:8px">Kids Collection</h3>
+        <p style="color:#c8b88a;font-size:13px;line-height:1.5">Adorable, safe jewellery for children — bangles, anklets, pendants.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section id="featured" style="padding:80px 0;background:var(--cream)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--gold);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Bestsellers</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--dark);margin:14px 0 16px;line-height:1.1">Most <span style="color:var(--gold)">loved pieces</span>.</h2>
+      <p style="color:var(--muted);font-size:16px;max-width:620px;margin:0 auto">Our customers keep coming back for these — see why.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px" class="feat-grid">
+      <div style="background:#fff;border-radius:18px;padding:24px;border:1px solid var(--line);text-align:center">
+        <div style="aspect-ratio:1;background:linear-gradient(135deg,#f7f0dc,#e8ddc4);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:70px;margin-bottom:18px">💍</div>
+        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--dark);margin-bottom:6px">Diamond Ring</h4>
+        <p style="color:var(--muted);font-size:12px;margin-bottom:10px">18K Gold · IGI Certified</p>
+        <b style="color:var(--gold);font-size:18px;font-weight:900">₹45,999</b>
+      </div>
+
+      <div style="background:#fff;border-radius:18px;padding:24px;border:1px solid var(--line);text-align:center">
+        <div style="aspect-ratio:1;background:linear-gradient(135deg,#f7f0dc,#e8ddc4);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:70px;margin-bottom:18px">📿</div>
+        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--dark);margin-bottom:6px">Gold Chain</h4>
+        <p style="color:var(--muted);font-size:12px;margin-bottom:10px">22K Hallmark · 12g</p>
+        <b style="color:var(--gold);font-size:18px;font-weight:900">₹89,940</b>
+      </div>
+
+      <div style="background:#fff;border-radius:18px;padding:24px;border:1px solid var(--line);text-align:center">
+        <div style="aspect-ratio:1;background:linear-gradient(135deg,#f7f0dc,#e8ddc4);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:70px;margin-bottom:18px">💎</div>
+        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--dark);margin-bottom:6px">Bridal Set</h4>
+        <p style="color:var(--muted);font-size:12px;margin-bottom:10px">Full Wedding · Custom</p>
+        <b style="color:var(--gold);font-size:18px;font-weight:900">₹2,45,000</b>
+      </div>
+
+      <div style="background:#fff;border-radius:18px;padding:24px;border:1px solid var(--line);text-align:center">
+        <div style="aspect-ratio:1;background:linear-gradient(135deg,#f7f0dc,#e8ddc4);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:70px;margin-bottom:18px">🪙</div>
+        <h4 style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--dark);margin-bottom:6px">Gold Coin (5g)</h4>
+        <p style="color:var(--muted);font-size:12px;margin-bottom:10px">24K · Certified</p>
+        <b style="color:var(--gold);font-size:18px;font-weight:900">₹36,225</b>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:40px">
+      <a href="#visit" class="btn btn-outline btn-lg">See All Pieces →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why" style="padding:80px 0;background:#fff">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--gold);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Why VAA Jewellers</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--dark);margin:14px 0 16px;line-height:1.1">Trust is our <span style="color:var(--gold)">biggest ornament</span>.</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px" class="why-grid">
+      <div style="background:var(--gold-soft);border:1px solid var(--line);border-radius:18px;padding:28px 22px">
+        <div style="width:52px;height:52px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px">✅</div>
+        <h4 style="font-size:16px;font-weight:800;color:var(--dark);margin-bottom:8px">100% Hallmark</h4>
+        <p style="color:var(--muted);font-size:13px;line-height:1.55">Every gold piece is BIS Hallmarked. Certificate provided with purchase.</p>
+      </div>
+
+      <div style="background:var(--gold-soft);border:1px solid var(--line);border-radius:18px;padding:28px 22px">
+        <div style="width:52px;height:52px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px">🔄</div>
+        <h4 style="font-size:16px;font-weight:800;color:var(--dark);margin-bottom:8px">Lifetime Exchange</h4>
+        <p style="color:var(--muted);font-size:13px;line-height:1.55">Exchange old jewellery at full value — no deductions on gold rate.</p>
+      </div>
+
+      <div style="background:var(--gold-soft);border:1px solid var(--line);border-radius:18px;padding:28px 22px">
+        <div style="width:52px;height:52px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px">💍</div>
+        <h4 style="font-size:16px;font-weight:800;color:var(--dark);margin-bottom:8px">Custom Design</h4>
+        <p style="color:var(--muted);font-size:13px;line-height:1.55">Bring any design — we'll craft it in gold, diamond, or silver.</p>
+      </div>
+
+      <div style="background:var(--gold-soft);border:1px solid var(--line);border-radius:18px;padding:28px 22px">
+        <div style="width:52px;height:52px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px">💰</div>
+        <h4 style="font-size:16px;font-weight:800;color:var(--dark);margin-bottom:8px">Zero Making Charges</h4>
+        <p style="color:var(--muted);font-size:13px;line-height:1.55">Making charges starting at ₹0 on select collections. Ask in-store.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+@media(max-width:900px){
+  .col-grid,.feat-grid,.why-grid{grid-template-columns:repeat(2,1fr)!important}
+}
+@media(max-width:600px){
+  .col-grid,.feat-grid,.why-grid{grid-template-columns:1fr!important}
+}
+  </style><!-- TESTIMONIALS -->
+<section style="padding:80px 0;background:var(--cream)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--gold);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Customer Stories</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--dark);margin:14px 0 16px;line-height:1.1">Families who <span style="color:var(--gold)">trust us</span>.</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="test-grid">
+      <div style="background:#fff;border-radius:18px;padding:28px 24px;border:1px solid var(--line)">
+        <div style="color:var(--gold-light);font-size:16px;letter-spacing:2px;margin-bottom:14px">★★★★★</div>
+        <p style="color:var(--ink);font-size:14px;line-height:1.7;margin-bottom:18px">"Bought my daughter's wedding jewellery here. The designs were stunning and the staff helped us choose within our budget. Truly trustworthy."</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--line)">
+          <div style="width:40px;height:40px;background:var(--gold-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--gold-dark)">SM</div>
+          <div><b style="font-size:13px;color:var(--dark);display:block">Sunita Malhotra</b><small style="color:var(--muted);font-size:11px">Karnal</small></div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:18px;padding:28px 24px;border:1px solid var(--line)">
+        <div style="color:var(--gold-light);font-size:16px;letter-spacing:2px;margin-bottom:14px">★★★★★</div>
+        <p style="color:var(--ink);font-size:14px;line-height:1.7;margin-bottom:18px">"Been buying from VAA for 10 years now. Hallmark certified, fair rates, and they always give good exchange value. Highly recommend."</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--line)">
+          <div style="width:40px;height:40px;background:var(--gold-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--gold-dark)">RK</div>
+          <div><b style="font-size:13px;color:var(--dark);display:block">Rajesh Khanna</b><small style="color:var(--muted);font-size:11px">Karnal</small></div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:18px;padding:28px 24px;border:1px solid var(--line)">
+        <div style="color:var(--gold-light);font-size:16px;letter-spacing:2px;margin-bottom:14px">★★★★★</div>
+        <p style="color:var(--ink);font-size:14px;line-height:1.7;margin-bottom:18px">"Got a custom diamond ring designed for my engagement. The craftsmanship is beautiful and the price was much better than big showrooms."</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--line)">
+          <div style="width:40px;height:40px;background:var(--gold-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--gold-dark)">AP</div>
+          <div><b style="font-size:13px;color:var(--dark);display:block">Ankit Patel</b><small style="color:var(--muted);font-size:11px">Karnal</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT / CONTACT -->
+<section id="visit" style="padding:80px 0;background:#fff">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center" class="contact-grid">
+      <div>
+        <span style="color:var(--gold);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Visit Showroom</span>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--dark);margin:14px 0 16px;line-height:1.1">Come see us <span style="color:var(--gold)">in person.</span></h2>
+        <p style="color:var(--muted);font-size:16px;line-height:1.65;margin-bottom:24px">Walk in anytime or book a private appointment. Our team will help you find the perfect piece.</p>
+
+        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:28px">
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--gold-soft);border-radius:14px">
+            <div style="font-size:24px">📞</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Call us</small><b style="display:block;color:var(--dark);font-size:15px">0184-222-1111</b></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--gold-soft);border-radius:14px">
+            <div style="font-size:24px">💬</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">WhatsApp</small><b style="display:block;color:var(--dark);font-size:15px">+91 98765 43210</b></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--gold-soft);border-radius:14px">
+            <div style="font-size:24px">📍</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Visit us</small><b style="display:block;color:var(--dark);font-size:15px">Main Bazaar, Near Clock Tower, Karnal</b></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--gold-soft);border-radius:14px">
+            <div style="font-size:24px">⏰</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Open</small><b style="display:block;color:var(--dark);font-size:15px">Mon–Sun · 10AM – 9PM</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--cream);border-radius:22px;padding:36px 32px;border:1px solid var(--line)">
+        <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--dark);margin-bottom:6px">Book a Visit</h3>
+        <p style="color:var(--muted);font-size:13px;margin-bottom:22px">Private appointment — no waiting</p>
+        <form onsubmit="event.preventDefault();alert('Demo: In real site, this sends to WhatsApp instantly.');this.reset();">
+          <div style="margin-bottom:14px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Full Name</label>
+            <input required type="text" placeholder="Your name" style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+          </div>
+          <div style="margin-bottom:14px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Phone</label>
+            <input required type="tel" placeholder="10-digit number" style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+          </div>
+          <div style="margin-bottom:14px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Interested In</label>
+            <select style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+              <option>Bridal Collection</option>
+              <option>Diamond Jewellery</option>
+              <option>Gold Chains & Rings</option>
+              <option>Silver Collection</option>
+              <option>Gold Coins</option>
+              <option>Custom Design</option>
+            </select>
+          </div>
+          <div style="margin-bottom:16px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Preferred Time</label>
+            <select style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+              <option>Morning (10AM – 1PM)</option>
+              <option>Afternoon (1PM – 5PM)</option>
+              <option>Evening (5PM – 9PM)</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center;padding:16px;font-size:15px">📅 Book Appointment</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#1a1208;color:#fff;padding:60px 20px 30px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;margin-bottom:44px" class="foot-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <div style="width:44px;height:44px;background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px">💎</div>
+          <div>
+            <b style="font-family:'Playfair Display',serif;font-size:19px;display:block">VAA Jewellers</b>
+            <small style="color:#c8b88a;font-size:10px;letter-spacing:2px;font-weight:700">SINCE 1995 · KARNAL</small>
+          </div>
+        </div>
+        <p style="color:#c8b88a;font-size:13px;line-height:1.7;max-width:300px">Trusted for 30+ years. BIS Hallmark gold, certified diamonds, and timeless designs crafted for generations.</p>
+      </div>
+      <div>
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-bottom:16px;color:#fff">Collections</h5>
+        <a href="#collections" style="display:block;color:#c8b88a;font-size:13px;padding:5px 0">Bridal</a>
+        <a href="#collections" style="display:block;color:#c8b88a;font-size:13px;padding:5px 0">Diamond</a>
+        <a href="#collections" style="display:block;color:#c8b88a;font-size:13px;padding:5px 0">Gold Chains</a>
+        <a href="#collections" style="display:block;color:#c8b88a;font-size:13px;padding:5px 0">Silver</a>
+      </div>
+      <div>
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-bottom:16px;color:#fff">Company</h5>
+        <a href="#why" style="display:block;color:#c8b88a;font-size:13px;padding:5px 0">Why Us</a>
+        <a href="#featured" style="display:block;color:#c8b88a;font-size:13px;padding:5px 0">Featured</a>
+        <a href="#visit" style="display:block;color:#c8b88a;font-size:13px;padding:5px 0">Visit Us</a>
+        <a href="#visit" style="display:block;color:#c8b88a;font-size:13px;padding:5px 0">Book Appointment</a>
+      </div>
+      <div>
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-bottom:16px;color:#fff">Contact</h5>
+        <p style="color:#c8b88a;font-size:13px;padding:5px 0">📞 0184-222-1111</p>
+        <p style="color:#c8b88a;font-size:13px;padding:5px 0">💬 +91 98765 43210</p>
+        <p style="color:#c8b88a;font-size:13px;padding:5px 0">📍 Main Bazaar, Karnal</p>
+        <p style="color:#c8b88a;font-size:13px;padding:5px 0">⏰ 10AM – 9PM Daily</p>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(212,175,55,.2);padding-top:24px;text-align:center;color:#c8b88a;font-size:12px">
+      © 2026 VAA Jewellers — Demo website. This is a <b style="color:#fff">VAAN Consultancy</b> demo.
+    </div>
+  </div>
+</footer>
+
+<!-- DEMO FLOATING BANNER -->
+<div id="demoBanner" style="position:fixed;bottom:16px;left:16px;right:16px;background:linear-gradient(135deg,#1a1208,#2d2010);color:#fff;border-radius:16px;padding:16px 20px;box-shadow:0 20px 50px rgba(0,0,0,.5);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;z-index:999;border:1px solid rgba(212,175,55,.3);max-width:700px;margin:0 auto">
+  <div style="flex:1;min-width:200px">
+    <div style="font-size:11px;color:#c8b88a;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px">Want this website?</div>
+    <div style="font-size:14px;font-weight:800">Basic ₹4,999 · <span style="color:var(--gold-light)">Standard ₹9,999</span> · Premium ₹19,999</div>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20a%20jewellery%20website%20like%20this%20demo." target="_blank" style="background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));color:#fff;padding:11px 18px;border-radius:10px;font-weight:800;font-size:13px;white-space:nowrap">💬 Get This Site</a>
+    <button onclick="document.getElementById('demoBanner').style.display='none'" style="background:rgba(212,175,55,.2);color:#fff;border:0;padding:11px 14px;border-radius:10px;font-weight:800;font-size:13px;cursor:pointer">✕</button>
+  </div>
+</div>
+
+<style>
+@media(max-width:900px){
+  .test-grid{grid-template-columns:repeat(2,1fr)!important}
+  .contact-grid{grid-template-columns:1fr!important;gap:32px!important}
+  .foot-grid{grid-template-columns:1fr 1fr!important;gap:28px!important}
+}
+@media(max-width:600px){
+  .test-grid{grid-template-columns:1fr!important}
+  .foot-grid{grid-template-columns:1fr!important}
+}
+</style>
+
+</body>
+                                                                                                                                   </html>
