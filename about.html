@@ -525,11 +525,14 @@ function toggleNav(){
 
 /* ====== FAQ ACCORDION ====== */
 function toggleFaq(btn){
-  const item = btn.closest(".faq-item");
-  const allItems = document.querySelectorAll(".faq-item");
-  allItems.forEach(i => { if (i !== item) i.classList.remove("open"); });
+  var item = btn.closest(".faq-item");
+  if (!item) return;
+  var allItems = document.querySelectorAll(".faq-item");
+  for (var i = 0; i < allItems.length; i++){
+    if (allItems[i] !== item) allItems[i].classList.remove("open");
+  }
   item.classList.toggle("open");
-}
+  }
 
 /* ====== 3D TORUS KNOT HERO ====== */
 (function initTorusKnot(){
