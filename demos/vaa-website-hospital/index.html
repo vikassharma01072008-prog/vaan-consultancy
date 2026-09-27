@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VAA Hospital — Best Multispeciality Hospital in Karnal</title>
+<meta name="description" content="VAA Hospital — 24x7 emergency, ICU, surgery, diagnostics. Trusted by 10,000+ families in Karnal.">
+<meta name="theme-color" content="#0a0e1a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#f7f9fc;color:#1a2233;line-height:1.6;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+:root{
+  --blue:#0a5cc8;
+  --blue-dark:#064399;
+  --blue-soft:#e8f1fd;
+  --green:#12b76a;
+  --red:#e11d2a;
+  --gold:#ffb020;
+  --white:#ffffff;
+  --ink:#1a2233;
+  --muted:#6b7688;
+  --line:#e2e8f0;
+  --bg:#f7f9fc;
+}
+
+/* ====== TOP BAR ====== */
+.topbar{background:var(--blue-dark);color:#fff;font-size:12px;padding:8px 0}
+.topbar-in{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.topbar-left{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.topbar a{color:#fff;font-weight:600}
+.topbar .em{color:var(--gold);font-weight:800}
+
+/* ====== NAV ====== */
+.nav{background:#fff;box-shadow:0 2px 16px rgba(0,0,0,.06);position:sticky;top:0;z-index:100}
+.nav-in{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.5px}
+.brand-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;flex-shrink:0}
+.brand-txt{line-height:1.1}
+.brand-txt b{font-size:18px;color:var(--ink);display:block}
+.brand-txt small{font-size:10px;color:var(--muted);letter-spacing:1.5px;font-weight:700}
+.nav-links{display:flex;gap:28px;font-size:14px;font-weight:600}
+.nav-links a{color:var(--ink);transition:.2s;position:relative}
+.nav-links a:hover{color:var(--blue)}
+.nav-actions{display:flex;gap:10px;align-items:center}
+.btn{border:0;border-radius:10px;padding:13px 22px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;transition:.25s;display:inline-flex;align-items:center;gap:8px;letter-spacing:.2px}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:0 8px 20px rgba(10,92,200,.25)}
+.btn-blue:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 12px 28px rgba(10,92,200,.35)}
+.btn-outline{background:transparent;color:var(--blue);border:2px solid var(--blue)}
+.btn-outline:hover{background:var(--blue);color:#fff}
+.btn-lg{padding:16px 28px;font-size:15px}
+
+/* ====== HERO ====== */
+.hero{background:linear-gradient(135deg,#e8f1fd 0%,#f7f9fc 100%);padding:70px 0 90px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(10,92,200,.08),transparent 70%);border-radius:50%}
+.hero-in{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);color:var(--blue);padding:8px 16px;border-radius:99px;font-size:12px;font-weight:800;letter-spacing:.5px;margin-bottom:22px;box-shadow:0 4px 14px rgba(0,0,0,.04)}
+.hero-badge::before{content:"";width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 0 4px rgba(18,183,106,.15);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.hero h1{font-size:clamp(32px,5vw,54px);font-weight:900;line-height:1.05;letter-spacing:-1.5px;color:var(--ink);margin-bottom:20px}
+.hero h1 .blue{color:var(--blue)}
+.hero p{font-size:17px;color:var(--muted);max-width:540px;margin-bottom:32px;line-height:1.65}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.hero-stats{display:flex;gap:32px;flex-wrap:wrap;padding-top:24px;border-top:1px solid var(--line)}
+.hero-stat b{display:block;font-size:28px;font-weight:900;color:var(--blue);letter-spacing:-1px}
+.hero-stat span{display:block;color:var(--muted);font-size:11px;letter-spacing:1px;font-weight:700;text-transform:uppercase;margin-top:4px}
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
+.hero-card{background:#fff;border-radius:24px;padding:28px;box-shadow:0 30px 60px rgba(10,92,200,.15);width:100%;max-width:400px}
+.hero-card-head{display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.hero-card-icon{width:48px;height:48px;background:var(--blue-soft);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.hero-card-head b{font-size:15px;font-weight:800;color:var(--ink);display:block}
+.hero-card-head small{color:var(--muted);font-size:12px}
+.hero-card-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.hero-card-row:last-child{border-bottom:0}
+.hero-card-row span{color:var(--muted)}
+.hero-card-row b{color:var(--ink);font-weight:700}
+.hero-card-row b.green{color:var(--green)}
+@media(max-width:900px){
+  .hero-in{grid-template-columns:1fr;gap:32px}
+  .nav-links{display:none}
+  .topbar-in{justify-content:center;text-align:center}
+}
+</style>
+  </head><body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="topbar-left">
+      <span>📞 <a href="tel:01842220000">0184-220-0000</a></span>
+      <span class="em">🚨 24x7 Emergency</span>
+    </div>
+    <div>
+      <a href="#appointment">📍 Book Appointment</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <a href="#" class="brand">
+      <span class="brand-icon">🏥</span>
+      <span class="brand-txt">
+        <b>VAA Hospital</b>
+        <small>MULTISPECIALITY · KARNAL</small>
+      </span>
+    </a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#doctors">Doctors</a>
+      <a href="#facilities">Facilities</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <a href="#appointment" class="btn btn-blue">📅 Book Appointment</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-in">
+    <div>
+      <span class="hero-badge">Trusted by 10,000+ Families in Karnal</span>
+      <h1>Advanced healthcare,<br><span class="blue">close to home.</span></h1>
+      <p>VAA Hospital brings world-class medical care to Karnal — 24x7 emergency, modern ICU, expert surgeons, and compassionate staff. Your family's health, our priority.</p>
+      <div class="hero-ctas">
+        <a href="#appointment" class="btn btn-blue btn-lg">📅 Book Appointment</a>
+        <a href="tel:01842220000" class="btn btn-outline btn-lg">📞 Call Now</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>25+</b><span>Expert Doctors</span></div>
+        <div class="hero-stat"><b>100+</b><span>Beds</span></div>
+        <div class="hero-stat"><b>24x7</b><span>Emergency</span></div>
+        <div class="hero-stat"><b>15+</b><span>Years Trusted</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-head">
+          <div class="hero-card-icon">🚑</div>
+          <div>
+            <b>Emergency Status</b>
+            <small>Available right now</small>
+          </div>
+        </div>
+        <div class="hero-card-row">
+          <span>Emergency Ward</span>
+          <b class="green">● Open</b>
+        </div>
+        <div class="hero-card-row">
+          <span>ICU Beds Available</span>
+          <b>4 / 12</b>
+        </div>
+        <div class="hero-card-row">
+          <span>Ambulance Response</span>
+          <b>~8 min</b>
+        </div>
+        <div class="hero-card-row">
+          <span>Avg. Wait Time</span>
+          <b class="green">Under 15 min</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section style="background:#fff;padding:28px 0;border-bottom:1px solid var(--line)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-around;flex-wrap:wrap;gap:24px;text-align:center">
+    <div><b style="font-size:14px;color:var(--ink);display:block">NABH Accredited</b><span style="font-size:11px;color:var(--muted);font-weight:700">Quality Certified</span></div>
+    <div><b style="font-size:14px;color:var(--ink);display:block">Cashless Insurance</b><span style="font-size:11px;color:var(--muted);font-weight:700">20+ Providers</span></div>
+    <div><b style="font-size:14px;color:var(--ink);display:block">Ayushman Bharat</b><span style="font-size:11px;color:var(--muted);font-weight:700">Govt. Scheme Accepted</span></div>
+    <div><b style="font-size:14px;color:var(--ink);display:block">Digital Reports</b><span style="font-size:11px;color:var(--muted);font-weight:700">WhatsApp Delivery</span></div>
+  </div>
+        </section><!-- SERVICES -->
+<section id="services" style="padding:80px 0;background:#fff">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--blue);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Our Departments</span>
+      <h2 style="font-size:clamp(28px,4vw,42px);font-weight:900;letter-spacing:-1.5px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Complete care under <span style="color:var(--blue)">one roof</span>.</h2>
+      <p style="color:var(--muted);font-size:16px;max-width:620px;margin:0 auto">From emergency care to advanced surgery, our departments cover every medical need your family has.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="svc-grid">
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px;transition:.3s;cursor:pointer" class="svc-item">
+        <div style="width:56px;height:56px;background:var(--blue-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🚨</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Emergency & Trauma</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">24x7 emergency ward with modern ambulances, trained paramedics and rapid response team.</p>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px;transition:.3s;cursor:pointer" class="svc-item">
+        <div style="width:56px;height:56px;background:var(--blue-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">❤️</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Cardiology</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Heart specialists, ECG, echo, angiography and complete cardiac care by experienced cardiologists.</p>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px;transition:.3s;cursor:pointer" class="svc-item">
+        <div style="width:56px;height:56px;background:var(--blue-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🦴</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Orthopaedics</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Joint replacement, fracture care, sports injuries and physiotherapy by expert orthopaedic surgeons.</p>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px;transition:.3s;cursor:pointer" class="svc-item">
+        <div style="width:56px;height:56px;background:var(--blue-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">👶</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Pediatrics</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Complete child care — vaccinations, growth monitoring, newborn ICU and pediatric emergency.</p>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px;transition:.3s;cursor:pointer" class="svc-item">
+        <div style="width:56px;height:56px;background:var(--blue-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🧪</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Diagnostics & Lab</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">NABL-grade lab, ultrasound, X-ray, CT scan and full body health checkup packages.</p>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px;transition:.3s;cursor:pointer" class="svc-item">
+        <div style="width:56px;height:56px;background:var(--blue-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🩺</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">General Medicine</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Fever, infections, diabetes, BP management and OPD consultations with senior physicians.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTORS -->
+<section id="doctors" style="padding:80px 0;background:var(--bg)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--blue);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Our Doctors</span>
+      <h2 style="font-size:clamp(28px,4vw,42px);font-weight:900;letter-spacing:-1.5px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Experts you can <span style="color:var(--blue)">trust</span>.</h2>
+      <p style="color:var(--muted);font-size:16px;max-width:620px;margin:0 auto">25+ specialists across departments — highly qualified, deeply experienced, and always accessible.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px" class="doc-grid">
+      <div style="background:#fff;border-radius:18px;padding:24px;text-align:center;border:1px solid var(--line)">
+        <div style="width:80px;height:80px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;margin:0 auto 16px;color:#fff">👨‍⚕️</div>
+        <h4 style="font-size:15px;font-weight:800;color:var(--ink);margin-bottom:4px">Dr. Rajesh Kumar</h4>
+        <p style="color:var(--blue);font-size:12px;font-weight:700;margin-bottom:8px">Cardiologist</p>
+        <p style="color:var(--muted);font-size:12px;line-height:1.5">MD, DM · 18 yrs experience</p>
+      </div>
+
+      <div style="background:#fff;border-radius:18px;padding:24px;text-align:center;border:1px solid var(--line)">
+        <div style="width:80px;height:80px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;margin:0 auto 16px;color:#fff">👩‍⚕️</div>
+        <h4 style="font-size:15px;font-weight:800;color:var(--ink);margin-bottom:4px">Dr. Priya Sharma</h4>
+        <p style="color:var(--blue);font-size:12px;font-weight:700;margin-bottom:8px">Pediatrician</p>
+        <p style="color:var(--muted);font-size:12px;line-height:1.5">MBBS, MD · 12 yrs experience</p>
+      </div>
+
+      <div style="background:#fff;border-radius:18px;padding:24px;text-align:center;border:1px solid var(--line)">
+        <div style="width:80px;height:80px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;margin:0 auto 16px;color:#fff">👨‍⚕️</div>
+        <h4 style="font-size:15px;font-weight:800;color:var(--ink);margin-bottom:4px">Dr. Anil Verma</h4>
+        <p style="color:var(--blue);font-size:12px;font-weight:700;margin-bottom:8px">Orthopaedic Surgeon</p>
+        <p style="color:var(--muted);font-size:12px;line-height:1.5">MS Ortho · 15 yrs experience</p>
+      </div>
+
+      <div style="background:#fff;border-radius:18px;padding:24px;text-align:center;border:1px solid var(--line)">
+        <div style="width:80px;height:80px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;margin:0 auto 16px;color:#fff">👩‍⚕️</div>
+        <h4 style="font-size:15px;font-weight:800;color:var(--ink);margin-bottom:4px">Dr. Sneha Gupta</h4>
+        <p style="color:var(--blue);font-size:12px;font-weight:700;margin-bottom:8px">Gynecologist</p>
+        <p style="color:var(--muted);font-size:12px;line-height:1.5">MS Obs & Gyn · 10 yrs</p>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:40px">
+      <a href="#appointment" class="btn btn-outline btn-lg">View All Doctors →</a>
+    </div>
+  </div>
+</section>
+
+<style>
+.svc-item:hover{border-color:var(--blue);box-shadow:0 12px 30px rgba(10,92,200,.1);transform:translateY(-4px)}
+@media(max-width:900px){.svc-grid,.doc-grid{grid-template-columns:repeat(2,1fr)!important}}
+@media(max-width:600px){.svc-grid,.doc-grid{grid-template-columns:1fr!important}}
+  </style><!-- FACILITIES -->
+<section id="facilities" style="padding:80px 0;background:#fff">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--blue);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">World-Class Facilities</span>
+      <h2 style="font-size:clamp(28px,4vw,42px);font-weight:900;letter-spacing:-1.5px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Modern infrastructure, <span style="color:var(--blue)">real care</span>.</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="fac-grid">
+      <div style="background:var(--blue-soft);border-radius:18px;padding:28px 24px;text-align:center">
+        <div style="font-size:36px;margin-bottom:12px">🏥</div>
+        <h4 style="font-size:16px;font-weight:800;color:var(--ink);margin-bottom:6px">100+ Bed Capacity</h4>
+        <p style="color:var(--muted);font-size:13px;line-height:1.5">Private, semi-private and general wards with 24x7 nursing care.</p>
+      </div>
+      <div style="background:var(--blue-soft);border-radius:18px;padding:28px 24px;text-align:center">
+        <div style="font-size:36px;margin-bottom:12px">🛏️</div>
+        <h4 style="font-size:16px;font-weight:800;color:var(--ink);margin-bottom:6px">Modern ICU & NICU</h4>
+        <p style="color:var(--muted);font-size:13px;line-height:1.5">Fully equipped intensive care units with ventilator support and monitoring.</p>
+      </div>
+      <div style="background:var(--blue-soft);border-radius:18px;padding:28px 24px;text-align:center">
+        <div style="font-size:36px;margin-bottom:12px">🔬</div>
+        <h4 style="font-size:16px;font-weight:800;color:var(--ink);margin-bottom:6px">In-House Lab</h4>
+        <p style="color:var(--muted);font-size:13px;line-height:1.5">Fast, accurate diagnostic reports — same day for most tests.</p>
+      </div>
+      <div style="background:var(--blue-soft);border-radius:18px;padding:28px 24px;text-align:center">
+        <div style="font-size:36px;margin-bottom:12px">🚑</div>
+        <h4 style="font-size:16px;font-weight:800;color:var(--ink);margin-bottom:6px">24x7 Ambulance</h4>
+        <p style="color:var(--muted);font-size:13px;line-height:1.5">Oxygen-equipped ambulances reach you in under 10 minutes.</p>
+      </div>
+      <div style="background:var(--blue-soft);border-radius:18px;padding:28px 24px;text-align:center">
+        <div style="font-size:36px;margin-bottom:12px">💊</div>
+        <h4 style="font-size:16px;font-weight:800;color:var(--ink);margin-bottom:6px">In-House Pharmacy</h4>
+        <p style="color:var(--muted);font-size:13px;line-height:1.5">All medicines available round the clock at MRP or below.</p>
+      </div>
+      <div style="background:var(--blue-soft);border-radius:18px;padding:28px 24px;text-align:center">
+        <div style="font-size:36px;margin-bottom:12px">📱</div>
+        <h4 style="font-size:16px;font-weight:800;color:var(--ink);margin-bottom:6px">Digital Reports</h4>
+        <p style="color:var(--muted);font-size:13px;line-height:1.5">Get reports on WhatsApp instantly — no queue, no waiting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="padding:80px 0;background:var(--bg)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--blue);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Patient Stories</span>
+      <h2 style="font-size:clamp(28px,4vw,42px);font-weight:900;letter-spacing:-1.5px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Families who <span style="color:var(--blue)">trust us</span>.</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="test-grid">
+      <div style="background:#fff;border-radius:18px;padding:28px 24px;border:1px solid var(--line)">
+        <div style="color:var(--gold);font-size:16px;letter-spacing:2px;margin-bottom:14px">★★★★★</div>
+        <p style="color:var(--ink);font-size:14px;line-height:1.7;margin-bottom:18px">"My father's heart surgery was done here. The doctors explained everything clearly, and staff was very caring. Highly recommend."</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--line)">
+          <div style="width:40px;height:40px;background:var(--blue-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--blue)">RS</div>
+          <div><b style="font-size:13px;color:var(--ink);display:block">Ramesh Singh</b><small style="color:var(--muted);font-size:11px">Karnal</small></div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:18px;padding:28px 24px;border:1px solid var(--line)">
+        <div style="color:var(--gold);font-size:16px;letter-spacing:2px;margin-bottom:14px">★★★★★</div>
+        <p style="color:var(--ink);font-size:14px;line-height:1.7;margin-bottom:18px">"Delivered my baby here. Dr. Sneha was amazing throughout. Clean rooms, good food, and reasonable charges. Best hospital in Karnal."</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--line)">
+          <div style="width:40px;height:40px;background:var(--blue-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--blue)">PK</div>
+          <div><b style="font-size:13px;color:var(--ink);display:block">Priya Kapoor</b><small style="color:var(--muted);font-size:11px">Karnal</small></div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:18px;padding:28px 24px;border:1px solid var(--line)">
+        <div style="color:var(--gold);font-size:16px;letter-spacing:2px;margin-bottom:14px">★★★★★</div>
+        <p style="color:var(--ink);font-size:14px;line-height:1.7;margin-bottom:18px">"Emergency at 2am — ambulance came in 8 minutes. Doctors were ready when we arrived. Saved my son's life. Forever grateful."</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--line)">
+          <div style="width:40px;height:40px;background:var(--blue-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--blue)">AK</div>
+          <div><b style="font-size:13px;color:var(--ink);display:block">Ashok Kumar</b><small style="color:var(--muted);font-size:11px">Karnal</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPOINTMENT / CONTACT -->
+<section id="appointment" style="padding:80px 0;background:#fff">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center" class="contact-grid">
+      <div>
+        <span style="color:var(--blue);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Book Appointment</span>
+        <h2 style="font-size:clamp(28px,4vw,42px);font-weight:900;letter-spacing:-1.5px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Need to see a <span style="color:var(--blue)">doctor?</span></h2>
+        <p style="color:var(--muted);font-size:16px;line-height:1.65;margin-bottom:24px">Call us, WhatsApp us, or fill the form — we'll confirm your appointment within 10 minutes.</p>
+
+        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:28px">
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--blue-soft);border-radius:14px">
+            <div style="font-size:24px">📞</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Call us</small><b style="display:block;color:var(--ink);font-size:15px">0184-220-0000</b></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--blue-soft);border-radius:14px">
+            <div style="font-size:24px">💬</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">WhatsApp</small><b style="display:block;color:var(--ink);font-size:15px">+91 98765 43210</b></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--blue-soft);border-radius:14px">
+            <div style="font-size:24px">📍</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Visit us</small><b style="display:block;color:var(--ink);font-size:15px">Mall Road, Near Bus Stand, Karnal</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--bg);border-radius:22px;padding:36px 32px;border:1px solid var(--line)">
+        <h3 style="font-size:20px;font-weight:800;color:var(--ink);margin-bottom:6px">Request Appointment</h3>
+        <p style="color:var(--muted);font-size:13px;margin-bottom:22px">Fill details — we'll call you back</p>
+        <form onsubmit="event.preventDefault();alert('Demo: In real site, this sends to WhatsApp instantly.');this.reset();">
+          <div style="margin-bottom:14px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Full Name</label>
+            <input required type="text" placeholder="Your name" style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+          </div>
+          <div style="margin-bottom:14px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Phone</label>
+            <input required type="tel" placeholder="10-digit number" style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+          </div>
+          <div style="margin-bottom:14px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Department</label>
+            <select style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+              <option>General Medicine</option>
+              <option>Cardiology</option>
+              <option>Orthopaedics</option>
+              <option>Pediatrics</option>
+              <option>Gynecology</option>
+              <option>Diagnostics</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-blue" style="width:100%;justify-content:center;padding:16px;font-size:15px">📅 Request Appointment</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#0a1224;color:#fff;padding:60px 20px 30px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;margin-bottom:44px" class="foot-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <div style="width:44px;height:44px;background:var(--blue);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px">🏥</div>
+          <div>
+            <b style="font-size:17px;display:block">VAA Hospital</b>
+            <small style="color:#8a95ab;font-size:10px;letter-spacing:1.5px;font-weight:700">MULTISPECIALITY · KARNAL</small>
+          </div>
+        </div>
+        <p style="color:#8a95ab;font-size:13px;line-height:1.7;max-width:300px">Trusted healthcare for 15+ years. Modern facilities, expert doctors, and 24x7 emergency support for your family.</p>
+      </div>
+      <div>
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-bottom:16px;color:#fff">Departments</h5>
+        <a href="#services" style="display:block;color:#8a95ab;font-size:13px;padding:5px 0">Emergency</a>
+        <a href="#services" style="display:block;color:#8a95ab;font-size:13px;padding:5px 0">Cardiology</a>
+        <a href="#services" style="display:block;color:#8a95ab;font-size:13px;padding:5px 0">Orthopaedics</a>
+        <a href="#services" style="display:block;color:#8a95ab;font-size:13px;padding:5px 0">Pediatrics</a>
+      </div>
+      <div>
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-bottom:16px;color:#fff">Quick Links</h5>
+        <a href="#doctors" style="display:block;color:#8a95ab;font-size:13px;padding:5px 0">Our Doctors</a>
+        <a href="#facilities" style="display:block;color:#8a95ab;font-size:13px;padding:5px 0">Facilities</a>
+        <a href="#appointment" style="display:block;color:#8a95ab;font-size:13px;padding:5px 0">Book Appointment</a>
+        <a href="#contact" style="display:block;color:#8a95ab;font-size:13px;padding:5px 0">Contact</a>
+      </div>
+      <div id="contact">
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-bottom:16px;color:#fff">Contact</h5>
+        <p style="color:#8a95ab;font-size:13px;padding:5px 0">📞 0184-220-0000</p>
+        <p style="color:#8a95ab;font-size:13px;padding:5px 0">💬 +91 98765 43210</p>
+        <p style="color:#8a95ab;font-size:13px;padding:5px 0">📍 Mall Road, Karnal</p>
+        <p style="color:#8a95ab;font-size:13px;padding:5px 0">⏰ Emergency: 24x7</p>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:24px;text-align:center;color:#8a95ab;font-size:12px">
+      © 2026 VAA Hospital — Demo website. This is a <b style="color:#fff">VAAN Consultancy</b> demo.
+    </div>
+  </div>
+</footer>
+
+<!-- DEMO FLOATING BANNER -->
+<div id="demoBanner" style="position:fixed;bottom:16px;left:16px;right:16px;background:linear-gradient(135deg,#0a1224,#0d1a3a);color:#fff;border-radius:16px;padding:16px 20px;box-shadow:0 20px 50px rgba(0,0,0,.4);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;z-index:999;border:1px solid rgba(255,255,255,.1);max-width:700px;margin:0 auto">
+  <div style="flex:1;min-width:200px">
+    <div style="font-size:11px;color:#8a95ab;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px">Want this website?</div>
+    <div style="font-size:14px;font-weight:800">Basic ₹4,999 · <span style="color:var(--gold)">Standard ₹9,999</span> · Premium ₹19,999</div>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20a%20hospital%20website%20like%20this%20demo." target="_blank" style="background:var(--gold);color:#0a1224;padding:11px 18px;border-radius:10px;font-weight:800;font-size:13px;white-space:nowrap">💬 Get This Site</a>
+    <button onclick="document.getElementById('demoBanner').style.display='none'" style="background:rgba(255,255,255,.1);color:#fff;border:0;padding:11px 14px;border-radius:10px;font-weight:800;font-size:13px;cursor:pointer">✕</button>
+  </div>
+</div>
+
+<style>
+@media(max-width:900px){
+  .fac-grid,.test-grid{grid-template-columns:repeat(2,1fr)!important}
+  .contact-grid{grid-template-columns:1fr!important;gap:32px!important}
+  .foot-grid{grid-template-columns:1fr 1fr!important;gap:28px!important}
+}
+@media(max-width:600px){
+  .fac-grid,.test-grid{grid-template-columns:1fr!important}
+  .foot-grid{grid-template-columns:1fr!important}
+}
+</style>
+
+</body>
+  </html>
