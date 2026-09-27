@@ -470,11 +470,11 @@ img{max-width:100%;display:block}
   </div>
 </footer>
 
-<!-- DEMO FLOATING BANNER -->
+<!-- DEMO FLOATING BANNER (auto-prices from Supabase) -->
 <div id="demoBanner" style="position:fixed;bottom:16px;left:16px;right:16px;background:linear-gradient(135deg,#1a1208,#2d2010);color:#fff;border-radius:16px;padding:16px 20px;box-shadow:0 20px 50px rgba(0,0,0,.5);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;z-index:999;border:1px solid rgba(212,175,55,.3);max-width:700px;margin:0 auto">
   <div style="flex:1;min-width:200px">
     <div style="font-size:11px;color:#c8b88a;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px">Want this website?</div>
-    <div style="font-size:14px;font-weight:800">Basic ₹4,999 · <span style="color:var(--gold-light)">Standard ₹9,999</span> · Premium ₹19,999</div>
+    <div id="priceLine" style="font-size:14px;font-weight:800">Loading prices...</div>
   </div>
   <div style="display:flex;gap:8px;flex-wrap:wrap">
     <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20a%20jewellery%20website%20like%20this%20demo." target="_blank" style="background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));color:#fff;padding:11px 18px;border-radius:10px;font-weight:800;font-size:13px;white-space:nowrap">💬 Get This Site</a>
@@ -482,6 +482,24 @@ img{max-width:100%;display:block}
   </div>
 </div>
 
+<!-- AUTO-PRICE FETCH -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  const sb = supabase.createClient(
+    "https://xvtxpllmfwgnlrffbcqz.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2dHhwbGxtZndnbmxyZmZiY3F6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0Mzg2OTYsImV4cCI6MjEwNjAxNDY5Nn0.JC1Za7PdNGLngpupBovq_DqI-vHRVBOovLdEe-w1Ap0"
+  );
+  sb.from("vaan_pricing").select("service_key,price").in("service_key",["basic","business","premium"])
+    .then(({data}) => {
+      const el = document.getElementById("priceLine");
+      if (!el || !data) return;
+      const get = k => (data.find(r => r.service_key === k)||{}).price || 0;
+      const fmt = n => "₹" + n.toLocaleString("en-IN");
+      el.innerHTML = fmt(get("basic")) + " · <span style='color:var(--gold-light)'>" + fmt(get("business")) + "</span> · " + fmt(get("premium"));
+    });
+})();
+  </script>
 <style>
 @media(max-width:900px){
   .test-grid{grid-template-columns:repeat(2,1fr)!important}
