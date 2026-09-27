@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VAA Travels — Tours & Travels in Karnal | Domestic & International Packages</title>
+<meta name="description" content="VAA Travels — Book flights, hotels, and tour packages from Karnal. Domestic & international trips, honeymoon packages, group tours.">
+<meta name="theme-color" content="#0c4a6e">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#f0f9ff;color:#0c4a6e;line-height:1.6;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+:root{--sky:#0284c7;--sky-dark:#075985;--sky-light:#38bdf8;--sky-soft:#e0f2fe;--coral:#f97316;--coral-light:#fb923c;--coral-soft:#ffedd5;--teal:#0d9488;--bg:#f0f9ff;--white:#ffffff;--ink:#0c4a6e;--muted:#64748b;--line:#cffafe;--gold:#fbbf24}
+.topbar{background:var(--sky-dark);color:#fff;font-size:12px;padding:8px 0}
+.topbar-in{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.topbar-left{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.topbar a{color:#fff;font-weight:600}
+.topbar .coral{color:var(--coral-light);font-weight:800}
+.nav{background:#fff;box-shadow:0 2px 20px rgba(12,74,110,.08);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--line)}
+.nav-in{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.5px}
+.brand-icon{width:46px;height:46px;background:linear-gradient(135deg,var(--sky),var(--sky-light));border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;flex-shrink:0;box-shadow:0 6px 18px rgba(2,132,199,.3)}
+.brand-txt{line-height:1.1}
+.brand-txt b{font-family:'Playfair Display',serif;font-size:21px;color:var(--ink);display:block;letter-spacing:-.5px}
+.brand-txt small{font-size:10px;color:var(--sky);letter-spacing:2px;font-weight:800}
+.nav-links{display:flex;gap:28px;font-size:14px;font-weight:600}
+.nav-links a{color:var(--ink);transition:.2s}
+.nav-links a:hover{color:var(--sky)}
+.nav-actions{display:flex;gap:10px;align-items:center}
+.btn{border:0;border-radius:10px;padding:13px 22px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;transition:.25s;display:inline-flex;align-items:center;gap:8px;letter-spacing:.2px}
+.btn-coral{background:linear-gradient(135deg,var(--coral),#ea580c);color:#fff;box-shadow:0 8px 20px rgba(249,115,22,.3)}
+.btn-coral:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(249,115,22,.45)}
+.btn-sky{background:linear-gradient(135deg,var(--sky),var(--sky-dark));color:#fff;box-shadow:0 8px 20px rgba(2,132,199,.3)}
+.btn-sky:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(2,132,199,.45)}
+.btn-outline{background:transparent;color:var(--sky);border:2px solid var(--sky)}
+.btn-outline:hover{background:var(--sky);color:#fff}
+.btn-lg{padding:16px 28px;font-size:15px}
+.hero{background:linear-gradient(135deg,#075985 0%,#0284c7 40%,#38bdf8 100%);padding:70px 0 90px;position:relative;overflow:hidden;color:#fff}
+.hero::before{content:"";position:absolute;top:-150px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(249,115,22,.25),transparent 70%);border-radius:50%}
+.hero::after{content:"";position:absolute;bottom:-150px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(255,255,255,.15),transparent 70%);border-radius:50%}
+.hero-in{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;padding:8px 16px;border-radius:99px;font-size:12px;font-weight:800;letter-spacing:1px;margin-bottom:22px}
+.hero-badge::before{content:"✈";font-size:14px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,5.5vw,56px);font-weight:800;line-height:1.05;letter-spacing:-1px;color:#fff;margin-bottom:20px}
+.hero h1 .coral{color:var(--coral-light)}
+.hero p{font-size:17px;color:#e0f2fe;max-width:540px;margin-bottom:32px;line-height:1.65}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.hero-stats{display:flex;gap:32px;flex-wrap:wrap;padding-top:24px;border-top:1px solid rgba(255,255,255,.25)}
+.hero-stat b{display:block;font-family:'Playfair Display',serif;font-size:28px;font-weight:800;color:#fff;letter-spacing:-1px}
+.hero-stat span{display:block;color:#e0f2fe;font-size:11px;letter-spacing:1.5px;font-weight:700;text-transform:uppercase;margin-top:4px}
+.hero-visual{display:flex;justify-content:center}
+.hero-card{background:rgba(255,255,255,.95);border-radius:24px;padding:30px 26px;box-shadow:0 30px 60px rgba(0,0,0,.2);width:100%;max-width:420px}
+.hero-card h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.hero-card p{color:var(--muted);font-size:13px;margin-bottom:22px}
+.hero-card .trip-type{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:18px}
+.hero-card .trip-type button{padding:10px 8px;background:#f1f5f9;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;transition:.2s}
+.hero-card .trip-type button.active{background:var(--sky);color:#fff;border-color:var(--sky)}
+.trip-field{margin-bottom:14px}
+.trip-field label{display:block;color:var(--sky-dark);font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.trip-field input,.trip-field select{width:100%;padding:13px 14px;background:#f8fafc;border:1px solid var(--line);border-radius:10px;color:var(--ink);font-family:inherit;font-size:14px}
+.trip-field input:focus,.trip-field select:focus{outline:none;border-color:var(--sky)}
+.trip-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:900px){.hero-in{grid-template-columns:1fr;gap:36px}.nav-links{display:none}.topbar-in{justify-content:center;text-align:center}}
+</style>
+</head><body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="topbar-left">
+      <span>📞 <a href="tel:01842228888">0184-222-8888</a></span>
+      <span class="coral">✈ 500+ Trips Booked</span>
+    </div>
+    <div>
+      <a href="#enquiry">📍 Plan Your Trip</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <a href="#" class="brand">
+      <span class="brand-icon">✈️</span>
+      <span class="brand-txt">
+        <b>VAA Travels</b>
+        <small>TOURS · KARNAL</small>
+      </span>
+    </a>
+    <div class="nav-links">
+      <a href="#packages">Packages</a>
+      <a href="#destinations">Destinations</a>
+      <a href="#services">Services</a>
+      <a href="#enquiry">Enquiry</a>
+    </div>
+    <div class="nav-actions">
+      <a href="#enquiry" class="btn btn-coral">📅 Plan Trip</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-in">
+    <div>
+      <span class="hero-badge">Trusted Travel Partner Since 2012</span>
+      <h1>Your next adventure<br><span class="coral">starts here.</span></h1>
+      <p>VAA Travels — domestic & international tour packages, flight bookings, hotels, visa assistance. Customized trips from Karnal, made easy.</p>
+      <div class="hero-ctas">
+        <a href="#packages" class="btn btn-coral btn-lg">🌍 Explore Packages</a>
+        <a href="tel:01842228888" class="btn btn-outline btn-lg" style="border-color:#fff;color:#fff">📞 Call Now</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>500+</b><span>Trips Booked</span></div>
+        <div class="hero-stat"><b>50+</b><span>Destinations</span></div>
+        <div class="hero-stat"><b>12+</b><span>Years Experience</span></div>
+        <div class="hero-stat"><b>4.9★</b><span>Customer Rating</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card">
+        <h3>Plan Your Trip</h3>
+        <p>Free consultation · Custom itineraries</p>
+        <div class="trip-type">
+          <button class="active">Domestic</button>
+          <button>International</button>
+          <button>Honeymoon</button>
+        </div>
+        <div class="trip-row">
+          <div class="trip-field">
+            <label>From</label>
+            <input type="text" value="Karnal" readonly>
+          </div>
+          <div class="trip-field">
+            <label>To</label>
+            <select>
+              <option>Goa</option>
+              <option>Kashmir</option>
+              <option>Manali</option>
+              <option>Kerala</option>
+              <option>Dubai</option>
+              <option>Thailand</option>
+              <option>Bali</option>
+              <option>Europe</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="trip-row">
+          <div class="trip-field">
+            <label>Departure</label>
+            <input type="date">
+          </div>
+          <div class="trip-field">
+            <label>Days</label>
+            <select>
+              <option>3-4 Days</option>
+              <option>5-7 Days</option>
+              <option>8-10 Days</option>
+              <option>10+ Days</option>
+            </select>
+          </div>
+        </div>
+        <div class="trip-field">
+          <label>Travelers</label>
+          <select>
+            <option>1 Adult</option>
+            <option selected>2 Adults</option>
+            <option>Family (3-4)</option>
+            <option>Group (5+)</option>
+          </select>
+        </div>
+        <button class="btn btn-coral" style="width:100%;justify-content:center;padding:15px;margin-top:8px;font-size:15px">✈ Get Custom Quote</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section style="background:#fff;padding:28px 0;border-bottom:1px solid var(--line)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-around;flex-wrap:wrap;gap:24px;text-align:center">
+    <div><b style="font-size:14px;color:var(--ink);display:block">Best Price Guarantee</b><span style="font-size:11px;color:var(--muted);font-weight:700">No hidden charges</span></div>
+    <div><b style="font-size:14px;color:var(--ink);display:block">24x7 Support</b><span style="font-size:11px;color:var(--muted);font-weight:700">During your trip</span></div>
+    <div><b style="font-size:14px;color:var(--ink);display:block">Visa Assistance</b><span style="font-size:11px;color:var(--muted);font-weight:700">Complete guidance</span></div>
+    <div><b style="font-size:14px;color:var(--ink);display:block">Custom Itineraries</b><span style="font-size:11px;color:var(--muted);font-weight:700">Built for you</span></div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages" style="padding:80px 0;background:#fff">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--sky);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Trending Packages</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Handpicked <span style="color:var(--sky)">getaways</span>.</h2>
+      <p style="color:var(--muted);font-size:16px;max-width:620px;margin:0 auto">Our best-selling packages — curated with hotels, transport, and sightseeing all included.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px" class="pkg-grid">
+      <div style="background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.3s" class="pkg-item">
+        <div style="aspect-ratio:16/10;background:linear-gradient(135deg,#0d9488,#14b8a6);display:flex;align-items:center;justify-content:center;font-size:90px;position:relative">
+          🏖️
+          <span style="position:absolute;top:14px;left:14px;background:var(--coral);color:#fff;padding:5px 12px;border-radius:99px;font-size:10px;font-weight:900;letter-spacing:1px">POPULAR</span>
+        </div>
+        <div style="padding:24px 22px">
+          <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:6px">Goa Beach Escape</h3>
+          <p style="color:var(--muted);font-size:13px;margin-bottom:12px">📍 4 Days · 3 Nights</p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);font-weight:600;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--line)">
+            <span>🏨 3★ Hotel</span><span>🚌 Transport</span><span>🍽️ Breakfast</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><b style="color:var(--coral);font-size:22px;font-weight:900">₹12,999</b><span style="font-size:11px;color:var(--muted);font-weight:600">/person</span></div>
+            <a href="#enquiry" class="btn btn-sky" style="padding:9px 16px;font-size:12px">Enquire</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#fff;border:2px solid var(--sky);border-radius:20px;overflow:hidden;transition:.3s;position:relative" class="pkg-item">
+        <div style="position:absolute;top:16px;right:16px;background:var(--gold);color:#0c4a6e;padding:5px 12px;border-radius:99px;font-size:10px;font-weight:900;letter-spacing:1px;z-index:2">BESTSELLER</div>
+        <div style="aspect-ratio:16/10;background:linear-gradient(135deg,#0ea5e9,#0284c7);display:flex;align-items:center;justify-content:center;font-size:90px;position:relative">
+          🏔️
+          <span style="position:absolute;top:14px;left:14px;background:var(--coral);color:#fff;padding:5px 12px;border-radius:99px;font-size:10px;font-weight:900;letter-spacing:1px">POPULAR</span>
+        </div>
+        <div style="padding:24px 22px">
+          <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:6px">Kashmir Delight</h3>
+          <p style="color:var(--muted);font-size:13px;margin-bottom:12px">📍 6 Days · 5 Nights</p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);font-weight:600;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--line)">
+            <span>🏨 4★ Hotel</span><span>🚤 Shikara Ride</span><span>🍽️ All Meals</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><b style="color:var(--coral);font-size:22px;font-weight:900">₹24,999</b><span style="font-size:11px;color:var(--muted);font-weight:600">/person</span></div>
+            <a href="#enquiry" class="btn btn-coral" style="padding:9px 16px;font-size:12px">Enquire</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.3s" class="pkg-item">
+        <div style="aspect-ratio:16/10;background:linear-gradient(135deg,#7c3aed,#a855f7);display:flex;align-items:center;justify-content:center;font-size:90px;position:relative">
+          🗼
+          <span style="position:absolute;top:14px;left:14px;background:var(--sky);color:#fff;padding:5px 12px;border-radius:99px;font-size:10px;font-weight:900;letter-spacing:1px">INTL</span>
+        </div>
+        <div style="padding:24px 22px">
+          <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:6px">Dubai Grand Tour</h3>
+          <p style="color:var(--muted);font-size:13px;margin-bottom:12px">📍 5 Days · 4 Nights</p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);font-weight:600;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--line)">
+            <span>✈ Flights</span><span>🏨 5★ Hotel</span><span>🎢 Sightseeing</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><b style="color:var(--coral);font-size:22px;font-weight:900">₹64,999</b><span style="font-size:11px;color:var(--muted);font-weight:600">/person</span></div>
+            <a href="#enquiry" class="btn btn-sky" style="padding:9px 16px;font-size:12px">Enquire</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section id="destinations" style="padding:80px 0;background:var(--bg)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--sky);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Popular Destinations</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Where do you want to <span style="color:var(--sky)">go next?</span></h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px" class="dest-grid">
+      <div style="background:linear-gradient(135deg,#0ea5e9,#0284c7);border-radius:18px;padding:32px 20px;text-align:center;color:#fff">
+        <div style="font-size:40px;margin-bottom:10px">🏔️</div>
+        <b style="font-size:15px;font-weight:800;display:block">Manali</b>
+        <span style="font-size:11px;color:#bae6fd;font-weight:600">From ₹9,999</span>
+      </div>
+      <div style="background:linear-gradient(135deg,#0d9488,#059669);border-radius:18px;padding:32px 20px;text-align:center;color:#fff">
+        <div style="font-size:40px;margin-bottom:10px">🌴</div>
+        <b style="font-size:15px;font-weight:800;display:block">Kerala</b>
+        <span style="font-size:11px;color:#a7f3d0;font-weight:600">From ₹18,999</span>
+      </div>
+      <div style="background:linear-gradient(135deg,#f97316,#ea580c);border-radius:18px;padding:32px 20px;text-align:center;color:#fff">
+        <div style="font-size:40px;margin-bottom:10px">🕌</div>
+        <b style="font-size:15px;font-weight:800;display:block">Dubai</b>
+        <span style="font-size:11px;color:#fed7aa;font-weight:600">From ₹64,999</span>
+      </div>
+      <div style="background:linear-gradient(135deg,#7c3aed,#6d28d9);border-radius:18px;padding:32px 20px;text-align:center;color:#fff">
+        <div style="font-size:40px;margin-bottom:10px">🏝️</div>
+        <b style="font-size:15px;font-weight:800;display:block">Bali</b>
+        <span style="font-size:11px;color:#ddd6fe;font-weight:600">From ₹54,999</span>
+      </div>
+      <div style="background:linear-gradient(135deg,#dc2626,#b91c1c);border-radius:18px;padding:32px 20px;text-align:center;color:#fff">
+        <div style="font-size:40px;margin-bottom:10px">🗼</div>
+        <b style="font-size:15px;font-weight:800;display:block">Paris</b>
+        <span style="font-size:11px;color:#fecaca;font-weight:600">From ₹1,24,999</span>
+      </div>
+      <div style="background:linear-gradient(135deg,#0284c7,#075985);border-radius:18px;padding:32px 20px;text-align:center;color:#fff">
+        <div style="font-size:40px;margin-bottom:10px">🐘</div>
+        <b style="font-size:15px;font-weight:800;display:block">Thailand</b>
+        <span style="font-size:11px;color:#bae6fd;font-weight:600">From ₹44,999</span>
+      </div>
+      <div style="background:linear-gradient(135deg,#65a30d,#4d7c0f);border-radius:18px;padding:32px 20px;text-align:center;color:#fff">
+        <div style="font-size:40px;margin-bottom:10px">🌲</div>
+        <b style="font-size:15px;font-weight:800;display:block">Shimla</b>
+        <span style="font-size:11px;color:#d9f99d;font-weight:600">From ₹8,999</span>
+      </div>
+      <div style="background:linear-gradient(135deg,#e11d48,#be123c);border-radius:18px;padding:32px 20px;text-align:center;color:#fff">
+        <div style="font-size:40px;margin-bottom:10px">🌸</div>
+        <b style="font-size:15px;font-weight:800;display:block">Singapore</b>
+        <span style="font-size:11px;color:#fecdd3;font-weight:600">From ₹74,999</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="padding:80px 0;background:#fff">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--sky);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Our Services</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Everything travel, <span style="color:var(--sky)">sorted</span>.</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="svc-grid">
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">✈️</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Flight Booking</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Domestic & international flights. Best fares, group discounts, quick confirmations.</p>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🏨</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Hotel Booking</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Budget to luxury hotels, all verified. Special rates for our clients across India & abroad.</p>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🌍</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Tour Packages</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Custom domestic & international packages — family trips, honeymoon, corporate tours.</p>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">📋</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Visa Assistance</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Complete visa support — documents, forms, appointments, and interview prep.</p>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🛡️</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Travel Insurance</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Comprehensive coverage for international trips. Medical, baggage, trip cancellation.</p>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🚗</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Airport Transfers</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Pickup & drop at any airport. Premium cars, verified drivers, on-time guarantee.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.pkg-item:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(12,74,110,.1)}
+@media(max-width:900px){.pkg-grid,.svc-grid{grid-template-columns:repeat(2,1fr)!important}.dest-grid{grid-template-columns:repeat(3,1fr)!important}}
+@media(max-width:600px){.pkg-grid,.svc-grid{grid-template-columns:1fr!important}.dest-grid{grid-template-columns:repeat(2,1fr)!important}}
+                                 </style><!-- TESTIMONIALS -->
+<section style="padding:80px 0;background:var(--bg)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--sky);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Happy Travelers</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Memories we <span style="color:var(--sky)">helped create</span>.</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="test-grid">
+      <div style="background:#fff;border-radius:18px;padding:28px 24px;border:1px solid var(--line)">
+        <div style="color:var(--gold);font-size:16px;letter-spacing:2px;margin-bottom:14px">★★★★★</div>
+        <p style="color:var(--ink);font-size:14px;line-height:1.7;margin-bottom:18px">"Booked a 6-day Kashmir trip. Everything was arranged perfectly — hotel, transport, sightseeing. Zero stress. Best trip of our lives."</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--line)">
+          <div style="width:40px;height:40px;background:var(--sky-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--sky)">RS</div>
+          <div><b style="font-size:13px;color:var(--ink);display:block">Rajesh Sharma</b><small style="color:var(--muted);font-size:11px">Karnal</small></div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:18px;padding:28px 24px;border:1px solid var(--line)">
+        <div style="color:var(--gold);font-size:16px;letter-spacing:2px;margin-bottom:14px">★★★★★</div>
+        <p style="color:var(--ink);font-size:14px;line-height:1.7;margin-bottom:18px">"Went to Dubai for our honeymoon. VAA Travels handled everything — flights, visa, hotel, tours. We just enjoyed. Highly recommended!"</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--line)">
+          <div style="width:40px;height:40px;background:var(--sky-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--sky)">AK</div>
+          <div><b style="font-size:13px;color:var(--ink);display:block">Amit & Kavita</b><small style="color:var(--muted);font-size:11px">Karnal</small></div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:18px;padding:28px 24px;border:1px solid var(--line)">
+        <div style="color:var(--gold);font-size:16px;letter-spacing:2px;margin-bottom:14px">★★★★★</div>
+        <p style="color:var(--ink);font-size:14px;line-height:1.7;margin-bottom:18px">"Took my parents on a Kerala trip. They handled senior-friendly hotels and slow-paced itinerary. My parents came back so happy. Thank you!"</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--line)">
+          <div style="width:40px;height:40px;background:var(--sky-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--sky)">PV</div>
+          <div><b style="font-size:13px;color:var(--ink);display:block">Priya Verma</b><small style="color:var(--muted);font-size:11px">Karnal</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENQUIRY / CONTACT -->
+<section id="enquiry" style="padding:80px 0;background:#fff">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center" class="contact-grid">
+      <div>
+        <span style="color:var(--sky);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Plan Your Trip</span>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Let's plan your <span style="color:var(--sky)">dream trip.</span></h2>
+        <p style="color:var(--muted);font-size:16px;line-height:1.65;margin-bottom:24px">Share your travel plans — we'll send a customized itinerary and quote within 24 hours. Free consultation, no obligation.</p>
+
+        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:28px">
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--sky-soft);border-radius:14px">
+            <div style="font-size:24px">📞</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Call us</small><b style="display:block;color:var(--ink);font-size:15px">0184-222-8888</b></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--sky-soft);border-radius:14px">
+            <div style="font-size:24px">💬</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">WhatsApp</small><b style="display:block;color:var(--ink);font-size:15px">+91 98765 43210</b></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--sky-soft);border-radius:14px">
+            <div style="font-size:24px">📍</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Office</small><b style="display:block;color:var(--ink);font-size:15px">Near Bus Stand, Karnal</b></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--sky-soft);border-radius:14px">
+            <div style="font-size:24px">🕐</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Open</small><b style="display:block;color:var(--ink);font-size:15px">Mon–Sat · 10AM – 8PM</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--bg);border-radius:22px;padding:36px 32px;border:1px solid var(--line)">
+        <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:6px">Get Free Trip Quote</h3>
+        <p style="color:var(--muted);font-size:13px;margin-bottom:22px">Custom itinerary in 24 hours</p>
+        <form onsubmit="event.preventDefault();alert('Demo: In real site, this sends to WhatsApp instantly.');this.reset();">
+          <div style="margin-bottom:14px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Full Name</label>
+            <input required type="text" placeholder="Your name" style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+          </div>
+          <div style="margin-bottom:14px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Phone</label>
+            <input required type="tel" placeholder="10-digit number" style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+          </div>
+          <div style="margin-bottom:14px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Destination</label>
+            <select style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+              <option>Goa</option>
+              <option>Kashmir</option>
+              <option>Manali / Shimla</option>
+              <option>Kerala</option>
+              <option>Rajasthan</option>
+              <option>Dubai</option>
+              <option>Thailand</option>
+              <option>Bali</option>
+              <option>Europe</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+            <div>
+              <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Travelers</label>
+              <select style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+                <option>1</option>
+                <option selected>2</option>
+                <option>3-4</option>
+                <option>5+</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Days</label>
+              <select style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+                <option>3-4</option>
+                <option selected>5-7</option>
+                <option>8-10</option>
+                <option>10+</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-bottom:16px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Trip Type</label>
+            <select style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+              <option>Family Trip</option>
+              <option>Honeymoon</option>
+              <option>Friends Group</option>
+              <option>Corporate Tour</option>
+              <option>Solo</option>
+              <option>Pilgrimage</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-coral" style="width:100%;justify-content:center;padding:16px;font-size:15px">✈ Get Free Quote</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--sky-dark);color:#fff;padding:60px 20px 30px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;margin-bottom:44px" class="foot-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <div style="width:44px;height:44px;background:linear-gradient(135deg,var(--sky),var(--sky-light));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px">✈️</div>
+          <div>
+            <b style="font-family:'Playfair Display',serif;font-size:19px;display:block">VAA Travels</b>
+            <small style="color:#bae6fd;font-size:10px;letter-spacing:2px;font-weight:700">TOURS · KARNAL</small>
+          </div>
+        </div>
+        <p style="color:#bae6fd;font-size:13px;line-height:1.7;max-width:300px">Trusted travel partner since 2012. Domestic & international tours, flight & hotel bookings, visa assistance, and 24x7 support.</p>
+      </div>
+      <div>
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-bottom:16px;color:#fff">Packages</h5>
+        <a href="#packages" style="display:block;color:#bae6fd;font-size:13px;padding:5px 0">Domestic Tours</a>
+        <a href="#packages" style="display:block;color:#bae6fd;font-size:13px;padding:5px 0">International</a>
+        <a href="#packages" style="display:block;color:#bae6fd;font-size:13px;padding:5px 0">Honeymoon</a>
+        <a href="#packages" style="display:block;color:#bae6fd;font-size:13px;padding:5px 0">Group Tours</a>
+      </div>
+      <div>
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-bottom:16px;color:#fff">Services</h5>
+        <a href="#services" style="display:block;color:#bae6fd;font-size:13px;padding:5px 0">Flight Booking</a>
+        <a href="#services" style="display:block;color:#bae6fd;font-size:13px;padding:5px 0">Hotel Booking</a>
+        <a href="#services" style="display:block;color:#bae6fd;font-size:13px;padding:5px 0">Visa Assistance</a>
+        <a href="#services" style="display:block;color:#bae6fd;font-size:13px;padding:5px 0">Travel Insurance</a>
+      </div>
+      <div>
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-bottom:16px;color:#fff">Contact</h5>
+        <p style="color:#bae6fd;font-size:13px;padding:5px 0">📞 0184-222-8888</p>
+        <p style="color:#bae6fd;font-size:13px;padding:5px 0">💬 +91 98765 43210</p>
+        <p style="color:#bae6fd;font-size:13px;padding:5px 0">📍 Near Bus Stand, Karnal</p>
+        <p style="color:#bae6fd;font-size:13px;padding:5px 0">🕐 Mon–Sat · 10AM–8PM</p>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(186,230,253,.2);padding-top:24px;text-align:center;color:#bae6fd;font-size:12px">
+      © 2026 VAA Travels — Demo website. This is a <b style="color:#fff">VAAN Consultancy</b> demo.
+    </div>
+  </div>
+</footer>
+
+<!-- DEMO FLOATING BANNER (auto-prices from Supabase) -->
+<div id="demoBanner" style="position:fixed;bottom:16px;left:16px;right:16px;background:linear-gradient(135deg,#075985,#0284c7);color:#fff;border-radius:16px;padding:16px 20px;box-shadow:0 20px 50px rgba(0,0,0,.4);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;z-index:999;border:1px solid rgba(255,255,255,.2);max-width:700px;margin:0 auto">
+  <div style="flex:1;min-width:200px">
+    <div style="font-size:11px;color:#bae6fd;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px">Want this website?</div>
+    <div id="priceLine" style="font-size:14px;font-weight:800">Loading prices...</div>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20a%20travel%20agency%20website%20like%20this%20demo." target="_blank" style="background:linear-gradient(135deg,var(--coral),#ea580c);color:#fff;padding:11px 18px;border-radius:10px;font-weight:800;font-size:13px;white-space:nowrap">💬 Get This Site</a>
+    <button onclick="document.getElementById('demoBanner').style.display='none'" style="background:rgba(255,255,255,.15);color:#fff;border:0;padding:11px 14px;border-radius:10px;font-weight:800;font-size:13px;cursor:pointer">✕</button>
+  </div>
+</div>
+
+<!-- AUTO-PRICE FETCH -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  const sb = supabase.createClient(
+    "https://xvtxpllmfwgnlrffbcqz.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2dHhwbGxtZndnbmxyZmZiY3F6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0Mzg2OTYsImV4cCI6MjEwNjAxNDY5Nn0.JC1Za7PdNGLngpupBovq_DqI-vHRVBOovLdEe-w1Ap0"
+  );
+  sb.from("vaan_pricing").select("service_key,price").in("service_key",["basic","business","premium"])
+    .then(({data}) => {
+      const el = document.getElementById("priceLine");
+      if (!el || !data) return;
+      const get = k => (data.find(r => r.service_key === k)||{}).price || 0;
+      const fmt = n => "₹" + n.toLocaleString("en-IN");
+      el.innerHTML = fmt(get("basic")) + " · <span style='color:#fdba74'>" + fmt(get("business")) + "</span> · " + fmt(get("premium"));
+    });
+})();
+</script>
+
+<style>
+@media(max-width:900px){
+  .test-grid{grid-template-columns:repeat(2,1fr)!important}
+  .contact-grid{grid-template-columns:1fr!important;gap:32px!important}
+  .foot-grid{grid-template-columns:1fr 1fr!important;gap:28px!important}
+}
+@media(max-width:600px){
+  .test-grid{grid-template-columns:1fr!important}
+  .foot-grid{grid-template-columns:1fr!important}
+}
+</style>
+
+</body>
+  </html>
