@@ -1,0 +1,1048 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<title>The VAAN Journey — Vision · Automation · Advancement · Network</title>
+<meta name="description" content="A cinematic 3D journey through VAAN Consultancy — how digital transformed business, and how we build the future.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0a0e1a">
+<link rel="canonical" href="https://vikassharma01072008-prog.github.io/vaan-consultancy/showcase.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#000;color:#f5f5f5;overflow-x:hidden;line-height:1.6;-webkit-tap-highlight-color:transparent}
+@media(min-width:901px){body{cursor:none}}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+:root{--gold:#ffd400;--gold-2:#ffa726;--blue:#4f8fff;--blue-2:#8bb4ff;--purple:#a78bfa;--sepia:#d4b896;--sepia-dark:#8b6f47;--white:#f5f5f5;--muted:#8a8f9c;--line-soft:rgba(255,255,255,.08);--bg:#0a0e1a}
+
+/* ============================================================
+   LOADING SCREEN
+   ============================================================ */
+#loadingScreen{position:fixed;inset:0;background:#000;z-index:999999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .8s ease,visibility .8s ease}
+#loadingScreen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loading-logo{font-size:clamp(60px,10vw,90px);font-weight:950;letter-spacing:-4px;background:linear-gradient(135deg,var(--gold),var(--blue));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;animation:logoPulse 2s ease-in-out infinite}
+@keyframes logoPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.85;transform:scale(1.03)}}
+.loading-tag{color:var(--muted);font-size:11px;letter-spacing:4px;font-weight:800;text-transform:uppercase;margin-bottom:40px}
+.loading-bar{width:min(280px,70vw);height:3px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;position:relative}
+.loading-bar-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--blue));transition:width .3s ease;border-radius:99px;box-shadow:0 0 20px rgba(255,212,0,.5)}
+.loading-status{margin-top:20px;color:var(--muted);font-size:11px;letter-spacing:2px;font-weight:700;text-transform:uppercase;min-height:16px}
+.loading-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);color:#4a4f5c;font-size:10px;letter-spacing:2px;font-weight:700;text-transform:uppercase;text-align:center;padding:0 20px}
+
+/* ============================================================
+   CUSTOM CURSOR (desktop only)
+   ============================================================ */
+#customCursor{position:fixed;top:0;left:0;width:10px;height:10px;border-radius:50%;background:var(--gold);pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .25s ease,height .25s ease,background .25s ease;mix-blend-mode:screen;box-shadow:0 0 20px rgba(255,212,0,.8)}
+#customCursor.hover{width:46px;height:46px;background:rgba(255,212,0,.15);border:1px solid var(--gold);box-shadow:0 0 30px rgba(255,212,0,.5)}
+@media(max-width:900px){#customCursor{display:none}}
+
+/* ============================================================
+   BASE CANVAS + SCROLL SPACE
+   ============================================================ */
+#showcaseCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#scrollSpace{position:relative;z-index:1}
+
+/* ============================================================
+   SCENE TEXT OVERLAYS
+   ============================================================ */
+.scene-text{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 24px;position:relative;opacity:0;transform:translateY(40px);transition:opacity 1.2s cubic-bezier(.2,.9,.3,1),transform 1.2s cubic-bezier(.2,.9,.3,1)}
+.scene-text.visible{opacity:1;transform:translateY(0)}
+.scene-inner{max-width:920px;text-align:center;position:relative;z-index:2}
+.scene-num{display:inline-block;font-size:11px;letter-spacing:5px;font-weight:900;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.scene-huge{font-size:clamp(70px,16vw,180px);font-weight:950;line-height:.85;letter-spacing:-8px;margin-bottom:24px;position:relative}
+.scene-huge .letter{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--blue));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 80px rgba(255,212,0,.4)}
+.scene-title{font-size:clamp(28px,5vw,54px);font-weight:950;letter-spacing:-2px;line-height:1.05;margin-bottom:20px}
+.scene-title .gold{color:var(--gold)}
+.scene-title .blue{color:var(--blue)}
+.scene-title .purple{color:var(--purple)}
+.scene-title .sepia{color:var(--sepia)}
+.scene-desc{font-size:clamp(15px,1.6vw,18px);color:#b8becc;line-height:1.7;max-width:640px;margin:0 auto}
+.scene-desc b{color:#fff;font-weight:800}
+
+/* ============================================================
+   SCENE THEMES
+   ============================================================ */
+.scene-old{background:radial-gradient(ellipse at 50% 50%,rgba(139,111,71,.15),transparent 70%)}
+.scene-old .scene-huge .letter{background:linear-gradient(135deg,var(--sepia),var(--sepia-dark));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 60px rgba(212,184,150,.3)}
+.scene-old .scene-desc{color:#a89680}
+.scene-v{background:radial-gradient(ellipse at 50% 50%,rgba(255,212,0,.12),transparent 70%)}
+.scene-auto{background:radial-gradient(ellipse at 50% 50%,rgba(79,143,255,.12),transparent 70%)}
+.scene-adv{background:radial-gradient(ellipse at 50% 50%,rgba(255,212,0,.08),rgba(79,143,255,.08),transparent 70%)}
+.scene-net{background:radial-gradient(ellipse at 50% 50%,rgba(167,139,250,.12),transparent 70%)}
+.scene-final{background:radial-gradient(ellipse at 50% 50%,rgba(255,212,0,.1),rgba(79,143,255,.1),transparent 70%)}
+</style>/* ============================================================
+   NAV
+   ============================================================ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;background:rgba(10,14,26,.6);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);transition:.3s}
+.nav-in{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:950;letter-spacing:-1.5px;color:#fff}
+.brand-logo{width:36px;height:36px}
+.brand-logo svg{width:100%;height:100%;filter:drop-shadow(0 0 12px rgba(255,212,0,.5))}
+.brand-text{display:flex;flex-direction:column;line-height:1}
+.brand-text b{font-size:19px;letter-spacing:-1px}
+.brand-text small{font-size:9px;letter-spacing:2px;color:var(--muted);margin-top:3px;font-weight:600}
+.nav-links{display:flex;align-items:center;gap:26px;font-size:14px;font-weight:600}
+.nav-links a{color:var(--white);opacity:.85;transition:.2s}
+.nav-links a:hover{opacity:1;color:var(--gold)}
+.nav-links a.active{color:var(--gold);opacity:1}
+.nav-cta{background:var(--gold);color:#0a0e1a !important;padding:11px 20px;border-radius:99px;font-weight:800;font-size:13px;transition:.3s;opacity:1 !important;box-shadow:0 8px 24px rgba(255,212,0,.25)}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,212,0,.45)}
+.hamburger{display:none;background:transparent;border:0;cursor:pointer;padding:8px;flex-direction:column;gap:5px;width:40px;height:40px;align-items:center;justify-content:center}
+.hamburger span{display:block;width:24px;height:2px;background:#f5f5f5;border-radius:2px;transition:.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ============================================================
+   SOUND TOGGLE BUTTON
+   ============================================================ */
+#soundToggle{position:fixed;top:80px;right:24px;z-index:9998;width:46px;height:46px;border-radius:50%;background:rgba(18,25,42,.85);border:1px solid rgba(255,212,0,.3);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(20px);transition:.3s;font-size:18px}
+#soundToggle:hover{background:rgba(255,212,0,.15);transform:scale(1.08);box-shadow:0 8px 24px rgba(255,212,0,.3)}
+#soundToggle.playing{color:var(--blue);border-color:rgba(79,143,255,.4);box-shadow:0 0 20px rgba(79,143,255,.3)}
+@media(max-width:700px){#soundToggle{top:74px;right:16px;width:42px;height:42px;font-size:16px}}
+
+/* ============================================================
+   SCROLL HINT (bottom of hero)
+   ============================================================ */
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:11px;letter-spacing:3px;font-weight:800;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:12px;opacity:.7;animation:hintFloat 2.4s ease-in-out infinite}
+@keyframes hintFloat{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+.scroll-hint .arrow{width:18px;height:18px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg);margin-top:2px}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{border:0;border-radius:12px;padding:16px 28px;font-weight:800;font-size:14px;cursor:pointer;font-family:inherit;transition:all .25s cubic-bezier(.2,.9,.3,1.2);display:inline-flex;align-items:center;gap:8px;letter-spacing:.3px;text-decoration:none;position:relative;overflow:hidden}
+.btn-primary{background:var(--gold);color:#0a0e1a;box-shadow:0 10px 30px rgba(255,212,0,.3)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(255,212,0,.5)}
+.btn-secondary{background:rgba(255,255,255,.08);color:var(--white);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(10px)}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+.btn-lg{padding:20px 36px;font-size:16px}
+
+/* ============================================================
+   CTA + FOOTER
+   ============================================================ */
+.final-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+footer{background:rgba(7,10,20,.95);border-top:1px solid var(--line-soft);padding:60px 24px 30px;margin-top:80px;backdrop-filter:blur(20px)}
+.foot-in{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:12px}
+.foot-brand{display:flex;align-items:center;gap:10px;font-weight:950;letter-spacing:-1px;color:#fff;font-size:16px}
+.foot-brand svg{width:26px;height:26px}
+.foot-meta{color:var(--muted)}
+.foot-meta a{color:var(--gold)}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:900px){
+  .scene-huge{letter-spacing:-4px}
+  .scene-text{padding:80px 20px}
+}
+@media(max-width:700px){
+  .nav-links{position:fixed;top:70px;left:0;right:0;background:rgba(10,14,26,.98);backdrop-filter:blur(20px);flex-direction:column;padding:24px;gap:20px;border-bottom:1px solid var(--line-soft);transform:translateY(-150%);transition:.4s cubic-bezier(.2,.9,.3,1.1);z-index:999}
+  .nav-links.open{transform:translateY(0)}
+  .hamburger{display:flex}
+  .foot-in{justify-content:center;text-align:center}
+}</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div id="customCursor"></div>
+
+<!-- LOADING SCREEN -->
+<div id="loadingScreen">
+  <div class="loading-logo">VAAN</div>
+  <div class="loading-tag">VISION · AUTOMATION · ADVANCEMENT · NETWORK</div>
+  <div class="loading-bar"><div class="loading-bar-fill" id="loadingFill"></div></div>
+  <div class="loading-status" id="loadingStatus">Initializing...</div>
+  <div class="loading-hint">A cinematic journey by VAAN Consultancy</div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <a href="index.html" class="brand">
+      <span class="brand-logo">
+        <svg viewBox="0 0 100 100" fill="none"><path d="M50 8 L92 92 L74 92 L50 42 L26 92 L8 92 Z" fill="url(#g1)"/><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffd400"/><stop offset="100%" stop-color="#4f8fff"/></linearGradient></defs></svg>
+      </span>
+      <span class="brand-text"><b>VAAN</b><small>CONSULTANCY</small></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="demos/index.html">Demos</a>
+      <a href="about.html">About</a>
+      <a href="showcase.html" class="active">Showcase</a>
+      <a href="tel:9671163712" class="nav-cta">📞 9671163712</a>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- SOUND TOGGLE -->
+<div id="soundToggle" onclick="toggleSound()" title="Toggle sound">🔇</div>
+
+<!-- 3D CANVAS -->
+<canvas id="showcaseCanvas"></canvas>
+
+<!-- SCROLL SPACE -->
+<div id="scrollSpace">
+
+  <!-- SCENE 1 — OLD WORLD -->
+  <section class="scene-text scene-old" data-scene="old">
+    <div class="scene-inner">
+      <span class="scene-num">Prologue · Before Digital</span>
+      <div class="scene-huge"><span class="letter">OLD WORLD</span></div>
+      <h2 class="scene-title">Business used to be <span class="sepia">slower.</span></h2>
+      <p class="scene-desc">Paper menus. Hand-written registers. Signs that never changed. Customers walked in — or they didn't. There was no way to be found online, no way to be seen at 3 AM. <b>Growth depended on luck and location.</b></p>
+      <div class="scroll-hint">
+        <span>Scroll to begin</span>
+        <span class="arrow"></span>
+      </div>
+    </div>
+  </section><!-- SCENE 2 — V (VISION) -->
+<section class="scene-text scene-v" data-scene="v">
+  <div class="scene-inner">
+    <span class="scene-num">Chapter 01 · V</span>
+    <div class="scene-huge"><span class="letter">V</span></div>
+    <h2 class="scene-title"><span class="gold">Vision</span> — seeing what's possible.</h2>
+    <p class="scene-desc">Businesses don't fail because of bad products. They fail because <b>no one sees them.</b> VAAN's first job is vision — helping owners imagine their business online. A website. A QR menu. A booking system. The tools exist. The vision comes first.</p>
+  </div>
+</section>
+
+<!-- SCENE 3 — A (AUTOMATION) -->
+<section class="scene-text scene-auto" data-scene="auto">
+  <div class="scene-inner">
+    <span class="scene-num">Chapter 02 · A</span>
+    <div class="scene-huge"><span class="letter">A</span></div>
+    <h2 class="scene-title"><span class="blue">Automation</span> — systems that never sleep.</h2>
+    <p class="scene-desc">A menu that updates itself. A gym that logs members without a register. Bookings that confirm on WhatsApp automatically. <b>Automation isn't about robots — it's about your business running while you rest.</b> That's what we build.</p>
+  </div>
+</section>
+
+<!-- SCENE 4 — A (ADVANCEMENT) -->
+<section class="scene-text scene-adv" data-scene="adv">
+  <div class="scene-inner">
+    <span class="scene-num">Chapter 03 · A</span>
+    <div class="scene-huge"><span class="letter">A</span></div>
+    <h2 class="scene-title"><span class="gold">Advancement</span> — always one step ahead.</h2>
+    <p class="scene-desc">Your first website is never your last. Version 2 loads faster. Version 3 converts better. Version 4 talks to your customers with AI. <b>We don't ship and disappear.</b> Every project we touch gets better over time — and so does your business.</p>
+  </div>
+</section>  <!-- SCENE 5 — N (NETWORK) -->
+  <section class="scene-text scene-net" data-scene="net">
+    <div class="scene-inner">
+      <span class="scene-num">Chapter 04 · N</span>
+      <div class="scene-huge"><span class="letter">N</span></div>
+      <h2 class="scene-title"><span class="purple">Network</span> — everything connected.</h2>
+      <p class="scene-desc">One business. One system. Website, QR codes, social media, AI chatbot, admin panel — all talking to each other. <b>Your customers don't see the technology. They just feel it working.</b> This is what a connected business looks like.</p>
+    </div>
+  </section>
+
+  <!-- SCENE 6 — FINALE -->
+  <section class="scene-text scene-final" data-scene="final">
+    <div class="scene-inner">
+      <span class="scene-num">Finale</span>
+      <div class="scene-huge"><span class="letter">VAAN</span></div>
+      <h2 class="scene-title">Vision · Automation · <span class="gold">Advancement</span> · Network</h2>
+      <p class="scene-desc">Four principles. One agency. <b>A digital partner for the businesses of tomorrow — built in Karnal, trusted across India and the world.</b> Whatever you build next, VAAN builds it with you.</p>
+      <div class="final-cta">
+        <a href="demos/index.html" class="btn btn-primary btn-lg">🎬 See Live Demos</a>
+        <a href="services.html" class="btn btn-secondary btn-lg">View Services</a>
+        <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20just%20saw%20your%20showcase.%20I%20want%20to%20discuss%20a%20project." class="btn btn-secondary btn-lg" target="_blank">💬 WhatsApp Now</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-in">
+    <div class="foot-brand">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M50 8 L92 92 L74 92 L50 42 L26 92 L8 92 Z" fill="url(#g2)"/><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffd400"/><stop offset="100%" stop-color="#4f8fff"/></linearGradient></defs></svg>
+      VAAN CONSULTANCY
+    </div>
+    <div class="foot-meta">
+      A cinematic journey · Made with <span style="color:var(--gold)">▲</span> in Karnal · <a href="tel:9671163712">9671163712</a>
+    </div>
+  </div>
+</footer><!-- ====== LIBRARIES ====== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+/* ============================================================
+   VAAN SHOWCASE — CORE 3D SETUP
+   ============================================================ */
+
+/* ---------- LOADING SCREEN LOGIC ---------- */
+(function(){
+  var fill = document.getElementById("loadingFill");
+  var status = document.getElementById("loadingStatus");
+  var screen = document.getElementById("loadingScreen");
+  var msgs = ["Initializing...", "Loading 3D engine...", "Preparing world...", "Rendering scenes...", "Almost ready..."];
+  var p = 0, i = 0;
+  var int = setInterval(function(){
+    p += Math.random() * 14 + 6;
+    if (p > 100) p = 100;
+    if (fill) fill.style.width = p + "%";
+    i = Math.min(msgs.length - 1, Math.floor(p / 22));
+    if (status) status.textContent = msgs[i];
+    if (p >= 100){
+      clearInterval(int);
+      setTimeout(function(){
+        if (screen) screen.classList.add("hidden");
+        setTimeout(function(){ if (screen) screen.style.display = "none"; }, 800);
+      }, 500);
+    }
+  }, 260);
+})();
+
+/* ---------- GLOBAL STATE ---------- */
+var _scene = null, _camera = null, _renderer = null;
+var _clock = null, _t = 0;
+var _mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+
+/* ---------- CUSTOM CURSOR ---------- */
+(function(){
+  if (window.innerWidth <= 900) return;
+  var cur = document.getElementById("customCursor");
+  if (!cur) return;
+  document.addEventListener("mousemove", function(e){
+    cur.style.left = e.clientX + "px";
+    cur.style.top = e.clientY + "px";
+  });
+  document.addEventListener("mouseover", function(e){
+    if (e.target.closest("a,button,.btn,.interactive")) cur.classList.add("hover");
+  });
+  document.addEventListener("mouseout", function(e){
+    if (e.target.closest("a,button,.btn,.interactive")) cur.classList.remove("hover");
+  });
+})();
+
+/* ---------- NAV ---------- */
+window.toggleNav = function(){
+  var m = document.getElementById("navLinks");
+  var h = document.getElementById("hamburger");
+  if (m) m.classList.toggle("open");
+  if (h) h.classList.toggle("open");
+};
+
+/* ============================================================
+   THREE.JS SCENE INITIALIZATION
+   ============================================================ */
+(function initShowcase(){
+  var canvas = document.getElementById("showcaseCanvas");
+  if (!canvas || typeof THREE === "undefined") return;
+
+  /* Scene */
+  _scene = new THREE.Scene();
+  _scene.fog = new THREE.FogExp2(0x0a0e1a, 0.028);
+
+  /* Camera */
+  var w = window.innerWidth, h = window.innerHeight;
+  _camera = new THREE.PerspectiveCamera(55, w / h, 0.1, 500);
+  _camera.position.set(0, 1.5, 12);
+  _camera.lookAt(0, 0, 0);
+
+  /* Renderer */
+  _renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+  _renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  _renderer.setSize(w, h);
+  _renderer.setClearColor(0x000000, 0);
+
+  /* Clock */
+  _clock = new THREE.Clock();
+
+  /* ============================================================
+     LIGHTS
+     ============================================================ */
+  var ambient = new THREE.AmbientLight(0xffffff, 0.28);
+  _scene.add(ambient);
+
+  var keyLight = new THREE.PointLight(0xffd400, 1.6, 60);
+  keyLight.position.set(8, 10, 8);
+  _scene.add(keyLight);
+
+  var fillLight = new THREE.PointLight(0x4f8fff, 1.4, 60);
+  fillLight.position.set(-8, -6, 6);
+  _scene.add(fillLight);
+
+  var rimLight = new THREE.DirectionalLight(0xa78bfa, 0.6);
+  rimLight.position.set(0, 8, -10);
+  _scene.add(rimLight);
+
+  /* ============================================================
+     MOUSE TRACKING (parallax)
+     ============================================================ */
+  window.addEventListener("mousemove", function(e){
+    _mouse.tx = (e.clientX / window.innerWidth) * 2 - 1;
+    _mouse.ty = -(e.clientY / window.innerHeight) * 2 + 1;
+  });
+  window.addEventListener("touchmove", function(e){
+    if (e.touches[0]){
+      _mouse.tx = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+      _mouse.ty = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+    }
+  });
+
+  /* ============================================================
+     RESIZE
+     ============================================================ */
+  window.addEventListener("resize", function(){
+    var w = window.innerWidth, h = window.innerHeight;
+    _camera.aspect = w / h;
+    _camera.updateProjectionMatrix();
+    _renderer.setSize(w, h);
+  });
+
+  /* ============================================================
+     ANIMATE LOOP
+     ============================================================ */
+  function animate(){
+    requestAnimationFrame(animate);
+    _t += 0.01;
+
+    /* Smooth mouse */
+    _mouse.x += (_mouse.tx - _mouse.x) * 0.06;
+    _mouse.y += (_mouse.ty - _mouse.y) * 0.06;
+
+    /* Render */
+    _renderer.render(_scene, _camera);
+  }
+  animate();
+
+  /* Expose for later chunks */
+  window._VAAN = {
+    scene: _scene,
+    camera: _camera,
+    renderer: _renderer,
+    clock: _clock,
+    mouse: _mouse,
+    getTime: function(){ return _t; }
+  };
+})();
+
+/* ============================================================
+   SCENE TEXT VISIBILITY (scroll-triggered)
+   ============================================================ */
+(function(){
+  var sections = document.querySelectorAll(".scene-text");
+  if (!("IntersectionObserver" in window)) {
+    sections.forEach(function(s){ s.classList.add("visible"); });
+    return;
+  }
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.25 });
+  sections.forEach(function(s){ observer.observe(s); });
+})();
+
+/* ============================================================
+   SOUND TOGGLE (placeholder — real sounds in next chunk)
+   ============================================================ */
+window._soundEnabled = false;
+window.toggleSound = function(){
+  window._soundEnabled = !window._soundEnabled;
+  var btn = document.getElementById("soundToggle");
+  if (btn){
+    btn.textContent = window._soundEnabled ? "🔊" : "🔇";
+    btn.classList.toggle("playing", window._soundEnabled);
+  }
+};
+</script><script>
+/* ============================================================
+   SCENE 1 — OLD WORLD
+   Floating paper menus, ledgers, faded signs, dust particles
+   ============================================================ */
+(function buildOldWorld(){
+  if (!window._VAAN) return;
+  var scene = window._VAAN.scene;
+
+  /* ---- Group for all Old World objects ---- */
+  var oldGroup = new THREE.Group();
+  oldGroup.name = "oldWorldGroup";
+  scene.add(oldGroup);
+
+  /* ---- Materials ---- */
+  /* Aged paper color */
+  var paperMat = new THREE.MeshStandardMaterial({
+    color: 0xd4b896,
+    roughness: 0.85,
+    metalness: 0.05,
+    emissive: 0x8b6f47,
+    emissiveIntensity: 0.05
+  });
+  /* Faded dark leather (ledgers) */
+  var ledgerMat = new THREE.MeshStandardMaterial({
+    color: 0x5c4a35,
+    roughness: 0.9,
+    metalness: 0.08,
+    emissive: 0x2a1f12,
+    emissiveIntensity: 0.06
+  });
+  /* Aged brass (signs, clock) */
+  var brassMat = new THREE.MeshStandardMaterial({
+    color: 0x9c7a3f,
+    roughness: 0.5,
+    metalness: 0.7,
+    emissive: 0x3a2b15,
+    emissiveIntensity: 0.05
+  });
+  /* Old wood (frames) */
+  var woodMat = new THREE.MeshStandardMaterial({
+    color: 0x3d2a1a,
+    roughness: 0.85,
+    metalness: 0.05
+  });
+
+  /* ---- Helper: create floating object ---- */
+  function makeFloating(geo, mat, pos, rot, scale){
+    var mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(pos[0], pos[1], pos[2]);
+    mesh.rotation.set(rot[0], rot[1], rot[2]);
+    if (scale) mesh.scale.set(scale, scale, scale);
+    mesh.userData.floatSpeed = 0.3 + Math.random() * 0.5;
+    mesh.userData.floatAmp = 0.15 + Math.random() * 0.25;
+    mesh.userData.rotSpeed = (Math.random() - 0.5) * 0.15;
+    mesh.userData.baseY = pos[1];
+    oldGroup.add(mesh);
+    return mesh;
+  }
+
+  /* ---- 1. PAPER MENUS (thin planes) ---- */
+  var paperGeo = new THREE.PlaneGeometry(1.4, 1.9);
+  for (var i = 0; i < 6; i++){
+    var x = (Math.random() - 0.5) * 14;
+    var y = (Math.random() - 0.5) * 6;
+    var z = -3 - Math.random() * 8;
+    makeFloating(
+      paperGeo,
+      paperMat,
+      [x, y, z],
+      [Math.random() * 0.3 - 0.15, Math.random() * 0.6 - 0.3, Math.random() * 0.4 - 0.2],
+      0.8 + Math.random() * 0.4
+    );
+  }
+
+  /* ---- 2. LEDGER BOOKS (thick boxes) ---- */
+  var ledgerGeo = new THREE.BoxGeometry(1.2, 0.22, 1.6);
+  for (var j = 0; j < 4; j++){
+    var lx = (Math.random() - 0.5) * 12;
+    var ly = (Math.random() - 0.5) * 5;
+    var lz = -4 - Math.random() * 7;
+    makeFloating(
+      ledgerGeo,
+      ledgerMat,
+      [lx, ly, lz],
+      [Math.random() * 0.4 - 0.2, Math.random() * 1.2 - 0.6, Math.random() * 0.3 - 0.15],
+      0.9 + Math.random() * 0.3
+    );
+  }
+
+  /* ---- 3. FADED SHOP SIGNS (planes with brass borders) ---- */
+  var signGeo = new THREE.PlaneGeometry(2.2, 0.9);
+  for (var k = 0; k < 5; k++){
+    var sx = (Math.random() - 0.5) * 16;
+    var sy = (Math.random() - 0.5) * 7;
+    var sz = -5 - Math.random() * 9;
+    makeFloating(
+      signGeo,
+      brassMat,
+      [sx, sy, sz],
+      [Math.random() * 0.2 - 0.1, Math.random() * 1.5 - 0.75, Math.random() * 0.3 - 0.15],
+      0.7 + Math.random() * 0.5
+    );
+  }
+
+  /* ---- 4. OLD WALL CLOCK (torus + hands) ---- */
+  var clockGroup = new THREE.Group();
+  var clockRing = new THREE.Mesh(new THREE.TorusGeometry(0.9, 0.08, 16, 40), brassMat);
+  clockGroup.add(clockRing);
+  var clockFace = new THREE.Mesh(new THREE.CircleGeometry(0.85, 40), paperMat);
+  clockFace.position.z = 0.01;
+  clockGroup.add(clockFace);
+  var hourHand = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.45, 0.03), ledgerMat);
+  hourHand.position.set(0, 0.2, 0.03);
+  clockGroup.add(hourHand);
+  var minHand = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.65, 0.03), ledgerMat);
+  minHand.position.set(0, 0.3, 0.04);
+  minHand.rotation.z = 0.5;
+  clockGroup.add(minHand);
+  clockGroup.position.set(3.5, 1.5, -6);
+  clockGroup.userData.isClock = true;
+  clockGroup.userData.hourHand = hourHand;
+  clockGroup.userData.minHand = minHand;
+  clockGroup.userData.floatSpeed = 0.4;
+  clockGroup.userData.floatAmp = 0.15;
+  clockGroup.userData.baseY = 1.5;
+  oldGroup.add(clockGroup);
+
+  /* ---- 5. OLD TELEPHONE (handset shape) ---- */
+  var phoneGroup = new THREE.Group();
+  var phoneBase = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.25, 0.5), woodMat);
+  phoneGroup.add(phoneBase);
+  var phoneHandset = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.7, 12), ledgerMat);
+  phoneHandset.rotation.z = Math.PI / 2;
+  phoneHandset.position.y = 0.35;
+  phoneGroup.add(phoneHandset);
+  var phoneDial = new THREE.Mesh(new THREE.CircleGeometry(0.2, 20), paperMat);
+  phoneDial.position.set(0.2, 0.13, 0.26);
+  phoneGroup.add(phoneDial);
+  phoneGroup.position.set(-4, -1, -5);
+  phoneGroup.userData.floatSpeed = 0.5;
+  phoneGroup.userData.floatAmp = 0.2;
+  phoneGroup.userData.baseY = -1;
+  oldGroup.add(phoneGroup);
+
+  /* ---- 6. DUST PARTICLES (sepia tone) ---- */
+  var dustCount = 220;
+  var dustPos = new Float32Array(dustCount * 3);
+  for (var d = 0; d < dustCount * 3; d += 3){
+    dustPos[d] = (Math.random() - 0.5) * 30;
+    dustPos[d + 1] = (Math.random() - 0.5) * 20;
+    dustPos[d + 2] = (Math.random() - 0.5) * 25 - 4;
+  }
+  var dustGeo = new THREE.BufferGeometry();
+  dustGeo.setAttribute("position", new THREE.BufferAttribute(dustPos, 3));
+  var dustMat = new THREE.PointsMaterial({
+    color: 0xd4b896,
+    size: 0.06,
+    transparent: true,
+    opacity: 0.55,
+    sizeAttenuation: true,
+    depthWrite: false
+  });
+  var dust = new THREE.Points(dustGeo, dustMat);
+  dust.name = "oldDust";
+  oldGroup.add(dust);
+
+  /* ---- Store for animation ---- */
+  window._VAAN.oldWorldGroup = oldGroup;
+  window._VAAN.oldDust = dust;
+
+})();
+</script><script>
+/* ============================================================
+   SCENE 2 — V (VISION)
+   QR codes, glowing website screens, gold burst particles
+   ============================================================ */
+(function buildVision(){
+  if (!window._VAAN) return;
+  var scene = window._VAAN.scene;
+
+  var visionGroup = new THREE.Group();
+  visionGroup.name = "visionGroup";
+  scene.add(visionGroup);
+
+  /* ---- Materials ---- */
+  var glassMat = new THREE.MeshPhysicalMaterial({
+    color: 0xffffff,
+    metalness: 0.4,
+    roughness: 0.1,
+    transparent: true,
+    opacity: 0.35,
+    clearcoat: 1,
+    clearcoatRoughness: 0.05,
+    transmission: 0.4,
+    ior: 1.5
+  });
+
+  var goldMat = new THREE.MeshStandardMaterial({
+    color: 0xffd400,
+    emissive: 0xffd400,
+    emissiveIntensity: 0.9,
+    metalness: 0.7,
+    roughness: 0.2,
+    transparent: true,
+    opacity: 0.9
+  });
+
+  var screenMat = new THREE.MeshBasicMaterial({
+    color: 0x0f1520,
+    transparent: true,
+    opacity: 0.9
+  });
+
+  var screenGlowMat = new THREE.MeshBasicMaterial({
+    color: 0x4f8fff,
+    transparent: true,
+    opacity: 0.35
+  });
+
+  /* ---- 1. BIG QR CODE (glowing, center) ---- */
+  var qrGroup = new THREE.Group();
+  var qrSize = 3;
+  var qrCells = 9;
+  var cellSize = qrSize / qrCells;
+  /* Simple random QR pattern */
+  var seed = 1;
+  function rng(){ seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+  for (var r = 0; r < qrCells; r++){
+    for (var c = 0; c < qrCells; c++){
+      if (rng() > 0.42){
+        var cell = new THREE.Mesh(
+          new THREE.BoxGeometry(cellSize * 0.92, cellSize * 0.92, 0.15),
+          goldMat
+        );
+        cell.position.set(
+          (c - (qrCells - 1) / 2) * cellSize,
+          ((qrCells - 1) / 2 - r) * cellSize,
+          0
+        );
+        qrGroup.add(cell);
+      }
+    }
+  }
+  /* QR corner markers */
+  function cornerMarker(x, y){
+    var m = new THREE.Mesh(new THREE.BoxGeometry(cellSize * 2.6, cellSize * 2.6, 0.18), goldMat);
+    m.position.set(x, y, 0.02);
+    var inner = new THREE.Mesh(new THREE.BoxGeometry(cellSize * 1.2, cellSize * 1.2, 0.22), screenMat);
+    inner.position.set(x, y, 0.05);
+    qrGroup.add(m);
+    qrGroup.add(inner);
+  }
+  cornerMarker(-1.5 * cellSize, 1.5 * cellSize);
+  cornerMarker(1.5 * cellSize, 1.5 * cellSize);
+  cornerMarker(-1.5 * cellSize, -1.5 * cellSize);
+
+  qrGroup.position.set(0, 0.5, 0);
+  qrGroup.userData.floatSpeed = 0.4;
+  qrGroup.userData.floatAmp = 0.15;
+  qrGroup.userData.baseY = 0.5;
+  qrGroup.userData.rotSpeed = 0.12;
+  visionGroup.add(qrGroup);
+
+  /* ---- 2. FLOATING WEBSITE SCREENS ---- */
+  var screenGeo = new THREE.PlaneGeometry(2.4, 1.5);
+  var screens = [];
+  var screenPositions = [
+    [-5.5, 1.5, -2, 0.25],
+    [5.5, 2, -2.5, -0.3],
+    [-6, -2, -3, 0.4],
+    [6, -1.5, -3.5, -0.35],
+    [-4.5, 2.8, -4, 0.2]
+  ];
+  for (var s = 0; s < screenPositions.length; s++){
+    var sp = screenPositions[s];
+    var frame = new THREE.Group();
+
+    var screen = new THREE.Mesh(screenGeo, screenMat);
+    frame.add(screen);
+
+    /* Glowing border */
+    var border = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.5, 1.6),
+      new THREE.MeshBasicMaterial({ color: 0x4f8fff, transparent: true, opacity: 0.15 })
+    );
+    border.position.z = -0.02;
+    frame.add(border);
+
+    /* Top bar (browser chrome) */
+    var bar = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.4, 0.12),
+      new THREE.MeshBasicMaterial({ color: 0xffd400, transparent: true, opacity: 0.5 })
+    );
+    bar.position.set(0, 0.69, 0.01);
+    frame.add(bar);
+
+    /* Content lines (fake text) */
+    for (var l = 0; l < 4; l++){
+      var line = new THREE.Mesh(
+        new THREE.PlaneGeometry(1.6 - l * 0.15, 0.06),
+        new THREE.MeshBasicMaterial({ color: 0x8bb4ff, transparent: true, opacity: 0.4 - l * 0.08 })
+      );
+      line.position.set(-0.3, 0.4 - l * 0.22, 0.02);
+      frame.add(line);
+    }
+
+    frame.position.set(sp[0], sp[1], sp[2]);
+    frame.rotation.y = sp[3];
+    frame.userData.floatSpeed = 0.35 + s * 0.08;
+    frame.userData.floatAmp = 0.18 + (s % 3) * 0.06;
+    frame.userData.baseY = sp[1];
+    frame.userData.rotSpeed = (Math.random() - 0.5) * 0.08;
+    frame.userData.baseRotY = sp[3];
+
+    visionGroup.add(frame);
+    screens.push(frame);
+  }
+
+  /* ---- 3. GOLD BURST PARTICLES ---- */
+  var burstCount = 400;
+  var burstPos = new Float32Array(burstCount * 3);
+  var burstVel = new Float32Array(burstCount * 3);
+  for (var b = 0; b < burstCount * 3; b += 3){
+    var angle = Math.random() * Math.PI * 2;
+    var phi = Math.acos(2 * Math.random() - 1);
+    var radius = 2 + Math.random() * 8;
+    burstPos[b] = Math.sin(phi) * Math.cos(angle) * radius;
+    burstPos[b + 1] = Math.sin(phi) * Math.sin(angle) * radius;
+    burstPos[b + 2] = Math.cos(phi) * radius - 3;
+    burstVel[b] = (Math.random() - 0.5) * 0.008;
+    burstVel[b + 1] = (Math.random() - 0.5) * 0.008;
+    burstVel[b + 2] = (Math.random() - 0.5) * 0.008;
+  }
+  var burstGeo = new THREE.BufferGeometry();
+  burstGeo.setAttribute("position", new THREE.BufferAttribute(burstPos, 3));
+  var burstMat = new THREE.PointsMaterial({
+    color: 0xffd400,
+    size: 0.07,
+    transparent: true,
+    opacity: 0.75,
+    sizeAttenuation: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var burst = new THREE.Points(burstGeo, burstMat);
+  burst.name = "visionBurst";
+  visionGroup.add(burst);
+
+  /* ---- 4. ORBITING GOLD RINGS around QR ---- */
+  var ringGeo = new THREE.TorusGeometry(2.5, 0.015, 8, 80);
+  var ringMat = new THREE.MeshBasicMaterial({ color: 0xffd400, transparent: true, opacity: 0.6 });
+  var ring1 = new THREE.Mesh(ringGeo, ringMat);
+  ring1.rotation.x = Math.PI / 2.2;
+  qrGroup.add(ring1);
+  var ring2 = new THREE.Mesh(new THREE.TorusGeometry(3.2, 0.01, 8, 80), ringMat);
+  ring2.rotation.x = Math.PI / 1.8;
+  ring2.rotation.y = 0.6;
+  qrGroup.add(ring2);
+
+  /* ---- Store for animation ---- */
+  window._VAAN.visionGroup = visionGroup;
+  window._VAAN.visionQR = qrGroup;
+  window._VAAN.visionScreens = screens;
+  window._VAAN.visionBurst = burst;
+  window._VAAN.visionBurstVel = burstVel;
+
+  /* Start hidden (opacity 0) — will animate in on scroll */
+  visionGroup.visible = false;
+
+})();
+</script><script>
+/* ============================================================
+   SCENE 3 — A (AUTOMATION)
+   Floating check-ins, orders, bookings, notification popups
+   ============================================================ */
+(function buildAutomation(){
+  if (!window._VAAN) return;
+  var scene = window._VAAN.scene;
+
+  var autoGroup = new THREE.Group();
+  autoGroup.name = "autoGroup";
+  scene.add(autoGroup);
+
+  /* ---- Materials ---- */
+  var panelMat = new THREE.MeshPhysicalMaterial({
+    color: 0x12192a,
+    metalness: 0.5,
+    roughness: 0.15,
+    clearcoat: 1,
+    clearcoatRoughness: 0.1
+  });
+  var blueGlowMat = new THREE.MeshBasicMaterial({
+    color: 0x4f8fff,
+    transparent: true,
+    opacity: 0.85
+  });
+  var greenGlowMat = new THREE.MeshBasicMaterial({
+    color: 0x25b46e,
+    transparent: true,
+    opacity: 0.9
+  });
+  var goldGlowMat = new THREE.MeshBasicMaterial({
+    color: 0xffd400,
+    transparent: true,
+    opacity: 0.9
+  });
+  var purpleGlowMat = new THREE.MeshBasicMaterial({
+    color: 0xa78bfa,
+    transparent: true,
+    opacity: 0.85
+  });
+
+  /* ---- Helper: system panel ---- */
+  function makeSystemPanel(x, y, z, rotY, accent){
+    var g = new THREE.Group();
+
+    /* Main card */
+    var card = new THREE.Mesh(new THREE.BoxGeometry(2.2, 1.4, 0.08), panelMat);
+    g.add(card);
+
+    /* Top accent bar */
+    var bar = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 0.08), accent);
+    bar.position.set(0, 0.66, 0.05);
+    g.add(bar);
+
+    /* Fake content: 3 rows + 1 check */
+    for (var r = 0; r < 3; r++){
+      var rowBg = new THREE.Mesh(
+        new THREE.PlaneGeometry(1.8, 0.15),
+        new THREE.MeshBasicMaterial({ color: 0x1a2136, transparent: true, opacity: 0.8 })
+      );
+      rowBg.position.set(0, 0.35 - r * 0.24, 0.05);
+      g.add(rowBg);
+
+      /* Small check/glow */
+      var dot = new THREE.Mesh(new THREE.CircleGeometry(0.05, 16), accent);
+      dot.position.set(-0.75, 0.35 - r * 0.24, 0.06);
+      g.add(dot);
+    }
+
+    /* Big bottom button */
+    var btn = new THREE.Mesh(new THREE.PlaneGeometry(1.6, 0.25), accent);
+    btn.position.set(0, -0.45, 0.05);
+    g.add(btn);
+
+    g.position.set(x, y, z);
+    g.rotation.y = rotY;
+    g.userData.floatSpeed = 0.4 + Math.random() * 0.4;
+    g.userData.floatAmp = 0.15 + Math.random() * 0.15;
+    g.userData.baseY = y;
+    g.userData.baseRotY = rotY;
+    g.userData.rotSpeed = (Math.random() - 0.5) * 0.1;
+    autoGroup.add(g);
+    return g;
+  }
+
+  /* ---- 1. SIX SYSTEM PANELS ARRANGED IN SPACE ---- */
+  var panelPositions = [
+    [-6, 2, -1, 0.35, blueGlowMat],
+    [-2.5, 3, -3, -0.2, greenGlowMat],
+    [2.5, 3, -3, 0.25, goldGlowMat],
+    [6, 2, -1, -0.4, purpleGlowMat],
+    [-4, -2.5, -2.5, 0.3, goldGlowMat],
+    [4, -2.5, -2.5, -0.3, blueGlowMat]
+  ];
+  var panels = [];
+  for (var p = 0; p < panelPositions.length; p++){
+    var pp = panelPositions[p];
+    panels.push(makeSystemPanel(pp[0], pp[1], pp[2], pp[3], pp[4]));
+  }
+
+  /* ---- 2. FLOATING NOTIFICATION POPUPS ---- */
+  var notifPositions = [
+    [-3, 0.5, 1.5],
+    [3.5, -0.2, 1],
+    [-1, -1.8, 2],
+    [1.5, 1.5, 1.8]
+  ];
+  var notifications = [];
+  for (var n = 0; n < notifPositions.length; n++){
+    var np = notifPositions[n];
+    var ng = new THREE.Group();
+
+    /* Rounded card (approximated with box) */
+    var notif = new THREE.Mesh(
+      new THREE.BoxGeometry(1.6, 0.5, 0.06),
+      new THREE.MeshPhysicalMaterial({
+        color: 0x12192a,
+        metalness: 0.4,
+        roughness: 0.2,
+        clearcoat: 1
+      })
+    );
+    ng.add(notif);
+
+    /* Glow accent line */
+    var accent = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.06, 0.5),
+      n % 2 === 0 ? greenGlowMat : blueGlowMat
+    );
+    accent.position.set(-0.77, 0, 0.04);
+    ng.add(accent);
+
+    /* Fake text */
+    var textLine = new THREE.Mesh(
+      new THREE.PlaneGeometry(1.1, 0.08),
+      new THREE.MeshBasicMaterial({ color: 0xe5e9ee, transparent: true, opacity: 0.7 })
+    );
+    textLine.position.set(0.05, 0.08, 0.04);
+    ng.add(textLine);
+
+    var textLine2 = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.7, 0.06),
+      new THREE.MeshBasicMaterial({ color: 0x8a8f9c, transparent: true, opacity: 0.5 })
+    );
+    textLine2.position.set(-0.15, -0.12, 0.04);
+    ng.add(textLine2);
+
+    ng.position.set(np[0], np[1], np[2]);
+    ng.userData.floatSpeed = 0.6 + Math.random() * 0.5;
+    ng.userData.floatAmp = 0.2 + Math.random() * 0.15;
+    ng.userData.baseY = np[1];
+    ng.userData.rotSpeed = 0.05;
+    autoGroup.add(ng);
+    notifications.push(ng);
+  }
+
+  /* ---- 3. DATA FLOW PARTICLES (moving between panels) ---- */
+  var flowCount = 80;
+  var flowPos = new Float32Array(flowCount * 3);
+  var flowSpeed = new Float32Array(flowCount);
+  var flowFrom = [];
+  for (var f = 0; f < flowCount; f++){
+    var start = panelPositions[Math.floor(Math.random() * panelPositions.length)];
+    var end = panelPositions[Math.floor(Math.random() * panelPositions.length)];
+    flowFrom.push({ start: start, end: end, t: Math.random() });
+    flowPos[f * 3] = start[0];
+    flowPos[f * 3 + 1] = start[1];
+    flowPos[f * 3 + 2] = start[2];
+    flowSpeed[f] = 0.002 + Math.random() * 0.004;
+  }
+  var flowGeo = new THREE.BufferGeometry();
+  flowGeo.setAttribute("position", new THREE.BufferAttribute(flowPos, 3));
+  var flowMat = new THREE.PointsMaterial({
+    color: 0x4f8fff,
+    size: 0.08,
+    transparent: true,
+    opacity: 0.9,
+    sizeAttenuation: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var flowParticles = new THREE.Points(flowGeo, flowMat);
+  flowParticles.name = "autoFlow";
+  autoGroup.add(flowParticles);
+
+  /* ---- 4. BIG CENTRAL RING (dashboard-ish) ---- */
+  var bigRing = new THREE.Mesh(
+    new THREE.TorusGeometry(4, 0.04, 16, 100),
+    new THREE.MeshBasicMaterial({ color: 0x4f8fff, transparent: true, opacity: 0.35 })
+  );
+  bigRing.rotation.x = Math.PI / 2.2;
+  bigRing.position.set(0, 0, -1);
+  autoGroup.add(bigRing);
+
+  var bigRing2 = new THREE.Mesh(
+    new THREE.TorusGeometry(4.8, 0.02, 16, 100),
+    new THREE.MeshBasicMaterial({ color: 0xa78bfa, transparent: true, opacity: 0.25 })
+  );
+  bigRing2.rotation.x = Math.PI / 1.9;
+  bigRing2.position.set(0, 0, -1);
+  autoGroup.add(bigRing2);
+
+  /* ---- Store for animation ---- */
+  window._VAAN.autoGroup = autoGroup;
+  window._VAAN.autoPanels = panels;
+  window._VAAN.autoNotifications = notifications;
+  window._VAAN.autoFlow = flowParticles;
+  window._VAAN.autoFlowData = flowFrom;
+  window._VAAN.autoFlowSpeed = flowSpeed;
+  window._VAAN.autoRing = bigRing;
+  window._VAAN.autoRing2 = bigRing2;
+
+  /* Start hidden */
+  autoGroup.visible = false;
+
+})();
+</script>
