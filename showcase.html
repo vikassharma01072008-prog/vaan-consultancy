@@ -1593,4 +1593,1298 @@ window.addEventListener("scroll", function(){
 
   console.log("✅ Scene 3 (Automation) loaded");
 })();
+  </script><script>
+/* ============================================================
+   SCENE 3 — AUTOMATION ANIMATION
+   ============================================================ */
+(function animateAutomation(){
+  if (!window._V || !window._V.auto) return;
+  var ref = window._V.auto;
+
+  window._V.animateAutomation = function(t){
+    if (!ref.group.visible) return;
+
+    /* Panels float */
+    for (var i = 0; i < ref.panels.length; i++){
+      var pnl = ref.panels[i];
+      pnl.position.y = pnl.userData.baseY +
+        Math.sin(t * pnl.userData.floatSpeed + pnl.position.x * 0.7) * pnl.userData.floatAmp;
+      pnl.rotation.y = pnl.userData.baseRotY +
+        Math.sin(t * 0.4 + pnl.position.x) * 0.06;
+    }
+
+    /* Notifications bob + scale pulse */
+    for (var n = 0; n < ref.notifications.length; n++){
+      var nf = ref.notifications[n];
+      nf.position.y = nf.userData.baseY +
+        Math.sin(t * nf.userData.floatSpeed + nf.userData.phase) * nf.userData.floatAmp;
+      nf.rotation.y = Math.sin(t * 0.3 + n) * 0.18;
+      var sc = 1 + Math.sin(t * 1.5 + nf.userData.phase) * 0.06;
+      nf.scale.set(sc, sc, sc);
+    }
+
+    /* Flow particles travel between panels */
+    if (ref.flow && ref.flowData){
+      var fpos = ref.flow.geometry.attributes.position.array;
+      for (var f = 0; f < ref.flowData.length; f++){
+        var fd = ref.flowData[f];
+        fd.t += fd.speed;
+        if (fd.t > 1) fd.t = 0;
+
+        var tt = fd.t;
+        var ease = tt * tt * (3 - 2 * tt);
+
+        fpos[f * 3]     = fd.from.x + (fd.to.x - fd.from.x) * ease;
+        fpos[f * 3 + 1] = fd.from.y + (fd.to.y - fd.from.y) * ease + Math.sin(tt * Math.PI) * 0.6;
+        fpos[f * 3 + 2] = fd.from.z + (fd.to.z - fd.from.z) * ease;
+      }
+      ref.flow.geometry.attributes.position.needsUpdate = true;
+    }
+
+    /* Central rings rotate */
+    if (ref.ring1) ref.ring1.rotation.z += 0.004;
+    if (ref.ring2) ref.ring2.rotation.z -= 0.0025;
+  };
+})();
+
+/* ============================================================
+   SCENE 4 — ADVANCEMENT
+   Timeline of website versions v1 → v2 → v3 → v4
+   ============================================================ */
+(function buildAdvancement(){
+  if (!window._V) return;
+  var scene = window._V.scene;
+  var group = new THREE.Group();
+  group.name = "advGroup";
+  group.visible = false;
+  scene.add(group);
+
+  /* ---- MATERIALS ---- */
+  var cardMat = new THREE.MeshPhysicalMaterial({
+    color: 0x12192a, metalness: 0.5, roughness: 0.15,
+    clearcoat: 1, clearcoatRoughness: 0.08
+  });
+  var goldGlow = new THREE.MeshBasicMaterial({ color: 0xffd400, transparent: true, opacity: 0.9, depthWrite: false });
+  var blueGlow = new THREE.MeshBasicMaterial({ color: 0x4f8fff, transparent: true, opacity: 0.85, depthWrite: false });
+  var purpleGlow = new THREE.MeshBasicMaterial({ color: 0xa78bfa, transparent: true, opacity: 0.85, depthWrite: false });
+  var greenGlow = new THREE.MeshBasicMaterial({ color: 0x25b46e, transparent: true, opacity: 0.85, depthWrite: false });
+
+  /* ---- HELPER: version card (fake website preview) ---- */
+  function makeVersionCard(accent, complexity){
+    var g = new THREE.Group();
+
+    /* Card */
+    var card = new THREE.Mesh(
+      new THREE.BoxGeometry(2.8, 1.7, 0.12),
+      cardMat
+    );
+    g.add(card);
+
+    /* Top browser bar */
+    var topBar = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.8, 0.16),
+      new THREE.MeshBasicMaterial({ color: 0x1a2136, transparent: true, opacity: 0.95 })
+    );
+    topBar.position.set(0, 0.77, 0.07);
+    g.add(topBar);
+
+    /* Accent strip */
+    var strip = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.8, 0.06),
+      accent
+    );
+    strip.position.set(0, 0.7, 0.08);
+    g.add(strip);
+
+    /* Content blocks — more = more advanced */
+    for (var i = 0; i < complexity; i++){
+      var bw = 0.6 + Math.random() * 1.4;
+      var bh = 0.15 + Math.random() * 0.3;
+      var block = new THREE.Mesh(
+        new THREE.PlaneGeometry(bw, bh),
+        accent.clone()
+      );
+      block.material.opacity = 0.35 + Math.random() * 0.4;
+      block.material.depthWrite = false;
+      block.position.set(
+        (Math.random() - 0.5) * 2,
+        0.4 - i * 0.2,
+        0.07
+      );
+      g.add(block);
+    }
+
+    /* Small fake UI details */
+    for (var d = 0; d < Math.min(complexity + 1, 5); d++){
+      var dot = new THREE.Mesh(
+        new THREE.CircleGeometry(0.035, 12),
+        accent
+      );
+      dot.position.set(-1.2 + d * 0.15, 0.77, 0.08);
+      g.add(dot);
+    }
+
+    return g;
+  }
+
+  /* ---- 1. FOUR VERSION CARDS ON TIMELINE ---- */
+  var versions = [];
+
+  var v1 = makeVersionCard(blueGlow, 2);
+  v1.position.set(-6.5, 0, 0);
+  v1.rotation.y = 0.35;
+  v1.userData = { floatSpeed: 0.35, floatAmp: 0.12, baseY: 0, label: "v1" };
+  group.add(v1);
+  versions.push(v1);
+
+  var v2 = makeVersionCard(goldGlow, 3);
+  v2.position.set(-2.2, 0, -0.8);
+  v2.rotation.y = 0.18;
+  v2.userData = { floatSpeed: 0.45, floatAmp: 0.14, baseY: 0, label: "v2" };
+  group.add(v2);
+  versions.push(v2);
+
+  var v3 = makeVersionCard(purpleGlow, 4);
+  v3.position.set(2.2, 0, -1.6);
+  v3.rotation.y = -0.18;
+  v3.userData = { floatSpeed: 0.55, floatAmp: 0.16, baseY: 0, label: "v3" };
+  group.add(v3);
+  versions.push(v3);
+
+  var v4 = makeVersionCard(greenGlow, 5);
+  v4.position.set(6.5, 0, -2.4);
+  v4.rotation.y = -0.35;
+  v4.userData = { floatSpeed: 0.65, floatAmp: 0.18, baseY: 0, label: "v4" };
+  group.add(v4);
+  versions.push(v4);
+
+  /* ---- 2. TIMELINE LINE ---- */
+  var linePoints = [];
+  for (var li = 0; li < versions.length; li++){
+    linePoints.push(new THREE.Vector3(
+      versions[li].position.x,
+      versions[li].position.y - 1.1,
+      versions[li].position.z
+    ));
+  }
+  var lineGeo = new THREE.BufferGeometry().setFromPoints(linePoints);
+  var lineMat = new THREE.LineBasicMaterial({
+    color: 0xffd400,
+    transparent: true,
+    opacity: 0.6
+  });
+  var timelineLine = new THREE.Line(lineGeo, lineMat);
+  group.add(timelineLine);
+
+  /* ---- 3. GLOWING NODES ON TIMELINE ---- */
+  var nodeColors = [0x4f8fff, 0xffd400, 0xa78bfa, 0x25b46e];
+  for (var ni = 0; ni < versions.length; ni++){
+    var node = new THREE.Mesh(
+      new THREE.SphereGeometry(0.18, 16, 16),
+      new THREE.MeshBasicMaterial({ color: nodeColors[ni] })
+    );
+    node.position.set(
+      versions[ni].position.x,
+      versions[ni].position.y - 1.1,
+      versions[ni].position.z
+    );
+    node.userData = { phase: ni * 1.5 };
+    group.add(node);
+  }
+
+  /* ---- 4. RISING PARTICLES (upgrade energy) ---- */
+  var riseCount = window._V.lowEnd ? 100 : 250;
+  var risePos = new Float32Array(riseCount * 3);
+  var riseVel = new Float32Array(riseCount);
+  for (var ri = 0; ri < riseCount; ri++){
+    risePos[ri * 3]     = (Math.random() - 0.5) * 20;
+    risePos[ri * 3 + 1] = -8 - Math.random() * 4;
+    risePos[ri * 3 + 2] = (Math.random() - 0.5) * 10;
+    riseVel[ri] = 0.012 + Math.random() * 0.018;
+  }
+  var riseGeo = new THREE.BufferGeometry();
+  riseGeo.setAttribute("position", new THREE.BufferAttribute(risePos, 3));
+  var riseMat = new THREE.PointsMaterial({
+    color: 0xffd400,
+    size: 0.07,
+    transparent: true,
+    opacity: 0.85,
+    sizeAttenuation: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var riseParticles = new THREE.Points(riseGeo, riseMat);
+  riseParticles.name = "advRise";
+  group.add(riseParticles);
+
+  /* ---- 5. EVOLUTION SPIRAL (background) ---- */
+  var spiralPoints = [];
+  for (var si = 0; si < 240; si++){
+    var angle = si * 0.14;
+    var radius = 2 + si * 0.022;
+    spiralPoints.push(new THREE.Vector3(
+      Math.cos(angle) * radius * 0.9,
+      (si - 120) * 0.06,
+      Math.sin(angle) * radius * 0.55 - 1
+    ));
+  }
+  var spiralGeo = new THREE.BufferGeometry().setFromPoints(spiralPoints);
+  var spiralMat = new THREE.LineBasicMaterial({
+    color: 0x4f8fff,
+    transparent: true,
+    opacity: 0.22
+  });
+  var spiralLine = new THREE.Line(spiralGeo, spiralMat);
+  group.add(spiralLine);
+
+  /* ---- STORE ---- */
+  window._V.adv = {
+    group: group,
+    versions: versions,
+    timeline: timelineLine,
+    rise: riseParticles,
+    riseVel: riseVel,
+    spiral: spiralLine
+  };
+
+  console.log("✅ Scene 4 (Advancement) loaded");
+})();
+  </script><script>
+/* ============================================================
+   SCENE 4 — ADVANCEMENT ANIMATION
+   ============================================================ */
+(function animateAdvancement(){
+  if (!window._V || !window._V.adv) return;
+  var ref = window._V.adv;
+
+  window._V.animateAdvancement = function(t){
+    if (!ref.group.visible) return;
+
+    /* Versions float */
+    for (var i = 0; i < ref.versions.length; i++){
+      var ver = ref.versions[i];
+      ver.position.y = ver.userData.baseY +
+        Math.sin(t * ver.userData.floatSpeed + i * 1.5) * ver.userData.floatAmp;
+    }
+
+    /* Rising particles */
+    if (ref.rise && ref.riseVel){
+      var rpos = ref.rise.geometry.attributes.position.array;
+      for (var r = 0; r < ref.riseVel.length; r++){
+        rpos[r * 3 + 1] += ref.riseVel[r];
+        if (rpos[r * 3 + 1] > 8){
+          rpos[r * 3 + 1] = -8;
+          rpos[r * 3]     = (Math.random() - 0.5) * 20;
+          rpos[r * 3 + 2] = (Math.random() - 0.5) * 10;
+        }
+      }
+      ref.rise.geometry.attributes.position.needsUpdate = true;
+    }
+
+    /* Spiral rotates */
+    if (ref.spiral) ref.spiral.rotation.y += 0.002;
+  };
+})();
+
+/* ============================================================
+   SCENE 5 — NETWORK
+   24-node web + core + traveling particles
+   ============================================================ */
+(function buildNetwork(){
+  if (!window._V) return;
+  var scene = window._V.scene;
+  var group = new THREE.Group();
+  group.name = "netGroup";
+  group.visible = false;
+  scene.add(group);
+
+  /* ---- NODE COLOR PALETTE (VAAN services) ---- */
+  var nodeColors = [
+    0xffd400, /* gold */
+    0x4f8fff, /* blue */
+    0x25b46e, /* green */
+    0xa78bfa, /* purple */
+    0xff8c42, /* orange */
+    0xff5e7a  /* pink */
+  ];
+
+  /* ---- BUILD NODES IN 3D LAYERS ---- */
+  var nodes = [];
+  var nodePositions = [];
+  var layers = 3;
+  var nodesPerLayer = 8;
+  var radius = 7;
+
+  for (var layer = 0; layer < layers; layer++){
+    var y = (layer - 1) * 2.8;
+    var layerRadius = radius * (1 - Math.abs(layer - 1) * 0.25);
+
+    for (var i = 0; i < nodesPerLayer; i++){
+      var angle = (i / nodesPerLayer) * Math.PI * 2 + layer * 0.4;
+      var x = Math.cos(angle) * layerRadius * (0.9 + Math.random() * 0.2);
+      var z = Math.sin(angle) * layerRadius * (0.9 + Math.random() * 0.2);
+
+      var color = nodeColors[(layer * nodesPerLayer + i) % nodeColors.length];
+
+      /* Node */
+      var node = new THREE.Mesh(
+        new THREE.SphereGeometry(0.2, 18, 18),
+        new THREE.MeshBasicMaterial({ color: color })
+      );
+      node.position.set(x, y, z);
+
+      /* Halo */
+      var halo = new THREE.Mesh(
+        new THREE.SphereGeometry(0.45, 14, 14),
+        new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.22,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending
+        })
+      );
+      node.add(halo);
+
+      node.userData = {
+        baseY: y,
+        floatSpeed: 0.4 + Math.random() * 0.5,
+        floatAmp: 0.2 + Math.random() * 0.2,
+        color: color,
+        phase: Math.random() * Math.PI * 2
+      };
+
+      group.add(node);
+      nodes.push(node);
+      nodePositions.push(new THREE.Vector3(x, y, z));
+    }
+  }
+
+  /* ---- LIGHT TRAILS CONNECTING NEARBY NODES ---- */
+  var lines = [];
+  for (var a = 0; a < nodes.length; a++){
+    /* Find 2 nearest neighbors */
+    var distances = [];
+    for (var b = 0; b < nodes.length; b++){
+      if (a === b) continue;
+      distances.push({
+        idx: b,
+        d: nodePositions[a].distanceTo(nodePositions[b])
+      });
+    }
+    distances.sort(function(x, y){ return x.d - y.d; });
+
+    for (var c = 0; c < 2 && c < distances.length; c++){
+      var oi = distances[c].idx;
+      if (oi < a) continue;
+
+      var pts = [nodePositions[a], nodePositions[oi]];
+      var lgeo = new THREE.BufferGeometry().setFromPoints(pts);
+      var lmat = new THREE.LineBasicMaterial({
+        color: nodes[a].userData.color,
+        transparent: true,
+        opacity: 0.35,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+      var line = new THREE.Line(lgeo, lmat);
+      line.userData = {
+        fromIdx: a,
+        toIdx: oi,
+        phase: Math.random() * Math.PI * 2,
+        baseOpacity: 0.35
+      };
+      group.add(line);
+      lines.push(line);
+    }
+  }
+
+  /* ---- CENTER CORE (VAAN) ---- */
+  var core = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(1.4, 1),
+    new THREE.MeshPhysicalMaterial({
+      color: 0xffd400,
+      emissive: 0x4f8fff,
+      emissiveIntensity: 0.45,
+      metalness: 0.9,
+      roughness: 0.15,
+      clearcoat: 1,
+      flatShading: true
+    })
+  );
+  group.add(core);
+
+  /* Wireframe overlay on core */
+  var coreWire = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(1.45, 1),
+    new THREE.MeshBasicMaterial({
+      color: 0xffd400,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.18
+    })
+  );
+  core.add(coreWire);
+
+  /* Core halo */
+  var coreHalo = new THREE.Mesh(
+    new THREE.SphereGeometry(2.4, 24, 24),
+    new THREE.MeshBasicMaterial({
+      color: 0xffd400,
+      transparent: true,
+      opacity: 0.08,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
+    })
+  );
+  group.add(coreHalo);
+
+  /* ---- TRAVELING PARTICLES ---- */
+  var travelCount = window._V.lowEnd ? 40 : 90;
+  var travelPos = new Float32Array(travelCount * 3);
+  var travelData = [];
+  for (var t = 0; t < travelCount; t++){
+    var fromIdx = Math.floor(Math.random() * nodes.length);
+    var toIdx = Math.floor(Math.random() * nodes.length);
+    if (toIdx === fromIdx) toIdx = (fromIdx + 3) % nodes.length;
+
+    travelData.push({
+      from: nodePositions[fromIdx],
+      to: nodePositions[toIdx],
+      t: Math.random(),
+      speed: 0.005 + Math.random() * 0.004
+    });
+    travelPos[t * 3]     = nodePositions[fromIdx].x;
+    travelPos[t * 3 + 1] = nodePositions[fromIdx].y;
+    travelPos[t * 3 + 2] = nodePositions[fromIdx].z;
+  }
+  var travelGeo = new THREE.BufferGeometry();
+  travelGeo.setAttribute("position", new THREE.BufferAttribute(travelPos, 3));
+  var travelMat = new THREE.PointsMaterial({
+    color: 0xffd400,
+    size: 0.12,
+    transparent: true,
+    opacity: 0.9,
+    sizeAttenuation: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var travelParticles = new THREE.Points(travelGeo, travelMat);
+  travelParticles.name = "netTravel";
+  group.add(travelParticles);
+
+  /* ---- STORE ---- */
+  window._V.net = {
+    group: group,
+    nodes: nodes,
+    lines: lines,
+    core: core,
+    coreWire: coreWire,
+    coreHalo: coreHalo,
+    travel: travelParticles,
+    travelData: travelData
+  };
+
+  console.log("✅ Scene 5 (Network) loaded");
+})();
+  </script><script>
+/* ============================================================
+   SCENE 5 — NETWORK ANIMATION
+   ============================================================ */
+(function animateNetwork(){
+  if (!window._V || !window._V.net) return;
+  var ref = window._V.net;
+
+  window._V.animateNetwork = function(t){
+    if (!ref.group.visible) return;
+
+    /* Core spins */
+    if (ref.core){
+      ref.core.rotation.x += 0.003;
+      ref.core.rotation.y += 0.005;
+    }
+
+    /* Nodes pulse + float */
+    for (var i = 0; i < ref.nodes.length; i++){
+      var node = ref.nodes[i];
+      var pulse = 1 + Math.sin(t * 1.5 + node.userData.phase) * 0.18;
+      node.scale.set(pulse, pulse, pulse);
+      node.position.y = node.userData.baseY +
+        Math.sin(t * node.userData.floatSpeed) * node.userData.floatAmp;
+    }
+
+    /* Lines pulse opacity */
+    for (var l = 0; l < ref.lines.length; l++){
+      var line = ref.lines[l];
+      var o = line.userData.baseOpacity +
+        Math.sin(t * 1.2 + line.userData.phase) * 0.22;
+      line.material.opacity = Math.max(0.08, Math.min(0.75, o));
+    }
+
+    /* Travel particles */
+    if (ref.travel && ref.travelData){
+      var tpos = ref.travel.geometry.attributes.position.array;
+      for (var tr = 0; tr < ref.travelData.length; tr++){
+        var data = ref.travelData[tr];
+        data.t += data.speed;
+        if (data.t > 1) data.t = 0;
+
+        var tt = data.t;
+        var ease = tt * tt * (3 - 2 * tt);
+        tpos[tr * 3]     = data.from.x + (data.to.x - data.from.x) * ease;
+        tpos[tr * 3 + 1] = data.from.y + (data.to.y - data.from.y) * ease;
+        tpos[tr * 3 + 2] = data.from.z + (data.to.z - data.from.z) * ease;
+      }
+      ref.travel.geometry.attributes.position.needsUpdate = true;
+    }
+
+    /* Halo breathes */
+    if (ref.coreHalo){
+      var s = 1 + Math.sin(t * 0.8) * 0.07;
+      ref.coreHalo.scale.set(s, s, s);
+    }
+  };
+})();
+
+/* ============================================================
+   SCENE 6 — FINALE
+   Merged mega-core + expanding rings + particle cloud
+   ============================================================ */
+(function buildFinale(){
+  if (!window._V) return;
+  var scene = window._V.scene;
+  var group = new THREE.Group();
+  group.name = "finaleGroup";
+  group.visible = false;
+  scene.add(group);
+
+  /* ---- CENTER MEGA-CORE ---- */
+  var core = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(2, 2),
+    new THREE.MeshPhysicalMaterial({
+      color: 0xffd400,
+      emissive: 0x4f8fff,
+      emissiveIntensity: 0.5,
+      metalness: 0.92,
+      roughness: 0.1,
+      clearcoat: 1,
+      clearcoatRoughness: 0.05,
+      flatShading: true
+    })
+  );
+  group.add(core);
+
+  /* Wireframe */
+  var coreWire = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(2.08, 2),
+    new THREE.MeshBasicMaterial({
+      color: 0xffd400,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.14
+    })
+  );
+  core.add(coreWire);
+
+  /* ---- EXPANDING RINGS ---- */
+  var rings = [];
+  var ringColors = [0xffd400, 0x4f8fff, 0xa78bfa, 0x25b46e];
+  for (var r = 0; r < 4; r++){
+    var ring = new THREE.Mesh(
+      new THREE.TorusGeometry(3.4 + r * 1.1, 0.025, 8, 120),
+      new THREE.MeshBasicMaterial({
+        color: ringColors[r],
+        transparent: true,
+        opacity: 0.55,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      })
+    );
+    ring.rotation.x = Math.PI / 2 + r * 0.35;
+    ring.rotation.y = r * 0.5;
+    ring.userData = {
+      baseRotSpeed: 0.15 + r * 0.05,
+      phase: r * 1.3
+    };
+    group.add(ring);
+    rings.push(ring);
+  }
+
+  /* ---- CELEBRATION PARTICLE CLOUD ---- */
+  var cloudCount = window._V.lowEnd ? 250 : 600;
+  var cloudPos = new Float32Array(cloudCount * 3);
+  var cloudColor = new Float32Array(cloudCount * 3);
+  var palette = [0xffd400, 0x4f8fff, 0xa78bfa, 0x25b46e, 0xff8c42];
+
+  for (var i = 0; i < cloudCount; i++){
+    var ang = Math.random() * Math.PI * 2;
+    var phi = Math.acos(2 * Math.random() - 1);
+    var rad = 3.5 + Math.random() * 13;
+
+    cloudPos[i * 3]     = Math.sin(phi) * Math.cos(ang) * rad;
+    cloudPos[i * 3 + 1] = Math.sin(phi) * Math.sin(ang) * rad;
+    cloudPos[i * 3 + 2] = Math.cos(phi) * rad;
+
+    var c = new THREE.Color(palette[Math.floor(Math.random() * palette.length)]);
+    cloudColor[i * 3]     = c.r;
+    cloudColor[i * 3 + 1] = c.g;
+    cloudColor[i * 3 + 2] = c.b;
+  }
+  var cloudGeo = new THREE.BufferGeometry();
+  cloudGeo.setAttribute("position", new THREE.BufferAttribute(cloudPos, 3));
+  cloudGeo.setAttribute("color", new THREE.BufferAttribute(cloudColor, 3));
+  var cloudMat = new THREE.PointsMaterial({
+    size: 0.1,
+    transparent: true,
+    opacity: 0.9,
+    sizeAttenuation: true,
+    depthWrite: false,
+    vertexColors: true,
+    blending: THREE.AdditiveBlending
+  });
+  var cloud = new THREE.Points(cloudGeo, cloudMat);
+  cloud.name = "finaleCloud";
+  group.add(cloud);
+
+  /* ---- SOFT AURA ---- */
+  var aura = new THREE.Mesh(
+    new THREE.SphereGeometry(3.2, 32, 32),
+    new THREE.MeshBasicMaterial({
+      color: 0xffd400,
+      transparent: true,
+      opacity: 0.07,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
+    })
+  );
+  group.add(aura);
+
+  /* ---- LIGHT RAYS ---- */
+  var rays = [];
+  var rayCount = 16;
+  for (var rc = 0; rc < rayCount; rc++){
+    var rayAngle = (rc / rayCount) * Math.PI * 2;
+    var ray = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.05, 8),
+      new THREE.MeshBasicMaterial({
+        color: 0xffd400,
+        transparent: true,
+        opacity: 0.13,
+        side: THREE.DoubleSide,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      })
+    );
+    ray.rotation.z = rayAngle;
+    ray.rotation.y = 0.3;
+    ray.userData = { baseOpacity: 0.13, phase: rc * 0.4 };
+    group.add(ray);
+    rays.push(ray);
+  }
+
+  /* ---- STORE ---- */
+  window._V.finale = {
+    group: group,
+    core: core,
+    rings: rings,
+    cloud: cloud,
+    aura: aura,
+    rays: rays
+  };
+
+  console.log("✅ Scene 6 (Finale) loaded");
+})();
+  </script><script>
+/* ============================================================
+   SCENE 6 — FINALE ANIMATION
+   ============================================================ */
+(function animateFinale(){
+  if (!window._V || !window._V.finale) return;
+  var ref = window._V.finale;
+
+  window._V.animateFinale = function(t){
+    if (!ref.group.visible) return;
+
+    /* Core spins */
+    if (ref.core){
+      ref.core.rotation.x += 0.0035;
+      ref.core.rotation.y += 0.0055;
+    }
+
+    /* Rings expand + rotate */
+    for (var i = 0; i < ref.rings.length; i++){
+      var ring = ref.rings[i];
+      ring.rotation.z += ring.userData.baseRotSpeed * 0.01;
+      ring.rotation.x += 0.0018;
+      var s = 1 + Math.sin(t * 0.6 + ring.userData.phase) * 0.08;
+      ring.scale.set(s, s, s);
+    }
+
+    /* Cloud rotates */
+    if (ref.cloud){
+      ref.cloud.rotation.y += 0.0015;
+      ref.cloud.rotation.x += 0.0005;
+    }
+
+    /* Aura breathes */
+    if (ref.aura){
+      var a = 1 + Math.sin(t * 0.7) * 0.1;
+      ref.aura.scale.set(a, a, a);
+      ref.aura.material.opacity = 0.06 + Math.sin(t * 0.85) * 0.025;
+    }
+
+    /* Rays pulse */
+    for (var r = 0; r < ref.rays.length; r++){
+      var ray = ref.rays[r];
+      ray.material.opacity = ray.userData.baseOpacity +
+        Math.sin(t * 1.2 + ray.userData.phase) * 0.05;
+    }
+  };
+})();
+
+/* ============================================================
+   MASTER ANIMATION LOOP
+   Calls all scene animators each frame + handles camera parallax
+   ============================================================ */
+(function masterLoop(){
+  if (!window._V) return;
+  var V = window._V;
+  var cameraBase = { x: 0, y: 1.5, z: 12 };
+  var scrollDriven = false;
+
+  /* If GSAP sets camera positions, we don't fight them.
+     We only add mouse parallax on top. */
+  var scrollActive = false;
+
+  /* Detect scroll activity to blend parallax gently */
+  window.addEventListener("scroll", function(){
+    scrollActive = true;
+    clearTimeout(window._scrollTimeout);
+    window._scrollTimeout = setTimeout(function(){
+      scrollActive = false;
+    }, 200);
+  }, { passive: true });
+
+  function masterFrame(){
+    requestAnimationFrame(masterFrame);
+
+    var t = V.t;
+    var mx = V.mouse.x;
+    var my = V.mouse.y;
+
+    /* Call each scene animator */
+    if (V.animateOldWorld) V.animateOldWorld(t);
+    if (V.animateVision) V.animateVision(t);
+    if (V.animateAutomation) V.animateAutomation(t);
+    if (V.animateAdvancement) V.animateAdvancement(t);
+    if (V.animateNetwork) V.animateNetwork(t);
+    if (V.animateFinale) V.animateFinale(t);
+
+    /* Mouse parallax — subtle drift added on top of GSAP position */
+    /* We use a separate offset object so GSAP controls position.z etc.
+       Actually, GSAP modifies camera.position directly.
+       So we only nudge x/y here when NOT actively scrolling. */
+    if (!scrollActive && V.camera){
+      /* Tiny drift toward mouse — 0.15 units max */
+      var targetX = mx * 0.35;
+      var targetY = my * 0.25;
+      V.camera.position.x += (targetX - V.camera.position.x) * 0.008;
+      V.camera.position.y += (targetY - V.camera.position.y) * 0.008;
+    }
+
+    /* Always look at center */
+    if (V.camera) V.camera.lookAt(0, 0.5, 0);
+  }
+  masterFrame();
+
+  console.log("✅ Master animation loop running");
+})();
+  </script><script>
+/* ============================================================
+   GSAP SCROLLTRIGGER — Cinematic scroll choreography
+   Camera paths + scene toggles + fog colors
+   ============================================================ */
+(function initScrollChoreography(){
+  if (!window._V || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  var V = window._V;
+  var camera = V.camera;
+  var fog = V.scene.fog;
+
+  /* Hide all scene groups initially */
+  function hideAll(){
+    if (V.oldWorld && V.oldWorld.group) V.oldWorld.group.visible = false;
+    if (V.vision && V.vision.group) V.vision.group.visible = false;
+    if (V.auto && V.auto.group) V.auto.group.visible = false;
+    if (V.adv && V.adv.group) V.adv.group.visible = false;
+    if (V.net && V.net.group) V.net.group.visible = false;
+    if (V.finale && V.finale.group) V.finale.group.visible = false;
+  }
+  hideAll();
+
+  /* ============================================================
+     SCENE 1 — OLD WORLD
+     ============================================================ */
+  ScrollTrigger.create({
+    trigger: '[data-scene="old"]',
+    start: "top 90%",
+    end: "bottom 10%",
+    onEnter: function(){
+      hideAll();
+      if (V.oldWorld) V.oldWorld.group.visible = true;
+      fog.color.setHex(0x2a1f12);
+      fog.density = 0.032;
+      if (V.playWhoosh) V.playWhoosh("old");
+    },
+    onEnterBack: function(){
+      hideAll();
+      if (V.oldWorld) V.oldWorld.group.visible = true;
+      fog.color.setHex(0x2a1f12);
+      fog.density = 0.032;
+    }
+  });
+
+  /* Scene 1 camera path — slow dolly forward */
+  gsap.fromTo(camera.position,
+    { x: 0, y: 1.5, z: 14 },
+    {
+      x: 0, y: 1.2, z: 6,
+      scrollTrigger: {
+        trigger: '[data-scene="old"]',
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.8
+      }
+    }
+  );
+
+  /* ============================================================
+     SCENE 2 — VISION
+     ============================================================ */
+  ScrollTrigger.create({
+    trigger: '[data-scene="v"]',
+    start: "top 90%",
+    end: "bottom 10%",
+    onEnter: function(){
+      hideAll();
+      if (V.vision) V.vision.group.visible = true;
+      fog.color.setHex(0x1a1508);
+      fog.density = 0.024;
+      if (V.playWhoosh) V.playWhoosh("v");
+    },
+    onEnterBack: function(){
+      hideAll();
+      if (V.vision) V.vision.group.visible = true;
+      fog.color.setHex(0x1a1508);
+      fog.density = 0.024;
+    }
+  });
+
+  /* Scene 2 camera — pull back revealing QR */
+  gsap.fromTo(camera.position,
+    { x: -3, y: 0.5, z: 6 },
+    {
+      x: 3, y: 2, z: 12,
+      scrollTrigger: {
+        trigger: '[data-scene="v"]',
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.8
+      }
+    }
+  );
+
+  /* ============================================================
+     SCENE 3 — AUTOMATION
+     ============================================================ */
+  ScrollTrigger.create({
+    trigger: '[data-scene="auto"]',
+    start: "top 90%",
+    end: "bottom 10%",
+    onEnter: function(){
+      hideAll();
+      if (V.auto) V.auto.group.visible = true;
+      fog.color.setHex(0x081626);
+      fog.density = 0.024;
+      if (V.playWhoosh) V.playWhoosh("auto");
+    },
+    onEnterBack: function(){
+      hideAll();
+      if (V.auto) V.auto.group.visible = true;
+      fog.color.setHex(0x081626);
+      fog.density = 0.024;
+    }
+  });
+
+  /* Scene 3 camera — fly sideways through panels */
+  gsap.fromTo(camera.position,
+    { x: -6, y: 1.5, z: 10 },
+    {
+      x: 6, y: 1.5, z: 10,
+      scrollTrigger: {
+        trigger: '[data-scene="auto"]',
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.8
+      }
+    }
+  );
+
+  /* ============================================================
+     SCENE 4 — ADVANCEMENT
+     ============================================================ */
+  ScrollTrigger.create({
+    trigger: '[data-scene="adv"]',
+    start: "top 90%",
+    end: "bottom 10%",
+    onEnter: function(){
+      hideAll();
+      if (V.adv) V.adv.group.visible = true;
+      fog.color.setHex(0x14140a);
+      fog.density = 0.024;
+      if (V.playWhoosh) V.playWhoosh("adv");
+    },
+    onEnterBack: function(){
+      hideAll();
+      if (V.adv) V.adv.group.visible = true;
+      fog.color.setHex(0x14140a);
+      fog.density = 0.024;
+    }
+  });
+
+  /* Scene 4 camera — orbit along timeline */
+  gsap.fromTo(camera.position,
+    { x: 6, y: 1.5, z: 12 },
+    {
+      x: -6, y: 1.5, z: 10,
+      scrollTrigger: {
+        trigger: '[data-scene="adv"]',
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.8
+      }
+    }
+  );
+
+  /* ============================================================
+     SCENE 5 — NETWORK
+     ============================================================ */
+  ScrollTrigger.create({
+    trigger: '[data-scene="net"]',
+    start: "top 90%",
+    end: "bottom 10%",
+    onEnter: function(){
+      hideAll();
+      if (V.net) V.net.group.visible = true;
+      fog.color.setHex(0x140a26);
+      fog.density = 0.026;
+      if (V.playWhoosh) V.playWhoosh("net");
+    },
+    onEnterBack: function(){
+      hideAll();
+      if (V.net) V.net.group.visible = true;
+      fog.color.setHex(0x140a26);
+      fog.density = 0.026;
+    }
+  });
+
+  /* Scene 5 camera — pull way back to reveal web */
+  gsap.fromTo(camera.position,
+    { x: 0, y: 0.5, z: 8 },
+    {
+      x: 0, y: 2, z: 16,
+      scrollTrigger: {
+        trigger: '[data-scene="net"]',
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.8
+      }
+    }
+  );
+
+  /* ============================================================
+     SCENE 6 — FINALE
+     ============================================================ */
+  ScrollTrigger.create({
+    trigger: '[data-scene="final"]',
+    start: "top 90%",
+    end: "bottom 10%",
+    onEnter: function(){
+      hideAll();
+      if (V.finale) V.finale.group.visible = true;
+      fog.color.setHex(0x0a0e1a);
+      fog.density = 0.018;
+      if (V.playWhoosh) V.playWhoosh("final");
+    },
+    onEnterBack: function(){
+      hideAll();
+      if (V.finale) V.finale.group.visible = true;
+      fog.color.setHex(0x0a0e1a);
+      fog.density = 0.018;
+    }
+  });
+
+  /* Scene 6 camera — close in on finale core */
+  gsap.fromTo(camera.position,
+    { x: 0, y: 2, z: 14 },
+    {
+      x: 0, y: 0.8, z: 7,
+      scrollTrigger: {
+        trigger: '[data-scene="final"]',
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.8
+      }
+    }
+  );
+
+  /* ============================================================
+     SCROLL PROGRESS INDICATOR (right side dots)
+     ============================================================ */
+  var indicator = document.createElement("div");
+  indicator.id = "sceneIndicator";
+  indicator.style.cssText = "position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:9997;display:flex;flex-direction:column;gap:14px";
+  document.body.appendChild(indicator);
+
+  var sceneKeys = ["old","v","auto","adv","net","final"];
+  var dotElements = [];
+
+  sceneKeys.forEach(function(key, i){
+    var dot = document.createElement("div");
+    dot.style.cssText = "width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:.3s";
+    dot.title = key.toUpperCase();
+    dot.addEventListener("click", function(){
+      var el = document.querySelector('[data-scene="' + key + '"]');
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    });
+    indicator.appendChild(dot);
+    dotElements.push(dot);
+  });
+
+  /* Update active dot on scroll */
+  sceneKeys.forEach(function(key, i){
+    ScrollTrigger.create({
+      trigger: '[data-scene="' + key + '"]',
+      start: "top 70%",
+      end: "bottom 30%",
+      onToggle: function(self){
+        if (self.isActive){
+          dotElements.forEach(function(d, di){
+            d.style.background = di === i ? "#ffd400" : "rgba(255,255,255,.2)";
+            d.style.boxShadow = di === i ? "0 0 12px #ffd400" : "none";
+          });
+        }
+      }
+    });
+  });
+
+  console.log("✅ Scroll choreography loaded with 6 scenes");
+})();
+  </script><script>
+/* ============================================================
+   TEXT ANIMATIONS
+   Letter-by-letter 3D blur→sharp reveal for scene text
+   ============================================================ */
+(function initTextAnimations(){
+  if (!window._V || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ============================================================
+     BIG LETTER REVEAL (V, A, A, N, VAAN, OLD WORLD)
+     Zooms in from huge scale + blur→sharp + glow pulse
+     ============================================================ */
+  function animateBigLetter(section){
+    var letter = section.querySelector(".scene-huge .letter");
+    if (!letter) return;
+
+    gsap.set(letter, {
+      opacity: 0,
+      scale: 4,
+      filter: "blur(30px)",
+      rotationY: -180
+    });
+
+    gsap.to(letter, {
+      opacity: 1,
+      scale: 1,
+      filter: "blur(0px)",
+      rotationY: 0,
+      duration: 1.8,
+      ease: "power4.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 60%",
+        once: true
+      }
+    });
+
+    /* Glow pulse after landing */
+    gsap.to(letter, {
+      textShadow: "0 0 80px rgba(255,212,0,.8), 0 0 160px rgba(255,212,0,.4)",
+      duration: 2,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      delay: 1.8,
+      scrollTrigger: {
+        trigger: section,
+        start: "top 60%",
+        once: true
+      }
+    });
+  }
+
+  /* ============================================================
+     SCENE NUMBER (small eyebrow)
+     ============================================================ */
+  function animateEyebrow(section){
+    var eyebrow = section.querySelector(".scene-num");
+    if (!eyebrow) return;
+
+    gsap.set(eyebrow, { opacity: 0, y: 20 });
+
+    gsap.to(eyebrow, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 65%",
+        once: true
+      }
+    });
+  }
+
+  /* ============================================================
+     TITLE REVEAL — word by word, slide up + blur
+     ============================================================ */
+  function animateTitle(section){
+    var title = section.querySelector(".scene-title");
+    if (!title) return;
+
+    /* Split title into words but preserve HTML spans */
+    var html = title.innerHTML;
+    var words = html.split(/\s+/);
+    title.innerHTML = words.map(function(w){
+      return '<span class="word-wrap" style="display:inline-block;overflow:hidden;vertical-align:top"><span class="word" style="display:inline-block;opacity:0;transform:translateY(60px);filter:blur(12px)">' + w + '</span></span>';
+    }).join(" ");
+
+    var wordEls = title.querySelectorAll(".word");
+
+    gsap.to(wordEls, {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      duration: 1.2,
+      stagger: 0.08,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 55%",
+        once: true
+      }
+    });
+  }
+
+  /* ============================================================
+     DESCRIPTION REVEAL — line by line fade up
+     ============================================================ */
+  function animateDesc(section){
+    var desc = section.querySelector(".scene-desc");
+    if (!desc) return;
+
+    gsap.set(desc, { opacity: 0, y: 40, filter: "blur(8px)" });
+
+    gsap.to(desc, {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      duration: 1.4,
+      delay: 0.6,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 50%",
+        once: true
+      }
+    });
+  }
+
+  /* ============================================================
+     CTA BUTTONS (finale)
+     ============================================================ */
+  function animateCTA(section){
+    var ctas = section.querySelectorAll(".btn-lg");
+    if (!ctas.length) return;
+
+    gsap.set(ctas, { opacity: 0, y: 30, scale: 0.9 });
+
+    gsap.to(ctas, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 1,
+      stagger: 0.15,
+      delay: 1.2,
+      ease: "back.out(1.4)",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 40%",
+        once: true
+      }
+    });
+  }
+
+  /* ============================================================
+     APPLY TO ALL SCENES
+     ============================================================ */
+  var sections = document.querySelectorAll(".scene-text");
+  sections.forEach(function(sec){
+    animateEyebrow(sec);
+    animateBigLetter(sec);
+    animateTitle(sec);
+    animateDesc(sec);
+    animateCTA(sec);
+  });
+
+  /* ============================================================
+     WORD SPLIT ENHANCEMENT (for .hl highlighter spans)
+     Re-wrap special-case split
+     ============================================================ */
+
+  /* Custom green glow on highlighted words */
+  gsap.utils.toArray(".hl").forEach(function(el){
+    gsap.fromTo(el,
+      { textShadow: "0 0 0 rgba(255,212,0,0)" },
+      {
+        textShadow: "0 0 20px rgba(255,212,0,.6)",
+        duration: 1.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      }
+    );
+  });
+
+  /* ============================================================
+     SCROLL HINT FADE OUT on scroll
+     ============================================================ */
+  var hint = document.querySelector(".scroll-hint");
+  if (hint){
+    gsap.to(hint, {
+      opacity: 0,
+      y: 20,
+      scrollTrigger: {
+        trigger: '[data-scene="old"]',
+        start: "top top",
+        end: "+=300",
+        scrub: 1
+      }
+    });
+  }
+
+  console.log("✅ Text animations loaded");
+})();
   </script>
