@@ -1,0 +1,2031 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<title>The VAAN Journey — Vision · Automation · Advancement · Network</title>
+<meta name="description" content="A cinematic 3D journey through VAAN Consultancy — how digital transformed business, and how we build the future.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0a0e1a">
+<link rel="canonical" href="https://vikassharma01072008-prog.github.io/vaan-consultancy/showcase.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RESET + ROOT
+   ============================================================ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#000;color:#f5f5f5;overflow-x:hidden;line-height:1.6;-webkit-tap-highlight-color:transparent}
+@media(min-width:901px){body{cursor:none}}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+:root{
+  --gold:#ffd400;
+  --gold-2:#ffa726;
+  --blue:#4f8fff;
+  --blue-2:#8bb4ff;
+  --purple:#a78bfa;
+  --sepia:#d4b896;
+  --sepia-dark:#8b6f47;
+  --white:#f5f5f5;
+  --muted:#8a8f9c;
+  --line-soft:rgba(255,255,255,.08);
+  --bg:#0a0e1a;
+}
+
+/* ============================================================
+   LOADING SCREEN
+   ============================================================ */
+#loadingScreen{
+  position:fixed;inset:0;background:#000;z-index:999999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity 1s ease,visibility 1s ease;
+  cursor:pointer;
+}
+#loadingScreen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loading-logo{
+  font-size:clamp(70px,12vw,120px);
+  font-weight:950;letter-spacing:-6px;
+  background:linear-gradient(135deg,var(--gold),var(--blue));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:10px;
+  animation:logoPulse 2.5s ease-in-out infinite;
+  filter:drop-shadow(0 0 40px rgba(255,212,0,.4));
+}
+@keyframes logoPulse{
+  0%,100%{opacity:1;transform:scale(1);filter:drop-shadow(0 0 40px rgba(255,212,0,.4))}
+  50%{opacity:.9;transform:scale(1.02);filter:drop-shadow(0 0 60px rgba(255,212,0,.7))}
+}
+.loading-tag{
+  color:var(--muted);font-size:11px;letter-spacing:5px;
+  font-weight:800;text-transform:uppercase;margin-bottom:50px;
+  animation:fadeInOut 3s ease-in-out infinite;
+}
+@keyframes fadeInOut{0%,100%{opacity:.5}50%{opacity:1}}
+.loading-bar{
+  width:min(280px,70vw);height:2px;
+  background:rgba(255,255,255,.08);
+  border-radius:99px;overflow:hidden;position:relative;
+  margin-bottom:24px;
+}
+.loading-bar-fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--gold),var(--blue));
+  transition:width .4s cubic-bezier(.2,.9,.3,1);
+  border-radius:99px;
+  box-shadow:0 0 20px rgba(255,212,0,.6);
+}
+.loading-status{
+  color:var(--muted);font-size:10px;letter-spacing:3px;
+  font-weight:800;text-transform:uppercase;min-height:16px;
+}
+.loading-hint{
+  position:absolute;bottom:50px;left:50%;transform:translateX(-50%);
+  color:var(--gold);font-size:11px;letter-spacing:3px;
+  font-weight:900;text-transform:uppercase;
+  padding:14px 26px;border:1px solid rgba(255,212,0,.4);
+  border-radius:99px;background:rgba(255,212,0,.05);
+  backdrop-filter:blur(10px);
+  animation:hintPulse 2s ease-in-out infinite;
+}
+@keyframes hintPulse{
+  0%,100%{box-shadow:0 0 0 rgba(255,212,0,0)}
+  50%{box-shadow:0 0 30px rgba(255,212,0,.4)}
+}
+
+/* ============================================================
+   CUSTOM CURSOR (desktop only)
+   ============================================================ */
+#customCursor{
+  position:fixed;top:0;left:0;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--gold);
+  pointer-events:none;z-index:99998;
+  transform:translate(-50%,-50%);
+  transition:width .3s ease,height .3s ease,background .3s ease;
+  mix-blend-mode:screen;
+  box-shadow:0 0 20px rgba(255,212,0,.8);
+}
+#customCursor.hover{
+  width:50px;height:50px;
+  background:rgba(255,212,0,.15);
+  border:1px solid var(--gold);
+  box-shadow:0 0 30px rgba(255,212,0,.5);
+}
+#customCursor.click{
+  width:26px;height:26px;
+  background:rgba(255,212,0,.35);
+}
+@media(max-width:900px){#customCursor{display:none}}
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 0;background:rgba(10,14,26,.55);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.06);transition:.4s}
+.nav.scrolled{background:rgba(10,14,26,.85);padding:12px 0}
+.nav-in{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:950;letter-spacing:-1.5px;color:#fff}
+.brand-logo{width:36px;height:36px}
+.brand-logo svg{width:100%;height:100%;filter:drop-shadow(0 0 12px rgba(255,212,0,.6))}
+.brand-text{display:flex;flex-direction:column;line-height:1}
+.brand-text b{font-size:19px;letter-spacing:-1px}
+.brand-text small{font-size:9px;letter-spacing:2px;color:var(--muted);margin-top:3px;font-weight:600}
+.nav-links{display:flex;align-items:center;gap:26px;font-size:14px;font-weight:600}
+.nav-links a{color:var(--white);opacity:.85;transition:.25s;position:relative}
+.nav-links a:hover{opacity:1;color:var(--gold)}
+.nav-links a.active{color:var(--gold);opacity:1}
+.nav-links a.active::after{content:"";position:absolute;bottom:-6px;left:0;right:0;height:2px;background:var(--gold);border-radius:2px;box-shadow:0 0 12px var(--gold)}
+.nav-cta{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#0a0e1a !important;padding:11px 22px;border-radius:99px;font-weight:800;font-size:13px;transition:.3s;opacity:1 !important;box-shadow:0 8px 24px rgba(255,212,0,.3)}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,212,0,.55)}
+.hamburger{display:none;background:transparent;border:0;cursor:pointer;padding:8px;flex-direction:column;gap:5px;width:40px;height:40px;align-items:center;justify-content:center}
+.hamburger span{display:block;width:24px;height:2px;background:#f5f5f5;border-radius:2px;transition:.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ============================================================
+   SOUND TOGGLE
+   ============================================================ */
+#soundToggle{position:fixed;top:88px;right:24px;z-index:9998;width:48px;height:48px;border-radius:50%;background:rgba(18,25,42,.75);border:1px solid rgba(255,212,0,.3);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(20px);transition:.3s;font-size:20px}
+#soundToggle:hover{background:rgba(255,212,0,.15);transform:scale(1.08);box-shadow:0 8px 24px rgba(255,212,0,.4)}
+#soundToggle.playing{color:var(--blue);border-color:rgba(79,143,255,.5);box-shadow:0 0 20px rgba(79,143,255,.4);animation:soundPulse 2s infinite}
+@keyframes soundPulse{0%,100%{box-shadow:0 0 20px rgba(79,143,255,.4)}50%{box-shadow:0 0 32px rgba(79,143,255,.7)}}
+@media(max-width:700px){#soundToggle{top:76px;right:16px;width:42px;height:42px;font-size:17px}}
+
+/* ============================================================
+   BASE CANVAS + SCROLL SPACE
+   ============================================================ */
+#showcaseCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#scrollSpace{position:relative;z-index:1}
+
+/* ============================================================
+   SCENE TEXT OVERLAYS
+   ============================================================ */
+.scene-text{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 24px;position:relative;pointer-events:none}
+.scene-text .scene-inner{pointer-events:auto}
+.scene-inner{max-width:920px;text-align:center;position:relative;z-index:2}
+.scene-num{display:inline-block;font-size:11px;letter-spacing:6px;font-weight:900;text-transform:uppercase;color:var(--muted);margin-bottom:28px;opacity:0}
+.scene-huge{font-size:clamp(80px,18vw,200px);font-weight:950;line-height:.85;letter-spacing:-8px;margin-bottom:28px;position:relative;display:flex;justify-content:center}
+.scene-huge .letter{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--blue));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;opacity:0;filter:blur(20px);transform:scale(3);will-change:transform,opacity,filter}
+.scene-title{font-size:clamp(28px,5vw,54px);font-weight:950;letter-spacing:-2px;line-height:1.05;margin-bottom:24px;opacity:0}
+.scene-title .gold{color:var(--gold)}
+.scene-title .blue{color:var(--blue)}
+.scene-title .purple{color:var(--purple)}
+.scene-title .sepia{color:var(--sepia)}
+.scene-desc{font-size:clamp(15px,1.6vw,18px);color:#b8becc;line-height:1.75;max-width:680px;margin:0 auto;opacity:0}
+.scene-desc b{color:#fff;font-weight:800}
+.scene-desc .hl{background:linear-gradient(90deg,var(--gold),var(--gold-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+
+/* ============================================================
+   SCENE THEME BACKGROUNDS
+   ============================================================ */
+.scene-old{background:radial-gradient(ellipse at 50% 50%,rgba(139,111,71,.08),transparent 70%)}
+.scene-old .scene-huge .letter{background:linear-gradient(135deg,var(--sepia),var(--sepia-dark));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.scene-old .scene-desc{color:#a89680}
+.scene-v{background:radial-gradient(ellipse at 50% 50%,rgba(255,212,0,.08),transparent 70%)}
+.scene-auto{background:radial-gradient(ellipse at 50% 50%,rgba(79,143,255,.08),transparent 70%)}
+.scene-adv{background:radial-gradient(ellipse at 50% 50%,rgba(255,212,0,.06),rgba(79,143,255,.06),transparent 70%)}
+.scene-net{background:radial-gradient(ellipse at 50% 50%,rgba(167,139,250,.08),transparent 70%)}
+.scene-final{background:radial-gradient(ellipse at 50% 50%,rgba(255,212,0,.08),rgba(79,143,255,.08),transparent 70%)}
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  border:0;border-radius:12px;padding:16px 28px;
+  font-weight:800;font-size:14px;cursor:pointer;font-family:inherit;
+  transition:all .3s cubic-bezier(.2,.9,.3,1.2);
+  display:inline-flex;align-items:center;gap:8px;
+  letter-spacing:.3px;text-decoration:none;
+  position:relative;overflow:hidden;
+}
+.btn::before{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transition:left .6s}
+.btn:hover::before{left:100%}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#0a0e1a;box-shadow:0 10px 30px rgba(255,212,0,.35)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(255,212,0,.55)}
+.btn-secondary{background:rgba(255,255,255,.06);color:var(--white);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(10px)}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px);box-shadow:0 12px 32px rgba(255,212,0,.2)}
+.btn-lg{padding:20px 36px;font-size:15px}
+
+/* ============================================================
+   FINALE SECTION (Scene 6 special)
+   ============================================================ */
+.finale-block{
+  display:flex;flex-direction:column;align-items:center;gap:18px;
+  margin-top:50px;opacity:0;
+}
+.finale-line-1{
+  font-size:clamp(50px,10vw,120px);
+  font-weight:950;letter-spacing:-4px;line-height:1;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  text-shadow:0 0 80px rgba(255,212,0,.6);
+}
+.finale-line-2{
+  font-size:clamp(18px,2.4vw,26px);
+  font-weight:600;color:#b8becc;font-style:italic;
+  margin-bottom:6px;
+}
+.finale-line-3{
+  font-size:clamp(14px,1.6vw,18px);
+  font-weight:900;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:30px;
+}
+.finale-buttons{
+  display:flex;gap:14px;flex-wrap:wrap;justify-content:center;
+}
+
+/* ============================================================
+   SCROLL HINT
+   ============================================================ */
+.scroll-hint{
+  position:absolute;bottom:50px;left:50%;transform:translateX(-50%);
+  color:var(--muted);font-size:10px;letter-spacing:4px;
+  font-weight:800;text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  opacity:.6;animation:hintFloat 2.5s ease-in-out infinite;
+}
+@keyframes hintFloat{
+  0%,100%{transform:translate(-50%,0);opacity:.6}
+  50%{transform:translate(-50%,10px);opacity:.9}
+}
+.scroll-hint .arrow{
+  width:16px;height:16px;
+  border-right:2px solid var(--gold);
+  border-bottom:2px solid var(--gold);
+  transform:rotate(45deg);margin-top:-4px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{
+  background:rgba(7,10,20,.95);
+  border-top:1px solid var(--line-soft);
+  padding:60px 24px 30px;margin-top:60px;
+  backdrop-filter:blur(20px);
+}
+.foot-in{
+  max-width:1280px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:20px;flex-wrap:wrap;
+}
+.foot-brand{
+  display:flex;align-items:center;gap:10px;
+  font-weight:950;letter-spacing:-1px;color:#fff;font-size:16px;
+}
+.foot-brand svg{width:26px;height:26px}
+.foot-meta{color:var(--muted);font-size:12px}
+.foot-meta a{color:var(--gold)}
+
+/* ============================================================
+   SCENE INDICATOR DOTS (right side)
+   ============================================================ */
+#sceneIndicator{
+  position:fixed;right:24px;top:50%;transform:translateY(-50%);
+  z-index:9997;display:flex;flex-direction:column;gap:14px;
+}
+#sceneIndicator div{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,.2);cursor:pointer;
+  transition:.3s;
+}
+#sceneIndicator div:hover{background:rgba(255,212,0,.5);transform:scale(1.3)}
+@media(max-width:700px){#sceneIndicator{right:10px;gap:10px}}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:900px){
+  .scene-huge{letter-spacing:-4px}
+  .scene-text{padding:100px 20px}
+  .finale-line-1{letter-spacing:-2px}
+}
+@media(max-width:700px){
+  .nav-links{
+    position:fixed;top:70px;left:0;right:0;
+    background:rgba(10,14,26,.98);
+    backdrop-filter:blur(20px);
+    flex-direction:column;padding:24px;gap:20px;
+    border-bottom:1px solid var(--line-soft);
+    transform:translateY(-150%);
+    transition:.4s cubic-bezier(.2,.9,.3,1.1);
+    z-index:999;
+  }
+  .nav-links.open{transform:translateY(0)}
+  .hamburger{display:flex}
+  .foot-in{justify-content:center;text-align:center}
+  .finale-buttons .btn{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body><!-- CUSTOM CURSOR -->
+<div id="customCursor"></div>
+
+<!-- ============================================================
+     LOADING SCREEN
+     ============================================================ -->
+<div id="loadingScreen">
+  <div class="loading-logo">VAAN</div>
+  <div class="loading-tag">VISION · AUTOMATION · ADVANCEMENT · NETWORK</div>
+  <div class="loading-bar">
+    <div class="loading-bar-fill" id="loadingFill"></div>
+  </div>
+  <div class="loading-status" id="loadingStatus">Initializing...</div>
+  <div class="loading-hint">Tap to Begin</div>
+</div>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav class="nav" id="mainNav">
+  <div class="nav-in">
+    <a href="index.html" class="brand">
+      <span class="brand-logo">
+        <svg viewBox="0 0 100 100" fill="none"><path d="M50 8 L92 92 L74 92 L50 42 L26 92 L8 92 Z" fill="url(#g1)"/><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffd400"/><stop offset="100%" stop-color="#4f8fff"/></linearGradient></defs></svg>
+      </span>
+      <span class="brand-text"><b>VAAN</b><small>CONSULTANCY</small></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="demos/index.html">Demos</a>
+      <a href="about.html">About</a>
+      <a href="showcase.html" class="active">Showcase</a>
+      <a href="tel:9671163712" class="nav-cta">📞 9671163712</a>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- SOUND TOGGLE -->
+<div id="soundToggle" title="Toggle sound">🔇</div>
+
+<!-- ============================================================
+     3D CANVAS
+     ============================================================ -->
+<canvas id="showcaseCanvas"></canvas>
+
+<!-- ============================================================
+     SCROLL SPACE (all 6 scenes live here)
+     ============================================================ -->
+<div id="scrollSpace"><!-- ============================================================
+     SCENE 1 — OLD WORLD
+     ============================================================ -->
+<section class="scene-text scene-old" data-scene="old">
+  <div class="scene-inner">
+    <span class="scene-num">PROLOGUE · BEFORE DIGITAL</span>
+    <div class="scene-huge"><span class="letter">OLD WORLD</span></div>
+    <h2 class="scene-title">Business used to be <span class="sepia">slower.</span></h2>
+    <p class="scene-desc">
+      Paper menus. Hand-written registers. Faded signs that never changed.
+      Customers walked in — or they didn't. There was no way to be found online,
+      no way to be seen at 3 AM. <b>Growth depended on luck and location.</b>
+    </p>
+    <div class="scroll-hint">
+      <span>Scroll to begin</span>
+      <span class="arrow"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SCENE 2 — V (VISION)
+     ============================================================ -->
+<section class="scene-text scene-v" data-scene="v">
+  <div class="scene-inner">
+    <span class="scene-num">CHAPTER 01 · V</span>
+    <div class="scene-huge"><span class="letter">V</span></div>
+    <h2 class="scene-title"><span class="gold">Vision</span> — seeing what's possible.</h2>
+    <p class="scene-desc">
+      Businesses don't fail because of bad products. They fail because
+      <b>no one sees them.</b> VAAN's first job is vision — helping owners imagine
+      their business online. A website. A QR menu. A booking system.
+      The tools exist. <span class="hl">The vision comes first.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SCENE 3 — A (AUTOMATION)
+     ============================================================ -->
+<section class="scene-text scene-auto" data-scene="auto">
+  <div class="scene-inner">
+    <span class="scene-num">CHAPTER 02 · A</span>
+    <div class="scene-huge"><span class="letter">A</span></div>
+    <h2 class="scene-title"><span class="blue">Automation</span> — systems that never sleep.</h2>
+    <p class="scene-desc">
+      A menu that updates itself. A gym that logs members without a register.
+      Bookings that confirm on WhatsApp automatically.
+      <b>Automation isn't about robots — it's about your business running while you rest.</b>
+      That's what we build.
+    </p>
+  </div>
+      </section>  <!-- ============================================================
+       SCENE 4 — A (ADVANCEMENT)
+       ============================================================ -->
+  <section class="scene-text scene-adv" data-scene="adv">
+    <div class="scene-inner">
+      <span class="scene-num">CHAPTER 03 · A</span>
+      <div class="scene-huge"><span class="letter">A</span></div>
+      <h2 class="scene-title"><span class="gold">Advancement</span> — always one step ahead.</h2>
+      <p class="scene-desc">
+        Your first website is never your last. Version 2 loads faster.
+        Version 3 converts better. Version 4 talks to your customers with AI.
+        <b>We don't ship and disappear.</b> Every project we touch gets better over time —
+        <span class="hl">and so does your business.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCENE 5 — N (NETWORK)
+       ============================================================ -->
+  <section class="scene-text scene-net" data-scene="net">
+    <div class="scene-inner">
+      <span class="scene-num">CHAPTER 04 · N</span>
+      <div class="scene-huge"><span class="letter">N</span></div>
+      <h2 class="scene-title"><span class="purple">Network</span> — everything connected.</h2>
+      <p class="scene-desc">
+        One business. One system. Website, QR codes, social media,
+        AI chatbot, admin panel — all talking to each other.
+        <b>Your customers don't see the technology.</b>
+        They just feel it working. <span class="hl">This is what a connected business looks like.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SCENE 6 — FINALE · GO DIGITAL
+       ============================================================ -->
+  <section class="scene-text scene-final" data-scene="final">
+    <div class="scene-inner">
+      <span class="scene-num">FINALE</span>
+      <div class="scene-huge"><span class="letter">VAAN</span></div>
+      <h2 class="scene-title">Vision · Automation · <span class="gold">Advancement</span> · Network</h2>
+
+      <div class="finale-block">
+        <div class="finale-line-1">GO DIGITAL.</div>
+        <div class="finale-line-2">Blend into the modern world.</div>
+        <div class="finale-line-3">Natural Selection · Evolve or Fade</div>
+        <div class="finale-buttons">
+          <a href="services.html" class="btn btn-primary btn-lg">🎬 Explore Services</a>
+          <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20just%20watched%20your%20showcase.%20I%20want%20to%20discuss%20a%20project." class="btn btn-secondary btn-lg" target="_blank">💬 Get Yours</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<!-- END SCROLL SPACE -->
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="foot-in">
+    <div class="foot-brand">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M50 8 L92 92 L74 92 L50 42 L26 92 L8 92 Z" fill="url(#g2)"/><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffd400"/><stop offset="100%" stop-color="#4f8fff"/></linearGradient></defs></svg>
+      VAAN CONSULTANCY
+    </div>
+    <div class="foot-meta">
+      A cinematic journey · Made with <span style="color:var(--gold)">▲</span> in Karnal · <a href="tel:9671163712">9671163712</a>
+    </div>
+  </div>
+</footer><!-- ============================================================
+     LIBRARIES
+     ============================================================ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+
+<script>
+/* ============================================================
+   VAAN SHOWCASE — GLOBAL STATE
+   ============================================================ */
+window._V = {
+  scene: null,
+  camera: null,
+  renderer: null,
+  composer: null,
+  bloomPass: null,
+  clock: null,
+  t: 0,
+  mouse: { x: 0, y: 0, tx: 0, ty: 0 },
+  isMobile: /Android|iPhone|iPad|iPod/i.test(navigator.userAgent),
+  lowEnd: false,
+  loaded: false,
+  entered: false
+};
+
+/* ============================================================
+   LOADING SCREEN LOGIC
+   ============================================================ */
+(function loadingLogic(){
+  var fill = document.getElementById("loadingFill");
+  var status = document.getElementById("loadingStatus");
+  var msgs = [
+    "Initializing...",
+    "Loading 3D engine...",
+    "Preparing world...",
+    "Rendering scenes...",
+    "Almost ready..."
+  ];
+  var p = 0, i = 0;
+
+  var int = setInterval(function(){
+    p += Math.random() * 12 + 5;
+    if (p > 100) p = 100;
+    if (fill) fill.style.width = p + "%";
+    i = Math.min(msgs.length - 1, Math.floor(p / 22));
+    if (status) status.textContent = msgs[i];
+    if (p >= 100){
+      clearInterval(int);
+      if (status) status.textContent = "Ready";
+    }
+  }, 240);
+
+  window.startExperience = function(){
+    if (window._V.entered) return;
+    window._V.entered = true;
+
+    var screen = document.getElementById("loadingScreen");
+    if (screen){
+      screen.style.opacity = "0";
+      screen.style.visibility = "hidden";
+      screen.style.pointerEvents = "none";
+      setTimeout(function(){ screen.style.display = "none"; }, 1000);
+    }
+
+    if (typeof window.playMusic === "function") window.playMusic();
+
+    /* Show scene 1 */
+    if (window._V.oldWorld && window._V.oldWorld.group){
+      window._V.oldWorld.group.visible = true;
+    }
+    if (window._V.scene && window._V.scene.fog){
+      window._V.scene.fog.color.setHex(0x2a1f12);
+      window._V.scene.fog.density = 0.032;
+    }
+
+    /* Camera intro */
+    if (window._V.camera && typeof gsap !== "undefined"){
+      gsap.fromTo(window._V.camera.position,
+        { x: 0, y: 4, z: 24 },
+        { x: 0, y: 1.5, z: 14, duration: 3.5, ease: "power3.out" }
+      );
+    }
+
+    console.log("🎬 Experience started");
+  };
+
+  var screen = document.getElementById("loadingScreen");
+  if (screen){
+    screen.addEventListener("click", window.startExperience);
+    screen.addEventListener("touchstart", function(e){
+      e.preventDefault();
+      window.startExperience();
+    }, { passive: false });
+  }
+
+  document.addEventListener("keydown", function(e){
+    if ((e.key === "Enter" || e.key === " ") && !window._V.entered){
+      e.preventDefault();
+      window.startExperience();
+    }
+  });
+
+  /* Auto-start after 12s fallback */
+  setTimeout(function(){
+    if (!window._V.entered) window.startExperience();
+  }, 12000);
+})();
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+(function customCursor(){
+  if (window.innerWidth <= 900) return;
+  var cur = document.getElementById("customCursor");
+  if (!cur) return;
+
+  var mx = 0, my = 0, cx = 0, cy = 0;
+
+  document.addEventListener("mousemove", function(e){
+    mx = e.clientX;
+    my = e.clientY;
+  });
+
+  document.addEventListener("mousedown", function(){ cur.classList.add("click"); });
+  document.addEventListener("mouseup", function(){ cur.classList.remove("click"); });
+
+  document.addEventListener("mouseover", function(e){
+    if (e.target.closest("a,button,.btn,.interactive,#soundToggle")){
+      cur.classList.add("hover");
+    }
+  });
+  document.addEventListener("mouseout", function(e){
+    if (e.target.closest("a,button,.btn,.interactive,#soundToggle")){
+      cur.classList.remove("hover");
+    }
+  });
+
+  function animate(){
+    cx += (mx - cx) * 0.2;
+    cy += (my - cy) * 0.2;
+    cur.style.left = cx + "px";
+    cur.style.top = cy + "px";
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+/* ============================================================
+   NAV LOGIC
+   ============================================================ */
+window.toggleNav = function(){
+  var m = document.getElementById("navLinks");
+  var h = document.getElementById("hamburger");
+  if (m) m.classList.toggle("open");
+  if (h) h.classList.toggle("open");
+};
+
+document.addEventListener("DOMContentLoaded", function(){
+  var navLinks = document.getElementById("navLinks");
+  if (navLinks){
+    navLinks.querySelectorAll("a").forEach(function(a){
+      a.addEventListener("click", function(){
+        navLinks.classList.remove("open");
+        var h = document.getElementById("hamburger");
+        if (h) h.classList.remove("open");
+      });
+    });
+  }
+});
+
+window.addEventListener("scroll", function(){
+  var nav = document.getElementById("mainNav");
+  if (!nav) return;
+  if (window.scrollY > 40) nav.classList.add("scrolled");
+  else nav.classList.remove("scrolled");
+});
+</script><script>
+/* ============================================================
+   THREE.JS CORE ENGINE
+   Scene + Camera + Renderer + Composer + Lights + Loop
+   ============================================================ */
+(function initThree(){
+  if (!window._V) return;
+  var canvas = document.getElementById("showcaseCanvas");
+  if (!canvas || typeof THREE === "undefined") return;
+
+  var V = window._V;
+  var w = window.innerWidth, h = window.innerHeight;
+
+  /* Detect low-end device */
+  if (V.isMobile && (w < 500 || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4))){
+    V.lowEnd = true;
+  }
+
+  /* ---------- SCENE ---------- */
+  V.scene = new THREE.Scene();
+  V.scene.fog = new THREE.FogExp2(0x0a0e1a, 0.028);
+
+  /* ---------- CAMERA ---------- */
+  V.camera = new THREE.PerspectiveCamera(55, w / h, 0.1, 500);
+  V.camera.position.set(0, 1.5, 12);
+  V.camera.lookAt(0, 0, 0);
+
+  /* ---------- RENDERER ---------- */
+  V.renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true,
+    antialias: !V.lowEnd
+  });
+  V.renderer.setPixelRatio(Math.min(window.devicePixelRatio, V.lowEnd ? 1.2 : 2));
+  V.renderer.setSize(w, h);
+  V.renderer.setClearColor(0x000000, 0);
+
+  /* ---------- CLOCK ---------- */
+  V.clock = new THREE.Clock();
+
+  /* ---------- POST-PROCESSING (bloom) ---------- */
+  if (!V.lowEnd && typeof THREE.EffectComposer !== "undefined"){
+    try {
+      var composer = new THREE.EffectComposer(V.renderer);
+      composer.setSize(w, h);
+
+      var renderPass = new THREE.RenderPass(V.scene, V.camera);
+      composer.addPass(renderPass);
+
+      var bloomPass = new THREE.UnrealBloomPass(
+        new THREE.Vector2(w, h),
+        0.9,   /* strength */
+        0.6,   /* radius */
+        0.5    /* threshold */
+      );
+      composer.addPass(bloomPass);
+
+      V.composer = composer;
+      V.bloomPass = bloomPass;
+      console.log("✅ Bloom post-processing enabled");
+    } catch (e){
+      console.warn("Bloom disabled:", e);
+      V.composer = null;
+    }
+  } else {
+    console.log("⚡ Bloom disabled (low-end or unavailable)");
+  }
+
+  /* ---------- LIGHTS ---------- */
+  V.scene.add(new THREE.AmbientLight(0xffffff, 0.28));
+
+  var keyLight = new THREE.PointLight(0xffd400, 1.6, 60);
+  keyLight.position.set(8, 10, 8);
+  V.scene.add(keyLight);
+
+  var fillLight = new THREE.PointLight(0x4f8fff, 1.4, 60);
+  fillLight.position.set(-8, -6, 6);
+  V.scene.add(fillLight);
+
+  var rimLight = new THREE.DirectionalLight(0xa78bfa, 0.6);
+  rimLight.position.set(0, 8, -10);
+  V.scene.add(rimLight);
+
+  V.lights = { ambient: V.scene.children[0], key: keyLight, fill: fillLight, rim: rimLight };
+
+  /* ---------- MOUSE TRACKING ---------- */
+  window.addEventListener("mousemove", function(e){
+    V.mouse.tx = (e.clientX / window.innerWidth) * 2 - 1;
+    V.mouse.ty = -(e.clientY / window.innerHeight) * 2 + 1;
+  });
+  window.addEventListener("touchmove", function(e){
+    if (e.touches[0]){
+      V.mouse.tx = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+      V.mouse.ty = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+    }
+  }, { passive: true });
+
+  /* ---------- RESIZE ---------- */
+  window.addEventListener("resize", function(){
+    var nw = window.innerWidth, nh = window.innerHeight;
+    V.camera.aspect = nw / nh;
+    V.camera.updateProjectionMatrix();
+    V.renderer.setSize(nw, nh);
+    if (V.composer) V.composer.setSize(nw, nh);
+  });
+
+  /* ---------- RENDER LOOP ---------- */
+  function renderLoop(){
+    requestAnimationFrame(renderLoop);
+    V.t += 0.01;
+
+    /* Smooth mouse */
+    V.mouse.x += (V.mouse.tx - V.mouse.x) * 0.06;
+    V.mouse.y += (V.mouse.ty - V.mouse.y) * 0.06;
+
+    if (V.composer){
+      V.composer.render();
+    } else {
+      V.renderer.render(V.scene, V.camera);
+    }
+  }
+  renderLoop();
+
+  console.log("✅ Three.js core engine ready", V.lowEnd ? "(low-end mode)" : "(full mode)");
+})();
+</script><script>
+/* ============================================================
+   SCENE 1 — OLD WORLD
+   Sepia floating objects: paper, ledgers, signs, clock, phone
+   ============================================================ */
+(function buildOldWorld(){
+  if (!window._V) return;
+  var V = window._V;
+  var scene = V.scene;
+
+  var group = new THREE.Group();
+  group.name = "oldWorldGroup";
+  group.visible = false;
+  scene.add(group);
+
+  /* ---------- MATERIALS ---------- */
+  var paperMat = new THREE.MeshStandardMaterial({
+    color: 0xd4b896, roughness: 0.88, metalness: 0.05,
+    emissive: 0x8b6f47, emissiveIntensity: 0.06
+  });
+  var ledgerMat = new THREE.MeshStandardMaterial({
+    color: 0x5c4a35, roughness: 0.92, metalness: 0.08,
+    emissive: 0x2a1f12, emissiveIntensity: 0.05
+  });
+  var brassMat = new THREE.MeshStandardMaterial({
+    color: 0x9c7a3f, roughness: 0.5, metalness: 0.75,
+    emissive: 0x3a2b15, emissiveIntensity: 0.08
+  });
+  var woodMat = new THREE.MeshStandardMaterial({
+    color: 0x3d2a1a, roughness: 0.88, metalness: 0.05
+  });
+
+  /* ---------- HELPER: add floating object ---------- */
+  function addFloat(mesh, speed, amp, baseY){
+    mesh.userData.floatSpeed = speed;
+    mesh.userData.floatAmp = amp;
+    mesh.userData.baseY = baseY !== undefined ? baseY : mesh.position.y;
+    mesh.userData.rotSpeed = (Math.random() - 0.5) * 0.15;
+    group.add(mesh);
+    return mesh;
+  }
+
+  /* ---------- 1. PAPER MENUS (12 floating planes) ---------- */
+  var paperGeo = new THREE.PlaneGeometry(1.4, 1.9);
+  for (var i = 0; i < 12; i++){
+    var pm = new THREE.Mesh(paperGeo, paperMat);
+    pm.position.set(
+      (Math.random() - 0.5) * 18,
+      (Math.random() - 0.5) * 8,
+      -3 - Math.random() * 10
+    );
+    pm.rotation.set(
+      Math.random() * 0.4 - 0.2,
+      Math.random() * 1.2 - 0.6,
+      Math.random() * 0.5 - 0.25
+    );
+    addFloat(pm, 0.3 + Math.random() * 0.5, 0.15 + Math.random() * 0.25);
+  }
+
+  /* ---------- 2. LEDGER BOOKS (7 boxes) ---------- */
+  var ledgerGeo = new THREE.BoxGeometry(1.2, 0.22, 1.6);
+  for (var j = 0; j < 7; j++){
+    var lb = new THREE.Mesh(ledgerGeo, ledgerMat);
+    lb.position.set(
+      (Math.random() - 0.5) * 16,
+      (Math.random() - 0.5) * 7,
+      -4 - Math.random() * 9
+    );
+    lb.rotation.set(
+      Math.random() * 0.5 - 0.25,
+      Math.random() * 1.5 - 0.75,
+      Math.random() * 0.3 - 0.15
+    );
+    addFloat(lb, 0.4 + Math.random() * 0.4, 0.18 + Math.random() * 0.2);
+  }
+
+  /* ---------- 3. FADED SHOP SIGNS (7 brass planes) ---------- */
+  var signGeo = new THREE.PlaneGeometry(2.2, 0.9);
+  for (var k = 0; k < 7; k++){
+    var sg = new THREE.Mesh(signGeo, brassMat);
+    sg.position.set(
+      (Math.random() - 0.5) * 20,
+      (Math.random() - 0.5) * 9,
+      -5 - Math.random() * 10
+    );
+    sg.rotation.set(
+      Math.random() * 0.3 - 0.15,
+      Math.random() * 1.5 - 0.75,
+      Math.random() * 0.35 - 0.175
+    );
+    addFloat(sg, 0.3 + Math.random() * 0.4, 0.12 + Math.random() * 0.2);
+  }
+
+  /* ---------- 4. WALL CLOCK ---------- */
+  var clockGroup = new THREE.Group();
+
+  var clockRing = new THREE.Mesh(
+    new THREE.TorusGeometry(0.9, 0.09, 16, 48),
+    brassMat
+  );
+  clockGroup.add(clockRing);
+
+  var clockFace = new THREE.Mesh(
+    new THREE.CircleGeometry(0.85, 40),
+    paperMat
+  );
+  clockFace.position.z = 0.01;
+  clockGroup.add(clockFace);
+
+  var hourHand = new THREE.Mesh(
+    new THREE.BoxGeometry(0.07, 0.45, 0.04),
+    ledgerMat
+  );
+  hourHand.position.set(0, 0.2, 0.05);
+  clockGroup.add(hourHand);
+
+  var minHand = new THREE.Mesh(
+    new THREE.BoxGeometry(0.06, 0.65, 0.04),
+    ledgerMat
+  );
+  minHand.position.set(0, 0.3, 0.06);
+  minHand.rotation.z = 0.6;
+  clockGroup.add(minHand);
+
+  /* Numerals */
+  for (var n = 0; n < 12; n++){
+    var na = (n / 12) * Math.PI * 2;
+    var numeral = new THREE.Mesh(
+      new THREE.CircleGeometry(0.03, 8),
+      brassMat
+    );
+    numeral.position.set(
+      Math.sin(na) * 0.7,
+      Math.cos(na) * 0.7,
+      0.03
+    );
+    clockGroup.add(numeral);
+  }
+
+  clockGroup.position.set(4, 1.8, -6);
+  clockGroup.userData.isClock = true;
+  clockGroup.userData.hourHand = hourHand;
+  clockGroup.userData.minHand = minHand;
+  addFloat(clockGroup, 0.4, 0.15);
+
+  /* ---------- 5. OLD TELEPHONE ---------- */
+  var phoneGroup = new THREE.Group();
+
+  var phoneBase = new THREE.Mesh(
+    new THREE.BoxGeometry(0.9, 0.28, 0.55),
+    woodMat
+  );
+  phoneGroup.add(phoneBase);
+
+  var phoneHandset = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.1, 0.1, 0.75, 14),
+    ledgerMat
+  );
+  phoneHandset.rotation.z = Math.PI / 2;
+  phoneHandset.position.y = 0.35;
+  phoneGroup.add(phoneHandset);
+
+  var phoneDial = new THREE.Mesh(
+    new THREE.CircleGeometry(0.22, 24),
+    paperMat
+  );
+  phoneDial.position.set(0.18, 0.14, 0.28);
+  phoneGroup.add(phoneDial);
+
+  for (var d = 0; d < 8; d++){
+    var da = (d / 8) * Math.PI * 2;
+    var hole = new THREE.Mesh(
+      new THREE.CircleGeometry(0.025, 8),
+      ledgerMat
+    );
+    hole.position.set(
+      0.18 + Math.cos(da) * 0.14,
+      0.14 + Math.sin(da) * 0.14,
+      0.29
+    );
+    phoneGroup.add(hole);
+  }
+
+  phoneGroup.position.set(-4.5, -1.2, -5);
+  addFloat(phoneGroup, 0.5, 0.2);
+
+  /* ---------- 6. DUST PARTICLES ---------- */
+  var dustCount = V.lowEnd ? 120 : 280;
+  var dustPos = new Float32Array(dustCount * 3);
+  for (var di = 0; di < dustCount * 3; di += 3){
+    dustPos[di]     = (Math.random() - 0.5) * 32;
+    dustPos[di + 1] = (Math.random() - 0.5) * 22;
+    dustPos[di + 2] = (Math.random() - 0.5) * 26 - 5;
+  }
+  var dustGeo = new THREE.BufferGeometry();
+  dustGeo.setAttribute("position", new THREE.BufferAttribute(dustPos, 3));
+  var dustMat = new THREE.PointsMaterial({
+    color: 0xd4b896, size: 0.06,
+    transparent: true, opacity: 0.55,
+    sizeAttenuation: true, depthWrite: false
+  });
+  var dust = new THREE.Points(dustGeo, dustMat);
+  dust.name = "oldDust";
+  group.add(dust);
+
+  /* ---------- 7. FLOOR GRID (subtle) ---------- */
+  var grid = new THREE.GridHelper(30, 30, 0x8b6f47, 0x3d2a1a);
+  grid.position.y = -4;
+  grid.material.transparent = true;
+  grid.material.opacity = 0.15;
+  group.add(grid);
+
+  /* ---------- STORE ---------- */
+  V.oldWorld = {
+    group: group,
+    dust: dust,
+    clock: clockGroup
+  };
+
+  console.log("✅ Scene 1 (Old World) built");
+})();
+</script><script>
+/* ============================================================
+   SCENE 1 — OLD WORLD ANIMATION
+   ============================================================ */
+(function animateOldWorld(){
+  if (!window._V || !window._V.oldWorld) return;
+  var oldRef = window._V.oldWorld;
+
+  window._V.animateOldWorld = function(t){
+    var group = oldRef.group;
+    if (!group.visible) return;
+
+    for (var i = 0; i < group.children.length; i++){
+      var child = group.children[i];
+      if (child.userData && child.userData.baseY !== undefined){
+        child.position.y = child.userData.baseY +
+          Math.sin(t * child.userData.floatSpeed + child.position.x) * child.userData.floatAmp;
+
+        if (child.userData.rotSpeed){
+          child.rotation.y += child.userData.rotSpeed * 0.005;
+        }
+
+        if (child.userData.isClock){
+          if (child.userData.hourHand)
+            child.userData.hourHand.rotation.z = -t * 0.3;
+          if (child.userData.minHand)
+            child.userData.minHand.rotation.z = -t * 2.2;
+        }
+      }
+    }
+
+    /* Dust drifts upward slowly */
+    if (oldRef.dust){
+      var dp = oldRef.dust.geometry.attributes.position.array;
+      for (var d = 0; d < dp.length; d += 3){
+        dp[d + 1] += 0.003;
+        if (dp[d + 1] > 11) dp[d + 1] = -11;
+      }
+      oldRef.dust.geometry.attributes.position.needsUpdate = true;
+    }
+  };
+})();
+
+/* ============================================================
+   SCENE 2 — VISION
+   Big QR code + floating website screens + gold burst
+   ============================================================ */
+(function buildVision(){
+  if (!window._V) return;
+  var V = window._V;
+  var scene = V.scene;
+
+  var group = new THREE.Group();
+  group.name = "visionGroup";
+  group.visible = false;
+  scene.add(group);
+
+  /* ---------- MATERIALS ---------- */
+  var goldMat = new THREE.MeshStandardMaterial({
+    color: 0xffd400,
+    emissive: 0xffd400,
+    emissiveIntensity: 0.9,
+    metalness: 0.7,
+    roughness: 0.2
+  });
+  var goldGlowMat = new THREE.MeshBasicMaterial({
+    color: 0xffd400,
+    transparent: true,
+    opacity: 0.9,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+  var screenDarkMat = new THREE.MeshPhysicalMaterial({
+    color: 0x0f1520,
+    metalness: 0.4,
+    roughness: 0.15,
+    clearcoat: 1,
+    clearcoatRoughness: 0.1
+  });
+  var blueAccentMat = new THREE.MeshBasicMaterial({
+    color: 0x4f8fff,
+    transparent: true,
+    opacity: 0.75
+  });
+
+  /* ---------- BIG QR CODE ---------- */
+  var qrGroup = new THREE.Group();
+  var qrSize = 3.2;
+  var qrCells = 9;
+  var cellSize = qrSize / qrCells;
+
+  /* Deterministic random */
+  var seed = 7;
+  function rng(){ seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+
+  for (var r = 0; r < qrCells; r++){
+    for (var c = 0; c < qrCells; c++){
+      var inCorner =
+        (r < 3 && c < 3) ||
+        (r < 3 && c > qrCells - 4) ||
+        (r > qrCells - 4 && c < 3);
+      if (inCorner) continue;
+
+      if (rng() > 0.42){
+        var cell = new THREE.Mesh(
+          new THREE.BoxGeometry(cellSize * 0.9, cellSize * 0.9, 0.18),
+          goldMat
+        );
+        cell.position.set(
+          (c - (qrCells - 1) / 2) * cellSize,
+          ((qrCells - 1) / 2 - r) * cellSize,
+          0
+        );
+        qrGroup.add(cell);
+      }
+    }
+  }
+
+  /* Corner markers */
+  function cornerMarker(x, y){
+    var outer = new THREE.Mesh(
+      new THREE.BoxGeometry(cellSize * 2.8, cellSize * 2.8, 0.2),
+      goldMat
+    );
+    outer.position.set(x, y, 0);
+    qrGroup.add(outer);
+
+    var inner = new THREE.Mesh(
+      new THREE.BoxGeometry(cellSize * 1.4, cellSize * 1.4, 0.24),
+      screenDarkMat
+    );
+    inner.position.set(x, y, 0.02);
+    qrGroup.add(inner);
+
+    var center = new THREE.Mesh(
+      new THREE.BoxGeometry(cellSize * 0.6, cellSize * 0.6, 0.28),
+      goldMat
+    );
+    center.position.set(x, y, 0.04);
+    qrGroup.add(center);
+  }
+  cornerMarker(-1.6 * cellSize, 1.6 * cellSize);
+  cornerMarker(1.6 * cellSize, 1.6 * cellSize);
+  cornerMarker(-1.6 * cellSize, -1.6 * cellSize);
+
+  qrGroup.position.set(0, 0.5, 0);
+  qrGroup.userData = {
+    floatSpeed: 0.4,
+    floatAmp: 0.18,
+    baseY: 0.5
+  };
+  group.add(qrGroup);
+
+  /* Orbiting rings around QR */
+  var ring1 = new THREE.Mesh(
+    new THREE.TorusGeometry(2.8, 0.015, 8, 100),
+    new THREE.MeshBasicMaterial({ color: 0xffd400, transparent: true, opacity: 0.6, depthWrite: false })
+  );
+  ring1.rotation.x = Math.PI / 2.2;
+  qrGroup.add(ring1);
+
+  var ring2 = new THREE.Mesh(
+    new THREE.TorusGeometry(3.6, 0.01, 8, 100),
+    new THREE.MeshBasicMaterial({ color: 0x4f8fff, transparent: true, opacity: 0.4, depthWrite: false })
+  );
+  ring2.rotation.x = Math.PI / 1.8;
+  ring2.rotation.y = 0.6;
+  qrGroup.add(ring2);
+
+  /* ---------- FLOATING WEBSITE SCREENS ---------- */
+  var screenGeo = new THREE.PlaneGeometry(2.4, 1.5);
+  var screens = [];
+  var screenPositions = [
+    [-5.5, 2, -2, 0.35],
+    [5.5, 2.4, -2.5, -0.3],
+    [-6, -1.5, -3, 0.4],
+    [6, -1, -3.5, -0.35],
+    [-4, 3, -5, 0.25],
+    [4.5, -3, -4, -0.2]
+  ];
+
+  for (var s = 0; s < screenPositions.length; s++){
+    var sp = screenPositions[s];
+    var frame = new THREE.Group();
+
+    /* Screen base */
+    var scr = new THREE.Mesh(screenGeo, screenDarkMat);
+    frame.add(scr);
+
+    /* Glow border */
+    var border = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.55, 1.65),
+      new THREE.MeshBasicMaterial({ color: 0x4f8fff, transparent: true, opacity: 0.15, depthWrite: false })
+    );
+    border.position.z = -0.02;
+    frame.add(border);
+
+    /* Top chrome bar */
+    var topBar = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.4, 0.14),
+      blueAccentMat
+    );
+    topBar.position.set(0, 0.68, 0.02);
+    frame.add(topBar);
+
+    /* Fake content lines */
+    for (var ln = 0; ln < 4; ln++){
+      var line = new THREE.Mesh(
+        new THREE.PlaneGeometry(1.7 - ln * 0.15, 0.06),
+        new THREE.MeshBasicMaterial({
+          color: 0x8bb4ff,
+          transparent: true,
+          opacity: 0.5 - ln * 0.1,
+          depthWrite: false
+        })
+      );
+      line.position.set(-0.3, 0.4 - ln * 0.22, 0.03);
+      frame.add(line);
+    }
+
+    frame.position.set(sp[0], sp[1], sp[2]);
+    frame.rotation.y = sp[3];
+    frame.userData = {
+      floatSpeed: 0.35 + s * 0.08,
+      floatAmp: 0.2 + (s % 3) * 0.08,
+      baseY: sp[1],
+      baseRotY: sp[3]
+    };
+    group.add(frame);
+    screens.push(frame);
+  }
+
+  /* ---------- GOLD BURST PARTICLES ---------- */
+  var burstCount = V.lowEnd ? 180 : 400;
+  var burstPos = new Float32Array(burstCount * 3);
+  var burstData = [];
+  for (var b = 0; b < burstCount; b++){
+    var ang = Math.random() * Math.PI * 2;
+    var phi = Math.acos(2 * Math.random() - 1);
+    var rad = 2 + Math.random() * 9;
+    burstPos[b * 3]     = Math.sin(phi) * Math.cos(ang) * rad;
+    burstPos[b * 3 + 1] = Math.sin(phi) * Math.sin(ang) * rad;
+    burstPos[b * 3 + 2] = Math.cos(phi) * rad - 3;
+    burstData.push({
+      baseX: burstPos[b * 3],
+      baseY: burstPos[b * 3 + 1],
+      baseZ: burstPos[b * 3 + 2],
+      phase: Math.random() * Math.PI * 2
+    });
+  }
+  var burstGeo = new THREE.BufferGeometry();
+  burstGeo.setAttribute("position", new THREE.BufferAttribute(burstPos, 3));
+  var burstMat = new THREE.PointsMaterial({
+    color: 0xffd400, size: 0.08,
+    transparent: true, opacity: 0.85,
+    sizeAttenuation: true, depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var burst = new THREE.Points(burstGeo, burstMat);
+  burst.name = "visionBurst";
+  group.add(burst);
+
+  /* ---------- STORE ---------- */
+  V.vision = {
+    group: group,
+    qr: qrGroup,
+    screens: screens,
+    burst: burst,
+    burstData: burstData,
+    ring1: ring1,
+    ring2: ring2
+  };
+
+  console.log("✅ Scene 2 (Vision) built");
+})();
+</script><script>
+/* ============================================================
+   SCENE 2 — VISION ANIMATION
+   ============================================================ */
+(function animateVision(){
+  if (!window._V || !window._V.vision) return;
+  var ref = window._V.vision;
+
+  window._V.animateVision = function(t){
+    if (!ref.group.visible) return;
+
+    /* QR rotates gently + floats */
+    if (ref.qr){
+      ref.qr.rotation.y = Math.sin(t * 0.35) * 0.4;
+      ref.qr.position.y = ref.qr.userData.baseY + Math.sin(t * 0.6) * 0.22;
+    }
+
+    /* Rings rotate at different speeds */
+    if (ref.ring1) ref.ring1.rotation.z += 0.008;
+    if (ref.ring2) ref.ring2.rotation.z -= 0.005;
+
+    /* Screens float + wobble */
+    for (var i = 0; i < ref.screens.length; i++){
+      var scr = ref.screens[i];
+      scr.position.y = scr.userData.baseY +
+        Math.sin(t * scr.userData.floatSpeed + scr.position.x * 0.5) * scr.userData.floatAmp;
+      scr.rotation.y = scr.userData.baseRotY +
+        Math.sin(t * 0.3 + scr.position.x) * 0.08;
+    }
+
+    /* Burst rotates + pulses */
+    if (ref.burst){
+      ref.burst.rotation.y += 0.0015;
+      ref.burst.rotation.x += 0.0006;
+      ref.burst.material.opacity = 0.6 + Math.sin(t * 1.8) * 0.25;
+    }
+
+    /* Individual particles breathe outward */
+    if (ref.burstData){
+      var bpos = ref.burst.geometry.attributes.position.array;
+      for (var b = 0; b < ref.burstData.length; b++){
+        var bd = ref.burstData[b];
+        var pulse = 1 + Math.sin(t * 0.8 + bd.phase) * 0.08;
+        bpos[b * 3]     = bd.baseX * pulse;
+        bpos[b * 3 + 1] = bd.baseY * pulse;
+        bpos[b * 3 + 2] = bd.baseZ * pulse;
+      }
+      ref.burst.geometry.attributes.position.needsUpdate = true;
+    }
+  };
+})();
+
+/* ============================================================
+   SCENE 3 — AUTOMATION
+   System panels + notification popups + data flow
+   ============================================================ */
+(function buildAutomation(){
+  if (!window._V) return;
+  var V = window._V;
+  var scene = V.scene;
+
+  var group = new THREE.Group();
+  group.name = "autoGroup";
+  group.visible = false;
+  scene.add(group);
+
+  /* ---------- MATERIALS ---------- */
+  var panelMat = new THREE.MeshPhysicalMaterial({
+    color: 0x12192a, metalness: 0.5, roughness: 0.15,
+    clearcoat: 1, clearcoatRoughness: 0.08
+  });
+  var blueGlow = new THREE.MeshBasicMaterial({ color: 0x4f8fff, transparent: true, opacity: 0.85, depthWrite: false });
+  var greenGlow = new THREE.MeshBasicMaterial({ color: 0x25b46e, transparent: true, opacity: 0.9, depthWrite: false });
+  var goldGlow = new THREE.MeshBasicMaterial({ color: 0xffd400, transparent: true, opacity: 0.9, depthWrite: false });
+  var purpleGlow = new THREE.MeshBasicMaterial({ color: 0xa78bfa, transparent: true, opacity: 0.85, depthWrite: false });
+
+  /* ---------- HELPER: system panel ---------- */
+  function makePanel(x, y, z, rotY, accent){
+    var g = new THREE.Group();
+
+    var card = new THREE.Mesh(new THREE.BoxGeometry(2.4, 1.5, 0.1), panelMat);
+    g.add(card);
+
+    var top = new THREE.Mesh(new THREE.PlaneGeometry(2.4, 0.09), accent);
+    top.position.set(0, 0.71, 0.06);
+    g.add(top);
+
+    for (var r = 0; r < 3; r++){
+      var row = new THREE.Mesh(
+        new THREE.PlaneGeometry(2, 0.16),
+        new THREE.MeshBasicMaterial({ color: 0x1a2136, transparent: true, opacity: 0.85 })
+      );
+      row.position.set(0, 0.4 - r * 0.26, 0.06);
+      g.add(row);
+
+      var dot = new THREE.Mesh(new THREE.CircleGeometry(0.055, 16), accent);
+      dot.position.set(-0.85, 0.4 - r * 0.26, 0.07);
+      g.add(dot);
+    }
+
+    var btn = new THREE.Mesh(new THREE.PlaneGeometry(1.8, 0.28), accent);
+    btn.position.set(0, -0.5, 0.06);
+    g.add(btn);
+
+    g.position.set(x, y, z);
+    g.rotation.y = rotY;
+    g.userData = {
+      floatSpeed: 0.4 + Math.random() * 0.35,
+      floatAmp: 0.16 + Math.random() * 0.12,
+      baseY: y,
+      baseRotY: rotY
+    };
+    group.add(g);
+    return g;
+  }
+
+  /* ---------- 6 PANELS ---------- */
+  var panels = [];
+  var panelDefs = [
+    [-6.5, 2, -1, 0.35, blueGlow],
+    [-2.8, 3.2, -3, -0.2, greenGlow],
+    [2.8, 3.2, -3, 0.25, goldGlow],
+    [6.5, 2, -1, -0.4, purpleGlow],
+    [-4.5, -2.5, -2.5, 0.3, goldGlow],
+    [4.5, -2.5, -2.5, -0.3, blueGlow]
+  ];
+  for (var p = 0; p < panelDefs.length; p++){
+    var pd = panelDefs[p];
+    panels.push(makePanel(pd[0], pd[1], pd[2], pd[3], pd[4]));
+  }
+
+  /* ---------- NOTIFICATIONS ---------- */
+  var notifPositions = [
+    [-3.5, 0.8, 1.5],
+    [3.8, -0.3, 1],
+    [-1.2, -2, 2],
+    [1.8, 1.8, 1.8],
+    [-5, 1.5, 0],
+    [5.5, 1.5, 0]
+  ];
+  var notifications = [];
+  for (var n = 0; n < notifPositions.length; n++){
+    var np = notifPositions[n];
+    var ng = new THREE.Group();
+
+    var notif = new THREE.Mesh(
+      new THREE.BoxGeometry(1.8, 0.55, 0.08),
+      new THREE.MeshPhysicalMaterial({
+        color: 0x12192a, metalness: 0.4, roughness: 0.2, clearcoat: 1
+      })
+    );
+    ng.add(notif);
+
+    var accent = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.07, 0.55),
+      n % 3 === 0 ? greenGlow : (n % 3 === 1 ? blueGlow : goldGlow)
+    );
+    accent.position.set(-0.86, 0, 0.05);
+    ng.add(accent);
+
+    var l1 = new THREE.Mesh(
+      new THREE.PlaneGeometry(1.2, 0.09),
+      new THREE.MeshBasicMaterial({ color: 0xe5e9ee, transparent: true, opacity: 0.7 })
+    );
+    l1.position.set(0.05, 0.09, 0.05);
+    ng.add(l1);
+
+    var l2 = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.75, 0.06),
+      new THREE.MeshBasicMaterial({ color: 0x8a8f9c, transparent: true, opacity: 0.55 })
+    );
+    l2.position.set(-0.1, -0.13, 0.05);
+    ng.add(l2);
+
+    ng.position.set(np[0], np[1], np[2]);
+    ng.userData = {
+      floatSpeed: 0.55 + Math.random() * 0.4,
+      floatAmp: 0.2 + Math.random() * 0.15,
+      baseY: np[1],
+      phase: Math.random() * Math.PI * 2
+    };
+    group.add(ng);
+    notifications.push(ng);
+  }
+
+  /* ---------- DATA FLOW PARTICLES ---------- */
+  var flowCount = V.lowEnd ? 40 : 100;
+  var flowPos = new Float32Array(flowCount * 3);
+  var flowData = [];
+  for (var f = 0; f < flowCount; f++){
+    var s = panelDefs[Math.floor(Math.random() * panelDefs.length)];
+    var e = panelDefs[Math.floor(Math.random() * panelDefs.length)];
+    while (e === s) e = panelDefs[Math.floor(Math.random() * panelDefs.length)];
+
+    flowData.push({
+      from: new THREE.Vector3(s[0], s[1], s[2]),
+      to: new THREE.Vector3(e[0], e[1], e[2]),
+      t: Math.random(),
+      speed: 0.003 + Math.random() * 0.004
+    });
+    flowPos[f * 3]     = s[0];
+    flowPos[f * 3 + 1] = s[1];
+    flowPos[f * 3 + 2] = s[2];
+  }
+  var flowGeo = new THREE.BufferGeometry();
+  flowGeo.setAttribute("position", new THREE.BufferAttribute(flowPos, 3));
+  var flowMat = new THREE.PointsMaterial({
+    color: 0x4f8fff, size: 0.1,
+    transparent: true, opacity: 0.9,
+    sizeAttenuation: true, depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var flowParticles = new THREE.Points(flowGeo, flowMat);
+  flowParticles.name = "autoFlow";
+  group.add(flowParticles);
+
+  /* ---------- CENTRAL RINGS ---------- */
+  var bigRing1 = new THREE.Mesh(
+    new THREE.TorusGeometry(4.5, 0.04, 16, 100),
+    new THREE.MeshBasicMaterial({ color: 0x4f8fff, transparent: true, opacity: 0.35, depthWrite: false })
+  );
+  bigRing1.rotation.x = Math.PI / 2.2;
+  bigRing1.position.set(0, 0, -1);
+  group.add(bigRing1);
+
+  var bigRing2 = new THREE.Mesh(
+    new THREE.TorusGeometry(5.2, 0.02, 16, 100),
+    new THREE.MeshBasicMaterial({ color: 0xa78bfa, transparent: true, opacity: 0.28, depthWrite: false })
+  );
+  bigRing2.rotation.x = Math.PI / 1.9;
+  bigRing2.position.set(0, 0, -1);
+  group.add(bigRing2);
+
+  /* ---------- STORE ---------- */
+  V.auto = {
+    group: group,
+    panels: panels,
+    notifications: notifications,
+    flow: flowParticles,
+    flowData: flowData,
+    ring1: bigRing1,
+    ring2: bigRing2
+  };
+
+  console.log("✅ Scene 3 (Automation) built");
+})();
+</script><script>
+/* ============================================================
+   SCENE 3 — AUTOMATION ANIMATION
+   ============================================================ */
+(function animateAutomation(){
+  if (!window._V || !window._V.auto) return;
+  var ref = window._V.auto;
+
+  window._V.animateAutomation = function(t){
+    if (!ref.group.visible) return;
+
+    /* Panels float */
+    for (var i = 0; i < ref.panels.length; i++){
+      var pnl = ref.panels[i];
+      pnl.position.y = pnl.userData.baseY +
+        Math.sin(t * pnl.userData.floatSpeed + pnl.position.x * 0.7) * pnl.userData.floatAmp;
+      pnl.rotation.y = pnl.userData.baseRotY +
+        Math.sin(t * 0.4 + pnl.position.x) * 0.06;
+    }
+
+    /* Notifications bob + pulse */
+    for (var n = 0; n < ref.notifications.length; n++){
+      var nf = ref.notifications[n];
+      nf.position.y = nf.userData.baseY +
+        Math.sin(t * nf.userData.floatSpeed + nf.userData.phase) * nf.userData.floatAmp;
+      nf.rotation.y = Math.sin(t * 0.3 + n) * 0.18;
+      var sc = 1 + Math.sin(t * 1.5 + nf.userData.phase) * 0.06;
+      nf.scale.set(sc, sc, sc);
+    }
+
+    /* Flow particles travel */
+    if (ref.flow && ref.flowData){
+      var fpos = ref.flow.geometry.attributes.position.array;
+      for (var f = 0; f < ref.flowData.length; f++){
+        var fd = ref.flowData[f];
+        fd.t += fd.speed;
+        if (fd.t > 1) fd.t = 0;
+
+        var tt = fd.t;
+        var ease = tt * tt * (3 - 2 * tt);
+
+        fpos[f * 3]     = fd.from.x + (fd.to.x - fd.from.x) * ease;
+        fpos[f * 3 + 1] = fd.from.y + (fd.to.y - fd.from.y) * ease + Math.sin(tt * Math.PI) * 0.6;
+        fpos[f * 3 + 2] = fd.from.z + (fd.to.z - fd.from.z) * ease;
+      }
+      ref.flow.geometry.attributes.position.needsUpdate = true;
+    }
+
+    /* Rings rotate */
+    if (ref.ring1) ref.ring1.rotation.z += 0.004;
+    if (ref.ring2) ref.ring2.rotation.z -= 0.0025;
+  };
+})();
+
+/* ============================================================
+   SCENE 4 — ADVANCEMENT
+   Timeline of website versions v1 → v2 → v3 → v4
+   ============================================================ */
+(function buildAdvancement(){
+  if (!window._V) return;
+  var V = window._V;
+  var scene = V.scene;
+
+  var group = new THREE.Group();
+  group.name = "advGroup";
+  group.visible = false;
+  scene.add(group);
+
+  /* ---------- MATERIALS ---------- */
+  var cardMat = new THREE.MeshPhysicalMaterial({
+    color: 0x12192a, metalness: 0.5, roughness: 0.15,
+    clearcoat: 1, clearcoatRoughness: 0.08
+  });
+  var goldGlow = new THREE.MeshBasicMaterial({ color: 0xffd400, transparent: true, opacity: 0.9, depthWrite: false });
+  var blueGlow = new THREE.MeshBasicMaterial({ color: 0x4f8fff, transparent: true, opacity: 0.85, depthWrite: false });
+  var purpleGlow = new THREE.MeshBasicMaterial({ color: 0xa78bfa, transparent: true, opacity: 0.85, depthWrite: false });
+  var greenGlow = new THREE.MeshBasicMaterial({ color: 0x25b46e, transparent: true, opacity: 0.85, depthWrite: false });
+
+  /* ---------- HELPER: version card ---------- */
+  function makeVersionCard(accent, complexity){
+    var g = new THREE.Group();
+
+    var card = new THREE.Mesh(
+      new THREE.BoxGeometry(2.8, 1.7, 0.12),
+      cardMat
+    );
+    g.add(card);
+
+    var topBar = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.8, 0.16),
+      new THREE.MeshBasicMaterial({ color: 0x1a2136, transparent: true, opacity: 0.95 })
+    );
+    topBar.position.set(0, 0.77, 0.07);
+    g.add(topBar);
+
+    var strip = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.8, 0.06),
+      accent
+    );
+    strip.position.set(0, 0.7, 0.08);
+    g.add(strip);
+
+    /* Content blocks */
+    for (var i = 0; i < complexity; i++){
+      var bw = 0.6 + Math.random() * 1.4;
+      var bh = 0.15 + Math.random() * 0.3;
+      var block = new THREE.Mesh(
+        new THREE.PlaneGeometry(bw, bh),
+        accent.clone()
+      );
+      block.material.opacity = 0.35 + Math.random() * 0.4;
+      block.material.depthWrite = false;
+      block.position.set(
+        (Math.random() - 0.5) * 2,
+        0.4 - i * 0.2,
+        0.07
+      );
+      g.add(block);
+    }
+
+    /* Small dots */
+    for (var d = 0; d < Math.min(complexity + 1, 5); d++){
+      var dot = new THREE.Mesh(
+        new THREE.CircleGeometry(0.035, 12),
+        accent
+      );
+      dot.position.set(-1.2 + d * 0.15, 0.77, 0.08);
+      g.add(dot);
+    }
+
+    return g;
+  }
+
+  /* ---------- FOUR VERSION CARDS ---------- */
+  var versions = [];
+
+  var v1 = makeVersionCard(blueGlow, 2);
+  v1.position.set(-6.5, 0, 0);
+  v1.rotation.y = 0.35;
+  v1.userData = { floatSpeed: 0.35, floatAmp: 0.12, baseY: 0, label: "v1" };
+  group.add(v1); versions.push(v1);
+
+  var v2 = makeVersionCard(goldGlow, 3);
+  v2.position.set(-2.2, 0, -0.8);
+  v2.rotation.y = 0.18;
+  v2.userData = { floatSpeed: 0.45, floatAmp: 0.14, baseY: 0, label: "v2" };
+  group.add(v2); versions.push(v2);
+
+  var v3 = makeVersionCard(purpleGlow, 4);
+  v3.position.set(2.2, 0, -1.6);
+  v3.rotation.y = -0.18;
+  v3.userData = { floatSpeed: 0.55, floatAmp: 0.16, baseY: 0, label: "v3" };
+  group.add(v3); versions.push(v3);
+
+  var v4 = makeVersionCard(greenGlow, 5);
+  v4.position.set(6.5, 0, -2.4);
+  v4.rotation.y = -0.35;
+  v4.userData = { floatSpeed: 0.65, floatAmp: 0.18, baseY: 0, label: "v4" };
+  group.add(v4); versions.push(v4);
+
+  /* ---------- TIMELINE LINE ---------- */
+  var linePoints = [];
+  for (var li = 0; li < versions.length; li++){
+    linePoints.push(new THREE.Vector3(
+      versions[li].position.x,
+      versions[li].position.y - 1.1,
+      versions[li].position.z
+    ));
+  }
+  var lineGeo = new THREE.BufferGeometry().setFromPoints(linePoints);
+  var lineMat = new THREE.LineBasicMaterial({
+    color: 0xffd400,
+    transparent: true,
+    opacity: 0.6
+  });
+  var timelineLine = new THREE.Line(lineGeo, lineMat);
+  group.add(timelineLine);
+
+  /* ---------- TIMELINE NODES ---------- */
+  var nodeColors = [0x4f8fff, 0xffd400, 0xa78bfa, 0x25b46e];
+  for (var ni = 0; ni < versions.length; ni++){
+    var node = new THREE.Mesh(
+      new THREE.SphereGeometry(0.18, 16, 16),
+      new THREE.MeshBasicMaterial({ color: nodeColors[ni] })
+    );
+    node.position.set(
+      versions[ni].position.x,
+      versions[ni].position.y - 1.1,
+      versions[ni].position.z
+    );
+    node.userData = { phase: ni * 1.5 };
+    group.add(node);
+  }
+
+  /* ---------- RISING PARTICLES ---------- */
+  var riseCount = V.lowEnd ? 100 : 250;
+  var risePos = new Float32Array(riseCount * 3);
+  var riseVel = new Float32Array(riseCount);
+  for (var ri = 0; ri < riseCount; ri++){
+    risePos[ri * 3]     = (Math.random() - 0.5) * 20;
+    risePos[ri * 3 + 1] = -8 - Math.random() * 4;
+    risePos[ri * 3 + 2] = (Math.random() - 0.5) * 10;
+    riseVel[ri] = 0.012 + Math.random() * 0.018;
+  }
+  var riseGeo = new THREE.BufferGeometry();
+  riseGeo.setAttribute("position", new THREE.BufferAttribute(risePos, 3));
+  var riseMat = new THREE.PointsMaterial({
+    color: 0xffd400, size: 0.07,
+    transparent: true, opacity: 0.85,
+    sizeAttenuation: true, depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var riseParticles = new THREE.Points(riseGeo, riseMat);
+  riseParticles.name = "advRise";
+  group.add(riseParticles);
+
+  /* ---------- EVOLUTION SPIRAL ---------- */
+  var spiralPoints = [];
+  for (var si = 0; si < 240; si++){
+    var angle = si * 0.14;
+    var radius = 2 + si * 0.022;
+    spiralPoints.push(new THREE.Vector3(
+      Math.cos(angle) * radius * 0.9,
+      (si - 120) * 0.06,
+      Math.sin(angle) * radius * 0.55 - 1
+    ));
+  }
+  var spiralGeo = new THREE.BufferGeometry().setFromPoints(spiralPoints);
+  var spiralMat = new THREE.LineBasicMaterial({
+    color: 0x4f8fff,
+    transparent: true,
+    opacity: 0.22
+  });
+  var spiralLine = new THREE.Line(spiralGeo, spiralMat);
+  group.add(spiralLine);
+
+  /* ---------- STORE ---------- */
+  V.adv = {
+    group: group,
+    versions: versions,
+    timeline: timelineLine,
+    rise: riseParticles,
+    riseVel: riseVel,
+    spiral: spiralLine
+  };
+
+  console.log("✅ Scene 4 (Advancement) built");
+})();
+</script><script>
+/* ============================================================
+   SCENE 4 — ADVANCEMENT ANIMATION
+   ============================================================ */
+(function animateAdvancement(){
+  if (!window._V || !window._V.adv) return;
+  var ref = window._V.adv;
+
+  window._V.animateAdvancement = function(t){
+    if (!ref.group.visible) return;
+
+    /* Versions float */
+    for (var i = 0; i < ref.versions.length; i++){
+      var ver = ref.versions[i];
+      ver.position.y = ver.userData.baseY +
+        Math.sin(t * ver.userData.floatSpeed + i * 1.5) * ver.userData.floatAmp;
+    }
+
+    /* Rising particles */
+    if (ref.rise && ref.riseVel){
+      var rpos = ref.rise.geometry.attributes.position.array;
+      for (var r = 0; r < ref.riseVel.length; r++){
+        rpos[r * 3 + 1] += ref.riseVel[r];
+        if (rpos[r * 3 + 1] > 8){
+          rpos[r * 3 + 1] = -8;
+          rpos[r * 3]     = (Math.random() - 0.5) * 20;
+          rpos[r * 3 + 2] = (Math.random() - 0.5) * 10;
+        }
+      }
+      ref.rise.geometry.attributes.position.needsUpdate = true;
+    }
+
+    /* Spiral rotates */
+    if (ref.spiral) ref.spiral.rotation.y += 0.002;
+  };
+})();
+
+/* ============================================================
+   SCENE 5 — NETWORK
+   24 nodes + connections + core + travel particles
+   ============================================================ */
+(function buildNetwork(){
+  if (!window._V) return;
+  var V = window._V;
+  var scene = V.scene;
+
+  var group = new THREE.Group();
+  group.name = "netGroup";
+  group.visible = false;
+  scene.add(group);
+
+  /* ---------- NODE COLORS ---------- */
+  var nodeColors = [
+    0xffd400, /* gold */
+    0x4f8fff, /* blue */
+    0x25b46e, /* green */
+    0xa78bfa, /* purple */
+    0xff8c42, /* orange */
+    0xff5e7a  /* pink */
+  ];
+
+  /* ---------- BUILD NODES IN 3 LAYERS ---------- */
+  var nodes = [];
+  var nodePositions = [];
+  var layers = 3;
+  var nodesPerLayer = 8;
+  var radius = 7;
+
+  for (var layer = 0; layer < layers; layer++){
+    var y = (layer - 1) * 2.8;
+    var layerRadius = radius * (1 - Math.abs(layer - 1) * 0.25);
+
+    for (var i = 0; i < nodesPerLayer; i++){
+      var angle = (i / nodesPerLayer) * Math.PI * 2 + layer * 0.4;
+      var x = Math.cos(angle) * layerRadius * (0.9 + Math.random() * 0.2);
+      var z = Math.sin(angle) * layerRadius * (0.9 + Math.random() * 0.2);
+
+      var color = nodeColors[(layer * nodesPerLayer + i) % nodeColors.length];
+
+      /* Node */
+      var node = new THREE.Mesh(
+        new THREE.SphereGeometry(0.2, 18, 18),
+        new THREE.MeshBasicMaterial({ color: color })
+      );
+      node.position.set(x, y, z);
+
+      /* Halo */
+      var halo = new THREE.Mesh(
+        new THREE.SphereGeometry(0.45, 14, 14),
+        new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.22,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending
+        })
+      );
+      node.add(halo);
+
+      node.userData = {
+        baseY: y,
+        floatSpeed: 0.4 + Math.random() * 0.5,
+        floatAmp: 0.2 + Math.random() * 0.2,
+        color: color,
+        phase: Math.random() * Math.PI * 2
+      };
+
+      group.add(node);
+      nodes.push(node);
+      nodePositions.push(new THREE.Vector3(x, y, z));
+    }
+  }
+
+  /* ---------- CONNECTING LINES (nearest neighbors) ---------- */
+  var lines = [];
+  for (var a = 0; a < nodes.length; a++){
+    var distances = [];
+    for (var b = 0; b < nodes.length; b++){
+      if (a === b) continue;
+      distances.push({
+        idx: b,
+        d: nodePositions[a].distanceTo(nodePositions[b])
+      });
+    }
+    distances.sort(function(x, y){ return x.d - y.d; });
+
+    for (var c = 0; c < 2 && c < distances.length; c++){
+      var oi = distances[c].idx;
+      if (oi < a) continue;
+
+      var pts = [nodePositions[a], nodePositions[oi]];
+      var lgeo = new THREE.BufferGeometry().setFromPoints(pts);
+      var lmat = new THREE.LineBasicMaterial({
+        color: nodes[a].userData.color,
+        transparent: true,
+        opacity: 0.35,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+      var line = new THREE.Line(lgeo, lmat);
+      line.userData = {
+        phase: Math.random() * Math.PI * 2,
+        baseOpacity: 0.35
+      };
+      group.add(line);
+      lines.push(line);
+    }
+  }
+
+  /* ---------- CENTER CORE ---------- */
+  var core = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(1.4, 1),
+    new THREE.MeshPhysicalMaterial({
+      color: 0xffd400,
+      emissive: 0x4f8fff,
+      emissiveIntensity: 0.45,
+      metalness: 0.9,
+      roughness: 0.15,
+      clearcoat: 1,
+      flatShading: true
+    })
+  );
+  group.add(core);
+
+  /* Wireframe overlay */
+  var coreWire = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(1.45, 1),
+    new THREE.MeshBasicMaterial({
+      color: 0xffd400,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.18
+    })
+  );
+  core.add(coreWire);
+
+  /* Halo */
+  var coreHalo = new THREE.Mesh(
+    new THREE.SphereGeometry(2.4, 24, 24),
+    new THREE.MeshBasicMaterial({
+      color: 0xffd400,
+      transparent: true,
+      opacity: 0.08,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
+    })
+  );
+  group.add(coreHalo);
+
+  /* ---------- TRAVEL PARTICLES ---------- */
+  var travelCount = V.lowEnd ? 40 : 90;
+  var travelPos = new Float32Array(travelCount * 3);
+  var travelData = [];
+  for (var t = 0; t < travelCount; t++){
+    var fromIdx = Math.floor(Math.random() * nodes.length);
+    var toIdx = Math.floor(Math.random() * nodes.length);
+    if (toIdx === fromIdx) toIdx = (fromIdx + 3) % nodes.length;
+
+    travelData.push({
+      from: nodePositions[fromIdx],
+      to: nodePositions[toIdx],
+      t: Math.random(),
+      speed: 0.005 + Math.random() * 0.004
+    });
+    travelPos[t * 3]     = nodePositions[fromIdx].x;
+    travelPos[t * 3 + 1] = nodePositions[fromIdx].y;
+    travelPos[t * 3 + 2] = nodePositions[fromIdx].z;
+  }
+  var travelGeo = new THREE.BufferGeometry();
+  travelGeo.setAttribute("position", new THREE.BufferAttribute(travelPos, 3));
+  var travelMat = new THREE.PointsMaterial({
+    color: 0xffd400, size: 0.12,
+    transparent: true, opacity: 0.9,
+    sizeAttenuation: true, depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var travelParticles = new THREE.Points(travelGeo, travelMat);
+  travelParticles.name = "netTravel";
+  group.add(travelParticles);
+
+  /* ---------- STORE ---------- */
+  V.net = {
+    group: group,
+    nodes: nodes,
+    lines: lines,
+    core: core,
+    coreWire: coreWire,
+    coreHalo: coreHalo,
+    travel: travelParticles,
+    travelData: travelData
+  };
+
+  console.log("✅ Scene 5 (Network) built");
+})();
+</script>
