@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About — VAAN Consultancy | Digital Agency in Karnal</title>
+<meta name="description" content="VAAN Consultancy — a division of VAA Enterprises. Premium websites, QR systems and branding for modern businesses.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0a0e1a">
+<link rel="canonical" href="https://vikassharma01072008-prog.github.io/vaan-consultancy/about.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#0a0e1a;color:#f5f5f5;overflow-x:hidden;line-height:1.6;-webkit-tap-highlight-color:transparent}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+:root{--bg-dark:#0a0e1a;--bg-dark2:#0f1520;--card:#12192a;--line:rgba(255,212,0,.15);--line-soft:rgba(255,255,255,.08);--gold:#ffd400;--gold-soft:rgba(255,212,0,.15);--blue:#4f8fff;--blue-soft:rgba(79,143,255,.15);--white:#f5f5f5;--muted:#8a8f9c;--green:#25b46e;--purple:#a78bfa}
+
+/* ====== NAV ====== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;background:rgba(10,14,26,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--line-soft);transition:.3s}
+.nav-in{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:950;letter-spacing:-1.5px;color:#fff}
+.brand-logo{width:36px;height:36px}
+.brand-logo svg{width:100%;height:100%;filter:drop-shadow(0 0 12px rgba(255,212,0,.5))}
+.brand-text{display:flex;flex-direction:column;line-height:1}
+.brand-text b{font-size:19px;letter-spacing:-1px}
+.brand-text small{font-size:9px;letter-spacing:2px;color:var(--muted);margin-top:3px;font-weight:600}
+.nav-links{display:flex;align-items:center;gap:28px;font-size:14px;font-weight:600}
+.nav-links a{color:var(--white);opacity:.85;transition:.2s}
+.nav-links a:hover{opacity:1;color:var(--gold)}
+.nav-links a.active{color:var(--gold);opacity:1}
+.nav-cta{background:var(--gold);color:#0a0e1a !important;padding:11px 20px;border-radius:99px;font-weight:800;font-size:13px;transition:.3s;opacity:1 !important;box-shadow:0 8px 24px rgba(255,212,0,.25)}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,212,0,.45)}
+.hamburger{display:none;background:transparent;border:0;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+.hamburger span{width:24px;height:2px;background:var(--white);border-radius:2px;transition:.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ====== HERO WITH 3D ====== */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:120px 24px 80px;background:radial-gradient(ellipse at 30% 20%,rgba(79,143,255,.12),transparent 55%),radial-gradient(ellipse at 70% 80%,rgba(255,212,0,.1),transparent 55%),linear-gradient(180deg,#0a0e1a 0%,#0f1520 100%)}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(10,14,26,.6) 90%);z-index:1;pointer-events:none}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:900px;margin:0 auto;pointer-events:none;animation:heroFadeIn 1.2s ease-out}
+@keyframes heroFadeIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.hero-content .btn{pointer-events:auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(79,143,255,.1);border:1px solid rgba(79,143,255,.3);color:#8bb4ff;padding:8px 16px;border-radius:99px;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px;backdrop-filter:blur(10px)}
+.hero-eyebrow::before{content:"";width:6px;height:6px;background:var(--gold);border-radius:50%;box-shadow:0 0 12px var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero h1{font-size:clamp(42px,7vw,84px);font-weight:950;line-height:.95;letter-spacing:-4px;margin-bottom:24px;text-shadow:0 4px 40px rgba(0,0,0,.6)}
+.hero h1 .gold{color:var(--gold);text-shadow:0 0 60px rgba(255,212,0,.6)}
+.hero h1 .blue{color:var(--blue);text-shadow:0 0 60px rgba(79,143,255,.6)}
+.hero p{font-size:17px;color:#c8cdd8;max-width:620px;margin:0 auto 36px;line-height:1.65;text-shadow:0 2px 20px rgba(0,0,0,.6)}
+
+/* ====== BUTTONS ====== */
+.btn{border:0;border-radius:12px;padding:16px 28px;font-weight:800;font-size:14px;cursor:pointer;font-family:inherit;transition:all .25s cubic-bezier(.2,.9,.3,1.2);display:inline-flex;align-items:center;gap:8px;letter-spacing:.3px;text-decoration:none}
+.btn-primary{background:var(--gold);color:#0a0e1a;box-shadow:0 10px 30px rgba(255,212,0,.3)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(255,212,0,.5)}
+.btn-secondary{background:rgba(255,255,255,.08);color:var(--white);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(10px)}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+.btn-outline{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.15)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ====== SECTIONS ====== */
+section{padding:100px 0;position:relative}
+.sec-in{max-width:1280px;margin:0 auto;padding:0 24px}
+.sec-eyebrow{display:inline-block;color:var(--blue);font-size:11px;letter-spacing:3px;font-weight:800;text-transform:uppercase;margin-bottom:14px}
+.sec-title{font-size:clamp(32px,4.5vw,52px);font-weight:950;letter-spacing:-2px;line-height:1.05;margin-bottom:18px}
+.sec-title .gold{color:var(--gold)}
+.sec-sub{color:#b8becc;font-size:17px;max-width:680px;line-height:1.65;margin-bottom:56px}
+.sec-center{text-align:center}
+.sec-center .sec-sub{margin-left:auto;margin-right:auto}
+
+/* ====== RESPONSIVE ====== */
+@media(max-width:1000px){
+  .foot-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  .nav-links{position:fixed;top:70px;left:0;right:0;background:rgba(10,14,26,.98);backdrop-filter:blur(20px);flex-direction:column;padding:24px;gap:20px;border-bottom:1px solid var(--line-soft);transform:translateY(-150%);transition:.4s cubic-bezier(.2,.9,.3,1.1)}
+  .nav-links.open{transform:translateY(0)}
+  .hamburger{display:flex}
+  section{padding:70px 0}
+  .hero{min-height:auto;padding:100px 20px 60px}
+}
+</style>
+  </head><body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <a href="index.html" class="brand">
+      <span class="brand-logo">
+        <svg viewBox="0 0 100 100" fill="none"><path d="M50 8 L92 92 L74 92 L50 42 L26 92 L8 92 Z" fill="url(#g1)"/><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffd400"/><stop offset="100%" stop-color="#4f8fff"/></linearGradient></defs></svg>
+      </span>
+      <span class="brand-text"><b>VAAN</b><small>CONSULTANCY</small></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="demos/index.html">Demos</a>
+      <a href="about.html" class="active">About</a>
+      <a href="tel:9671163712" class="nav-cta">📞 9671163712</a>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO WITH 3D TORUS KNOT -->
+<section class="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">About VAAN Consultancy</span>
+    <h1>A digital agency <span class="gold">built</span> for <span class="blue">modern business.</span></h1>
+    <p>Premium websites, QR systems, and branding for businesses across India and worldwide. A division of VAA Enterprises.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="#story" class="btn btn-primary">Read Our Story ↓</a>
+      <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20know%20more%20about%20VAAN%20Consultancy." class="btn btn-secondary" target="_blank">💬 Talk to Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- VAAN 4 LETTERS -->
+<section id="story">
+  <div class="sec-in">
+    <div class="sec-center">
+      <span class="sec-eyebrow">What VAAN Stands For</span>
+      <h2 class="sec-title">Four words. <span class="gold">One mission.</span></h2>
+      <p class="sec-sub">Every project we build is guided by these four principles — from the smallest QR code to a full-scale business platform.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px" class="letters-grid">
+      <div style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:22px;padding:36px 24px;text-align:center;position:relative;overflow:hidden;transition:.35s cubic-bezier(.2,.9,.3,1.1)" class="letter-card">
+        <div style="font-family:'Inter',sans-serif;font-size:72px;font-weight:950;line-height:1;color:var(--gold);letter-spacing:-4px;margin-bottom:14px;text-shadow:0 0 40px rgba(255,212,0,.3)">V</div>
+        <h3 style="font-size:20px;font-weight:900;letter-spacing:-.5px;margin-bottom:10px">Vision</h3>
+        <p style="color:var(--muted);font-size:13.5px;line-height:1.6">We see what your business could become — and build the digital tools to get you there.</p>
+      </div>
+
+      <div style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:22px;padding:36px 24px;text-align:center;position:relative;overflow:hidden;transition:.35s cubic-bezier(.2,.9,.3,1.1)" class="letter-card">
+        <div style="font-family:'Inter',sans-serif;font-size:72px;font-weight:950;line-height:1;color:var(--gold);letter-spacing:-4px;margin-bottom:14px;text-shadow:0 0 40px rgba(255,212,0,.3)">A</div>
+        <h3 style="font-size:20px;font-weight:900;letter-spacing:-.5px;margin-bottom:10px">Automation</h3>
+        <p style="color:var(--muted);font-size:13.5px;line-height:1.6">Systems that work while you sleep — QR menus, check-ins, bookings, reminders.</p>
+      </div>
+
+      <div style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:22px;padding:36px 24px;text-align:center;position:relative;overflow:hidden;transition:.35s cubic-bezier(.2,.9,.3,1.1)" class="letter-card">
+        <div style="font-family:'Inter',sans-serif;font-size:72px;font-weight:950;line-height:1;color:var(--gold);letter-spacing:-4px;margin-bottom:14px;text-shadow:0 0 40px rgba(255,212,0,.3)">A</div>
+        <h3 style="font-size:20px;font-weight:900;letter-spacing:-.5px;margin-bottom:10px">Advancement</h3>
+        <p style="color:var(--muted);font-size:13.5px;line-height:1.6">Always upgrading, never stuck. We evolve with every project, client, and technology.</p>
+      </div>
+
+      <div style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:22px;padding:36px 24px;text-align:center;position:relative;overflow:hidden;transition:.35s cubic-bezier(.2,.9,.3,1.1)" class="letter-card">
+        <div style="font-family:'Inter',sans-serif;font-size:72px;font-weight:950;line-height:1;color:var(--gold);letter-spacing:-4px;margin-bottom:14px;text-shadow:0 0 40px rgba(255,212,0,.3)">N</div>
+        <h3 style="font-size:20px;font-weight:900;letter-spacing:-.5px;margin-bottom:10px">Network</h3>
+        <p style="color:var(--muted);font-size:13.5px;line-height:1.6">Connecting your business to its customers through every digital channel that matters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART OF VAA ENTERPRISES -->
+<section style="background:var(--bg-dark2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)">
+  <div class="sec-in">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center" class="vaa-grid">
+      <div>
+        <span class="sec-eyebrow">Part of VAA Enterprises</span>
+        <h2 class="sec-title">VAAN is the <span class="gold">digital arm</span> of VAA Enterprises.</h2>
+        <p style="color:#b8becc;font-size:16px;line-height:1.75;margin-bottom:20px">
+          VAA Enterprises builds infrastructure for modern India — connecting businesses, workers, and materials through smart platforms. VAAN Consultancy is the digital engine behind that vision, delivering websites, QR systems, and branding for every business we serve.
+        </p>
+        <p style="color:#b8becc;font-size:16px;line-height:1.75;margin-bottom:28px">
+          From a small shop in Karnal to a national workforce platform — VAA is where our story begins. VAAN is where we bring that same energy to the digital world.
+        </p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="https://vikassharma01072008-prog.github.io/VAA-enterprises-/" class="btn btn-secondary" target="_blank">Visit VAA Enterprises →</a>
+        </div>
+      </div>
+      <div>
+        <div style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line);border-radius:24px;padding:44px 36px;text-align:center;position:relative;overflow:hidden">
+          <div style="position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,212,0,.15),transparent 70%);border-radius:50%"></div>
+          <div style="position:relative">
+            <div style="display:inline-flex;align-items:center;justify-content:center;width:80px;height:80px;background:linear-gradient(135deg,var(--gold),#ffa726);border-radius:22px;font-size:36px;margin-bottom:20px;box-shadow:0 20px 40px rgba(255,212,0,.3)">▲</div>
+            <h3 style="font-size:24px;font-weight:950;letter-spacing:-1px;margin-bottom:8px">VAA ENTERPRISES</h3>
+            <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:24px">Workforce · Materials · Digital</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding-top:24px;border-top:1px solid var(--line-soft)">
+              <div><b style="display:block;font-size:22px;font-weight:950;color:var(--gold);letter-spacing:-1px">3</b><span style="color:var(--muted);font-size:11px;letter-spacing:1.5px;font-weight:800;text-transform:uppercase">Divisions</span></div>
+              <div><b style="display:block;font-size:22px;font-weight:950;color:var(--gold);letter-spacing:-1px">15+</b><span style="color:var(--muted);font-size:11px;letter-spacing:1.5px;font-weight:800;text-transform:uppercase">Services</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.letter-card:hover{transform:translateY(-8px);border-color:rgba(255,212,0,.4);box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.letter-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--blue));transform:scaleX(0);transition:.4s;transform-origin:left}
+.letter-card:hover::before{transform:scaleX(1)}
+@media(max-width:1000px){.letters-grid{grid-template-columns:repeat(2,1fr)!important}.vaa-grid{grid-template-columns:1fr!important;gap:40px!important}}
+@media(max-width:600px){.letters-grid{grid-template-columns:1fr!important}}
+          </style><!-- TEAM -->
+<section>
+  <div class="sec-in">
+    <div class="sec-center">
+      <span class="sec-eyebrow">The Team</span>
+      <h2 class="sec-title">Built by a small, <span class="gold">focused team.</span></h2>
+      <p class="sec-sub">VAAN runs with a compact crew of engineers, a graphic designer, a legal advisor, and a coder — lean, fast, and obsessed with results.</p>
+    </div>
+
+    <!-- Vikas card — bigger -->
+    <div style="max-width:520px;margin:0 auto 40px">
+      <div style="background:linear-gradient(145deg,#1a2136,#0d1220);border:1px solid rgba(255,212,0,.3);border-radius:24px;padding:44px 32px;text-align:center;position:relative;overflow:hidden">
+        <div style="position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(255,212,0,.18),transparent 70%);border-radius:50%"></div>
+        <div style="position:relative">
+          <div style="width:110px;height:110px;background:linear-gradient(135deg,var(--gold),var(--blue));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:950;color:#0a0e1a;margin:0 auto 22px;box-shadow:0 20px 50px rgba(255,212,0,.4);letter-spacing:-2px">VS</div>
+          <span style="display:inline-block;background:rgba(255,212,0,.15);color:var(--gold);font-size:10px;font-weight:900;letter-spacing:2px;padding:5px 12px;border-radius:99px;text-transform:uppercase;margin-bottom:14px">Founder & CEO</span>
+          <h3 style="font-size:26px;font-weight:950;letter-spacing:-1px;margin-bottom:8px">Vikas Sharma</h3>
+          <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:6px">Largest stake holder · Face of the company</p>
+          <p style="color:#b8becc;font-size:13.5px;line-height:1.7;max-width:380px;margin:16px auto 0">Leads client work, product design, and engineering at VAAN. Responsible for every project that ships.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Small team line -->
+    <div style="max-width:760px;margin:0 auto;background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:22px;padding:36px 32px;text-align:center">
+      <div style="font-size:32px;margin-bottom:14px">🧑‍💻 🎨 ⚖️ 💻</div>
+      <h3 style="font-size:22px;font-weight:950;letter-spacing:-.6px;margin-bottom:12px">The Supporting Team</h3>
+      <p style="color:#b8becc;font-size:15px;line-height:1.7;max-width:580px;margin:0 auto">
+        Behind every VAAN project stands a small team of <b style="color:var(--white)">engineers</b>, a <b style="color:var(--white)">graphic designer</b>, a <b style="color:var(--white)">legal advisor</b>, and a <b style="color:var(--white)">coder</b> — working remotely across India to deliver premium digital products on time, every time.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section style="background:var(--bg-dark2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)">
+  <div class="sec-in">
+    <div class="sec-center">
+      <span class="sec-eyebrow">Our Values</span>
+      <h2 class="sec-title">What we <span class="gold">stand for.</span></h2>
+      <p class="sec-sub">Four principles guide every project — from the smallest fix to the biggest build.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px" class="values-grid">
+      <div style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:22px;padding:34px 26px;transition:.35s cubic-bezier(.2,.9,.3,1.1)" class="value-card">
+        <div style="width:56px;height:56px;background:var(--gold-soft);border:1px solid var(--line);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">⚡</div>
+        <h3 style="font-size:19px;font-weight:900;letter-spacing:-.4px;margin-bottom:10px">Speed</h3>
+        <p style="color:var(--muted);font-size:13.5px;line-height:1.6">Most projects live in 3–5 days. We don't sit on briefs — we ship.</p>
+      </div>
+
+      <div style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:22px;padding:34px 26px;transition:.35s cubic-bezier(.2,.9,.3,1.1)" class="value-card">
+        <div style="width:56px;height:56px;background:var(--gold-soft);border:1px solid var(--line);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">💎</div>
+        <h3 style="font-size:19px;font-weight:900;letter-spacing:-.4px;margin-bottom:10px">Premium Quality</h3>
+        <p style="color:var(--muted);font-size:13.5px;line-height:1.6">Agency-grade design at freelancer prices. Every project looks like it costs 10x more.</p>
+      </div>
+
+      <div style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:22px;padding:34px 26px;transition:.35s cubic-bezier(.2,.9,.3,1.1)" class="value-card">
+        <div style="width:56px;height:56px;background:var(--gold-soft);border:1px solid var(--line);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🤝</div>
+        <h3 style="font-size:19px;font-weight:900;letter-spacing:-.4px;margin-bottom:10px">Honest Pricing</h3>
+        <p style="color:var(--muted);font-size:13.5px;line-height:1.6">No hidden charges, no surprise upsells. What we quote is what you pay.</p>
+      </div>
+
+      <div style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:22px;padding:34px 26px;transition:.35s cubic-bezier(.2,.9,.3,1.1)" class="value-card">
+        <div style="width:56px;height:56px;background:var(--gold-soft);border:1px solid var(--line);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🌍</div>
+        <h3 style="font-size:19px;font-weight:900;letter-spacing:-.4px;margin-bottom:10px">Global Reach</h3>
+        <p style="color:var(--muted);font-size:13.5px;line-height:1.6">Clients across India, UAE, US and UK. Flexible time zones, English-first delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.value-card:hover{transform:translateY(-8px);border-color:rgba(255,212,0,.4);box-shadow:0 30px 60px rgba(0,0,0,.5)}
+@media(max-width:1000px){.values-grid{grid-template-columns:repeat(2,1fr)!important}}
+@media(max-width:600px){.values-grid{grid-template-columns:1fr!important}}
+      </style><!-- FAQ -->
+<section>
+  <div class="sec-in">
+    <div class="sec-center">
+      <span class="sec-eyebrow">Frequently Asked</span>
+      <h2 class="sec-title">Questions, <span class="gold">answered.</span></h2>
+      <p class="sec-sub">Everything you might want to know before we start working together. Don't see your question? Message us on WhatsApp.</p>
+    </div>
+
+    <div style="max-width:820px;margin:0 auto;display:grid;gap:12px" class="faq-list">
+
+      <!-- Q1 -->
+      <div class="faq-item" style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;transition:.3s">
+        <button class="faq-q" onclick="toggleFaq(this)" style="width:100%;background:transparent;border:0;color:var(--white);text-align:left;padding:22px 24px;font-family:inherit;font-size:15.5px;font-weight:800;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;letter-spacing:-.2px">
+          <span>How much does a website cost?</span>
+          <span class="faq-icon" style="color:var(--gold);font-size:22px;font-weight:900;line-height:1;transition:.3s;flex-shrink:0">+</span>
+        </button>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.2,.9,.3,1.1)">
+          <div style="padding:0 24px 24px;color:#b8becc;font-size:14.5px;line-height:1.7">Our websites start at ₹4,999 for a single-page professional site and go up based on pages, features, and complexity. Our most popular tier is ₹19,999 — a full multi-page site with custom design. Every project gets a fixed quote before we start — no hidden charges.</div>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="faq-item" style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;transition:.3s">
+        <button class="faq-q" onclick="toggleFaq(this)" style="width:100%;background:transparent;border:0;color:var(--white);text-align:left;padding:22px 24px;font-family:inherit;font-size:15.5px;font-weight:800;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;letter-spacing:-.2px">
+          <span>How long does it take to build?</span>
+          <span class="faq-icon" style="color:var(--gold);font-size:22px;font-weight:900;line-height:1;transition:.3s;flex-shrink:0">+</span>
+        </button>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.2,.9,.3,1.1)">
+          <div style="padding:0 24px 24px;color:#b8becc;font-size:14.5px;line-height:1.7">Most projects go live in 3–5 days. Simple QR systems and single-page sites can be delivered in 1–2 days. Larger, custom sites take 7–14 days depending on complexity. We agree on a delivery timeline before we begin.</div>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="faq-item" style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;transition:.3s">
+        <button class="faq-q" onclick="toggleFaq(this)" style="width:100%;background:transparent;border:0;color:var(--white);text-align:left;padding:22px 24px;font-family:inherit;font-size:15.5px;font-weight:800;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;letter-spacing:-.2px">
+          <span>Do I need to pay upfront?</span>
+          <span class="faq-icon" style="color:var(--gold);font-size:22px;font-weight:900;line-height:1;transition:.3s;flex-shrink:0">+</span>
+        </button>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.2,.9,.3,1.1)">
+          <div style="padding:0 24px 24px;color:#b8becc;font-size:14.5px;line-height:1.7">We usually take 50% to start and 50% on delivery. For smaller projects (under ₹5,000), we may ask for the full amount upfront. Flexible options available — just ask.</div>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="faq-item" style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;transition:.3s">
+        <button class="faq-q" onclick="toggleFaq(this)" style="width:100%;background:transparent;border:0;color:var(--white);text-align:left;padding:22px 24px;font-family:inherit;font-size:15.5px;font-weight:800;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;letter-spacing:-.2px">
+          <span>What's included in the price?</span>
+          <span class="faq-icon" style="color:var(--gold);font-size:22px;font-weight:900;line-height:1;transition:.3s;flex-shrink:0">+</span>
+        </button>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.2,.9,.3,1.1)">
+          <div style="padding:0 24px 24px;color:#b8becc;font-size:14.5px;line-height:1.7">Custom design, mobile-responsive build, contact forms, WhatsApp integration, basic SEO setup, social media links, and free hosting setup. Every project is delivered fully working, ready to go live.</div>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="faq-item" style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;transition:.3s">
+        <button class="faq-q" onclick="toggleFaq(this)" style="width:100%;background:transparent;border:0;color:var(--white);text-align:left;padding:22px 24px;font-family:inherit;font-size:15.5px;font-weight:800;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;letter-spacing:-.2px">
+          <span>Do you offer support after launch?</span>
+          <span class="faq-icon" style="color:var(--gold);font-size:22px;font-weight:900;line-height:1;transition:.3s;flex-shrink:0">+</span>
+        </button>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.2,.9,.3,1.1)">
+          <div style="padding:0 24px 24px;color:#b8becc;font-size:14.5px;line-height:1.7">Yes — every project includes free support for the first 30 days after launch. This covers bug fixes, minor text/image updates, and technical questions. Long-term maintenance plans available if you need ongoing updates.</div>
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="faq-item" style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;transition:.3s">
+        <button class="faq-q" onclick="toggleFaq(this)" style="width:100%;background:transparent;border:0;color:var(--white);text-align:left;padding:22px 24px;font-family:inherit;font-size:15.5px;font-weight:800;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;letter-spacing:-.2px">
+          <span>Can I update the website myself?</span>
+          <span class="faq-icon" style="color:var(--gold);font-size:22px;font-weight:900;line-height:1;transition:.3s;flex-shrink:0">+</span>
+        </button>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.2,.9,.3,1.1)">
+          <div style="padding:0 24px 24px;color:#b8becc;font-size:14.5px;line-height:1.7">Yes — we build most projects with a simple admin panel so you can update prices, menus, images, and text without touching code. For anything complex, you can always message us and we'll handle it.</div>
+        </div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="faq-item" style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;transition:.3s">
+        <button class="faq-q" onclick="toggleFaq(this)" style="width:100%;background:transparent;border:0;color:var(--white);text-align:left;padding:22px 24px;font-family:inherit;font-size:15.5px;font-weight:800;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;letter-spacing:-.2px">
+          <span>Do you work with businesses outside Karnal?</span>
+          <span class="faq-icon" style="color:var(--gold);font-size:22px;font-weight:900;line-height:1;transition:.3s;flex-shrink:0">+</span>
+        </button>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.2,.9,.3,1.1)">
+          <div style="padding:0 24px 24px;color:#b8becc;font-size:14.5px;line-height:1.7">Absolutely. We work with clients across India and internationally — UAE, US, UK. Everything is handled online via WhatsApp, email, and video calls. Distance is not a barrier.</div>
+        </div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="faq-item" style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;transition:.3s">
+        <button class="faq-q" onclick="toggleFaq(this)" style="width:100%;background:transparent;border:0;color:var(--white);text-align:left;padding:22px 24px;font-family:inherit;font-size:15.5px;font-weight:800;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;letter-spacing:-.2px">
+          <span>What payment methods do you accept?</span>
+          <span class="faq-icon" style="color:var(--gold);font-size:22px;font-weight:900;line-height:1;transition:.3s;flex-shrink:0">+</span>
+        </button>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.2,.9,.3,1.1)">
+          <div style="padding:0 24px 24px;color:#b8becc;font-size:14.5px;line-height:1.7">UPI, bank transfer, and cash. For international clients, we accept PayPal and Wise. Invoice provided for every payment.</div>
+        </div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="faq-item" style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;transition:.3s">
+        <button class="faq-q" onclick="toggleFaq(this)" style="width:100%;background:transparent;border:0;color:var(--white);text-align:left;padding:22px 24px;font-family:inherit;font-size:15.5px;font-weight:800;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;letter-spacing:-.2px">
+          <span>What if I don't like the design?</span>
+          <span class="faq-icon" style="color:var(--gold);font-size:22px;font-weight:900;line-height:1;transition:.3s;flex-shrink:0">+</span>
+        </button>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.2,.9,.3,1.1)">
+          <div style="padding:0 24px 24px;color:#b8becc;font-size:14.5px;line-height:1.7">We include revision rounds in every project. You'll see a preview before we go live and can request changes. Most projects are approved after 1–2 rounds of revisions. Your satisfaction is our priority.</div>
+        </div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="faq-item" style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;transition:.3s">
+        <button class="faq-q" onclick="toggleFaq(this)" style="width:100%;background:transparent;border:0;color:var(--white);text-align:left;padding:22px 24px;font-family:inherit;font-size:15.5px;font-weight:800;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;letter-spacing:-.2px">
+          <span>Is there a setup fee or monthly fee?</span>
+          <span class="faq-icon" style="color:var(--gold);font-size:22px;font-weight:900;line-height:1;transition:.3s;flex-shrink:0">+</span>
+        </button>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.2,.9,.3,1.1)">
+          <div style="padding:0 24px 24px;color:#b8becc;font-size:14.5px;line-height:1.7">No setup fee. No monthly fee for standard websites — it's a one-time payment, and the site is yours. Ongoing costs are only for optional extras: domain (₹800/year), premium hosting, or ongoing maintenance plans.</div>
+        </div>
+      </div>
+
+      <!-- Q11 -->
+      <div class="faq-item" style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;transition:.3s">
+        <button class="faq-q" onclick="toggleFaq(this)" style="width:100%;background:transparent;border:0;color:var(--white);text-align:left;padding:22px 24px;font-family:inherit;font-size:15.5px;font-weight:800;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;letter-spacing:-.2px">
+          <span>Can you also handle my social media?</span>
+          <span class="faq-icon" style="color:var(--gold);font-size:22px;font-weight:900;line-height:1;transition:.3s;flex-shrink:0">+</span>
+        </button>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.2,.9,.3,1.1)">
+          <div style="padding:0 24px 24px;color:#b8becc;font-size:14.5px;line-height:1.7">Yes — we offer Instagram setup, content design, and monthly management. Packages start from ₹4,999/month. We can also design logos and complete brand identities.</div>
+        </div>
+      </div>
+
+      <!-- Q12 -->
+      <div class="faq-item" style="background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;transition:.3s">
+        <button class="faq-q" onclick="toggleFaq(this)" style="width:100%;background:transparent;border:0;color:var(--white);text-align:left;padding:22px 24px;font-family:inherit;font-size:15.5px;font-weight:800;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;letter-spacing:-.2px">
+          <span>What makes VAAN different?</span>
+          <span class="faq-icon" style="color:var(--gold);font-size:22px;font-weight:900;line-height:1;transition:.3s;flex-shrink:0">+</span>
+        </button>
+        <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.2,.9,.3,1.1)">
+          <div style="padding:0 24px 24px;color:#b8becc;font-size:14.5px;line-height:1.7">We're a new-generation agency that combines premium design with modern systems — QR codes, AI chatbots, admin panels. Our pricing is honest, our timelines are fast, and our support doesn't vanish after launch. Every project is treated like it's our own.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.faq-item:hover{border-color:rgba(255,212,0,.3)}
+.faq-item.open{border-color:rgba(255,212,0,.5)}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-item.open .faq-a{max-height:400px}
+  </style><!-- VAAN EXPANDED -->
+<section style="background:var(--bg-dark2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)">
+  <div class="sec-in">
+    <div style="max-width:900px;margin:0 auto;text-align:center">
+      <span class="sec-eyebrow">The Full Meaning</span>
+      <h2 class="sec-title">VAAN — four letters. <span class="gold">One philosophy.</span></h2>
+      <div style="text-align:left;background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:24px;padding:44px 36px;margin-top:36px;position:relative;overflow:hidden">
+        <div style="position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(255,212,0,.1),transparent 70%);border-radius:50%"></div>
+        <p style="position:relative;color:#d0d5de;font-size:16px;line-height:1.85;margin-bottom:22px">
+          <b style="color:var(--gold);font-size:18px;letter-spacing:-.3px">V — Vision.</b> Every business has untapped potential. Our vision is simple: to make that potential visible, sellable, and scalable through digital tools that actually work. When we look at a small shop, we don't see a small shop — we see a brand waiting to be built.
+        </p>
+        <p style="position:relative;color:#d0d5de;font-size:16px;line-height:1.85;margin-bottom:22px">
+          <b style="color:var(--gold);font-size:18px;letter-spacing:-.3px">A — Automation.</b> A business shouldn't stop when you sleep. We build systems that keep working — QR menus that never need reprinting, gym check-ins that run themselves, booking flows that capture leads at 3 AM. Automation isn't a luxury anymore; it's how modern businesses stay ahead.
+        </p>
+        <p style="position:relative;color:#d0d5de;font-size:16px;line-height:1.85;margin-bottom:22px">
+          <b style="color:var(--gold);font-size:18px;letter-spacing:-.3px">A — Advancement.</b> We never sit still. Every project we ship teaches us something new. Every client conversation sharpens our craft. Every technology we adopt becomes a new tool in your hands. Advancement is not a milestone — it's a mindset we carry into every single build.
+        </p>
+        <p style="position:relative;color:#d0d5de;font-size:16px;line-height:1.85">
+          <b style="color:var(--gold);font-size:18px;letter-spacing:-.3px">N — Network.</b> A business is only as strong as its connections. We connect you to your customers through websites, QR systems, social channels, and WhatsApp. More than that — we connect you to a growing network of businesses we serve, so every project strengthens the whole ecosystem.
+        </p>
+        <div style="position:relative;margin-top:32px;padding-top:24px;border-top:1px solid var(--line-soft);text-align:center">
+          <p style="color:var(--muted);font-size:13px;letter-spacing:2px;font-weight:800;text-transform:uppercase">Vision · Automation · Advancement · Network</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" style="text-align:center;background:linear-gradient(135deg,#0f1520,#0a0e1a)">
+  <div class="sec-in">
+    <h2 class="sec-title" style="max-width:820px;margin:0 auto 16px">Ready to build something <span class="gold">remarkable?</span></h2>
+    <p class="sec-sub" style="margin:0 auto 36px;text-align:center">Free consultation. Honest pricing. Delivered in days, not weeks.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20read%20your%20About%20page%20and%20want%20to%20discuss%20a%20project." class="btn btn-primary" target="_blank">💬 WhatsApp Now</a>
+      <a href="tel:9671163712" class="btn btn-secondary">📞 Call 9671163712</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#070a14;border-top:1px solid var(--line-soft);padding:60px 24px 30px">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;margin-bottom:48px" class="foot-top">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;font-weight:950;font-size:20px;letter-spacing:-1px">
+          <svg viewBox="0 0 100 100" fill="none" style="width:32px;height:32px"><path d="M50 8 L92 92 L74 92 L50 42 L26 92 L8 92 Z" fill="url(#g2)"/><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffd400"/><stop offset="100%" stop-color="#4f8fff"/></linearGradient></defs></svg>
+          VAAN CONSULTANCY
+        </div>
+        <p style="color:#8a8f9c;font-size:13px;line-height:1.7;max-width:300px;margin-bottom:20px">Digital solutions for modern businesses. Websites, QR systems, and branding that actually work.</p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <span style="font-size:10px;letter-spacing:1.5px;font-weight:800;color:var(--muted);padding:4px 8px;background:rgba(255,255,255,.04);border-radius:4px;text-transform:uppercase">Vision</span>
+          <span style="font-size:10px;letter-spacing:1.5px;font-weight:800;color:var(--muted);padding:4px 8px;background:rgba(255,255,255,.04);border-radius:4px;text-transform:uppercase">Automation</span>
+          <span style="font-size:10px;letter-spacing:1.5px;font-weight:800;color:var(--muted);padding:4px 8px;background:rgba(255,255,255,.04);border-radius:4px;text-transform:uppercase">Advancement</span>
+          <span style="font-size:10px;letter-spacing:1.5px;font-weight:800;color:var(--muted);padding:4px 8px;background:rgba(255,255,255,.04);border-radius:4px;text-transform:uppercase">Network</span>
+        </div>
+      </div>
+      <div>
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:900;text-transform:uppercase;color:var(--white);margin-bottom:18px">Services</h5>
+        <a href="services.html" style="display:block;color:#8a8f9c;font-size:13px;padding:6px 0">Websites</a>
+        <a href="services.html" style="display:block;color:#8a8f9c;font-size:13px;padding:6px 0">QR Systems</a>
+        <a href="services.html" style="display:block;color:#8a8f9c;font-size:13px;padding:6px 0">Branding</a>
+        <a href="services.html" style="display:block;color:#8a8f9c;font-size:13px;padding:6px 0">Social Media</a>
+      </div>
+      <div>
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:900;text-transform:uppercase;color:var(--white);margin-bottom:18px">Company</h5>
+        <a href="about.html" style="display:block;color:#8a8f9c;font-size:13px;padding:6px 0">About</a>
+        <a href="demos/index.html" style="display:block;color:#8a8f9c;font-size:13px;padding:6px 0">Live Demos</a>
+        <a href="services.html" style="display:block;color:#8a8f9c;font-size:13px;padding:6px 0">Pricing</a>
+        <a href="index.html#contact" style="display:block;color:#8a8f9c;font-size:13px;padding:6px 0">Contact</a>
+      </div>
+      <div>
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:900;text-transform:uppercase;color:var(--white);margin-bottom:18px">Connect</h5>
+        <a href="tel:9671163712" style="display:block;color:#8a8f9c;font-size:13px;padding:6px 0">📞 9671163712</a>
+        <a href="https://wa.me/919671163712" target="_blank" style="display:block;color:#8a8f9c;font-size:13px;padding:6px 0">💬 WhatsApp</a>
+        <a href="https://instagram.com/vaa_enterprises" target="_blank" style="display:block;color:#8a8f9c;font-size:13px;padding:6px 0">📸 Instagram</a>
+        <a href="#" style="display:block;color:#8a8f9c;font-size:13px;padding:6px 0">📍 Karnal, Haryana</a>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--line-soft);padding-top:24px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:#5a6172;font-size:12px">
+      <div>© 2026 <strong style="color:var(--white)">VAAN Consultancy</strong> — A division of VAA Enterprises.</div>
+      <div>Made with <span style="color:var(--gold)">▲</span> in Karnal, India</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ====== THREE.JS CDN ====== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+/* ====== NAV TOGGLE ====== */
+function toggleNav(){
+  document.getElementById("navLinks").classList.toggle("open");
+}
+
+/* ====== FAQ ACCORDION ====== */
+function toggleFaq(btn){
+  const item = btn.closest(".faq-item");
+  const allItems = document.querySelectorAll(".faq-item");
+  allItems.forEach(i => { if (i !== item) i.classList.remove("open"); });
+  item.classList.toggle("open");
+}
+
+/* ====== 3D TORUS KNOT HERO ====== */
+(function initTorusKnot(){
+  const canvas = document.getElementById("heroCanvas");
+  if (!canvas || typeof THREE === "undefined") return;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.z = 6;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  /* Main torus knot */
+  const geometry = new THREE.TorusKnotGeometry(1.6, 0.42, 160, 24, 2, 3);
+  const material = new THREE.MeshPhysicalMaterial({
+    color: 0xffd400,
+    emissive: 0x4f8fff,
+    emissiveIntensity: 0.2,
+    metalness: 0.95,
+    roughness: 0.15,
+    clearcoat: 1,
+    clearcoatRoughness: 0.08,
+    flatShading: false
+  });
+  const torus = new THREE.Mesh(geometry, material);
+  scene.add(torus);
+
+  /* Wireframe overlay */
+  const wire = new THREE.Mesh(
+    new THREE.TorusKnotGeometry(1.61, 0.425, 60, 10, 2, 3),
+    new THREE.MeshBasicMaterial({ color: 0x4f8fff, wireframe: true, transparent: true, opacity: 0.12 })
+  );
+  scene.add(wire);
+
+  /* Lights */
+  scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+  const l1 = new THREE.PointLight(0xffd400, 2, 25);
+  l1.position.set(5, 5, 5);
+  scene.add(l1);
+  const l2 = new THREE.PointLight(0x4f8fff, 2, 25);
+  l2.position.set(-5, -3, 4);
+  scene.add(l2);
+  const l3 = new THREE.PointLight(0xffffff, 0.8, 20);
+  l3.position.set(0, -5, -5);
+  scene.add(l3);
+
+  /* Particle dust */
+  const count = 180;
+  const pos = new Float32Array(count * 3);
+  for (let i = 0; i < count * 3; i += 3){
+    pos[i]     = (Math.random() - 0.5) * 22;
+    pos[i + 1] = (Math.random() - 0.5) * 22;
+    pos[i + 2] = (Math.random() - 0.5) * 22;
+  }
+  const pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({
+    color: 0xffd400, size: 0.035, transparent: true, opacity: 0.65, sizeAttenuation: true
+  }));
+  scene.add(particles);
+
+  /* Mouse / touch follow */
+  let mx = 0, my = 0;
+  window.addEventListener("mousemove", e => {
+    mx = (e.clientX / window.innerWidth) * 2 - 1;
+    my = -(e.clientY / window.innerHeight) * 2 + 1;
+  });
+  window.addEventListener("touchmove", e => {
+    if (e.touches[0]){
+      mx = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+      my = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+    }
+  });
+
+  /* Animate */
+  let t = 0;
+  function animate(){
+    requestAnimationFrame(animate);
+    t += 0.008;
+    torus.rotation.x += 0.003;
+    torus.rotation.y += 0.005;
+    torus.position.y = Math.sin(t) * 0.18;
+    wire.rotation.copy(torus.rotation);
+    wire.position.y = torus.position.y;
+    torus.rotation.x += my * 0.001;
+    torus.rotation.y += mx * 0.001;
+    particles.rotation.y += 0.0004;
+    camera.position.x += (mx * 0.6 - camera.position.x) * 0.05;
+    camera.position.y += (my * 0.4 - camera.position.y) * 0.05;
+    camera.lookAt(scene.position);
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+})();
+</script>
+
+</body>
+  </html>
