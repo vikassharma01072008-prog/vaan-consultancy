@@ -527,11 +527,21 @@ function toggleNav(){
 function toggleFaq(btn){
   var item = btn.closest(".faq-item");
   if (!item) return;
-  var allItems = document.querySelectorAll(".faq-item");
-  for (var i = 0; i < allItems.length; i++){
-    if (allItems[i] !== item) allItems[i].classList.remove("open");
+  var answer = item.querySelector(".faq-a");
+  var isOpen = item.classList.contains("open");
+
+  /* Close all others */
+  document.querySelectorAll(".faq-item").forEach(function(i){
+    i.classList.remove("open");
+    var a = i.querySelector(".faq-a");
+    if (a) a.style.maxHeight = "0px";
+  });
+
+  /* Toggle this one */
+  if (!isOpen){
+    item.classList.add("open");
+    if (answer) answer.style.maxHeight = answer.scrollHeight + "px";
   }
-  item.classList.toggle("open");
   }
 
 /* ====== 3D TORUS KNOT HERO ====== */
