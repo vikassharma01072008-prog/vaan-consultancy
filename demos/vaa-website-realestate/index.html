@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VAA Properties — Premium Real Estate in Karnal</title>
+<meta name="description" content="VAA Properties — Buy, sell, rent residential & commercial property in Karnal. Trusted since 2008. 500+ happy families.">
+<meta name="theme-color" content="#0a1f3d">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏢</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#f7f9fc;color:#0a1f3d;line-height:1.6;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+:root{
+  --navy:#0a1f3d;
+  --navy-light:#14325c;
+  --navy-dark:#061529;
+  --blue:#2563eb;
+  --blue-light:#3b82f6;
+  --blue-soft:#e0eaff;
+  --emerald:#059669;
+  --gold:#f59e0b;
+  --bg:#f7f9fc;
+  --white:#ffffff;
+  --ink:#0a1f3d;
+  --muted:#64748b;
+  --line:#e2e8f0;
+  --red:#dc2626;
+}
+
+/* ====== TOP BAR ====== */
+.topbar{background:var(--navy-dark);color:#fff;font-size:12px;padding:8px 0}
+.topbar-in{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.topbar-left{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.topbar a{color:#fff;font-weight:600}
+.topbar .highlight{color:var(--gold);font-weight:800}
+
+/* ====== NAV ====== */
+.nav{background:#fff;box-shadow:0 2px 20px rgba(10,31,61,.08);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--line)}
+.nav-in{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.5px}
+.brand-icon{width:46px;height:46px;background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;flex-shrink:0;box-shadow:0 6px 18px rgba(37,99,235,.3)}
+.brand-txt{line-height:1.1}
+.brand-txt b{font-family:'Playfair Display',serif;font-size:21px;color:var(--navy);display:block;letter-spacing:-.5px}
+.brand-txt small{font-size:10px;color:var(--blue);letter-spacing:2px;font-weight:800}
+.nav-links{display:flex;gap:28px;font-size:14px;font-weight:600}
+.nav-links a{color:var(--ink);transition:.2s}
+.nav-links a:hover{color:var(--blue)}
+.nav-actions{display:flex;gap:10px;align-items:center}
+.btn{border:0;border-radius:10px;padding:13px 22px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;transition:.25s;display:inline-flex;align-items:center;gap:8px;letter-spacing:.2px}
+.btn-blue{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;box-shadow:0 8px 20px rgba(37,99,235,.3)}
+.btn-blue:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(37,99,235,.45)}
+.btn-outline{background:transparent;color:var(--blue);border:2px solid var(--blue)}
+.btn-outline:hover{background:var(--blue);color:#fff}
+.btn-white{background:#fff;color:var(--navy)}
+.btn-lg{padding:16px 28px;font-size:15px}
+
+/* ====== HERO ====== */
+.hero{background:linear-gradient(135deg,#061529 0%,#0a1f3d 50%,#14325c 100%);padding:70px 0 90px;position:relative;overflow:hidden;color:#fff}
+.hero::before{content:"";position:absolute;top:-150px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(37,99,235,.25),transparent 70%);border-radius:50%}
+.hero::after{content:"";position:absolute;bottom:-150px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(245,158,11,.15),transparent 70%);border-radius:50%}
+.hero-in{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(37,99,235,.2);border:1px solid rgba(59,130,246,.5);color:#93c5fd;padding:8px 16px;border-radius:99px;font-size:12px;font-weight:800;letter-spacing:1px;margin-bottom:22px}
+.hero-badge::before{content:"";width:8px;height:8px;background:var(--emerald);border-radius:50%;box-shadow:0 0 0 4px rgba(5,150,105,.2);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,5.5vw,56px);font-weight:800;line-height:1.05;letter-spacing:-1px;color:#fff;margin-bottom:20px}
+.hero h1 .blue{color:#60a5fa}
+.hero p{font-size:17px;color:#94a3b8;max-width:540px;margin-bottom:32px;line-height:1.65}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.hero-stats{display:flex;gap:32px;flex-wrap:wrap;padding-top:24px;border-top:1px solid rgba(59,130,246,.2)}
+.hero-stat b{display:block;font-family:'Playfair Display',serif;font-size:28px;font-weight:800;color:#60a5fa;letter-spacing:-1px}
+.hero-stat span{display:block;color:#94a3b8;font-size:11px;letter-spacing:1.5px;font-weight:700;text-transform:uppercase;margin-top:4px}
+.hero-visual{display:flex;justify-content:center}
+.search-card{background:rgba(255,255,255,.06);border:1px solid rgba(59,130,246,.25);border-radius:24px;padding:30px 26px;backdrop-filter:blur(20px);width:100%;max-width:420px}
+.search-card h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:6px}
+.search-card p{color:#94a3b8;font-size:13px;margin-bottom:22px}
+.search-field{margin-bottom:14px}
+.search-field label{display:block;color:#93c5fd;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.search-field input,.search-field select{width:100%;padding:13px 14px;background:rgba(0,0,0,.3);border:1px solid rgba(59,130,246,.25);border-radius:10px;color:#fff;font-family:inherit;font-size:14px}
+.search-field input:focus,.search-field select:focus{outline:none;border-color:var(--blue-light)}
+.search-field select option{background:var(--navy);color:#fff}
+.search-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+@media(max-width:900px){
+  .hero-in{grid-template-columns:1fr;gap:36px}
+  .nav-links{display:none}
+  .topbar-in{justify-content:center;text-align:center}
+}
+</style>
+</head><body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="topbar-left">
+      <span>📞 <a href="tel:01842224444">0184-222-4444</a></span>
+      <span class="highlight">🏆 Trusted since 2008 · 500+ Happy Families</span>
+    </div>
+    <div>
+      <a href="#contact">📍 Free Consultation</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <a href="#" class="brand">
+      <span class="brand-icon">🏢</span>
+      <span class="brand-txt">
+        <b>VAA Properties</b>
+        <small>REAL ESTATE · KARNAL</small>
+      </span>
+    </a>
+    <div class="nav-links">
+      <a href="#properties">Properties</a>
+      <a href="#services">Services</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <a href="#contact" class="btn btn-blue">📅 Free Visit</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-in">
+    <div>
+      <span class="hero-badge">Buy · Sell · Rent</span>
+      <h1>Find your perfect<br><span class="blue">property in Karnal.</span></h1>
+      <p>From luxury villas to commercial plots — VAA Properties helps you buy, sell, and rent with complete transparency. 500+ families settled, 1000+ deals closed.</p>
+      <div class="hero-ctas">
+        <a href="#properties" class="btn btn-blue btn-lg">🏠 View Properties</a>
+        <a href="tel:01842224444" class="btn btn-outline btn-lg" style="border-color:#60a5fa;color:#60a5fa">📞 Call Now</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>500+</b><span>Families Served</span></div>
+        <div class="hero-stat"><b>1000+</b><span>Deals Closed</span></div>
+        <div class="hero-stat"><b>15+</b><span>Years Experience</span></div>
+        <div class="hero-stat"><b>100%</b><span>Verified Deals</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="search-card">
+        <h3>Find Your Property</h3>
+        <p>Search from 200+ verified listings</p>
+        <div class="search-field">
+          <label>Looking For</label>
+          <select>
+            <option>Buy — Residential</option>
+            <option>Buy — Commercial</option>
+            <option>Rent — Residential</option>
+            <option>Rent — Commercial</option>
+            <option>Plots / Land</option>
+          </select>
+        </div>
+        <div class="search-row">
+          <div class="search-field">
+            <label>Budget Min</label>
+            <select>
+              <option>₹10 Lakh</option>
+              <option selected>₹25 Lakh</option>
+              <option>₹50 Lakh</option>
+              <option>₹1 Crore+</option>
+            </select>
+          </div>
+          <div class="search-field">
+            <label>Budget Max</label>
+            <select>
+              <option>₹50 Lakh</option>
+              <option selected>₹75 Lakh</option>
+              <option>₹1 Crore</option>
+              <option>₹5 Crore+</option>
+            </select>
+          </div>
+        </div>
+        <div class="search-field">
+          <label>Location</label>
+          <select>
+            <option>Sector 12, Karnal</option>
+            <option>Sector 32, Karnal</option>
+            <option>Model Town</option>
+            <option>Old City</option>
+            <option>All Locations</option>
+          </select>
+        </div>
+        <button class="btn btn-blue" style="width:100%;justify-content:center;padding:15px;margin-top:8px;font-size:15px">🔍 Search Properties</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section style="background:#fff;padding:28px 0;border-bottom:1px solid var(--line)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-around;flex-wrap:wrap;gap:24px;text-align:center">
+    <div><b style="font-size:14px;color:var(--ink);display:block">RERA Registered</b><span style="font-size:11px;color:var(--muted);font-weight:700">Fully Compliant</span></div>
+    <div><b style="font-size:14px;color:var(--ink);display:block">Verified Listings</b><span style="font-size:11px;color:var(--muted);font-weight:700">100% Legal Check</span></div>
+    <div><b style="font-size:14px;color:var(--ink);display:block">Loan Assistance</b><span style="font-size:11px;color:var(--muted);font-weight:700">All Major Banks</span></div>
+    <div><b style="font-size:14px;color:var(--ink);display:block">Zero Brokerage</b><span style="font-size:11px;color:var(--muted);font-weight:700">On Select Deals</span></div>
+  </div>
+</section>
+
+<!-- FEATURED PROPERTIES -->
+<section id="properties" style="padding:80px 0;background:#fff">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--blue);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Featured Properties</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Hand-picked for <span style="color:var(--blue)">you</span>.</h2>
+      <p style="color:var(--muted);font-size:16px;max-width:620px;margin:0 auto">Verified, legal-checked, and ready-to-move properties across Karnal's best locations.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px" class="prop-grid">
+      <div style="background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.3s" class="prop-item">
+        <div style="aspect-ratio:16/10;background:linear-gradient(135deg,#dbeafe,#bfdbfe);display:flex;align-items:center;justify-content:center;font-size:80px;position:relative">
+          🏡
+          <span style="position:absolute;top:14px;left:14px;background:var(--emerald);color:#fff;padding:5px 12px;border-radius:99px;font-size:10px;font-weight:900;letter-spacing:1px">FOR SALE</span>
+        </div>
+        <div style="padding:24px 22px">
+          <h3 style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--ink);margin-bottom:6px">3BHK Luxury Villa</h3>
+          <p style="color:var(--muted);font-size:13px;margin-bottom:12px">📍 Sector 12, Karnal</p>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);font-weight:600;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--line)">
+            <span>🛏 3 Bed</span><span>🚿 3 Bath</span><span>📐 1800 sqft</span>
+          </div>
+          <b style="color:var(--blue);font-size:20px;font-weight:900">₹85,00,000</b>
+        </div>
+      </div>
+
+      <div style="background:#fff;border:2px solid var(--blue);border-radius:20px;overflow:hidden;transition:.3s;position:relative" class="prop-item">
+        <div style="position:absolute;top:16px;right:16px;background:var(--gold);color:var(--navy-dark);padding:5px 12px;border-radius:99px;font-size:10px;font-weight:900;letter-spacing:1px;z-index:2">FEATURED</div>
+        <div style="aspect-ratio:16/10;background:linear-gradient(135deg,#dbeafe,#bfdbfe);display:flex;align-items:center;justify-content:center;font-size:80px;position:relative">
+          🏢
+          <span style="position:absolute;top:14px;left:14px;background:var(--blue);color:#fff;padding:5px 12px;border-radius:99px;font-size:10px;font-weight:900;letter-spacing:1px">FOR RENT</span>
+        </div>
+        <div style="padding:24px 22px">
+          <h3 style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--ink);margin-bottom:6px">Commercial Office</h3>
+          <p style="color:var(--muted);font-size:13px;margin-bottom:12px">📍 Sector 32, Karnal</p>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);font-weight:600;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--line)">
+            <span>🛏 0 Bed</span><span>🚿 2 Bath</span><span>📐 1200 sqft</span>
+          </div>
+          <b style="color:var(--blue);font-size:20px;font-weight:900">₹45,000<span style="font-size:12px;color:var(--muted);font-weight:600">/month</span></b>
+        </div>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.3s" class="prop-item">
+        <div style="aspect-ratio:16/10;background:linear-gradient(135deg,#dbeafe,#bfdbfe);display:flex;align-items:center;justify-content:center;font-size:80px;position:relative">
+          🏘️
+          <span style="position:absolute;top:14px;left:14px;background:var(--emerald);color:#fff;padding:5px 12px;border-radius:99px;font-size:10px;font-weight:900;letter-spacing:1px">FOR SALE</span>
+        </div>
+        <div style="padding:24px 22px">
+          <h3 style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--ink);margin-bottom:6px">2BHK Modern Flat</h3>
+          <p style="color:var(--muted);font-size:13px;margin-bottom:12px">📍 Model Town, Karnal</p>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);font-weight:600;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--line)">
+            <span>🛏 2 Bed</span><span>🚿 2 Bath</span><span>📐 1050 sqft</span>
+          </div>
+          <b style="color:var(--blue);font-size:20px;font-weight:900">₹42,00,000</b>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:40px">
+      <a href="#contact" class="btn btn-outline btn-lg">View All 200+ Properties →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="padding:80px 0;background:var(--bg)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--blue);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Our Services</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Everything real estate, <span style="color:var(--blue)">under one roof</span>.</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="svc-grid">
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:var(--blue-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🏠</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Buy Property</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Residential, commercial, plots & land. Curated listings across Karnal's best locations.</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:var(--blue-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">💰</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Sell Property</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Get the best value for your property. Free valuation, professional photography, priority listing.</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:var(--blue-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🔑</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Rentals</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Long-term & short-term rentals. Verified tenants, digital agreements, monthly support.</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:var(--blue-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">📋</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Legal Assistance</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Title verification, registration, stamp duty, and all paperwork handled by our team.</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:var(--blue-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🏦</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Home Loan Help</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Tie-ups with SBI, HDFC, ICICI. Fast approvals, lowest interest rates, complete guidance.</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:var(--blue-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">📊</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Investment Advice</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Best ROI areas, upcoming projects, and property market analysis — free consultation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.prop-item:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(10,31,61,.1)}
+@media(max-width:900px){
+  .prop-grid,.svc-grid{grid-template-columns:repeat(2,1fr)!important}
+}
+@media(max-width:600px){
+  .prop-grid,.svc-grid{grid-template-columns:1fr!important}
+}
+  </style><!-- WHY US -->
+<section id="why" style="padding:80px 0;background:#fff">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--blue);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Why VAA Properties</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Trust built over <span style="color:var(--blue)">15+ years</span>.</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px" class="why-grid">
+      <div style="background:var(--blue-soft);border:1px solid var(--line);border-radius:18px;padding:28px 22px">
+        <div style="width:52px;height:52px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px">✅</div>
+        <h4 style="font-size:16px;font-weight:800;color:var(--ink);margin-bottom:8px">100% Verified</h4>
+        <p style="color:var(--muted);font-size:13px;line-height:1.55">Every property legal-checked. No hidden disputes. No surprises.</p>
+      </div>
+      <div style="background:var(--blue-soft);border:1px solid var(--line);border-radius:18px;padding:28px 22px">
+        <div style="width:52px;height:52px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px">🤝</div>
+        <h4 style="font-size:16px;font-weight:800;color:var(--ink);margin-bottom:8px">Zero Pressure</h4>
+        <p style="color:var(--muted);font-size:13px;line-height:1.55">We show options, you decide. No pushy sales, no forced closes.</p>
+      </div>
+      <div style="background:var(--blue-soft);border:1px solid var(--line);border-radius:18px;padding:28px 22px">
+        <div style="width:52px;height:52px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px">💼</div>
+        <h4 style="font-size:16px;font-weight:800;color:var(--ink);margin-bottom:8px">End-to-End</h4>
+        <p style="color:var(--muted);font-size:13px;line-height:1.55">From site visit to keys handover — we handle everything.</p>
+      </div>
+      <div style="background:var(--blue-soft);border:1px solid var(--line);border-radius:18px;padding:28px 22px">
+        <div style="width:52px;height:52px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px">📞</div>
+        <h4 style="font-size:16px;font-weight:800;color:var(--ink);margin-bottom:8px">Lifetime Support</h4>
+        <p style="color:var(--muted);font-size:13px;line-height:1.55">Even after purchase, we help with paperwork, tenants, and advice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="padding:80px 0;background:var(--bg)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--blue);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Client Stories</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Families we've <span style="color:var(--blue)">helped</span>.</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="test-grid">
+      <div style="background:#fff;border-radius:18px;padding:28px 24px;border:1px solid var(--line)">
+        <div style="color:var(--gold);font-size:16px;letter-spacing:2px;margin-bottom:14px">★★★★★</div>
+        <p style="color:var(--ink);font-size:14px;line-height:1.7;margin-bottom:18px">"Bought our dream home through VAA. The team was patient, showed us 12 properties, and helped with the loan too. Zero pressure throughout."</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--line)">
+          <div style="width:40px;height:40px;background:var(--blue-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--blue)">SM</div>
+          <div><b style="font-size:13px;color:var(--ink);display:block">Sunil Malhotra</b><small style="color:var(--muted);font-size:11px">Karnal</small></div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:18px;padding:28px 24px;border:1px solid var(--line)">
+        <div style="color:var(--gold);font-size:16px;letter-spacing:2px;margin-bottom:14px">★★★★★</div>
+        <p style="color:var(--ink);font-size:14px;line-height:1.7;margin-bottom:18px">"Sold my old property in 3 weeks at a great price. They handled all the legal work — I just showed up at registration. Very professional."</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--line)">
+          <div style="width:40px;height:40px;background:var(--blue-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--blue)">RK</div>
+          <div><b style="font-size:13px;color:var(--ink);display:block">Rajesh Kumar</b><small style="color:var(--muted);font-size:11px">Karnal</small></div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:18px;padding:28px 24px;border:1px solid var(--line)">
+        <div style="color:var(--gold);font-size:16px;letter-spacing:2px;margin-bottom:14px">★★★★★</div>
+        <p style="color:var(--ink);font-size:14px;line-height:1.7;margin-bottom:18px">"As a first-time buyer, I had a lot of questions. The team explained everything — RERA, stamp duty, registration. Felt completely safe."</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--line)">
+          <div style="width:40px;height:40px;background:var(--blue-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--blue)">PS</div>
+          <div><b style="font-size:13px;color:var(--ink);display:block">Priya Sharma</b><small style="color:var(--muted);font-size:11px">Karnal</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="padding:80px 0;background:#fff">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center" class="contact-grid">
+      <div>
+        <span style="color:var(--blue);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Free Consultation</span>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Let's find your <span style="color:var(--blue)">perfect place.</span></h2>
+        <p style="color:var(--muted);font-size:16px;line-height:1.65;margin-bottom:24px">Whether buying, selling or renting — get a free 15-minute consultation. No obligation, no pushy sales.</p>
+
+        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:28px">
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--blue-soft);border-radius:14px">
+            <div style="font-size:24px">📞</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Call us</small><b style="display:block;color:var(--ink);font-size:15px">0184-222-4444</b></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--blue-soft);border-radius:14px">
+            <div style="font-size:24px">💬</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">WhatsApp</small><b style="display:block;color:var(--ink);font-size:15px">+91 98765 43210</b></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--blue-soft);border-radius:14px">
+            <div style="font-size:24px">📍</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Office</small><b style="display:block;color:var(--ink);font-size:15px">Sector 12 Market, Karnal</b></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--blue-soft);border-radius:14px">
+            <div style="font-size:24px">🕐</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Open</small><b style="display:block;color:var(--ink);font-size:15px">Mon–Sat · 9AM – 8PM</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--bg);border-radius:22px;padding:36px 32px;border:1px solid var(--line)">
+        <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:6px">Get Free Consultation</h3>
+        <p style="color:var(--muted);font-size:13px;margin-bottom:22px">We'll call you within 30 minutes</p>
+        <form onsubmit="event.preventDefault();alert('Demo: In real site, this sends to WhatsApp instantly.');this.reset();">
+          <div style="margin-bottom:14px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Full Name</label>
+            <input required type="text" placeholder="Your name" style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+          </div>
+          <div style="margin-bottom:14px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Phone</label>
+            <input required type="tel" placeholder="10-digit number" style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+          </div>
+          <div style="margin-bottom:14px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">I Want To</label>
+            <select style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+              <option>Buy a Property</option>
+              <option>Sell a Property</option>
+              <option>Rent a Property</option>
+              <option>Get Investment Advice</option>
+              <option>Home Loan Help</option>
+            </select>
+          </div>
+          <div style="margin-bottom:16px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Budget Range</label>
+            <select style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+              <option>Under ₹25 Lakh</option>
+              <option>₹25 – 50 Lakh</option>
+              <option>₹50 Lakh – 1 Crore</option>
+              <option>₹1 Crore – 5 Crore</option>
+              <option>5 Crore+</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-blue" style="width:100%;justify-content:center;padding:16px;font-size:15px">📅 Request Callback</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--navy-dark);color:#fff;padding:60px 20px 30px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;margin-bottom:44px" class="foot-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <div style="width:44px;height:44px;background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px">🏢</div>
+          <div>
+            <b style="font-family:'Playfair Display',serif;font-size:19px;display:block">VAA Properties</b>
+            <small style="color:#94a3b8;font-size:10px;letter-spacing:2px;font-weight:700">REAL ESTATE · KARNAL</small>
+          </div>
+        </div>
+        <p style="color:#94a3b8;font-size:13px;line-height:1.7;max-width:300px">Trusted real estate consultants since 2008. Buy, sell, rent — with complete transparency and 100% verified listings.</p>
+      </div>
+      <div>
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-bottom:16px;color:#fff">Services</h5>
+        <a href="#services" style="display:block;color:#94a3b8;font-size:13px;padding:5px 0">Buy Property</a>
+        <a href="#services" style="display:block;color:#94a3b8;font-size:13px;padding:5px 0">Sell Property</a>
+        <a href="#services" style="display:block;color:#94a3b8;font-size:13px;padding:5px 0">Rentals</a>
+        <a href="#services" style="display:block;color:#94a3b8;font-size:13px;padding:5px 0">Home Loans</a>
+      </div>
+      <div>
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-bottom:16px;color:#fff">Locations</h5>
+        <a href="#properties" style="display:block;color:#94a3b8;font-size:13px;padding:5px 0">Sector 12</a>
+        <a href="#properties" style="display:block;color:#94a3b8;font-size:13px;padding:5px 0">Sector 32</a>
+        <a href="#properties" style="display:block;color:#94a3b8;font-size:13px;padding:5px 0">Model Town</a>
+        <a href="#properties" style="display:block;color:#94a3b8;font-size:13px;padding:5px 0">Old City</a>
+      </div>
+      <div>
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-bottom:16px;color:#fff">Contact</h5>
+        <p style="color:#94a3b8;font-size:13px;padding:5px 0">📞 0184-222-4444</p>
+        <p style="color:#94a3b8;font-size:13px;padding:5px 0">💬 +91 98765 43210</p>
+        <p style="color:#94a3b8;font-size:13px;padding:5px 0">📍 Sector 12 Market, Karnal</p>
+        <p style="color:#94a3b8;font-size:13px;padding:5px 0">🕐 Mon–Sat · 9AM–8PM</p>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(59,130,246,.2);padding-top:24px;text-align:center;color:#94a3b8;font-size:12px">
+      © 2026 VAA Properties — Demo website. This is a <b style="color:#fff">VAAN Consultancy</b> demo.
+    </div>
+  </div>
+</footer>
+
+<!-- DEMO FLOATING BANNER -->
+<div id="demoBanner" style="position:fixed;bottom:16px;left:16px;right:16px;background:linear-gradient(135deg,#061529,#0a1f3d);color:#fff;border-radius:16px;padding:16px 20px;box-shadow:0 20px 50px rgba(0,0,0,.5);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;z-index:999;border:1px solid rgba(59,130,246,.3);max-width:700px;margin:0 auto">
+  <div style="flex:1;min-width:200px">
+    <div style="font-size:11px;color:#94a3b8;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px">Want this website?</div>
+    <div style="font-size:14px;font-weight:800">Basic ₹4,999 · <span style="color:#60a5fa">Standard ₹9,999</span> · Premium ₹19,999</div>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20a%20real%20estate%20website%20like%20this%20demo." target="_blank" style="background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:11px 18px;border-radius:10px;font-weight:800;font-size:13px;white-space:nowrap">💬 Get This Site</a>
+    <button onclick="document.getElementById('demoBanner').style.display='none'" style="background:rgba(59,130,246,.2);color:#fff;border:0;padding:11px 14px;border-radius:10px;font-weight:800;font-size:13px;cursor:pointer">✕</button>
+  </div>
+</div>
+
+<style>
+@media(max-width:900px){
+  .test-grid{grid-template-columns:repeat(2,1fr)!important}
+  .contact-grid{grid-template-columns:1fr!important;gap:32px!important}
+  .foot-grid{grid-template-columns:1fr 1fr!important;gap:28px!important}
+  .why-grid{grid-template-columns:repeat(2,1fr)!important}
+}
+@media(max-width:600px){
+  .test-grid{grid-template-columns:1fr!important}
+  .foot-grid{grid-template-columns:1fr!important}
+  .why-grid{grid-template-columns:1fr!important}
+}
+</style>
+
+</body>
+      </html>
