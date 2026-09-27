@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VAA Hotel — Luxury Stay in the Heart of Karnal</title>
+<meta name="description" content="VAA Hotel — 5-star comfort, modern rooms, fine dining, and premium banquet facilities in Karnal. Book your stay today.">
+<meta name="theme-color" content="#1a2332">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏨</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#f5f7fa;color:#1a2332;line-height:1.6;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+:root{
+  --navy:#1a2332;
+  --navy-light:#2c3a52;
+  --navy-dark:#0f1720;
+  --accent:#c9a961;
+  --accent-light:#e0c286;
+  --accent-soft:#faf5e8;
+  --bg:#f5f7fa;
+  --white:#ffffff;
+  --ink:#1a2332;
+  --muted:#6b7789;
+  --line:#e4e8ee;
+  --green:#12b76a;
+  --red:#c8102e;
+}
+
+/* ====== TOP BAR ====== */
+.topbar{background:var(--navy-dark);color:#fff;font-size:12px;padding:8px 0}
+.topbar-in{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.topbar-left{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.topbar a{color:#fff;font-weight:600}
+.topbar .accent{color:var(--accent-light);font-weight:800}
+
+/* ====== NAV ====== */
+.nav{background:rgba(26,35,50,.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(201,169,97,.2)}
+.nav-in{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.5px;color:#fff}
+.brand-icon{width:46px;height:46px;background:linear-gradient(135deg,var(--accent),var(--accent-light));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 6px 18px rgba(201,169,97,.3)}
+.brand-txt{line-height:1.1}
+.brand-txt b{font-family:'Playfair Display',serif;font-size:22px;color:#fff;display:block;letter-spacing:-.5px}
+.brand-txt small{font-size:10px;color:var(--accent-light);letter-spacing:2px;font-weight:800}
+.nav-links{display:flex;gap:28px;font-size:14px;font-weight:600}
+.nav-links a{color:#fff;opacity:.9;transition:.2s}
+.nav-links a:hover{color:var(--accent-light);opacity:1}
+.nav-actions{display:flex;gap:10px;align-items:center}
+.btn{border:0;border-radius:10px;padding:13px 22px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;transition:.25s;display:inline-flex;align-items:center;gap:8px;letter-spacing:.2px}
+.btn-accent{background:linear-gradient(135deg,var(--accent),var(--accent-light));color:var(--navy-dark);box-shadow:0 8px 20px rgba(201,169,97,.3)}
+.btn-accent:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(201,169,97,.5)}
+.btn-outline{background:transparent;color:var(--accent-light);border:2px solid var(--accent)}
+.btn-outline:hover{background:var(--accent);color:var(--navy-dark)}
+.btn-white{background:#fff;color:var(--navy-dark)}
+.btn-white:hover{background:var(--accent-light)}
+.btn-lg{padding:16px 28px;font-size:15px}
+
+/* ====== HERO ====== */
+.hero{position:relative;min-height:90vh;display:flex;align-items:center;padding:80px 0;background:linear-gradient(135deg,#0f1720 0%,#1a2332 50%,#2c3a52 100%);color:#fff;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-150px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(201,169,97,.18),transparent 70%);border-radius:50%}
+.hero::after{content:"";position:absolute;bottom:-150px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(201,169,97,.1),transparent 70%);border-radius:50%}
+.hero-in{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,169,97,.15);border:1px solid rgba(201,169,97,.4);color:var(--accent-light);padding:8px 16px;border-radius:99px;font-size:12px;font-weight:800;letter-spacing:1px;margin-bottom:22px}
+.hero-badge::before{content:"★";color:var(--accent-light);font-size:14px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5.5vw,60px);font-weight:800;line-height:1.05;letter-spacing:-1px;color:#fff;margin-bottom:20px}
+.hero h1 .accent{color:var(--accent-light)}
+.hero p{font-size:17px;color:#b8c2d1;max-width:540px;margin-bottom:32px;line-height:1.65}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.hero-stats{display:flex;gap:32px;flex-wrap:wrap;padding-top:24px;border-top:1px solid rgba(201,169,97,.2)}
+.hero-stat b{display:block;font-family:'Playfair Display',serif;font-size:30px;font-weight:800;color:var(--accent-light);letter-spacing:-1px}
+.hero-stat span{display:block;color:#8894a8;font-size:11px;letter-spacing:1.5px;font-weight:700;text-transform:uppercase;margin-top:4px}
+.hero-visual{display:flex;justify-content:center}
+.booking-card{background:rgba(255,255,255,.06);border:1px solid rgba(201,169,97,.25);border-radius:24px;padding:32px 28px;backdrop-filter:blur(20px);width:100%;max-width:420px}
+.booking-card h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:6px}
+.booking-card p{color:#8894a8;font-size:13px;margin-bottom:22px}
+.book-field{margin-bottom:14px}
+.book-field label{display:block;color:var(--accent-light);font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.book-field input,.book-field select{width:100%;padding:13px 14px;background:rgba(0,0,0,.3);border:1px solid rgba(201,169,97,.25);border-radius:10px;color:#fff;font-family:inherit;font-size:14px}
+.book-field input:focus,.book-field select:focus{outline:none;border-color:var(--accent)}
+.book-field select{color:#fff}
+.book-field select option{background:var(--navy);color:#fff}
+.book-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+@media(max-width:900px){
+  .hero-in{grid-template-columns:1fr;gap:36px}
+  .nav-links{display:none}
+  .topbar-in{justify-content:center;text-align:center}
+  .hero{min-height:auto}
+}
+</style>
+</head><body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="topbar-left">
+      <span>📞 <a href="tel:01842223333">0184-222-3333</a></span>
+      <span class="accent">★ 4.8/5 · 2,400+ Reviews</span>
+    </div>
+    <div>
+      <a href="#book">📍 Book Now</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <a href="#" class="brand">
+      <span class="brand-icon">🏨</span>
+      <span class="brand-txt">
+        <b>VAA Hotel</b>
+        <small>LUXURY · KARNAL</small>
+      </span>
+    </a>
+    <div class="nav-links">
+      <a href="#rooms">Rooms</a>
+      <a href="#dining">Dining</a>
+      <a href="#banquet">Banquet</a>
+      <a href="#book">Book</a>
+    </div>
+    <div class="nav-actions">
+      <a href="#book" class="btn btn-accent">📅 Book Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-in">
+    <div>
+      <span class="hero-badge">5-Star Comfort in Karnal</span>
+      <h1>Where luxury<br><span class="accent">meets comfort.</span></h1>
+      <p>VAA Hotel — modern rooms, fine dining, premium banquet halls, and warm hospitality. Perfect for business trips, family stays, and special occasions.</p>
+      <div class="hero-ctas">
+        <a href="#book" class="btn btn-accent btn-lg">📅 Book Your Stay</a>
+        <a href="tel:01842223333" class="btn btn-outline btn-lg">📞 Call Us</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>48</b><span>Luxury Rooms</span></div>
+        <div class="hero-stat"><b>3</b><span>Banquet Halls</span></div>
+        <div class="hero-stat"><b>4.8★</b><span>Guest Rating</span></div>
+        <div class="hero-stat"><b>24x7</b><span>Room Service</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="booking-card">
+        <h3>Book Your Room</h3>
+        <p>Instant confirmation · Best price guaranteed</p>
+        <div class="book-field">
+          <label>Check In</label>
+          <input type="date" id="checkin">
+        </div>
+        <div class="book-field">
+          <label>Check Out</label>
+          <input type="date" id="checkout">
+        </div>
+        <div class="book-row">
+          <div class="book-field">
+            <label>Guests</label>
+            <select>
+              <option>1 Adult</option>
+              <option selected>2 Adults</option>
+              <option>3 Adults</option>
+              <option>Family (4+)</option>
+            </select>
+          </div>
+          <div class="book-field">
+            <label>Room Type</label>
+            <select>
+              <option>Deluxe</option>
+              <option selected>Executive</option>
+              <option>Suite</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-accent" style="width:100%;justify-content:center;padding:15px;margin-top:8px;font-size:15px">🔍 Check Availability</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section style="background:#fff;padding:28px 0;border-bottom:1px solid var(--line)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-around;flex-wrap:wrap;gap:24px;text-align:center">
+    <div><b style="font-size:14px;color:var(--ink);display:block">Free Cancellation</b><span style="font-size:11px;color:var(--muted);font-weight:700">Up to 24hrs before</span></div>
+    <div><b style="font-size:14px;color:var(--ink);display:block">Free Wi-Fi</b><span style="font-size:11px;color:var(--muted);font-weight:700">High-speed everywhere</span></div>
+    <div><b style="font-size:14px;color:var(--ink);display:block">Free Parking</b><span style="font-size:11px;color:var(--muted);font-weight:700">Valet available</span></div>
+    <div><b style="font-size:14px;color:var(--ink);display:block">Complimentary Breakfast</b><span style="font-size:11px;color:var(--muted);font-weight:700">All rooms included</span></div>
+  </div>
+</section>
+
+<!-- ROOMS -->
+<section id="rooms" style="padding:80px 0;background:#fff">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--accent);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Our Rooms</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Comfort in <span style="color:var(--accent)">every detail</span>.</h2>
+      <p style="color:var(--muted);font-size:16px;max-width:620px;margin:0 auto">Choose from our curated room categories — every room designed for a restful, premium experience.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px" class="room-grid">
+      <div style="background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.3s" class="room-item">
+        <div style="aspect-ratio:16/10;background:linear-gradient(135deg,#e8eef5,#c8d4e3);display:flex;align-items:center;justify-content:center;font-size:80px">🛏️</div>
+        <div style="padding:26px 24px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+            <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink)">Deluxe Room</h3>
+            <b style="color:var(--accent);font-size:16px;font-weight:900">₹3,499<span style="font-size:11px;color:var(--muted);font-weight:600">/night</span></b>
+          </div>
+          <p style="color:var(--muted);font-size:13px;line-height:1.55;margin-bottom:14px">Cozy 280 sq ft room with queen bed, city view, and all modern amenities.</p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);font-weight:600">
+            <span>✓ Queen Bed</span><span>✓ Wi-Fi</span><span>✓ AC</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#fff;border:2px solid var(--accent);border-radius:20px;overflow:hidden;transition:.3s;position:relative" class="room-item">
+        <div style="position:absolute;top:16px;right:16px;background:var(--accent);color:var(--navy-dark);padding:5px 12px;border-radius:99px;font-size:10px;font-weight:900;letter-spacing:1px;z-index:2">POPULAR</div>
+        <div style="aspect-ratio:16/10;background:linear-gradient(135deg,#e8eef5,#c8d4e3);display:flex;align-items:center;justify-content:center;font-size:80px">🛌</div>
+        <div style="padding:26px 24px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+            <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink)">Executive Room</h3>
+            <b style="color:var(--accent);font-size:16px;font-weight:900">₹5,999<span style="font-size:11px;color:var(--muted);font-weight:600">/night</span></b>
+          </div>
+          <p style="color:var(--muted);font-size:13px;line-height:1.55;margin-bottom:14px">Spacious 400 sq ft room with king bed, work desk, and premium furnishings.</p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);font-weight:600">
+            <span>✓ King Bed</span><span>✓ Mini Bar</span><span>✓ Bathtub</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.3s" class="room-item">
+        <div style="aspect-ratio:16/10;background:linear-gradient(135deg,#e8eef5,#c8d4e3);display:flex;align-items:center;justify-content:center;font-size:80px">👑</div>
+        <div style="padding:26px 24px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+            <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink)">Royal Suite</h3>
+            <b style="color:var(--accent);font-size:16px;font-weight:900">₹11,999<span style="font-size:11px;color:var(--muted);font-weight:600">/night</span></b>
+          </div>
+          <p style="color:var(--muted);font-size:13px;line-height:1.55;margin-bottom:14px">Luxurious 650 sq ft suite with living area, dining space, and jacuzzi.</p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);font-weight:600">
+            <span>✓ Living Area</span><span>✓ Jacuzzi</span><span>✓ Butler</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section id="dining" style="padding:80px 0;background:var(--bg)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--accent);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Amenities & Dining</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Everything you <span style="color:var(--accent)">need</span>.</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="amen-grid">
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:var(--accent-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🍽️</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Fine Dining Restaurant</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Multi-cuisine restaurant serving Indian, Chinese & Continental. Open 7AM – 11PM.</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:var(--accent-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🎉</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Banquet Halls</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">3 premium halls for weddings, receptions & corporate events. Capacity up to 500.</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:var(--accent-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">💪</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Fitness Center</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Modern gym with cardio & strength equipment. Complimentary for all guests.</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:var(--accent-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🏊</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Swimming Pool</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Temperature-controlled outdoor pool with lounge chairs. Open 6AM – 9PM.</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:var(--accent-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🧖</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Spa & Wellness</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">Relaxing spa treatments — massage, facial, and body therapies by trained therapists.</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px">
+        <div style="width:56px;height:56px;background:var(--accent-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px">🚗</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px">Airport Pickup</h3>
+        <p style="color:var(--muted);font-size:14px;line-height:1.6">On-demand pickup & drop from Delhi, Chandigarh airports. Premium cars available.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.room-item:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.08)}
+@media(max-width:900px){
+  .room-grid,.amen-grid{grid-template-columns:repeat(2,1fr)!important}
+}
+@media(max-width:600px){
+  .room-grid,.amen-grid{grid-template-columns:1fr!important}
+}
+  </style><!-- BANQUET -->
+<section id="banquet" style="padding:80px 0;background:#fff">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center" class="banquet-grid">
+      <div>
+        <span style="color:var(--accent);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Banquet & Events</span>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Host events that <span style="color:var(--accent)">wow everyone</span>.</h2>
+        <p style="color:var(--muted);font-size:16px;line-height:1.65;margin-bottom:24px">From intimate gatherings to grand weddings — our 3 banquet halls are designed for memories. Custom menus, decor, and full event support included.</p>
+
+        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:28px">
+          <div style="display:flex;align-items:center;gap:16px;padding:18px;background:var(--accent-soft);border-radius:14px;border-left:4px solid var(--accent)">
+            <div style="font-size:22px">💒</div>
+            <div><b style="display:block;color:var(--ink);font-size:15px;font-weight:800">Grand Ballroom</b><span style="color:var(--muted);font-size:12px">Up to 500 guests · For weddings & receptions</span></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;padding:18px;background:var(--accent-soft);border-radius:14px;border-left:4px solid var(--accent)">
+            <div style="font-size:22px">🎊</div>
+            <div><b style="display:block;color:var(--ink);font-size:15px;font-weight:800">Celebration Hall</b><span style="color:var(--muted);font-size:12px">Up to 200 guests · For birthdays & anniversaries</span></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;padding:18px;background:var(--accent-soft);border-radius:14px;border-left:4px solid var(--accent)">
+            <div style="font-size:22px">💼</div>
+            <div><b style="display:block;color:var(--ink);font-size:15px;font-weight:800">Conference Room</b><span style="color:var(--muted);font-size:12px">Up to 80 guests · For meetings & seminars</span></div>
+          </div>
+        </div>
+
+        <a href="#book" class="btn btn-accent btn-lg">📞 Enquire About Banquet</a>
+      </div>
+
+      <div style="background:linear-gradient(135deg,#0f1720,#1a2332);border-radius:24px;padding:40px 32px;color:#fff;position:relative;overflow:hidden">
+        <div style="position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:radial-gradient(circle,rgba(201,169,97,.2),transparent 70%);border-radius:50%"></div>
+        <div style="position:relative;z-index:2">
+          <div style="font-size:60px;margin-bottom:20px">🎉</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin-bottom:14px;line-height:1.2">Plan your next event with us</h3>
+          <p style="color:#b8c2d1;font-size:14px;line-height:1.7;margin-bottom:24px">Custom packages starting from ₹499 per plate. Includes hall rent, decor, sound system, and dedicated event manager.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;padding-top:22px;border-top:1px solid rgba(201,169,97,.2)">
+            <div><b style="display:block;font-size:22px;color:var(--accent-light);font-family:'Playfair Display',serif;font-weight:800">500+</b><span style="color:#8894a8;font-size:10px;letter-spacing:1.5px;font-weight:700;text-transform:uppercase">Guest Capacity</span></div>
+            <div><b style="display:block;font-size:22px;color:var(--accent-light);font-family:'Playfair Display',serif;font-weight:800">3</b><span style="color:#8894a8;font-size:10px;letter-spacing:1.5px;font-weight:700;text-transform:uppercase">Halls Available</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="padding:80px 0;background:var(--bg)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="text-align:center;margin-bottom:50px">
+      <span style="color:var(--accent);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Guest Reviews</span>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Loved by <span style="color:var(--accent)">our guests</span>.</h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="test-grid">
+      <div style="background:#fff;border-radius:18px;padding:28px 24px;border:1px solid var(--line)">
+        <div style="color:var(--accent);font-size:16px;letter-spacing:2px;margin-bottom:14px">★★★★★</div>
+        <p style="color:var(--ink);font-size:14px;line-height:1.7;margin-bottom:18px">"Stayed for a business trip. Rooms were spotless, staff was very polite, and the food was outstanding. Best hotel in Karnal, hands down."</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--line)">
+          <div style="width:40px;height:40px;background:var(--accent-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent)">AK</div>
+          <div><b style="font-size:13px;color:var(--ink);display:block">Amit Kapoor</b><small style="color:var(--muted);font-size:11px">Delhi</small></div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:18px;padding:28px 24px;border:1px solid var(--line)">
+        <div style="color:var(--accent);font-size:16px;letter-spacing:2px;margin-bottom:14px">★★★★★</div>
+        <p style="color:var(--ink);font-size:14px;line-height:1.7;margin-bottom:18px">"We hosted my sister's wedding here. The banquet hall, food, decor — everything was perfect. Staff went above and beyond. Highly recommend."</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--line)">
+          <div style="width:40px;height:40px;background:var(--accent-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent)">PS</div>
+          <div><b style="font-size:13px;color:var(--ink);display:block">Priya Singh</b><small style="color:var(--muted);font-size:11px">Karnal</small></div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:18px;padding:28px 24px;border:1px solid var(--line)">
+        <div style="color:var(--accent);font-size:16px;letter-spacing:2px;margin-bottom:14px">★★★★★</div>
+        <p style="color:var(--ink);font-size:14px;line-height:1.7;margin-bottom:18px">"Family stayed here during a trip. Kids loved the pool, wife loved the spa. Clean rooms, great food, and very reasonable rates for the quality."</p>
+        <div style="display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--line)">
+          <div style="width:40px;height:40px;background:var(--accent-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent)">RV</div>
+          <div><b style="font-size:13px;color:var(--ink);display:block">Rohit Verma</b><small style="color:var(--muted);font-size:11px">Chandigarh</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK / CONTACT -->
+<section id="book" style="padding:80px 0;background:#fff">
+  <div style="max-width:1200px;margin:0 auto;padding:0 20px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center" class="contact-grid">
+      <div>
+        <span style="color:var(--accent);font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase">Reservations</span>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,46px);font-weight:800;letter-spacing:-1px;color:var(--ink);margin:14px 0 16px;line-height:1.1">Reserve your <span style="color:var(--accent)">escape.</span></h2>
+        <p style="color:var(--muted);font-size:16px;line-height:1.65;margin-bottom:24px">Book direct for the best rates. Call, WhatsApp, or fill the form — we confirm in minutes.</p>
+
+        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:28px">
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--accent-soft);border-radius:14px">
+            <div style="font-size:24px">📞</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Front Desk</small><b style="display:block;color:var(--ink);font-size:15px">0184-222-3333</b></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--accent-soft);border-radius:14px">
+            <div style="font-size:24px">💬</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">WhatsApp</small><b style="display:block;color:var(--ink);font-size:15px">+91 98765 43210</b></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--accent-soft);border-radius:14px">
+            <div style="font-size:24px">📍</div>
+            <div><small style="color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Address</small><b style="display:block;color:var(--ink);font-size:15px">NH-44, Near Sector 12, Karnal</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--bg);border-radius:22px;padding:36px 32px;border:1px solid var(--line)">
+        <h3 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:6px">Book Your Stay</h3>
+        <p style="color:var(--muted);font-size:13px;margin-bottom:22px">Instant confirmation on WhatsApp</p>
+        <form onsubmit="event.preventDefault();alert('Demo: In real site, this sends to WhatsApp instantly.');this.reset();">
+          <div style="margin-bottom:14px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Full Name</label>
+            <input required type="text" placeholder="Your name" style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+          </div>
+          <div style="margin-bottom:14px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Phone</label>
+            <input required type="tel" placeholder="10-digit number" style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+            <div>
+              <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Check In</label>
+              <input type="date" style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+            </div>
+            <div>
+              <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Check Out</label>
+              <input type="date" style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+            </div>
+          </div>
+          <div style="margin-bottom:16px">
+            <label style="display:block;color:var(--muted);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px">Room Type</label>
+            <select style="width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;font-family:inherit;font-size:14px;background:#fff;color:var(--ink)">
+              <option>Deluxe Room (₹3,499)</option>
+              <option>Executive Room (₹5,999)</option>
+              <option>Royal Suite (₹11,999)</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-accent" style="width:100%;justify-content:center;padding:16px;font-size:15px">📅 Request Booking</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--navy-dark);color:#fff;padding:60px 20px 30px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;margin-bottom:44px" class="foot-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <div style="width:44px;height:44px;background:linear-gradient(135deg,var(--accent),var(--accent-light));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px">🏨</div>
+          <div>
+            <b style="font-family:'Playfair Display',serif;font-size:19px;display:block">VAA Hotel</b>
+            <small style="color:#b8c2d1;font-size:10px;letter-spacing:2px;font-weight:700">LUXURY · KARNAL</small>
+          </div>
+        </div>
+        <p style="color:#b8c2d1;font-size:13px;line-height:1.7;max-width:300px">Where luxury meets comfort. Premium rooms, fine dining, banquet halls, and hospitality that feels like home.</p>
+      </div>
+      <div>
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-bottom:16px;color:#fff">Hotel</h5>
+        <a href="#rooms" style="display:block;color:#b8c2d1;font-size:13px;padding:5px 0">Rooms</a>
+        <a href="#dining" style="display:block;color:#b8c2d1;font-size:13px;padding:5px 0">Dining</a>
+        <a href="#banquet" style="display:block;color:#b8c2d1;font-size:13px;padding:5px 0">Banquet</a>
+        <a href="#book" style="display:block;color:#b8c2d1;font-size:13px;padding:5px 0">Book Now</a>
+      </div>
+      <div>
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-bottom:16px;color:#fff">Explore</h5>
+        <a href="#" style="display:block;color:#b8c2d1;font-size:13px;padding:5px 0">Spa & Wellness</a>
+        <a href="#" style="display:block;color:#b8c2d1;font-size:13px;padding:5px 0">Swimming Pool</a>
+        <a href="#" style="display:block;color:#b8c2d1;font-size:13px;padding:5px 0">Fitness Center</a>
+        <a href="#" style="display:block;color:#b8c2d1;font-size:13px;padding:5px 0">Airport Pickup</a>
+      </div>
+      <div>
+        <h5 style="font-size:12px;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-bottom:16px;color:#fff">Contact</h5>
+        <p style="color:#b8c2d1;font-size:13px;padding:5px 0">📞 0184-222-3333</p>
+        <p style="color:#b8c2d1;font-size:13px;padding:5px 0">💬 +91 98765 43210</p>
+        <p style="color:#b8c2d1;font-size:13px;padding:5px 0">📍 NH-44, Karnal</p>
+        <p style="color:#b8c2d1;font-size:13px;padding:5px 0">🕐 Front desk: 24x7</p>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(201,169,97,.2);padding-top:24px;text-align:center;color:#8894a8;font-size:12px">
+      © 2026 VAA Hotel — Demo website. This is a <b style="color:#fff">VAAN Consultancy</b> demo.
+    </div>
+  </div>
+</footer>
+
+<!-- DEMO FLOATING BANNER -->
+<div id="demoBanner" style="position:fixed;bottom:16px;left:16px;right:16px;background:linear-gradient(135deg,#0f1720,#1a2332);color:#fff;border-radius:16px;padding:16px 20px;box-shadow:0 20px 50px rgba(0,0,0,.5);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;z-index:999;border:1px solid rgba(201,169,97,.3);max-width:700px;margin:0 auto">
+  <div style="flex:1;min-width:200px">
+    <div style="font-size:11px;color:#b8c2d1;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px">Want this website?</div>
+    <div style="font-size:14px;font-weight:800">Basic ₹4,999 · <span style="color:var(--accent-light)">Standard ₹9,999</span> · Premium ₹19,999</div>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20a%20hotel%20website%20like%20this%20demo." target="_blank" style="background:linear-gradient(135deg,var(--accent),var(--accent-light));color:var(--navy-dark);padding:11px 18px;border-radius:10px;font-weight:800;font-size:13px;white-space:nowrap">💬 Get This Site</a>
+    <button onclick="document.getElementById('demoBanner').style.display='none'" style="background:rgba(201,169,97,.2);color:#fff;border:0;padding:11px 14px;border-radius:10px;font-weight:800;font-size:13px;cursor:pointer">✕</button>
+  </div>
+</div>
+
+<style>
+@media(max-width:900px){
+  .banquet-grid{grid-template-columns:1fr!important;gap:32px!important}
+  .test-grid{grid-template-columns:repeat(2,1fr)!important}
+  .contact-grid{grid-template-columns:1fr!important;gap:32px!important}
+  .foot-grid{grid-template-columns:1fr 1fr!important;gap:28px!important}
+}
+@media(max-width:600px){
+  .test-grid{grid-template-columns:1fr!important}
+  .foot-grid{grid-template-columns:1fr!important}
+}
+</style>
+
+</body>
+  </html>
