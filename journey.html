@@ -1,0 +1,2113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<title>The VAAN Journey — A Cinematic Story</title>
+<meta name="description" content="A journey through how business transformed. From paper to pixels. Vision, Automation, Advancement, Network.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://vikassharma01072008-prog.github.io/vaan-consultancy/journey.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RESET + ROOT
+   ============================================================ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',-apple-system,Arial,sans-serif;
+  background:#000;color:#f5f5f5;
+  overflow-x:hidden;line-height:1.6;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-font-smoothing:antialiased;
+}
+@media(min-width:901px){body{cursor:none}}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+
+:root{
+  --gold:#ffd400;
+  --gold-2:#ffa726;
+  --blue:#4f8fff;
+  --blue-2:#8bb4ff;
+  --purple:#a78bfa;
+  --sepia:#d4b896;
+  --sepia-dark:#8b6f47;
+  --paper:#e8d8b8;
+  --paper-dark:#b89968;
+  --white:#f5f5f5;
+  --muted:#8a8f9c;
+  --line-soft:rgba(255,255,255,.08);
+  --bg:#0a0e1a;
+}
+
+/* ============================================================
+   LOADING SCREEN
+   ============================================================ */
+#loadingScreen{
+  position:fixed;inset:0;background:#000;z-index:999999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity 1.2s ease,visibility 1.2s ease;
+  cursor:pointer;
+}
+#loadingScreen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+
+.loading-brand{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(80px,14vw,140px);
+  font-weight:800;letter-spacing:-6px;line-height:.9;
+  background:linear-gradient(135deg,var(--gold),var(--blue));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:16px;
+  animation:brandPulse 3s ease-in-out infinite;
+  filter:drop-shadow(0 0 60px rgba(255,212,0,.5));
+}
+@keyframes brandPulse{
+  0%,100%{opacity:1;transform:scale(1);filter:drop-shadow(0 0 60px rgba(255,212,0,.5))}
+  50%{opacity:.92;transform:scale(1.015);filter:drop-shadow(0 0 80px rgba(255,212,0,.7))}
+}
+
+.loading-subtitle{
+  color:var(--muted);
+  font-size:10px;letter-spacing:6px;
+  font-weight:800;text-transform:uppercase;
+  margin-bottom:60px;
+  animation:subtitleFade 3s ease-in-out infinite;
+}
+@keyframes subtitleFade{0%,100%{opacity:.5}50%{opacity:1}}
+
+.loading-bar{
+  width:min(320px,72vw);height:1px;
+  background:rgba(255,255,255,.08);
+  border-radius:99px;overflow:hidden;position:relative;
+  margin-bottom:28px;
+}
+.loading-bar-fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--gold),var(--blue));
+  transition:width .4s cubic-bezier(.4,0,.2,1);
+  border-radius:99px;
+  box-shadow:0 0 30px rgba(255,212,0,.7);
+}
+
+.loading-status{
+  color:var(--muted);
+  font-size:9px;letter-spacing:4px;
+  font-weight:800;text-transform:uppercase;
+  min-height:14px;
+  margin-bottom:8px;
+}
+
+.loading-hint{
+  position:absolute;bottom:56px;left:50%;
+  transform:translateX(-50%);
+  color:var(--gold);
+  font-size:10px;letter-spacing:4px;
+  font-weight:900;text-transform:uppercase;
+  padding:16px 32px;
+  border:1px solid rgba(255,212,0,.35);
+  border-radius:99px;
+  background:rgba(255,212,0,.04);
+  backdrop-filter:blur(12px);
+  animation:hintGlow 2.4s ease-in-out infinite;
+  white-space:nowrap;
+}
+@keyframes hintGlow{
+  0%,100%{box-shadow:0 0 0 rgba(255,212,0,0);border-color:rgba(255,212,0,.35)}
+  50%{box-shadow:0 0 40px rgba(255,212,0,.5);border-color:rgba(255,212,0,.8)}
+}
+
+/* ============================================================
+   CUSTOM CURSOR (desktop only)
+   ============================================================ */
+#customCursor{
+  position:fixed;top:0;left:0;
+  width:12px;height:12px;border-radius:50%;
+  background:var(--gold);
+  pointer-events:none;z-index:999998;
+  transform:translate(-50%,-50%);
+  transition:width .35s cubic-bezier(.4,0,.2,1),
+             height .35s cubic-bezier(.4,0,.2,1),
+             background .35s ease,
+             border .35s ease;
+  mix-blend-mode:screen;
+  box-shadow:0 0 24px rgba(255,212,0,.9);
+  will-change:transform,left,top;
+}
+#customCursor.hover{
+  width:60px;height:60px;
+  background:rgba(255,212,0,.12);
+  border:1px solid var(--gold);
+  box-shadow:0 0 40px rgba(255,212,0,.6);
+}
+#customCursor.click{
+  width:22px;height:22px;
+  background:rgba(255,212,0,.5);
+}
+@media(max-width:900px){#customCursor{display:none}}
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:20px 0;
+  background:rgba(0,0,0,.4);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(255,255,255,.05);
+  transition:all .4s cubic-bezier(.4,0,.2,1);
+}
+.nav.scrolled{
+  background:rgba(0,0,0,.85);
+  padding:14px 0;
+  border-bottom:1px solid rgba(255,212,0,.1);
+}
+.nav-in{
+  max-width:1320px;margin:0 auto;padding:0 28px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.brand{display:flex;align-items:center;gap:14px;font-weight:950;letter-spacing:-1.5px;color:#fff}
+.brand-logo{width:38px;height:38px;flex-shrink:0}
+.brand-logo svg{width:100%;height:100%;filter:drop-shadow(0 0 14px rgba(255,212,0,.7))}
+.brand-text{display:flex;flex-direction:column;line-height:1}
+.brand-text b{font-size:20px;letter-spacing:-.8px;font-family:'Playfair Display',serif;font-weight:800}
+.brand-text small{font-size:9px;letter-spacing:3px;color:var(--muted);margin-top:4px;font-weight:700}
+
+.nav-links{display:flex;align-items:center;gap:30px;font-size:13.5px;font-weight:600;letter-spacing:.3px}
+.nav-links a{color:var(--white);opacity:.8;transition:.25s;position:relative;padding:6px 0}
+.nav-links a:hover{opacity:1;color:var(--gold)}
+.nav-links a.active{color:var(--gold);opacity:1}
+.nav-links a.active::after{
+  content:"";position:absolute;bottom:-4px;left:0;right:0;height:1.5px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  box-shadow:0 0 12px var(--gold);
+}
+
+.nav-cta{
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  color:#000 !important;padding:12px 24px;border-radius:99px;
+  font-weight:800;font-size:13px;transition:.3s;
+  opacity:1 !important;letter-spacing:.5px;
+  box-shadow:0 10px 28px rgba(255,212,0,.35);
+}
+.nav-cta:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 40px rgba(255,212,0,.55);
+}
+
+.hamburger{
+  display:none;background:transparent;border:0;cursor:pointer;
+  padding:10px;flex-direction:column;gap:6px;
+  width:44px;height:44px;align-items:center;justify-content:center;
+}
+.hamburger span{
+  display:block;width:26px;height:2px;background:#f5f5f5;
+  border-radius:2px;transition:.3s;
+}
+.hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+/* ============================================================
+   SOUND TOGGLE
+   ============================================================ */
+#soundToggle{
+  position:fixed;top:94px;right:28px;z-index:9998;
+  width:50px;height:50px;border-radius:50%;
+  background:rgba(10,14,26,.75);
+  border:1px solid rgba(255,212,0,.35);
+  color:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;backdrop-filter:blur(24px);
+  transition:.3s;font-size:20px;
+  box-shadow:0 8px 24px rgba(0,0,0,.5);
+}
+#soundToggle:hover{
+  background:rgba(255,212,0,.15);
+  transform:scale(1.08);
+  box-shadow:0 12px 32px rgba(255,212,0,.45);
+}
+#soundToggle.playing{
+  color:var(--blue);
+  border-color:rgba(79,143,255,.6);
+  animation:soundPulse 2.4s infinite;
+}
+@keyframes soundPulse{
+  0%,100%{box-shadow:0 0 20px rgba(79,143,255,.4)}
+  50%{box-shadow:0 0 40px rgba(79,143,255,.8)}
+}
+@media(max-width:700px){#soundToggle{top:80px;right:16px;width:44px;height:44px;font-size:17px}}
+
+/* ============================================================
+   BASE CANVAS + SCROLL SPACE
+   ============================================================ */
+#journeyCanvas{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  z-index:0;pointer-events:none;
+}
+#scrollSpace{position:relative;z-index:1}
+
+/* ============================================================
+   SCENE TEXT OVERLAYS (base — themes in next chunk)
+   ============================================================ */
+.scene-text{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:140px 28px;
+  position:relative;
+  pointer-events:none;
+}
+.scene-text .scene-inner{pointer-events:auto}
+.scene-inner{
+  max-width:960px;text-align:center;
+  position:relative;z-index:2;
+}
+.scene-num{
+  display:inline-block;
+  font-size:11px;letter-spacing:8px;font-weight:900;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:32px;opacity:0;
+}
+.scene-huge{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(90px,20vw,220px);
+  font-weight:800;line-height:.85;letter-spacing:-8px;
+  margin-bottom:32px;
+  display:flex;justify-content:center;
+}
+.scene-huge .letter{
+  display:inline-block;
+  opacity:0;
+  filter:blur(30px);
+  transform:scale(4);
+  will-change:transform,opacity,filter;
+}
+.scene-title{
+  font-size:clamp(28px,5vw,54px);
+  font-weight:900;letter-spacing:-2px;
+  line-height:1.05;margin-bottom:24px;opacity:0;
+}
+.scene-desc{
+  font-size:clamp(15px,1.6vw,18px);
+  color:#b8becc;line-height:1.8;
+  max-width:700px;margin:0 auto;opacity:0;
+  font-weight:400;
+}
+.scene-desc b{color:#fff;font-weight:700}
+.scene-desc .hl{
+  background:linear-gradient(90deg,var(--gold),var(--gold-2));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  font-weight:800;
+  }
+/* ============================================================
+   SCENE THEME BACKGROUNDS
+   ============================================================ */
+.scene-old{
+  background:radial-gradient(ellipse at 50% 50%,rgba(139,111,71,.10),transparent 70%);
+}
+.scene-old .scene-huge .letter{
+  background:linear-gradient(135deg,var(--sepia),var(--sepia-dark));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.scene-old .scene-desc{color:#a89680}
+
+.scene-tear{
+  background:radial-gradient(ellipse at 50% 50%,rgba(255,180,100,.10),transparent 70%);
+}
+
+.scene-v{
+  background:radial-gradient(ellipse at 50% 50%,rgba(255,212,0,.10),transparent 70%);
+}
+.scene-v .scene-huge .letter{
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.scene-auto{
+  background:radial-gradient(ellipse at 50% 50%,rgba(79,143,255,.10),transparent 70%);
+}
+.scene-auto .scene-huge .letter{
+  background:linear-gradient(135deg,var(--blue),var(--blue-2));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.scene-adv{
+  background:radial-gradient(ellipse at 50% 50%,rgba(255,212,0,.08),rgba(79,143,255,.08),transparent 70%);
+}
+
+.scene-net{
+  background:radial-gradient(ellipse at 50% 50%,rgba(167,139,250,.10),transparent 70%);
+}
+.scene-net .scene-huge .letter{
+  background:linear-gradient(135deg,var(--purple),var(--blue));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.scene-final{
+  background:radial-gradient(ellipse at 50% 50%,rgba(255,212,0,.10),rgba(79,143,255,.10),transparent 70%);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  border:0;border-radius:14px;
+  padding:18px 32px;font-weight:800;font-size:14px;
+  cursor:pointer;font-family:inherit;
+  transition:all .35s cubic-bezier(.2,.9,.3,1.2);
+  display:inline-flex;align-items:center;gap:10px;
+  letter-spacing:.5px;text-decoration:none;
+  position:relative;overflow:hidden;
+  will-change:transform;
+}
+.btn::before{
+  content:"";position:absolute;top:0;left:-100%;
+  width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+  transition:left .7s;
+}
+.btn:hover::before{left:100%}
+.btn-primary{
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  color:#000;
+  box-shadow:0 14px 40px rgba(255,212,0,.4);
+}
+.btn-primary:hover{
+  transform:translateY(-4px);
+  box-shadow:0 20px 56px rgba(255,212,0,.6);
+}
+.btn-secondary{
+  background:rgba(255,255,255,.06);
+  color:var(--white);
+  border:1px solid rgba(255,255,255,.18);
+  backdrop-filter:blur(12px);
+}
+.btn-secondary:hover{
+  border-color:var(--gold);
+  color:var(--gold);
+  transform:translateY(-4px);
+  box-shadow:0 16px 40px rgba(255,212,0,.25);
+}
+.btn-lg{padding:22px 42px;font-size:15.5px;border-radius:16px}
+
+/* ============================================================
+   FINALE BLOCK (GO DIGITAL)
+   ============================================================ */
+.finale-block{
+  display:flex;flex-direction:column;align-items:center;
+  margin-top:60px;
+}
+
+.finale-line-1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(70px,14vw,180px);
+  font-weight:800;line-height:.9;
+  letter-spacing:-6px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:20px;
+  opacity:0;
+  will-change:transform,opacity,filter;
+}
+.finale-line-2{
+  font-size:clamp(18px,2.6vw,30px);
+  font-weight:400;color:#b8becc;font-style:italic;
+  margin-bottom:14px;
+  opacity:0;
+}
+.finale-line-3{
+  font-size:clamp(13px,1.5vw,17px);
+  font-weight:900;letter-spacing:6px;text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:52px;
+  opacity:0;
+}
+.finale-buttons{
+  display:flex;gap:16px;flex-wrap:wrap;justify-content:center;
+  opacity:0;
+}
+
+/* ============================================================
+   SCROLL HINT
+   ============================================================ */
+.scroll-hint{
+  position:absolute;bottom:56px;left:50%;
+  transform:translateX(-50%);
+  color:var(--muted);
+  font-size:10px;letter-spacing:6px;
+  font-weight:900;text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:16px;
+  opacity:.7;
+  animation:hintFloat 3s ease-in-out infinite;
+}
+@keyframes hintFloat{
+  0%,100%{transform:translate(-50%,0);opacity:.7}
+  50%{transform:translate(-50%,12px);opacity:1}
+}
+.scroll-hint .arrow{
+  width:18px;height:18px;
+  border-right:2px solid var(--gold);
+  border-bottom:2px solid var(--gold);
+  transform:rotate(45deg);
+  margin-top:-6px;
+  filter:drop-shadow(0 0 8px var(--gold));
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{
+  background:rgba(0,0,0,.95);
+  border-top:1px solid var(--line-soft);
+  padding:70px 28px 36px;
+  margin-top:80px;
+  backdrop-filter:blur(24px);
+  position:relative;z-index:2;
+}
+.foot-in{
+  max-width:1320px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:24px;flex-wrap:wrap;
+}
+.foot-brand{
+  display:flex;align-items:center;gap:14px;
+  font-family:'Playfair Display',serif;
+  font-weight:800;letter-spacing:-1px;
+  color:#fff;font-size:18px;
+}
+.foot-brand svg{width:30px;height:30px;filter:drop-shadow(0 0 10px rgba(255,212,0,.5))}
+.foot-meta{color:var(--muted);font-size:12px;letter-spacing:.3px}
+.foot-meta a{color:var(--gold);font-weight:700}
+.foot-meta a:hover{text-decoration:underline}
+
+/* ============================================================
+   SCENE INDICATOR DOTS (right side)
+   ============================================================ */
+#sceneIndicator{
+  position:fixed;right:28px;top:50%;
+  transform:translateY(-50%);
+  z-index:9997;
+  display:flex;flex-direction:column;gap:18px;
+}
+#sceneIndicator div{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,.18);
+  cursor:pointer;
+  transition:.35s cubic-bezier(.2,.9,.3,1.2);
+  position:relative;
+}
+#sceneIndicator div:hover{
+  background:rgba(255,212,0,.5);
+  transform:scale(1.4);
+}
+#sceneIndicator div.active{
+  background:var(--gold);
+  box-shadow:0 0 16px var(--gold);
+  transform:scale(1.3);
+}
+@media(max-width:700px){#sceneIndicator{right:12px;gap:12px}}
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1100px){
+  .nav-in{padding:0 20px}
+}
+@media(max-width:900px){
+  .scene-huge{letter-spacing:-5px}
+  .scene-text{padding:120px 22px}
+  .finale-line-1{letter-spacing:-3px}
+  .foot-in{flex-direction:column;text-align:center;gap:18px}
+}
+@media(max-width:700px){
+  .nav-links{
+    position:fixed;top:78px;left:0;right:0;
+    background:rgba(0,0,0,.97);
+    backdrop-filter:blur(24px);
+    -webkit-backdrop-filter:blur(24px);
+    flex-direction:column;padding:32px 24px;gap:24px;
+    border-bottom:1px solid rgba(255,212,0,.12);
+    transform:translateY(-160%);
+    transition:.5s cubic-bezier(.4,0,.2,1);
+    z-index:999;
+    box-shadow:0 24px 60px rgba(0,0,0,.6);
+  }
+  .nav-links.open{transform:translateY(0)}
+  .hamburger{display:flex}
+  .nav-links a{font-size:16px;padding:10px 0;width:100%;text-align:center}
+  .nav-cta{width:100%;text-align:center;justify-content:center}
+  .finale-buttons{flex-direction:column;width:100%}
+  .finale-buttons .btn{width:100%;justify-content:center}
+  .scene-num{letter-spacing:5px}
+}
+@media(max-width:400px){
+  .brand-text small{letter-spacing:2px;font-size:8px}
+  .nav-cta{padding:10px 20px;font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     CUSTOM CURSOR
+     ============================================================ -->
+<div id="customCursor"></div>
+
+<!-- ============================================================
+     LOADING SCREEN
+     ============================================================ -->
+<div id="loadingScreen">
+  <div class="loading-brand">VAAN</div>
+  <div class="loading-subtitle">Vision · Automation · Advancement · Network</div>
+  <div class="loading-bar">
+    <div class="loading-bar-fill" id="loadingFill"></div>
+  </div>
+  <div class="loading-status" id="loadingStatus">Initializing</div>
+  <div class="loading-hint">Tap to Begin the Journey</div>
+</div>
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav class="nav" id="mainNav">
+  <div class="nav-in">
+    <a href="index.html" class="brand">
+      <span class="brand-logo">
+        <svg viewBox="0 0 100 100" fill="none"><path d="M50 8 L92 92 L74 92 L50 42 L26 92 L8 92 Z" fill="url(#g1)"/><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffd400"/><stop offset="100%" stop-color="#4f8fff"/></linearGradient></defs></svg>
+      </span>
+      <span class="brand-text"><b>VAAN</b><small>CONSULTANCY</small></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="demos/index.html">Demos</a>
+      <a href="about.html">About</a>
+      <a href="journey.html" class="active">Journey</a>
+      <a href="tel:9671163712" class="nav-cta">📞 9671163712</a>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- SOUND TOGGLE -->
+<div id="soundToggle" title="Toggle Sound">🔇</div>
+
+<!-- ============================================================
+     3D CANVAS (fixed behind everything)
+     ============================================================ -->
+<canvas id="journeyCanvas"></canvas>
+
+<!-- ============================================================
+     SCROLL SPACE — All 7 story chapters live here
+     ============================================================ -->
+<div id="scrollSpace">
+
+  <!-- ============================================================
+       PROLOGUE — THE OLD WORLD
+       ============================================================ -->
+  <section class="scene-text scene-old" data-scene="old">
+    <div class="scene-inner">
+      <span class="scene-num">PROLOGUE</span>
+      <div class="scene-huge"><span class="letter">OLD WORLD</span></div>
+      <h2 class="scene-title">This is how business <span style="color:var(--sepia)">used to work.</span></h2>
+      <p class="scene-desc">
+        Quietly. Locally. Slowly. A shop, a menu, a register.
+        Customers walked in — or they didn't. <b>No one knew you existed outside your street.</b>
+        There was no way to be found online. No way to grow beyond your walls.
+      </p>
+      <div class="scroll-hint">
+        <span>Scroll to begin</span>
+        <span class="arrow"></span>
+      </div>
+    </div>
+  </section>
+<!-- ============================================================
+     CHAPTER 1 — THE PAPER TEAR
+     ============================================================ -->
+<section class="scene-text scene-tear" data-scene="tear">
+  <div class="scene-inner">
+    <span class="scene-num">CHAPTER 01</span>
+    <div class="scene-huge"><span class="letter">TEAR</span></div>
+    <h2 class="scene-title">The moment it all <span style="color:var(--gold)">changes.</span></h2>
+    <p class="scene-desc">
+      A hand picks up an old paper menu. Looks at it. And tears it in half.
+      Not out of anger — out of necessity. Because the world moved on.
+      <b>Behind that torn paper: a mind opening to what's possible.</b>
+      <span class="hl">This is where the journey begins.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     CHAPTER 2 — V · VISION (Inside the Mind)
+     ============================================================ -->
+<section class="scene-text scene-v" data-scene="v">
+  <div class="scene-inner">
+    <span class="scene-num">CHAPTER 02 · V</span>
+    <div class="scene-huge"><span class="letter">V</span></div>
+    <h2 class="scene-title"><span style="color:var(--gold)">Vision</span> — seeing what's possible.</h2>
+    <p class="scene-desc">
+      Inside the mind, everything is possible. A website materializes from thin air.
+      A QR code assembles itself from golden light. A digital menu floats into view.
+      <b>This is what your business could look like — if you could see it first.</b>
+      <span class="hl">V is where every transformation begins.</span>
+    </p>
+  </div>
+</section>
+<!-- ============================================================
+     CHAPTER 3 — A · AUTOMATION (Digital Landscape)
+     ============================================================ -->
+<section class="scene-text scene-auto" data-scene="auto">
+  <div class="scene-inner">
+    <span class="scene-num">CHAPTER 03 · A</span>
+    <div class="scene-huge"><span class="letter">A</span></div>
+    <h2 class="scene-title"><span style="color:var(--blue)">Automation</span> — systems that never sleep.</h2>
+    <p class="scene-desc">
+      The camera flies over a town. Every shop glows with a QR code.
+      Every restaurant has a digital menu. Every gym logs members without a register.
+      Every hotel has a concierge that never rests.
+      <b>Orders confirm. Bookings come in. Systems run themselves.</b>
+      <span class="hl">This is what automation looks like — quiet, powerful, everywhere.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     CHAPTER 4 — A · ADVANCEMENT (Upward Scroll)
+     ============================================================ -->
+<section class="scene-text scene-adv" data-scene="adv">
+  <div class="scene-inner">
+    <span class="scene-num">CHAPTER 04 · A</span>
+    <div class="scene-huge"><span class="letter">A</span></div>
+    <h2 class="scene-title"><span style="color:var(--gold)">Advancement</span> — always one step ahead.</h2>
+    <p class="scene-desc">
+      Camera rises through time. Version 1. Then 2. Then 3. Then 4.
+      Each upgrade is faster, brighter, better. Each iteration learns from the last.
+      <b>Your first website is never your last.</b>
+      <span class="hl">Advancement is a mindset — never staying still.</span>
+    </p>
+  </div>
+</section>
+  <!-- ============================================================
+       CHAPTER 5 — N · NETWORK (Connected Web)
+       ============================================================ -->
+  <section class="scene-text scene-net" data-scene="net">
+    <div class="scene-inner">
+      <span class="scene-num">CHAPTER 05 · N</span>
+      <div class="scene-huge"><span class="letter">N</span></div>
+      <h2 class="scene-title"><span style="color:var(--purple)">Network</span> — everything connected.</h2>
+      <p class="scene-desc">
+        Camera pulls back. Hundreds of glowing dots appear across the landscape.
+        Each dot is a business. A customer. A person. Slowly, they begin to connect —
+        light trails forming between them, weaving into a vast web.
+        <b>One business is powerful. A network is unstoppable.</b>
+        <span class="hl">N is what happens when everyone is reachable.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FINALE — GO DIGITAL
+       ============================================================ -->
+  <section class="scene-text scene-final" data-scene="final">
+    <div class="scene-inner">
+      <span class="scene-num">FINALE</span>
+
+      <div class="finale-block">
+        <div class="finale-line-1">GO DIGITAL.</div>
+        <div class="finale-line-2">Blend into the modern world.</div>
+        <div class="finale-line-3">Natural Selection · Evolve or Fade</div>
+        <div class="finale-buttons">
+          <a href="services.html" class="btn btn-primary btn-lg">🎬 Explore Services</a>
+          <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20just%20finished%20the%20journey.%20I%20want%20to%20discuss%20a%20project." class="btn btn-secondary btn-lg" target="_blank">💬 Get Yours</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<!-- END SCROLL SPACE -->
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="foot-in">
+    <div class="foot-brand">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M50 8 L92 92 L74 92 L50 42 L26 92 L8 92 Z" fill="url(#g2)"/><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffd400"/><stop offset="100%" stop-color="#4f8fff"/></linearGradient></defs></svg>
+      VAAN CONSULTANCY
+    </div>
+    <div class="foot-meta">
+      A cinematic journey · Made with <span style="color:var(--gold)">▲</span> in Karnal · <a href="tel:9671163712">9671163712</a>
+    </div>
+  </div>
+</footer><!-- ============================================================
+     LIBRARIES
+     ============================================================ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+
+<script>
+/* ============================================================
+   VAAN JOURNEY — GLOBAL STATE
+   ============================================================ */
+window._J = {
+  scene: null,
+  camera: null,
+  renderer: null,
+  composer: null,
+  bloomPass: null,
+  clock: null,
+  t: 0,
+  mouse: { x: 0, y: 0, tx: 0, ty: 0 },
+  isMobile: /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent),
+  lowEnd: false,
+  loaded: false,
+  entered: false,
+  currentScene: "old"
+};
+
+/* ============================================================
+   LOADING SCREEN LOGIC
+   ============================================================ */
+(function loadingLogic(){
+  var fill = document.getElementById("loadingFill");
+  var status = document.getElementById("loadingStatus");
+  var msgs = [
+    "Initializing",
+    "Loading engine",
+    "Preparing world",
+    "Building memory",
+    "Lighting scene",
+    "Almost ready"
+  ];
+  var p = 0, i = 0;
+
+  var int = setInterval(function(){
+    p += Math.random() * 10 + 5;
+    if (p > 100) p = 100;
+    if (fill) fill.style.width = p + "%";
+    i = Math.min(msgs.length - 1, Math.floor(p / 18));
+    if (status) status.textContent = msgs[i];
+    if (p >= 100){
+      clearInterval(int);
+      if (status) status.textContent = "Ready";
+    }
+  }, 260);
+
+  window.startExperience = function(){
+    if (window._J.entered) return;
+    window._J.entered = true;
+
+    var screen = document.getElementById("loadingScreen");
+    if (screen){
+      screen.style.opacity = "0";
+      screen.style.visibility = "hidden";
+      screen.style.pointerEvents = "none";
+      setTimeout(function(){ screen.style.display = "none"; }, 1200);
+    }
+
+    if (typeof window.playMusic === "function") window.playMusic();
+
+    /* Reveal scene 1 (Old World) */
+    if (window._J.oldWorld && window._J.oldWorld.group){
+      window._J.oldWorld.group.visible = true;
+    }
+    if (window._J.scene && window._J.scene.fog){
+      window._J.scene.fog.color.setHex(0x2a1f12);
+      window._J.scene.fog.density = 0.032;
+    }
+
+    /* Camera intro dolly */
+    if (window._J.camera && typeof gsap !== "undefined"){
+      gsap.fromTo(window._J.camera.position,
+        { x: 0, y: 5, z: 26 },
+        { x: 0, y: 1.5, z: 14, duration: 4, ease: "power3.out" }
+      );
+    }
+
+    /* Nav fade in */
+    var nav = document.getElementById("mainNav");
+    if (nav){
+      nav.style.opacity = "0";
+      nav.style.transition = "opacity 1s ease";
+      setTimeout(function(){ nav.style.opacity = "1"; }, 800);
+    }
+
+    console.log("🎬 Journey started");
+  };
+
+  var screen = document.getElementById("loadingScreen");
+  if (screen){
+    screen.addEventListener("click", window.startExperience);
+    screen.addEventListener("touchstart", function(e){
+      e.preventDefault();
+      window.startExperience();
+    }, { passive: false });
+  }
+
+  document.addEventListener("keydown", function(e){
+    if ((e.key === "Enter" || e.key === " ") && !window._J.entered){
+      e.preventDefault();
+      window.startExperience();
+    }
+  });
+
+  /* Fallback auto-start */
+  setTimeout(function(){
+    if (!window._J.entered) window.startExperience();
+  }, 12000);
+})();
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+(function customCursor(){
+  if (window.innerWidth <= 900) return;
+  var cur = document.getElementById("customCursor");
+  if (!cur) return;
+
+  var mx = 0, my = 0, cx = 0, cy = 0;
+
+  document.addEventListener("mousemove", function(e){
+    mx = e.clientX;
+    my = e.clientY;
+  });
+
+  document.addEventListener("mousedown", function(){ cur.classList.add("click"); });
+  document.addEventListener("mouseup", function(){ cur.classList.remove("click"); });
+
+  document.addEventListener("mouseover", function(e){
+    if (e.target.closest("a, button, .btn, .nav-cta, #soundToggle, #sceneIndicator div")){
+      cur.classList.add("hover");
+    }
+  });
+  document.addEventListener("mouseout", function(e){
+    if (e.target.closest("a, button, .btn, .nav-cta, #soundToggle, #sceneIndicator div")){
+      cur.classList.remove("hover");
+    }
+  });
+
+  function animate(){
+    cx += (mx - cx) * 0.18;
+    cy += (my - cy) * 0.18;
+    cur.style.left = cx + "px";
+    cur.style.top = cy + "px";
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+/* ============================================================
+   NAV
+   ============================================================ */
+window.toggleNav = function(){
+  var m = document.getElementById("navLinks");
+  var h = document.getElementById("hamburger");
+  if (m) m.classList.toggle("open");
+  if (h) h.classList.toggle("open");
+};
+
+document.addEventListener("DOMContentLoaded", function(){
+  var navLinks = document.getElementById("navLinks");
+  if (navLinks){
+    navLinks.querySelectorAll("a").forEach(function(a){
+      a.addEventListener("click", function(){
+        navLinks.classList.remove("open");
+        var h = document.getElementById("hamburger");
+        if (h) h.classList.remove("open");
+      });
+    });
+  }
+});
+
+window.addEventListener("scroll", function(){
+  var nav = document.getElementById("mainNav");
+  if (!nav) return;
+  if (window.scrollY > 40) nav.classList.add("scrolled");
+  else nav.classList.remove("scrolled");
+});
+  </script><script>
+/* ============================================================
+   THREE.JS CORE ENGINE
+   Scene · Camera · Renderer · Composer · Lights · Loop
+   ============================================================ */
+(function initThree(){
+  if (!window._J) return;
+  var canvas = document.getElementById("journeyCanvas");
+  if (!canvas || typeof THREE === "undefined") return;
+
+  var J = window._J;
+  var w = window.innerWidth, h = window.innerHeight;
+
+  /* Low-end detection */
+  if (J.isMobile && (w < 500 || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4))){
+    J.lowEnd = true;
+  }
+
+  /* ---------- SCENE ---------- */
+  J.scene = new THREE.Scene();
+  J.scene.fog = new THREE.FogExp2(0x0a0e1a, 0.028);
+
+  /* ---------- CAMERA ---------- */
+  J.camera = new THREE.PerspectiveCamera(55, w / h, 0.1, 500);
+  J.camera.position.set(0, 1.5, 14);
+  J.camera.lookAt(0, 0, 0);
+
+  /* ---------- RENDERER ---------- */
+  J.renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true,
+    antialias: !J.lowEnd,
+    powerPreference: "high-performance"
+  });
+  J.renderer.setPixelRatio(Math.min(window.devicePixelRatio, J.lowEnd ? 1.2 : 2));
+  J.renderer.setSize(w, h);
+  J.renderer.setClearColor(0x000000, 0);
+  J.renderer.outputEncoding = THREE.sRGBEncoding;
+  J.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  J.renderer.toneMappingExposure = 1.15;
+
+  /* ---------- CLOCK ---------- */
+  J.clock = new THREE.Clock();
+
+  /* ---------- POST-PROCESSING ---------- */
+  if (!J.lowEnd && typeof THREE.EffectComposer !== "undefined"){
+    try {
+      var composer = new THREE.EffectComposer(J.renderer);
+      composer.setSize(w, h);
+
+      var renderPass = new THREE.RenderPass(J.scene, J.camera);
+      composer.addPass(renderPass);
+
+      var bloomPass = new THREE.UnrealBloomPass(
+        new THREE.Vector2(w, h),
+        0.85,   /* strength */
+        0.55,   /* radius */
+        0.55    /* threshold */
+      );
+      composer.addPass(bloomPass);
+
+      J.composer = composer;
+      J.bloomPass = bloomPass;
+      console.log("✅ Bloom post-processing enabled");
+    } catch (e){
+      console.warn("Bloom failed:", e);
+      J.composer = null;
+    }
+  } else {
+    console.log("⚡ Bloom disabled");
+  }
+
+  /* ---------- LIGHTS ---------- */
+  var ambient = new THREE.AmbientLight(0xffffff, 0.30);
+  J.scene.add(ambient);
+
+  var keyLight = new THREE.PointLight(0xffd400, 1.8, 70);
+  keyLight.position.set(10, 12, 10);
+  J.scene.add(keyLight);
+
+  var fillLight = new THREE.PointLight(0x4f8fff, 1.4, 70);
+  fillLight.position.set(-10, -8, 8);
+  J.scene.add(fillLight);
+
+  var rimLight = new THREE.DirectionalLight(0xa78bfa, 0.7);
+  rimLight.position.set(0, 10, -12);
+  J.scene.add(rimLight);
+
+  var paperLight = new THREE.PointLight(0xd4b896, 0.6, 40);
+  paperLight.position.set(0, 5, 5);
+  J.scene.add(paperLight);
+
+  J.lights = {
+    ambient: ambient,
+    key: keyLight,
+    fill: fillLight,
+    rim: rimLight,
+    paper: paperLight
+  };
+
+  /* ---------- MOUSE TRACKING ---------- */
+  window.addEventListener("mousemove", function(e){
+    J.mouse.tx = (e.clientX / window.innerWidth) * 2 - 1;
+    J.mouse.ty = -(e.clientY / window.innerHeight) * 2 + 1;
+  });
+  window.addEventListener("touchmove", function(e){
+    if (e.touches[0]){
+      J.mouse.tx = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+      J.mouse.ty = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+    }
+  }, { passive: true });
+
+  /* ---------- RESIZE ---------- */
+  window.addEventListener("resize", function(){
+    var nw = window.innerWidth, nh = window.innerHeight;
+    J.camera.aspect = nw / nh;
+    J.camera.updateProjectionMatrix();
+    J.renderer.setSize(nw, nh);
+    if (J.composer) J.composer.setSize(nw, nh);
+  });
+
+  /* ---------- RENDER LOOP ---------- */
+  function renderLoop(){
+    requestAnimationFrame(renderLoop);
+    J.t += 0.01;
+
+    /* Smooth mouse */
+    J.mouse.x += (J.mouse.tx - J.mouse.x) * 0.055;
+    J.mouse.y += (J.mouse.ty - J.mouse.y) * 0.055;
+
+    if (J.composer){
+      J.composer.render();
+    } else {
+      J.renderer.render(J.scene, J.camera);
+    }
+  }
+  renderLoop();
+
+  console.log("✅ Three.js core ready —", J.lowEnd ? "LOW-END mode" : "FULL mode");
+})();
+  </script><script>
+/* ============================================================
+   SCENE 1 — OLD WORLD
+   Sepia floating objects: paper menus, ledgers, signs, clock,
+   telephone, dust particles
+   ============================================================ */
+(function buildOldWorld(){
+  if (!window._J) return;
+  var J = window._J;
+  var scene = J.scene;
+
+  var group = new THREE.Group();
+  group.name = "oldWorldGroup";
+  group.visible = false;
+  scene.add(group);
+
+  /* ---------- MATERIALS ---------- */
+  /* Aged paper */
+  var paperMat = new THREE.MeshStandardMaterial({
+    color: 0xe8d8b8,
+    roughness: 0.9,
+    metalness: 0.05,
+    emissive: 0x8b6f47,
+    emissiveIntensity: 0.08
+  });
+  /* Dark leather (ledgers) */
+  var ledgerMat = new THREE.MeshStandardMaterial({
+    color: 0x5c4a35,
+    roughness: 0.92,
+    metalness: 0.08,
+    emissive: 0x2a1f12,
+    emissiveIntensity: 0.06
+  });
+  /* Aged brass */
+  var brassMat = new THREE.MeshStandardMaterial({
+    color: 0x9c7a3f,
+    roughness: 0.5,
+    metalness: 0.8,
+    emissive: 0x3a2b15,
+    emissiveIntensity: 0.10
+  });
+  /* Wood */
+  var woodMat = new THREE.MeshStandardMaterial({
+    color: 0x3d2a1a,
+    roughness: 0.88,
+    metalness: 0.05
+  });
+
+  /* ---------- HELPER: floating object ---------- */
+  function addFloat(mesh, speed, amp, baseY){
+    mesh.userData.floatSpeed = speed;
+    mesh.userData.floatAmp = amp;
+    mesh.userData.baseY = baseY !== undefined ? baseY : mesh.position.y;
+    mesh.userData.rotSpeed = (Math.random() - 0.5) * 0.15;
+    group.add(mesh);
+    return mesh;
+  }
+
+  /* ---------- 1. PAPER MENUS (14 floating planes) ---------- */
+  var paperGeo = new THREE.PlaneGeometry(1.5, 2);
+  for (var i = 0; i < 14; i++){
+    var pm = new THREE.Mesh(paperGeo, paperMat);
+    pm.position.set(
+      (Math.random() - 0.5) * 20,
+      (Math.random() - 0.5) * 9,
+      -3 - Math.random() * 12
+    );
+    pm.rotation.set(
+      Math.random() * 0.5 - 0.25,
+      Math.random() * 1.4 - 0.7,
+      Math.random() * 0.6 - 0.3
+    );
+    addFloat(pm, 0.3 + Math.random() * 0.5, 0.15 + Math.random() * 0.25);
+  }
+
+  /* ---------- 2. LEDGER BOOKS (8 boxes) ---------- */
+  var ledgerGeo = new THREE.BoxGeometry(1.3, 0.24, 1.7);
+  for (var j = 0; j < 8; j++){
+    var lb = new THREE.Mesh(ledgerGeo, ledgerMat);
+    lb.position.set(
+      (Math.random() - 0.5) * 18,
+      (Math.random() - 0.5) * 8,
+      -4 - Math.random() * 10
+    );
+    lb.rotation.set(
+      Math.random() * 0.5 - 0.25,
+      Math.random() * 1.6 - 0.8,
+      Math.random() * 0.35 - 0.175
+    );
+    addFloat(lb, 0.4 + Math.random() * 0.4, 0.18 + Math.random() * 0.22);
+  }
+
+  /* ---------- 3. FADED SHOP SIGNS (8 brass planes) ---------- */
+  var signGeo = new THREE.PlaneGeometry(2.4, 1);
+  for (var k = 0; k < 8; k++){
+    var sg = new THREE.Mesh(signGeo, brassMat);
+    sg.position.set(
+      (Math.random() - 0.5) * 22,
+      (Math.random() - 0.5) * 10,
+      -5 - Math.random() * 12
+    );
+    sg.rotation.set(
+      Math.random() * 0.3 - 0.15,
+      Math.random() * 1.6 - 0.8,
+      Math.random() * 0.4 - 0.2
+    );
+    addFloat(sg, 0.3 + Math.random() * 0.4, 0.12 + Math.random() * 0.22);
+  }
+
+  /* ---------- 4. WALL CLOCK ---------- */
+  var clockGroup = new THREE.Group();
+
+  var clockRing = new THREE.Mesh(
+    new THREE.TorusGeometry(1, 0.1, 16, 56),
+    brassMat
+  );
+  clockGroup.add(clockRing);
+
+  var clockFace = new THREE.Mesh(
+    new THREE.CircleGeometry(0.94, 48),
+    paperMat
+  );
+  clockFace.position.z = 0.01;
+  clockGroup.add(clockFace);
+
+  var hourHand = new THREE.Mesh(
+    new THREE.BoxGeometry(0.08, 0.5, 0.05),
+    ledgerMat
+  );
+  hourHand.position.set(0, 0.22, 0.06);
+  clockGroup.add(hourHand);
+
+  var minHand = new THREE.Mesh(
+    new THREE.BoxGeometry(0.07, 0.72, 0.05),
+    ledgerMat
+  );
+  minHand.position.set(0, 0.32, 0.07);
+  minHand.rotation.z = 0.6;
+  clockGroup.add(minHand);
+
+  /* Numerals */
+  for (var n = 0; n < 12; n++){
+    var na = (n / 12) * Math.PI * 2;
+    var numeral = new THREE.Mesh(
+      new THREE.CircleGeometry(0.035, 10),
+      brassMat
+    );
+    numeral.position.set(
+      Math.sin(na) * 0.76,
+      Math.cos(na) * 0.76,
+      0.04
+    );
+    clockGroup.add(numeral);
+  }
+
+  clockGroup.position.set(5, 2, -7);
+  clockGroup.userData.isClock = true;
+  clockGroup.userData.hourHand = hourHand;
+  clockGroup.userData.minHand = minHand;
+  addFloat(clockGroup, 0.4, 0.15);
+
+  /* ---------- 5. OLD TELEPHONE ---------- */
+  var phoneGroup = new THREE.Group();
+
+  var phoneBase = new THREE.Mesh(
+    new THREE.BoxGeometry(1, 0.3, 0.6),
+    woodMat
+  );
+  phoneGroup.add(phoneBase);
+
+  var phoneHandset = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.11, 0.11, 0.85, 16),
+    ledgerMat
+  );
+  phoneHandset.rotation.z = Math.PI / 2;
+  phoneHandset.position.y = 0.4;
+  phoneGroup.add(phoneHandset);
+
+  var phoneDial = new THREE.Mesh(
+    new THREE.CircleGeometry(0.24, 28),
+    paperMat
+  );
+  phoneDial.position.set(0.2, 0.15, 0.31);
+  phoneGroup.add(phoneDial);
+
+  for (var d = 0; d < 8; d++){
+    var da = (d / 8) * Math.PI * 2;
+    var hole = new THREE.Mesh(
+      new THREE.CircleGeometry(0.028, 10),
+      ledgerMat
+    );
+    hole.position.set(
+      0.2 + Math.cos(da) * 0.15,
+      0.15 + Math.sin(da) * 0.15,
+      0.32
+    );
+    phoneGroup.add(hole);
+  }
+
+  phoneGroup.position.set(-5, -1.3, -6);
+  addFloat(phoneGroup, 0.5, 0.22);
+
+  /* ---------- 6. DUST PARTICLES ---------- */
+  var dustCount = J.lowEnd ? 130 : 300;
+  var dustPos = new Float32Array(dustCount * 3);
+  for (var di = 0; di < dustCount * 3; di += 3){
+    dustPos[di]     = (Math.random() - 0.5) * 34;
+    dustPos[di + 1] = (Math.random() - 0.5) * 24;
+    dustPos[di + 2] = (Math.random() - 0.5) * 28 - 5;
+  }
+  var dustGeo = new THREE.BufferGeometry();
+  dustGeo.setAttribute("position", new THREE.BufferAttribute(dustPos, 3));
+  var dustMat = new THREE.PointsMaterial({
+    color: 0xe8d8b8,
+    size: 0.065,
+    transparent: true,
+    opacity: 0.55,
+    sizeAttenuation: true,
+    depthWrite: false
+  });
+  var dust = new THREE.Points(dustGeo, dustMat);
+  dust.name = "oldDust";
+  group.add(dust);
+
+  /* ---------- 7. FLOOR GRID ---------- */
+  var grid = new THREE.GridHelper(34, 34, 0x8b6f47, 0x3d2a1a);
+  grid.position.y = -4.5;
+  grid.material.transparent = true;
+  grid.material.opacity = 0.15;
+  group.add(grid);
+
+  /* ---------- STORE ---------- */
+  J.oldWorld = {
+    group: group,
+    dust: dust,
+    clock: clockGroup
+  };
+
+  console.log("✅ Old World built");
+})();
+  </script><script>
+/* ============================================================
+   OLD WORLD ANIMATION
+   ============================================================ */
+(function animateOldWorld(){
+  if (!window._J || !window._J.oldWorld) return;
+  var oldRef = window._J.oldWorld;
+
+  window._J.animateOldWorld = function(t){
+    var group = oldRef.group;
+    if (!group.visible) return;
+
+    for (var i = 0; i < group.children.length; i++){
+      var child = group.children[i];
+      if (child.userData && child.userData.baseY !== undefined){
+        child.position.y = child.userData.baseY +
+          Math.sin(t * child.userData.floatSpeed + child.position.x) * child.userData.floatAmp;
+
+        if (child.userData.rotSpeed){
+          child.rotation.y += child.userData.rotSpeed * 0.005;
+        }
+
+        if (child.userData.isClock){
+          if (child.userData.hourHand)
+            child.userData.hourHand.rotation.z = -t * 0.3;
+          if (child.userData.minHand)
+            child.userData.minHand.rotation.z = -t * 2.2;
+        }
+      }
+    }
+
+    /* Dust drifts upward */
+    if (oldRef.dust){
+      var dp = oldRef.dust.geometry.attributes.position.array;
+      for (var d = 0; d < dp.length; d += 3){
+        dp[d + 1] += 0.003;
+        if (dp[d + 1] > 12) dp[d + 1] = -12;
+      }
+      oldRef.dust.geometry.attributes.position.needsUpdate = true;
+    }
+  };
+})();
+
+/* ============================================================
+   SCENE 2 — THE PAPER TEAR
+   Two paper halves pulling apart + glowing mind sphere
+   ============================================================ */
+(function buildPaperTear(){
+  if (!window._J) return;
+  var J = window._J;
+  var scene = J.scene;
+
+  var group = new THREE.Group();
+  group.name = "tearGroup";
+  group.visible = false;
+  scene.add(group);
+
+  /* ---------- MATERIALS ---------- */
+  var paperMat = new THREE.MeshStandardMaterial({
+    color: 0xe8d8b8,
+    roughness: 0.9,
+    metalness: 0.05,
+    emissive: 0x8b6f47,
+    emissiveIntensity: 0.08,
+    side: THREE.DoubleSide
+  });
+
+  var mindWireMat = new THREE.MeshBasicMaterial({
+    color: 0xffd400,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.7
+  });
+
+  var mindGlowMat = new THREE.MeshBasicMaterial({
+    color: 0xffd400,
+    transparent: true,
+    opacity: 0.15,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+
+  /* ---------- TWO PAPER HALVES ---------- */
+  /* Left half */
+  var leftHalfGeo = new THREE.PlaneGeometry(1.75, 2.4);
+  var leftHalf = new THREE.Mesh(leftHalfGeo, paperMat);
+  leftHalf.position.set(-0.95, 0, 0);
+  leftHalf.rotation.z = 0.02;
+  group.add(leftHalf);
+
+  /* Right half */
+  var rightHalfGeo = new THREE.PlaneGeometry(1.75, 2.4);
+  var rightHalf = new THREE.Mesh(rightHalfGeo, paperMat);
+  rightHalf.position.set(0.95, 0, 0);
+  rightHalf.rotation.z = -0.02;
+  group.add(rightHalf);
+
+  /* Store initial positions */
+  leftHalf.userData = {
+    baseX: -0.95,
+    baseY: 0,
+    floatSpeed: 0.5,
+    floatAmp: 0.12,
+    isLeftHalf: true,
+    targetX: -4.5
+  };
+  rightHalf.userData = {
+    baseX: 0.95,
+    baseY: 0,
+    floatSpeed: 0.55,
+    floatAmp: 0.12,
+    isRightHalf: true,
+    targetX: 4.5
+  };
+
+  /* Torn edge details — small paper fibers along the split */
+  var fiberGeo = new THREE.PlaneGeometry(0.08, 0.15);
+  for (var f = 0; f < 20; f++){
+    var fy = (Math.random() - 0.5) * 2.4;
+    var fiber = new THREE.Mesh(fiberGeo, paperMat);
+    fiber.position.set(
+      (f % 2 === 0 ? -0.05 : 0.05) + (Math.random() * 0.06 - 0.03),
+      fy,
+      0.01
+    );
+    fiber.rotation.z = (Math.random() - 0.5) * 0.8;
+    fiber.scale.set(1, 0.5 + Math.random() * 0.8, 1);
+    group.add(fiber);
+  }
+
+  /* ---------- GLOWING MIND SPHERE (behind the tear) ---------- */
+  var mindGroup = new THREE.Group();
+
+  /* Outer wireframe sphere */
+  var mindWire = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(1.4, 2),
+    mindWireMat
+  );
+  mindGroup.add(mindWire);
+
+  /* Inner glow */
+  var mindGlow = new THREE.Mesh(
+    new THREE.SphereGeometry(1.25, 32, 32),
+    mindGlowMat
+  );
+  mindGroup.add(mindGlow);
+
+  /* Neural nodes inside the mind */
+  var neuralNodes = [];
+  var neuralCount = 40;
+  for (var nn = 0; nn < neuralCount; nn++){
+    var phi = Math.acos(2 * Math.random() - 1);
+    var theta = Math.random() * Math.PI * 2;
+    var r = 0.4 + Math.random() * 0.85;
+
+    var node = new THREE.Mesh(
+      new THREE.SphereGeometry(0.03, 8, 8),
+      new THREE.MeshBasicMaterial({ color: 0xffd400 })
+    );
+    node.position.set(
+      Math.sin(phi) * Math.cos(theta) * r,
+      Math.sin(phi) * Math.sin(theta) * r,
+      Math.cos(phi) * r
+    );
+    node.userData = { phase: Math.random() * Math.PI * 2 };
+    mindGroup.add(node);
+    neuralNodes.push(node);
+  }
+
+  /* Neural connections (lines between nodes) */
+  var neuralLines = [];
+  for (var nl = 0; nl < 25; nl++){
+    var a = neuralNodes[Math.floor(Math.random() * neuralNodes.length)];
+    var b = neuralNodes[Math.floor(Math.random() * neuralNodes.length)];
+    if (a === b) continue;
+
+    var pts = [a.position.clone(), b.position.clone()];
+    var lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
+    var lineMat = new THREE.LineBasicMaterial({
+      color: 0xffd400,
+      transparent: true,
+      opacity: 0.35,
+      blending: THREE.AdditiveBlending
+    });
+    var line = new THREE.Line(lineGeo, lineMat);
+    line.userData = { phase: Math.random() * Math.PI * 2 };
+    mindGroup.add(line);
+    neuralLines.push(line);
+  }
+
+  /* Position mind BEHIND the paper */
+  mindGroup.position.set(0, 0, -1.5);
+  group.add(mindGroup);
+
+  /* ---------- SECOND LAYER: MORE MIND GLOW BEHIND ---------- */
+  var outerAura = new THREE.Mesh(
+    new THREE.SphereGeometry(2.2, 32, 32),
+    new THREE.MeshBasicMaterial({
+      color: 0xffd400,
+      transparent: true,
+      opacity: 0.06,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
+    })
+  );
+  outerAura.position.set(0, 0, -1.5);
+  group.add(outerAura);
+
+  /* ---------- PARTICLES EMITTING FROM TEAR ---------- */
+  var tearParticles = [];
+  var tearCount = J.lowEnd ? 60 : 150;
+  var tearPositions = new Float32Array(tearCount * 3);
+  for (var tp = 0; tp < tearCount * 3; tp += 3){
+    tearPositions[tp]     = (Math.random() - 0.5) * 0.6;
+    tearPositions[tp + 1] = (Math.random() - 0.5) * 2.4;
+    tearPositions[tp + 2] = 0.2;
+  }
+  var tearGeo = new THREE.BufferGeometry();
+  tearGeo.setAttribute("position", new THREE.BufferAttribute(tearPositions, 3));
+  var tearMat = new THREE.PointsMaterial({
+    color: 0xffd400,
+    size: 0.06,
+    transparent: true,
+    opacity: 0.85,
+    sizeAttenuation: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var tearParticleSystem = new THREE.Points(tearGeo, tearMat);
+  tearParticleSystem.name = "tearParticles";
+  group.add(tearParticleSystem);
+
+  /* ---------- STORE ---------- */
+  J.paperTear = {
+    group: group,
+    leftHalf: leftHalf,
+    rightHalf: rightHalf,
+    mindGroup: mindGroup,
+    mindWire: mindWire,
+    neuralNodes: neuralNodes,
+    neuralLines: neuralLines,
+    tearParticles: tearParticleSystem,
+    aura: outerAura
+  };
+
+  console.log("✅ Paper Tear scene built");
+})();
+  </script><script>
+/* ============================================================
+   PAPER TEAR ANIMATION
+   Two halves pull apart + mind pulses + particles flow
+   ============================================================ */
+(function animatePaperTear(){
+  if (!window._J || !window._J.paperTear) return;
+  var ref = window._J.paperTear;
+
+  window._J.animatePaperTear = function(t){
+    if (!ref.group.visible) return;
+
+    /* Floating motion on both halves */
+    if (ref.leftHalf){
+      ref.leftHalf.position.y = ref.leftHalf.userData.baseY +
+        Math.sin(t * ref.leftHalf.userData.floatSpeed) * ref.leftHalf.userData.floatAmp;
+    }
+    if (ref.rightHalf){
+      ref.rightHalf.position.y = ref.rightHalf.userData.baseY +
+        Math.sin(t * ref.rightHalf.userData.floatSpeed + 0.5) * ref.rightHalf.userData.floatAmp;
+    }
+
+    /* Mind rotates + pulses */
+    if (ref.mindGroup){
+      ref.mindGroup.rotation.y += 0.003;
+      ref.mindGroup.rotation.x += 0.0015;
+
+      var mindPulse = 1 + Math.sin(t * 1.2) * 0.04;
+      ref.mindGroup.scale.set(mindPulse, mindPulse, mindPulse);
+    }
+
+    /* Neural nodes pulse */
+    if (ref.neuralNodes){
+      for (var i = 0; i < ref.neuralNodes.length; i++){
+        var node = ref.neuralNodes[i];
+        var ns = 1 + Math.sin(t * 2 + node.userData.phase) * 0.4;
+        node.scale.set(ns, ns, ns);
+      }
+    }
+
+    /* Neural lines pulse */
+    if (ref.neuralLines){
+      for (var l = 0; l < ref.neuralLines.length; l++){
+        var line = ref.neuralLines[l];
+        line.material.opacity = 0.2 + Math.sin(t * 1.5 + line.userData.phase) * 0.25;
+      }
+    }
+
+    /* Tear particles emit outward */
+    if (ref.tearParticles){
+      var tp = ref.tearParticles.geometry.attributes.position.array;
+      for (var p = 0; p < tp.length; p += 3){
+        tp[p + 1] += 0.008;
+        if (tp[p + 1] > 2.5) tp[p + 1] = -2.5;
+      }
+      ref.tearParticles.geometry.attributes.position.needsUpdate = true;
+    }
+
+    /* Aura breathes */
+    if (ref.aura){
+      var aS = 1 + Math.sin(t * 0.7) * 0.08;
+      ref.aura.scale.set(aS, aS, aS);
+    }
+  };
+})();
+
+/* ============================================================
+   SCROLL-TRIGGERED TEAR
+   When user scrolls into the tear section, the paper splits apart
+   ============================================================ */
+(function tearScrollTrigger(){
+  if (!window._J || !window._J.paperTear) return;
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  var ref = window._J.paperTear;
+
+  /* Left half flies left */
+  gsap.fromTo(ref.leftHalf.position,
+    { x: ref.leftHalf.userData.baseX },
+    {
+      x: ref.leftHalf.userData.targetX,
+      rotation: -0.4,
+      scrollTrigger: {
+        trigger: '[data-scene="tear"]',
+        start: "top 70%",
+        end: "center 30%",
+        scrub: 1.5
+      }
+    }
+  );
+
+  /* Right half flies right */
+  gsap.fromTo(ref.rightHalf.position,
+    { x: ref.rightHalf.userData.baseX },
+    {
+      x: ref.rightHalf.userData.targetX,
+      rotation: 0.4,
+      scrollTrigger: {
+        trigger: '[data-scene="tear"]',
+        start: "top 70%",
+        end: "center 30%",
+        scrub: 1.5
+      }
+    }
+  );
+
+  /* Mind grows + brightens as tear opens */
+  gsap.fromTo(ref.mindGroup.scale,
+    { x: 0.5, y: 0.5, z: 0.5 },
+    {
+      x: 1.3, y: 1.3, z: 1.3,
+      scrollTrigger: {
+        trigger: '[data-scene="tear"]',
+        start: "top 60%",
+        end: "center 40%",
+        scrub: 1.8
+      }
+    }
+  );
+
+  console.log("✅ Tear scroll trigger loaded");
+})();
+  </script><script>
+/* ============================================================
+   SCENE 3 — V · VISION
+   Inside the mind: website materializes + QR code + particles
+   ============================================================ */
+(function buildVision(){
+  if (!window._J) return;
+  var J = window._J;
+  var scene = J.scene;
+
+  var group = new THREE.Group();
+  group.name = "visionGroup";
+  group.visible = false;
+  scene.add(group);
+
+  /* ---------- MATERIALS ---------- */
+  var goldMat = new THREE.MeshStandardMaterial({
+    color: 0xffd400,
+    emissive: 0xffd400,
+    emissiveIntensity: 0.9,
+    metalness: 0.75,
+    roughness: 0.2
+  });
+  var goldGlow = new THREE.MeshBasicMaterial({
+    color: 0xffd400,
+    transparent: true,
+    opacity: 0.85,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+  var blueAccent = new THREE.MeshBasicMaterial({
+    color: 0x4f8fff,
+    transparent: true,
+    opacity: 0.75,
+    depthWrite: false
+  });
+  var screenDark = new THREE.MeshPhysicalMaterial({
+    color: 0x0f1520,
+    metalness: 0.5,
+    roughness: 0.15,
+    clearcoat: 1,
+    clearcoatRoughness: 0.1
+  });
+
+  /* ---------- FLOATING WEBSITE (main center) ---------- */
+  var website = new THREE.Group();
+
+  /* Screen base */
+  var screenBase = new THREE.Mesh(
+    new THREE.BoxGeometry(3.2, 2, 0.1),
+    screenDark
+  );
+  website.add(screenBase);
+
+  /* Glow border */
+  var border = new THREE.Mesh(
+    new THREE.PlaneGeometry(3.4, 2.2),
+    new THREE.MeshBasicMaterial({
+      color: 0x4f8fff,
+      transparent: true,
+      opacity: 0.15,
+      depthWrite: false
+    })
+  );
+  border.position.z = -0.02;
+  website.add(border);
+
+  /* Top browser bar */
+  var topBar = new THREE.Mesh(
+    new THREE.PlaneGeometry(3.2, 0.16),
+    blueAccent
+  );
+  topBar.position.set(0, 0.9, 0.06);
+  website.add(topBar);
+
+  /* Fake hero section */
+  var heroBlock = new THREE.Mesh(
+    new THREE.PlaneGeometry(2.9, 0.9),
+    goldGlow.clone()
+  );
+  heroBlock.material.opacity = 0.55;
+  heroBlock.position.set(0, 0.3, 0.06);
+  website.add(heroBlock);
+
+  /* Fake content lines */
+  for (var i = 0; i < 4; i++){
+    var line = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.5 - i * 0.25, 0.06),
+      new THREE.MeshBasicMaterial({
+        color: 0x8bb4ff,
+        transparent: true,
+        opacity: 0.5 - i * 0.1,
+        depthWrite: false
+      })
+    );
+    line.position.set(-0.2, -0.25 - i * 0.18, 0.06);
+    website.add(line);
+  }
+
+  /* Fake button */
+  var fakeBtn = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 0.22),
+    goldGlow.clone()
+  );
+  fakeBtn.position.set(-0.9, -0.85, 0.06);
+  website.add(fakeBtn);
+
+  website.position.set(0, 0.4, 0);
+  group.add(website);
+
+  /* ---------- QR CODE (materializes) ---------- */
+  var qrGroup = new THREE.Group();
+  var qrSize = 1.6;
+  var qrCells = 7;
+  var cellSize = qrSize / qrCells;
+
+  var seed = 11;
+  function rng(){ seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+
+  var qrCellsArr = [];
+  for (var r = 0; r < qrCells; r++){
+    for (var c = 0; c < qrCells; c++){
+      var inCorner =
+        (r < 2 && c < 2) ||
+        (r < 2 && c > qrCells - 3) ||
+        (r > qrCells - 3 && c < 2);
+      if (inCorner) continue;
+
+      if (rng() > 0.45){
+        var cell = new THREE.Mesh(
+          new THREE.BoxGeometry(cellSize * 0.9, cellSize * 0.9, 0.12),
+          goldMat
+        );
+        cell.position.set(
+          (c - (qrCells - 1) / 2) * cellSize,
+          ((qrCells - 1) / 2 - r) * cellSize,
+          0
+        );
+        /* Start hidden — GSAP will fade in */
+        cell.userData.revealDelay = Math.random() * 0.5;
+        cell.scale.set(0, 0, 0);
+        qrGroup.add(cell);
+        qrCellsArr.push(cell);
+      }
+    }
+  }
+
+  /* QR corner markers */
+  function cornerMarker(x, y){
+    var outer = new THREE.Mesh(
+      new THREE.BoxGeometry(cellSize * 2.6, cellSize * 2.6, 0.14),
+      goldMat
+    );
+    outer.position.set(x, y, 0);
+    outer.scale.set(0, 0, 0);
+    qrGroup.add(outer);
+    qrCellsArr.push(outer);
+
+    var inner = new THREE.Mesh(
+      new THREE.BoxGeometry(cellSize * 1.3, cellSize * 1.3, 0.18),
+      screenDark
+    );
+    inner.position.set(x, y, 0.02);
+    inner.scale.set(0, 0, 0);
+    qrGroup.add(inner);
+    qrCellsArr.push(inner);
+  }
+  cornerMarker(-1.45 * cellSize, 1.45 * cellSize);
+  cornerMarker(1.45 * cellSize, 1.45 * cellSize);
+  cornerMarker(-1.45 * cellSize, -1.45 * cellSize);
+
+  qrGroup.position.set(0, 0.4, 1.5);
+  group.add(qrGroup);
+
+  /* Orbiting rings around QR */
+  var ring1 = new THREE.Mesh(
+    new THREE.TorusGeometry(1.4, 0.012, 8, 80),
+    goldGlow
+  );
+  ring1.rotation.x = Math.PI / 2.2;
+  qrGroup.add(ring1);
+
+  var ring2 = new THREE.Mesh(
+    new THREE.TorusGeometry(1.9, 0.008, 8, 80),
+    new THREE.MeshBasicMaterial({
+      color: 0x4f8fff,
+      transparent: true,
+      opacity: 0.5,
+      depthWrite: false
+    })
+  );
+  ring2.rotation.x = Math.PI / 1.8;
+  ring2.rotation.y = 0.6;
+  qrGroup.add(ring2);
+
+  /* ---------- FLOATING NEURAL NODES (background) ---------- */
+  var neuralCount = J.lowEnd ? 40 : 100;
+  var neuralPos = new Float32Array(neuralCount * 3);
+  for (var np = 0; np < neuralCount * 3; np += 3){
+    var angle = Math.random() * Math.PI * 2;
+    var radius = 4 + Math.random() * 6;
+    neuralPos[np]     = Math.cos(angle) * radius;
+    neuralPos[np + 1] = (Math.random() - 0.5) * 8;
+    neuralPos[np + 2] = Math.sin(angle) * radius - 3;
+  }
+  var neuralGeo = new THREE.BufferGeometry();
+  neuralGeo.setAttribute("position", new THREE.BufferAttribute(neuralPos, 3));
+  var neuralMat = new THREE.PointsMaterial({
+    color: 0xffd400,
+    size: 0.08,
+    transparent: true,
+    opacity: 0.75,
+    sizeAttenuation: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var neuralPoints = new THREE.Points(neuralGeo, neuralMat);
+  neuralPoints.name = "visionNeural";
+  group.add(neuralPoints);
+
+  /* ---------- GOLD BURST PARTICLES ---------- */
+  var burstCount = J.lowEnd ? 200 : 450;
+  var burstPos = new Float32Array(burstCount * 3);
+  var burstData = [];
+  for (var b = 0; b < burstCount; b++){
+    var ba = Math.random() * Math.PI * 2;
+    var bp = Math.acos(2 * Math.random() - 1);
+    var br = 2.5 + Math.random() * 10;
+    burstPos[b * 3]     = Math.sin(bp) * Math.cos(ba) * br;
+    burstPos[b * 3 + 1] = Math.sin(bp) * Math.sin(ba) * br;
+    burstPos[b * 3 + 2] = Math.cos(bp) * br - 3;
+    burstData.push({
+      baseX: burstPos[b * 3],
+      baseY: burstPos[b * 3 + 1],
+      baseZ: burstPos[b * 3 + 2],
+      phase: Math.random() * Math.PI * 2
+    });
+  }
+  var burstGeo = new THREE.BufferGeometry();
+  burstGeo.setAttribute("position", new THREE.BufferAttribute(burstPos, 3));
+  var burstMat = new THREE.PointsMaterial({
+    color: 0xffd400,
+    size: 0.09,
+    transparent: true,
+    opacity: 0.85,
+    sizeAttenuation: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var burst = new THREE.Points(burstGeo, burstMat);
+  burst.name = "visionBurst";
+  group.add(burst);
+
+  /* ---------- STORE ---------- */
+  J.vision = {
+    group: group,
+    website: website,
+    qr: qrGroup,
+    qrCells: qrCellsArr,
+    burst: burst,
+    burstData: burstData,
+    neural: neuralPoints,
+    ring1: ring1,
+    ring2: ring2
+  };
+
+  console.log("✅ Vision scene built");
+})();
+  </script><script>
+/* ============================================================
+   VISION ANIMATION
+   QR rotates, rings orbit, burst pulses, neural drifts
+   ============================================================ */
+(function animateVision(){
+  if (!window._J || !window._J.vision) return;
+  var ref = window._J.vision;
+
+  window._J.animateVision = function(t){
+    if (!ref.group.visible) return;
+
+    /* Website floats gently */
+    if (ref.website){
+      ref.website.position.y = 0.4 + Math.sin(t * 0.5) * 0.15;
+      ref.website.rotation.y = Math.sin(t * 0.25) * 0.08;
+    }
+
+    /* QR rotates + floats */
+    if (ref.qr){
+      ref.qr.rotation.y = Math.sin(t * 0.35) * 0.5;
+      ref.qr.position.y = 0.4 + Math.sin(t * 0.7) * 0.18;
+    }
+
+    /* Rings orbit at different speeds */
+    if (ref.ring1) ref.ring1.rotation.z += 0.008;
+    if (ref.ring2) ref.ring2.rotation.z -= 0.005;
+
+    /* Burst rotates + pulses */
+    if (ref.burst){
+      ref.burst.rotation.y += 0.0015;
+      ref.burst.rotation.x += 0.0006;
+      ref.burst.material.opacity = 0.55 + Math.sin(t * 1.8) * 0.3;
+    }
+
+    /* Burst particles breathe outward */
+    if (ref.burstData){
+      var bpos = ref.burst.geometry.attributes.position.array;
+      for (var b = 0; b < ref.burstData.length; b++){
+        var bd = ref.burstData[b];
+        var pulse = 1 + Math.sin(t * 0.8 + bd.phase) * 0.1;
+        bpos[b * 3]     = bd.baseX * pulse;
+        bpos[b * 3 + 1] = bd.baseY * pulse;
+        bpos[b * 3 + 2] = bd.baseZ * pulse;
+      }
+      ref.burst.geometry.attributes.position.needsUpdate = true;
+    }
+
+    /* Neural drift */
+    if (ref.neural){
+      ref.neural.rotation.y += 0.0008;
+    }
+  };
+})();
+
+/* ============================================================
+   VISION SCROLL TRIGGER
+   QR materializes cube-by-cube + website scales in + rings expand
+   ============================================================ */
+(function visionScrollTrigger(){
+  if (!window._J || !window._J.vision) return;
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  var ref = window._J.vision;
+
+  /* QR cells materialize one by one */
+  if (ref.qrCells && ref.qrCells.length){
+    gsap.to(ref.qrCells, {
+      scale: 1,
+      duration: 0.5,
+      stagger: {
+        each: 0.02,
+        from: "random"
+      },
+      ease: "back.out(1.8)",
+      scrollTrigger: {
+        trigger: '[data-scene="v"]',
+        start: "top 65%",
+        once: true
+      }
+    });
+  }
+
+  /* Website scales in from small */
+  gsap.fromTo(ref.website.scale,
+    { x: 0.3, y: 0.3, z: 0.3 },
+    {
+      x: 1, y: 1, z: 1,
+      duration: 1.5,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: '[data-scene="v"]',
+        start: "top 60%",
+        once: true
+      }
+    }
+  );
+
+  /* Website fades in */
+  gsap.fromTo(ref.website.position,
+    { z: -5, y: -2 },
+    {
+      z: 0, y: 0.4,
+      duration: 1.6,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: '[data-scene="v"]',
+        start: "top 60%",
+        once: true
+      }
+    }
+  );
+
+  /* Rings expand outward */
+  gsap.fromTo(ref.ring1.scale,
+    { x: 0.3, y: 0.3, z: 0.3 },
+    {
+      x: 1, y: 1, z: 1,
+      duration: 1.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: '[data-scene="v"]',
+        start: "top 55%",
+        once: true
+      }
+    }
+  );
+
+  gsap.fromTo(ref.ring2.scale,
+    { x: 0.3, y: 0.3, z: 0.3 },
+    {
+      x: 1, y: 1, z: 1,
+      duration: 2,
+      delay: 0.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: '[data-scene="v"]',
+        start: "top 55%",
+        once: true
+      }
+    }
+  );
+
+  console.log("✅ Vision scroll trigger loaded");
+})();
+  </script>
