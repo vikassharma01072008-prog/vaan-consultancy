@@ -2110,4 +2110,2327 @@ window.addEventListener("scroll", function(){
 
   console.log("✅ Vision scroll trigger loaded");
 })();
-  </script>
+  </script><script>
+/* ============================================================
+   SCENE 4 — A · AUTOMATION
+   Digital landscape: buildings, glowing QR signals, data flow
+   ============================================================ */
+(function buildAutomation(){
+  if (!window._J) return;
+  var J = window._J;
+  var scene = J.scene;
+
+  var group = new THREE.Group();
+  group.name = "autoGroup";
+  group.visible = false;
+  scene.add(group);
+
+  /* ---------- MATERIALS ---------- */
+  var buildingMat = new THREE.MeshPhysicalMaterial({
+    color: 0x0f1520,
+    metalness: 0.7,
+    roughness: 0.25,
+    clearcoat: 0.8,
+    clearcoatRoughness: 0.2
+  });
+  var buildingMatLit = new THREE.MeshPhysicalMaterial({
+    color: 0x1a2136,
+    metalness: 0.6,
+    roughness: 0.3,
+    clearcoat: 0.9,
+    clearcoatRoughness: 0.15,
+    emissive: 0x4f8fff,
+    emissiveIntensity: 0.15
+  });
+
+  var blueGlow = new THREE.MeshBasicMaterial({
+    color: 0x4f8fff,
+    transparent: true,
+    opacity: 0.9,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var goldGlow = new THREE.MeshBasicMaterial({
+    color: 0xffd400,
+    transparent: true,
+    opacity: 0.9,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var greenGlow = new THREE.MeshBasicMaterial({
+    color: 0x25b46e,
+    transparent: true,
+    opacity: 0.9,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var purpleGlow = new THREE.MeshBasicMaterial({
+    color: 0xa78bfa,
+    transparent: true,
+    opacity: 0.85,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+
+  var accentColors = [blueGlow, goldGlow, greenGlow, purpleGlow];
+
+  /* ---------- DIGITAL LANDSCAPE GRID ---------- */
+  /* Ground plane with grid */
+  var groundGrid = new THREE.GridHelper(50, 50, 0x4f8fff, 0x1a2136);
+  groundGrid.position.y = -3;
+  groundGrid.material.transparent = true;
+  groundGrid.material.opacity = 0.35;
+  group.add(groundGrid);
+
+  /* ---------- BUILDINGS (glowing signals) ---------- */
+  var buildings = [];
+  var buildingGridSize = 5;
+  var buildingSpacing = 4;
+  var qrScreens = [];
+  var glowPulses = [];
+
+  for (var bx = 0; bx < buildingGridSize; bx++){
+    for (var bz = 0; bz < buildingGridSize; bz++){
+      /* Skip center area for camera path */
+      var centerDist = Math.hypot(bx - 2, bz - 2);
+      if (centerDist < 1.2) continue;
+
+      var x = (bx - 2) * buildingSpacing + (Math.random() - 0.5) * 0.6;
+      var z = (bz - 2) * buildingSpacing + (Math.random() - 0.5) * 0.6;
+      var height = 1.5 + Math.random() * 3.5;
+      var width = 0.9 + Math.random() * 0.6;
+      var depth = 0.9 + Math.random() * 0.6;
+
+      var building = new THREE.Mesh(
+        new THREE.BoxGeometry(width, height, depth),
+        Math.random() > 0.5 ? buildingMat : buildingMatLit
+      );
+      building.position.set(x, -3 + height / 2, z);
+      building.userData = {
+        baseY: -3 + height / 2,
+        floatSpeed: 0.2 + Math.random() * 0.3,
+        floatAmp: 0.05 + Math.random() * 0.08,
+        height: height,
+        phase: Math.random() * Math.PI * 2
+      };
+      group.add(building);
+      buildings.push(building);
+
+      /* Glowing top edge (roof light) */
+      var accent = accentColors[Math.floor(Math.random() * accentColors.length)];
+      var roofLight = new THREE.Mesh(
+        new THREE.PlaneGeometry(width * 0.95, depth * 0.95),
+        accent
+      );
+      roofLight.rotation.x = -Math.PI / 2;
+      roofLight.position.set(x, -3 + height + 0.01, z);
+      group.add(roofLight);
+
+      /* Floating QR code above building */
+      var qrAbove = makeFloatingQR(accent);
+      qrAbove.position.set(x, -3 + height + 1.2, z);
+      qrAbove.userData = {
+        baseY: -3 + height + 1.2,
+        floatSpeed: 0.5 + Math.random() * 0.4,
+        floatAmp: 0.2 + Math.random() * 0.15,
+        phase: Math.random() * Math.PI * 2
+      };
+      group.add(qrAbove);
+      qrScreens.push(qrAbove);
+
+      /* Glow pulse ring at base */
+      var pulse = new THREE.Mesh(
+        new THREE.RingGeometry(width * 0.6, width * 0.75, 24),
+        accent
+      );
+      pulse.rotation.x = -Math.PI / 2;
+      pulse.position.set(x, -2.95, z);
+      pulse.userData = { phase: Math.random() * Math.PI * 2 };
+      group.add(pulse);
+      glowPulses.push(pulse);
+    }
+  }
+
+  /* ---------- HELPER: small floating QR code ---------- */
+  function makeFloatingQR(accent){
+    var g = new THREE.Group();
+    var size = 0.4;
+    var cells = 5;
+    var cellSize = size / cells;
+
+    var seed = Math.floor(Math.random() * 1000);
+    function rng(){ seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+
+    for (var r = 0; r < cells; r++){
+      for (var c = 0; c < cells; c++){
+        if (rng() > 0.5){
+          var cell = new THREE.Mesh(
+            new THREE.PlaneGeometry(cellSize * 0.85, cellSize * 0.85),
+            accent
+          );
+          cell.position.set(
+            (c - (cells - 1) / 2) * cellSize,
+            ((cells - 1) / 2 - r) * cellSize,
+            0
+          );
+          g.add(cell);
+        }
+      }
+    }
+
+    return g;
+  }
+
+  /* ---------- DATA FLOW PARTICLES ---------- */
+  var flowCount = J.lowEnd ? 80 : 200;
+  var flowPos = new Float32Array(flowCount * 3);
+  var flowData = [];
+  for (var f = 0; f < flowCount; f++){
+    /* Pick two random buildings */
+    var bA = buildings[Math.floor(Math.random() * buildings.length)];
+    var bB = buildings[Math.floor(Math.random() * buildings.length)];
+    if (bA === bB) continue;
+
+    flowData.push({
+      from: bA.position.clone(),
+      to: bB.position.clone(),
+      t: Math.random(),
+      speed: 0.002 + Math.random() * 0.004,
+      heightOffset: 1 + Math.random() * 2
+    });
+    flowPos[f * 3]     = bA.position.x;
+    flowPos[f * 3 + 1] = bA.position.y;
+    flowPos[f * 3 + 2] = bA.position.z;
+  }
+  var flowGeo = new THREE.BufferGeometry();
+  flowGeo.setAttribute("position", new THREE.BufferAttribute(flowPos, 3));
+  var flowMat = new THREE.PointsMaterial({
+    color: 0xffd400,
+    size: 0.12,
+    transparent: true,
+    opacity: 0.9,
+    sizeAttenuation: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var flowParticles = new THREE.Points(flowGeo, flowMat);
+  flowParticles.name = "autoFlow";
+  group.add(flowParticles);
+
+  /* ---------- CONNECTION LINES ---------- */
+  var connectionLines = [];
+  for (var cl = 0; cl < 15; cl++){
+    var a = buildings[Math.floor(Math.random() * buildings.length)];
+    var b = buildings[Math.floor(Math.random() * buildings.length)];
+    if (a === b) continue;
+
+    var pts = [
+      a.position.clone().setY(-3 + a.userData.height + 0.5),
+      b.position.clone().setY(-3 + b.userData.height + 0.5)
+    ];
+    var lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
+    var lineMat = new THREE.LineBasicMaterial({
+      color: 0x4f8fff,
+      transparent: true,
+      opacity: 0.25,
+      blending: THREE.AdditiveBlending
+    });
+    var line = new THREE.Line(lineGeo, lineMat);
+    line.userData = { phase: Math.random() * Math.PI * 2 };
+    group.add(line);
+    connectionLines.push(line);
+  }
+
+  /* ---------- AMBIENT HAZE ---------- */
+  var haze = new THREE.Mesh(
+    new THREE.SphereGeometry(35, 32, 32),
+    new THREE.MeshBasicMaterial({
+      color: 0x4f8fff,
+      transparent: true,
+      opacity: 0.025,
+      side: THREE.BackSide,
+      depthWrite: false
+    })
+  );
+  haze.position.y = -2;
+  group.add(haze);
+
+  /* ---------- STORE ---------- */
+  J.auto = {
+    group: group,
+    buildings: buildings,
+    qrScreens: qrScreens,
+    glowPulses: glowPulses,
+    flow: flowParticles,
+    flowData: flowData,
+    connectionLines: connectionLines,
+    grid: groundGrid
+  };
+
+  console.log("✅ Automation · Digital Landscape built");
+})();
+   </script><script>
+/* ============================================================
+   AUTOMATION ANIMATION
+   Buildings float, QR pulse, data flow travels, rings breathe
+   ============================================================ */
+(function animateAutomation(){
+  if (!window._J || !window._J.auto) return;
+  var ref = window._J.auto;
+
+  window._J.animateAutomation = function(t){
+    if (!ref.group.visible) return;
+
+    /* Buildings float subtly */
+    for (var i = 0; i < ref.buildings.length; i++){
+      var b = ref.buildings[i];
+      b.position.y = b.userData.baseY +
+        Math.sin(t * b.userData.floatSpeed + b.userData.phase) * b.userData.floatAmp;
+    }
+
+    /* QR screens float + bob */
+    for (var q = 0; q < ref.qrScreens.length; q++){
+      var qr = ref.qrScreens[q];
+      qr.position.y = qr.userData.baseY +
+        Math.sin(t * qr.userData.floatSpeed + qr.userData.phase) * qr.userData.floatAmp;
+      qr.rotation.y = Math.sin(t * 0.4 + qr.userData.phase) * 0.3;
+    }
+
+    /* Glow pulses breathe */
+    for (var p = 0; p < ref.glowPulses.length; p++){
+      var pulse = ref.glowPulses[p];
+      var s = 1 + Math.sin(t * 1.4 + pulse.userData.phase) * 0.15;
+      pulse.scale.set(s, s, s);
+      pulse.material.opacity = 0.5 + Math.sin(t * 1.4 + pulse.userData.phase) * 0.3;
+    }
+
+    /* Data flow particles travel between buildings */
+    if (ref.flow && ref.flowData){
+      var fpos = ref.flow.geometry.attributes.position.array;
+      for (var f = 0; f < ref.flowData.length; f++){
+        var fd = ref.flowData[f];
+        fd.t += fd.speed;
+        if (fd.t > 1){
+          fd.t = 0;
+          /* Re-pick target */
+          fd.to = ref.buildings[Math.floor(Math.random() * ref.buildings.length)].position.clone();
+        }
+
+        var tt = fd.t;
+        var ease = tt * tt * (3 - 2 * tt);
+
+        fpos[f * 3]     = fd.from.x + (fd.to.x - fd.from.x) * ease;
+        fpos[f * 3 + 1] = fd.from.y + (fd.to.y - fd.from.y) * ease + Math.sin(tt * Math.PI) * fd.heightOffset;
+        fpos[f * 3 + 2] = fd.from.z + (fd.to.z - fd.from.z) * ease;
+      }
+      ref.flow.geometry.attributes.position.needsUpdate = true;
+    }
+
+    /* Connection lines pulse */
+    for (var l = 0; l < ref.connectionLines.length; l++){
+      var line = ref.connectionLines[l];
+      line.material.opacity = 0.15 + Math.sin(t * 1.2 + line.userData.phase) * 0.2;
+    }
+  };
+})();
+
+/* ============================================================
+   AUTOMATION SCROLL TRIGGER
+   Camera flies over the digital landscape
+   ============================================================ */
+(function automationScrollTrigger(){
+  if (!window._J || !window._J.auto) return;
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  var ref = window._J.auto;
+
+  /* Buildings scale in from 0 */
+  gsap.fromTo(ref.buildings.map(function(b){ return b.scale; }),
+    { x: 0, y: 0, z: 0 },
+    {
+      x: 1, y: 1, z: 1,
+      duration: 0.8,
+      stagger: {
+        each: 0.03,
+        from: "center"
+      },
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: '[data-scene="auto"]',
+        start: "top 65%",
+        once: true
+      }
+    }
+  );
+
+  /* QR screens scale in after buildings */
+  gsap.fromTo(ref.qrScreens.map(function(q){ return q.scale; }),
+    { x: 0, y: 0, z: 0 },
+    {
+      x: 1, y: 1, z: 1,
+      duration: 0.6,
+      delay: 0.6,
+      stagger: 0.02,
+      ease: "back.out(1.5)",
+      scrollTrigger: {
+        trigger: '[data-scene="auto"]',
+        start: "top 60%",
+        once: true
+      }
+    }
+  );
+
+  /* Glow pulses grow */
+  gsap.fromTo(ref.glowPulses.map(function(p){ return p.scale; }),
+    { x: 0, y: 0, z: 0 },
+    {
+      x: 1, y: 1, z: 1,
+      duration: 1,
+      delay: 0.9,
+      stagger: 0.02,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: '[data-scene="auto"]',
+        start: "top 55%",
+        once: true
+      }
+    }
+  );
+
+  console.log("✅ Automation scroll trigger loaded");
+})();
+   </script><script>
+/* ============================================================
+   SCENE 5 — A · ADVANCEMENT
+   Vertical column of version rings + floating screen previews
+   ============================================================ */
+(function buildAdvancement(){
+  if (!window._J) return;
+  var J = window._J;
+  var scene = J.scene;
+
+  var group = new THREE.Group();
+  group.name = "advGroup";
+  group.visible = false;
+  scene.add(group);
+
+  /* ---------- MATERIALS ---------- */
+  var cardMat = new THREE.MeshPhysicalMaterial({
+    color: 0x12192a,
+    metalness: 0.55,
+    roughness: 0.15,
+    clearcoat: 1,
+    clearcoatRoughness: 0.08
+  });
+
+  var goldGlow = new THREE.MeshBasicMaterial({
+    color: 0xffd400,
+    transparent: true,
+    opacity: 0.9,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var blueGlow = new THREE.MeshBasicMaterial({
+    color: 0x4f8fff,
+    transparent: true,
+    opacity: 0.85,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var purpleGlow = new THREE.MeshBasicMaterial({
+    color: 0xa78bfa,
+    transparent: true,
+    opacity: 0.85,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var greenGlow = new THREE.MeshBasicMaterial({
+    color: 0x25b46e,
+    transparent: true,
+    opacity: 0.85,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+
+  /* ---------- VERSION RINGS ---------- */
+  var rings = [];
+  var ringData = [
+    { y: -6,  color: blueGlow,   label: "v1", complexity: 2 },
+    { y: -2,  color: goldGlow,   label: "v2", complexity: 3 },
+    { y: 2,   color: purpleGlow, label: "v3", complexity: 4 },
+    { y: 6,   color: greenGlow,  label: "v4", complexity: 5 }
+  ];
+
+  /* ---------- VERSION CARDS (screen previews) ---------- */
+  var versionCards = [];
+
+  for (var i = 0; i < ringData.length; i++){
+    var rd = ringData[i];
+
+    /* ---------- OUTER RING ---------- */
+    var ringGeo = new THREE.TorusGeometry(3.2, 0.025, 12, 90);
+    var ring = new THREE.Mesh(ringGeo, rd.color);
+    ring.rotation.x = Math.PI / 2;
+    ring.position.set(0, rd.y, -1);
+    ring.userData = {
+      baseY: rd.y,
+      baseRotSpeed: 0.15 + i * 0.05,
+      phase: i * 1.5,
+      label: rd.label
+    };
+    group.add(ring);
+    rings.push(ring);
+
+    /* ---------- INNER RING ---------- */
+    var innerRingGeo = new THREE.TorusGeometry(2.5, 0.015, 12, 80);
+    var innerRing = new THREE.Mesh(innerRingGeo, rd.color);
+    innerRing.rotation.x = Math.PI / 2;
+    innerRing.rotation.z = Math.random() * Math.PI;
+    innerRing.position.set(0, rd.y, -1);
+    innerRing.userData = {
+      baseY: rd.y,
+      baseRotSpeed: -(0.1 + i * 0.03),
+      phase: i * 1.8
+    };
+    group.add(innerRing);
+    rings.push(innerRing);
+
+    /* ---------- FLOATING VERSION CARD ---------- */
+    var cardGroup = new THREE.Group();
+
+    /* Card base */
+    var card = new THREE.Mesh(
+      new THREE.BoxGeometry(2.8, 1.7, 0.1),
+      cardMat
+    );
+    cardGroup.add(card);
+
+    /* Top chrome bar */
+    var topBar = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.8, 0.16),
+      new THREE.MeshBasicMaterial({ color: 0x1a2136, transparent: true, opacity: 0.95 })
+    );
+    topBar.position.set(0, 0.77, 0.06);
+    cardGroup.add(topBar);
+
+    /* Accent strip */
+    var strip = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.8, 0.06),
+      rd.color
+    );
+    strip.position.set(0, 0.7, 0.07);
+    cardGroup.add(strip);
+
+    /* Content blocks — more = more advanced */
+    for (var b = 0; b < rd.complexity; b++){
+      var bw = 0.7 + Math.random() * 1.4;
+      var bh = 0.18 + Math.random() * 0.3;
+      var block = new THREE.Mesh(
+        new THREE.PlaneGeometry(bw, bh),
+        rd.color.clone()
+      );
+      block.material.opacity = 0.35 + Math.random() * 0.4;
+      block.position.set(
+        (Math.random() - 0.5) * 2,
+        0.42 - b * 0.22,
+        0.06
+      );
+      cardGroup.add(block);
+    }
+
+    /* Small dots (fake buttons) */
+    for (var d = 0; d < Math.min(rd.complexity + 1, 5); d++){
+      var dot = new THREE.Mesh(
+        new THREE.CircleGeometry(0.035, 12),
+        rd.color
+      );
+      dot.position.set(-1.2 + d * 0.15, 0.77, 0.08);
+      cardGroup.add(dot);
+    }
+
+    /* Card position — beside the ring */
+    cardGroup.position.set(0, rd.y, 0);
+    cardGroup.userData = {
+      baseY: rd.y,
+      floatSpeed: 0.4 + i * 0.1,
+      floatAmp: 0.15 + i * 0.03,
+      phase: i * 2
+    };
+    group.add(cardGroup);
+    versionCards.push(cardGroup);
+  }
+
+  /* ---------- CENTRAL VERTICAL BEAM ---------- */
+  var beamGeo = new THREE.CylinderGeometry(0.04, 0.04, 16, 12);
+  var beamMat = new THREE.MeshBasicMaterial({
+    color: 0xffd400,
+    transparent: true,
+    opacity: 0.4,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+  var beam = new THREE.Mesh(beamGeo, beamMat);
+  beam.position.set(0, 0, -1);
+  group.add(beam);
+
+  /* ---------- RISING PARTICLES ---------- */
+  var riseCount = J.lowEnd ? 120 : 300;
+  var risePos = new Float32Array(riseCount * 3);
+  var riseVel = new Float32Array(riseCount);
+  for (var rp = 0; rp < riseCount; rp++){
+    risePos[rp * 3]     = (Math.random() - 0.5) * 12;
+    risePos[rp * 3 + 1] = -10 - Math.random() * 4;
+    risePos[rp * 3 + 2] = (Math.random() - 0.5) * 6;
+    riseVel[rp] = 0.015 + Math.random() * 0.02;
+  }
+  var riseGeo = new THREE.BufferGeometry();
+  riseGeo.setAttribute("position", new THREE.BufferAttribute(risePos, 3));
+  var riseMat = new THREE.PointsMaterial({
+    color: 0xffd400,
+    size: 0.075,
+    transparent: true,
+    opacity: 0.85,
+    sizeAttenuation: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var riseParticles = new THREE.Points(riseGeo, riseMat);
+  riseParticles.name = "advRise";
+  group.add(riseParticles);
+
+  /* ---------- SPIRAL (background) ---------- */
+  var spiralPoints = [];
+  for (var sp = 0; sp < 260; sp++){
+    var spAngle = sp * 0.14;
+    var spRadius = 2.5 + sp * 0.025;
+    spiralPoints.push(new THREE.Vector3(
+      Math.cos(spAngle) * spRadius * 0.85,
+      (sp - 130) * 0.07,
+      Math.sin(spAngle) * spRadius * 0.55 - 1.5
+    ));
+  }
+  var spiralGeo = new THREE.BufferGeometry().setFromPoints(spiralPoints);
+  var spiralMat = new THREE.LineBasicMaterial({
+    color: 0x4f8fff,
+    transparent: true,
+    opacity: 0.18
+  });
+  var spiralLine = new THREE.Line(spiralGeo, spiralMat);
+  group.add(spiralLine);
+
+  /* ---------- STORE ---------- */
+  J.adv = {
+    group: group,
+    rings: rings,
+    versionCards: versionCards,
+    beam: beam,
+    rise: riseParticles,
+    riseVel: riseVel,
+    spiral: spiralLine
+  };
+
+  console.log("✅ Advancement · Vertical column built");
+})();
+   </script><script>
+/* ============================================================
+   ADVANCEMENT ANIMATION
+   Rings orbit, cards float, particles rise, beam pulses
+   ============================================================ */
+(function animateAdvancement(){
+  if (!window._J || !window._J.adv) return;
+  var ref = window._J.adv;
+
+  window._J.animateAdvancement = function(t){
+    if (!ref.group.visible) return;
+
+    /* Rings rotate at different speeds */
+    for (var i = 0; i < ref.rings.length; i++){
+      var ring = ref.rings[i];
+      ring.rotation.z += ring.userData.baseRotSpeed * 0.01;
+
+      /* Subtle vertical breathing */
+      var s = 1 + Math.sin(t * 0.7 + ring.userData.phase) * 0.05;
+      ring.scale.set(s, s, s);
+    }
+
+    /* Version cards float + bob */
+    for (var c = 0; c < ref.versionCards.length; c++){
+      var card = ref.versionCards[c];
+      card.position.y = card.userData.baseY +
+        Math.sin(t * card.userData.floatSpeed + card.userData.phase) * card.userData.floatAmp;
+      card.rotation.y = Math.sin(t * 0.35 + card.userData.phase) * 0.15;
+    }
+
+    /* Beam pulses brightness */
+    if (ref.beam){
+      ref.beam.material.opacity = 0.3 + Math.sin(t * 1.5) * 0.2;
+    }
+
+    /* Rising particles */
+    if (ref.rise && ref.riseVel){
+      var rpos = ref.rise.geometry.attributes.position.array;
+      for (var r = 0; r < ref.riseVel.length; r++){
+        rpos[r * 3 + 1] += ref.riseVel[r];
+        if (rpos[r * 3 + 1] > 10){
+          rpos[r * 3 + 1] = -10;
+          rpos[r * 3]     = (Math.random() - 0.5) * 12;
+          rpos[r * 3 + 2] = (Math.random() - 0.5) * 6;
+        }
+      }
+      ref.rise.geometry.attributes.position.needsUpdate = true;
+    }
+
+    /* Spiral rotates slowly */
+    if (ref.spiral){
+      ref.spiral.rotation.y += 0.0018;
+    }
+  };
+})();
+
+/* ============================================================
+   ADVANCEMENT SCROLL TRIGGER
+   Camera rises through column, cards reveal in sequence
+   ============================================================ */
+(function advancementScrollTrigger(){
+  if (!window._J || !window._J.adv) return;
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  var ref = window._J.adv;
+
+  /* Rings scale in from 0 */
+  gsap.fromTo(ref.rings.map(function(r){ return r.scale; }),
+    { x: 0, y: 0, z: 0 },
+    {
+      x: 1, y: 1, z: 1,
+      duration: 1,
+      stagger: 0.1,
+      ease: "back.out(1.5)",
+      scrollTrigger: {
+        trigger: '[data-scene="adv"]',
+        start: "top 70%",
+        once: true
+      }
+    }
+  );
+
+  /* Cards reveal one by one */
+  gsap.fromTo(ref.versionCards.map(function(c){ return c.scale; }),
+    { x: 0.2, y: 0.2, z: 0.2 },
+    {
+      x: 1, y: 1, z: 1,
+      duration: 0.9,
+      delay: 0.4,
+      stagger: 0.18,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: '[data-scene="adv"]',
+        start: "top 65%",
+        once: true
+      }
+    }
+  );
+
+  /* Cards fade in */
+  ref.versionCards.forEach(function(card, idx){
+    gsap.fromTo(card.position,
+      { z: -3, opacity: 0 },
+      {
+        z: 0, opacity: 1,
+        duration: 1.2,
+        delay: idx * 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: '[data-scene="adv"]',
+          start: "top 65%",
+          once: true
+        }
+      }
+    );
+  });
+
+  /* Beam grows */
+  gsap.fromTo(ref.beam.scale,
+    { x: 0, y: 0, z: 0 },
+    {
+      x: 1, y: 1, z: 1,
+      duration: 1.5,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: '[data-scene="adv"]',
+        start: "top 70%",
+        once: true
+      }
+    }
+  );
+
+  console.log("✅ Advancement scroll trigger loaded");
+})();
+   </script><script>
+/* ============================================================
+   SCENE 6 — N · NETWORK
+   30-node web + core + light trails + travel particles
+   ============================================================ */
+(function buildNetwork(){
+  if (!window._J) return;
+  var J = window._J;
+  var scene = J.scene;
+
+  var group = new THREE.Group();
+  group.name = "netGroup";
+  group.visible = false;
+  scene.add(group);
+
+  /* ---------- NODE COLORS ---------- */
+  var nodeColors = [
+    0xffd400, /* gold */
+    0x4f8fff, /* blue */
+    0x25b46e, /* green */
+    0xa78bfa, /* purple */
+    0xff8c42, /* orange */
+    0xff5e7a  /* pink */
+  ];
+
+  /* ---------- BUILD NODES IN 3 LAYERS ---------- */
+  var nodes = [];
+  var nodePositions = [];
+  var layers = 3;
+  var nodesPerLayer = 10;
+  var radius = 8.5;
+
+  for (var layer = 0; layer < layers; layer++){
+    var y = (layer - 1) * 3.2;
+    var layerRadius = radius * (1 - Math.abs(layer - 1) * 0.22);
+
+    for (var i = 0; i < nodesPerLayer; i++){
+      var angle = (i / nodesPerLayer) * Math.PI * 2 + layer * 0.35;
+      var x = Math.cos(angle) * layerRadius * (0.88 + Math.random() * 0.24);
+      var z = Math.sin(angle) * layerRadius * (0.88 + Math.random() * 0.24);
+
+      var color = nodeColors[(layer * nodesPerLayer + i) % nodeColors.length];
+
+      /* Node */
+      var node = new THREE.Mesh(
+        new THREE.SphereGeometry(0.22, 20, 20),
+        new THREE.MeshBasicMaterial({ color: color })
+      );
+      node.position.set(x, y, z);
+
+      /* Halo */
+      var halo = new THREE.Mesh(
+        new THREE.SphereGeometry(0.5, 14, 14),
+        new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.25,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending
+        })
+      );
+      node.add(halo);
+
+      node.userData = {
+        baseY: y,
+        floatSpeed: 0.4 + Math.random() * 0.5,
+        floatAmp: 0.2 + Math.random() * 0.25,
+        color: color,
+        phase: Math.random() * Math.PI * 2
+      };
+
+      group.add(node);
+      nodes.push(node);
+      nodePositions.push(new THREE.Vector3(x, y, z));
+    }
+  }
+
+  /* ---------- CONNECTING LINES (nearest neighbors) ---------- */
+  var lines = [];
+  for (var a = 0; a < nodes.length; a++){
+    var distances = [];
+    for (var b = 0; b < nodes.length; b++){
+      if (a === b) continue;
+      distances.push({
+        idx: b,
+        d: nodePositions[a].distanceTo(nodePositions[b])
+      });
+    }
+    distances.sort(function(x, y){ return x.d - y.d; });
+
+    /* Connect to 2-3 nearest */
+    var maxConns = 2 + Math.floor(Math.random() * 2);
+    for (var c = 0; c < maxConns && c < distances.length; c++){
+      var oi = distances[c].idx;
+      if (oi < a) continue;
+
+      var pts = [nodePositions[a], nodePositions[oi]];
+      var lgeo = new THREE.BufferGeometry().setFromPoints(pts);
+      var lmat = new THREE.LineBasicMaterial({
+        color: nodes[a].userData.color,
+        transparent: true,
+        opacity: 0.35,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+      var line = new THREE.Line(lgeo, lmat);
+      line.userData = {
+        fromIdx: a,
+        toIdx: oi,
+        phase: Math.random() * Math.PI * 2,
+        baseOpacity: 0.35
+      };
+      group.add(line);
+      lines.push(line);
+    }
+  }
+
+  /* ---------- CENTER CORE ---------- */
+  var core = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(1.6, 1),
+    new THREE.MeshPhysicalMaterial({
+      color: 0xffd400,
+      emissive: 0x4f8fff,
+      emissiveIntensity: 0.5,
+      metalness: 0.9,
+      roughness: 0.15,
+      clearcoat: 1,
+      clearcoatRoughness: 0.05,
+      flatShading: true
+    })
+  );
+  group.add(core);
+
+  /* Core wireframe */
+  var coreWire = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(1.65, 1),
+    new THREE.MeshBasicMaterial({
+      color: 0xffd400,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.18
+    })
+  );
+  core.add(coreWire);
+
+  /* Core halo */
+  var coreHalo = new THREE.Mesh(
+    new THREE.SphereGeometry(2.8, 28, 28),
+    new THREE.MeshBasicMaterial({
+      color: 0xffd400,
+      transparent: true,
+      opacity: 0.08,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
+    })
+  );
+  group.add(coreHalo);
+
+  /* ---------- TRAVEL PARTICLES (data moving between nodes) ---------- */
+  var travelCount = J.lowEnd ? 60 : 140;
+  var travelPos = new Float32Array(travelCount * 3);
+  var travelData = [];
+  for (var t = 0; t < travelCount; t++){
+    var fromIdx = Math.floor(Math.random() * nodes.length);
+    var toIdx = Math.floor(Math.random() * nodes.length);
+    if (toIdx === fromIdx) toIdx = (fromIdx + 3) % nodes.length;
+
+    travelData.push({
+      from: nodePositions[fromIdx],
+      to: nodePositions[toIdx],
+      t: Math.random(),
+      speed: 0.004 + Math.random() * 0.005
+    });
+    travelPos[t * 3]     = nodePositions[fromIdx].x;
+    travelPos[t * 3 + 1] = nodePositions[fromIdx].y;
+    travelPos[t * 3 + 2] = nodePositions[fromIdx].z;
+  }
+  var travelGeo = new THREE.BufferGeometry();
+  travelGeo.setAttribute("position", new THREE.BufferAttribute(travelPos, 3));
+  var travelMat = new THREE.PointsMaterial({
+    color: 0xffd400,
+    size: 0.14,
+    transparent: true,
+    opacity: 0.95,
+    sizeAttenuation: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending
+  });
+  var travelParticles = new THREE.Points(travelGeo, travelMat);
+  travelParticles.name = "netTravel";
+  group.add(travelParticles);
+
+  /* ---------- AMBIENT AURA ---------- */
+  var aura = new THREE.Mesh(
+    new THREE.SphereGeometry(18, 32, 32),
+    new THREE.MeshBasicMaterial({
+      color: 0xa78bfa,
+      transparent: true,
+      opacity: 0.025,
+      side: THREE.BackSide,
+      depthWrite: false
+    })
+  );
+  group.add(aura);
+
+  /* ---------- STORE ---------- */
+  J.net = {
+    group: group,
+    nodes: nodes,
+    nodePositions: nodePositions,
+    lines: lines,
+    core: core,
+    coreWire: coreWire,
+    coreHalo: coreHalo,
+    travel: travelParticles,
+    travelData: travelData,
+    aura: aura
+  };
+
+  console.log("✅ Network built");
+})();
+   </script><script>
+/* ============================================================
+   NETWORK ANIMATION
+   Nodes pulse, lines shimmer, travel flows, core spins
+   ============================================================ */
+(function animateNetwork(){
+  if (!window._J || !window._J.net) return;
+  var ref = window._J.net;
+
+  window._J.animateNetwork = function(t){
+    if (!ref.group.visible) return;
+
+    /* Core spins */
+    if (ref.core){
+      ref.core.rotation.x += 0.003;
+      ref.core.rotation.y += 0.005;
+    }
+
+    /* Nodes pulse + float */
+    for (var i = 0; i < ref.nodes.length; i++){
+      var node = ref.nodes[i];
+      var pulse = 1 + Math.sin(t * 1.5 + node.userData.phase) * 0.2;
+      node.scale.set(pulse, pulse, pulse);
+
+      node.position.y = node.userData.baseY +
+        Math.sin(t * node.userData.floatSpeed) * node.userData.floatAmp;
+    }
+
+    /* Lines shimmer */
+    for (var l = 0; l < ref.lines.length; l++){
+      var line = ref.lines[l];
+      var o = line.userData.baseOpacity +
+        Math.sin(t * 1.3 + line.userData.phase) * 0.22;
+      line.material.opacity = Math.max(0.08, Math.min(0.75, o));
+    }
+
+    /* Travel particles flow between nodes */
+    if (ref.travel && ref.travelData){
+      var tpos = ref.travel.geometry.attributes.position.array;
+      for (var tr = 0; tr < ref.travelData.length; tr++){
+        var data = ref.travelData[tr];
+        data.t += data.speed;
+        if (data.t > 1){
+          data.t = 0;
+          /* Pick new target */
+          var newIdx = Math.floor(Math.random() * ref.nodePositions.length);
+          data.to = ref.nodePositions[newIdx];
+        }
+
+        var tt = data.t;
+        var ease = tt * tt * (3 - 2 * tt);
+
+        tpos[tr * 3]     = data.from.x + (data.to.x - data.from.x) * ease;
+        tpos[tr * 3 + 1] = data.from.y + (data.to.y - data.from.y) * ease;
+        tpos[tr * 3 + 2] = data.from.z + (data.to.z - data.from.z) * ease;
+      }
+      ref.travel.geometry.attributes.position.needsUpdate = true;
+    }
+
+    /* Core halo breathes */
+    if (ref.coreHalo){
+      var s = 1 + Math.sin(t * 0.8) * 0.08;
+      ref.coreHalo.scale.set(s, s, s);
+    }
+
+    /* Aura breathes */
+    if (ref.aura){
+      var aS = 1 + Math.sin(t * 0.5) * 0.05;
+      ref.aura.scale.set(aS, aS, aS);
+    }
+  };
+})();
+
+/* ============================================================
+   NETWORK SCROLL TRIGGER
+   Nodes appear one by one, connections draw in, then core ignites
+   ============================================================ */
+(function networkScrollTrigger(){
+  if (!window._J || !window._J.net) return;
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  var ref = window._J.net;
+
+  /* Nodes pop in */
+  gsap.fromTo(ref.nodes.map(function(n){ return n.scale; }),
+    { x: 0, y: 0, z: 0 },
+    {
+      x: 1, y: 1, z: 1,
+      duration: 0.6,
+      stagger: {
+        each: 0.04,
+        from: "random"
+      },
+      ease: "back.out(1.8)",
+      scrollTrigger: {
+        trigger: '[data-scene="net"]',
+        start: "top 70%",
+        once: true
+      }
+    }
+  );
+
+  /* Lines fade in after nodes */
+  gsap.fromTo(ref.lines.map(function(l){ return l.material; }),
+    { opacity: 0 },
+    {
+      opacity: function(idx, target){
+        return target.userData && target.userData.baseOpacity !== undefined
+          ? target.userData.baseOpacity
+          : 0.35;
+      },
+      duration: 1.2,
+      delay: 1.2,
+      stagger: 0.03,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: '[data-scene="net"]',
+        start: "top 65%",
+        once: true
+      }
+    }
+  );
+
+  /* Core grows from 0 */
+  gsap.fromTo(ref.core.scale,
+    { x: 0, y: 0, z: 0 },
+    {
+      x: 1, y: 1, z: 1,
+      duration: 1.5,
+      delay: 1,
+      ease: "back.out(1.3)",
+      scrollTrigger: {
+        trigger: '[data-scene="net"]',
+        start: "top 60%",
+        once: true
+      }
+    }
+  );
+
+  /* Core halo expands */
+  gsap.fromTo(ref.coreHalo.scale,
+    { x: 0.3, y: 0.3, z: 0.3 },
+    {
+      x: 1, y: 1, z: 1,
+      duration: 2,
+      delay: 1.5,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: '[data-scene="net"]',
+        start: "top 55%",
+        once: true
+      }
+    }
+  );
+
+  console.log("✅ Network scroll trigger loaded");
+})();
+   </script><script>
+/* ============================================================
+   SCENE 7 — GO DIGITAL FINALE
+   Golden core + expanding rings + celebration particles + rays
+   ============================================================ */
+(function buildFinale(){
+  if (!window._J) return;
+  var J = window._J;
+  var scene = J.scene;
+
+  var group = new THREE.Group();
+  group.name = "finaleGroup";
+  group.visible = false;
+  scene.add(group);
+
+  /* ---------- CENTER MEGA-CORE ---------- */
+  var core = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(2.2, 2),
+    new THREE.MeshPhysicalMaterial({
+      color: 0xffd400,
+      emissive: 0xffa726,
+      emissiveIntensity: 0.6,
+      metalness: 0.95,
+      roughness: 0.08,
+      clearcoat: 1,
+      clearcoatRoughness: 0.04,
+      flatShading: true
+    })
+  );
+  group.add(core);
+
+  /* Inner wireframe */
+  var coreWire = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(2.28, 2),
+    new THREE.MeshBasicMaterial({
+      color: 0xffd400,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.15
+    })
+  );
+  core.add(coreWire);
+
+  /* ---------- CONVERGING LIGHT BEAMS ---------- */
+  var beams = [];
+  var beamCount = 24;
+  for (var b = 0; b < beamCount; b++){
+    var beamAngle = (b / beamCount) * Math.PI * 2;
+    var beamDistance = 12 + Math.random() * 6;
+    var beamStart = new THREE.Vector3(
+      Math.cos(beamAngle) * beamDistance,
+      (Math.random() - 0.5) * 10,
+      Math.sin(beamAngle) * beamDistance
+    );
+
+    var beamGeo = new THREE.BufferGeometry().setFromPoints([
+      beamStart,
+      new THREE.Vector3(0, 0, 0)
+    ]);
+    var beamMat = new THREE.LineBasicMaterial({
+      color: 0xffd400,
+      transparent: true,
+      opacity: 0.4,
+      blending: THREE.AdditiveBlending
+    });
+    var beamLine = new THREE.Line(beamGeo, beamMat);
+    beamLine.userData = {
+      phase: Math.random() * Math.PI * 2,
+      start: beamStart
+    };
+    group.add(beamLine);
+    beams.push(beamLine);
+  }
+
+  /* ---------- EXPANDING RINGS ---------- */
+  var rings = [];
+  var ringColors = [0xffd400, 0x4f8fff, 0xa78bfa, 0x25b46e];
+  for (var r = 0; r < 4; r++){
+    var ring = new THREE.Mesh(
+      new THREE.TorusGeometry(3.8 + r * 1.2, 0.028, 10, 130),
+      new THREE.MeshBasicMaterial({
+        color: ringColors[r],
+        transparent: true,
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      })
+    );
+    ring.rotation.x = Math.PI / 2 + r * 0.32;
+    ring.rotation.y = r * 0.5;
+    ring.userData = {
+      baseRotSpeed: 0.15 + r * 0.05,
+      phase: r * 1.3
+    };
+    group.add(ring);
+    rings.push(ring);
+  }
+
+  /* ---------- CELEBRATION PARTICLE CLOUD ---------- */
+  var cloudCount = J.lowEnd ? 300 : 700;
+  var cloudPos = new Float32Array(cloudCount * 3);
+  var cloudColor = new Float32Array(cloudCount * 3);
+  var palette = [0xffd400, 0x4f8fff, 0xa78bfa, 0x25b46e, 0xff8c42, 0xff5e7a];
+
+  for (var c = 0; c < cloudCount; c++){
+    var ca = Math.random() * Math.PI * 2;
+    var cp = Math.acos(2 * Math.random() - 1);
+    var cr = 4 + Math.random() * 15;
+
+    cloudPos[c * 3]     = Math.sin(cp) * Math.cos(ca) * cr;
+    cloudPos[c * 3 + 1] = Math.sin(cp) * Math.sin(ca) * cr;
+    cloudPos[c * 3 + 2] = Math.cos(cp) * cr;
+
+    var col = new THREE.Color(palette[Math.floor(Math.random() * palette.length)]);
+    cloudColor[c * 3]     = col.r;
+    cloudColor[c * 3 + 1] = col.g;
+    cloudColor[c * 3 + 2] = col.b;
+  }
+  var cloudGeo = new THREE.BufferGeometry();
+  cloudGeo.setAttribute("position", new THREE.BufferAttribute(cloudPos, 3));
+  cloudGeo.setAttribute("color", new THREE.BufferAttribute(cloudColor, 3));
+  var cloudMat = new THREE.PointsMaterial({
+    size: 0.12,
+    transparent: true,
+    opacity: 0.9,
+    sizeAttenuation: true,
+    depthWrite: false,
+    vertexColors: true,
+    blending: THREE.AdditiveBlending
+  });
+  var cloud = new THREE.Points(cloudGeo, cloudMat);
+  cloud.name = "finaleCloud";
+  group.add(cloud);
+
+  /* ---------- SOFT AURA ---------- */
+  var aura = new THREE.Mesh(
+    new THREE.SphereGeometry(3.6, 32, 32),
+    new THREE.MeshBasicMaterial({
+      color: 0xffd400,
+      transparent: true,
+      opacity: 0.08,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
+    })
+  );
+  group.add(aura);
+
+  /* ---------- LIGHT RAYS ---------- */
+  var rays = [];
+  var rayCount = 20;
+  for (var rc = 0; rc < rayCount; rc++){
+    var rayAngle = (rc / rayCount) * Math.PI * 2;
+    var ray = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.06, 10),
+      new THREE.MeshBasicMaterial({
+        color: 0xffd400,
+        transparent: true,
+        opacity: 0.14,
+        side: THREE.DoubleSide,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      })
+    );
+    ray.rotation.z = rayAngle;
+    ray.rotation.y = 0.3;
+    ray.userData = {
+      baseOpacity: 0.14,
+      phase: rc * 0.4
+    };
+    group.add(ray);
+    rays.push(ray);
+  }
+
+  /* ---------- STORE ---------- */
+  J.finale = {
+    group: group,
+    core: core,
+    beams: beams,
+    rings: rings,
+    cloud: cloud,
+    aura: aura,
+    rays: rays
+  };
+
+  console.log("✅ Finale built");
+})();
+   </script><script>
+/* ============================================================
+   FINALE ANIMATION
+   Core spins, beams pulse, rings expand, cloud rotates
+   ============================================================ */
+(function animateFinale(){
+  if (!window._J || !window._J.finale) return;
+  var ref = window._J.finale;
+
+  window._J.animateFinale = function(t){
+    if (!ref.group.visible) return;
+
+    /* Core spins */
+    if (ref.core){
+      ref.core.rotation.x += 0.0035;
+      ref.core.rotation.y += 0.0055;
+    }
+
+    /* Beams pulse */
+    for (var b = 0; b < ref.beams.length; b++){
+      var beam = ref.beams[b];
+      beam.material.opacity = 0.25 + Math.sin(t * 1.5 + beam.userData.phase) * 0.25;
+    }
+
+    /* Rings expand + rotate */
+    for (var r = 0; r < ref.rings.length; r++){
+      var ring = ref.rings[r];
+      ring.rotation.z += ring.userData.baseRotSpeed * 0.01;
+      ring.rotation.x += 0.0018;
+
+      var s = 1 + Math.sin(t * 0.6 + ring.userData.phase) * 0.1;
+      ring.scale.set(s, s, s);
+    }
+
+    /* Cloud rotates */
+    if (ref.cloud){
+      ref.cloud.rotation.y += 0.0015;
+      ref.cloud.rotation.x += 0.0005;
+    }
+
+    /* Aura breathes */
+    if (ref.aura){
+      var aS = 1 + Math.sin(t * 0.7) * 0.12;
+      ref.aura.scale.set(aS, aS, aS);
+      ref.aura.material.opacity = 0.06 + Math.sin(t * 0.85) * 0.03;
+    }
+
+    /* Rays flicker */
+    for (var rc = 0; rc < ref.rays.length; rc++){
+      var ray = ref.rays[rc];
+      ray.material.opacity = ray.userData.baseOpacity +
+        Math.sin(t * 1.2 + ray.userData.phase) * 0.06;
+    }
+  };
+})();
+
+/* ============================================================
+   FINALE SCROLL TRIGGER
+   Beams converge, core ignites, everything explodes into light
+   ============================================================ */
+(function finaleScrollTrigger(){
+  if (!window._J || !window._J.finale) return;
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  var ref = window._J.finale;
+
+  /* Beams shrink to center — converging light */
+  ref.beams.forEach(function(beam, idx){
+    var startPoint = beam.userData.start.clone();
+    var endPoint = new THREE.Vector3(0, 0, 0);
+
+    gsap.fromTo(beam.geometry.attributes.position,
+      { array: [startPoint.x, startPoint.y, startPoint.z, startPoint.x, startPoint.y, startPoint.z] },
+      {
+        array: [startPoint.x, startPoint.y, startPoint.z, endPoint.x, endPoint.y, endPoint.z],
+        duration: 2,
+        delay: idx * 0.05,
+        ease: "power2.in",
+        scrollTrigger: {
+          trigger: '[data-scene="final"]',
+          start: "top 70%",
+          end: "center 50%",
+          scrub: 1.8
+        }
+      }
+    );
+  });
+
+  /* Core grows from tiny → explosive */
+  gsap.fromTo(ref.core.scale,
+    { x: 0.2, y: 0.2, z: 0.2 },
+    {
+      x: 1.2, y: 1.2, z: 1.2,
+      duration: 2,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: '[data-scene="final"]',
+        start: "top 60%",
+        end: "center 40%",
+        scrub: 1.8
+      }
+    }
+  );
+
+  /* Rings expand outward */
+  gsap.fromTo(ref.rings.map(function(r){ return r.scale; }),
+    { x: 0.2, y: 0.2, z: 0.2 },
+    {
+      x: 1, y: 1, z: 1,
+      duration: 2,
+      stagger: 0.15,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: '[data-scene="final"]',
+        start: "top 55%",
+        once: true
+      }
+    }
+  );
+
+  /* Cloud expands */
+  gsap.fromTo(ref.cloud.scale,
+    { x: 0.3, y: 0.3, z: 0.3 },
+    {
+      x: 1, y: 1, z: 1,
+      duration: 2.5,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: '[data-scene="final"]',
+        start: "top 50%",
+        once: true
+      }
+    }
+  );
+
+  /* Aura expands */
+  gsap.fromTo(ref.aura.scale,
+    { x: 0.4, y: 0.4, z: 0.4 },
+    {
+      x: 1, y: 1, z: 1,
+      duration: 2.5,
+      delay: 0.3,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: '[data-scene="final"]',
+        start: "top 50%",
+        once: true
+      }
+    }
+  );
+
+  /* Rays fade in */
+  gsap.fromTo(ref.rays.map(function(r){ return r.material; }),
+    { opacity: 0 },
+    {
+      opacity: 0.14,
+      duration: 2,
+      delay: 1,
+      stagger: 0.05,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: '[data-scene="final"]',
+        start: "top 45%",
+        once: true
+      }
+    }
+  );
+
+  console.log("✅ Finale scroll trigger loaded");
+})();
+   </script><script>
+/* ============================================================
+   MASTER ANIMATION LOOP
+   Calls all scene animators each frame + camera parallax
+   ============================================================ */
+(function masterLoop(){
+  if (!window._J) return;
+  var J = window._J;
+  var scrollActive = false;
+
+  window.addEventListener("scroll", function(){
+    scrollActive = true;
+    clearTimeout(window._scrollTimeout);
+    window._scrollTimeout = setTimeout(function(){
+      scrollActive = false;
+    }, 220);
+  }, { passive: true });
+
+  function masterFrame(){
+    requestAnimationFrame(masterFrame);
+
+    var t = J.t;
+
+    /* Call each scene's animator */
+    if (J.animateOldWorld) J.animateOldWorld(t);
+    if (J.animatePaperTear) J.animatePaperTear(t);
+    if (J.animateVision) J.animateVision(t);
+    if (J.animateAutomation) J.animateAutomation(t);
+    if (J.animateAdvancement) J.animateAdvancement(t);
+    if (J.animateNetwork) J.animateNetwork(t);
+    if (J.animateFinale) J.animateFinale(t);
+
+    /* Mouse parallax — subtle drift when NOT scrolling */
+    if (!scrollActive && J.camera && J.entered){
+      var targetX = J.mouse.x * 0.4;
+      var targetY = J.mouse.y * 0.3;
+      J.camera.position.x += (targetX - J.camera.position.x) * 0.008;
+      J.camera.position.y += (targetY - J.camera.position.y) * 0.008;
+    }
+
+    /* Camera always looks at center */
+    if (J.camera) J.camera.lookAt(0, 0.5, 0);
+  }
+  masterFrame();
+
+  console.log("✅ Master loop running");
+})();
+   </script><script>
+/* ============================================================
+   GSAP SCROLL CHOREOGRAPHY
+   Scene toggles + camera paths + fog + indicator dots
+   ============================================================ */
+(function initScrollChoreography(){
+  if (!window._J || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  var J = window._J;
+  var camera = J.camera;
+  var fog = J.scene.fog;
+
+  function hideAll(){
+    if (J.oldWorld && J.oldWorld.group) J.oldWorld.group.visible = false;
+    if (J.paperTear && J.paperTear.group) J.paperTear.group.visible = false;
+    if (J.vision && J.vision.group) J.vision.group.visible = false;
+    if (J.auto && J.auto.group) J.auto.group.visible = false;
+    if (J.adv && J.adv.group) J.adv.group.visible = false;
+    if (J.net && J.net.group) J.net.group.visible = false;
+    if (J.finale && J.finale.group) J.finale.group.visible = false;
+  }
+  hideAll();
+
+  /* ============================================================
+     SCENE 1 — OLD WORLD
+     ============================================================ */
+  ScrollTrigger.create({
+    trigger: '[data-scene="old"]',
+    start: "top 90%",
+    end: "bottom 10%",
+    onEnter: function(){
+      hideAll();
+      if (J.oldWorld) J.oldWorld.group.visible = true;
+      fog.color.setHex(0x2a1f12);
+      fog.density = 0.032;
+      if (J.playWhoosh) J.playWhoosh();
+    },
+    onEnterBack: function(){
+      hideAll();
+      if (J.oldWorld) J.oldWorld.group.visible = true;
+      fog.color.setHex(0x2a1f12);
+      fog.density = 0.032;
+    }
+  });
+
+  gsap.fromTo(camera.position,
+    { x: 0, y: 1.5, z: 16 },
+    {
+      x: 0, y: 1.2, z: 6,
+      scrollTrigger: {
+        trigger: '[data-scene="old"]',
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.8
+      }
+    }
+  );
+
+  /* ============================================================
+     SCENE 2 — PAPER TEAR
+     ============================================================ */
+  ScrollTrigger.create({
+    trigger: '[data-scene="tear"]',
+    start: "top 90%",
+    end: "bottom 10%",
+    onEnter: function(){
+      hideAll();
+      if (J.paperTear) J.paperTear.group.visible = true;
+      fog.color.setHex(0x3a2510);
+      fog.density = 0.028;
+      if (J.playWhoosh) J.playWhoosh();
+    },
+    onEnterBack: function(){
+      hideAll();
+      if (J.paperTear) J.paperTear.group.visible = true;
+      fog.color.setHex(0x3a2510);
+      fog.density = 0.028;
+    }
+  });
+
+  gsap.fromTo(camera.position,
+    { x: 0, y: 1.5, z: 12 },
+    {
+      x: 0, y: 1, z: 4,
+      scrollTrigger: {
+        trigger: '[data-scene="tear"]',
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.8
+      }
+    }
+  );
+
+  /* ============================================================
+     SCENE 3 — V · VISION
+     ============================================================ */
+  ScrollTrigger.create({
+    trigger: '[data-scene="v"]',
+    start: "top 90%",
+    end: "bottom 10%",
+    onEnter: function(){
+      hideAll();
+      if (J.vision) J.vision.group.visible = true;
+      fog.color.setHex(0x1a1508);
+      fog.density = 0.024;
+      if (J.playWhoosh) J.playWhoosh();
+    },
+    onEnterBack: function(){
+      hideAll();
+      if (J.vision) J.vision.group.visible = true;
+      fog.color.setHex(0x1a1508);
+      fog.density = 0.024;
+    }
+  });
+
+  gsap.fromTo(camera.position,
+    { x: -4, y: 0.5, z: 6 },
+    {
+      x: 4, y: 2.2, z: 12,
+      scrollTrigger: {
+        trigger: '[data-scene="v"]',
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.8
+      }
+    }
+  );
+
+  /* ============================================================
+     SCENE 4 — A · AUTOMATION
+     ============================================================ */
+  ScrollTrigger.create({
+    trigger: '[data-scene="auto"]',
+    start: "top 90%",
+    end: "bottom 10%",
+    onEnter: function(){
+      hideAll();
+      if (J.auto) J.auto.group.visible = true;
+      fog.color.setHex(0x081626);
+      fog.density = 0.024;
+      if (J.playWhoosh) J.playWhoosh();
+    },
+    onEnterBack: function(){
+      hideAll();
+      if (J.auto) J.auto.group.visible = true;
+      fog.color.setHex(0x081626);
+      fog.density = 0.024;
+    }
+  });
+
+  /* Camera flies over the landscape */
+  gsap.fromTo(camera.position,
+    { x: -10, y: 6, z: 12 },
+    {
+      x: 10, y: 6, z: 12,
+      scrollTrigger: {
+        trigger: '[data-scene="auto"]',
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.8
+      }
+    }
+  );
+
+  /* ============================================================
+     SCENE 5 — A · ADVANCEMENT
+     ============================================================ */
+  ScrollTrigger.create({
+    trigger: '[data-scene="adv"]',
+    start: "top 90%",
+    end: "bottom 10%",
+    onEnter: function(){
+      hideAll();
+      if (J.adv) J.adv.group.visible = true;
+      fog.color.setHex(0x14140a);
+      fog.density = 0.024;
+      if (J.playWhoosh) J.playWhoosh();
+    },
+    onEnterBack: function(){
+      hideAll();
+      if (J.adv) J.adv.group.visible = true;
+      fog.color.setHex(0x14140a);
+      fog.density = 0.024;
+    }
+  });
+
+  /* Camera rises vertically through the column */
+  gsap.fromTo(camera.position,
+    { x: 0, y: -8, z: 10 },
+    {
+      x: 0, y: 8, z: 10,
+      scrollTrigger: {
+        trigger: '[data-scene="adv"]',
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.8
+      }
+    }
+  );
+
+  /* ============================================================
+     SCENE 6 — N · NETWORK
+     ============================================================ */
+  ScrollTrigger.create({
+    trigger: '[data-scene="net"]',
+    start: "top 90%",
+    end: "bottom 10%",
+    onEnter: function(){
+      hideAll();
+      if (J.net) J.net.group.visible = true;
+      fog.color.setHex(0x140a26);
+      fog.density = 0.026;
+      if (J.playWhoosh) J.playWhoosh();
+    },
+    onEnterBack: function(){
+      hideAll();
+      if (J.net) J.net.group.visible = true;
+      fog.color.setHex(0x140a26);
+      fog.density = 0.026;
+    }
+  });
+
+  /* Camera pulls back to reveal the web */
+  gsap.fromTo(camera.position,
+    { x: 0, y: 0.5, z: 8 },
+    {
+      x: 0, y: 2.5, z: 20,
+      scrollTrigger: {
+        trigger: '[data-scene="net"]',
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.8
+      }
+    }
+  );
+
+  /* ============================================================
+     SCENE 7 — FINALE
+     ============================================================ */
+  ScrollTrigger.create({
+    trigger: '[data-scene="final"]',
+    start: "top 90%",
+    end: "bottom 10%",
+    onEnter: function(){
+      hideAll();
+      if (J.finale) J.finale.group.visible = true;
+      fog.color.setHex(0x0a0e1a);
+      fog.density = 0.018;
+      if (J.playWhoosh) J.playWhoosh();
+    },
+    onEnterBack: function(){
+      hideAll();
+      if (J.finale) J.finale.group.visible = true;
+      fog.color.setHex(0x0a0e1a);
+      fog.density = 0.018;
+    }
+  });
+
+  /* Camera moves close to finale core */
+  gsap.fromTo(camera.position,
+    { x: 0, y: 3, z: 18 },
+    {
+      x: 0, y: 0.8, z: 8,
+      scrollTrigger: {
+        trigger: '[data-scene="final"]',
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.8
+      }
+    }
+  );
+
+  /* ============================================================
+     SCENE INDICATOR DOTS
+     ============================================================ */
+  var indicator = document.getElementById("sceneIndicator");
+  if (!indicator){
+    indicator = document.createElement("div");
+    indicator.id = "sceneIndicator";
+    document.body.appendChild(indicator);
+  }
+
+  var sceneKeys = ["old", "tear", "v", "auto", "adv", "net", "final"];
+  var dotElements = [];
+
+  sceneKeys.forEach(function(key, i){
+    var dot = document.createElement("div");
+    dot.title = key.toUpperCase();
+    dot.addEventListener("click", function(){
+      var el = document.querySelector('[data-scene="' + key + '"]');
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    });
+    indicator.appendChild(dot);
+    dotElements.push(dot);
+  });
+
+  sceneKeys.forEach(function(key, i){
+    ScrollTrigger.create({
+      trigger: '[data-scene="' + key + '"]',
+      start: "top 70%",
+      end: "bottom 30%",
+      onToggle: function(self){
+        if (self.isActive){
+          dotElements.forEach(function(d, di){
+            d.classList.toggle("active", di === i);
+          });
+        }
+      }
+    });
+  });
+
+  console.log("✅ Scroll choreography loaded — 7 scenes");
+})();
+   </script><script>
+/* ============================================================
+   TEXT ANIMATIONS
+   Eyebrow · Big letter · Title words · Description · Finale
+   ============================================================ */
+(function initTextAnimations(){
+  if (!window._J || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ============================================================
+     EYEBROW (small scene number)
+     ============================================================ */
+  function animateEyebrow(section){
+    var eyebrow = section.querySelector(".scene-num");
+    if (!eyebrow) return;
+
+    gsap.set(eyebrow, { opacity: 0, y: 24 });
+    gsap.to(eyebrow, {
+      opacity: 1,
+      y: 0,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 68%",
+        once: true
+      }
+    });
+  }
+
+  /* ============================================================
+     BIG LETTER
+     Zooms in from huge + blur → sharp + rotation
+     ============================================================ */
+  function animateBigLetter(section){
+    var letter = section.querySelector(".scene-huge .letter");
+    if (!letter) return;
+
+    gsap.set(letter, {
+      opacity: 0,
+      scale: 5,
+      filter: "blur(40px)",
+      rotationY: -240,
+      rotationZ: 15
+    });
+
+    gsap.to(letter, {
+      opacity: 1,
+      scale: 1,
+      filter: "blur(0px)",
+      rotationY: 0,
+      rotationZ: 0,
+      duration: 2.2,
+      ease: "power4.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 60%",
+        once: true
+      }
+    });
+
+    /* Glow pulse after landing */
+    gsap.to(letter, {
+      textShadow: "0 0 100px rgba(255,212,0,.9), 0 0 200px rgba(255,212,0,.5)",
+      duration: 2.4,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      delay: 2.2,
+      scrollTrigger: {
+        trigger: section,
+        start: "top 60%",
+        once: true
+      }
+    });
+  }
+
+  /* ============================================================
+     TITLE — word by word reveal
+     ============================================================ */
+  function animateTitle(section){
+    var title = section.querySelector(".scene-title");
+    if (!title) return;
+
+    var html = title.innerHTML;
+    var words = html.split(/\s+/);
+    title.innerHTML = words.map(function(w){
+      return '<span class="word-wrap" style="display:inline-block;overflow:hidden;vertical-align:top"><span class="word" style="display:inline-block;opacity:0;transform:translateY(70px) rotateX(90deg);filter:blur(14px);transform-origin:bottom center">' + w + '</span></span>';
+    }).join(" ");
+
+    var wordEls = title.querySelectorAll(".word");
+
+    gsap.to(wordEls, {
+      opacity: 1,
+      y: 0,
+      rotationX: 0,
+      filter: "blur(0px)",
+      duration: 1.4,
+      stagger: 0.08,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 56%",
+        once: true
+      }
+    });
+  }
+
+  /* ============================================================
+     DESCRIPTION
+     ============================================================ */
+  function animateDesc(section){
+    var desc = section.querySelector(".scene-desc");
+    if (!desc) return;
+
+    gsap.set(desc, { opacity: 0, y: 44, filter: "blur(10px)" });
+
+    gsap.to(desc, {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      duration: 1.5,
+      delay: 0.7,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 52%",
+        once: true
+      }
+    });
+  }
+
+  /* ============================================================
+     FINALE — GO DIGITAL cascade
+     ============================================================ */
+  function animateFinale(section){
+    if (!section) return;
+
+    var line1 = section.querySelector(".finale-line-1");
+    var line2 = section.querySelector(".finale-line-2");
+    var line3 = section.querySelector(".finale-line-3");
+    var buttons = section.querySelectorAll(".finale-buttons .btn");
+
+    if (line1){
+      gsap.set(line1, {
+        opacity: 0,
+        scale: 4,
+        filter: "blur(40px)",
+        rotationY: 180
+      });
+
+      gsap.to(line1, {
+        opacity: 1,
+        scale: 1,
+        filter: "blur(0px)",
+        rotationY: 0,
+        duration: 2.4,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 48%",
+          once: true
+        }
+      });
+
+      gsap.to(line1, {
+        textShadow: "0 0 80px rgba(255,212,0,.9), 0 0 180px rgba(255,212,0,.5)",
+        duration: 2.8,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: 2.4,
+        scrollTrigger: {
+          trigger: section,
+          start: "top 48%",
+          once: true
+        }
+      });
+    }
+
+    if (line2){
+      gsap.set(line2, { opacity: 0, y: 40, filter: "blur(8px)" });
+      gsap.to(line2, {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        duration: 1.4,
+        delay: 1.6,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 48%",
+          once: true
+        }
+      });
+    }
+
+    if (line3){
+      gsap.set(line3, {
+        opacity: 0,
+        y: 30,
+        letterSpacing: "20px"
+      });
+      gsap.to(line3, {
+        opacity: 1,
+        y: 0,
+        letterSpacing: "6px",
+        duration: 1.6,
+        delay: 2.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 48%",
+          once: true
+        }
+      });
+    }
+
+    if (buttons.length){
+      gsap.set(buttons, {
+        opacity: 0,
+        y: 40,
+        scale: 0.85,
+        filter: "blur(10px)"
+      });
+      gsap.to(buttons, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        filter: "blur(0px)",
+        duration: 1.2,
+        stagger: 0.2,
+        delay: 2.9,
+        ease: "back.out(1.6)",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 48%",
+          once: true
+        }
+      });
+    }
+  }
+
+  /* ============================================================
+     APPLY TO ALL SECTIONS
+     ============================================================ */
+  var sections = document.querySelectorAll(".scene-text");
+  sections.forEach(function(sec){
+    animateEyebrow(sec);
+    animateBigLetter(sec);
+    animateTitle(sec);
+    animateDesc(sec);
+  });
+
+  var finalSection = document.querySelector('[data-scene="final"]');
+  if (finalSection) animateFinale(finalSection);
+
+  /* ============================================================
+     SCROLL HINT FADE OUT
+     ============================================================ */
+  var hint = document.querySelector(".scroll-hint");
+  if (hint){
+    gsap.to(hint, {
+      opacity: 0,
+      y: 20,
+      scrollTrigger: {
+        trigger: '[data-scene="old"]',
+        start: "top top",
+        end: "+=300",
+        scrub: 1
+      }
+    });
+  }
+
+  /* ============================================================
+     HIGHLIGHT TEXT GLOW
+     ============================================================ */
+  gsap.utils.toArray(".hl").forEach(function(el){
+    gsap.fromTo(el,
+      { textShadow: "0 0 0 rgba(255,212,0,0)" },
+      {
+        textShadow: "0 0 24px rgba(255,212,0,.7)",
+        duration: 1.6,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      }
+    );
+  });
+
+  console.log("✅ Text animations loaded");
+})();
+   </script><script>
+/* ============================================================
+   SOUND SYSTEM
+   Music from Supabase + whoosh + click + ambient hum
+   ============================================================ */
+(function initSound(){
+  if (!window._J) return;
+  var J = window._J;
+
+  var MUSIC_URL = "https://xvtxpllmfwgnlrffbcqz.supabase.co/storage/v1/object/public/assets/sigmamusicart-sad-emotional-piano-background-music-462089.mp3";
+
+  var audioCtx = null;
+  var musicEl = null;
+  var ambientNodes = null;
+  var soundEnabled = false;
+
+  /* ---------- PLAY MUSIC (called after user taps loading) ---------- */
+  window.playMusic = function(){
+    if (soundEnabled) return;
+    soundEnabled = true;
+
+    if (!musicEl){
+      musicEl = new Audio(MUSIC_URL);
+      musicEl.loop = true;
+      musicEl.volume = 0.32;
+      musicEl.crossOrigin = "anonymous";
+      musicEl.preload = "auto";
+    }
+
+    musicEl.play().then(function(){
+      updateSoundButton();
+    }).catch(function(err){
+      console.warn("Music play failed:", err);
+      soundEnabled = false;
+      updateSoundButton();
+    });
+
+    startAmbient();
+  };
+
+  /* ---------- TOGGLE ---------- */
+  window.toggleSound = function(){
+    if (!musicEl){
+      window.playMusic();
+      return;
+    }
+
+    if (soundEnabled){
+      soundEnabled = false;
+      musicEl.pause();
+      if (ambientNodes && audioCtx){
+        ambientNodes.gain1.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.4);
+        ambientNodes.gain2.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.4);
+      }
+    } else {
+      soundEnabled = true;
+      musicEl.play().catch(function(){});
+      if (ambientNodes && audioCtx){
+        if (audioCtx.state === "suspended") audioCtx.resume();
+        ambientNodes.gain1.gain.linearRampToValueAtTime(0.03, audioCtx.currentTime + 0.5);
+        ambientNodes.gain2.gain.linearRampToValueAtTime(0.02, audioCtx.currentTime + 0.5);
+      }
+    }
+    updateSoundButton();
+  };
+
+  function updateSoundButton(){
+    var btn = document.getElementById("soundToggle");
+    if (!btn) return;
+    btn.textContent = soundEnabled ? "🔊" : "🔇";
+    btn.classList.toggle("playing", soundEnabled);
+  }
+
+  /* ---------- WIRE UP SOUND BUTTON ---------- */
+  document.addEventListener("DOMContentLoaded", function(){
+    var btn = document.getElementById("soundToggle");
+    if (btn){
+      btn.addEventListener("click", function(e){
+        e.stopPropagation();
+        window.toggleSound();
+      });
+    }
+  });
+
+  /* ---------- AMBIENT HUM ---------- */
+  function startAmbient(){
+    if (ambientNodes){
+      if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+      return;
+    }
+    try {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+      var osc1 = audioCtx.createOscillator();
+      osc1.type = "sine";
+      osc1.frequency.value = 55;
+      var gain1 = audioCtx.createGain();
+      gain1.gain.value = 0.0;
+      osc1.connect(gain1);
+      gain1.connect(audioCtx.destination);
+      osc1.start();
+
+      var osc2 = audioCtx.createOscillator();
+      osc2.type = "sine";
+      osc2.frequency.value = 82.5;
+      var gain2 = audioCtx.createGain();
+      gain2.gain.value = 0.0;
+      osc2.connect(gain2);
+      gain2.connect(audioCtx.destination);
+      osc2.start();
+
+      ambientNodes = { osc1: osc1, gain1: gain1, osc2: osc2, gain2: gain2 };
+
+      /* Fade in */
+      gain1.gain.linearRampToValueAtTime(0.03, audioCtx.currentTime + 1.5);
+      gain2.gain.linearRampToValueAtTime(0.02, audioCtx.currentTime + 1.5);
+    } catch (e){
+      console.warn("Ambient audio unavailable");
+    }
+  }
+
+  /* ---------- WHOOSH on scene change ---------- */
+  J.playWhoosh = function(){
+    if (!soundEnabled || !audioCtx) return;
+    try {
+      var osc = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+      var filter = audioCtx.createBiquadFilter();
+
+      osc.type = "sawtooth";
+      osc.frequency.setValueAtTime(340, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(60, audioCtx.currentTime + 0.9);
+
+      filter.type = "lowpass";
+      filter.frequency.value = 1000;
+      filter.Q.value = 6;
+
+      gain.gain.setValueAtTime(0, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.14, audioCtx.currentTime + 0.06);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 1.1);
+    } catch (e){}
+  };
+
+  /* ---------- CLICK ---------- */
+  J.playClick = function(){
+    if (!soundEnabled || !audioCtx) return;
+    try {
+      var osc = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.16);
+    } catch (e){}
+  };
+
+  /* Wire click sounds */
+  document.addEventListener("DOMContentLoaded", function(){
+    document.querySelectorAll(".btn, .nav-cta").forEach(function(b){
+      b.addEventListener("click", function(){ J.playClick(); });
+    });
+  });
+
+  console.log("✅ Sound system ready");
+})();
+   </script>
