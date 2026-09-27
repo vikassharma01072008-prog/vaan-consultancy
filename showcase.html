@@ -2887,4 +2887,622 @@ window.addEventListener("scroll", function(){
 
   console.log("✅ Text animations loaded");
 })();
-  </script>
+  </script><script>
+/* ============================================================
+   SOUND SYSTEM
+   Music (Supabase MP3) + whoosh + ambient hum
+   ============================================================ */
+(function initSound(){
+  if (!window._V) return;
+
+  var MUSIC_URL = "https://xvtxpllmfwgnlrffbcqz.supabase.co/storage/v1/object/public/assets/sigmamusicart-sad-emotional-piano-background-music-462089.mp3";
+
+  var audioCtx = null;
+  var musicEl = null;
+  var ambientNodes = null;
+  var soundEnabled = false;
+
+  /* ---------- MUSIC ---------- */
+  window.playMusic = function(){
+    if (soundEnabled) return;
+    soundEnabled = true;
+
+    /* Create audio element if not there */
+    if (!musicEl){
+      musicEl = new Audio(MUSIC_URL);
+      musicEl.loop = true;
+      musicEl.volume = 0.35;
+    }
+
+    musicEl.play().then(function(){
+      updateSoundButton();
+    }).catch(function(err){
+      console.warn("Music play failed:", err);
+    });
+
+    /* Start ambient layer */
+    startAmbient();
+  };
+
+  window.toggleSound = function(){
+    if (!musicEl){
+      window.playMusic();
+      return;
+    }
+
+    if (soundEnabled){
+      /* Mute */
+      soundEnabled = false;
+      musicEl.pause();
+      if (ambientNodes){
+        ambientNodes.gain1.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.4);
+        ambientNodes.gain2.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.4);
+      }
+    } else {
+      /* Unmute */
+      soundEnabled = true;
+      musicEl.play().catch(function(){});
+      if (ambientNodes && audioCtx){
+        ambientNodes.gain1.gain.linearRampToValueAtTime(0.03, audioCtx.currentTime + 0.5);
+        ambientNodes.gain2.gain.linearRampToValueAtTime(0.02, audioCtx.currentTime + 0.5);
+      }
+    }
+    updateSoundButton();
+  };
+
+  function updateSoundButton(){
+    var btn = document.getElementById("soundToggle");
+    if (!btn) return;
+    btn.textContent = soundEnabled ? "🔊" : "🔇";
+    btn.classList.toggle("playing", soundEnabled);
+  }
+
+  /* Wire up sound toggle button */
+  document.addEventListener("DOMContentLoaded", function(){
+    var btn = document.getElementById("soundToggle");
+    if (btn){
+      btn.addEventListener("click", function(e){
+        e.stopPropagation();
+        window.toggleSound();
+      });
+    }
+  });
+
+  /* ---------- AMBIENT HUM (Web Audio) ---------- */
+  function startAmbient(){
+    if (ambientNodes) {
+      if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+      return;
+    }
+    try {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+      var osc1 = audioCtx.createOscillator();
+      osc1.type = "sine";
+      osc1.frequency.value = 55;
+
+      var gain1 = audioCtx.createGain();
+      gain1.gain.value = 0.0;
+
+      osc1.connect(gain1);
+      gain1.connect(audioCtx.destination);
+      osc1.start();
+
+      var osc2 = audioCtx.createOscillator();
+      osc2.type = "sine";
+      osc2.frequency.value = 82.5;
+      var gain2 = audioCtx.createGain();
+      gain2.gain.value = 0.0;
+      osc2.connect(gain2);
+      gain2.connect(audioCtx.destination);
+      osc2.start();
+
+      ambientNodes = { osc1: osc1, gain1: gain1, osc2: osc2, gain2: gain2 };
+
+      /* Fade in ambient */
+      gain1.gain.linearRampToValueAtTime(0.03, audioCtx.currentTime + 1.5);
+      gain2.gain.linearRampToValueAtTime(0.02, audioCtx.currentTime + 1.5);
+    } catch (e){
+      console.warn("Ambient audio unavailable");
+    }
+  }
+
+  /* ---------- WHOOSH on scene change ---------- */
+  window._V.playWhoosh = function(sceneKey){
+    if (!soundEnabled || !audioCtx) return;
+    try {
+      var osc = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+      var filter = audioCtx.createBiquadFilter();
+
+      osc.type = "sawtooth";
+      osc.frequency.setValueAtTime(320, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(60, audioCtx.currentTime + 0.9);
+
+      filter.type = "lowpass";
+      filter.frequency.value = 1000;
+      filter.Q.value = 6;
+
+      gain.gain.setValueAtTime(0, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.14, audioCtx.currentTime + 0.06);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 1.1);
+    } catch (e){}
+  };
+
+  /* ---------- CLICK on buttons ---------- */
+  window._V.playClick = function(){
+    if (!soundEnabled || !audioCtx) return;
+    try {
+      var osc = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.16);
+    } catch (e){}
+  };
+
+  /* Wire clicks to buttons */
+  document.addEventListener("DOMContentLoaded", function(){
+    document.querySelectorAll(".btn, .nav-cta").forEach(function(b){
+      b.addEventListener("click", function(){ window._V.playClick(); });
+    });
+  });
+
+  console.log("✅ Sound system loaded");
+})();
+    </script><script>
+/* ============================================================
+   CURSOR MAGNETIC EFFECTS + INTERACTIONS
+   ============================================================ */
+(function initInteractions(){
+  if (!window._V) return;
+
+  /* Skip on mobile */
+  if (window.innerWidth <= 900) return;
+
+  /* ---------- MAGNETIC BUTTONS ---------- */
+  /* Buttons gently pull toward cursor when hovered */
+  var magneticBtns = document.querySelectorAll(".btn, .nav-cta");
+  magneticBtns.forEach(function(btn){
+    btn.addEventListener("mousemove", function(e){
+      var rect = btn.getBoundingClientRect();
+      var x = e.clientX - rect.left - rect.width / 2;
+      var y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = "translate(" + (x * 0.15) + "px, " + (y * 0.2) + "px)";
+      btn.style.transition = "transform 0.1s ease-out";
+    });
+    btn.addEventListener("mouseleave", function(){
+      btn.style.transform = "";
+      btn.style.transition = "transform 0.4s cubic-bezier(.2,.9,.3,1.2)";
+    });
+  });
+
+  /* ---------- CURSOR TEXT DETECTION ---------- */
+  /* Cursor shrinks when hovering text (feels cinematic) */
+  var cursor = document.getElementById("customCursor");
+  if (!cursor) return;
+
+  document.addEventListener("mouseover", function(e){
+    var target = e.target;
+    /* On headings */
+    if (target.closest("h1, h2, h3, .scene-title, .scene-huge, .brand")){
+      cursor.classList.add("hover");
+    }
+    /* On links / buttons */
+    if (target.closest("a, button, .btn, .nav-cta, .interactive, #soundToggle")){
+      cursor.classList.add("hover");
+    }
+  });
+
+  document.addEventListener("mouseout", function(e){
+    var target = e.target;
+    if (target.closest("h1, h2, h3, .scene-title, .scene-huge, .brand, a, button, .btn, .nav-cta, .interactive, #soundToggle")){
+      setTimeout(function(){
+        /* Only remove hover if we're not now over another interactive */
+        var el = document.elementFromPoint(e.clientX || 0, e.clientY || 0);
+        if (!el || !el.closest("h1, h2, h3, .scene-title, .scene-huge, .brand, a, button, .btn, .nav-cta, .interactive, #soundToggle")){
+          cursor.classList.remove("hover");
+        }
+      }, 30);
+    }
+  });
+
+  /* ---------- CURSOR TRAIL PARTICLES (subtle) ---------- */
+  var trailParticles = [];
+  var maxTrail = 6;
+  var trailIndex = 0;
+
+  for (var i = 0; i < maxTrail; i++){
+    var tp = document.createElement("div");
+    tp.style.cssText = "position:fixed;width:6px;height:6px;border-radius:50%;background:rgba(255,212,0,.4);pointer-events:none;z-index:99997;transform:translate(-50%,-50%);transition:opacity .4s,transform .4s;opacity:0";
+    document.body.appendChild(tp);
+    trailParticles.push(tp);
+  }
+
+  var lastTrailTime = 0;
+  document.addEventListener("mousemove", function(e){
+    var now = Date.now();
+    if (now - lastTrailTime > 80){
+      lastTrailTime = now;
+      var tp = trailParticles[trailIndex];
+      trailIndex = (trailIndex + 1) % maxTrail;
+      tp.style.left = e.clientX + "px";
+      tp.style.top = e.clientY + "px";
+      tp.style.opacity = "1";
+      setTimeout(function(){
+        tp.style.opacity = "0";
+        tp.style.transform = "translate(-50%,-50%) scale(0.3)";
+      }, 50);
+    }
+  });
+
+  /* ---------- SCENE INDICATOR DOTS HOVER ---------- */
+  var indicator = document.getElementById("sceneIndicator");
+  if (indicator){
+    indicator.querySelectorAll("div").forEach(function(dot){
+      dot.addEventListener("mouseenter", function(){
+        cursor.classList.add("hover");
+      });
+      dot.addEventListener("mouseleave", function(){
+        cursor.classList.remove("hover");
+      });
+    });
+  }
+
+  /* ---------- KEYBOARD NAVIGATION ---------- */
+  /* Arrow keys / Page Up-Down jump between scenes */
+  var scenes = ["old", "v", "auto", "adv", "net", "final"];
+  var currentSceneIdx = 0;
+
+  document.addEventListener("keydown", function(e){
+    if (e.key === "ArrowDown" || e.key === "PageDown"){
+      e.preventDefault();
+      currentSceneIdx = Math.min(scenes.length - 1, currentSceneIdx + 1);
+      var el = document.querySelector('[data-scene="' + scenes[currentSceneIdx] + '"]');
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+    if (e.key === "ArrowUp" || e.key === "PageUp"){
+      e.preventDefault();
+      currentSceneIdx = Math.max(0, currentSceneIdx - 1);
+      var el = document.querySelector('[data-scene="' + scenes[currentSceneIdx] + '"]');
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+
+  console.log("✅ Interactions loaded");
+})();
+    </script><script>
+/* ============================================================
+   MOBILE PERFORMANCE + FALLBACK
+   Auto-tune effects based on device capability
+   ============================================================ */
+(function mobilePerformance(){
+  if (!window._V) return;
+  var V = window._V;
+
+  /* ---------- DETECT DEVICE ---------- */
+  var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+  var isSmall = window.innerWidth < 600;
+  var isLowCPU = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+  var isLowMemory = navigator.deviceMemory && navigator.deviceMemory <= 2;
+  var isSlowConnection = navigator.connection && (navigator.connection.effectiveType === "2g" || navigator.connection.effectiveType === "slow-2g");
+
+  /* Mark as low-end */
+  if (isMobile && (isSmall || isLowCPU || isLowMemory || isSlowConnection)){
+    V.lowEnd = true;
+    console.log("⚡ Low-end mode active");
+  }
+
+  /* ---------- REDUCE PIXEL RATIO ---------- */
+  if (V.lowEnd && V.renderer){
+    V.renderer.setPixelRatio(1);
+  }
+
+  /* ---------- DISABLE BLOOM ON LOW-END ---------- */
+  if (V.lowEnd && V.composer){
+    /* Remove bloom pass */
+    V.composer.passes = V.composer.passes.filter(function(p){
+      return !(p instanceof THREE.UnrealBloomPass);
+    });
+    V.composer = null; /* Force direct renderer */
+    console.log("Bloom disabled for performance");
+  }
+
+  /* ---------- REDUCE PARTICLE COUNTS ---------- */
+  if (V.lowEnd){
+    /* Old World dust */
+    if (V.oldWorld && V.oldWorld.dust){
+      V.oldWorld.dust.geometry.setDrawRange(0, 80);
+    }
+    /* Vision burst */
+    if (V.vision && V.vision.burst){
+      V.vision.burst.geometry.setDrawRange(0, 120);
+    }
+    /* Automation flow */
+    if (V.auto && V.auto.flow){
+      V.auto.flow.geometry.setDrawRange(0, 40);
+    }
+    /* Advancement rising */
+    if (V.adv && V.adv.rise){
+      V.adv.rise.geometry.setDrawRange(0, 80);
+    }
+    /* Network travel */
+    if (V.net && V.net.travel){
+      V.net.travel.geometry.setDrawRange(0, 30);
+    }
+    /* Finale cloud */
+    if (V.finale && V.finale.cloud){
+      V.finale.cloud.geometry.setDrawRange(0, 200);
+    }
+  }
+
+  /* ---------- RESPECT "REDUCED MOTION" PREFERENCE ---------- */
+  var prefersReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReducedMotion){
+    document.documentElement.style.setProperty("--motion-reduce", "1");
+    /* Slow down animations */
+    if (typeof gsap !== "undefined"){
+      gsap.globalTimeline.timeScale(0.5);
+    }
+    console.log("🎬 Reduced motion preference detected");
+  }
+
+  /* ---------- TAB VISIBILITY PAUSE ---------- */
+  /* Pause music when tab is hidden (saves battery + data) */
+  document.addEventListener("visibilitychange", function(){
+    var musicEls = document.querySelectorAll("audio");
+    if (document.hidden){
+      musicEls.forEach(function(m){ m.pause(); });
+    } else {
+      /* Resume if sound was on */
+      var soundBtn = document.getElementById("soundToggle");
+      if (soundBtn && soundBtn.classList.contains("playing")){
+        musicEls.forEach(function(m){ m.play().catch(function(){}); });
+      }
+    }
+  });
+
+  /* ---------- FPS MONITOR (auto-reduce if slow) ---------- */
+  var frameCount = 0;
+  var lastTime = performance.now();
+  var fpsCheckDone = false;
+
+  function monitorFPS(){
+    if (fpsCheckDone) return;
+    frameCount++;
+    var now = performance.now();
+    if (now - lastTime >= 1000){
+      var fps = frameCount;
+      frameCount = 0;
+      lastTime = now;
+      if (fps < 24 && !V.lowEnd){
+        V.lowEnd = true;
+        console.log("⚡ Low FPS detected (" + fps + ") — switching to performance mode");
+        if (V.renderer) V.renderer.setPixelRatio(1);
+        if (V.composer) V.composer = null;
+      }
+      /* Only check first 5 seconds */
+      if (performance.now() > 6000) fpsCheckDone = true;
+    }
+    requestAnimationFrame(monitorFPS);
+  }
+  monitorFPS();
+
+  console.log("✅ Performance tuning complete");
+})();
+    </script><script>
+/* ============================================================
+   LOADING SCREEN POLISH + INTRO SEQUENCE
+   ============================================================ */
+(function loadingPolish(){
+  if (!window._V) return;
+  var V = window._V;
+
+  var screen = document.getElementById("loadingScreen");
+  var hint = screen ? screen.querySelector(".loading-hint") : null;
+
+  /* ---------- WAIT FOR 3D SCENE TO BE READY ---------- */
+  var startTime = Date.now();
+  var minLoadTime = 2800; /* Minimum 2.8s so user sees the intro */
+
+  /* ---------- CHANGE HINT AFTER READY ---------- */
+  setTimeout(function(){
+    if (hint) hint.textContent = "Tap to Begin";
+  }, 1500);
+
+  /* ---------- START EXPERIENCE ---------- */
+  window.startExperience = function(){
+    if (V.entered) return;
+    V.entered = true;
+
+    /* Hide loading */
+    if (screen){
+      screen.style.opacity = "0";
+      screen.style.visibility = "hidden";
+      screen.style.pointerEvents = "none";
+      setTimeout(function(){ screen.style.display = "none"; }, 1000);
+    }
+
+    /* Play music */
+    if (typeof window.playMusic === "function"){
+      window.playMusic();
+    }
+
+    /* Force show scene 1 initially */
+    if (V.oldWorld && V.oldWorld.group){
+      V.oldWorld.group.visible = true;
+    }
+    if (V.scene && V.scene.fog){
+      V.scene.fog.color.setHex(0x2a1f12);
+      V.scene.fog.density = 0.032;
+    }
+
+    /* Intro camera move — dolly in */
+    if (V.camera && typeof gsap !== "undefined"){
+      gsap.fromTo(V.camera.position,
+        { x: 0, y: 4, z: 24 },
+        { x: 0, y: 1.5, z: 14, duration: 3.5, ease: "power3.out" }
+      );
+    }
+
+    /* Fade in nav and sound toggle */
+    var nav = document.getElementById("mainNav");
+    var sndBtn = document.getElementById("soundToggle");
+    if (nav){
+      nav.style.opacity = "0";
+      nav.style.transition = "opacity 1s ease";
+      setTimeout(function(){ nav.style.opacity = "1"; }, 600);
+    }
+    if (sndBtn){
+      sndBtn.style.opacity = "0";
+      sndBtn.style.transition = "opacity 1s ease";
+      setTimeout(function(){ sndBtn.style.opacity = "1"; }, 800);
+    }
+
+    /* Intro title fade */
+    setTimeout(function(){
+      var firstScene = document.querySelector('[data-scene="old"]');
+      if (firstScene){
+        var eyebrow = firstScene.querySelector(".scene-num");
+        if (eyebrow && typeof gsap !== "undefined"){
+          gsap.fromTo(eyebrow, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1.4, ease: "power3.out" });
+        }
+      }
+    }, 1200);
+
+    console.log("🎬 Experience started");
+  };
+
+  /* ---------- WIRE UP ---------- */
+  if (screen){
+    screen.addEventListener("click", window.startExperience);
+    screen.addEventListener("touchstart", function(e){
+      e.preventDefault();
+      window.startExperience();
+    }, { passive: false });
+  }
+
+  /* Also allow Enter/Space keys to start */
+  document.addEventListener("keydown", function(e){
+    if ((e.key === "Enter" || e.key === " ") && !V.entered){
+      e.preventDefault();
+      window.startExperience();
+    }
+  });
+
+  /* ---------- AUTO-HIDE FALLBACK (safety) ---------- */
+  /* If somehow user doesn't tap, auto-show after 12s */
+  setTimeout(function(){
+    if (!V.entered && screen && screen.style.display !== "none"){
+      console.log("⏱️ Auto-starting after 12s");
+      window.startExperience();
+    }
+  }, 12000);
+
+  /* ---------- INITIAL SCROLL POSITION ---------- */
+  if (window.scrollY !== 0){
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
+
+  console.log("✅ Loading polish complete");
+})();
+    </script><script>
+/* ============================================================
+   MASTER INIT — Ensures everything runs in order
+   ============================================================ */
+(function masterInit(){
+  if (!window._V) return;
+
+  /* ---------- LOG WHAT LOADED ---------- */
+  window.addEventListener("load", function(){
+    var modules = {
+      "3D Core": !!window._V.renderer,
+      "Old World": !!(window._V.oldWorld && window._V.oldWorld.group),
+      "Vision": !!(window._V.vision && window._V.vision.group),
+      "Automation": !!(window._V.auto && window._V.auto.group),
+      "Advancement": !!(window._V.adv && window._V.adv.group),
+      "Network": !!(window._V.net && window._V.net.group),
+      "Finale": !!(window._V.finale && window._V.finale.group),
+      "Sound": typeof window.playMusic === "function",
+      "Text Anims": typeof gsap !== "undefined",
+      "Scroll Trigger": typeof ScrollTrigger !== "undefined"
+    };
+
+    console.log("===== VAAN SHOWCASE — MODULE STATUS =====");
+    Object.keys(modules).forEach(function(key){
+      console.log((modules[key] ? "✅" : "❌") + " " + key);
+    });
+    console.log("Device mode:", window._V.lowEnd ? "LOW-END" : "FULL");
+    console.log("=========================================");
+  });
+
+  /* ---------- GLOBAL ERROR HANDLER ---------- */
+  window.addEventListener("error", function(e){
+    console.error("⚠️ Error:", e.message);
+  });
+
+  /* ---------- PREVENT PAGE JUMP ON SCROLL (smooth anchor) ---------- */
+  document.addEventListener("click", function(e){
+    var link = e.target.closest("a[href^='#']");
+    if (link){
+      e.preventDefault();
+      var target = document.querySelector(link.getAttribute("href"));
+      if (target) target.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+
+  /* ---------- SCROLL RESTORATION OFF ---------- */
+  if ("scrollRestoration" in window.history){
+    window.history.scrollRestoration = "manual";
+  }
+
+  /* ---------- SMOOTH INITIAL RESET ---------- */
+  window.addEventListener("beforeunload", function(){
+    window.scrollTo(0, 0);
+  });
+
+  console.log("✅ Master init complete — VAAN Showcase ready");
+})();
+
+/* ============================================================
+   SAFETY: Ensure GSAP ScrollTrigger refreshes after images/fonts
+   ============================================================ */
+window.addEventListener("load", function(){
+  if (typeof ScrollTrigger !== "undefined"){
+    setTimeout(function(){
+      ScrollTrigger.refresh();
+      console.log("🔄 ScrollTrigger refreshed");
+    }, 500);
+  }
+});
+
+/* ============================================================
+   FALLBACK: If Three.js fails to load (network issue)
+   ============================================================ */
+setTimeout(function(){
+  if (!window._V || !window._V.renderer){
+    console.warn("Three.js failed to load — showing static fallback");
+    var screen = document.getElementById("loadingScreen");
+    if (screen){
+      var hint = screen.querySelector(".loading-hint");
+      if (hint) hint.textContent = "Tap to continue";
+    }
+  }
+}, 8000);
+</script>
+
+</body>
+  </html>
