@@ -2101,4 +2101,197 @@ window.toggleSound = function(){
   console.log("✅ Scroll choreography loaded");
 
 })();
+</script><script>
+/* ============================================================
+   SOUND SYSTEM (Web Audio API — no external files)
+   Ambient hum + whoosh on scene change + click on button
+   ============================================================ */
+(function initSound(){
+  var audioCtx = null;
+  var ambientOsc = null;
+  var ambientGain = null;
+  var initialized = false;
+
+  function init(){
+    if (initialized) return;
+    try {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      initialized = true;
+      startAmbient();
+    } catch (e){
+      console.warn("Audio not supported");
+    }
+  }
+
+  /* ---------- AMBIENT HUM (very subtle) ---------- */
+  function startAmbient(){
+    if (!audioCtx) return;
+    ambientOsc = audioCtx.createOscillator();
+    ambientGain = audioCtx.createGain();
+
+    ambientOsc.type = "sine";
+    ambientOsc.frequency.value = 55; /* low hum */
+    ambientGain.gain.value = 0.0;
+
+    /* Add a second oscillator for richness */
+    var osc2 = audioCtx.createOscillator();
+    osc2.type = "sine";
+    osc2.frequency.value = 82.5;
+    var gain2 = audioCtx.createGain();
+    gain2.gain.value = 0.0;
+
+    ambientOsc.connect(ambientGain);
+    ambientGain.connect(audioCtx.destination);
+
+    osc2.connect(gain2);
+    gain2.connect(audioCtx.destination);
+
+    ambientOsc.start();
+    osc2.start();
+
+    /* Store for toggling */
+    window._ambientNodes = {
+      osc1: ambientOsc,
+      gain1: ambientGain,
+      osc2: osc2,
+      gain2: gain2
+    };
+  }
+
+  /* ---------- WHOOSH SOUND (on scene change) ---------- */
+  window.playWhoosh = function(){
+    if (!audioCtx || !window._soundEnabled) return;
+    try {
+      var osc = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+      var filter = audioCtx.createBiquadFilter();
+
+      osc.type = "sawtooth";
+      osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(60, audioCtx.currentTime + 0.8);
+
+      filter.type = "lowpass";
+      filter.frequency.value = 1200;
+      filter.Q.value = 5;
+
+      gain.gain.setValueAtTime(0, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.15, audioCtx.currentTime + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.9);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 1);
+    } catch (e){}
+  };
+
+  /* ---------- CLICK SOUND (on button) ---------- */
+  window.playClick = function(){
+    if (!audioCtx || !window._soundEnabled) return;
+    try {
+      var osc = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.08);
+
+      gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.15);
+    } catch (e){}
+  };
+
+  /* ---------- TOGGLE ---------- */
+  var _origToggle = window.toggleSound;
+  window.toggleSound = function(){
+    if (!initialized) init();
+
+    /* Resume audio context (browser requires user gesture) */
+    if (audioCtx && audioCtx.state === "suspended"){
+      audioCtx.resume();
+    }
+
+    window._soundEnabled = !window._soundEnabled;
+    var btn = document.getElementById("soundToggle");
+    if (btn){
+      btn.textContent = window._soundEnabled ? "🔊" : "🔇";
+      btn.classList.toggle("playing", window._soundEnabled);
+    }
+
+    /* Fade ambient in/out */
+    if (window._ambientNodes){
+      var targetVol = window._soundEnabled ? 0.04 : 0;
+      var nodes = window._ambientNodes;
+      if (audioCtx && nodes.gain1 && nodes.gain2){
+        nodes.gain1.gain.linearRampToValueAtTime(targetVol, audioCtx.currentTime + 0.6);
+        nodes.gain2.gain.linearRampToValueAtTime(targetVol * 0.6, audioCtx.currentTime + 0.6);
+      }
+    }
+  };
+
+  /* ---------- ATTACH CLICK SOUND TO BUTTONS ---------- */
+  document.addEventListener("DOMContentLoaded", function(){
+    var btns = document.querySelectorAll(".btn, .nav-cta, #soundToggle");
+    btns.forEach(function(b){
+      b.addEventListener("click", function(){ window.playClick(); });
+    });
+  });
+
+  /* ---------- WHOOSH ON SCENE CHANGE ---------- */
+  if (typeof ScrollTrigger !== "undefined"){
+    ["old", "v", "auto", "adv", "net", "final"].forEach(function(scene){
+      ScrollTrigger.create({
+        trigger: '[data-scene="' + scene + '"]',
+        start: "top 70%",
+        onEnter: function(){ window.playWhoosh(); }
+      });
+    });
+  }
+})();
+
+/* ============================================================
+   MOBILE PERFORMANCE FALLBACK
+   If device is slow, reduce effects
+   ============================================================ */
+(function mobileFallback(){
+  if (!window._VAAN) return;
+  var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  var lowEnd = isMobile && (window.innerWidth < 500 || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4));
+
+  if (lowEnd){
+    /* Reduce pixel ratio */
+    if (window._VAAN.renderer){
+      window._VAAN.renderer.setPixelRatio(1);
+    }
+    /* Reduce fog density for speed */
+    if (window._VAAN.scene && window._VAAN.scene.fog){
+      window._VAAN.scene.fog.density *= 0.8;
+    }
+    console.log("⚡ Low-end device — performance mode active");
+  }
+})();
+
+/* ============================================================
+   HIDE LOADING AFTER EVERYTHING IS READY
+   ============================================================ */
+window.addEventListener("load", function(){
+  setTimeout(function(){
+    var screen = document.getElementById("loadingScreen");
+    if (screen && !screen.classList.contains("hidden")){
+      screen.classList.add("hidden");
+      setTimeout(function(){ screen.style.display = "none"; }, 800);
+    }
+  }, 2500);
+});
 </script>
+
+</body>
+</html>
