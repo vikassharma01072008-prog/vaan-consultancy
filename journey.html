@@ -4433,4 +4433,302 @@ window.addEventListener("scroll", function(){
 
   console.log("✅ Sound system ready");
 })();
-   </script>
+   </script><script>
+/* ============================================================
+   INTERACTIONS
+   Magnetic buttons · Cursor hover · Trail · Keyboard nav
+   ============================================================ */
+(function initInteractions(){
+  if (!window._J) return;
+  if (window.innerWidth <= 900) return;
+
+  var cursor = document.getElementById("customCursor");
+  if (!cursor) return;
+
+  /* ---------- MAGNETIC BUTTONS ---------- */
+  var magneticBtns = document.querySelectorAll(".btn, .nav-cta");
+  magneticBtns.forEach(function(btn){
+    btn.addEventListener("mousemove", function(e){
+      var rect = btn.getBoundingClientRect();
+      var x = e.clientX - rect.left - rect.width / 2;
+      var y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = "translate(" + (x * 0.18) + "px, " + (y * 0.22) + "px)";
+      btn.style.transition = "transform 0.12s ease-out";
+    });
+    btn.addEventListener("mouseleave", function(){
+      btn.style.transform = "";
+      btn.style.transition = "transform 0.45s cubic-bezier(.2,.9,.3,1.2)";
+    });
+  });
+
+  /* ---------- CURSOR HOVER DETECTION ---------- */
+  document.addEventListener("mouseover", function(e){
+    var t = e.target;
+    if (t.closest("h1, h2, h3, .scene-title, .scene-huge, .brand, .finale-line-1")){
+      cursor.classList.add("hover");
+    }
+    if (t.closest("a, button, .btn, .nav-cta, #soundToggle, #sceneIndicator div")){
+      cursor.classList.add("hover");
+    }
+  });
+
+  document.addEventListener("mouseout", function(e){
+    var t = e.target;
+    if (t.closest("h1, h2, h3, .scene-title, .scene-huge, .brand, .finale-line-1, a, button, .btn, .nav-cta, #soundToggle, #sceneIndicator div")){
+      setTimeout(function(){
+        var el = document.elementFromPoint(e.clientX || 0, e.clientY || 0);
+        if (!el || !el.closest("h1, h2, h3, .scene-title, .scene-huge, .brand, .finale-line-1, a, button, .btn, .nav-cta, #soundToggle, #sceneIndicator div")){
+          cursor.classList.remove("hover");
+        }
+      }, 30);
+    }
+  });
+
+  /* ---------- CURSOR TRAIL ---------- */
+  var trailParticles = [];
+  var maxTrail = 8;
+  var trailIndex = 0;
+
+  for (var i = 0; i < maxTrail; i++){
+    var tp = document.createElement("div");
+    tp.style.cssText = "position:fixed;width:6px;height:6px;border-radius:50%;background:rgba(255,212,0,.45);pointer-events:none;z-index:999997;transform:translate(-50%,-50%);transition:opacity .5s,transform .5s;opacity:0;mix-blend-mode:screen";
+    document.body.appendChild(tp);
+    trailParticles.push(tp);
+  }
+
+  var lastTrailTime = 0;
+  document.addEventListener("mousemove", function(e){
+    var now = Date.now();
+    if (now - lastTrailTime > 70){
+      lastTrailTime = now;
+      var tp = trailParticles[trailIndex];
+      trailIndex = (trailIndex + 1) % maxTrail;
+      tp.style.left = e.clientX + "px";
+      tp.style.top = e.clientY + "px";
+      tp.style.opacity = "1";
+      tp.style.transform = "translate(-50%,-50%) scale(1)";
+      setTimeout(function(){
+        tp.style.opacity = "0";
+        tp.style.transform = "translate(-50%,-50%) scale(0.2)";
+      }, 60);
+    }
+  });
+
+  /* ---------- SCENE INDICATOR HOVER ---------- */
+  var indicator = document.getElementById("sceneIndicator");
+  if (indicator){
+    indicator.querySelectorAll("div").forEach(function(dot){
+      dot.addEventListener("mouseenter", function(){ cursor.classList.add("hover"); });
+      dot.addEventListener("mouseleave", function(){ cursor.classList.remove("hover"); });
+    });
+  }
+
+  /* ---------- KEYBOARD NAVIGATION ---------- */
+  var scenes = ["old", "tear", "v", "auto", "adv", "net", "final"];
+  var currentSceneIdx = 0;
+
+  document.addEventListener("keydown", function(e){
+    if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " "){
+      e.preventDefault();
+      currentSceneIdx = Math.min(scenes.length - 1, currentSceneIdx + 1);
+      var el = document.querySelector('[data-scene="' + scenes[currentSceneIdx] + '"]');
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+    if (e.key === "ArrowUp" || e.key === "PageUp"){
+      e.preventDefault();
+      currentSceneIdx = Math.max(0, currentSceneIdx - 1);
+      var el2 = document.querySelector('[data-scene="' + scenes[currentSceneIdx] + '"]');
+      if (el2) el2.scrollIntoView({ behavior: "smooth" });
+    }
+    /* M to mute */
+    if (e.key === "m" || e.key === "M"){
+      window.toggleSound();
+    }
+  });
+
+  /* ---------- UPDATE SCENE INDEX ON SCROLL ---------- */
+  if (typeof ScrollTrigger !== "undefined"){
+    scenes.forEach(function(key, idx){
+      ScrollTrigger.create({
+        trigger: '[data-scene="' + key + '"]',
+        start: "top 50%",
+        end: "bottom 50%",
+        onToggle: function(self){
+          if (self.isActive) currentSceneIdx = idx;
+        }
+      });
+    });
+  }
+
+  console.log("✅ Interactions loaded");
+})();
+   </script><script>
+/* ============================================================
+   PERFORMANCE TUNING + AUTO-FALLBACK
+   ============================================================ */
+(function mobilePerformance(){
+  if (!window._J) return;
+  var J = window._J;
+
+  var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+  var isSmall = window.innerWidth < 600;
+  var isLowCPU = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+  var isLowMemory = navigator.deviceMemory && navigator.deviceMemory <= 2;
+  var isSlowConnection = navigator.connection && (
+    navigator.connection.effectiveType === "2g" ||
+    navigator.connection.effectiveType === "slow-2g"
+  );
+
+  if (isMobile && (isSmall || isLowCPU || isLowMemory || isSlowConnection)){
+    J.lowEnd = true;
+    console.log("⚡ Low-end mode active");
+  }
+
+  /* Reduce pixel ratio */
+  if (J.lowEnd && J.renderer){
+    J.renderer.setPixelRatio(1);
+  }
+
+  /* Disable bloom */
+  if (J.lowEnd){
+    J.composer = null;
+    console.log("Bloom disabled");
+  }
+
+  /* Reduce particle counts */
+  if (J.lowEnd){
+    if (J.oldWorld && J.oldWorld.dust) J.oldWorld.dust.geometry.setDrawRange(0, 90);
+    if (J.vision && J.vision.burst) J.vision.burst.geometry.setDrawRange(0, 150);
+    if (J.auto && J.auto.flow) J.auto.flow.geometry.setDrawRange(0, 60);
+    if (J.adv && J.adv.rise) J.adv.rise.geometry.setDrawRange(0, 100);
+    if (J.net && J.net.travel) J.net.travel.geometry.setDrawRange(0, 40);
+    if (J.finale && J.finale.cloud) J.finale.cloud.geometry.setDrawRange(0, 250);
+  }
+
+  /* Respect reduced motion */
+  var prefersReducedMotion = window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReducedMotion && typeof gsap !== "undefined"){
+    gsap.globalTimeline.timeScale(0.6);
+    console.log("🎬 Reduced motion detected");
+  }
+
+  /* Pause music when tab hidden */
+  document.addEventListener("visibilitychange", function(){
+    var musicEls = document.querySelectorAll("audio");
+    if (document.hidden){
+      musicEls.forEach(function(m){ m.pause(); });
+    } else {
+      var soundBtn = document.getElementById("soundToggle");
+      if (soundBtn && soundBtn.classList.contains("playing")){
+        musicEls.forEach(function(m){ m.play().catch(function(){}); });
+      }
+    }
+  });
+
+  /* FPS monitor */
+  var frameCount = 0;
+  var lastTime = performance.now();
+  var fpsCheckDone = false;
+
+  function monitorFPS(){
+    if (fpsCheckDone) return;
+    frameCount++;
+    var now = performance.now();
+    if (now - lastTime >= 1000){
+      var fps = frameCount;
+      frameCount = 0;
+      lastTime = now;
+      if (fps < 24 && !J.lowEnd){
+        J.lowEnd = true;
+        console.log("⚡ Low FPS detected (" + fps + ") — switching to low-end mode");
+        if (J.renderer) J.renderer.setPixelRatio(1);
+        J.composer = null;
+      }
+      if (performance.now() > 6000) fpsCheckDone = true;
+    }
+    requestAnimationFrame(monitorFPS);
+  }
+  monitorFPS();
+
+  console.log("✅ Performance tuning complete");
+})();
+
+/* ============================================================
+   MASTER INIT + ERROR HANDLER
+   ============================================================ */
+(function masterInit(){
+  if (!window._J) return;
+
+  window.addEventListener("load", function(){
+    var modules = {
+      "3D Core": !!window._J.renderer,
+      "Old World": !!(window._J.oldWorld && window._J.oldWorld.group),
+      "Paper Tear": !!(window._J.paperTear && window._J.paperTear.group),
+      "Vision": !!(window._J.vision && window._J.vision.group),
+      "Automation": !!(window._J.auto && window._J.auto.group),
+      "Advancement": !!(window._J.adv && window._J.adv.group),
+      "Network": !!(window._J.net && window._J.net.group),
+      "Finale": !!(window._J.finale && window._J.finale.group),
+      "Sound": typeof window.playMusic === "function",
+      "Text Anims": typeof gsap !== "undefined",
+      "Scroll Trigger": typeof ScrollTrigger !== "undefined"
+    };
+    console.log("========== VAAN JOURNEY — MODULES ==========");
+    Object.keys(modules).forEach(function(key){
+      console.log((modules[key] ? "✅" : "❌") + " " + key);
+    });
+    console.log("Device mode:", window._J.lowEnd ? "LOW-END" : "FULL");
+    console.log("===========================================");
+  });
+
+  window.addEventListener("error", function(e){
+    console.error("⚠️ Error:", e.message);
+  });
+
+  /* Anchor smooth scroll */
+  document.addEventListener("click", function(e){
+    var link = e.target.closest("a[href^='#']");
+    if (link){
+      e.preventDefault();
+      var target = document.querySelector(link.getAttribute("href"));
+      if (target) target.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+
+  if ("scrollRestoration" in window.history){
+    window.history.scrollRestoration = "manual";
+  }
+
+  console.log("✅ Master init complete");
+})();
+
+/* ============================================================
+   SCROLLTRIGGER REFRESH AFTER LOAD
+   ============================================================ */
+window.addEventListener("load", function(){
+  if (typeof ScrollTrigger !== "undefined"){
+    setTimeout(function(){
+      ScrollTrigger.refresh();
+      console.log("🔄 ScrollTrigger refreshed");
+    }, 600);
+  }
+});
+
+/* ============================================================
+   FALLBACK IF THREE.JS FAILS
+   ============================================================ */
+setTimeout(function(){
+  if (!window._J || !window._J.renderer){
+    console.warn("Three.js failed to load — showing fallback");
+    var screen = document.getElementById("loadingScreen");
+    if (screen){
+      var hint = screen.querySelector(".loading-hint");
+      if (hint) hint.textContent = "Tap to continue";
+    }
+  }
+}, 8000);
+</script>
+
+</body>
+</html>
