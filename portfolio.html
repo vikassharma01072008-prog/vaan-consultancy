@@ -152,16 +152,58 @@ body::after {
   border-radius: 2px;
 }
 
-/* Mobile nav */
-@media (max-width: 640px) {
+/* ─── Hamburger button ─── */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 8px;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: .3s;
+  display: block;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ─── Mobile nav (hamburger — matches index.html) ─── */
+@media (max-width: 700px) {
   .nav-links {
-    gap: 14px;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: rgba(6, 15, 36, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    padding: 24px;
+    gap: 20px;
+    border-bottom: 1px solid var(--border-soft);
+    transform: translateY(-150%);
+    transition: .4s cubic-bezier(.2, .9, .3, 1.1);
   }
-  .nav-links a {
-    font-size: 13px;
+  .nav-links.open {
+    transform: translateY(0);
   }
-  .nav-logo {
-    font-size: 17px;
+  .hamburger {
+    display: flex;
   }
 }
 
@@ -683,12 +725,17 @@ body::after {
 <nav class="nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">VAAN <span>Consultancy</span></a>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
       <a href="portfolio.html" class="active">Portfolio</a>
+      <a href="demos/index.html">Demos</a>
+      <a href="journey.html">Journey</a>
       <a href="about.html">About</a>
     </div>
+    <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -712,7 +759,8 @@ body::after {
     <div class="hero-divider"></div>
 
     <!-- Stats strip -->
-          <div class="stat">
+    <div class="stats reveal">
+      <div class="stat">
         <div class="stat-num">8</div>
         <div class="stat-label">Live Projects</div>
       </div>
