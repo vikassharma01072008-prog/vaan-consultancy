@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Schedule — VAA Public School, Karnal</title>
+<meta name="description" content="Holiday schedule, exam dates and school timings for VAA Public School, Karnal. Academic year 2026-27.">
+<meta name="theme-color" content="#0a1a3a">
+<link rel="canonical" href="https://vaan-consultancy.pages.dev/demos/school-demo/schedule.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%230a1a3a'/><text x='50' y='68' font-size='52' font-family='Georgia' text-anchor='middle' fill='%23d4a017'>V</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#fdfaf3;color:#1a1a1a;overflow-x:hidden;line-height:1.6;-webkit-tap-highlight-color:transparent}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+:root{
+  --navy:#0a1a3a;
+  --navy-soft:#1a2c52;
+  --gold:#d4a017;
+  --gold-light:#f0c14b;
+  --cream:#fdfaf3;
+  --cream-soft:#f5efe2;
+  --text:#1a1a1a;
+  --text-dim:#6b6b6b;
+  --line:rgba(10,26,58,.1);
+  --shadow:0 10px 40px rgba(10,26,58,.08);
+  --shadow-lg:0 25px 60px rgba(10,26,58,.14);
+}
+
+/* ====== TOPBAR ====== */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:14px 0;background:rgba(253,250,243,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);transition:.3s}
+.topbar.scrolled{box-shadow:0 4px 30px rgba(10,26,58,.08)}
+.tb-in{max-width:1240px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.school-brand{display:flex;align-items:center;gap:14px}
+.crest{width:52px;height:52px;flex-shrink:0}
+.crest svg{width:100%;height:100%;filter:drop-shadow(0 4px 12px rgba(212,160,23,.3))}
+.brand-text{display:flex;flex-direction:column;line-height:1}
+.brand-text b{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:800;letter-spacing:-.5px;color:var(--navy);line-height:1}
+.brand-text small{font-size:9.5px;letter-spacing:2.5px;color:var(--gold);margin-top:5px;font-weight:700;text-transform:uppercase}
+.tb-nav{display:flex;align-items:center;gap:26px;font-size:14px;font-weight:600}
+.tb-nav a{color:var(--navy);opacity:.75;transition:.2s;position:relative}
+.tb-nav a:hover,.tb-nav a.active{opacity:1;color:var(--gold)}
+.tb-nav a::after{content:"";position:absolute;bottom:-6px;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:.3s;transform-origin:left}
+.tb-nav a:hover::after,.tb-nav a.active::after{transform:scaleX(1)}
+.admission-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;padding:10px 20px;border-radius:99px;font-weight:800;font-size:12.5px;letter-spacing:.5px;box-shadow:0 8px 24px rgba(212,160,23,.35);transition:.3s;white-space:nowrap}
+.admission-badge:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(212,160,23,.5)}
+.admission-badge .dot{width:7px;height:7px;background:#fff;border-radius:50%;animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
+.hamburger{display:none;background:transparent;border:0;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+.hamburger span{width:24px;height:2px;background:var(--navy);border-radius:2px;transition:.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ====== PAGE HERO ====== */
+.page-hero{background:linear-gradient(135deg,#0a1a3a 0%,#1a2c52 100%);padding:170px 24px 90px;text-align:center;position:relative;overflow:hidden}
+.page-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(212,160,23,.15),transparent 55%),radial-gradient(circle at 70% 70%,rgba(212,160,23,.08),transparent 55%);pointer-events:none}
+.page-hero-in{max-width:800px;margin:0 auto;position:relative}
+.page-hero .eyebrow{display:inline-block;color:var(--gold-light);font-size:11px;letter-spacing:3.5px;font-weight:800;text-transform:uppercase;margin-bottom:18px}
+.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,6vw,66px);font-weight:700;letter-spacing:-1.5px;line-height:1.05;margin-bottom:20px;color:#fff}
+.page-hero h1 .gold{color:var(--gold-light);font-style:italic}
+.page-hero p{color:rgba(255,255,255,.78);font-size:17px;line-height:1.7;max-width:620px;margin:0 auto}
+.breadcrumb{display:flex;justify-content:center;gap:10px;margin-top:26px;font-size:13px;color:rgba(255,255,255,.55)}
+.breadcrumb a{color:var(--gold-light);font-weight:600}
+.breadcrumb a:hover{text-decoration:underline}
+
+/* ====== SECTIONS ====== */
+section{padding:100px 0;position:relative}
+.sec-in{max-width:1100px;margin:0 auto;padding:0 24px}
+.sec-eyebrow{display:inline-block;color:var(--gold);font-size:11px;letter-spacing:3.5px;font-weight:800;text-transform:uppercase;margin-bottom:16px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,54px);font-weight:700;letter-spacing:-1.5px;line-height:1.05;margin-bottom:20px;color:var(--navy)}
+.sec-title .gold{color:var(--gold);font-style:italic}
+.sec-sub{color:var(--text-dim);font-size:17px;max-width:680px;line-height:1.7;margin-bottom:50px}
+
+/* ====== ACTION BAR ====== */
+.action-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:60px}
+.action-btn{background:#fff;border:1.5px solid var(--line);color:var(--navy);font-family:inherit;font-size:13.5px;font-weight:700;padding:13px 26px;border-radius:99px;cursor:pointer;transition:.25s;letter-spacing:.3px;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.action-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 24px rgba(212,160,23,.15)}
+.action-btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;border-color:transparent;box-shadow:0 8px 24px rgba(212,160,23,.3)}
+.action-btn.primary:hover{color:#fff;box-shadow:0 12px 32px rgba(212,160,23,.45)}
+
+/* ====== TAB SWITCHER ====== */
+.tabs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.tab-btn{background:#fff;border:1.5px solid var(--line);color:var(--navy);font-family:inherit;font-size:13.5px;font-weight:700;padding:13px 26px;border-radius:99px;cursor:pointer;transition:.25s;letter-spacing:.3px}
+.tab-btn:hover{border-color:var(--gold);color:var(--gold)}
+.tab-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.tab-panel{display:none;animation:fadeIn .4s ease}
+.tab-panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ====== TABLE ====== */
+.table-wrap{background:#fff;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
+.table-head{background:linear-gradient(135deg,#0a1a3a,#1a2c52);color:#fff;padding:28px 32px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.table-head h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;letter-spacing:-.3px;color:#fff;margin:0}
+.table-head span{color:var(--gold-light);font-size:12px;letter-spacing:2px;font-weight:700;text-transform:uppercase}
+
+table{width:100%;border-collapse:collapse}
+table th{background:rgba(10,26,58,.04);color:var(--navy);font-size:11.5px;letter-spacing:2px;font-weight:800;text-transform:uppercase;padding:18px 24px;text-align:left;border-bottom:1px solid var(--line)}
+table td{padding:18px 24px;border-bottom:1px solid var(--line);color:var(--text);font-size:14.5px;line-height:1.5}
+table tr:last-child td{border-bottom:0}
+table tr:hover td{background:rgba(212,160,23,.04)}
+table td:first-child{font-weight:700;color:var(--navy);white-space:nowrap}
+.date-chip{display:inline-block;background:rgba(212,160,23,.12);color:var(--gold);font-size:12px;font-weight:800;padding:5px 12px;border-radius:99px;letter-spacing:.5px}
+.tag{display:inline-block;background:rgba(10,26,58,.08);color:var(--navy);font-size:11px;font-weight:800;padding:4px 10px;border-radius:6px;letter-spacing:.5px;text-transform:uppercase}
+.tag.red{background:rgba(225,29,42,.1);color:#e11d2a}
+.tag.green{background:rgba(37,180,110,.12);color:#25b46e}
+.tag.gold{background:rgba(212,160,23,.15);color:var(--gold)}
+
+/* ====== TIMINGS ====== */
+.timing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.timing-card{background:#fff;border-radius:18px;padding:40px 32px;text-align:center;box-shadow:var(--shadow);transition:.35s;border-top:4px solid var(--gold);position:relative;overflow:hidden}
+.timing-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+.timing-icon{font-size:48px;margin-bottom:18px;display:block}
+.timing-card h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;letter-spacing:-.3px;color:var(--navy);margin-bottom:8px}
+.timing-role{color:var(--gold);font-size:11.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px}
+.timing-time{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--navy);line-height:1.2;letter-spacing:-.5px}
+.timing-time small{display:block;color:var(--text-dim);font-family:'Inter',sans-serif;font-size:13px;font-weight:500;letter-spacing:0;margin-top:6px}
+
+/* ====== NOTICE ====== */
+.notice-bar{background:rgba(212,160,23,.08);border-left:4px solid var(--gold);border-radius:12px;padding:22px 26px;margin-top:32px;display:flex;gap:16px;align-items:flex-start}
+.notice-bar-icon{font-size:24px;flex-shrink:0}
+.notice-bar-text{color:var(--navy);font-size:14.5px;line-height:1.6}
+.notice-bar-text b{color:var(--gold);font-weight:800;letter-spacing:.5px}
+
+/* ====== CTA ====== */
+.cta-sec{background:linear-gradient(135deg,#0a1a3a,#1a2c52);text-align:center;padding:100px 24px;position:relative;overflow:hidden}
+.cta-sec::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(212,160,23,.15),transparent 50%),radial-gradient(circle at 70% 70%,rgba(212,160,23,.1),transparent 50%);pointer-events:none}
+.cta-in{max-width:720px;margin:0 auto;position:relative}
+.cta-sec h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:20px;color:#fff}
+.cta-sec h2 .gold{color:var(--gold-light);font-style:italic}
+.cta-sec p{color:rgba(255,255,255,.75);font-size:17px;margin-bottom:36px;line-height:1.6}
+.btn{border:0;border-radius:10px;padding:15px 30px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;transition:all .25s cubic-bezier(.2,.9,.3,1.1);display:inline-flex;align-items:center;gap:8px;letter-spacing:.3px;position:relative}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;box-shadow:0 10px 30px rgba(212,160,23,.4)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(212,160,23,.55)}
+.btn-secondary{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.25)}
+.btn-secondary:hover{border-color:var(--gold-light);color:var(--gold-light);transform:translateY(-3px)}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ====== FOOTER ====== */
+footer{background:#07122a;color:rgba(255,255,255,.7);padding:70px 24px 30px;border-top:3px solid var(--gold)}
+.foot-in{max-width:1240px;margin:0 auto}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1.2fr 1fr;gap:44px;margin-bottom:50px}
+.foot-brand{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.foot-brand svg{width:44px;height:44px}
+.foot-brand-text b{display:block;font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:#fff;letter-spacing:-.3px;line-height:1}
+.foot-brand-text small{display:block;font-size:10px;letter-spacing:2.5px;color:var(--gold);font-weight:700;margin-top:5px;text-transform:uppercase}
+.foot-desc{font-size:13.5px;line-height:1.7;margin-bottom:20px;color:rgba(255,255,255,.55)}
+.foot-col h5{font-size:11.5px;letter-spacing:2.5px;font-weight:800;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.foot-col a{display:block;color:rgba(255,255,255,.6);font-size:13.5px;padding:6px 0;transition:.2s}
+.foot-col a:hover{color:var(--gold-light);padding-left:4px}
+.foot-contact{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:rgba(255,255,255,.6);padding:6px 0;line-height:1.5}
+.foot-social{display:flex;gap:12px;margin-top:16px}
+.foot-social a{width:40px;height:40px;border-radius:50%;background:rgba(212,160,23,.12);border:1px solid rgba(212,160,23,.25);display:flex;align-items:center;justify-content:center;font-size:16px;transition:.3s;color:var(--gold-light)}
+.foot-social a:hover{background:var(--gold);color:#fff;transform:translateY(-3px);border-color:var(--gold)}
+.foot-bot{border-top:1px solid rgba(255,255,255,.08);padding-top:26px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:12.5px;color:rgba(255,255,255,.5)}
+.foot-bot a{color:var(--gold-light);font-weight:600}
+.foot-bot strong{color:#fff;font-weight:700}
+
+/* ====== WHATSAPP FLOAT ====== */
+.wa-float{position:fixed;bottom:24px;right:24px;width:60px;height:60px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;z-index:999;box-shadow:0 12px 40px rgba(37,211,102,.45);transition:.3s;animation:waPulse 2.5s infinite}
+.wa-float:hover{transform:scale(1.1);box-shadow:0 16px 50px rgba(37,211,102,.6)}
+.wa-float svg{width:32px;height:32px;fill:#fff}
+@keyframes waPulse{0%,100%{box-shadow:0 12px 40px rgba(37,211,102,.45)}50%{box-shadow:0 12px 50px rgba(37,211,102,.75)}}
+
+/* ====== PRINT STYLES ====== */
+@media print{
+  .topbar,.wa-float,footer,.action-bar,.tabs,.cta-sec,.breadcrumb,.hamburger{display:none !important}
+  body{background:#fff;color:#000}
+  .page-hero{background:#fff !important;color:#000 !important;padding:30px 0 20px}
+  .page-hero h1,.page-hero p,.page-hero .eyebrow{color:#000 !important}
+  section{padding:20px 0}
+  .table-wrap{box-shadow:none;border:1px solid #ccc}
+  .table-head{background:#f0f0f0 !important;color:#000 !important}
+  .tab-panel{display:block !important;page-break-after:always}
+  .tab-panel:not(.active){display:block !important}
+  table td{color:#000}
+  .timing-card{box-shadow:none;border:1px solid #ccc}
+}
+
+/* ====== RESPONSIVE ====== */
+@media(max-width:900px){
+  .timing-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:36px}
+}
+@media(max-width:700px){
+  .tb-nav{position:fixed;top:78px;left:0;right:0;background:rgba(253,250,243,.98);backdrop-filter:blur(20px);flex-direction:column;padding:28px;gap:22px;border-bottom:1px solid var(--line);transform:translateY(-150%);transition:.4s cubic-bezier(.2,.9,.3,1.1);align-items:stretch;text-align:center;box-shadow:0 20px 40px rgba(10,26,58,.1)}
+  .tb-nav.open{transform:translateY(0)}
+  .tb-nav a{font-size:16px;padding:8px 0}
+  .hamburger{display:flex}
+  .admission-badge{display:none}
+  .brand-text b{font-size:17px}
+  .brand-text small{font-size:8px;letter-spacing:1.8px}
+  .crest{width:44px;height:44px}
+  section{padding:70px 0}
+  .page-hero{padding:130px 20px 70px}
+  table th,table td{padding:14px 16px;font-size:13.5px}
+  table th{font-size:10.5px;letter-spacing:1.5px}
+  .table-head{padding:22px 24px}
+  .table-head h3{font-size:20px}
+  .timing-card{padding:32px 24px}
+  .foot-grid{grid-template-columns:1fr;gap:34px}
+  .wa-float{width:54px;height:54px;bottom:18px;right:18px}
+  .wa-float svg{width:28px;height:28px}
+  .btn{padding:14px 24px;font-size:13.5px}
+  .action-btn,.tab-btn{padding:11px 20px;font-size:12.5px}
+}
+</style>
+</head>
+<body>
+
+<!-- ====== TOPBAR ====== -->
+<nav class="topbar" id="topbar">
+  <div class="tb-in">
+    <a href="index.html" class="school-brand">
+      <span class="crest">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="46" fill="#0a1a3a" stroke="#d4a017" stroke-width="3"/>
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#d4a017" stroke-width="1" opacity="0.5"/>
+          <path d="M50 22 L70 78 L58 78 L50 58 L42 78 L30 78 Z" fill="#d4a017"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <b>VAA Public School</b>
+        <small>Excellence in Education</small>
+      </span>
+    </a>
+
+    <div class="tb-nav" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="faculty.html">Faculty</a>
+      <a href="schedule.html" class="active">Schedule</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="admission.html">Admission</a>
+    </div>
+
+    <a href="admission.html" class="admission-badge">
+      <span class="dot"></span>
+      Admission Open 2026-27
+    </a>
+
+    <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ====== PAGE HERO ====== -->
+<section class="page-hero">
+  <div class="page-hero-in">
+    <span class="eyebrow">Academic Year 2026-27</span>
+    <h1>Holiday & <span class="gold">Exam Schedule.</span></h1>
+    <p>All the important dates, exam timelines and school timings — in one place. Print or download for your reference.</p>
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>·</span>
+      <span>Schedule</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SCHEDULE ====== -->
+<section>
+  <div class="sec-in">
+    <div class="action-bar">
+      <button class="action-btn primary" onclick="window.print()">🖨️ Print Schedule</button>
+      <a href="https://wa.me/919671163712?text=Hi%20VAA%20Public%20School%2C%20please%20send%20me%20the%20exam%20%26%20holiday%20schedule%20PDF." class="action-btn" target="_blank">📄 Request PDF on WhatsApp</a>
+    </div>
+
+    <div class="tabs" id="tabs">
+      <button class="tab-btn active" data-tab="holidays">🎉 Holidays</button>
+      <button class="tab-btn" data-tab="exams">📝 Exams</button>
+      <button class="tab-btn" data-tab="timings">🕐 School Timings</button>
+    </div>
+
+    <!-- HOLIDAYS -->
+    <div class="tab-panel active" id="panel-holidays">
+      <div class="table-wrap">
+        <div class="table-head">
+          <h3>Holiday Schedule 2026</h3>
+          <span>Academic Year 2026-27</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Day</th>
+              <th>Occasion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="date-chip">26 Jan 2026</span></td><td>Monday</td><td>Republic Day</td></tr>
+            <tr><td><span class="date-chip">14 Mar 2026</span></td><td>Saturday</td><td>Holi</td></tr>
+            <tr><td><span class="date-chip">31 Mar 2026</span></td><td>Tuesday</td><td>Ram Navami</td></tr>
+            <tr><td><span class="date-chip">14 Apr 2026</span></td><td>Tuesday</td><td>Ambedkar Jayanti</td></tr>
+            <tr><td><span class="date-chip">15 Aug 2026</span></td><td>Saturday</td><td>Independence Day</td></tr>
+            <tr><td><span class="date-chip">26 Aug 2026</span></td><td>Wednesday</td><td>Raksha Bandhan</td></tr>
+            <tr><td><span class="date-chip">04 Sep 2026</span></td><td>Friday</td><td>Janmashtami</td></tr>
+            <tr><td><span class="date-chip">02 Oct 2026</span></td><td>Friday</td><td>Gandhi Jayanti</td></tr>
+            <tr><td><span class="date-chip">20 Oct 2026</span></td><td>Tuesday</td><td>Dussehra</td></tr>
+            <tr><td><span class="date-chip">08 Nov 2026</span></td><td>Sunday</td><td>Diwali</td></tr>
+            <tr><td><span class="date-chip">09-13 Nov 2026</span></td><td>Mon-Fri</td><td>Diwali Break</td></tr>
+            <tr><td><span class="date-chip">25 Dec 2026</span></td><td>Friday</td><td>Christmas</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="notice-bar">
+        <span class="notice-bar-icon">📌</span>
+        <div class="notice-bar-text">
+          <b>Note:</b> Dates for local festivals may vary. Any changes to the holiday schedule will be communicated through the school diary and WhatsApp group at least 7 days in advance.
+        </div>
+      </div>
+    </div>
+
+    <!-- EXAMS -->
+    <div class="tab-panel" id="panel-exams">
+      <div class="table-wrap">
+        <div class="table-head">
+          <h3>Exam Schedule 2026-27</h3>
+          <span>All Classes</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Exam</th>
+              <th>Dates</th>
+              <th>Classes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Unit Test 1</td>
+              <td><span class="date-chip">15 – 20 July 2026</span></td>
+              <td><span class="tag">All Classes</span></td>
+            </tr>
+            <tr>
+              <td>Half Yearly Exam</td>
+              <td><span class="date-chip">20 Sep – 05 Oct 2026</span></td>
+              <td><span class="tag gold">All Classes</span></td>
+            </tr>
+            <tr>
+              <td>Unit Test 2</td>
+              <td><span class="date-chip">10 – 15 Dec 2026</span></td>
+              <td><span class="tag">All Classes</span></td>
+            </tr>
+            <tr>
+              <td>Pre-Board Exam</td>
+              <td><span class="date-chip">15 – 25 Jan 2027</span></td>
+              <td><span class="tag red">Class 10 Only</span></td>
+            </tr>
+            <tr>
+              <td>Annual Exam</td>
+              <td><span class="date-chip">01 – 15 Mar 2027</span></td>
+              <td><span class="tag green">All Classes</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="notice-bar">
+        <span class="notice-bar-icon">📌</span>
+        <div class="notice-bar-text">
+          <b>Note:</b> Detailed exam timetables (subject-wise dates and timings) will be shared with students two weeks before each exam. Class 10 students must carry their admit cards to every exam.
+        </div>
+      </div>
+    </div>
+
+    <!-- TIMINGS -->
+    <div class="tab-panel" id="panel-timings">
+      <div class="timing-grid">
+        <div class="timing-card">
+          <span class="timing-icon">🧸</span>
+          <h3>Pre-Primary</h3>
+          <div class="timing-role">Nursery · LKG · UKG</div>
+          <div class="timing-time">9:00 AM – 12:30 PM<small>Monday to Friday</small></div>
+        </div>
+        <div class="timing-card">
+          <span class="timing-icon">📖</span>
+          <h3>Primary</h3>
+          <div class="timing-role">Class 1 to Class 5</div>
+          <div class="timing-time">8:00 AM – 2:00 PM<small>Monday to Saturday</small></div>
+        </div>
+        <div class="timing-card">
+          <span class="timing-icon">🎓</span>
+          <h3>Middle & Secondary</h3>
+          <div class="timing-role">Class 6 to Class 10</div>
+          <div class="timing-time">8:00 AM – 2:30 PM<small>Monday to Saturday</small></div>
+        </div>
+      </div>
+
+      <div class="notice-bar" style="margin-top:40px">
+        <span class="notice-bar-icon">🕐</span>
+        <div class="notice-bar-text">
+          <b>Assembly:</b> Morning assembly for all classes begins at <b>7:55 AM</b>. Students should reach school at least 10 minutes early. Late arrivals after 8:15 AM will require a parent note.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ====== CTA ====== -->
+<section class="cta-sec">
+  <div class="cta-in">
+    <h2>Have a question about the <span class="gold">schedule?</span></h2>
+    <p>Reach out to us on WhatsApp or visit the school office. We're happy to help.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/919671163712?text=Hi%20VAA%20Public%20School%2C%20I%20have%20a%20question%20about%20the%20schedule." class="btn btn-primary" target="_blank">💬 WhatsApp Us</a>
+      <a href="admission.html" class="btn btn-secondary">Apply for Admission →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="foot-in">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" fill="#0a1a3a" stroke="#d4a017" stroke-width="3"/>
+            <path d="M50 22 L70 78 L58 78 L50 58 L42 78 L30 78 Z" fill="#d4a017"/>
+          </svg>
+          <div class="foot-brand-text">
+            <b>VAA Public School</b>
+            <small>Excellence in Education</small>
+          </div>
+        </div>
+        <p class="foot-desc">A premier co-educational school in Karnal, nurturing young minds since 2005. Smart classrooms, expert faculty and a values-first approach.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Quick Links</h5>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="faculty.html">Faculty</a>
+        <a href="schedule.html">Schedule</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="admission.html">Admission</a>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <div class="foot-contact"><span>📞</span><span>+91 9671163712</span></div>
+        <div class="foot-contact"><span>✉️</span><span>vaapublicschool@example.com</span></div>
+        <div class="foot-contact"><span>📍</span><span>VAA Public School, Karnal, Haryana 132001</span></div>
+        <div class="foot-contact"><span>🕐</span><span>Mon-Sat · 8:00 AM - 2:30 PM</span></div>
+      </div>
+      <div class="foot-col">
+        <h5>Follow Us</h5>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">📸</a>
+          <a href="#" aria-label="Facebook">📘</a>
+          <a href="#" aria-label="YouTube">▶️</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div>© 2026 <strong>VAA Public School</strong> · All rights reserved.</div>
+      <div>Powered by <a href="https://vaan-consultancy.pages.dev/" target="_blank">VAAN Consultancy</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ====== WHATSAPP FLOAT ====== -->
+<a href="https://wa.me/919671163712?text=Hi%20VAA%20Public%20School%2C%20I%20have%20a%20question%20about%20the%20schedule." class="wa-float" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+function toggleNav(){
+  document.getElementById("navLinks").classList.toggle("open");
+  document.getElementById("hamburger").classList.toggle("open");
+}
+document.querySelectorAll(".tb-nav a").forEach(a => {
+  a.addEventListener("click", () => {
+    document.getElementById("navLinks").classList.remove("open");
+    document.getElementById("hamburger").classList.remove("open");
+  });
+});
+window.addEventListener("scroll", () => {
+  document.getElementById("topbar").classList.toggle("scrolled", window.scrollY > 40);
+});
+
+/* ====== TABS ====== */
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("panel-" + btn.dataset.tab).classList.add("active");
+  });
+});
+
+/* ====== SCROLL REVEAL ====== */
+if ("IntersectionObserver" in window){
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "translateY(0)";
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll(".tab-panel, .timing-card, .action-bar").forEach(el => {
+    el.style.opacity = "0";
+    el.style.transform = "translateY(30px)";
+    el.style.transition = "opacity .8s ease, transform .8s cubic-bezier(.2,.9,.3,1.1)";
+    observer.observe(el);
+  });
+}
+</script>
+
+</body>
+</html>
