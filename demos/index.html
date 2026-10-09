@@ -187,8 +187,8 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:50px 24p
       <div class="choice-card" data-target="websites" onclick="showDemos('websites', this)">
         <div class="choice-icon">💻</div>
         <h3>Website Demos</h3>
-        <p>Full websites for hospitals, jewellery, hotels, real estate, coaching, car dealers, gyms & travel agencies.</p>
-        <span class="choice-count">8 Live Demos</span>
+        <p>Full websites for schools, hospitals, jewellery, hotels, real estate, coaching, car dealers, gyms & travel agencies.</p>
+        <span class="choice-count">9 Live Demos</span>
       </div>
 
       <div class="choice-card" data-target="qr" onclick="showDemos('qr', this)">
@@ -269,6 +269,7 @@ function toggleNav(){
 
 /* ====== DEMO DATA ====== */
 const WEBSITE_DEMOS = [
+  { icon: "🎓", name: "VAA Public School", category: "School / Education", description: "Complete school website with faculty, schedule, gallery and an online admission enquiry form.", features: ["6-page full website", "Faculty showcase", "Exam & holiday schedule", "Online admission form"], url: "school-demo/", status: "live" },
   { icon: "🏥", name: "VAA Hospital", category: "Multispeciality", description: "Full hospital website with departments, doctors, facilities, and appointment booking.", features: ["Department showcase", "Doctor profiles", "Appointment form", "24x7 emergency info"], url: "vaa-website-hospital/", status: "live" },
   { icon: "💎", name: "VAA Jewellers", category: "Jewellery Shop", description: "Premium jewellery website with collections, live gold rates, and custom design enquiry.", features: ["Live gold rate widget", "Collections gallery", "Featured pieces", "Book showroom visit"], url: "vaa-website-jewellery/", status: "live" },
   { icon: "🏨", name: "VAA Hotel", category: "Hospitality", description: "Hotel website with room categories, amenities, banquet halls, and instant booking.", features: ["Room pricing tiers", "Amenities showcase", "Banquet enquiries", "Booking form"], url: "vaa-website-hotel/", status: "live" },
@@ -278,7 +279,6 @@ const WEBSITE_DEMOS = [
   { icon: "💪", name: "VAA Gym", category: "Fitness Center", description: "Gym website with programs, trainers, membership plans, and free trial signup.", features: ["Program listings", "Trainer profiles", "Pricing plans", "Free trial form"], url: "vaa-website-gym/", status: "live" },
   { icon: "✈️", name: "VAA Travels", category: "Travel Agency", description: "Travel agency website with tour packages, destinations, and instant quote requests.", features: ["Package cards", "Destination grid", "Trip planner form", "Visa assistance"], url: "vaa-website-travel/", status: "live" }
 ];
-
 const QR_DEMOS = [
   { icon: "🍽️", name: "VAA Restaurants", category: "QR Menu System", description: "Digital menu customers scan with their phone. Update prices anytime — no reprinting.", features: ["Full menu with categories", "Veg / Non-veg badges", "Call + WhatsApp order", "Admin panel for updates"], url: "vaa-restaurants/", status: "live" },
   { icon: "🏋️", name: "VAA Gyms", category: "Check-in System", description: "QR check-in with member streaks, expiry warnings, and a full admin dashboard.", features: ["Member check-in QR", "Day streak counter", "Expiry reminders", "Ghost member detection"], url: "vaa-gyms/", status: "live" },
