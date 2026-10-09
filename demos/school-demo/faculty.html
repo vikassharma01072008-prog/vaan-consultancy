@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Faculty — VAA Public School, Karnal</title>
+<meta name="description" content="Meet the faculty of VAA Public School — 60+ qualified teachers, HODs, principal and support staff dedicated to student success.">
+<meta name="theme-color" content="#0a1a3a">
+<link rel="canonical" href="https://vaan-consultancy.pages.dev/demos/school-demo/faculty.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%230a1a3a'/><text x='50' y='68' font-size='52' font-family='Georgia' text-anchor='middle' fill='%23d4a017'>V</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#fdfaf3;color:#1a1a1a;overflow-x:hidden;line-height:1.6;-webkit-tap-highlight-color:transparent}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+:root{
+  --navy:#0a1a3a;
+  --navy-soft:#1a2c52;
+  --gold:#d4a017;
+  --gold-light:#f0c14b;
+  --cream:#fdfaf3;
+  --cream-soft:#f5efe2;
+  --text:#1a1a1a;
+  --text-dim:#6b6b6b;
+  --line:rgba(10,26,58,.1);
+  --shadow:0 10px 40px rgba(10,26,58,.08);
+  --shadow-lg:0 25px 60px rgba(10,26,58,.14);
+}
+
+/* ====== TOPBAR ====== */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:14px 0;background:rgba(253,250,243,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);transition:.3s}
+.topbar.scrolled{box-shadow:0 4px 30px rgba(10,26,58,.08)}
+.tb-in{max-width:1240px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.school-brand{display:flex;align-items:center;gap:14px}
+.crest{width:52px;height:52px;flex-shrink:0}
+.crest svg{width:100%;height:100%;filter:drop-shadow(0 4px 12px rgba(212,160,23,.3))}
+.brand-text{display:flex;flex-direction:column;line-height:1}
+.brand-text b{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:800;letter-spacing:-.5px;color:var(--navy);line-height:1}
+.brand-text small{font-size:9.5px;letter-spacing:2.5px;color:var(--gold);margin-top:5px;font-weight:700;text-transform:uppercase}
+.tb-nav{display:flex;align-items:center;gap:26px;font-size:14px;font-weight:600}
+.tb-nav a{color:var(--navy);opacity:.75;transition:.2s;position:relative}
+.tb-nav a:hover,.tb-nav a.active{opacity:1;color:var(--gold)}
+.tb-nav a::after{content:"";position:absolute;bottom:-6px;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:.3s;transform-origin:left}
+.tb-nav a:hover::after,.tb-nav a.active::after{transform:scaleX(1)}
+.admission-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;padding:10px 20px;border-radius:99px;font-weight:800;font-size:12.5px;letter-spacing:.5px;box-shadow:0 8px 24px rgba(212,160,23,.35);transition:.3s;white-space:nowrap}
+.admission-badge:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(212,160,23,.5)}
+.admission-badge .dot{width:7px;height:7px;background:#fff;border-radius:50%;animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
+.hamburger{display:none;background:transparent;border:0;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+.hamburger span{width:24px;height:2px;background:var(--navy);border-radius:2px;transition:.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ====== PAGE HERO ====== */
+.page-hero{background:linear-gradient(135deg,#0a1a3a 0%,#1a2c52 100%);padding:170px 24px 90px;text-align:center;position:relative;overflow:hidden}
+.page-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(212,160,23,.15),transparent 55%),radial-gradient(circle at 70% 70%,rgba(212,160,23,.08),transparent 55%);pointer-events:none}
+.page-hero-in{max-width:800px;margin:0 auto;position:relative}
+.page-hero .eyebrow{display:inline-block;color:var(--gold-light);font-size:11px;letter-spacing:3.5px;font-weight:800;text-transform:uppercase;margin-bottom:18px}
+.page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,6vw,66px);font-weight:700;letter-spacing:-1.5px;line-height:1.05;margin-bottom:20px;color:#fff}
+.page-hero h1 .gold{color:var(--gold-light);font-style:italic}
+.page-hero p{color:rgba(255,255,255,.78);font-size:17px;line-height:1.7;max-width:620px;margin:0 auto}
+.breadcrumb{display:flex;justify-content:center;gap:10px;margin-top:26px;font-size:13px;color:rgba(255,255,255,.55)}
+.breadcrumb a{color:var(--gold-light);font-weight:600}
+.breadcrumb a:hover{text-decoration:underline}
+
+/* ====== SECTIONS ====== */
+section{padding:100px 0;position:relative}
+.sec-in{max-width:1240px;margin:0 auto;padding:0 24px}
+.sec-eyebrow{display:inline-block;color:var(--gold);font-size:11px;letter-spacing:3.5px;font-weight:800;text-transform:uppercase;margin-bottom:16px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,54px);font-weight:700;letter-spacing:-1.5px;line-height:1.05;margin-bottom:20px;color:var(--navy)}
+.sec-title .gold{color:var(--gold);font-style:italic}
+.sec-sub{color:var(--text-dim);font-size:17px;max-width:680px;line-height:1.7;margin-bottom:60px}
+
+/* ====== PRINCIPAL CARD ====== */
+.principal-card{background:#fff;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);display:grid;grid-template-columns:1fr 1.4fr;gap:0;border-top:4px solid var(--gold)}
+.principal-img{position:relative;min-height:420px;background:linear-gradient(135deg,#0a1a3a,#1a2c52)}
+.principal-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.principal-body{padding:56px 48px;display:flex;flex-direction:column;justify-content:center}
+.principal-role-tag{display:inline-block;background:rgba(212,160,23,.12);color:var(--gold);font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;padding:7px 14px;border-radius:99px;margin-bottom:20px;width:fit-content}
+.principal-body h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.5vw,42px);font-weight:700;letter-spacing:-1px;color:var(--navy);line-height:1.1;margin-bottom:8px}
+.principal-qual{color:var(--gold);font-size:14px;font-weight:700;letter-spacing:1px;margin-bottom:24px}
+.principal-body p{color:var(--text-dim);font-size:15.5px;line-height:1.8;margin-bottom:16px}
+.principal-body p:first-of-type{font-style:italic;color:var(--navy);font-family:'Cormorant Garamond',serif;font-size:19px;line-height:1.6}
+.principal-meta{display:flex;gap:32px;margin-top:24px;padding-top:24px;border-top:1px solid var(--line);flex-wrap:wrap}
+.principal-meta div b{display:block;font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--gold);line-height:1}
+.principal-meta div span{display:block;font-size:11px;color:var(--text-dim);letter-spacing:1.5px;font-weight:700;text-transform:uppercase;margin-top:6px}
+
+/* ====== HOD GRID ====== */
+.hod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.hod-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);transition:.35s cubic-bezier(.2,.9,.3,1.1);border:2px solid transparent}
+.hod-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);border-color:var(--gold)}
+.hod-img{aspect-ratio:1;background:linear-gradient(135deg,#1a2c52,#0a1a3a);position:relative;overflow:hidden}
+.hod-img img{width:100%;height:100%;object-fit:cover;transition:.4s}
+.hod-card:hover .hod-img img{transform:scale(1.05)}
+.hod-body{padding:26px 24px;text-align:center}
+.hod-subject{display:inline-block;background:rgba(212,160,23,.12);color:var(--gold);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;border-radius:99px;margin-bottom:12px}
+.hod-body h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;letter-spacing:-.3px;color:var(--navy);margin-bottom:6px}
+.hod-qual{color:var(--text-dim);font-size:13px;line-height:1.5}
+.hod-exp{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.5px;margin-top:10px}
+
+/* ====== TEACHERS GRID ====== */
+.teachers-sec{background:var(--cream-soft)}
+.teacher-filter{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:44px}
+.filter-btn{background:#fff;border:1.5px solid var(--line);color:var(--navy);font-family:inherit;font-size:13px;font-weight:700;padding:11px 22px;border-radius:99px;cursor:pointer;transition:.25s;letter-spacing:.3px}
+.filter-btn:hover{border-color:var(--gold);color:var(--gold)}
+.filter-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.teacher-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.teacher-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);transition:.35s;border:1px solid var(--line)}
+.teacher-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:rgba(212,160,23,.4)}
+.teacher-img{aspect-ratio:1;background:linear-gradient(135deg,#1a2c52,#0a1a3a);position:relative;overflow:hidden}
+.teacher-img img{width:100%;height:100%;object-fit:cover;transition:.4s}
+.teacher-card:hover .teacher-img img{transform:scale(1.06)}
+.teacher-body{padding:22px 20px;text-align:center}
+.teacher-body h4{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;letter-spacing:-.2px;color:var(--navy);margin-bottom:4px}
+.teacher-subject{color:var(--gold);font-size:11.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.teacher-qual{color:var(--text-dim);font-size:12.5px;line-height:1.5}
+
+/* ====== SUPPORT STAFF ====== */
+.support-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.support-card{background:#fff;border-radius:16px;padding:34px 28px;box-shadow:var(--shadow);display:flex;align-items:center;gap:20px;transition:.35s;border-left:4px solid var(--gold)}
+.support-card:hover{transform:translateX(6px);box-shadow:var(--shadow-lg)}
+.support-icon{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,rgba(212,160,23,.15),rgba(10,26,58,.06));display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+.support-info h4{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;letter-spacing:-.3px;color:var(--navy);margin-bottom:4px}
+.support-info .role{color:var(--gold);font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.support-info p{color:var(--text-dim);font-size:13px;line-height:1.55}
+
+/* ====== JOIN US CTA ====== */
+.join-cta{background:linear-gradient(135deg,#0a1a3a,#1a2c52);border-radius:24px;padding:60px 48px;text-align:center;position:relative;overflow:hidden;margin-top:80px}
+.join-cta::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(212,160,23,.15),transparent 55%);pointer-events:none}
+.join-cta h3{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,40px);font-weight:700;color:#fff;letter-spacing:-1px;margin-bottom:16px;position:relative}
+.join-cta h3 .gold{color:var(--gold-light);font-style:italic}
+.join-cta p{color:rgba(255,255,255,.75);font-size:16px;max-width:560px;margin:0 auto 32px;position:relative;line-height:1.65}
+.btn{border:0;border-radius:10px;padding:15px 30px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;transition:all .25s cubic-bezier(.2,.9,.3,1.1);display:inline-flex;align-items:center;gap:8px;letter-spacing:.3px;position:relative}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;box-shadow:0 10px 30px rgba(212,160,23,.4)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(212,160,23,.55)}
+
+/* ====== CTA ====== */
+.cta-sec{background:linear-gradient(135deg,#0a1a3a,#1a2c52);text-align:center;padding:100px 24px;position:relative;overflow:hidden}
+.cta-sec::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(212,160,23,.15),transparent 50%),radial-gradient(circle at 70% 70%,rgba(212,160,23,.1),transparent 50%);pointer-events:none}
+.cta-in{max-width:720px;margin:0 auto;position:relative}
+.cta-sec h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:20px;color:#fff}
+.cta-sec h2 .gold{color:var(--gold-light);font-style:italic}
+.cta-sec p{color:rgba(255,255,255,.75);font-size:17px;margin-bottom:36px;line-height:1.6}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ====== FOOTER ====== */
+footer{background:#07122a;color:rgba(255,255,255,.7);padding:70px 24px 30px;border-top:3px solid var(--gold)}
+.foot-in{max-width:1240px;margin:0 auto}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1.2fr 1fr;gap:44px;margin-bottom:50px}
+.foot-brand{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.foot-brand svg{width:44px;height:44px}
+.foot-brand-text b{display:block;font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:#fff;letter-spacing:-.3px;line-height:1}
+.foot-brand-text small{display:block;font-size:10px;letter-spacing:2.5px;color:var(--gold);font-weight:700;margin-top:5px;text-transform:uppercase}
+.foot-desc{font-size:13.5px;line-height:1.7;margin-bottom:20px;color:rgba(255,255,255,.55)}
+.foot-col h5{font-size:11.5px;letter-spacing:2.5px;font-weight:800;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.foot-col a{display:block;color:rgba(255,255,255,.6);font-size:13.5px;padding:6px 0;transition:.2s}
+.foot-col a:hover{color:var(--gold-light);padding-left:4px}
+.foot-contact{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:rgba(255,255,255,.6);padding:6px 0;line-height:1.5}
+.foot-social{display:flex;gap:12px;margin-top:16px}
+.foot-social a{width:40px;height:40px;border-radius:50%;background:rgba(212,160,23,.12);border:1px solid rgba(212,160,23,.25);display:flex;align-items:center;justify-content:center;font-size:16px;transition:.3s;color:var(--gold-light)}
+.foot-social a:hover{background:var(--gold);color:#fff;transform:translateY(-3px);border-color:var(--gold)}
+.foot-bot{border-top:1px solid rgba(255,255,255,.08);padding-top:26px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:12.5px;color:rgba(255,255,255,.5)}
+.foot-bot a{color:var(--gold-light);font-weight:600}
+.foot-bot strong{color:#fff;font-weight:700}
+
+/* ====== WHATSAPP FLOAT ====== */
+.wa-float{position:fixed;bottom:24px;right:24px;width:60px;height:60px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;z-index:999;box-shadow:0 12px 40px rgba(37,211,102,.45);transition:.3s;animation:waPulse 2.5s infinite}
+.wa-float:hover{transform:scale(1.1);box-shadow:0 16px 50px rgba(37,211,102,.6)}
+.wa-float svg{width:32px;height:32px;fill:#fff}
+@keyframes waPulse{0%,100%{box-shadow:0 12px 40px rgba(37,211,102,.45)}50%{box-shadow:0 12px 50px rgba(37,211,102,.75)}}
+
+/* ====== RESPONSIVE ====== */
+@media(max-width:1000px){
+  .principal-card{grid-template-columns:1fr}
+  .principal-img{min-height:340px}
+  .principal-body{padding:40px 32px}
+  .hod-grid{grid-template-columns:repeat(2,1fr)}
+  .teacher-grid{grid-template-columns:repeat(3,1fr)}
+  .support-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:36px}
+}
+@media(max-width:700px){
+  .tb-nav{position:fixed;top:78px;left:0;right:0;background:rgba(253,250,243,.98);backdrop-filter:blur(20px);flex-direction:column;padding:28px;gap:22px;border-bottom:1px solid var(--line);transform:translateY(-150%);transition:.4s cubic-bezier(.2,.9,.3,1.1);align-items:stretch;text-align:center;box-shadow:0 20px 40px rgba(10,26,58,.1)}
+  .tb-nav.open{transform:translateY(0)}
+  .tb-nav a{font-size:16px;padding:8px 0}
+  .hamburger{display:flex}
+  .admission-badge{display:none}
+  .brand-text b{font-size:17px}
+  .brand-text small{font-size:8px;letter-spacing:1.8px}
+  .crest{width:44px;height:44px}
+  section{padding:70px 0}
+  .page-hero{padding:130px 20px 70px}
+  .principal-body{padding:32px 24px}
+  .principal-meta{gap:24px}
+  .hod-grid{grid-template-columns:1fr}
+  .teacher-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .support-card{padding:26px 22px;gap:16px}
+  .join-cta{padding:44px 24px}
+  .foot-grid{grid-template-columns:1fr;gap:34px}
+  .wa-float{width:54px;height:54px;bottom:18px;right:18px}
+  .wa-float svg{width:28px;height:28px}
+  .btn{padding:14px 24px;font-size:13.5px}
+}
+</style>
+</head>
+<body>
+
+<!-- ====== TOPBAR ====== -->
+<nav class="topbar" id="topbar">
+  <div class="tb-in">
+    <a href="index.html" class="school-brand">
+      <span class="crest">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="46" fill="#0a1a3a" stroke="#d4a017" stroke-width="3"/>
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#d4a017" stroke-width="1" opacity="0.5"/>
+          <path d="M50 22 L70 78 L58 78 L50 58 L42 78 L30 78 Z" fill="#d4a017"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <b>VAA Public School</b>
+        <small>Excellence in Education</small>
+      </span>
+    </a>
+
+    <div class="tb-nav" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="faculty.html" class="active">Faculty</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="admission.html">Admission</a>
+    </div>
+
+    <a href="admission.html" class="admission-badge">
+      <span class="dot"></span>
+      Admission Open 2026-27
+    </a>
+
+    <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ====== PAGE HERO ====== -->
+<section class="page-hero">
+  <div class="page-hero-in">
+    <span class="eyebrow">Our Faculty</span>
+    <h1>The educators behind <span class="gold">every success story.</span></h1>
+    <p>Meet the 60+ dedicated teachers who bring learning to life at VAA Public School every single day.</p>
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>·</span>
+      <span>Faculty</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PRINCIPAL ====== -->
+<section>
+  <div class="sec-in">
+    <div class="principal-card">
+      <div class="principal-img">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" alt="Principal" onerror="this.src='https://via.placeholder.com/800x900/1a2c52/d4a017?text=Principal'">
+      </div>
+      <div class="principal-body">
+        <span class="principal-role-tag">Principal</span>
+        <h2>Dr. Anita Sharma</h2>
+        <div class="principal-qual">M.Ed, Ph.D · Education Leadership</div>
+        <p>"Education is not the filling of a pail, but the lighting of a fire. At VAA Public School, every teacher is committed to sparking that fire in every child who walks through our gates."</p>
+        <p>With over 25 years of experience in school leadership, Dr. Sharma has been the guiding force behind VAA's transformation into one of Karnal's most respected institutions. She believes in a balance of academic rigour, moral grounding and joyful learning.</p>
+        <p>Under her leadership, VAA has introduced smart classrooms, expanded sports facilities and built a faculty development program that keeps our teachers at the forefront of modern pedagogy.</p>
+        <div class="principal-meta">
+          <div><b>25+</b><span>Years Experience</span></div>
+          <div><b>Ph.D</b><span>Education</span></div>
+          <div><b>2005</b><span>At VAA Since</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== HODs ====== -->
+<section style="background:var(--cream-soft)">
+  <div class="sec-in">
+    <span class="sec-eyebrow">Department Heads</span>
+    <h2 class="sec-title">Heads of <span class="gold">Departments.</span></h2>
+    <p class="sec-sub">Experienced academic leaders who guide each subject department with expertise and vision.</p>
+    <div class="hod-grid">
+      <div class="hod-card">
+        <div class="hod-img">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80" alt="HOD" onerror="this.src='https://via.placeholder.com/600/1a2c52/d4a017?text=HOD'">
+        </div>
+        <div class="hod-body">
+          <span class="hod-subject">Vice Principal</span>
+          <h3>Mr. Rajesh Kumar</h3>
+          <div class="hod-qual">M.A. English, B.Ed</div>
+          <div class="hod-exp">18 years experience</div>
+        </div>
+      </div>
+
+      <div class="hod-card">
+        <div class="hod-img">
+          <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=600&q=80" alt="HOD Science" onerror="this.src='https://via.placeholder.com/600/1a2c52/d4a017?text=Science'">
+        </div>
+        <div class="hod-body">
+          <span class="hod-subject">HOD Science</span>
+          <h3>Mrs. Sunita Yadav</h3>
+          <div class="hod-qual">M.Sc. Physics, B.Ed</div>
+          <div class="hod-exp">15 years experience</div>
+        </div>
+      </div>
+
+      <div class="hod-card">
+        <div class="hod-img">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80" alt="HOD Maths" onerror="this.src='https://via.placeholder.com/600/1a2c52/d4a017?text=Maths'">
+        </div>
+        <div class="hod-body">
+          <span class="hod-subject">HOD Mathematics</span>
+          <h3>Mr. Vikram Singh</h3>
+          <div class="hod-qual">M.Sc. Mathematics, B.Ed</div>
+          <div class="hod-exp">16 years experience</div>
+        </div>
+      </div>
+
+      <div class="hod-card">
+        <div class="hod-img">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80" alt="HOD English" onerror="this.src='https://via.placeholder.com/600/1a2c52/d4a017?text=English'">
+        </div>
+        <div class="hod-body">
+          <span class="hod-subject">HOD English</span>
+          <h3>Ms. Priya Nair</h3>
+          <div class="hod-qual">M.A. English Literature, B.Ed</div>
+          <div class="hod-exp">12 years experience</div>
+        </div>
+      </div>
+
+      <div class="hod-card">
+        <div class="hod-img">
+          <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=600&q=80" alt="HOD Social Studies" onerror="this.src='https://via.placeholder.com/600/1a2c52/d4a017?text=Social'">
+        </div>
+        <div class="hod-body">
+          <span class="hod-subject">HOD Social Studies</span>
+          <h3>Mrs. Kavita Rani</h3>
+          <div class="hod-qual">M.A. History, B.Ed</div>
+          <div class="hod-exp">14 years experience</div>
+        </div>
+      </div>
+
+      <div class="hod-card">
+        <div class="hod-img">
+          <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=80" alt="HOD Computer" onerror="this.src='https://via.placeholder.com/600/1a2c52/d4a017?text=Computer'">
+        </div>
+        <div class="hod-body">
+          <span class="hod-subject">HOD Computer Science</span>
+          <h3>Mr. Arjun Mehta</h3>
+          <div class="hod-qual">MCA, B.Ed</div>
+          <div class="hod-exp">10 years experience</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== TEACHERS ====== -->
+<section class="teachers-sec">
+  <div class="sec-in">
+    <span class="sec-eyebrow">Our Teachers</span>
+    <h2 class="sec-title">Meet the <span class="gold">teaching team.</span></h2>
+    <p class="sec-sub">Qualified, passionate and dedicated — our teachers are the heart of VAA Public School.</p>
+
+    <div class="teacher-filter" id="teacherFilter">
+      <button class="filter-btn active" data-subject="all">All Teachers</button>
+      <button class="filter-btn" data-subject="science">Science</button>
+      <button class="filter-btn" data-subject="maths">Maths</button>
+      <button class="filter-btn" data-subject="english">English</button>
+      <button class="filter-btn" data-subject="social">Social Studies</button>
+      <button class="filter-btn" data-subject="computer">Computer</button>
+      <button class="filter-btn" data-subject="primary">Primary</button>
+    </div>
+
+    <div class="teacher-grid" id="teacherGrid"></div>
+  </div>
+</section>
+
+<!-- ====== SUPPORT STAFF ====== -->
+<section>
+  <div class="sec-in">
+    <span class="sec-eyebrow">Support Team</span>
+    <h2 class="sec-title">The people who keep <span class="gold">VAA running.</span></h2>
+    <p class="sec-sub">Behind every smooth school day is a team of dedicated support staff.</p>
+    <div class="support-grid">
+      <div class="support-card">
+        <div class="support-icon">📋</div>
+        <div class="support-info">
+          <div class="role">Administration</div>
+          <h4>Mrs. Meena Gupta</h4>
+          <p>School administrator — handles admissions, records and parent communication.</p>
+        </div>
+      </div>
+      <div class="support-card">
+        <div class="support-icon">📚</div>
+        <div class="support-info">
+          <div class="role">Librarian</div>
+          <h4>Mr. Suresh Verma</h4>
+          <p>Manages our 8000+ book library and encourages a strong reading culture.</p>
+        </div>
+      </div>
+      <div class="support-card">
+        <div class="support-icon">🏏</div>
+        <div class="support-info">
+          <div class="role">Sports Coach</div>
+          <h4>Mr. Deepak Chauhan</h4>
+          <p>Physical education head — trains our athletics, cricket and football teams.</p>
+        </div>
+      </div>
+      <div class="support-card">
+        <div class="support-icon">🩺</div>
+        <div class="support-info">
+          <div class="role">School Nurse</div>
+          <h4>Mrs. Suman Devi</h4>
+          <p>Manages the medical room and ensures student health and safety daily.</p>
+        </div>
+      </div>
+      <div class="support-card">
+        <div class="support-icon">🎨</div>
+        <div class="support-info">
+          <div class="role">Art & Craft Teacher</div>
+          <h4>Ms. Ritu Sharma</h4>
+          <p>Leads creative arts, craft workshops and annual day decorations.</p>
+        </div>
+      </div>
+      <div class="support-card">
+        <div class="support-icon">🎵</div>
+        <div class="support-info">
+          <div class="role">Music Teacher</div>
+          <h4>Mr. Anil Joshi</h4>
+          <p>Trains students in vocal and instrumental music for events and competitions.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="join-cta">
+      <h3>Want to join <span class="gold">our team?</span></h3>
+      <p>We're always looking for passionate educators. If you believe in shaping young minds, we'd love to hear from you.</p>
+      <a href="https://wa.me/919671163712?text=Hi%20VAA%20Public%20School%2C%20I%20want%20to%20apply%20for%20a%20teaching%20position." class="btn btn-primary" target="_blank">💬 Send Your Resume</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CTA ====== -->
+<section class="cta-sec">
+  <div class="cta-in">
+    <h2>Give your child teachers who <span class="gold">truly care.</span></h2>
+    <p>Admissions for 2026-27 are now open. Come meet our faculty in person.</p>
+    <div class="cta-btns">
+      <a href="admission.html" class="btn btn-primary">Apply for Admission →</a>
+      <a href="https://wa.me/919671163712?text=Hi%20VAA%20Public%20School%2C%20I%20want%20to%20schedule%20a%20campus%20visit." class="btn btn-secondary" target="_blank">💬 Schedule a Visit</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="foot-in">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" fill="#0a1a3a" stroke="#d4a017" stroke-width="3"/>
+            <path d="M50 22 L70 78 L58 78 L50 58 L42 78 L30 78 Z" fill="#d4a017"/>
+          </svg>
+          <div class="foot-brand-text">
+            <b>VAA Public School</b>
+            <small>Excellence in Education</small>
+          </div>
+        </div>
+        <p class="foot-desc">A premier co-educational school in Karnal, nurturing young minds since 2005. Smart classrooms, expert faculty and a values-first approach.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Quick Links</h5>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="faculty.html">Faculty</a>
+        <a href="schedule.html">Schedule</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="admission.html">Admission</a>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <div class="foot-contact"><span>📞</span><span>+91 9671163712</span></div>
+        <div class="foot-contact"><span>✉️</span><span>vaapublicschool@example.com</span></div>
+        <div class="foot-contact"><span>📍</span><span>VAA Public School, Karnal, Haryana 132001</span></div>
+        <div class="foot-contact"><span>🕐</span><span>Mon-Sat · 8:00 AM - 2:30 PM</span></div>
+      </div>
+      <div class="foot-col">
+        <h5>Follow Us</h5>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">📸</a>
+          <a href="#" aria-label="Facebook">📘</a>
+          <a href="#" aria-label="YouTube">▶️</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div>© 2026 <strong>VAA Public School</strong> · All rights reserved.</div>
+      <div>Powered by <a href="https://vaan-consultancy.pages.dev/" target="_blank">VAAN Consultancy</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ====== WHATSAPP FLOAT ====== -->
+<a href="https://wa.me/919671163712?text=Hi%20VAA%20Public%20School%2C%20I%20want%20to%20know%20more%20about%20the%20faculty." class="wa-float" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+function toggleNav(){
+  document.getElementById("navLinks").classList.toggle("open");
+  document.getElementById("hamburger").classList.toggle("open");
+}
+document.querySelectorAll(".tb-nav a").forEach(a => {
+  a.addEventListener("click", () => {
+    document.getElementById("navLinks").classList.remove("open");
+    document.getElementById("hamburger").classList.remove("open");
+  });
+});
+window.addEventListener("scroll", () => {
+  document.getElementById("topbar").classList.toggle("scrolled", window.scrollY > 40);
+});
+
+/* ====== TEACHER DATA + RENDER ====== */
+const TEACHERS = [
+  { name: "Mrs. Anjali Rana", subject: "science", subjectLabel: "Science", qual: "M.Sc. Chemistry, B.Ed" },
+  { name: "Mr. Rakesh Kumar", subject: "science", subjectLabel: "Science", qual: "M.Sc. Biology, B.Ed" },
+  { name: "Ms. Neha Sharma", subject: "science", subjectLabel: "Science", qual: "M.Sc. Physics, B.Ed" },
+  { name: "Mr. Amit Verma", subject: "maths", subjectLabel: "Mathematics", qual: "M.Sc. Maths, B.Ed" },
+  { name: "Mrs. Pooja Singh", subject: "maths", subjectLabel: "Mathematics", qual: "M.Sc. Maths, B.Ed" },
+  { name: "Mr. Sanjay Gupta", subject: "maths", subjectLabel: "Mathematics", qual: "M.Sc. Statistics" },
+  { name: "Ms. Ritu Malhotra", subject: "english", subjectLabel: "English", qual: "M.A. English, B.Ed" },
+  { name: "Mr. Kunal Bhatia", subject: "english", subjectLabel: "English", qual: "M.A. English Literature" },
+  { name: "Mrs. Shalini Tyagi", subject: "english", subjectLabel: "English", qual: "M.A. English, B.Ed" },
+  { name: "Mr. Manoj Yadav", subject: "social", subjectLabel: "Social Studies", qual: "M.A. Political Science" },
+  { name: "Mrs. Reena Chauhan", subject: "social", subjectLabel: "Social Studies", qual: "M.A. Geography, B.Ed" },
+  { name: "Mr. Deepak Rathi", subject: "social", subjectLabel: "Social Studies", qual: "M.A. Economics, B.Ed" },
+  { name: "Ms. Karan Sethi", subject: "computer", subjectLabel: "Computer Science", qual: "MCA, B.Ed" },
+  { name: "Mr. Nitin Arora", subject: "computer", subjectLabel: "Computer Science", qual: "BCA, MCA" },
+  { name: "Mrs. Meenakshi Joshi", subject: "primary", subjectLabel: "Primary", qual: "M.A., B.Ed" },
+  { name: "Ms. Suman Lata", subject: "primary", subjectLabel: "Primary", qual: "B.A., B.Ed" },
+  { name: "Mr. Harsh Vardhan", subject: "primary", subjectLabel: "Primary", qual: "B.Sc., B.Ed" },
+  { name: "Mrs. Kiran Bala", subject: "primary", subjectLabel: "Primary", qual: "M.A., D.El.Ed" },
+  { name: "Ms. Tanvi Kapoor", subject: "primary", subjectLabel: "Primary", qual: "B.El.Ed" },
+  { name: "Mr. Yogesh Sharma", subject: "primary", subjectLabel: "Primary", qual: "M.A., B.Ed" }
+];
+
+const AVATAR_COLORS = ["1a2c52", "0a1a3a", "2a3c62", "0f2547", "1a3a5a"];
+
+function renderTeachers(filter){
+  const grid = document.getElementById("teacherGrid");
+  const list = filter === "all" ? TEACHERS : TEACHERS.filter(t => t.subject === filter);
+  grid.innerHTML = list.map((t, i) => {
+    const initials = t.name.replace(/^(Mr\.|Mrs\.|Ms\.)\s*/, "").split(" ").map(w => w[0]).slice(0,2).join("");
+    const bg = AVATAR_COLORS[i % AVATAR_COLORS.length];
+    const avatar = `https://via.placeholder.com/400/${bg}/d4a017?text=${encodeURIComponent(initials)}`;
+    return `
+      <div class="teacher-card">
+        <div class="teacher-img">
+          <img src="${avatar}" alt="${t.name}" loading="lazy">
+        </div>
+        <div class="teacher-body">
+          <h4>${t.name}</h4>
+          <div class="teacher-subject">${t.subjectLabel}</div>
+          <div class="teacher-qual">${t.qual}</div>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+renderTeachers("all");
+
+document.querySelectorAll(".filter-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    renderTeachers(btn.dataset.subject);
+  });
+});
+
+/* ====== SCROLL REVEAL ====== */
+if ("IntersectionObserver" in window){
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "translateY(0)";
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll("section .sec-in > *, .hod-card, .teacher-card, .support-card").forEach(el => {
+    el.style.opacity = "0";
+    el.style.transform = "translateY(30px)";
+    el.style.transition = "opacity .8s ease, transform .8s cubic-bezier(.2,.9,.3,1.1)";
+    observer.observe(el);
+  });
+}
+</script>
+
+</body>
+</html>
