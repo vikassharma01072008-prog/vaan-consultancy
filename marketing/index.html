@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>VAAN Marketing Team — Authorized Partner</title>
-<meta name="description" content="VAAN Marketing Team — Authorized representative of VAAN Consultancy. Bring businesses, earn rewards.">
+<title>VAAN Marketing Team — Verified Business Partner</title>
+<meta name="description" content="VAAN Marketing Team — Authorized representative of VAAN Consultancy. Verified business partner for websites, QR services, automation and digital growth.">
 <meta name="theme-color" content="#02040a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -251,7 +251,7 @@ img{max-width:100%;display:block}
   100%{opacity:0;transform:translate(-50%,-50%) scale(.9);filter:blur(10px)}
 }
 
-/* ===== CARD WRAP — top-aligned, no gap ===== */
+/* ===== CARD WRAP — clean, no gap ===== */
 #cardWrap{
   position:relative;
   z-index:50;
@@ -268,7 +268,7 @@ img{max-width:100%;display:block}
   pointer-events:auto;
 }
 
-/* ===== CARD — with breathing room ===== */
+/* ===== CARD ===== */
 .card{
   display:inline-block;
   text-align:left;
@@ -313,44 +313,46 @@ img{max-width:100%;display:block}
 
 .card > *{position:relative;z-index:1}
 
-/* Verified badge */
-.partner-badge{
+/* Verified stamp */
+.verified-stamp{
   display:flex;
   justify-content:center;
-  margin-bottom:20px;
+  margin-bottom:18px;
 }
-.partner-badge span{
+.verified-stamp .stamp{
   display:inline-flex;
   align-items:center;
-  gap:8px;
+  gap:9px;
   padding:8px 18px;
-  background:linear-gradient(135deg,rgba(37,180,110,.18),rgba(37,180,110,.06));
-  border:1px solid rgba(37,180,110,.5);
+  background:linear-gradient(135deg,rgba(37,180,110,.2),rgba(37,180,110,.06));
+  border:1.5px solid rgba(37,180,110,.55);
   border-radius:99px;
   color:#4ee39a;
   font-family:'JetBrains Mono',monospace;
   font-size:9.5px;
   font-weight:800;
-  letter-spacing:2.2px;
+  letter-spacing:2.4px;
   text-transform:uppercase;
-  animation:badgePulse 2.5s ease-in-out infinite;
+  position:relative;
+  animation:stampPulse 3s ease-in-out infinite;
 }
-.partner-badge span::before{
+.verified-stamp .stamp::before{
   content:"✓";
   display:flex;
   align-items:center;
   justify-content:center;
-  width:15px;height:15px;
+  width:16px;height:16px;
   border-radius:50%;
-  background:#25b46e;
+  background:linear-gradient(135deg,#25b46e,#128c3e);
   color:#fff;
-  font-size:10px;
+  font-size:11px;
   font-weight:900;
   line-height:1;
+  box-shadow:0 0 10px rgba(37,180,110,.6);
 }
-@keyframes badgePulse{
-  0%,100%{box-shadow:0 0 14px rgba(37,180,110,.4)}
-  50%{box-shadow:0 0 28px rgba(37,180,110,.8)}
+@keyframes stampPulse{
+  0%,100%{box-shadow:0 0 14px rgba(37,180,110,.35)}
+  50%{box-shadow:0 0 28px rgba(37,180,110,.75)}
 }
 
 /* Logo */
@@ -420,11 +422,11 @@ img{max-width:100%;display:block}
 .card-name{
   text-align:center;
   font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:26px;
+  font-size:24px;
   font-weight:700;
-  letter-spacing:3px;
+  letter-spacing:2.5px;
   color:var(--cream);
-  line-height:1.1;
+  line-height:1.15;
   margin-bottom:8px;
 }
 .card-name span{
@@ -436,7 +438,7 @@ img{max-width:100%;display:block}
 .card-subtitle{
   text-align:center;
   font-size:9.5px;
-  letter-spacing:4.5px;
+  letter-spacing:4px;
   font-weight:700;
   color:var(--cream-dim);
   text-transform:uppercase;
@@ -482,8 +484,8 @@ img{max-width:100%;display:block}
 @keyframes pulseGreen{0%,100%{opacity:1}50%{opacity:.5}}
 .card-live b{color:var(--gold-bright);font-weight:700}
 
-/* Contact block — Vikas */
-.card-partner{
+/* Team block (instead of founder) */
+.card-founder{
   padding:18px 20px;
   background:linear-gradient(135deg,rgba(79,143,255,.14),rgba(212,160,23,.1));
   border:1px solid rgba(240,193,75,.3);
@@ -496,26 +498,26 @@ img{max-width:100%;display:block}
   overflow:hidden;
   isolation:isolate;
 }
-.card-partner::before{
+.card-founder::before{
   content:"";
   position:absolute;
   top:0;left:-100%;
   width:100%;height:100%;
   background:linear-gradient(90deg,transparent,rgba(240,193,75,.22),transparent);
-  animation:partnerSheen 5s ease-in-out infinite;
+  animation:founderSheen 5s ease-in-out infinite;
 }
-@keyframes partnerSheen{
+@keyframes founderSheen{
   0%{left:-100%}
   50%,100%{left:200%}
 }
-.partner-avatar-wrap{
+.founder-avatar-wrap{
   position:relative;
   flex-shrink:0;
   width:56px;
   height:56px;
   z-index:1;
 }
-.partner-avatar{
+.founder-avatar{
   width:100%;height:100%;
   border-radius:50%;
   background:linear-gradient(135deg,var(--gold-hot),var(--gold-soft));
@@ -523,14 +525,15 @@ img{max-width:100%;display:block}
   align-items:center;
   justify-content:center;
   font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:24px;
+  font-size:18px;
   font-weight:700;
   color:#0a1a3a;
   position:relative;
   z-index:2;
   box-shadow:inset 0 0 12px rgba(255,255,255,.4);
+  letter-spacing:.5px;
 }
-.partner-ring{
+.founder-ring{
   position:absolute;
   inset:-5px;
   border-radius:50%;
@@ -542,7 +545,7 @@ img{max-width:100%;display:block}
   0%,100%{transform:scale(1);opacity:.8}
   50%{transform:scale(1.12);opacity:.35}
 }
-.partner-ring-2{
+.founder-ring-2{
   position:absolute;
   inset:-9px;
   border-radius:50%;
@@ -551,7 +554,7 @@ img{max-width:100%;display:block}
   z-index:0;
 }
 @keyframes ringRotate{to{transform:rotate(360deg)}}
-.partner-info{
+.founder-info{
   display:flex;
   flex-direction:column;
   line-height:1.3;
@@ -559,7 +562,7 @@ img{max-width:100%;display:block}
   z-index:1;
   min-width:0;
 }
-.partner-tag{
+.founder-tag{
   font-family:'JetBrains Mono',monospace;
   font-size:8px;
   font-weight:700;
@@ -568,9 +571,9 @@ img{max-width:100%;display:block}
   text-transform:uppercase;
   margin-bottom:4px;
 }
-.partner-name{
+.founder-name{
   font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:22px;
+  font-size:20px;
   font-weight:700;
   letter-spacing:.3px;
   background:linear-gradient(135deg,#ffd966,#f0c14b 30%,#5fd9ff);
@@ -579,35 +582,13 @@ img{max-width:100%;display:block}
   -webkit-text-fill-color:transparent;
   margin-bottom:3px;
 }
-.partner-phone{
+.founder-role{
+  font-size:8.5px;
+  letter-spacing:2px;
+  font-weight:700;
+  color:rgba(240,193,75,.8);
+  text-transform:uppercase;
   font-family:'JetBrains Mono',monospace;
-  font-size:11.5px;
-  font-weight:700;
-  color:rgba(240,193,75,.85);
-  letter-spacing:1px;
-}
-
-/* Pitch box */
-.card-pitch{
-  padding:16px 18px;
-  background:rgba(212,160,23,.06);
-  border:1px dashed rgba(212,160,23,.35);
-  border-radius:16px;
-  margin-bottom:20px;
-  text-align:center;
-}
-.card-pitch h3{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:18px;
-  font-weight:700;
-  color:var(--gold-hot);
-  letter-spacing:.3px;
-  margin-bottom:8px;
-}
-.card-pitch p{
-  font-size:12px;
-  color:rgba(253,250,243,.78);
-  line-height:1.6;
 }
 
 /* Section label */
@@ -776,13 +757,13 @@ img{max-width:100%;display:block}
 @media(max-width:380px){
   .card{padding:22px 16px 20px}
   .card-logo-wrap{width:82px;height:82px;margin-bottom:16px}
-  .card-name{font-size:22px;letter-spacing:2.2px}
+  .card-name{font-size:20px;letter-spacing:2px}
   .qr-box img{width:125px;height:125px}
   .svc-item{font-size:10px;padding:10px 8px}
   .btn{font-size:12px;padding:13px 16px;min-height:48px}
   .share-btn{font-size:7px;padding:10px 3px;min-height:58px}
-  .partner-avatar-wrap{width:50px;height:50px}
-  .partner-name{font-size:19px}
+  .founder-avatar-wrap{width:50px;height:50px}
+  .founder-name{font-size:17px}
 }
 </style>
 </head>
@@ -824,8 +805,8 @@ img{max-width:100%;display:block}
 <div id="cardWrap">
   <div class="card" id="mainCard">
 
-    <div class="partner-badge">
-      <span>Verified VAAN Partner</span>
+    <div class="verified-stamp">
+      <span class="stamp">Verified VAAN Team</span>
     </div>
 
     <div class="card-logo-wrap">
@@ -835,36 +816,31 @@ img{max-width:100%;display:block}
     </div>
 
     <h1 class="card-name"><span>VAAN</span> MARKETING TEAM</h1>
-    <div class="card-subtitle">Authorized Partner · India</div>
+    <div class="card-subtitle">Authorized · Verified · India</div>
 
-    <div class="card-tagline">Bring Businesses · Earn Rewards · Grow Together</div>
+    <div class="card-tagline">Vision · Automation · Advancement · Network</div>
 
     <div class="card-live">
       <span class="dot"></span>
-      <span id="liveStatus">Accepting Referrals</span>
+      <span id="liveStatus">Open now</span>
       <b id="liveTime">—:—</b>
       <span>IST</span>
     </div>
 
-    <div class="card-partner">
-      <div class="partner-avatar-wrap">
-        <div class="partner-ring-2"></div>
-        <div class="partner-ring"></div>
-        <div class="partner-avatar">VS</div>
+    <div class="card-founder">
+      <div class="founder-avatar-wrap">
+        <div class="founder-ring-2"></div>
+        <div class="founder-ring"></div>
+        <div class="founder-avatar">VAAN</div>
       </div>
-      <div class="partner-info">
-        <span class="partner-tag">Your Contact · Verified</span>
-        <span class="partner-name">Vikas Sharma</span>
-        <span class="partner-phone">+91 9671163712</span>
+      <div class="founder-info">
+        <span class="founder-tag">Official Representative</span>
+        <span class="founder-name">VAAN Marketing Team</span>
+        <span class="founder-role">Authorized Business Partner</span>
       </div>
     </div>
 
-    <div class="card-pitch">
-      <h3>Refer a Business. Get Rewarded.</h3>
-      <p>Know a shop, hotel, gym, salon or restaurant that needs a website, QR menu or automation? Connect them to VAAN and earn a referral reward when the deal closes.</p>
-    </div>
-
-    <div class="card-label">What VAAN Builds</div>
+    <div class="card-label">What we build</div>
     <div class="card-services">
       <div class="svc-item">Custom Websites</div>
       <div class="svc-item">QR Services</div>
@@ -883,13 +859,13 @@ img{max-width:100%;display:block}
     <a href="https://vaanconsultancy.in" class="qr-link">vaanconsultancy.in</a>
 
     <div class="card-actions">
-      <a href="https://wa.me/919671163712?text=Hi%20Vikas%2C%20I%20want%20to%20join%20the%20VAAN%20Marketing%20Team." class="btn btn-primary" target="_blank" rel="noopener">
+      <a href="https://wa.me/919671163712?text=Hi%20VAAN%20Marketing%20Team%2C%20I%20want%20to%20know%20about%20your%20services." class="btn btn-primary" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        <span>Join VAAN Marketing Team</span>
+        <span>Chat on WhatsApp</span>
       </a>
-      <a href="https://wa.me/919671163712?text=Hi%20Vikas%2C%20I%20have%20a%20business%20referral%20for%20VAAN." class="btn btn-secondary" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-        <span>Send a Referral</span>
+      <a href="tel:+919671163712" class="btn btn-secondary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>Call Now</span>
       </a>
     </div>
 
@@ -1498,15 +1474,15 @@ img{max-width:100%;display:block}
     if (timeEl) timeEl.textContent = h12 + ":" + mm + " " + ampm;
     const statusEl = document.getElementById("liveStatus");
     if (statusEl){
-      const isOpen = hours >= 9 && hours < 21;
-      statusEl.textContent = isOpen ? "Accepting Referrals" : "Replies Tomorrow";
+      const isOpen = hours >= 9 && hours < 20;
+      statusEl.textContent = isOpen ? "Open now" : "Replies fast";
     }
   }
 
   window.shareCard = async function(){
     const shareData = {
-      title: "VAAN Marketing Team — Authorized Partner",
-      text: "VAAN Marketing Team — bring businesses to VAAN and earn rewards. Authorized, verified, official.",
+      title: "VAAN Marketing Team — Verified Partner",
+      text: "VAAN Marketing Team — Authorized, verified business partner of VAAN Consultancy.",
       url: "https://vaanconsultancy.in/marketing"
     };
     if (navigator.share){
@@ -1526,14 +1502,14 @@ img{max-width:100%;display:block}
       "N:VAAN Marketing Team;;;;",
       "FN:VAAN Marketing Team",
       "ORG:VAAN Consultancy",
-      "TITLE:Authorized Marketing Partner · India",
+      "TITLE:Authorized Business Partner · India",
       "TEL;TYPE=CELL,VOICE:+919671163712",
       "TEL;TYPE=WORK,VOICE:+919671163712",
       "EMAIL;TYPE=WORK:hello@vaanconsultancy.in",
       "URL:https://vaanconsultancy.in/marketing",
       "URL:https://vaanconsultancy.in",
       "X-SOCIALPROFILE;type=instagram:https://www.instagram.com/vaa_enterprises",
-      "NOTE:VAAN Marketing Team — Authorized representative. Bring businesses, earn referral rewards. Contact Vikas Sharma.",
+      "NOTE:VAAN Marketing Team — Authorized verified partner of VAAN Consultancy. Websites, QR services, automation, social media, admin panels.",
       "ADR;TYPE=WORK:;;Karnal;Haryana;;132001;India",
       "END:VCARD"
     ].join("\r\n");
