@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>VAAN Marketing Partner — Authorized Representative</title>
+<meta name="description" content="VAAN Marketing Partner — Authorized representative of VAAN Consultancy. Bring businesses, earn referral rewards.">
+<meta name="theme-color" content="#02040a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="canonical" href="https://vaanconsultancy.in/marketing/">
+<link rel="icon" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{width:100%}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  background:#02040a;
+  color:#f5f5f5;
+  line-height:1.55;
+  min-height:100vh;
+}
+
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+img{max-width:100%;display:block}
+
+/* ============================================================
+   SIMPLE TOP-ALIGNED LAYOUT — no tricks, no flex, no centering
+   ============================================================ */
+.page{
+  width:100%;
+  padding:16px 12px 40px;
+  text-align:center;
+}
+
+.card{
+  display:inline-block;
+  text-align:left;
+  width:100%;
+  max-width:400px;
+  background:linear-gradient(165deg,#122448 0%,#0a1a3a 50%,#060f24 100%);
+  border:1px solid rgba(212,160,23,.25);
+  border-radius:24px;
+  padding:22px 18px 20px;
+  box-shadow:0 30px 60px rgba(0,0,0,.6), 0 0 60px rgba(212,160,23,.08);
+  position:relative;
+  overflow:hidden;
+  vertical-align:top;
+}
+
+.card::before{
+  content:"";
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(212,160,23,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(212,160,23,.04) 1px,transparent 1px);
+  background-size:26px 26px;
+  pointer-events:none;
+  mask-image:radial-gradient(ellipse at 50% 40%,#000 20%,transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse at 50% 40%,#000 20%,transparent 80%);
+}
+
+.card::after{
+  content:"";
+  position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(240,193,75,.8),transparent);
+  pointer-events:none;
+}
+
+.card > *{position:relative;z-index:1}
+
+/* Badge — VERIFIED PARTNER */
+.partner-badge{
+  display:flex;
+  justify-content:center;
+  margin-bottom:14px;
+}
+.partner-badge span{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 16px;
+  background:linear-gradient(135deg,rgba(37,180,110,.18),rgba(37,180,110,.08));
+  border:1px solid rgba(37,180,110,.5);
+  border-radius:99px;
+  color:#4ee39a;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:2.2px;
+  text-transform:uppercase;
+}
+.partner-badge span::before{
+  content:"✓";
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:14px;height:14px;
+  border-radius:50%;
+  background:#25b46e;
+  color:#fff;
+  font-size:10px;
+  font-weight:900;
+  line-height:1;
+}
+@keyframes badgePulse{
+  0%,100%{box-shadow:0 0 12px rgba(37,180,110,.4)}
+  50%{box-shadow:0 0 24px rgba(37,180,110,.8)}
+}
+.partner-badge span{animation:badgePulse 2.5s ease-in-out infinite}
+
+/* Logo */
+.card-logo-wrap{
+  width:80px;
+  height:80px;
+  margin:0 auto 12px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.card-logo-wrap::before{
+  content:"";
+  position:absolute;
+  inset:-5px;
+  border-radius:50%;
+  border:1.5px solid rgba(240,193,75,.5);
+  border-top-color:transparent;
+  border-bottom-color:transparent;
+  animation:logoRingSpin 6s linear infinite;
+  pointer-events:none;
+}
+@keyframes logoRingSpin{to{transform:rotate(360deg)}}
+.card-logo-wrap::after{
+  content:"";
+  position:absolute;
+  inset:-12px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(240,193,75,.22),transparent 65%);
+  animation:logoHalo 3s ease-in-out infinite;
+  pointer-events:none;
+  z-index:-1;
+}
+@keyframes logoHalo{
+  0%,100%{opacity:.5;transform:scale(1)}
+  50%{opacity:.9;transform:scale(1.15)}
+}
+.card-logo{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  z-index:2;
+}
+.card-logo img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 0 16px rgba(240,193,75,.55));
+}
+
+/* Name */
+.card-name{
+  text-align:center;
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:24px;
+  font-weight:700;
+  letter-spacing:2.5px;
+  color:#fdfaf3;
+  line-height:1;
+  margin-bottom:6px;
+}
+.card-name span{
+  background:linear-gradient(135deg,#ffd966,#f0c14b 40%,#d4a017);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.card-subtitle{
+  text-align:center;
+  font-size:9px;
+  letter-spacing:4px;
+  font-weight:700;
+  color:#a89a7a;
+  text-transform:uppercase;
+  margin-bottom:14px;
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* Tagline */
+.card-tagline{
+  text-align:center;
+  font-size:8.5px;
+  letter-spacing:1.8px;
+  font-weight:600;
+  color:rgba(240,193,75,.9);
+  text-transform:uppercase;
+  padding:9px 0;
+  border-top:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  margin-bottom:14px;
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* Live time */
+.card-live{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  font-size:10.5px;
+  color:#a89a7a;
+  margin-bottom:16px;
+  font-family:'JetBrains Mono',monospace;
+  text-transform:uppercase;
+}
+.card-live .dot{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:#25b46e;
+  box-shadow:0 0 10px #25b46e;
+  animation:pulseGreen 2s infinite;
+}
+@keyframes pulseGreen{0%,100%{opacity:1}50%{opacity:.5}}
+.card-live b{color:#f0c14b;font-weight:700}
+
+/* Partner box */
+.card-partner{
+  padding:16px;
+  background:linear-gradient(135deg,rgba(79,143,255,.16),rgba(212,160,23,.12));
+  border:1px solid rgba(240,193,75,.35);
+  border-radius:16px;
+  margin-bottom:16px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  position:relative;
+  overflow:hidden;
+}
+.card-partner::before{
+  content:"";
+  position:absolute;
+  top:0;left:-100%;
+  width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(240,193,75,.25),transparent);
+  animation:partnerSheen 4s ease-in-out infinite;
+}
+@keyframes partnerSheen{
+  0%{left:-100%}
+  50%,100%{left:200%}
+}
+.partner-avatar-wrap{
+  position:relative;
+  flex-shrink:0;
+  width:52px;
+  height:52px;
+  z-index:1;
+}
+.partner-avatar{
+  width:100%;height:100%;
+  border-radius:50%;
+  background:linear-gradient(135deg,#5fd9ff,#4f8fff 50%,#d4a017);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:22px;
+  font-weight:700;
+  color:#0a1a3a;
+  position:relative;
+  z-index:2;
+  box-shadow:inset 0 0 14px rgba(255,255,255,.4);
+}
+.partner-ring{
+  position:absolute;
+  inset:-5px;
+  border-radius:50%;
+  border:1.5px solid rgba(240,193,75,.75);
+  animation:ringPulse 3s ease-in-out infinite;
+  z-index:1;
+}
+@keyframes ringPulse{
+  0%,100%{transform:scale(1);opacity:.8}
+  50%{transform:scale(1.12);opacity:.35}
+}
+.partner-info{
+  display:flex;
+  flex-direction:column;
+  line-height:1.25;
+  position:relative;
+  z-index:1;
+}
+.partner-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:7.5px;
+  font-weight:700;
+  letter-spacing:2.2px;
+  color:#5fd9ff;
+  text-transform:uppercase;
+  margin-bottom:3px;
+}
+.partner-name{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:19px;
+  font-weight:700;
+  background:linear-gradient(135deg,#ffd966,#f0c14b 30%,#5fd9ff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:2px;
+}
+.partner-role{
+  font-size:7.5px;
+  letter-spacing:1.4px;
+  font-weight:700;
+  color:rgba(240,193,75,.8);
+  text-transform:uppercase;
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* Pitch section */
+.card-pitch{
+  padding:14px;
+  background:rgba(212,160,23,.06);
+  border:1px dashed rgba(212,160,23,.35);
+  border-radius:14px;
+  margin-bottom:16px;
+  text-align:center;
+}
+.card-pitch h3{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:17px;
+  font-weight:700;
+  color:#ffd966;
+  letter-spacing:.3px;
+  margin-bottom:6px;
+}
+.card-pitch p{
+  font-size:11.5px;
+  color:rgba(253,250,243,.75);
+  line-height:1.5;
+}
+
+/* Section label */
+.card-label{
+  font-size:9px;
+  letter-spacing:3px;
+  font-weight:800;
+  color:#d4a017;
+  text-transform:uppercase;
+  margin-bottom:10px;
+  font-family:'JetBrains Mono',monospace;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.card-label::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg,rgba(212,160,23,.4),transparent);
+}
+
+/* Services */
+.card-services{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+  margin-bottom:16px;
+}
+.svc-item{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:12px;
+  padding:10px 8px;
+  text-align:center;
+  font-size:9.5px;
+  font-weight:600;
+  color:rgba(253,250,243,.92);
+  line-height:1.3;
+}
+
+/* QR */
+.card-qr{
+  display:flex;
+  justify-content:center;
+  margin-bottom:12px;
+}
+.qr-box{
+  background:#0a1a3a;
+  padding:8px;
+  border-radius:16px;
+  border:1px solid rgba(212,160,23,.25);
+  box-shadow:0 0 30px rgba(212,160,23,.25);
+}
+.qr-box img{
+  width:130px;height:130px;
+  display:block;
+  border-radius:8px;
+}
+.qr-hint{
+  text-align:center;
+  font-size:8.5px;
+  letter-spacing:2.5px;
+  font-weight:700;
+  color:#a89a7a;
+  text-transform:uppercase;
+  margin-bottom:8px;
+  font-family:'JetBrains Mono',monospace;
+}
+.qr-link{
+  display:block;
+  text-align:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  font-weight:700;
+  color:#f0c14b;
+  padding:7px 10px;
+  margin:0 auto 14px;
+  max-width:260px;
+  border:1px dashed rgba(212,160,23,.4);
+  border-radius:9px;
+  background:rgba(212,160,23,.05);
+}
+
+/* Action buttons */
+.card-actions{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-bottom:14px;
+}
+.btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  padding:13px 16px;
+  border-radius:14px;
+  font-size:12.5px;
+  font-weight:700;
+  text-align:center;
+  min-height:46px;
+  transition:transform .2s ease;
+}
+.btn:active{transform:scale(.98)}
+.btn-primary{
+  background:linear-gradient(135deg,#25d366,#128c3e);
+  color:#fff;
+  box-shadow:0 8px 24px rgba(37,211,102,.35);
+}
+.btn-secondary{
+  background:linear-gradient(135deg,#ffd966,#f0c14b 40%,#d4a017);
+  color:#0a1a3a;
+  box-shadow:0 8px 24px rgba(212,160,23,.35);
+}
+.btn svg{width:17px;height:17px;flex-shrink:0}
+
+/* Share row */
+.card-share{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:5px;
+  margin-bottom:14px;
+}
+.share-btn{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  padding:10px 3px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:12px;
+  color:#a89a7a;
+  font-size:7px;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  min-height:56px;
+  font-family:'JetBrains Mono',monospace;
+  text-align:center;
+  line-height:1.15;
+}
+.share-btn svg{width:17px;height:17px;color:#d4a017}
+
+/* Footer */
+.card-footer{
+  text-align:center;
+  padding-top:12px;
+  border-top:1px solid rgba(255,255,255,.07);
+  font-size:8.5px;
+  color:rgba(168,154,122,.75);
+  letter-spacing:1.5px;
+  line-height:1.7;
+  font-family:'JetBrains Mono',monospace;
+  text-transform:uppercase;
+}
+.card-footer b{color:#d4a017;font-weight:700}
+
+@media(max-width:380px){
+  .card{padding:18px 14px 16px}
+  .card-logo-wrap{width:70px;height:70px}
+  .card-name{font-size:21px}
+  .qr-box img{width:115px;height:115px}
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="card">
+
+    <div class="partner-badge">
+      <span>Verified VAAN Partner</span>
+    </div>
+
+    <div class="card-logo-wrap">
+      <div class="card-logo">
+        <img src="logo.png" alt="VAAN logo" onerror="this.style.display='none'">
+      </div>
+    </div>
+
+    <h1 class="card-name"><span>VAAN</span> MARKETING</h1>
+    <div class="card-subtitle">Authorized Partner · India</div>
+
+    <div class="card-tagline">Bring Businesses · Earn Rewards · Grow Together</div>
+
+    <div class="card-live">
+      <span class="dot"></span>
+      <span id="liveStatus">Accepting Referrals</span>
+      <b id="liveTime">—:—</b>
+      <span>IST</span>
+    </div>
+
+    <div class="card-partner">
+      <div class="partner-avatar-wrap">
+        <div class="partner-ring"></div>
+        <div class="partner-avatar">VAAN</div>
+      </div>
+      <div class="partner-info">
+        <span class="partner-tag">Official Representative</span>
+        <span class="partner-name">VAAN Marketing Team</span>
+        <span class="partner-role">Authorized · Verified · India</span>
+      </div>
+    </div>
+
+    <div class="card-pitch">
+      <h3>Refer a Business. Get Rewarded.</h3>
+      <p>Know a shop, hotel, gym, salon or restaurant that needs a website, QR menu or automation? Connect them to VAAN and earn a referral reward when the deal closes.</p>
+    </div>
+
+    <div class="card-label">What VAAN Builds</div>
+    <div class="card-services">
+      <div class="svc-item">Custom Websites</div>
+      <div class="svc-item">QR Services</div>
+      <div class="svc-item">Automation</div>
+      <div class="svc-item">Google Reviews Setup</div>
+      <div class="svc-item">Social Media<br>Setup · Management · Marketing</div>
+      <div class="svc-item">Admin Panels</div>
+    </div>
+
+    <div class="card-qr">
+      <div class="qr-box">
+        <img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?data=https%3A%2F%2Fvaanconsultancy.in&size=260x260&color=d4a017&bgcolor=0a1a3a&qzone=2" alt="Scan to visit vaanconsultancy.in">
+      </div>
+    </div>
+    <div class="qr-hint">Scan · Verify · Connect</div>
+    <a href="https://vaanconsultancy.in" class="qr-link">vaanconsultancy.in</a>
+
+    <div class="card-actions">
+      <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20become%20a%20marketing%20partner." class="btn btn-primary" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        <span>Become a Partner</span>
+      </a>
+      <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20have%20a%20business%20referral%20for%20you." class="btn btn-secondary" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        <span>Send a Referral</span>
+      </a>
+    </div>
+
+    <div class="card-share">
+      <button class="share-btn" onclick="shareCard()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Share
+      </button>
+      <button class="share-btn" onclick="saveContact()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+        Save
+      </button>
+      <button class="share-btn" onclick="downloadVCard()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download
+      </button>
+      <button class="share-btn" onclick="copyLink(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy
+      </button>
+    </div>
+
+    <div class="card-footer">
+      🇮🇳 Official VAAN Marketing Partner<br>
+      @vaa_enterprises · © 2026 VAAN Consultancy
+    </div>
+
+  </div>
+</div>
+
+<script>
+function updateLiveTime(){
+  const now = new Date();
+  const istOffset = 5.5 * 60;
+  const istTime = new Date(now.getTime() + (now.getTimezoneOffset() + istOffset) * 60000);
+  const hours = istTime.getHours();
+  const minutes = istTime.getMinutes();
+  const isPM = hours >= 12;
+  const h12 = hours % 12 || 12;
+  const mm = String(minutes).padStart(2, "0");
+  const ampm = isPM ? "PM" : "AM";
+  const timeEl = document.getElementById("liveTime");
+  if (timeEl) timeEl.textContent = h12 + ":" + mm + " " + ampm;
+  const statusEl = document.getElementById("liveStatus");
+  if (statusEl){
+    const isOpen = hours >= 9 && hours < 21;
+    statusEl.textContent = isOpen ? "Accepting Referrals" : "Replies Tomorrow";
+  }
+}
+updateLiveTime();
+setInterval(updateLiveTime, 30000);
+
+function shareCard(){
+  const data = {
+    title: "VAAN Marketing Partner",
+    text: "VAAN Marketing Partner — bring businesses to VAAN and earn rewards. Authorized, verified, official.",
+    url: "https://vaanconsultancy.in/marketing"
+  };
+  if (navigator.share){
+    navigator.share(data).catch(()=>{});
+  } else {
+    navigator.clipboard.writeText(data.url).then(()=>alert("Link copied!"));
+  }
+}
+
+function buildVCard(){
+  return [
+    "BEGIN:VCARD",
+    "VERSION:3.0",
+    "N:VAAN Marketing;;;;",
+    "FN:VAAN Marketing Partner",
+    "ORG:VAAN Consultancy",
+    "TITLE:Authorized Marketing Partner · India",
+    "TEL;TYPE=CELL,VOICE:+919671163712",
+    "TEL;TYPE=WORK,VOICE:+919671163712",
+    "EMAIL;TYPE=WORK:hello@vaanconsultancy.in",
+    "URL:https://vaanconsultancy.in/marketing",
+    "URL:https://vaanconsultancy.in",
+    "X-SOCIALPROFILE;type=instagram:https://www.instagram.com/vaa_enterprises",
+    "NOTE:VAAN Marketing Partner — Authorized representative. Bring businesses, earn referral rewards. Contact for partnerships.",
+    "ADR;TYPE=WORK:;;Karnal;Haryana;;132001;India",
+    "END:VCARD"
+  ].join("\r\n");
+}
+
+function saveContact(){
+  const vcf = buildVCard();
+  const blob = new Blob([vcf], { type: "text/vcard;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "VAAN-Marketing.vcf";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 5000);
+  const ua = navigator.userAgent;
+  if (/android/i.test(ua)){
+    alert("Open Downloads → tap VAAN-Marketing.vcf → Save contact");
+  } else if (/iPad|iPhone|iPod/.test(ua)){
+    alert("Open Files → tap VAAN-Marketing.vcf → Add Contact");
+  } else {
+    alert("Open Downloads → double-click the file → Add to contacts");
+  }
+}
+
+function downloadVCard(){
+  const vcf = buildVCard();
+  const blob = new Blob([vcf], { type: "text/vcard;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "VAAN-Marketing.vcf";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 1500);
+}
+
+function copyLink(btn){
+  navigator.clipboard.writeText("https://vaanconsultancy.in/marketing").then(()=>{
+    btn.childNodes[btn.childNodes.length-1].textContent = " Copied!";
+    setTimeout(()=>{ btn.childNodes[btn.childNodes.length-1].textContent = " Copy"; }, 1800);
+  });
+}
+</script>
+
+</body>
+</html>
