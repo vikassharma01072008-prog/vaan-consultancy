@@ -255,21 +255,17 @@ img{max-width:100%;display:block}
 #cardWrap{
   position:relative;
   z-index:50;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:flex-start;
-  min-height:100vh;
-  min-height:100dvh;
+  display:block;
   padding:
-    calc(env(safe-area-inset-top, 0px) + 4px)
+    calc(env(safe-area-inset-top, 0px) + 8px)
     10px
     calc(env(safe-area-inset-bottom, 0px) + 24px);
   opacity:0;
   pointer-events:none;
   transition:opacity .6s ease .2s;
   perspective:1400px;
-  box-sizing:border-box;
+  text-align:center;
+  font-size:0;
 }
 #cardWrap.revealed{
   opacity:1;
@@ -278,10 +274,13 @@ img{max-width:100%;display:block}
 
 /* ===== CARD ===== */
 .card{
+  display:inline-block;
   width:100%;
   max-width:440px;
   margin:0;
-  flex-shrink:0;
+  vertical-align:top;
+  font-size:14px;
+  text-align:left;
   background:
     linear-gradient(165deg,rgba(18,36,72,.96) 0%,rgba(10,26,58,.985) 45%,rgba(6,15,36,1) 100%);
   border:1px solid var(--line);
