@@ -251,20 +251,25 @@ img{max-width:100%;display:block}
   100%{opacity:0;transform:translate(-50%,-50%) scale(.9);filter:blur(10px)}
 }
 
-/* ===== CARD WRAP — NO EMPTY SPACE (display:block instead of flex) ===== */
+/* ===== CARD WRAP — FLEX, TOP-ALIGNED, NO GAP ===== */
 #cardWrap{
   position:relative;
   z-index:50;
-  display:block;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  min-height:100vh;
+  min-height:100dvh;
   padding:
-    calc(env(safe-area-inset-top, 0px) + 6px)
+    calc(env(safe-area-inset-top, 0px) + 4px)
     10px
     calc(env(safe-area-inset-bottom, 0px) + 24px);
   opacity:0;
   pointer-events:none;
   transition:opacity .6s ease .2s;
   perspective:1400px;
-  text-align:center;
+  box-sizing:border-box;
 }
 #cardWrap.revealed{
   opacity:1;
@@ -275,7 +280,8 @@ img{max-width:100%;display:block}
 .card{
   width:100%;
   max-width:440px;
-  margin:0 auto;
+  margin:0;
+  flex-shrink:0;
   background:
     linear-gradient(165deg,rgba(18,36,72,.96) 0%,rgba(10,26,58,.985) 45%,rgba(6,15,36,1) 100%);
   border:1px solid var(--line);
@@ -342,7 +348,7 @@ img{max-width:100%;display:block}
 
 .card > *{position:relative;z-index:1}
 
-/* Logo — real logo.png on TOP of the ring */
+/* Logo */
 .card-logo-wrap{
   position:relative;
   width:110px;
@@ -818,7 +824,7 @@ img{max-width:100%;display:block}
   #skipBtn{font-size:11px;padding:10px 16px}
 }
 @media(min-width:640px){
-  #cardWrap{padding:16px 24px}
+  #cardWrap{padding:16px 24px 32px}
   .card{max-width:460px;padding:26px 28px 24px}
 }
 @media (prefers-reduced-motion: reduce){
@@ -1639,18 +1645,15 @@ img{max-width:100%;display:block}
     ].join("\r\n");
   }
 
-  /* Add Contact — with clear instructions */
   window.saveContactNative = function(){
     const vcf = buildVCard();
     const blob = new Blob([vcf], { type: "text/vcard;charset=utf-8" });
     const url = URL.createObjectURL(blob);
 
-    /* Detect device for specific instructions */
     const ua = navigator.userAgent;
     const isAndroid = /android/i.test(ua);
     const isiOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
-    /* Trigger download */
     const a = document.createElement("a");
     a.href = url;
     a.download = "VAAN-Consultancy.vcf";
@@ -1658,7 +1661,6 @@ img{max-width:100%;display:block}
     a.click();
     document.body.removeChild(a);
 
-    /* Show clear instruction */
     setTimeout(() => {
       if (isAndroid){
         showToast("📱 Open Downloads → tap VAAN-Consultancy.vcf → Save contact");
@@ -1672,7 +1674,6 @@ img{max-width:100%;display:block}
     setTimeout(() => URL.revokeObjectURL(url), 10000);
   };
 
-  /* Download only */
   window.downloadVCard = function(){
     const vcf = buildVCard();
     const blob = new Blob([vcf], { type: "text/vcard;charset=utf-8" });
