@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>VAAN Consultancy — Digital Card</title>
-<meta name="description" content="VAAN Consultancy — Vision · Automation · Advancement · Network. Websites and QR systems built in Karnal, India.">
+<title>VAAN Consultancy — Digital Visiting Card</title>
+<meta name="description" content="VAAN Consultancy — Vision · Automation · Advancement · Network. Websites, QR services, automation and social media setup. Built in India.">
 <meta name="theme-color" content="#02040a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -18,7 +18,7 @@
 
 <style>
 /* ============================================================
-   VAAN DIGITAL CARD — CINEMATIC BUILD v2
+   VAAN DIGITAL VISITING CARD — CINEMATIC v3
    ============================================================ */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -32,9 +32,8 @@ body{
   min-height:100dvh;
   position:relative;
   overscroll-behavior-y:none;
-  transition:overflow .3s ease;
 }
-body.locked{overflow:hidden;height:100vh;height:100dvh;position:fixed;width:100%}
+body.locked{overflow:hidden;height:100vh;height:100dvh;position:fixed;width:100%;top:0;left:0}
 
 :root{
   --bg-deep:#02040a;
@@ -52,7 +51,6 @@ body.locked{overflow:hidden;height:100vh;height:100dvh;position:fixed;width:100%
   --green:#25b46e;
   --line:rgba(212,160,23,.22);
   --line-soft:rgba(255,255,255,.07);
-  --line-blue:rgba(79,143,255,.22);
 }
 
 a{text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent}
@@ -71,20 +69,65 @@ img{max-width:100%;display:block}
   transition:opacity .9s cubic-bezier(.6,0,.2,1);
 }
 #stage.hidden{opacity:0;pointer-events:none}
-#dragonCanvas{
+
+/* Layered dragon scene */
+#dragonScene{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  will-change:transform;
+}
+
+/* Layer 1: blurred background (same dragon image, zoomed + darkened) */
+.layer-bg{
+  position:absolute;
+  inset:-10%;
+  background:url('dragon.png') center center / cover no-repeat;
+  filter:blur(24px) brightness(0.35) saturate(1.4);
+  transform:scale(1.3);
+  will-change:transform;
+}
+
+/* Layer 2: main dragon image */
+.layer-dragon{
+  position:absolute;
+  inset:0;
+  background:url('dragon.png') center center / cover no-repeat;
+  filter:brightness(0.95) saturate(1.15) contrast(1.08);
+  will-change:transform,opacity;
+}
+
+/* Layer 3: warm fire gradient overlay */
+.layer-fire{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse at 50% 85%,rgba(255,120,20,.35),transparent 55%),
+    radial-gradient(ellipse at 50% 50%,transparent 40%,rgba(0,0,0,.7) 100%);
+  pointer-events:none;
+  z-index:4;
+  mix-blend-mode:screen;
+  opacity:.75;
+}
+
+/* Layer 4: vignette */
+#dragonScene::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(0,0,0,.85) 100%);
+  pointer-events:none;
+  z-index:5;
+}
+
+/* Canvas for particles (fire, embers, logo assembly) */
+#particleCanvas{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
-  display:block;
-}
-#stage::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(ellipse at 50% 50%,transparent 25%,rgba(0,0,0,.9) 100%);
+  z-index:6;
   pointer-events:none;
-  z-index:3;
 }
 
 /* Letterbox bars */
@@ -113,9 +156,10 @@ img{max-width:100%;display:block}
 .hud{
   position:absolute;font-family:'JetBrains Mono',monospace;
   font-size:10px;letter-spacing:2.5px;
-  color:rgba(240,193,75,.7);
+  color:rgba(240,193,75,.75);
   z-index:15;pointer-events:none;text-transform:uppercase;
   opacity:0;transition:opacity .8s ease;
+  text-shadow:0 0 8px rgba(0,0,0,.9);
 }
 .hud.on{opacity:1}
 .hud.tl{top:calc(7vh + 18px);left:22px}
@@ -150,17 +194,16 @@ img{max-width:100%;display:block}
 #skipBtn:hover{color:#fff;border-color:var(--gold-bright);box-shadow:0 0 30px rgba(212,160,23,.6);transform:translateY(-2px)}
 #skipBtn:active{transform:scale(.96)}
 
-/* Opening logo */
+/* Opening logo (SVG replica, code-drawn) */
 #openingLogo{
   position:absolute;top:50%;left:50%;
   transform:translate(-50%,-50%) scale(.3) rotateY(-180deg);
-  width:min(60vw,320px);
+  width:min(60vw,300px);
   z-index:8;opacity:0;pointer-events:none;
   filter:drop-shadow(0 0 60px rgba(240,193,75,.9)) drop-shadow(0 0 120px rgba(212,160,23,.5));
   perspective:1200px;
   transform-style:preserve-3d;
 }
-#openingLogo img{width:100%;height:auto;display:block}
 #openingLogo.visible{opacity:1}
 #openingLogo.spin{animation:logoSpinIn 1.5s cubic-bezier(.2,.9,.3,1.05) forwards}
 @keyframes logoSpinIn{
@@ -233,7 +276,7 @@ img{max-width:100%;display:block}
 }
 
 /* ============================================================
-   CARD WRAP — scrollable destination
+   CARD WRAP — the final destination
    ============================================================ */
 #cardWrap{
   position:relative;
@@ -241,21 +284,24 @@ img{max-width:100%;display:block}
   min-height:100vh;
   min-height:100dvh;
   display:flex;
-  align-items:flex-start;
-  justify-content:center;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
   padding:
-    max(20px, env(safe-area-inset-top, 20px))
+    max(28px, calc(env(safe-area-inset-top, 0px) + 20px))
     16px
-    calc(32px + env(safe-area-inset-bottom, 0px));
+    calc(40px + env(safe-area-inset-bottom, 0px));
   opacity:0;
   pointer-events:none;
   transition:opacity .6s ease .2s;
   perspective:1400px;
-  -webkit-overflow-scrolling:touch;
 }
 #cardWrap.revealed{
   opacity:1;
   pointer-events:auto;
+}
+@media (min-height: 820px){
+  #cardWrap{justify-content:center}
 }
 
 /* ============================================================
@@ -265,10 +311,10 @@ img{max-width:100%;display:block}
   width:100%;
   max-width:440px;
   background:
-    linear-gradient(165deg,rgba(18,36,72,.95) 0%,rgba(10,26,58,.98) 45%,rgba(6,15,36,1) 100%);
+    linear-gradient(165deg,rgba(18,36,72,.96) 0%,rgba(10,26,58,.985) 45%,rgba(6,15,36,1) 100%);
   border:1px solid var(--line);
   border-radius:32px;
-  padding:40px 26px 28px;
+  padding:36px 26px 28px;
   box-shadow:
     0 60px 120px rgba(0,0,0,.75),
     0 0 80px rgba(212,160,23,.15),
@@ -278,7 +324,6 @@ img{max-width:100%;display:block}
   transform:translateY(80px) rotateX(-15deg) scale(.95);
   opacity:0;
   transform-style:preserve-3d;
-  margin-bottom: 40px;
 }
 .card.revealed{animation:cardCinematic 1.6s cubic-bezier(.2,.9,.3,1.05) forwards}
 @keyframes cardCinematic{
@@ -330,15 +375,46 @@ img{max-width:100%;display:block}
 
 .card > *{position:relative;z-index:1}
 
+/* Card header badge */
+.card-badge{
+  display:flex;
+  justify-content:center;
+  margin-bottom:22px;
+}
+.card-badge span{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 15px;
+  background:rgba(212,160,23,.1);
+  border:1px solid rgba(212,160,23,.35);
+  border-radius:99px;
+  color:var(--gold-bright);
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+}
+.card-badge span::before{
+  content:"";
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--gold-bright);
+  box-shadow:0 0 8px var(--gold-bright);
+  animation:pulseGold 2s infinite;
+}
+@keyframes pulseGold{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+
 /* Logo */
 .card-logo{
-  width:110px;height:110px;
-  margin:0 auto 24px;
+  width:96px;height:96px;
+  margin:0 auto 20px;
   position:relative;
   filter:drop-shadow(0 0 30px rgba(212,160,23,.6)) drop-shadow(0 0 60px rgba(240,193,75,.3));
   animation:logoBreath 4s ease-in-out infinite;
 }
-.card-logo img{width:100%;height:100%;object-fit:contain;display:block}
+.card-logo svg{width:100%;height:100%;display:block}
 @keyframes logoBreath{
   0%,100%{filter:drop-shadow(0 0 30px rgba(212,160,23,.6)) drop-shadow(0 0 60px rgba(240,193,75,.3))}
   50%{filter:drop-shadow(0 0 50px rgba(240,193,75,.9)) drop-shadow(0 0 90px rgba(240,193,75,.5))}
@@ -348,7 +424,7 @@ img{max-width:100%;display:block}
 .card-name{
   text-align:center;
   font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:34px;font-weight:700;letter-spacing:3px;
+  font-size:32px;font-weight:700;letter-spacing:3px;
   color:var(--cream);line-height:1;margin-bottom:8px;
 }
 .card-name span{
@@ -363,23 +439,23 @@ img{max-width:100%;display:block}
 .card-subtitle{
   text-align:center;font-size:10px;letter-spacing:5px;
   font-weight:700;color:var(--cream-dim);text-transform:uppercase;
-  margin-bottom:24px;font-family:'JetBrains Mono',monospace;
+  margin-bottom:20px;font-family:'JetBrains Mono',monospace;
 }
 
 /* Tagline */
 .card-tagline{
-  text-align:center;font-size:10.5px;letter-spacing:2.5px;
+  text-align:center;font-size:10px;letter-spacing:2.2px;
   font-weight:600;color:rgba(240,193,75,.9);text-transform:uppercase;
-  padding:14px 0;border-top:1px solid var(--line-soft);
-  border-bottom:1px solid var(--line-soft);margin-bottom:22px;
+  padding:13px 0;border-top:1px solid var(--line-soft);
+  border-bottom:1px solid var(--line-soft);margin-bottom:20px;
   font-family:'JetBrains Mono',monospace;
 }
 
 /* Live */
 .card-live{
   display:flex;align-items:center;justify-content:center;
-  gap:10px;font-size:12px;color:var(--cream-dim);
-  margin-bottom:28px;letter-spacing:.5px;
+  gap:10px;font-size:11.5px;color:var(--cream-dim);
+  margin-bottom:26px;letter-spacing:.5px;
   font-family:'JetBrains Mono',monospace;text-transform:uppercase;
 }
 .card-live .dot{
@@ -391,39 +467,102 @@ img{max-width:100%;display:block}
 @keyframes pulseGreen{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
 .card-live b{color:var(--gold-bright);font-weight:700}
 
-/* Founder */
+/* ============================================================
+   FOUNDER BLOCK — premium treatment
+   ============================================================ */
 .card-founder{
-  display:flex;align-items:center;gap:16px;
-  padding:18px 20px;
-  background:linear-gradient(135deg,rgba(212,160,23,.08),rgba(212,160,23,.03));
-  border:1px solid rgba(212,160,23,.2);
-  border-radius:18px;margin-bottom:26px;
-  position:relative;overflow:hidden;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:20px 22px;
+  background:
+    linear-gradient(135deg,rgba(212,160,23,.1),rgba(212,160,23,.02));
+  border:1px solid rgba(212,160,23,.28);
+  border-radius:20px;
+  margin-bottom:26px;
+  position:relative;
+  overflow:hidden;
 }
 .card-founder::before{
   content:"";
   position:absolute;top:0;left:-100%;
   width:100%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(240,193,75,.18),transparent);
-  animation:founderSheen 4.5s ease-in-out infinite;
+  background:linear-gradient(90deg,transparent,rgba(240,193,75,.22),transparent);
+  animation:founderSheen 5s ease-in-out infinite;
 }
 @keyframes founderSheen{0%{left:-100%}50%,100%{left:200%}}
-.founder-avatar{
-  width:52px;height:52px;border-radius:50%;
-  background:linear-gradient(135deg,var(--gold-bright),var(--gold-soft));
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:22px;font-weight:700;color:#0a1a3a;
+
+.founder-avatar-wrap{
+  position:relative;
   flex-shrink:0;
-  box-shadow:0 6px 20px rgba(212,160,23,.5),inset 0 0 12px rgba(255,255,255,.35);
-  position:relative;z-index:1;
+  width:64px;
+  height:64px;
+  z-index:1;
 }
-.founder-info{display:flex;flex-direction:column;line-height:1.25;position:relative;z-index:1}
-.founder-info b{font-size:16px;font-weight:700;color:var(--cream);letter-spacing:.3px}
-.founder-info span{
-  font-size:10px;letter-spacing:3px;font-weight:700;
-  color:var(--gold);text-transform:uppercase;margin-top:5px;
+.founder-avatar{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--gold-hot),var(--gold-soft));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:26px;
+  font-weight:700;
+  color:#0a1a3a;
+  box-shadow:
+    0 8px 24px rgba(212,160,23,.55),
+    inset 0 0 14px rgba(255,255,255,.4);
+  position:relative;
+  z-index:2;
+}
+.founder-ring{
+  position:absolute;
+  inset:-5px;
+  border-radius:50%;
+  border:2px solid rgba(240,193,75,.7);
+  animation:ringPulse 3s ease-in-out infinite;
+  z-index:1;
+}
+@keyframes ringPulse{
+  0%,100%{transform:scale(1);opacity:.7;border-color:rgba(240,193,75,.7)}
+  50%{transform:scale(1.08);opacity:.4;border-color:rgba(240,193,75,.4)}
+}
+
+.founder-info{
+  display:flex;
+  flex-direction:column;
+  line-height:1.3;
+  position:relative;
+  z-index:1;
+  flex:1;
+}
+.founder-info b{
+  font-size:18px;
+  font-weight:800;
+  color:var(--cream);
+  letter-spacing:.3px;
+  font-family:'Cormorant Garamond',Georgia,serif;
+}
+.founder-info small{
+  font-size:9.5px;
+  letter-spacing:3px;
+  font-weight:700;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-top:6px;
   font-family:'JetBrains Mono',monospace;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.founder-info small::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg,rgba(212,160,23,.5),transparent);
+  max-width:60px;
 }
 
 /* Section label */
@@ -442,23 +581,24 @@ img{max-width:100%;display:block}
 /* Services */
 .card-services{
   display:grid;grid-template-columns:1fr 1fr;
-  gap:9px;margin-bottom:26px;
+  gap:9px;margin-bottom:24px;
 }
 .svc-item{
   background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
   border:1px solid var(--line-soft);
-  border-radius:14px;padding:14px 10px;
-  text-align:center;font-size:11.5px;font-weight:600;
-  color:rgba(253,250,243,.9);line-height:1.3;
+  border-radius:14px;padding:15px 11px;
+  text-align:center;font-size:11px;font-weight:600;
+  color:rgba(253,250,243,.92);line-height:1.35;
   transition:all .35s cubic-bezier(.2,.9,.3,1.1);
   opacity:0;transform:translateY(16px) rotateX(-30deg);
   transform-origin:center bottom;
   cursor:default;position:relative;overflow:hidden;
+  letter-spacing:.2px;
 }
 .svc-item::before{
   content:"";
   position:absolute;inset:0;
-  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(212,160,23,.18),transparent 60%);
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(212,160,23,.2),transparent 60%);
   opacity:0;transition:opacity .35s;
 }
 .svc-item:hover::before{opacity:1}
@@ -479,7 +619,7 @@ img{max-width:100%;display:block}
 /* QR */
 .card-qr{
   display:flex;justify-content:center;
-  margin-bottom:24px;opacity:0;
+  margin-bottom:22px;opacity:0;
   transform:scale(.7) rotateY(-180deg);
   transform-style:preserve-3d;
 }
@@ -490,7 +630,7 @@ img{max-width:100%;display:block}
   100%{opacity:1;transform:scale(1) rotateY(0deg)}
 }
 .qr-box{
-  background:#0a1a3a;padding:14px;border-radius:22px;
+  background:#0a1a3a;padding:13px;border-radius:22px;
   border:1px solid var(--line);
   box-shadow:0 0 40px rgba(212,160,23,.35),inset 0 0 20px rgba(212,160,23,.1);
   position:relative;
@@ -503,22 +643,22 @@ img{max-width:100%;display:block}
   animation:qrRotate 8s linear infinite;
 }
 @keyframes qrRotate{100%{transform:rotate(360deg)}}
-.qr-box img{width:190px;height:190px;display:block;border-radius:12px}
+.qr-box img{width:180px;height:180px;display:block;border-radius:12px}
 .qr-hint{
-  text-align:center;font-size:10px;letter-spacing:3px;
+  text-align:center;font-size:9.5px;letter-spacing:3px;
   font-weight:700;color:var(--cream-dim);text-transform:uppercase;
-  margin-top:-16px;margin-bottom:24px;
+  margin-top:-14px;margin-bottom:22px;
   font-family:'JetBrains Mono',monospace;
 }
 
 /* Buttons */
-.card-actions{display:flex;flex-direction:column;gap:11px;margin-bottom:22px}
+.card-actions{display:flex;flex-direction:column;gap:11px;margin-bottom:20px}
 .btn{
   display:flex;align-items:center;justify-content:center;
-  gap:11px;padding:17px 22px;border-radius:16px;
-  font-size:14.5px;font-weight:700;letter-spacing:.4px;
+  gap:11px;padding:16px 22px;border-radius:16px;
+  font-size:14px;font-weight:700;letter-spacing:.4px;
   transition:all .3s cubic-bezier(.2,.9,.3,1.1);
-  min-height:58px;text-align:center;
+  min-height:56px;text-align:center;
   opacity:0;transform:translateY(20px) scale(.94);
   position:relative;overflow:hidden;
 }
@@ -566,22 +706,22 @@ img{max-width:100%;display:block}
 /* Share */
 .card-share{
   display:grid;grid-template-columns:repeat(3,1fr);
-  gap:9px;margin-bottom:24px;
+  gap:9px;margin-bottom:22px;
 }
 .share-btn{
   display:flex;flex-direction:column;align-items:center;
-  gap:7px;padding:16px 8px;
+  gap:7px;padding:15px 8px;
   background:rgba(255,255,255,.025);
   border:1px solid var(--line-soft);
   border-radius:16px;
   color:var(--cream-dim);
-  font-size:9.5px;font-weight:700;letter-spacing:1.8px;
+  font-size:9px;font-weight:700;letter-spacing:1.7px;
   text-transform:uppercase;
   transition:all .3s cubic-bezier(.2,.9,.3,1.1);
-  min-height:72px;justify-content:center;
+  min-height:70px;justify-content:center;
   font-family:'JetBrains Mono',monospace;
 }
-.share-btn svg{width:24px;height:24px;color:var(--gold);transition:all .3s}
+.share-btn svg{width:22px;height:22px;color:var(--gold);transition:all .3s}
 .share-btn:hover{
   border-color:rgba(212,160,23,.45);
   background:rgba(212,160,23,.08);
@@ -600,26 +740,36 @@ img{max-width:100%;display:block}
 
 /* Footer */
 .card-footer{
-  text-align:center;padding-top:20px;
+  text-align:center;padding-top:18px;
   border-top:1px solid var(--line-soft);
-  font-size:10px;color:rgba(168,154,122,.7);
-  letter-spacing:1.8px;line-height:1.7;
+  font-size:9.5px;color:rgba(168,154,122,.75);
+  letter-spacing:1.8px;line-height:1.75;
   font-family:'JetBrains Mono',monospace;
   text-transform:uppercase;
 }
 .card-footer b{color:var(--gold);font-weight:700;letter-spacing:1px}
+.card-footer .india-flag{
+  display:inline-block;
+  margin-right:6px;
+  font-size:11px;
+  vertical-align:-1px;
+}
 
 /* ============================================================
    RESPONSIVE
    ============================================================ */
 @media(max-width:380px){
-  .card{padding:34px 20px 24px;border-radius:26px}
-  .card-logo{width:92px;height:92px;margin-bottom:18px}
-  .card-name{font-size:28px;letter-spacing:2px}
-  .svc-item{font-size:10.5px;padding:12px 8px}
-  .qr-box img{width:160px;height:160px}
-  .btn{font-size:13.5px;padding:15px 18px;min-height:52px}
-  .share-btn{font-size:8.5px;padding:13px 6px}
+  .card{padding:30px 20px 22px;border-radius:26px}
+  .card-logo{width:82px;height:82px;margin-bottom:16px}
+  .card-name{font-size:27px;letter-spacing:2px}
+  .card-founder{padding:16px 18px;gap:14px}
+  .founder-avatar-wrap{width:56px;height:56px}
+  .founder-avatar{font-size:22px}
+  .founder-info b{font-size:16px}
+  .svc-item{font-size:10px;padding:13px 9px}
+  .qr-box img{width:150px;height:150px}
+  .btn{font-size:13px;padding:14px 18px;min-height:52px}
+  .share-btn{font-size:8.5px;padding:12px 6px;min-height:64px}
   .hud{font-size:9px}
   .hud.tl,.hud.tr{top:calc(7vh + 12px)}
   .hud.bl,.hud.br{bottom:calc(7vh + 12px)}
@@ -627,7 +777,7 @@ img{max-width:100%;display:block}
 }
 @media(min-width:640px){
   #cardWrap{padding:56px 24px}
-  .card{max-width:470px;padding:50px 36px 34px}
+  .card{max-width:470px;padding:46px 36px 32px}
 }
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{
@@ -644,16 +794,23 @@ img{max-width:100%;display:block}
 <body class="locked">
 
 <!-- ============================================================
-     STAGE — cinematic opening
+     STAGE — cinematic layered dragon opening
      ============================================================ -->
 <div id="stage" aria-hidden="true">
-  <canvas id="dragonCanvas"></canvas>
+  <div id="dragonScene">
+    <div class="layer-bg" id="layerBg"></div>
+    <div class="layer-dragon" id="layerDragon"></div>
+    <div class="layer-fire"></div>
+  </div>
+
+  <canvas id="particleCanvas"></canvas>
+
   <div id="scanline"></div>
 
   <div class="letterbox top"></div>
   <div class="letterbox bot"></div>
 
-  <div class="hud tl" id="hudTL"><span class="dot-live"></span>VAAN SYSTEMS ONLINE</div>
+  <div class="hud tl" id="hudTL"><span class="dot-live"></span>VAAN · SYSTEMS ONLINE</div>
   <div class="hud tr" id="hudTR">SEQ · 001</div>
   <div class="hud bl" id="hudBL">LAT 29.69°N · LON 76.99°E</div>
   <div class="hud br" id="hudBR">KARNAL · IN</div>
@@ -664,7 +821,74 @@ img{max-width:100%;display:block}
   </div>
 
   <div id="openingLogo">
-    <img src="logo.png" alt="VAAN logo" onerror="this.style.display='none'">
+    <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-label="VAAN logo">
+      <defs>
+        <linearGradient id="oBlueG" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#7ab0ff"/>
+          <stop offset="50%" stop-color="#4f8fff"/>
+          <stop offset="100%" stop-color="#1e4fb8"/>
+        </linearGradient>
+        <linearGradient id="oGoldG" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#ffd966"/>
+          <stop offset="50%" stop-color="#f0c14b"/>
+          <stop offset="100%" stop-color="#b8891a"/>
+        </linearGradient>
+        <filter id="oGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Blue left stroke -->
+      <g filter="url(#oGlow)">
+        <path d="M55 40 L120 200 L120 160 L78 60 Z" fill="url(#oBlueG)"/>
+        <path d="M55 40 L120 200 L120 160 L78 60 Z" fill="none" stroke="#7ab0ff" stroke-width="1.5" opacity="0.9"/>
+      </g>
+
+      <!-- Gold right stroke -->
+      <g filter="url(#oGlow)">
+        <path d="M185 40 L120 200 L120 160 L162 60 Z" fill="url(#oGoldG)"/>
+        <path d="M185 40 L120 200 L120 160 L162 60 Z" fill="none" stroke="#ffd966" stroke-width="1.5" opacity="0.9"/>
+      </g>
+
+      <!-- Circuit overlay on blue side -->
+      <g stroke="#7ab0ff" stroke-width="0.9" fill="none" opacity="0.75">
+        <line x1="80" y1="80" x2="100" y2="80"/>
+        <line x1="100" y1="80" x2="100" y2="100"/>
+        <line x1="85" y1="120" x2="105" y2="120"/>
+        <line x1="90" y1="160" x2="110" y2="160"/>
+      </g>
+      <g fill="#7ab0ff" opacity="0.9">
+        <circle cx="80" cy="80" r="2.5"/>
+        <circle cx="100" cy="100" r="2.5"/>
+        <circle cx="85" cy="120" r="2.5"/>
+        <circle cx="90" cy="160" r="2.5"/>
+      </g>
+
+      <!-- Circuit overlay on gold side -->
+      <g stroke="#ffd966" stroke-width="0.9" fill="none" opacity="0.75">
+        <line x1="160" y1="80" x2="140" y2="80"/>
+        <line x1="140" y1="80" x2="140" y2="100"/>
+        <line x1="155" y1="120" x2="135" y2="120"/>
+        <line x1="150" y1="160" x2="130" y2="160"/>
+      </g>
+      <g fill="#ffd966" opacity="0.9">
+        <circle cx="160" cy="80" r="2.5"/>
+        <circle cx="140" cy="100" r="2.5"/>
+        <circle cx="155" cy="120" r="2.5"/>
+        <circle cx="150" cy="160" r="2.5"/>
+      </g>
+
+      <!-- Center diamond chip -->
+      <rect x="112" y="112" width="16" height="16" transform="rotate(45 120 120)" fill="none" stroke="#ffd966" stroke-width="1.2" opacity="0.85"/>
+      <circle cx="120" cy="120" r="2" fill="#ffd966"/>
+
+      <!-- Floating data cubes -->
+      <rect x="30" y="55" width="5" height="5" fill="#7ab0ff" opacity="0.7"/>
+      <rect x="205" y="65" width="5" height="5" fill="#ffd966" opacity="0.75"/>
+      <rect x="40" y="175" width="4" height="4" fill="#7ab0ff" opacity="0.6"/>
+      <rect x="198" y="180" width="4" height="4" fill="#ffd966" opacity="0.65"/>
+    </svg>
   </div>
 
   <div id="shockwave"></div>
@@ -682,15 +906,76 @@ img{max-width:100%;display:block}
     <div class="card-orb o1"></div>
     <div class="card-orb o2"></div>
 
-    <div class="card-logo">
-      <img src="logo.png" alt="VAAN logo" onerror="this.parentElement.style.display='none'">
+    <!-- Badge -->
+    <div class="card-badge">
+      <span>Digital Visiting Card</span>
     </div>
 
-    <h1 class="card-name"><span>VAAN</span> CONSULTANCY</h1>
-    <div class="card-subtitle">Digital Studio · Karnal</div>
+    <!-- Logo (SVG replica — code-drawn, matches blue+gold circuit V) -->
+    <div class="card-logo">
+      <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-label="VAAN logo">
+        <defs>
+          <linearGradient id="cBlueG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#7ab0ff"/>
+            <stop offset="50%" stop-color="#4f8fff"/>
+            <stop offset="100%" stop-color="#1e4fb8"/>
+          </linearGradient>
+          <linearGradient id="cGoldG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ffd966"/>
+            <stop offset="50%" stop-color="#f0c14b"/>
+            <stop offset="100%" stop-color="#b8891a"/>
+          </linearGradient>
+        </defs>
 
+        <path d="M55 40 L120 200 L120 160 L78 60 Z" fill="url(#cBlueG)"/>
+        <path d="M55 40 L120 200 L120 160 L78 60 Z" fill="none" stroke="#7ab0ff" stroke-width="1.5" opacity="0.9"/>
+        <path d="M185 40 L120 200 L120 160 L162 60 Z" fill="url(#cGoldG)"/>
+        <path d="M185 40 L120 200 L120 160 L162 60 Z" fill="none" stroke="#ffd966" stroke-width="1.5" opacity="0.9"/>
+
+        <g stroke="#7ab0ff" stroke-width="0.9" fill="none" opacity="0.75">
+          <line x1="80" y1="80" x2="100" y2="80"/>
+          <line x1="100" y1="80" x2="100" y2="100"/>
+          <line x1="85" y1="120" x2="105" y2="120"/>
+          <line x1="90" y1="160" x2="110" y2="160"/>
+        </g>
+        <g fill="#7ab0ff" opacity="0.9">
+          <circle cx="80" cy="80" r="2.5"/>
+          <circle cx="100" cy="100" r="2.5"/>
+          <circle cx="85" cy="120" r="2.5"/>
+          <circle cx="90" cy="160" r="2.5"/>
+        </g>
+
+        <g stroke="#ffd966" stroke-width="0.9" fill="none" opacity="0.75">
+          <line x1="160" y1="80" x2="140" y2="80"/>
+          <line x1="140" y1="80" x2="140" y2="100"/>
+          <line x1="155" y1="120" x2="135" y2="120"/>
+          <line x1="150" y1="160" x2="130" y2="160"/>
+        </g>
+        <g fill="#ffd966" opacity="0.9">
+          <circle cx="160" cy="80" r="2.5"/>
+          <circle cx="140" cy="100" r="2.5"/>
+          <circle cx="155" cy="120" r="2.5"/>
+          <circle cx="150" cy="160" r="2.5"/>
+        </g>
+
+        <rect x="112" y="112" width="16" height="16" transform="rotate(45 120 120)" fill="none" stroke="#ffd966" stroke-width="1.2" opacity="0.85"/>
+        <circle cx="120" cy="120" r="2" fill="#ffd966"/>
+
+        <rect x="30" y="55" width="5" height="5" fill="#7ab0ff" opacity="0.7"/>
+        <rect x="205" y="65" width="5" height="5" fill="#ffd966" opacity="0.75"/>
+        <rect x="40" y="175" width="4" height="4" fill="#7ab0ff" opacity="0.6"/>
+        <rect x="198" y="180" width="4" height="4" fill="#ffd966" opacity="0.65"/>
+      </svg>
+    </div>
+
+    <!-- Name -->
+    <h1 class="card-name"><span>VAAN</span> CONSULTANCY</h1>
+    <div class="card-subtitle">Digital Studio · India</div>
+
+    <!-- Tagline -->
     <div class="card-tagline">Vision · Automation · Advancement · Network</div>
 
+    <!-- Live time -->
     <div class="card-live">
       <span class="dot"></span>
       <span id="liveStatus">Open now</span>
@@ -698,24 +983,30 @@ img{max-width:100%;display:block}
       <span>IST</span>
     </div>
 
+    <!-- Founder -->
     <div class="card-founder">
-      <div class="founder-avatar">VS</div>
+      <div class="founder-avatar-wrap">
+        <div class="founder-ring"></div>
+        <div class="founder-avatar">VS</div>
+      </div>
       <div class="founder-info">
         <b>Vikas Sharma</b>
-        <span>Founder</span>
+        <small>Founder</small>
       </div>
     </div>
 
+    <!-- Services -->
     <div class="card-label">What we build</div>
     <div class="card-services" id="servicesGrid">
       <div class="svc-item" data-svc>Custom Websites</div>
-      <div class="svc-item" data-svc>QR Menu Systems</div>
-      <div class="svc-item" data-svc>WhatsApp Automation</div>
-      <div class="svc-item" data-svc>Google Reviews</div>
-      <div class="svc-item" data-svc>Social Media</div>
+      <div class="svc-item" data-svc>QR Services</div>
+      <div class="svc-item" data-svc>Automation</div>
+      <div class="svc-item" data-svc>Google Reviews Setup</div>
+      <div class="svc-item" data-svc>Social Media<br>Setup · Management · Marketing</div>
       <div class="svc-item" data-svc>Admin Panels</div>
     </div>
 
+    <!-- QR -->
     <div class="card-qr" id="qrBlock">
       <div class="qr-box">
         <img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?data=https%3A%2F%2Fvaanconsultancy.in&size=260x260&color=d4a017&bgcolor=0a1a3a&qzone=2" alt="Scan to visit vaanconsultancy.in" loading="lazy">
@@ -723,6 +1014,7 @@ img{max-width:100%;display:block}
     </div>
     <div class="qr-hint">Scan · Save · Share</div>
 
+    <!-- Actions -->
     <div class="card-actions">
       <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20saw%20your%20digital%20card." class="btn btn-primary" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -738,6 +1030,7 @@ img{max-width:100%;display:block}
       </a>
     </div>
 
+    <!-- Share -->
     <div class="card-share">
       <button class="share-btn" id="shareBtn" onclick="shareCard()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -764,8 +1057,9 @@ img{max-width:100%;display:block}
       </button>
     </div>
 
+    <!-- Footer -->
     <div class="card-footer">
-      Made with pride in <b>Karnal</b><br>
+      <span class="india-flag">🇮🇳</span>Made in <b>India</b><br>
       @vaa_enterprises · © 2026 VAAN Consultancy
     </div>
 
@@ -775,15 +1069,14 @@ img{max-width:100%;display:block}
 <!-- ============================================================
      LIBRARIES
      ============================================================ -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
 <!-- ============================================================
-     CHUNK 2 GOES HERE — JS PART 1 (3D WORLD)
+     CHUNK 2 GOES HERE — JS PART 1 (2.5D DRAGON SCENE + PARTICLES)
      ============================================================ --><script>
 /* ============================================================
    VAAN DIGITAL CARD — PART 1 of 3
-   3D World: cyberpunk city with real depth + parallax
+   2.5D layered dragon scene + fire particles + embers + light rays
    ============================================================ */
 
 (function(){
@@ -799,36 +1092,39 @@ img{max-width:100%;display:block}
   const TIER = IS_MOBILE ? "low" : IS_TABLET ? "mid" : "high";
 
   const CFG = {
-    low:  { nearBldgs: 8,  midBldgs: 14, farBldgs: 20, stars: 300, dust: 300, breath: 140 },
-    mid:  { nearBldgs: 14, midBldgs: 24, farBldgs: 36, stars: 500, dust: 500, breath: 180 },
-    high: { nearBldgs: 20, midBldgs: 36, farBldgs: 56, stars: 800, dust: 900, breath: 240 }
+    low:  { fire: 500, embers: 120, rays: 3, sparks: 180 },
+    mid:  { fire: 900, embers: 200, rays: 4, sparks: 320 },
+    high: { fire: 1400, embers: 320, rays: 5, sparks: 520 }
   }[TIER];
 
-  const BODY_SEGMENTS = 30;
-  const SKIP_DELAY    = 2500;
+  const SKIP_DELAY = 2500;
 
   /* Element refs */
-  const stage     = document.getElementById("stage");
-  const canvas    = document.getElementById("dragonCanvas");
-  const skipBtn   = document.getElementById("skipBtn");
-  const openLogo  = document.getElementById("openingLogo");
-  const flash     = document.getElementById("flash");
-  const shockwave = document.getElementById("shockwave");
-  const cineTitle = document.getElementById("cineTitle");
-  const scanline  = document.getElementById("scanline");
-  const hudTL     = document.getElementById("hudTL");
-  const hudTR     = document.getElementById("hudTR");
-  const hudBL     = document.getElementById("hudBL");
-  const hudBR     = document.getElementById("hudBR");
-  const cardWrap  = document.getElementById("cardWrap");
-  const mainCard  = document.getElementById("mainCard");
+  const stage         = document.getElementById("stage");
+  const dragonScene   = document.getElementById("dragonScene");
+  const layerBg       = document.getElementById("layerBg");
+  const layerDragon   = document.getElementById("layerDragon");
+  const canvas        = document.getElementById("particleCanvas");
+  const skipBtn       = document.getElementById("skipBtn");
+  const openLogo      = document.getElementById("openingLogo");
+  const flash         = document.getElementById("flash");
+  const shockwave     = document.getElementById("shockwave");
+  const cineTitle     = document.getElementById("cineTitle");
+  const scanline      = document.getElementById("scanline");
+  const hudTL         = document.getElementById("hudTL");
+  const hudTR         = document.getElementById("hudTR");
+  const hudBL         = document.getElementById("hudBL");
+  const hudBR         = document.getElementById("hudBR");
+  const cardWrap      = document.getElementById("cardWrap");
+  const mainCard      = document.getElementById("mainCard");
 
-  /* Shared namespace */
+  /* Shared namespace for later chunks */
   window.__VAAN__ = {
-    stage, canvas, skipBtn, openLogo, flash, shockwave, cineTitle, scanline,
+    stage, dragonScene, layerBg, layerDragon, canvas,
+    skipBtn, openLogo, flash, shockwave, cineTitle, scanline,
     hudTL, hudTR, hudBL, hudBR, cardWrap, mainCard,
-    CFG, TIER, BODY_SEGMENTS, SKIP_DELAY, REDUCED,
-    three: {}, state: {}
+    CFG, TIER, SKIP_DELAY, REDUCED,
+    render: {}, state: {}
   };
 
   if (REDUCED){
@@ -840,389 +1136,296 @@ img{max-width:100%;display:block}
   }
 
   /* ============================================================
-     RENDERER + SCENE + CAMERA
+     CANVAS SETUP — 2D canvas (much lighter than WebGL for this)
      ============================================================ */
-  const scene  = new THREE.Scene();
-  scene.fog    = new THREE.FogExp2(0x02040a, 0.018);
+  let W = window.innerWidth;
+  let H = window.innerHeight;
+  let DPR = Math.min(window.devicePixelRatio, TIER === "low" ? 1.5 : 2);
 
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 300);
-  camera.position.set(0, 6, 24);
-  camera.lookAt(0, 3, 0);
+  const ctx = canvas.getContext("2d", { alpha: true });
 
-  const renderer = new THREE.WebGLRenderer({
-    canvas, alpha: true,
-    antialias: TIER === "high",
-    powerPreference: "high-performance"
-  });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, TIER === "low" ? 1.4 : 2));
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setClearColor(0x02040a, 0);
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.15;
+  function resizeCanvas(){
+    W = window.innerWidth;
+    H = window.innerHeight;
+    DPR = Math.min(window.devicePixelRatio, TIER === "low" ? 1.5 : 2);
+    canvas.width = W * DPR;
+    canvas.height = H * DPR;
+    canvas.style.width = W + "px";
+    canvas.style.height = H + "px";
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  resizeCanvas();
 
   /* ============================================================
-     LIGHTS — cinematic 3-point + city bounce
+     PARTICLE SYSTEMS
      ============================================================ */
-  scene.add(new THREE.AmbientLight(0x1a2648, 0.65));
 
-  const keyLight = new THREE.PointLight(0xf0c14b, 3.5, 100, 1.5);
-  keyLight.position.set(12, 24, 18);
-  scene.add(keyLight);
+  /* --- FIRE particles (rise from bottom of the dragon scene) --- */
+  const fireParticles = [];
+  function spawnFire(){
+    fireParticles.length = 0;
+    for (let i = 0; i < CFG.fire; i++){
+      fireParticles.push(newFire(true));
+    }
+  }
+  function newFire(scatter){
+    return {
+      x: Math.random() * W,
+      y: scatter ? H - Math.random() * H * 0.8 : H + 20,
+      vy: -0.4 - Math.random() * 1.4,
+      vx: (Math.random() - 0.5) * 0.6,
+      life: 0,
+      maxLife: 180 + Math.random() * 200,
+      size: 1.5 + Math.random() * 3.5,
+      hue: 25 + Math.random() * 35,        /* 25–60: orange → yellow */
+      sat: 90 + Math.random() * 10,
+      light: 55 + Math.random() * 25,
+      wobble: Math.random() * Math.PI * 2,
+      wobbleSpeed: 0.02 + Math.random() * 0.04
+    };
+  }
+  spawnFire();
 
-  const rimLight = new THREE.PointLight(0xff9d2e, 2.6, 90, 1.5);
-  rimLight.position.set(-16, 12, 12);
-  scene.add(rimLight);
+  /* --- EMBERS (small fast sparks flying up + outward) --- */
+  const embers = [];
+  function spawnEmbers(){
+    embers.length = 0;
+    for (let i = 0; i < CFG.embers; i++){
+      embers.push(newEmber(true));
+    }
+  }
+  function newEmber(scatter){
+    return {
+      x: W * 0.5 + (Math.random() - 0.5) * W,
+      y: scatter ? Math.random() * H : H * (0.75 + Math.random() * 0.2),
+      vx: (Math.random() - 0.5) * 2.5,
+      vy: -0.8 - Math.random() * 2.2,
+      life: 0,
+      maxLife: 90 + Math.random() * 160,
+      size: 0.8 + Math.random() * 2,
+      hue: 35 + Math.random() * 25,
+      alpha: 0.9
+    };
+  }
+  spawnEmbers();
 
-  const fillLight = new THREE.PointLight(0x4f8fff, 1.8, 80, 1.5);
-  fillLight.position.set(0, -6, -14);
-  scene.add(fillLight);
+  /* --- SPARKS (tiny bright dots — the "explosion" texture) --- */
+  const sparks = [];
+  function spawnSparks(){
+    sparks.length = 0;
+    for (let i = 0; i < CFG.sparks; i++){
+      sparks.push(newSpark());
+    }
+  }
+  function newSpark(){
+    return {
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: -0.2 - Math.random() * 0.6,
+      life: 0,
+      maxLife: 200 + Math.random() * 300,
+      size: 0.6 + Math.random() * 1.2,
+      alpha: 0.4 + Math.random() * 0.5,
+      twinkle: Math.random() * Math.PI * 2,
+      twinkleSpeed: 0.04 + Math.random() * 0.08
+    };
+  }
+  spawnSparks();
 
-  /* Slow orbiting light for atmosphere */
-  const orbitLight = new THREE.PointLight(0xf0c14b, 1.4, 60, 1.4);
-  scene.add(orbitLight);
+  /* --- LIGHT RAYS (god-rays behind the dragon) --- */
+  const rays = [];
+  function spawnRays(){
+    rays.length = 0;
+    for (let i = 0; i < CFG.rays; i++){
+      rays.push({
+        angle: (i / CFG.rays) * Math.PI + Math.random() * 0.3,
+        width: 40 + Math.random() * 120,
+        length: Math.max(W, H) * 1.3,
+        alpha: 0.04 + Math.random() * 0.06,
+        pulse: Math.random() * Math.PI * 2,
+        pulseSpeed: 0.01 + Math.random() * 0.02,
+        hue: 35 + Math.random() * 15
+      });
+    }
+  }
+  spawnRays();
 
   /* ============================================================
-     REFLECTIVE GROUND PLANE
+     PARTICLE UPDATERS
      ============================================================ */
-  const groundMat = new THREE.MeshStandardMaterial({
-    color: 0x02040a,
-    metalness: 1.0,
-    roughness: 0.35,
-    emissive: 0x081428,
-    emissiveIntensity: 0.4
-  });
-  const ground = new THREE.Mesh(new THREE.PlaneGeometry(500, 500), groundMat);
-  ground.rotation.x = -Math.PI / 2;
-  ground.position.y = -8;
-  scene.add(ground);
+  function updateFire(dt){
+    for (let i = 0; i < fireParticles.length; i++){
+      const p = fireParticles[i];
+      p.life += 1;
+      p.wobble += p.wobbleSpeed;
 
-  /* ============================================================
-     GRID FLOOR — two layers, different speeds (real depth cue)
-     ============================================================ */
-  const gridA = new THREE.GridHelper(240, 60, 0xf0c14b, 0x1a2c52);
-  gridA.material.opacity = 0.22;
-  gridA.material.transparent = true;
-  gridA.position.y = -7.95;
-  scene.add(gridA);
+      p.y += p.vy * dt * 60;
+      p.x += Math.sin(p.wobble) * 0.4 + p.vx * dt * 60;
 
-  const gridB = new THREE.GridHelper(320, 80, 0xd4a017, 0x0a1a3a);
-  gridB.material.opacity = 0.12;
-  gridB.material.transparent = true;
-  gridB.position.y = -7.9;
-  scene.add(gridB);
+      /* Fade near end of life */
+      const t = p.life / p.maxLife;
+      p.alpha = t < 0.2 ? t * 5 : (1 - t) * 1.2;
 
-  /* ============================================================
-     CYBERPUNK CITY — 3 PARALLAX LAYERS
-     ============================================================ */
-
-  /* --- Shared materials --- */
-  const buildingMats = {
-    near: [
-      new THREE.MeshStandardMaterial({
-        color: 0x0a1a3a, metalness: 0.9, roughness: 0.3,
-        emissive: 0x1a2c52, emissiveIntensity: 0.45
-      }),
-      new THREE.MeshStandardMaterial({
-        color: 0x122448, metalness: 0.85, roughness: 0.35,
-        emissive: 0x0f2547, emissiveIntensity: 0.55
-      })
-    ],
-    mid: new THREE.MeshStandardMaterial({
-      color: 0x0a1a3a, metalness: 0.85, roughness: 0.4,
-      emissive: 0x0f1c38, emissiveIntensity: 0.6
-    }),
-    far: new THREE.MeshBasicMaterial({
-      color: 0x0f2244,
-      transparent: true,
-      opacity: 0.7
-    })
-  };
-
-  const goldTrimMat = new THREE.MeshBasicMaterial({
-    color: 0xf0c14b, transparent: true, opacity: 0.55
-  });
-
-  const blueTrimMat = new THREE.MeshBasicMaterial({
-    color: 0x4f8fff, transparent: true, opacity: 0.45
-  });
-
-  const cityData = [];  // for animation
-
-  /* --- Helper: build a layer of buildings --- */
-  function buildLayer(count, radiusMin, radiusMax, heightMin, heightMax, widthMin, widthMax, matSet, trimMat, layerName){
-    const group = new THREE.Group();
-    scene.add(group);
-
-    for (let i = 0; i < count; i++){
-      const angle = Math.random() * Math.PI * 2;
-      const dist  = radiusMin + Math.random() * (radiusMax - radiusMin);
-      const x = Math.cos(angle) * dist;
-      const z = Math.sin(angle) * dist;
-
-      const w = widthMin + Math.random() * (widthMax - widthMin);
-      const d = widthMin + Math.random() * (widthMax - widthMin);
-      const h = heightMin + Math.random() * (heightMax - heightMin);
-
-      const geo = new THREE.BoxGeometry(w, h, d);
-      const mat = Array.isArray(matSet)
-        ? matSet[Math.floor(Math.random() * matSet.length)]
-        : matSet;
-      const b = new THREE.Mesh(geo, mat);
-      b.position.set(x, h/2 - 8, z);
-      b.rotation.y = Math.random() * Math.PI * 0.4;
-      group.add(b);
-
-      /* Gold trim edges */
-      if (trimMat && layerName !== "far"){
-        const edges = new THREE.EdgesGeometry(geo);
-        const line = new THREE.LineSegments(edges, trimMat);
-        line.position.copy(b.position);
-        line.rotation.copy(b.rotation);
-        group.add(line);
-        cityData.push({ line, phase: Math.random() * Math.PI * 2, speed: 0.6 + Math.random() * 0.8 });
-      }
-
-      /* Window lights on near + mid layers only */
-      if (layerName !== "far" && Math.random() > 0.35){
-        const winCount = layerName === "near" ? 6 + Math.floor(Math.random() * 12) : 4 + Math.floor(Math.random() * 8);
-        const winGeo = new THREE.PlaneGeometry(0.16, 0.22);
-        for (let w2 = 0; w2 < winCount; w2++){
-          const isGold = Math.random() > 0.4;
-          const winMat = new THREE.MeshBasicMaterial({
-            color: isGold ? 0xffd966 : 0x4f8fff,
-            transparent: true,
-            opacity: 0.75 + Math.random() * 0.25
-          });
-          const win = new THREE.Mesh(winGeo, winMat);
-          const wy = -h/2 + 0.6 + Math.random() * (h - 1.2);
-          const side = Math.random() > 0.5 ? 1 : -1;
-          win.position.set(
-            b.position.x + (w/2 + 0.02) * side,
-            b.position.y + wy,
-            b.position.z + (Math.random() - 0.5) * d * 0.6
-          );
-          win.rotation.y = side > 0 ? Math.PI / 2 : -Math.PI / 2;
-          group.add(win);
-        }
+      if (p.life > p.maxLife || p.y < -30){
+        fireParticles[i] = newFire(false);
       }
     }
   }
 
-  /* --- FAR LAYER: distant skyline (small, hazy, no trim) --- */
-  buildLayer(
-    CFG.farBldgs, 60, 130,
-    6, 40,
-    2, 5,
-    buildingMats.far, null, "far"
-  );
+  function updateEmbers(dt){
+    for (let i = 0; i < embers.length; i++){
+      const p = embers[i];
+      p.life += 1;
 
-  /* --- MID LAYER: mid-distance (medium, some trim) --- */
-  buildLayer(
-    CFG.midBldgs, 32, 65,
-    8, 30,
-    2, 4,
-    buildingMats.mid, blueTrimMat, "mid"
-  );
+      p.x += p.vx * dt * 60;
+      p.y += p.vy * dt * 60;
+      p.vy *= 0.995;
+      p.vx *= 0.995;
 
-  /* --- NEAR LAYER: close, tall, gold trim (highest detail) --- */
-  buildLayer(
-    CFG.nearBldgs, 14, 30,
-    10, 38,
-    2.5, 5,
-    buildingMats.near, goldTrimMat, "near"
-  );
+      const t = p.life / p.maxLife;
+      p.alpha = t < 0.1 ? t * 10 : Math.max(0, 1 - t);
 
-  /* ============================================================
-     VOLUMETRIC LIGHT SHAFTS — fake god-rays
-     ============================================================ */
-  const shafts = [];
-  const shaftCount = TIER === "low" ? 3 : TIER === "mid" ? 5 : 8;
-
-  for (let i = 0; i < shaftCount; i++){
-    const shaftGeo = new THREE.ConeGeometry(
-      2 + Math.random() * 4,
-      30 + Math.random() * 20,
-      6, 1, true
-    );
-    const shaftMat = new THREE.MeshBasicMaterial({
-      color: Math.random() > 0.5 ? 0xf0c14b : 0xff9d2e,
-      transparent: true,
-      opacity: 0.04 + Math.random() * 0.05,
-      side: THREE.DoubleSide,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending
-    });
-    const shaft = new THREE.Mesh(shaftGeo, shaftMat);
-
-    const angle = Math.random() * Math.PI * 2;
-    const dist  = 10 + Math.random() * 30;
-    shaft.position.set(Math.cos(angle) * dist, 12 + Math.random() * 8, Math.sin(angle) * dist);
-    shaft.rotation.z = (Math.random() - 0.5) * 0.4;
-    shaft.rotation.x = (Math.random() - 0.5) * 0.3;
-
-    scene.add(shaft);
-    shafts.push({ mesh: shaft, phase: Math.random() * Math.PI * 2, baseOpacity: shaftMat.opacity });
-  }
-
-  /* ============================================================
-     STAR FIELD — 3 depth layers (near, mid, far)
-     ============================================================ */
-  function buildStars(count, radiusMin, radiusMax, size, opacity){
-    const geo = new THREE.BufferGeometry();
-    const pos = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++){
-      const r = radiusMin + Math.random() * (radiusMax - radiusMin);
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(2 * Math.random() - 1);
-      pos[i*3]     = r * Math.sin(phi) * Math.cos(theta);
-      pos[i*3 + 1] = r * Math.cos(phi) * 0.6 + 25;
-      pos[i*3 + 2] = r * Math.sin(phi) * Math.sin(theta);
+      if (p.life > p.maxLife || p.y < -30 || p.x < -30 || p.x > W + 30){
+        embers[i] = newEmber(false);
+      }
     }
-    geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-    const mat = new THREE.PointsMaterial({
-      color: 0xf0c14b, size, transparent: true, opacity,
-      sizeAttenuation: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-    const stars = new THREE.Points(geo, mat);
-    scene.add(stars);
-    return stars;
   }
 
-  const starsNear = buildStars(Math.floor(CFG.stars * 0.3), 60, 120, 0.6, 0.8);
-  const starsMid  = buildStars(Math.floor(CFG.stars * 0.4), 120, 200, 0.4, 0.55);
-  const starsFar  = buildStars(Math.floor(CFG.stars * 0.3), 200, 280, 0.3, 0.35);
+  function updateSparks(dt){
+    for (let i = 0; i < sparks.length; i++){
+      const p = sparks[i];
+      p.life += 1;
+      p.twinkle += p.twinkleSpeed;
 
-  /* ============================================================
-     AMBIENT DUST — floating particles in 3 depth layers
-     ============================================================ */
-  function buildDust(count, radiusMin, radiusMax, size, color, opacity){
-    const geo = new THREE.BufferGeometry();
-    const pos = new Float32Array(count * 3);
-    const vel = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++){
-      const r = radiusMin + Math.random() * (radiusMax - radiusMin);
-      const a = Math.random() * Math.PI * 2;
-      pos[i*3]     = Math.cos(a) * r;
-      pos[i*3 + 1] = (Math.random() - 0.5) * 30 + 4;
-      pos[i*3 + 2] = Math.sin(a) * r;
-      vel[i*3]     = (Math.random() - 0.5) * 0.02;
-      vel[i*3 + 1] = 0.02 + Math.random() * 0.03;
-      vel[i*3 + 2] = (Math.random() - 0.5) * 0.02;
+      p.x += p.vx * dt * 60;
+      p.y += p.vy * dt * 60;
+
+      if (p.life > p.maxLife || p.y < -20 || p.x < -20 || p.x > W + 20){
+        sparks[i] = newSpark();
+      }
     }
-    geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-    const mat = new THREE.PointsMaterial({
-      color, size, transparent: true, opacity,
-      sizeAttenuation: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-    const points = new THREE.Points(geo, mat);
-    scene.add(points);
-    return { points, geo, vel, count };
-  }
-
-  const dustNear = buildDust(Math.floor(CFG.dust * 0.4), 8, 20, 0.14, 0xffd966, 0.7);
-  const dustMid  = buildDust(Math.floor(CFG.dust * 0.35), 20, 40, 0.1,  0xf0c14b, 0.5);
-  const dustFar  = buildDust(Math.floor(CFG.dust * 0.25), 40, 70, 0.08, 0xd4a017, 0.35);
-
-  /* ============================================================
-     DRAGON SPINE — setup only, dragon body added in Chunk 3
-     ============================================================ */
-  const baseSpine = [];
-  for (let i = 0; i < BODY_SEGMENTS; i++){
-    const t = i / (BODY_SEGMENTS - 1);
-    const x = Math.sin(t * Math.PI * 2.0) * 6 - 4;
-    const y = Math.cos(t * Math.PI * 1.5) * 2.5 + 2;
-    const z = Math.sin(t * Math.PI * 3.0) * 1.8;
-    baseSpine.push(new THREE.Vector3(x, y, z));
-  }
-  const spinePoints = baseSpine.map(p => p.clone());
-
-  function makeCurve(pts){
-    return new THREE.CatmullRomCurve3(pts, false, "catmullrom", 0.5);
   }
 
   /* ============================================================
-     ANIMATION LOOP
+     DRAW LAYERS
      ============================================================ */
-  const clock = new THREE.Clock();
+  function drawRays(t){
+    for (let i = 0; i < rays.length; i++){
+      const r = rays[i];
+      const a = r.alpha * (0.7 + Math.sin(t * r.pulseSpeed * 10 + r.pulse) * 0.3);
+
+      ctx.save();
+      ctx.translate(W * 0.5, H * 0.65);
+      ctx.rotate(r.angle);
+
+      const grad = ctx.createLinearGradient(0, 0, 0, -r.length);
+      grad.addColorStop(0, `hsla(${r.hue}, 95%, 60%, ${a})`);
+      grad.addColorStop(0.5, `hsla(${r.hue}, 95%, 65%, ${a * 0.5})`);
+      grad.addColorStop(1, `hsla(${r.hue}, 95%, 70%, 0)`);
+
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.moveTo(-r.width * 0.5, 0);
+      ctx.lineTo(r.width * 0.5, 0);
+      ctx.lineTo(r.width * 0.2, -r.length);
+      ctx.lineTo(-r.width * 0.2, -r.length);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.restore();
+    }
+  }
+
+  function drawSparks(t){
+    for (let i = 0; i < sparks.length; i++){
+      const p = sparks[i];
+      const twinkle = 0.5 + Math.sin(p.twinkle) * 0.5;
+      const a = p.alpha * twinkle * (1 - p.life / p.maxLife);
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 220, 140, ${a})`;
+      ctx.fill();
+    }
+  }
+
+  function drawFire(t){
+    for (let i = 0; i < fireParticles.length; i++){
+      const p = fireParticles[i];
+      const a = Math.max(0, Math.min(1, p.alpha)) * 0.7;
+
+      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 6);
+      grad.addColorStop(0, `hsla(${p.hue}, ${p.sat}%, ${p.light}%, ${a})`);
+      grad.addColorStop(0.4, `hsla(${p.hue}, ${p.sat}%, ${p.light * 0.85}%, ${a * 0.5})`);
+      grad.addColorStop(1, `hsla(${p.hue}, ${p.sat}%, ${p.light * 0.7}%, 0)`);
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * 6, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+    }
+  }
+
+  function drawEmbers(t){
+    for (let i = 0; i < embers.length; i++){
+      const p = embers[i];
+      const a = Math.max(0, Math.min(1, p.alpha));
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${p.hue}, 100%, 65%, ${a})`;
+      ctx.shadowColor = `hsla(${p.hue}, 100%, 65%, ${a})`;
+      ctx.shadowBlur = 12;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+  }
+
+  /* ============================================================
+     MAIN ANIMATION LOOP
+     ============================================================ */
+  const clock = { start: performance.now(), last: performance.now() };
   let paused = false;
   document.addEventListener("visibilitychange", () => { paused = document.hidden; });
 
-  function animate(){
+  /* Dragon scene wrapper gets parallax from JS later */
+  let sceneParallax = { x: 0, y: 0, scale: 1 };
+
+  function animate(now){
     requestAnimationFrame(animate);
     if (paused) return;
 
-    const dt = Math.min(clock.getDelta(), 0.05);
-    const t = clock.getElapsedTime();
+    const dt = Math.min((now - clock.last) / 1000, 0.05);
+    clock.last = now;
+    const t = (now - clock.start) / 1000;
 
-    /* --- Camera subtle handheld drift --- */
-    const target = window.__VAAN__.state.camTarget || { x: 0, y: 6, z: 24 };
-    camera.position.x += (target.x - camera.position.x) * 0.022;
-    camera.position.y += (target.y - camera.position.y) * 0.022;
-    camera.position.z += (target.z - camera.position.z) * 0.022;
+    /* --- Update particles --- */
+    updateFire(dt);
+    updateEmbers(dt);
+    updateSparks(dt);
 
-    /* Micro-drift for organic feel */
-    camera.position.x += Math.sin(t * 0.5) * 0.006;
-    camera.position.y += Math.cos(t * 0.4) * 0.006;
-    camera.position.z += Math.sin(t * 0.3) * 0.004;
+    /* --- Clear canvas --- */
+    ctx.clearRect(0, 0, W, H);
 
-    camera.lookAt(0, 3, 0);
+    /* --- Draw light rays (behind particles) --- */
+    drawRays(t);
 
-    /* --- Orbit light circles the scene --- */
-    orbitLight.position.x = Math.cos(t * 0.4) * 18;
-    orbitLight.position.z = Math.sin(t * 0.4) * 18;
-    orbitLight.position.y = 10 + Math.sin(t * 0.6) * 4;
+    /* --- Draw sparks (tiny dots) --- */
+    drawSparks(t);
 
-    /* --- City edge glow pulses --- */
-    for (let i = 0; i < cityData.length; i++){
-      const cd = cityData[i];
-      const o = 0.35 + Math.sin(t * cd.speed + cd.phase) * 0.25;
-      cd.line.material.opacity = Math.max(0.1, o);
-    }
+    /* --- Draw fire (soft glows) --- */
+    drawFire(t);
 
-    /* --- Grid drift (parallax motion cue) --- */
-    gridA.position.z = (t * 1.0) % 4;
-    gridA.position.x = (t * 0.7) % 4;
-    gridB.position.z = (t * 0.5) % 4;
-    gridB.position.x = (t * 0.35) % 4;
+    /* --- Draw embers (bright sparks on top) --- */
+    drawEmbers(t);
 
-    /* --- Stars slow rotation (each layer different speed) --- */
-    starsNear.rotation.y = t * 0.012;
-    starsMid.rotation.y  = t * 0.008;
-    starsFar.rotation.y  = t * 0.005;
-
-    /* --- Dust layers float up + rotate --- */
-    [dustNear, dustMid, dustFar].forEach((d, idx) => {
-      const pos = d.geo.attributes.position.array;
-      for (let i = 0; i < d.count; i++){
-        pos[i*3]     += d.vel[i*3]     * dt;
-        pos[i*3 + 1] += d.vel[i*3 + 1] * dt;
-        pos[i*3 + 2] += d.vel[i*3 + 2] * dt;
-        if (pos[i*3 + 1] > 24){
-          pos[i*3 + 1] = -8;
-        }
-      }
-      d.geo.attributes.position.needsUpdate = true;
-      d.points.rotation.y = t * (0.005 + idx * 0.003);
-    });
-
-    /* --- Light shafts breathe --- */
-    shafts.forEach((s, i) => {
-      const o = s.baseOpacity * (0.6 + Math.sin(t * 0.8 + s.phase) * 0.4);
-      s.mesh.material.opacity = o;
-      s.mesh.rotation.y += dt * 0.05;
-    });
-
-    /* --- Expose time for Chunk 4 --- */
+    /* --- Expose time for Chunk 4 timeline --- */
     window.__VAAN__.state.time = t;
     window.__VAAN__.state.dt = dt;
-
-    renderer.render(scene, camera);
   }
-  animate();
+
+  requestAnimationFrame(animate);
 
   /* ============================================================
      RESIZE
@@ -1231,690 +1434,326 @@ img{max-width:100%;display:block}
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, TIER === "low" ? 1.4 : 2));
+      resizeCanvas();
     }, 150);
   });
 
   /* ============================================================
      EXPOSE TO CHUNK 3 + 4
      ============================================================ */
-  window.__VAAN__.three = {
-    scene, camera, renderer,
-    keyLight, rimLight, fillLight, orbitLight,
-    gridA, gridB,
-    cityData,
-    shafts,
-    starsNear, starsMid, starsFar,
-    dustNear, dustMid, dustFar,
-    makeCurve, baseSpine, spinePoints
+  window.__VAAN__.render = {
+    ctx, canvas,
+    fireParticles, embers, sparks, rays,
+    spawnFire, spawnEmbers, spawnSparks, spawnRays,
+    resizeCanvas,
+    getW: () => W,
+    getH: () => H
   };
-
-  window.__VAAN__.state = Object.assign(window.__VAAN__.state, {
-    time: 0,
-    dt: 0,
-    camTarget: { x: 0, y: 6, z: 24 },
-    paused: false
-  });
 
 })();
 </script>
 
 <!-- ============================================================
-     CHUNK 3 GOES HERE — JS PART 2 (DRAGON)
+     CHUNK 3 GOES HERE — JS PART 2 (PARTICLE LOGO ASSEMBLY + BREATH)
      ============================================================ --><script>
 /* ============================================================
    VAAN DIGITAL CARD — PART 2 of 3
-   Real hybrid dragon: 3D head + horns + eyes + serpentine body + particle tail
+   Particle logo assembly · breath burst · dragon scene parallax
    ============================================================ */
 
 (function(){
   "use strict";
 
   const V = window.__VAAN__;
-  const T = V.three;
-  const CFG = V.CFG;
-  const BODY_SEGMENTS = V.BODY_SEGMENTS;
+  const R = V.render;
+  const ctx = R.ctx;
 
   if (V.REDUCED) return;
 
-  const scene = T.scene;
+  const getW = R.getW;
+  const getH = R.getH;
 
   /* ============================================================
-     DRAGON MATERIALS
+     LOGO ASSEMBLY PARTICLES
+     2500 particles that form the VAAN "V" silhouette
      ============================================================ */
-  const bodyMat = new THREE.MeshPhysicalMaterial({
-    color: 0xd4a017,
-    emissive: 0xb8891a,
-    emissiveIntensity: 0.65,
-    metalness: 0.95,
-    roughness: 0.22,
-    clearcoat: 1,
-    clearcoatRoughness: 0.12,
-    transparent: true,
-    opacity: 0.0
-  });
 
-  const headMat = new THREE.MeshPhysicalMaterial({
-    color: 0xf0c14b,
-    emissive: 0xd4a017,
-    emissiveIntensity: 0.7,
-    metalness: 1.0,
-    roughness: 0.18,
-    clearcoat: 1,
-    clearcoatRoughness: 0.1,
-    transparent: true,
-    opacity: 0.0
-  });
+  const ASSEMBLY_COUNT = V.TIER === "low" ? 1200 : V.TIER === "mid" ? 1800 : 2500;
 
-  const hornMat = new THREE.MeshPhysicalMaterial({
-    color: 0xb8891a,
-    emissive: 0xd4a017,
-    emissiveIntensity: 0.5,
-    metalness: 1.0,
-    roughness: 0.3,
-    transparent: true,
-    opacity: 0.0
-  });
+  /* Target positions — particle positions that form the V shape */
+  const assemblyTargets = [];
+  const assemblyPositions = [];
+  const assemblyColors = [];
+  const assemblySizes = [];
 
-  const eyeMat = new THREE.MeshBasicMaterial({
-    color: 0xffffff,
-    transparent: true,
-    opacity: 0.0
-  });
+  function buildVShapeTargets(){
+    assemblyTargets.length = 0;
+    assemblyPositions.length = 0;
+    assemblyColors.length = 0;
+    assemblySizes.length = 0;
 
-  const eyeGlowMat = new THREE.MeshBasicMaterial({
-    color: 0xffd966,
-    transparent: true,
-    opacity: 0.0,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
-  });
+    const cx = getW() * 0.5;
+    const cy = getH() * 0.5;
+    const scale = Math.min(getW(), getH()) * 0.55;
 
-  /* ============================================================
-     DRAGON GROUP — everything lives here
-     ============================================================ */
-  const dragonGroup = new THREE.Group();
-  scene.add(dragonGroup);
+    for (let i = 0; i < ASSEMBLY_COUNT; i++){
+      const t = i / ASSEMBLY_COUNT;
+      let x, y, isGold;
 
-  /* ============================================================
-     BODY — CatmullRom spine + TubeGeometry
-     Body tapers from thick (head end) to thin (tail end)
-     ============================================================ */
-  function makeBodyCurve(pts){
-    return new THREE.CatmullRomCurve3(pts, false, "catmullrom", 0.5);
-  }
+      /* Build a "V" shape — two diagonal strokes meeting at the bottom */
+      if (t < 0.5){
+        /* Left stroke — blue */
+        const u = t / 0.5;             /* 0 → 1 */
+        const thickness = 0.06 + (1 - u) * 0.06;   /* thicker at top */
+        const jitterX = (Math.random() - 0.5) * thickness;
+        const jitterY = (Math.random() - 0.5) * 0.02;
 
-  /* Custom tube with variable radius (taper) */
-  function buildTaperedTube(curve, segments, radialSeg, rStart, rEnd){
-    const frames = curve.computeFrenetFrames(segments, false);
-    const geo = new THREE.BufferGeometry();
+        x = cx + (-0.5 + u * 0.5 + jitterX) * scale;
+        y = cy + (-0.5 + u * 1.0 + jitterY) * scale;
+        isGold = false;
+      } else {
+        /* Right stroke — gold */
+        const u = (t - 0.5) / 0.5;     /* 0 → 1 */
+        const thickness = 0.06 + (1 - u) * 0.06;
+        const jitterX = (Math.random() - 0.5) * thickness;
+        const jitterY = (Math.random() - 0.5) * 0.02;
 
-    const positions = [];
-    const normals   = [];
-    const uvs       = [];
-    const indices   = [];
-
-    for (let i = 0; i <= segments; i++){
-      const t = i / segments;
-      const r = rStart * (1 - t) + rEnd * t;
-      const point = curve.getPointAt(t);
-      const N = frames.normals[i];
-      const B = frames.binormals[i];
-
-      for (let j = 0; j <= radialSeg; j++){
-        const v = (j / radialSeg) * Math.PI * 2;
-        const sin = Math.sin(v);
-        const cos = -Math.cos(v);
-
-        const nx = cos * N.x + sin * B.x;
-        const ny = cos * N.y + sin * B.y;
-        const nz = cos * N.z + sin * B.z;
-        const len = Math.sqrt(nx*nx + ny*ny + nz*nz) || 1;
-
-        positions.push(point.x + r * nx, point.y + r * ny, point.z + r * nz);
-        normals.push(nx/len, ny/len, nz/len);
-        uvs.push(i / segments, j / radialSeg);
+        x = cx + (0.5 - u * 0.5 + jitterX) * scale;
+        y = cy + (-0.5 + u * 1.0 + jitterY) * scale;
+        isGold = true;
       }
-    }
 
-    for (let i = 1; i <= segments; i++){
-      for (let j = 1; j <= radialSeg; j++){
-        const a = (radialSeg + 1) * (i - 1) + (j - 1);
-        const b = (radialSeg + 1) * i + (j - 1);
-        const c = (radialSeg + 1) * i + j;
-        const d = (radialSeg + 1) * (i - 1) + j;
-        indices.push(a, b, d, b, c, d);
+      assemblyTargets.push({ x, y, isGold });
+
+      /* Start position — scattered around screen */
+      const angle = Math.random() * Math.PI * 2;
+      const dist = Math.max(getW(), getH()) * (0.6 + Math.random() * 0.5);
+      assemblyPositions.push({
+        x: cx + Math.cos(angle) * dist,
+        y: cy + Math.sin(angle) * dist,
+        vx: 0,
+        vy: 0
+      });
+
+      /* Color */
+      if (isGold){
+        assemblyColors.push({
+          r: 240 + Math.random() * 15,
+          g: 180 + Math.random() * 30,
+          b: 60 + Math.random() * 40
+        });
+      } else {
+        assemblyColors.push({
+          r: 90 + Math.random() * 40,
+          g: 150 + Math.random() * 40,
+          b: 240 + Math.random() * 15
+        });
       }
+
+      assemblySizes.push(1.2 + Math.random() * 1.8);
     }
-
-    geo.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
-    geo.setAttribute("normal", new THREE.Float32BufferAttribute(normals, 3));
-    geo.setAttribute("uv", new THREE.Float32BufferAttribute(uvs, 2));
-    geo.setIndex(indices);
-    return geo;
   }
 
-  /* Live body mesh — will be rebuilt each frame */
-  let bodyMesh = new THREE.Mesh(new THREE.BufferGeometry(), bodyMat);
-  dragonGroup.add(bodyMesh);
-
-  /* Wireframe overlay for the energy look */
-  const bodyWireMat = new THREE.MeshBasicMaterial({
-    color: 0xffd966,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.0
-  });
-  let bodyWire = new THREE.Mesh(new THREE.BufferGeometry(), bodyWireMat);
-  dragonGroup.add(bodyWire);
+  /* Build once on init (and rebuild on resize) */
+  buildVShapeTargets();
 
   /* ============================================================
-     SPINE SPIKES — small cones along the spine (dragon mane)
+     BREATH BURST — fired from dragon's mouth area
      ============================================================ */
-  const SPIKE_COUNT = V.TIER === "low" ? 14 : V.TIER === "mid" ? 20 : 26;
-  const spikeGeo = new THREE.ConeGeometry(0.15, 0.55, 4);
-  const spikeMat = new THREE.MeshPhysicalMaterial({
-    color: 0xffd966,
-    emissive: 0xd4a017,
-    emissiveIntensity: 0.8,
-    metalness: 1.0,
-    roughness: 0.2,
-    transparent: true,
-    opacity: 0.0
-  });
-  const spikes = [];
-  for (let i = 0; i < SPIKE_COUNT; i++){
-    const s = new THREE.Mesh(spikeGeo, spikeMat.clone());
-    dragonGroup.add(s);
-    spikes.push(s);
-  }
+  const BREATH_COUNT = V.CFG.sparks > 400 ? 220 : 150;
+  const breathParticles = [];
 
-  /* ============================================================
-     HEAD — elongated snout + jaw
-     ============================================================ */
-  const headGroup = new THREE.Group();
-  dragonGroup.add(headGroup);
-
-  /* Main head shape — using a stretched box with bevels via scale */
-  const headCoreGeo = new THREE.BoxGeometry(1.4, 0.7, 0.9);
-  const headCore = new THREE.Mesh(headCoreGeo, headMat);
-  headCore.position.set(0.3, 0, 0);
-  headGroup.add(headCore);
-
-  /* Snout — tapered cone extending forward */
-  const snoutGeo = new THREE.ConeGeometry(0.4, 1.2, 6);
-  const snout = new THREE.Mesh(snoutGeo, headMat);
-  snout.rotation.z = -Math.PI / 2;
-  snout.position.set(1.25, -0.05, 0);
-  headGroup.add(snout);
-
-  /* Upper jaw */
-  const upperJawGeo = new THREE.BoxGeometry(1.0, 0.25, 0.7);
-  const upperJaw = new THREE.Mesh(upperJawGeo, headMat);
-  upperJaw.position.set(1.0, 0.15, 0);
-  headGroup.add(upperJaw);
-
-  /* Lower jaw */
-  const lowerJawGeo = new THREE.BoxGeometry(1.1, 0.2, 0.65);
-  const lowerJawMat = headMat.clone();
-  const lowerJaw = new THREE.Mesh(lowerJawGeo, lowerJawMat);
-  lowerJaw.position.set(1.0, -0.32, 0);
-  headGroup.add(lowerJaw);
-
-  /* ============================================================
-     HORNS — two swept-back horns
-     ============================================================ */
-  const hornGeo = new THREE.ConeGeometry(0.14, 1.3, 5);
-
-  const hornL = new THREE.Mesh(hornGeo, hornMat);
-  hornL.position.set(-0.35, 0.45, 0.3);
-  hornL.rotation.set(-0.5, 0, -0.7);
-  headGroup.add(hornL);
-
-  const hornR = new THREE.Mesh(hornGeo, hornMat);
-  hornR.position.set(-0.35, 0.45, -0.3);
-  hornR.rotation.set(0.5, 0, -0.7);
-  headGroup.add(hornR);
-
-  /* Small secondary horns */
-  const hornSmallGeo = new THREE.ConeGeometry(0.08, 0.6, 4);
-
-  const hornL2 = new THREE.Mesh(hornSmallGeo, hornMat);
-  hornL2.position.set(-0.15, 0.55, 0.35);
-  hornL2.rotation.set(-0.4, 0, -0.5);
-  headGroup.add(hornL2);
-
-  const hornR2 = new THREE.Mesh(hornSmallGeo, hornMat);
-  hornR2.position.set(-0.15, 0.55, -0.35);
-  hornR2.rotation.set(0.4, 0, -0.5);
-  headGroup.add(hornR2);
-
-  /* ============================================================
-     EYES — glowing spheres on both sides of the head
-     ============================================================ */
-  const eyeGeo2 = new THREE.SphereGeometry(0.13, 12, 12);
-
-  const eyeL = new THREE.Mesh(eyeGeo2, eyeMat);
-  eyeL.position.set(0.55, 0.15, 0.32);
-  headGroup.add(eyeL);
-
-  const eyeR = new THREE.Mesh(eyeGeo2, eyeMat);
-  eyeR.position.set(0.55, 0.15, -0.32);
-  headGroup.add(eyeR);
-
-  /* Eye glow halos */
-  const glowGeo = new THREE.SphereGeometry(0.24, 12, 12);
-  const glowL = new THREE.Mesh(glowGeo, eyeGlowMat.clone());
-  glowL.position.copy(eyeL.position);
-  headGroup.add(glowL);
-
-  const glowR = new THREE.Mesh(glowGeo, eyeGlowMat.clone());
-  glowR.position.copy(eyeR.position);
-  headGroup.add(glowR);
-
-  /* ============================================================
-     CLAWS — 4 small spikes under the head (front legs area)
-     ============================================================ */
-  const clawMat = hornMat.clone();
-  const clawGeo = new THREE.ConeGeometry(0.09, 0.35, 4);
-  const clawPositions = [
-    [-0.1, -0.5,  0.4],
-    [-0.1, -0.5, -0.4],
-    [-0.4, -0.5,  0.4],
-    [-0.4, -0.5, -0.4]
-  ];
-  const claws = clawPositions.map(p => {
-    const c = new THREE.Mesh(clawGeo, clawMat);
-    c.position.set(p[0], p[1], p[2]);
-    c.rotation.x = -0.4;
-    headGroup.add(c);
-    return c;
-  });
-
-  /* ============================================================
-     MOUTH GLOW — inner light when firing
-     ============================================================ */
-  const mouthGlowGeo = new THREE.SphereGeometry(0.5, 12, 12);
-  const mouthGlowMat = new THREE.MeshBasicMaterial({
-    color: 0xffd966,
-    transparent: true,
-    opacity: 0.0,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
-  });
-  const mouthGlow = new THREE.Mesh(mouthGlowGeo, mouthGlowMat);
-  mouthGlow.position.set(1.6, -0.15, 0);
-  headGroup.add(mouthGlow);
-
-  /* ============================================================
-     ENERGY PARTICLES — the tail trail
-     Particles flow from the body back into the distance
-     ============================================================ */
-  const TAIL_PARTICLES = V.TIER === "low" ? 250 : V.TIER === "mid" ? 400 : 600;
-
-  const tailGeo = new THREE.BufferGeometry();
-  const tailPos = new Float32Array(TAIL_PARTICLES * 3);
-  const tailVel = new Float32Array(TAIL_PARTICLES * 3);
-  const tailLife = new Float32Array(TAIL_PARTICLES);
-  const tailSize = new Float32Array(TAIL_PARTICLES);
-  const tailCol = new Float32Array(TAIL_PARTICLES * 3);
-
-  const tailColA = new THREE.Color(0xffd966);
-  const tailColB = new THREE.Color(0xf0c14b);
-  const tailColC = new THREE.Color(0xff9d2e);
-
-  for (let i = 0; i < TAIL_PARTICLES; i++){
-    tailPos[i*3]     = (Math.random() - 0.5) * 30;
-    tailPos[i*3 + 1] = (Math.random() - 0.5) * 20;
-    tailPos[i*3 + 2] = (Math.random() - 0.5) * 20;
-
-    tailVel[i*3]     = (Math.random() - 0.5) * 0.1;
-    tailVel[i*3 + 1] = Math.random() * 0.08;
-    tailVel[i*3 + 2] = (Math.random() - 0.5) * 0.1;
-
-    tailLife[i] = Math.random();
-    tailSize[i] = 0.08 + Math.random() * 0.14;
-
-    const r = Math.random();
-    const c = r < 0.5 ? tailColA : r < 0.8 ? tailColB : tailColC;
-    tailCol[i*3]     = c.r;
-    tailCol[i*3 + 1] = c.g;
-    tailCol[i*3 + 2] = c.b;
-  }
-
-  tailGeo.setAttribute("position", new THREE.BufferAttribute(tailPos, 3));
-  tailGeo.setAttribute("color", new THREE.BufferAttribute(tailCol, 3));
-
-  const tailMat = new THREE.PointsMaterial({
-    size: 0.15,
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.0,
-    sizeAttenuation: true,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
-  });
-
-  const tailParticles = new THREE.Points(tailGeo, tailMat);
-  dragonGroup.add(tailParticles);
-
-  /* ============================================================
-     BREATH ATTACK — burst forward from mouth
-     ============================================================ */
-  const BREATH_COUNT = CFG.breath;
-  const breathGeo = new THREE.BufferGeometry();
-  const breathPos = new Float32Array(BREATH_COUNT * 3);
-  const breathVel = new Float32Array(BREATH_COUNT * 3);
-  const breathLife = new Float32Array(BREATH_COUNT);
-  const breathCol = new Float32Array(BREATH_COUNT * 3);
-
-  for (let i = 0; i < BREATH_COUNT; i++){
-    const r = Math.random();
-    const c = r < 0.4 ? tailColA : r < 0.75 ? tailColB : tailColC;
-    breathCol[i*3]     = c.r;
-    breathCol[i*3 + 1] = c.g;
-    breathCol[i*3 + 2] = c.b;
-    breathPos[i*3]     = 9999;
-    breathPos[i*3 + 1] = 9999;
-    breathPos[i*3 + 2] = 9999;
-    breathLife[i] = 0;
-  }
-  breathGeo.setAttribute("position", new THREE.BufferAttribute(breathPos, 3));
-  breathGeo.setAttribute("color", new THREE.BufferAttribute(breathCol, 3));
-
-  const breathMat = new THREE.PointsMaterial({
-    size: 0.26,
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.0,
-    sizeAttenuation: true,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
-  });
-  const breathPoints = new THREE.Points(breathGeo, breathMat);
-  scene.add(breathPoints);
-
-  let breathActive = false;
-
-  function fireBreath(origin){
-    /* origin is a world position — grab forward direction from head rotation */
-    const forward = new THREE.Vector3(1, 0, 0);
-    forward.applyQuaternion(headGroup.quaternion);
-    forward.normalize();
+  function fireBreath(originX, originY){
+    breathParticles.length = 0;
 
     for (let i = 0; i < BREATH_COUNT; i++){
-      breathPos[i*3]     = origin.x;
-      breathPos[i*3 + 1] = origin.y;
-      breathPos[i*3 + 2] = origin.z;
-
-      const spread = 0.7;
-      breathVel[i*3]     = forward.x * (8 + Math.random() * 12) + (Math.random() - 0.5) * spread;
-      breathVel[i*3 + 1] = forward.y * (8 + Math.random() * 12) + (Math.random() - 0.5) * spread;
-      breathVel[i*3 + 2] = forward.z * (8 + Math.random() * 12) + (Math.random() - 0.5) * spread;
-
-      breathLife[i] = 1.0;
+      const angle = (Math.random() - 0.5) * 1.2;   /* cone spread */
+      const speed = 5 + Math.random() * 14;
+      breathParticles.push({
+        x: originX,
+        y: originY,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 2,
+        life: 0,
+        maxLife: 60 + Math.random() * 80,
+        size: 1.5 + Math.random() * 3.5,
+        hue: 30 + Math.random() * 30,
+        alpha: 1
+      });
     }
+  }
 
-    breathGeo.attributes.position.needsUpdate = true;
-    breathActive = true;
-    breathMat.opacity = 1.0;
+  function updateBreath(dt){
+    for (let i = breathParticles.length - 1; i >= 0; i--){
+      const p = breathParticles[i];
+      p.life += 1;
+      p.x += p.vx * dt * 60;
+      p.y += p.vy * dt * 60;
+      p.vx *= 0.96;
+      p.vy *= 0.96;
+      p.vy -= 0.1;   /* slight lift */
 
-    /* Trigger mouth glow */
-    mouthGlowMat.opacity = 1.0;
-    setTimeout(() => {
-      let fadeOut = setInterval(() => {
-        mouthGlowMat.opacity *= 0.85;
-        if (mouthGlowMat.opacity < 0.02){
-          mouthGlowMat.opacity = 0;
-          clearInterval(fadeOut);
-        }
-      }, 30);
+      const t = p.life / p.maxLife;
+      p.alpha = Math.max(0, 1 - t);
+
+      if (p.life > p.maxLife){
+        breathParticles.splice(i, 1);
+      }
+    }
+  }
+
+  function drawBreath(){
+    for (let i = 0; i < breathParticles.length; i++){
+      const p = breathParticles[i];
+      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 5);
+      grad.addColorStop(0, `hsla(${p.hue}, 100%, 70%, ${p.alpha})`);
+      grad.addColorStop(0.4, `hsla(${p.hue}, 100%, 60%, ${p.alpha * 0.6})`);
+      grad.addColorStop(1, `hsla(${p.hue}, 100%, 50%, 0)`);
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * 5, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+    }
+  }
+
+  /* ============================================================
+     DRAGON SCENE PARALLAX CONTROLLER
+     Applies a translate + scale to the 2.5D scene layers
+     ============================================================ */
+  const sceneState = {
+    bgZoom: 1.15,
+    bgBlur: 24,
+    dragonZoom: 1.0,
+    dragonY: 0,
+    sceneZoom: 1.0,
+    sceneY: 0,
+    sceneX: 0
+  };
+
+  function applyScene(){
+    /* Background layer — zooms + shifts independently (deeper parallax) */
+    V.layerBg.style.transform = `scale(${sceneState.bgZoom}) translate3d(${sceneState.sceneX * 0.4}px, ${sceneState.sceneY * 0.4}px, 0)`;
+    V.layerBg.style.filter = `blur(${sceneState.bgBlur}px) brightness(0.35) saturate(1.4)`;
+
+    /* Dragon layer — main visual, moves at full parallax */
+    V.layerDragon.style.transform = `scale(${sceneState.dragonZoom * sceneState.sceneZoom}) translate3d(${sceneState.sceneX}px, ${sceneState.sceneY + sceneState.dragonY}px, 0)`;
+    V.layerDragon.style.transformOrigin = "center center";
+  }
+  applyScene();
+
+  /* ============================================================
+     EXTEND THE MAIN LOOP — hook into particle draw cycle
+     We redraw assembly + breath AFTER the base particles
+     ============================================================ */
+  let assemblyProgress = 0;
+  let assemblyFade = 1;
+  let breathFade = 1;
+
+  function updateAssembly(dt){
+    for (let i = 0; i < assemblyPositions.length; i++){
+      const pos = assemblyPositions[i];
+      const target = assemblyTargets[i];
+      const p = 0.02 + assemblyProgress * 0.11;
+
+      pos.vx += (target.x - pos.x) * p;
+      pos.vy += (target.y - pos.y) * p;
+      pos.vx *= 0.86;
+      pos.vy *= 0.86;
+
+      pos.x += pos.vx * dt * 60;
+      pos.y += pos.vy * dt * 60;
+    }
+  }
+
+  function drawAssembly(){
+    if (assemblyFade <= 0) return;
+
+    for (let i = 0; i < assemblyPositions.length; i++){
+      const pos = assemblyPositions[i];
+      const col = assemblyColors[i];
+      const size = assemblySizes[i];
+
+      /* Dim particles that are still far from their target during early assembly */
+      const dist = Math.hypot(pos.x - assemblyTargets[i].x, pos.y - assemblyTargets[i].y);
+      const proximity = Math.max(0, 1 - dist / (getW() * 0.5));
+      const alpha = (0.3 + proximity * 0.7) * assemblyFade;
+
+      ctx.beginPath();
+      ctx.arc(pos.x, pos.y, size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${col.r}, ${col.g}, ${col.b}, ${alpha})`;
+      ctx.shadowColor = `rgba(${col.r}, ${col.g}, ${col.b}, ${alpha})`;
+      ctx.shadowBlur = 10;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+  }
+
+  /* ============================================================
+     PATCH — extend base loop with our draws
+     ============================================================ */
+  /* We wrap the canvas render loop by hooking on a custom draw queue */
+  function extendedDraw(dt){
+    /* Called externally from a new loop we install */
+    updateAssembly(dt);
+    updateBreath(dt);
+
+    drawAssembly();
+    drawBreath();
+  }
+
+  /* ============================================================
+     EXPOSE TO CHUNK 4
+     ============================================================ */
+  V.state.scene = sceneState;
+  V.state.assembly = {
+    progress: () => assemblyProgress,
+    setProgress: (v) => { assemblyProgress = v; },
+    setFade: (v) => { assemblyFade = v; },
+    getFade: () => assemblyFade,
+    positions: assemblyPositions,
+    targets: assemblyTargets,
+    rebuild: buildVShapeTargets
+  };
+  V.state.breath = {
+    fire: fireBreath,
+    setFade: (v) => { breathFade = v; },
+    count: () => breathParticles.length
+  };
+
+  V.render.extendedDraw = extendedDraw;
+  V.render.applyScene = applyScene;
+
+  /* Rebuild targets on resize */
+  window.addEventListener("resize", () => {
+    clearTimeout(window.__VAAN__._resizeT);
+    window.__VAAN__._resizeT = setTimeout(() => {
+      buildVShapeTargets();
     }, 200);
-  }
-
-  /* ============================================================
-     LIVE SPINE UPDATE + BODY REBUILD
-     ============================================================ */
-  const baseSpine = T.baseSpine;
-  const spinePoints = T.spinePoints;
-
-  /* Radius profile: thick near head, taper to 0 near tail */
-  const radiusProfile = [];
-  for (let i = 0; i < BODY_SEGMENTS; i++){
-    const t = i / (BODY_SEGMENTS - 1);
-    /* Fast taper at tail (last 30%) */
-    let r;
-    if (t < 0.15) r = 0.55 - t * 0.4;
-    else if (t < 0.7) r = 0.48 - (t - 0.15) * 0.35;
-    else r = 0.28 * (1 - (t - 0.7) / 0.3) + 0.05;
-    radiusProfile.push(Math.max(0.04, r));
-  }
-
-  let bodyBuilt = false;
-  const segPerFrame = 90;
-
-  function rebuildBody(){
-    const curve = makeBodyCurve(spinePoints);
-    /* Build custom tapered tube geometry */
-    const geo = buildTaperedTube(curve, segPerFrame, 8, radiusProfile[0], radiusProfile[BODY_SEGMENTS - 1]);
-    bodyMesh.geometry.dispose();
-    bodyMesh.geometry = geo;
-
-    /* Wireframe overlay geometry (same curve, slightly larger radius) */
-    const wireGeo = buildTaperedTube(curve, segPerFrame, 8, radiusProfile[0] * 1.05, radiusProfile[BODY_SEGMENTS - 1] * 1.05);
-    bodyWire.geometry.dispose();
-    bodyWire.geometry = wireGeo;
-  }
-  rebuildBody();
-  bodyBuilt = true;
-
-  /* ============================================================
-     ANIMATION LOOP
-     ============================================================ */
-  const clock = new THREE.Clock();
-
-  function animate(){
-    requestAnimationFrame(animate);
-    if (window.__VAAN__.state.paused) return;
-
-    const dt = Math.min(clock.getDelta(), 0.05);
-    const t = window.__VAAN__.state.time || 0;
-    const st = window.__VAAN__.state.dragonState || (window.__VAAN__.state.dragonState = {
-      form: 0, swim: 0, eyeGlow: 0, dissolve: 0, opacity: 0
-    });
-
-    /* --- Update spine with swim animation --- */
-    const swim = st.swim;
-    for (let i = 0; i < BODY_SEGMENTS; i++){
-      const tt = i / (BODY_SEGMENTS - 1);
-      const phase = t * 1.8 - tt * Math.PI * 2.6;
-      spinePoints[i].set(
-        baseSpine[i].x + Math.sin(phase) * 0.8 * swim,
-        baseSpine[i].y + Math.cos(phase * 0.75) * 0.6 * swim,
-        baseSpine[i].z + Math.sin(phase * 1.35) * 0.5 * swim
-      );
-    }
-
-    /* Rebuild body each frame when visible */
-    if (st.opacity > 0.01 && st.dissolve < 0.98){
-      rebuildBody();
-    }
-
-    /* --- Position head at the front of the spine --- */
-    const headPt = spinePoints[0];
-    const neckPt = spinePoints[1];
-    headGroup.position.copy(headPt);
-
-    /* Head faces the direction from neck → head */
-    const dir = new THREE.Vector3().subVectors(headPt, neckPt);
-    const angleY = Math.atan2(-dir.z, dir.x);
-    const angleZ = Math.atan2(-dir.y, Math.hypot(dir.x, dir.z));
-    headGroup.rotation.y = angleY * 0.5;
-    headGroup.rotation.z = angleZ * 0.6;
-
-    /* Add subtle head bob */
-    headGroup.rotation.z += Math.sin(t * 2.5) * 0.06;
-    headGroup.rotation.y += Math.sin(t * 1.4) * 0.04;
-
-    /* --- Update opacities from state --- */
-    const alive = st.opacity * (1 - st.dissolve);
-    bodyMat.opacity = alive * 0.95;
-    bodyWireMat.opacity = alive * 0.35;
-    headMat.opacity = alive * 1.0;
-    hornMat.opacity = alive * 0.9;
-    eyeMat.opacity = st.eyeGlow * 0.95;
-    eyeGlowMat.opacity = st.eyeGlow * 0.55;
-
-    /* Update eye glow clones */
-    glowL.material.opacity = st.eyeGlow * 0.55;
-    glowR.material.opacity = st.eyeGlow * 0.55;
-
-    /* --- Spikes along spine --- */
-    for (let i = 0; i < spikes.length; i++){
-      const s = spikes[i];
-      const idx = Math.floor((i / spikes.length) * (BODY_SEGMENTS - 1));
-      const anchor = spinePoints[idx];
-      const next = spinePoints[Math.min(idx + 1, BODY_SEGMENTS - 1)];
-
-      s.position.copy(anchor);
-
-      /* Point spike up (perpendicular-ish to spine) */
-      const dir2 = new THREE.Vector3().subVectors(next, anchor).normalize();
-      const up = new THREE.Vector3(0, 1, 0);
-      const side = new THREE.Vector3().crossVectors(dir2, up).normalize();
-      const realUp = new THREE.Vector3().crossVectors(side, dir2).normalize();
-
-      s.position.add(realUp.clone().multiplyScalar(0.35));
-      s.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), realUp);
-
-      s.material.opacity = alive;
-      const scl = 0.6 + Math.sin(t * 3 + i * 0.6) * 0.15;
-      s.scale.set(scl, scl, scl);
-    }
-
-    /* --- Tail particles flow --- */
-    const tailPosArr = tailGeo.attributes.position.array;
-    const tailEnd = spinePoints[BODY_SEGMENTS - 1];
-
-    for (let i = 0; i < TAIL_PARTICLES; i++){
-      /* Respawn particles near the tail */
-      if (tailLife[i] <= 0){
-        const jitter = 0.5;
-        tailPos[i*3]     = tailEnd.x + (Math.random() - 0.5) * jitter;
-        tailPos[i*3 + 1] = tailEnd.y + (Math.random() - 0.5) * jitter;
-        tailPos[i*3 + 2] = tailEnd.z + (Math.random() - 0.5) * jitter;
-        tailVel[i*3]     = (Math.random() - 0.5) * 0.3;
-        tailVel[i*3 + 1] = Math.random() * 0.35;
-        tailVel[i*3 + 2] = (Math.random() - 0.5) * 0.3;
-        tailLife[i] = 1.0;
-      } else {
-        tailLife[i] -= dt * 0.35;
-        tailPos[i*3]     += tailVel[i*3] * dt;
-        tailPos[i*3 + 1] += tailVel[i*3 + 1] * dt;
-        tailPos[i*3 + 2] += tailVel[i*3 + 2] * dt;
-        /* Drag */
-        tailVel[i*3]     *= 0.99;
-        tailVel[i*3 + 1] *= 0.99;
-        tailVel[i*3 + 2] *= 0.99;
-      }
-    }
-    tailGeo.attributes.position.needsUpdate = true;
-    tailMat.opacity = alive * 0.9;
-    tailMat.size = 0.12 + Math.sin(t * 4) * 0.03;
-
-    /* --- Breath particles --- */
-    if (breathActive){
-      let anyAlive = false;
-      for (let i = 0; i < BREATH_COUNT; i++){
-        if (breathLife[i] <= 0) continue;
-        anyAlive = true;
-        breathLife[i] -= dt * 1.3;
-        breathPos[i*3]     += breathVel[i*3] * dt;
-        breathPos[i*3 + 1] += breathVel[i*3 + 1] * dt;
-        breathPos[i*3 + 2] += breathVel[i*3 + 2] * dt;
-        breathVel[i*3]     *= 0.96;
-        breathVel[i*3 + 1] *= 0.96;
-        breathVel[i*3 + 2] *= 0.96;
-      }
-      breathGeo.attributes.position.needsUpdate = true;
-      breathMat.opacity = Math.max(0, breathMat.opacity - dt * 1.2);
-      if (!anyAlive || breathMat.opacity <= 0.01){
-        breathActive = false;
-        breathMat.opacity = 0;
-      }
-    }
-
-    /* --- Dissolve: fade group outward --- */
-    if (st.dissolve > 0.001){
-      const d = st.dissolve;
-      headGroup.scale.setScalar(1 - d);
-      tailMat.opacity = alive * 0.9 * (1 - d);
-    } else {
-      headGroup.scale.setScalar(1);
-    }
-  }
-
-  animate();
-
-  /* ============================================================
-     EXPOSE
-     ============================================================ */
-  V.three.dragon = {
-    group: dragonGroup,
-    body: bodyMesh,
-    bodyWire,
-    head: headGroup,
-    eyes: [eyeL, eyeR],
-    glows: [glowL, glowR],
-    spikes,
-    horns: [hornL, hornR, hornL2, hornR2],
-    claws,
-    tailParticles, tailGeo, tailMat,
-    breathPoints, breathGeo, breathMat,
-    mouthGlow, mouthGlowMat,
-    bodyMat, bodyWireMat, headMat, hornMat
-  };
-
-  V.state.fireBreath = fireBreath;
-
-  /* Head world position for timeline to reference */
-  V.state.getHeadWorldPos = function(){
-    const p = new THREE.Vector3();
-    headGroup.getWorldPosition(p);
-    /* Offset forward to mouth */
-    const offset = new THREE.Vector3(1.6, -0.15, 0);
-    offset.applyQuaternion(headGroup.quaternion);
-    p.add(offset);
-    return p;
-  };
+  });
 
 })();
 </script>
 
 <!-- ============================================================
-     CHUNK 4 GOES HERE — JS PART 3 (TIMELINE + CARD)
+     CHUNK 4 GOES HERE — JS PART 3 (MASTER TIMELINE + CARD + INTERACTIONS)
      ============================================================ --><script>
 /* ============================================================
    VAAN DIGITAL CARD — PART 3 of 3
-   Master timeline · camera choreography · card reveal · interactions
+   Master timeline · scene choreography · card reveal · interactions
    ============================================================ */
 
 (function(){
   "use strict";
 
   const V = window.__VAAN__;
-  const T = V.three;
   const S = V.state;
-  const ST = V.stage;
-  const REDUCED = V.REDUCED;
+  const R = V.render;
 
   /* ============================================================
      REDUCED MOTION — straight to card
      ============================================================ */
-  if (REDUCED){
+  if (V.REDUCED){
     document.body.classList.remove("locked");
     V.cardWrap.classList.add("revealed");
     V.mainCard.classList.add("revealed");
@@ -1924,113 +1763,194 @@ img{max-width:100%;display:block}
   }
 
   /* ============================================================
-     ENSURE DRAGON STATE EXISTS
+     EXTENDED RENDER LOOP
+     The base loop (Chunk 2) runs fire/embers/sparks.
+     We add a second rAF that draws the assembly + breath on top.
      ============================================================ */
-  if (!S.dragonState){
-    S.dragonState = { form: 0, swim: 0, eyeGlow: 0, dissolve: 0, opacity: 0 };
-  }
-  const DS = S.dragonState;
+  function extendedLoop(now){
+    requestAnimationFrame(extendedLoop);
+    if (S.paused) return;
 
-  /* Initialize camera target if missing */
-  if (!S.camTarget) S.camTarget = { x: 0, y: 6, z: 24 };
+    if (R.extendedDraw){
+      R.extendedDraw(S.dt || 0.016);
+    }
+  }
+  requestAnimationFrame(extendedLoop);
 
   /* ============================================================
-     MASTER TIMELINE
-     Timeline starts at t=0. Stage visible initially.
+     MOUSE / TOUCH PARALLAX — subtle scene drift with cursor
      ============================================================ */
-  const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+  let mouseX = 0, mouseY = 0;
+  let targetX = 0, targetY = 0;
 
-  /* --- t=0.0 → 0.8 : stage bg fade from pure black --- */
-  tl.fromTo(ST, { backgroundColor: "#000000" },
+  function onPointer(e){
+    const cx = (e.touches ? e.touches[0].clientX : e.clientX);
+    const cy = (e.touches ? e.touches[0].clientY : e.clientY);
+    mouseX = (cx / window.innerWidth - 0.5) * 2;
+    mouseY = (cy / window.innerHeight - 0.5) * 2;
+  }
+  window.addEventListener("mousemove", onPointer);
+  window.addEventListener("touchmove", onPointer, { passive: true });
+
+  function driftLoop(){
+    requestAnimationFrame(driftLoop);
+    if (S.paused) return;
+    /* Skip cursor drift if we're past the opening (card revealed) */
+    if (V.cardWrap.classList.contains("revealed")) return;
+
+    targetX += (mouseX - targetX) * 0.04;
+    targetY += (mouseY - targetY) * 0.04;
+
+    /* Only apply if sceneState exists and no timeline is overriding it */
+    if (S.scene && !S.parallaxLocked){
+      S.scene.sceneX = targetX * -18;
+      S.scene.sceneY = targetY * -12;
+      if (R.applyScene) R.applyScene();
+    }
+  }
+  requestAnimationFrame(driftLoop);
+
+  /* ============================================================
+     MASTER TIMELINE — 12-second cinematic opening
+     ============================================================ */
+  const tl = gsap.timeline({
+    defaults: { ease: "power2.out" },
+    onStart: () => { S.parallaxLocked = true; },
+    onComplete: () => { S.parallaxLocked = false; }
+  });
+
+  /* --- t=0.0 → 0.8 : stage bg fades from black --- */
+  tl.fromTo(V.stage, { backgroundColor: "#000000" },
     { backgroundColor: "#02040a", duration: 0.8 }, 0);
 
-  /* --- t=0.3 → 1.8 : camera dives in from far --- */
-  tl.fromTo(S.camTarget,
-    { x: 4, y: 14, z: 44 },
-    { x: -2, y: 5, z: 20, duration: 1.6, ease: "power2.inOut" }, 0.3);
+  /* --- t=0.0 → 1.5 : scene starts zoomed in, pulls back --- */
+  tl.fromTo(S.scene,
+    { sceneZoom: 1.4, bgZoom: 1.5, bgBlur: 40, dragonZoom: 1.3 },
+    {
+      sceneZoom: 1.0, bgZoom: 1.25, bgBlur: 22, dragonZoom: 1.05,
+      duration: 2.0, ease: "power2.out",
+      onUpdate: () => { if (R.applyScene) R.applyScene(); }
+    }, 0);
 
-  /* --- t=0.6 → 1.4 : dragon body opacity fades in --- */
-  tl.to(DS, { opacity: 1, duration: 0.9, ease: "power2.out" }, 0.6);
+  /* --- t=0.3 → 1.2 : light rays fade in via fire density --- */
+  tl.fromTo(R.fireParticles, {}, { duration: 0.9 }, 0.3);
 
-  /* --- t=0.8 → 2.6 : dragon swim amplitude ramps --- */
-  tl.to(DS, { swim: 1, duration: 1.6, ease: "power2.inOut" }, 0.8);
+  /* --- t=0.6 → 2.0 : camera drifts left and down for a "reveal" angle --- */
+  tl.to(S.scene, {
+    sceneX: -40, sceneY: -20,
+    duration: 1.4, ease: "power2.inOut",
+    onUpdate: () => { if (R.applyScene) R.applyScene(); }
+  }, 0.6);
 
-  /* --- t=1.2 → 2.4 : camera orbits around dragon --- */
-  tl.to(S.camTarget, { x: 3.5, y: 4, z: 17, duration: 1.2, ease: "power2.inOut" }, 1.2);
+  /* --- t=1.0 : HUD begins fading in --- */
+  tl.add(() => { V.hudTL.classList.add("on"); }, 1.0);
+  tl.add(() => { V.hudTR.classList.add("on"); }, 1.15);
+  tl.add(() => { V.hudBL.classList.add("on"); }, 1.3);
+  tl.add(() => { V.hudBR.classList.add("on"); }, 1.45);
+  tl.add(() => { V.scanline.classList.add("on"); }, 1.0);
 
-  /* --- t=2.0 : eyes ignite --- */
-  tl.to(DS, { eyeGlow: 1, duration: 0.6, ease: "power2.out" }, 2.0);
+  /* --- t=1.8 : skip button appears + gate opens --- */
+  tl.add(() => { V.skipBtn.classList.add("visible"); }, 1.8);
+  tl.add(() => { canSkip = true; }, 1.8);
 
-  /* --- t=2.2 : HUD fades in --- */
-  tl.add(() => { V.hudTL.classList.add("on"); }, 2.2);
-  tl.add(() => { V.hudTR.classList.add("on"); }, 2.3);
-  tl.add(() => { V.hudBL.classList.add("on"); }, 2.4);
-  tl.add(() => { V.hudBR.classList.add("on"); }, 2.5);
-  tl.add(() => { V.scanline.classList.add("on"); }, 2.2);
+  /* --- t=2.0 → 2.6 : scene drifts right (back to center) --- */
+  tl.to(S.scene, {
+    sceneX: 20, sceneY: 0,
+    duration: 0.8, ease: "power2.inOut",
+    onUpdate: () => { if (R.applyScene) R.applyScene(); }
+  }, 2.0);
 
-  /* --- t=2.4 : skip button appears + gate opens --- */
-  tl.add(() => { V.skipBtn.classList.add("visible"); }, 2.4);
-  tl.add(() => { canSkip = true; }, 2.4);
-
-  /* --- t=2.6 → 3.6 : dragon rears back for the roar --- */
-  tl.to(S.camTarget, { x: -2, y: 6, z: 22, duration: 0.6, ease: "power2.in" }, 2.6);
-
-  /* --- t=3.2 : eye flash before roar --- */
-  tl.to(DS, { eyeGlow: 1.6, duration: 0.15, yoyo: true, repeat: 1 }, 3.0);
-
-  /* --- t=3.4 : fire breath from mouth --- */
+  /* --- t=2.6 : fire breath fires from center (dragon's mouth area) --- */
   tl.add(() => {
-    if (S.getHeadWorldPos && S.fireBreath){
-      const headPos = S.getHeadWorldPos();
-      S.fireBreath(headPos);
+    const cx = window.innerWidth * 0.5;
+    const cy = window.innerHeight * 0.52;
+    if (S.breath && S.breath.fire) {
+      S.breath.fire(cx, cy);
+    }
+  }, 2.6);
+
+  /* --- t=2.7 : shockwave ring fires --- */
+  tl.add(() => { V.shockwave.classList.add("fire"); }, 2.7);
+
+  /* --- t=2.8 → 3.4 : scene zooms in dramatically --- */
+  tl.to(S.scene, {
+    sceneZoom: 1.35,
+    dragonZoom: 1.4,
+    sceneY: 30,
+    duration: 0.8, ease: "power2.in",
+    onUpdate: () => { if (R.applyScene) R.applyScene(); }
+  }, 2.8);
+
+  /* --- t=3.4 : particle logo assembly starts --- */
+  tl.add(() => {
+    if (S.assembly && S.assembly.setProgress) S.assembly.setProgress(0.1);
+  }, 3.4);
+
+  /* --- t=3.4 → 4.6 : assembly progresses, particles fly toward V shape --- */
+  tl.to({ p: 0.1 }, {
+    p: 1.0,
+    duration: 1.4,
+    ease: "power2.inOut",
+    onUpdate: function(){
+      if (S.assembly && S.assembly.setProgress) S.assembly.setProgress(this.targets()[0].p);
     }
   }, 3.4);
 
-  /* --- t=3.5 : shockwave ring fires --- */
-  tl.add(() => { V.shockwave.classList.add("fire"); }, 3.5);
+  /* --- t=3.6 : opening logo SVG fades in + spin starts --- */
+  tl.add(() => { V.openLogo.classList.add("visible"); }, 3.6);
+  tl.add(() => { V.openLogo.classList.add("spin"); }, 3.6);
 
-  /* --- t=3.6 → 4.0 : camera shakes from roar --- */
-  tl.to(S.camTarget, {
-    x: 0.5, y: 5, z: 19, duration: 0.15,
-    ease: "power2.in", yoyo: true, repeat: 3
-  }, 3.6);
+  /* --- t=4.2 → 5.0 : scene zooms out (dragon recedes, logo takes over) --- */
+  tl.to(S.scene, {
+    sceneZoom: 1.0,
+    dragonZoom: 0.9,
+    sceneY: 0,
+    sceneX: 0,
+    duration: 1.0,
+    ease: "power2.out",
+    onUpdate: () => { if (R.applyScene) R.applyScene(); }
+  }, 4.2);
 
-  /* --- t=4.0 : opening logo fades in --- */
-  tl.add(() => { V.openLogo.classList.add("visible"); }, 4.0);
-  tl.add(() => { V.openLogo.classList.add("spin"); }, 4.0);
+  /* --- t=4.5 : cinematic title flashes --- */
+  tl.add(() => { V.cineTitle.classList.add("flash-in"); }, 4.5);
 
-  /* --- t=4.2 → 5.2 : dragon dissolves --- */
-  tl.to(DS, { dissolve: 1, duration: 1.0, ease: "power2.in" }, 4.2);
-  tl.to(DS, { eyeGlow: 0, duration: 0.5 }, 4.2);
+  /* --- t=5.2 : dragon scene fade-out (image layers darken) --- */
+  tl.to([V.layerDragon], {
+    duration: 1.0,
+    opacity: 0.15,
+    ease: "power2.in"
+  }, 5.2);
 
-  /* --- t=4.4 → 5.4 : camera pulls back for logo reveal --- */
-  tl.to(S.camTarget, { x: 0, y: 4, z: 26, duration: 1.2, ease: "power2.inOut" }, 4.4);
+  /* --- t=5.5 : particle logo shimmer --- */
+  tl.add(() => { V.openLogo.classList.add("shimmer"); }, 5.5);
 
-  /* --- t=4.8 : cinematic title flashes --- */
-  tl.add(() => { V.cineTitle.classList.add("flash-in"); }, 4.8);
+  /* --- t=6.2 : assembly particles fade out (logo takes over visually) --- */
+  tl.to({}, {
+    duration: 0.6,
+    onUpdate: function(){
+      if (S.assembly && S.assembly.setFade) S.assembly.setFade(1 - this.progress());
+    }
+  }, 6.2);
 
-  /* --- t=5.4 : logo shimmer --- */
-  tl.add(() => { V.openLogo.classList.add("shimmer"); }, 5.4);
+  /* --- t=6.4 : logo zooms + flash fires --- */
+  tl.add(() => { V.openLogo.classList.add("zoom"); }, 6.4);
+  tl.add(() => { V.flash.classList.add("fire"); }, 6.4);
 
-  /* --- t=6.2 : logo zooms + flash fires --- */
-  tl.add(() => { V.openLogo.classList.add("zoom"); }, 6.2);
-  tl.add(() => { V.flash.classList.add("fire"); }, 6.2);
-
-  /* --- t=6.8 : stage hides, card reveals, scroll unlocks --- */
+  /* --- t=6.9 : stage hides, card reveals, scroll unlocks --- */
   tl.add(() => {
-    ST.classList.add("hidden");
-    ST.classList.add("letterbox-off");
+    V.stage.classList.add("hidden");
+    V.stage.classList.add("letterbox-off");
     V.cardWrap.classList.add("revealed");
     V.mainCard.classList.add("revealed");
     document.body.classList.remove("locked");
     revealEverything();
     startLiveTime();
-  }, 6.8);
+  }, 6.9);
 
-  /* --- t=7.8 : fully hide stage from DOM --- */
+  /* --- t=8.0 : fully hide stage from DOM --- */
   tl.add(() => {
-    setTimeout(() => { ST.style.display = "none"; }, 900);
-  }, 7.8);
+    setTimeout(() => { V.stage.style.display = "none"; }, 900);
+  }, 8.0);
 
   /* ============================================================
      SKIP LOGIC
@@ -2041,24 +1961,24 @@ img{max-width:100%;display:block}
     if (!canSkip) return;
 
     tl.kill();
+    S.parallaxLocked = false;
 
-    /* Force dragon to end state */
-    DS.opacity = 0;
-    DS.dissolve = 1;
+    /* Force assembly to final state */
+    if (S.assembly && S.assembly.setProgress) S.assembly.setProgress(1);
 
-    ST.classList.add("hidden");
-    ST.classList.add("letterbox-off");
+    V.stage.classList.add("hidden");
+    V.stage.classList.add("letterbox-off");
     V.cardWrap.classList.add("revealed");
     V.mainCard.classList.add("revealed");
     document.body.classList.remove("locked");
     revealEverything();
     startLiveTime();
 
-    setTimeout(() => { ST.style.display = "none"; }, 700);
+    setTimeout(() => { V.stage.style.display = "none"; }, 700);
   }
   window.skipOpening = skipOpening;
 
-  ST.addEventListener("click", (e) => {
+  V.stage.addEventListener("click", (e) => {
     if (e.target.id === "skipBtn") return;
     skipOpening();
   });
@@ -2148,8 +2068,8 @@ img{max-width:100%;display:block}
      ============================================================ */
   window.shareCard = async function(){
     const shareData = {
-      title: "VAAN Consultancy — Digital Card",
-      text: "Vision · Automation · Advancement · Network. Websites & QR systems built in Karnal.",
+      title: "VAAN Consultancy — Digital Visiting Card",
+      text: "Vision · Automation · Advancement · Network. Websites, QR services and automation — built in India.",
       url: "https://vaanconsultancy.in/card"
     };
 
@@ -2175,7 +2095,7 @@ img{max-width:100%;display:block}
       "N:;VAAN Consultancy;;;",
       "FN:VAAN Consultancy",
       "ORG:VAAN Consultancy",
-      "TITLE:Digital Studio · Karnal",
+      "TITLE:Digital Studio · India",
       "TEL;TYPE=CELL,VOICE:+919671163712",
       "EMAIL;TYPE=WORK:hello@vaanconsultancy.in",
       "URL:https://vaanconsultancy.in/card",
@@ -2281,7 +2201,7 @@ img{max-width:100%;display:block}
   }
 
   /* ============================================================
-     PREFETCH QR — quiet warm-up
+     PREFETCH QR
      ============================================================ */
   window.addEventListener("load", () => {
     const qr = document.getElementById("qrImage");
