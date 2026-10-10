@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>VAAN Marketing Partner — Authorized Representative</title>
-<meta name="description" content="VAAN Marketing Partner — Authorized representative of VAAN Consultancy. Bring businesses, earn referral rewards.">
+<title>VAAN Marketing Team — Authorized Partner</title>
+<meta name="description" content="VAAN Marketing Team — Authorized representative of VAAN Consultancy. Bring businesses, earn rewards.">
 <meta name="theme-color" content="#02040a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -18,91 +18,329 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 html,body{width:100%}
 body{
   font-family:'Inter',-apple-system,BlinkMacSystemFont,Arial,sans-serif;
   background:#02040a;
   color:#f5f5f5;
-  line-height:1.55;
+  line-height:1.6;
   min-height:100vh;
+  min-height:100dvh;
+  position:relative;
+  overscroll-behavior-y:none;
+}
+body.locked{overflow:hidden;height:100vh;height:100dvh;position:fixed;width:100%;top:0;left:0}
+
+:root{
+  --bg-deep:#02040a;
+  --navy:#0a1a3a;
+  --navy-soft:#122448;
+  --gold:#d4a017;
+  --gold-bright:#f0c14b;
+  --gold-hot:#ffd966;
+  --gold-soft:#b8891a;
+  --amber:#ff9d2e;
+  --blue:#4f8fff;
+  --blue-soft:#7ab0ff;
+  --cyan:#5fd9ff;
+  --green:#25b46e;
+  --cream:#fdfaf3;
+  --cream-dim:#a89a7a;
+  --line:rgba(212,160,23,.22);
+  --line-soft:rgba(255,255,255,.08);
 }
 
-a{text-decoration:none;color:inherit}
+a{text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent}
 button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
 img{max-width:100%;display:block}
 
-/* ============================================================
-   SIMPLE TOP-ALIGNED LAYOUT — no tricks, no flex, no centering
-   ============================================================ */
-.page{
+/* ===== STAGE ===== */
+#stage{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:#000;
+  overflow:hidden;
+  transition:opacity .9s cubic-bezier(.6,0,.2,1);
+}
+#stage.hidden{opacity:0;pointer-events:none}
+#dragonScene{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  will-change:transform;
+}
+.layer-bg{
+  position:absolute;
+  inset:-10%;
+  background:url('dragon.png') center center / cover no-repeat;
+  filter:blur(24px) brightness(0.35) saturate(1.4);
+  transform:scale(1.3);
+  will-change:transform;
+}
+.layer-dragon{
+  position:absolute;
+  inset:0;
+  background:url('dragon.png') center center / cover no-repeat;
+  filter:brightness(0.95) saturate(1.15) contrast(1.08);
+  will-change:transform,opacity;
+  opacity:0;
+}
+.layer-fire{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse at 50% 85%,rgba(255,120,20,.35),transparent 55%),
+    radial-gradient(ellipse at 50% 50%,transparent 40%,rgba(0,0,0,.7) 100%);
+  pointer-events:none;
+  z-index:4;
+  mix-blend-mode:screen;
+  opacity:.75;
+}
+#dragonScene::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(0,0,0,.85) 100%);
+  pointer-events:none;
+  z-index:5;
+}
+#particleCanvas{
+  position:absolute;
+  inset:0;
   width:100%;
-  padding:16px 12px 40px;
-  text-align:center;
+  height:100%;
+  z-index:6;
+  pointer-events:none;
+}
+.letterbox{
+  position:absolute;left:0;right:0;height:7vh;background:#000;
+  z-index:20;pointer-events:none;
+  transition:height .9s cubic-bezier(.6,0,.2,1);
+}
+.letterbox.top{top:0}
+.letterbox.bot{bottom:0}
+#stage.letterbox-off .letterbox{height:0}
+#scanline{
+  position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(240,193,75,.7),transparent);
+  box-shadow:0 0 24px rgba(240,193,75,.9);
+  z-index:15;pointer-events:none;
+  animation:scanMove 7s linear infinite;
+  opacity:0;transition:opacity .6s;
+}
+#scanline.on{opacity:.55}
+@keyframes scanMove{0%{top:-5%}100%{top:105%}}
+
+.hud{
+  position:absolute;font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:2.5px;
+  color:rgba(240,193,75,.75);
+  z-index:15;pointer-events:none;text-transform:uppercase;
+  opacity:0;transition:opacity .8s ease;
+  text-shadow:0 0 8px rgba(0,0,0,.9);
+}
+.hud.on{opacity:1}
+.hud.tl{top:calc(7vh + 18px);left:22px}
+.hud.tr{top:calc(7vh + 18px);right:22px;text-align:right}
+.hud.bl{bottom:calc(7vh + 18px);left:22px}
+.hud.br{bottom:calc(7vh + 18px);right:22px;text-align:right}
+.hud .dot-live{
+  display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:#ff3d3d;box-shadow:0 0 10px #ff3d3d;
+  margin-right:9px;vertical-align:middle;
+  animation:recBlink 1.4s infinite;
+}
+@keyframes recBlink{0%,100%{opacity:1}50%{opacity:.2}}
+
+#skipBtn{
+  position:absolute;
+  bottom:calc(7vh + 28px);right:24px;
+  z-index:25;
+  color:rgba(240,193,75,.85);
+  font-size:12px;font-weight:700;letter-spacing:2.5px;
+  padding:12px 22px;border-radius:99px;
+  border:1px solid rgba(212,160,23,.4);
+  background:rgba(10,26,58,.65);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  opacity:0;pointer-events:none;
+  transition:opacity .5s ease,transform .3s ease,color .3s ease,border-color .3s ease,box-shadow .3s ease;
+  text-transform:uppercase;
+}
+#skipBtn.visible{opacity:1;pointer-events:auto}
+#skipBtn:hover{color:#fff;border-color:var(--gold-bright);box-shadow:0 0 30px rgba(212,160,23,.6);transform:translateY(-2px)}
+#skipBtn:active{transform:scale(.96)}
+
+#openingLogo{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(.3) rotateY(-180deg);
+  width:min(60vw,300px);
+  z-index:8;opacity:0;pointer-events:none;
+  filter:drop-shadow(0 0 60px rgba(240,193,75,.9)) drop-shadow(0 0 120px rgba(212,160,23,.5));
+  perspective:1200px;
+  transform-style:preserve-3d;
+}
+#openingLogo img{width:100%;height:auto;display:block}
+#openingLogo.visible{opacity:1}
+#openingLogo.spin{animation:logoSpinIn 1.5s cubic-bezier(.2,.9,.3,1.05) forwards}
+@keyframes logoSpinIn{
+  0%{transform:translate(-50%,-50%) scale(.3) rotateY(-180deg);opacity:0}
+  40%{opacity:1}
+  100%{transform:translate(-50%,-50%) scale(1) rotateY(0deg);opacity:1}
+}
+#openingLogo.shimmer{animation:logoShimmer 1.2s ease infinite}
+@keyframes logoShimmer{
+  0%{filter:drop-shadow(0 0 60px rgba(240,193,75,.9)) drop-shadow(0 0 120px rgba(212,160,23,.5)) brightness(1)}
+  50%{filter:drop-shadow(0 0 100px rgba(255,217,102,1)) drop-shadow(0 0 180px rgba(240,193,75,.8)) brightness(1.7)}
+  100%{filter:drop-shadow(0 0 60px rgba(240,193,75,.9)) drop-shadow(0 0 120px rgba(212,160,23,.5)) brightness(1)}
+}
+#openingLogo.zoom{animation:logoZoomOut 1.2s cubic-bezier(.6,0,.2,1) forwards}
+@keyframes logoZoomOut{
+  0%{transform:translate(-50%,-50%) scale(1) rotateY(0deg);opacity:1;filter:brightness(1)}
+  50%{transform:translate(-50%,-50%) scale(1.5) rotateY(0deg);opacity:1;filter:brightness(2.5)}
+  100%{transform:translate(-50%,-50%) scale(6) rotateY(0deg);opacity:0;filter:brightness(3)}
 }
 
+#flash{
+  position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 50%,rgba(255,240,180,1),rgba(240,193,75,.9) 20%,rgba(212,160,23,.4) 45%,transparent 75%);
+  opacity:0;z-index:30;pointer-events:none;
+}
+#flash.fire{animation:flashPop 1s cubic-bezier(.2,.9,.3,1.1) forwards}
+@keyframes flashPop{0%{opacity:0}15%{opacity:1}60%{opacity:.4}100%{opacity:0}}
+
+#shockwave{
+  position:absolute;top:50%;left:50%;
+  width:10px;height:10px;border-radius:50%;
+  border:3px solid rgba(240,193,75,.9);
+  transform:translate(-50%,-50%) scale(1);
+  opacity:0;z-index:18;pointer-events:none;
+}
+#shockwave.fire{animation:shockwave 1.2s cubic-bezier(.2,.9,.3,1.1) forwards}
+@keyframes shockwave{
+  0%{transform:translate(-50%,-50%) scale(1);opacity:1;border-width:6px}
+  100%{transform:translate(-50%,-50%) scale(80);opacity:0;border-width:1px}
+}
+
+#cineTitle{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  z-index:12;text-align:center;opacity:0;pointer-events:none;
+  width:100%;padding:0 24px;
+}
+#cineTitle .cine-line1{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:clamp(32px,8vw,72px);font-weight:600;
+  letter-spacing:8px;color:var(--gold-bright);
+  text-shadow:0 0 40px rgba(240,193,75,.9),0 0 100px rgba(212,160,23,.6);
+  text-transform:uppercase;line-height:1.15;
+}
+#cineTitle .cine-line2{
+  font-family:'JetBrains Mono',monospace;
+  font-size:clamp(9px,2.2vw,12px);font-weight:600;
+  letter-spacing:7px;color:rgba(240,193,75,.7);
+  margin-top:18px;text-transform:uppercase;
+}
+#cineTitle.flash-in{animation:cineFlash 2.6s cubic-bezier(.2,.9,.3,1.1) forwards}
+@keyframes cineFlash{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(1.3);filter:blur(24px)}
+  15%{opacity:1;transform:translate(-50%,-50%) scale(1);filter:blur(0)}
+  70%{opacity:1;transform:translate(-50%,-50%) scale(1);filter:blur(0)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(.9);filter:blur(10px)}
+}
+
+/* ===== CARD WRAP — top-aligned, no gap ===== */
+#cardWrap{
+  position:relative;
+  z-index:50;
+  width:100%;
+  padding:10px 12px 40px;
+  text-align:center;
+  font-size:0;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .5s ease;
+}
+#cardWrap.revealed{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* ===== CARD — with breathing room ===== */
 .card{
   display:inline-block;
   text-align:left;
+  vertical-align:top;
   width:100%;
-  max-width:400px;
-  background:linear-gradient(165deg,#122448 0%,#0a1a3a 50%,#060f24 100%);
-  border:1px solid rgba(212,160,23,.25);
-  border-radius:24px;
-  padding:22px 18px 20px;
-  box-shadow:0 30px 60px rgba(0,0,0,.6), 0 0 60px rgba(212,160,23,.08);
+  max-width:420px;
+  font-size:14px;
+  background:linear-gradient(165deg,rgba(18,36,72,.96) 0%,rgba(10,26,58,.985) 45%,rgba(6,15,36,1) 100%);
+  border:1px solid var(--line);
+  border-radius:26px;
+  padding:26px 22px 24px;
+  box-shadow:
+    0 40px 90px rgba(0,0,0,.7),
+    0 0 70px rgba(212,160,23,.12),
+    inset 0 1px 0 rgba(255,255,255,.05);
   position:relative;
   overflow:hidden;
-  vertical-align:top;
 }
 
 .card::before{
   content:"";
   position:absolute;inset:0;
   background-image:
-    linear-gradient(rgba(212,160,23,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(212,160,23,.04) 1px,transparent 1px);
-  background-size:26px 26px;
+    linear-gradient(rgba(212,160,23,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(212,160,23,.045) 1px,transparent 1px);
+  background-size:28px 28px;
   pointer-events:none;
   mask-image:radial-gradient(ellipse at 50% 40%,#000 20%,transparent 80%);
   -webkit-mask-image:radial-gradient(ellipse at 50% 40%,#000 20%,transparent 80%);
+  animation:gridDrift 24s linear infinite;
 }
+@keyframes gridDrift{0%{background-position:0 0}100%{background-position:28px 28px}}
 
 .card::after{
   content:"";
   position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(240,193,75,.8),transparent);
+  background:linear-gradient(90deg,transparent,rgba(240,193,75,.9),transparent);
   pointer-events:none;
+  animation:topShimmer 3s ease-in-out infinite;
 }
+@keyframes topShimmer{0%,100%{opacity:.6}50%{opacity:1}}
 
 .card > *{position:relative;z-index:1}
 
-/* Badge — VERIFIED PARTNER */
+/* Verified badge */
 .partner-badge{
   display:flex;
   justify-content:center;
-  margin-bottom:14px;
+  margin-bottom:20px;
 }
 .partner-badge span{
   display:inline-flex;
   align-items:center;
-  gap:7px;
-  padding:7px 16px;
-  background:linear-gradient(135deg,rgba(37,180,110,.18),rgba(37,180,110,.08));
+  gap:8px;
+  padding:8px 18px;
+  background:linear-gradient(135deg,rgba(37,180,110,.18),rgba(37,180,110,.06));
   border:1px solid rgba(37,180,110,.5);
   border-radius:99px;
   color:#4ee39a;
   font-family:'JetBrains Mono',monospace;
-  font-size:9px;
+  font-size:9.5px;
   font-weight:800;
   letter-spacing:2.2px;
   text-transform:uppercase;
+  animation:badgePulse 2.5s ease-in-out infinite;
 }
 .partner-badge span::before{
   content:"✓";
   display:flex;
   align-items:center;
   justify-content:center;
-  width:14px;height:14px;
+  width:15px;height:15px;
   border-radius:50%;
   background:#25b46e;
   color:#fff;
@@ -111,17 +349,16 @@ img{max-width:100%;display:block}
   line-height:1;
 }
 @keyframes badgePulse{
-  0%,100%{box-shadow:0 0 12px rgba(37,180,110,.4)}
-  50%{box-shadow:0 0 24px rgba(37,180,110,.8)}
+  0%,100%{box-shadow:0 0 14px rgba(37,180,110,.4)}
+  50%{box-shadow:0 0 28px rgba(37,180,110,.8)}
 }
-.partner-badge span{animation:badgePulse 2.5s ease-in-out infinite}
 
 /* Logo */
 .card-logo-wrap{
-  width:80px;
-  height:80px;
-  margin:0 auto 12px;
   position:relative;
+  width:95px;
+  height:95px;
+  margin:0 auto 20px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -129,24 +366,25 @@ img{max-width:100%;display:block}
 .card-logo-wrap::before{
   content:"";
   position:absolute;
-  inset:-5px;
+  inset:-6px;
   border-radius:50%;
-  border:1.5px solid rgba(240,193,75,.5);
+  border:1.5px solid rgba(240,193,75,.55);
   border-top-color:transparent;
   border-bottom-color:transparent;
   animation:logoRingSpin 6s linear infinite;
   pointer-events:none;
+  z-index:1;
 }
 @keyframes logoRingSpin{to{transform:rotate(360deg)}}
 .card-logo-wrap::after{
   content:"";
   position:absolute;
-  inset:-12px;
+  inset:-14px;
   border-radius:50%;
-  background:radial-gradient(circle,rgba(240,193,75,.22),transparent 65%);
+  background:radial-gradient(circle,rgba(240,193,75,.25),transparent 65%);
   animation:logoHalo 3s ease-in-out infinite;
   pointer-events:none;
-  z-index:-1;
+  z-index:0;
 }
 @keyframes logoHalo{
   0%,100%{opacity:.5;transform:scale(1)}
@@ -160,100 +398,111 @@ img{max-width:100%;display:block}
   justify-content:center;
   position:relative;
   z-index:2;
+  animation:logoFloat 4s ease-in-out infinite;
+}
+@keyframes logoFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-3px)}
 }
 .card-logo img{
   width:100%;
   height:100%;
   object-fit:contain;
-  filter:drop-shadow(0 0 16px rgba(240,193,75,.55));
+  filter:drop-shadow(0 0 20px rgba(240,193,75,.65)) drop-shadow(0 0 40px rgba(212,160,23,.4));
+  animation:logoGlow 3.5s ease-in-out infinite;
+}
+@keyframes logoGlow{
+  0%,100%{filter:drop-shadow(0 0 20px rgba(240,193,75,.65)) drop-shadow(0 0 40px rgba(212,160,23,.4))}
+  50%{filter:drop-shadow(0 0 35px rgba(255,217,102,1)) drop-shadow(0 0 70px rgba(240,193,75,.6))}
 }
 
 /* Name */
 .card-name{
   text-align:center;
   font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:24px;
+  font-size:26px;
   font-weight:700;
-  letter-spacing:2.5px;
-  color:#fdfaf3;
-  line-height:1;
-  margin-bottom:6px;
+  letter-spacing:3px;
+  color:var(--cream);
+  line-height:1.1;
+  margin-bottom:8px;
 }
 .card-name span{
-  background:linear-gradient(135deg,#ffd966,#f0c14b 40%,#d4a017);
+  background:linear-gradient(135deg,var(--gold-hot),var(--gold-bright) 40%,var(--gold));
   -webkit-background-clip:text;
   background-clip:text;
   -webkit-text-fill-color:transparent;
 }
-
 .card-subtitle{
   text-align:center;
-  font-size:9px;
-  letter-spacing:4px;
+  font-size:9.5px;
+  letter-spacing:4.5px;
   font-weight:700;
-  color:#a89a7a;
+  color:var(--cream-dim);
   text-transform:uppercase;
-  margin-bottom:14px;
+  margin-bottom:20px;
   font-family:'JetBrains Mono',monospace;
 }
 
 /* Tagline */
 .card-tagline{
   text-align:center;
-  font-size:8.5px;
+  font-size:9px;
   letter-spacing:1.8px;
   font-weight:600;
   color:rgba(240,193,75,.9);
   text-transform:uppercase;
-  padding:9px 0;
-  border-top:1px solid rgba(255,255,255,.08);
-  border-bottom:1px solid rgba(255,255,255,.08);
-  margin-bottom:14px;
+  padding:12px 6px;
+  border-top:1px solid var(--line-soft);
+  border-bottom:1px solid var(--line-soft);
+  margin-bottom:18px;
   font-family:'JetBrains Mono',monospace;
+  line-height:1.6;
 }
 
-/* Live time */
+/* Live */
 .card-live{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:8px;
-  font-size:10.5px;
-  color:#a89a7a;
-  margin-bottom:16px;
+  gap:9px;
+  font-size:11px;
+  color:var(--cream-dim);
+  margin-bottom:22px;
   font-family:'JetBrains Mono',monospace;
   text-transform:uppercase;
 }
 .card-live .dot{
-  width:6px;height:6px;
+  width:7px;height:7px;
   border-radius:50%;
-  background:#25b46e;
-  box-shadow:0 0 10px #25b46e;
+  background:var(--green);
+  box-shadow:0 0 12px var(--green);
   animation:pulseGreen 2s infinite;
 }
 @keyframes pulseGreen{0%,100%{opacity:1}50%{opacity:.5}}
-.card-live b{color:#f0c14b;font-weight:700}
+.card-live b{color:var(--gold-bright);font-weight:700}
 
-/* Partner box */
+/* Contact block — Vikas */
 .card-partner{
-  padding:16px;
-  background:linear-gradient(135deg,rgba(79,143,255,.16),rgba(212,160,23,.12));
-  border:1px solid rgba(240,193,75,.35);
-  border-radius:16px;
-  margin-bottom:16px;
+  padding:18px 20px;
+  background:linear-gradient(135deg,rgba(79,143,255,.14),rgba(212,160,23,.1));
+  border:1px solid rgba(240,193,75,.3);
+  border-radius:18px;
+  margin-bottom:20px;
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:16px;
   position:relative;
   overflow:hidden;
+  isolation:isolate;
 }
 .card-partner::before{
   content:"";
   position:absolute;
   top:0;left:-100%;
   width:100%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(240,193,75,.25),transparent);
-  animation:partnerSheen 4s ease-in-out infinite;
+  background:linear-gradient(90deg,transparent,rgba(240,193,75,.22),transparent);
+  animation:partnerSheen 5s ease-in-out infinite;
 }
 @keyframes partnerSheen{
   0%{left:-100%}
@@ -262,24 +511,24 @@ img{max-width:100%;display:block}
 .partner-avatar-wrap{
   position:relative;
   flex-shrink:0;
-  width:52px;
-  height:52px;
+  width:56px;
+  height:56px;
   z-index:1;
 }
 .partner-avatar{
   width:100%;height:100%;
   border-radius:50%;
-  background:linear-gradient(135deg,#5fd9ff,#4f8fff 50%,#d4a017);
+  background:linear-gradient(135deg,var(--gold-hot),var(--gold-soft));
   display:flex;
   align-items:center;
   justify-content:center;
   font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:22px;
+  font-size:24px;
   font-weight:700;
   color:#0a1a3a;
   position:relative;
   z-index:2;
-  box-shadow:inset 0 0 14px rgba(255,255,255,.4);
+  box-shadow:inset 0 0 12px rgba(255,255,255,.4);
 }
 .partner-ring{
   position:absolute;
@@ -293,72 +542,82 @@ img{max-width:100%;display:block}
   0%,100%{transform:scale(1);opacity:.8}
   50%{transform:scale(1.12);opacity:.35}
 }
+.partner-ring-2{
+  position:absolute;
+  inset:-9px;
+  border-radius:50%;
+  border:1px dashed rgba(79,143,255,.4);
+  animation:ringRotate 12s linear infinite;
+  z-index:0;
+}
+@keyframes ringRotate{to{transform:rotate(360deg)}}
 .partner-info{
   display:flex;
   flex-direction:column;
-  line-height:1.25;
+  line-height:1.3;
   position:relative;
   z-index:1;
+  min-width:0;
 }
 .partner-tag{
   font-family:'JetBrains Mono',monospace;
-  font-size:7.5px;
+  font-size:8px;
   font-weight:700;
-  letter-spacing:2.2px;
-  color:#5fd9ff;
+  letter-spacing:2.5px;
+  color:var(--cyan);
   text-transform:uppercase;
-  margin-bottom:3px;
+  margin-bottom:4px;
 }
 .partner-name{
   font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:19px;
+  font-size:22px;
   font-weight:700;
+  letter-spacing:.3px;
   background:linear-gradient(135deg,#ffd966,#f0c14b 30%,#5fd9ff);
   -webkit-background-clip:text;
   background-clip:text;
   -webkit-text-fill-color:transparent;
-  margin-bottom:2px;
+  margin-bottom:3px;
 }
-.partner-role{
-  font-size:7.5px;
-  letter-spacing:1.4px;
-  font-weight:700;
-  color:rgba(240,193,75,.8);
-  text-transform:uppercase;
+.partner-phone{
   font-family:'JetBrains Mono',monospace;
+  font-size:11.5px;
+  font-weight:700;
+  color:rgba(240,193,75,.85);
+  letter-spacing:1px;
 }
 
-/* Pitch section */
+/* Pitch box */
 .card-pitch{
-  padding:14px;
+  padding:16px 18px;
   background:rgba(212,160,23,.06);
   border:1px dashed rgba(212,160,23,.35);
-  border-radius:14px;
-  margin-bottom:16px;
+  border-radius:16px;
+  margin-bottom:20px;
   text-align:center;
 }
 .card-pitch h3{
   font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:17px;
+  font-size:18px;
   font-weight:700;
-  color:#ffd966;
+  color:var(--gold-hot);
   letter-spacing:.3px;
-  margin-bottom:6px;
+  margin-bottom:8px;
 }
 .card-pitch p{
-  font-size:11.5px;
-  color:rgba(253,250,243,.75);
-  line-height:1.5;
+  font-size:12px;
+  color:rgba(253,250,243,.78);
+  line-height:1.6;
 }
 
 /* Section label */
 .card-label{
-  font-size:9px;
+  font-size:9.5px;
   letter-spacing:3px;
   font-weight:800;
-  color:#d4a017;
+  color:var(--gold);
   text-transform:uppercase;
-  margin-bottom:10px;
+  margin-bottom:12px;
   font-family:'JetBrains Mono',monospace;
   display:flex;
   align-items:center;
@@ -375,152 +634,195 @@ img{max-width:100%;display:block}
 .card-services{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:6px;
-  margin-bottom:16px;
+  gap:8px;
+  margin-bottom:20px;
 }
 .svc-item{
   background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:12px;
-  padding:10px 8px;
+  border:1px solid var(--line-soft);
+  border-radius:13px;
+  padding:12px 10px;
   text-align:center;
-  font-size:9.5px;
+  font-size:10.5px;
   font-weight:600;
   color:rgba(253,250,243,.92);
-  line-height:1.3;
+  line-height:1.4;
+  letter-spacing:.2px;
 }
 
 /* QR */
 .card-qr{
   display:flex;
   justify-content:center;
-  margin-bottom:12px;
+  margin-bottom:14px;
 }
 .qr-box{
   background:#0a1a3a;
-  padding:8px;
-  border-radius:16px;
-  border:1px solid rgba(212,160,23,.25);
-  box-shadow:0 0 30px rgba(212,160,23,.25);
+  padding:10px;
+  border-radius:18px;
+  border:1px solid var(--line);
+  box-shadow:0 0 30px rgba(212,160,23,.3);
 }
 .qr-box img{
-  width:130px;height:130px;
+  width:145px;height:145px;
   display:block;
-  border-radius:8px;
+  border-radius:10px;
 }
 .qr-hint{
   text-align:center;
-  font-size:8.5px;
-  letter-spacing:2.5px;
+  font-size:9px;
+  letter-spacing:2.8px;
   font-weight:700;
-  color:#a89a7a;
+  color:var(--cream-dim);
   text-transform:uppercase;
-  margin-bottom:8px;
+  margin-bottom:10px;
   font-family:'JetBrains Mono',monospace;
 }
 .qr-link{
   display:block;
   text-align:center;
   font-family:'JetBrains Mono',monospace;
-  font-size:11px;
+  font-size:11.5px;
   font-weight:700;
-  color:#f0c14b;
-  padding:7px 10px;
-  margin:0 auto 14px;
-  max-width:260px;
+  color:var(--gold-bright);
+  padding:9px 12px;
+  margin:0 auto 18px;
+  max-width:280px;
   border:1px dashed rgba(212,160,23,.4);
-  border-radius:9px;
+  border-radius:10px;
   background:rgba(212,160,23,.05);
+  letter-spacing:1.3px;
 }
 
 /* Action buttons */
 .card-actions{
   display:flex;
   flex-direction:column;
-  gap:8px;
-  margin-bottom:14px;
+  gap:10px;
+  margin-bottom:18px;
 }
 .btn{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:9px;
-  padding:13px 16px;
-  border-radius:14px;
-  font-size:12.5px;
+  gap:10px;
+  padding:15px 18px;
+  border-radius:15px;
+  font-size:13px;
   font-weight:700;
+  letter-spacing:.4px;
   text-align:center;
-  min-height:46px;
+  min-height:52px;
   transition:transform .2s ease;
+  position:relative;
+  overflow:hidden;
 }
 .btn:active{transform:scale(.98)}
 .btn-primary{
   background:linear-gradient(135deg,#25d366,#128c3e);
   color:#fff;
-  box-shadow:0 8px 24px rgba(37,211,102,.35);
+  box-shadow:0 10px 30px rgba(37,211,102,.35);
 }
 .btn-secondary{
-  background:linear-gradient(135deg,#ffd966,#f0c14b 40%,#d4a017);
+  background:linear-gradient(135deg,var(--gold-hot),var(--gold-bright) 40%,var(--gold));
   color:#0a1a3a;
-  box-shadow:0 8px 24px rgba(212,160,23,.35);
+  box-shadow:0 10px 30px rgba(212,160,23,.35);
 }
-.btn svg{width:17px;height:17px;flex-shrink:0}
+.btn svg{width:19px;height:19px;flex-shrink:0}
 
 /* Share row */
 .card-share{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:5px;
-  margin-bottom:14px;
+  gap:6px;
+  margin-bottom:18px;
 }
 .share-btn{
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:4px;
-  padding:10px 3px;
+  gap:5px;
+  padding:12px 4px;
   background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:12px;
-  color:#a89a7a;
-  font-size:7px;
+  border:1px solid var(--line-soft);
+  border-radius:13px;
+  color:var(--cream-dim);
+  font-size:7.5px;
   font-weight:700;
-  letter-spacing:1px;
+  letter-spacing:1.1px;
   text-transform:uppercase;
-  min-height:56px;
+  min-height:62px;
   font-family:'JetBrains Mono',monospace;
   text-align:center;
-  line-height:1.15;
+  line-height:1.2;
 }
-.share-btn svg{width:17px;height:17px;color:#d4a017}
+.share-btn svg{width:19px;height:19px;color:var(--gold)}
 
 /* Footer */
 .card-footer{
   text-align:center;
-  padding-top:12px;
-  border-top:1px solid rgba(255,255,255,.07);
-  font-size:8.5px;
+  padding-top:16px;
+  border-top:1px solid var(--line-soft);
+  font-size:9px;
   color:rgba(168,154,122,.75);
-  letter-spacing:1.5px;
-  line-height:1.7;
+  letter-spacing:1.6px;
+  line-height:1.8;
   font-family:'JetBrains Mono',monospace;
   text-transform:uppercase;
 }
-.card-footer b{color:#d4a017;font-weight:700}
+.card-footer b{color:var(--gold);font-weight:700;letter-spacing:1px}
 
 @media(max-width:380px){
-  .card{padding:18px 14px 16px}
-  .card-logo-wrap{width:70px;height:70px}
-  .card-name{font-size:21px}
-  .qr-box img{width:115px;height:115px}
+  .card{padding:22px 16px 20px}
+  .card-logo-wrap{width:82px;height:82px;margin-bottom:16px}
+  .card-name{font-size:22px;letter-spacing:2.2px}
+  .qr-box img{width:125px;height:125px}
+  .svc-item{font-size:10px;padding:10px 8px}
+  .btn{font-size:12px;padding:13px 16px;min-height:48px}
+  .share-btn{font-size:7px;padding:10px 3px;min-height:58px}
+  .partner-avatar-wrap{width:50px;height:50px}
+  .partner-name{font-size:19px}
 }
 </style>
 </head>
-<body>
+<body class="locked">
 
-<div class="page">
-  <div class="card">
+<div id="stage" aria-hidden="true">
+  <div id="dragonScene">
+    <div class="layer-bg" id="layerBg"></div>
+    <div class="layer-dragon" id="layerDragon"></div>
+    <div class="layer-fire"></div>
+  </div>
+
+  <canvas id="particleCanvas"></canvas>
+
+  <div id="scanline"></div>
+  <div class="letterbox top"></div>
+  <div class="letterbox bot"></div>
+
+  <div class="hud tl" id="hudTL"><span class="dot-live"></span>VAAN · MARKETING TEAM</div>
+  <div class="hud tr" id="hudTR">SEQ · 001</div>
+  <div class="hud bl" id="hudBL">LAT 29.69°N · LON 76.99°E</div>
+  <div class="hud br" id="hudBR">KARNAL · IN</div>
+
+  <div id="cineTitle">
+    <div class="cine-line1">VAAN</div>
+    <div class="cine-line2">Marketing Team · Official</div>
+  </div>
+
+  <div id="openingLogo">
+    <img src="logo.png" alt="VAAN logo" onerror="this.style.display='none'">
+  </div>
+
+  <div id="shockwave"></div>
+  <div id="flash"></div>
+
+  <button id="skipBtn" onclick="skipOpening()" aria-label="Skip intro">Skip Intro →</button>
+</div>
+
+<div id="cardWrap">
+  <div class="card" id="mainCard">
 
     <div class="partner-badge">
       <span>Verified VAAN Partner</span>
@@ -532,7 +834,7 @@ img{max-width:100%;display:block}
       </div>
     </div>
 
-    <h1 class="card-name"><span>VAAN</span> MARKETING</h1>
+    <h1 class="card-name"><span>VAAN</span> MARKETING TEAM</h1>
     <div class="card-subtitle">Authorized Partner · India</div>
 
     <div class="card-tagline">Bring Businesses · Earn Rewards · Grow Together</div>
@@ -546,13 +848,14 @@ img{max-width:100%;display:block}
 
     <div class="card-partner">
       <div class="partner-avatar-wrap">
+        <div class="partner-ring-2"></div>
         <div class="partner-ring"></div>
-        <div class="partner-avatar">VAAN</div>
+        <div class="partner-avatar">VS</div>
       </div>
       <div class="partner-info">
-        <span class="partner-tag">Official Representative</span>
-        <span class="partner-name">VAAN Marketing Team</span>
-        <span class="partner-role">Authorized · Verified · India</span>
+        <span class="partner-tag">Your Contact · Verified</span>
+        <span class="partner-name">Vikas Sharma</span>
+        <span class="partner-phone">+91 9671163712</span>
       </div>
     </div>
 
@@ -580,11 +883,11 @@ img{max-width:100%;display:block}
     <a href="https://vaanconsultancy.in" class="qr-link">vaanconsultancy.in</a>
 
     <div class="card-actions">
-      <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20become%20a%20marketing%20partner." class="btn btn-primary" target="_blank" rel="noopener">
+      <a href="https://wa.me/919671163712?text=Hi%20Vikas%2C%20I%20want%20to%20join%20the%20VAAN%20Marketing%20Team." class="btn btn-primary" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        <span>Become a Partner</span>
+        <span>Join VAAN Marketing Team</span>
       </a>
-      <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20have%20a%20business%20referral%20for%20you." class="btn btn-secondary" target="_blank" rel="noopener">
+      <a href="https://wa.me/919671163712?text=Hi%20Vikas%2C%20I%20have%20a%20business%20referral%20for%20VAAN." class="btn btn-secondary" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
         <span>Send a Referral</span>
       </a>
@@ -610,108 +913,721 @@ img{max-width:100%;display:block}
     </div>
 
     <div class="card-footer">
-      🇮🇳 Official VAAN Marketing Partner<br>
+      🇮🇳 Official VAAN Marketing Team<br>
       @vaa_enterprises · © 2026 VAAN Consultancy
     </div>
 
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
 <script>
-function updateLiveTime(){
-  const now = new Date();
-  const istOffset = 5.5 * 60;
-  const istTime = new Date(now.getTime() + (now.getTimezoneOffset() + istOffset) * 60000);
-  const hours = istTime.getHours();
-  const minutes = istTime.getMinutes();
-  const isPM = hours >= 12;
-  const h12 = hours % 12 || 12;
-  const mm = String(minutes).padStart(2, "0");
-  const ampm = isPM ? "PM" : "AM";
-  const timeEl = document.getElementById("liveTime");
-  if (timeEl) timeEl.textContent = h12 + ":" + mm + " " + ampm;
-  const statusEl = document.getElementById("liveStatus");
-  if (statusEl){
-    const isOpen = hours >= 9 && hours < 21;
-    statusEl.textContent = isOpen ? "Accepting Referrals" : "Replies Tomorrow";
-  }
-}
-updateLiveTime();
-setInterval(updateLiveTime, 30000);
+(function(){
+  "use strict";
 
-function shareCard(){
-  const data = {
-    title: "VAAN Marketing Partner",
-    text: "VAAN Marketing Partner — bring businesses to VAAN and earn rewards. Authorized, verified, official.",
-    url: "https://vaanconsultancy.in/marketing"
+  const IS_MOBILE = window.matchMedia("(max-width: 700px)").matches;
+  const IS_TABLET = window.matchMedia("(max-width: 1024px)").matches;
+  const REDUCED   = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const TIER = IS_MOBILE ? "low" : IS_TABLET ? "mid" : "high";
+  const CFG = {
+    low:  { fire: 500, embers: 120, rays: 3, sparks: 180 },
+    mid:  { fire: 900, embers: 200, rays: 4, sparks: 320 },
+    high: { fire: 1400, embers: 320, rays: 5, sparks: 520 }
+  }[TIER];
+
+  const stage       = document.getElementById("stage");
+  const layerBg     = document.getElementById("layerBg");
+  const layerDragon = document.getElementById("layerDragon");
+  const canvas      = document.getElementById("particleCanvas");
+  const skipBtn     = document.getElementById("skipBtn");
+  const openLogo    = document.getElementById("openingLogo");
+  const flash       = document.getElementById("flash");
+  const shockwave   = document.getElementById("shockwave");
+  const cineTitle   = document.getElementById("cineTitle");
+  const scanline    = document.getElementById("scanline");
+  const hudTL       = document.getElementById("hudTL");
+  const hudTR       = document.getElementById("hudTR");
+  const hudBL       = document.getElementById("hudBL");
+  const hudBR       = document.getElementById("hudBR");
+  const cardWrap    = document.getElementById("cardWrap");
+  const mainCard    = document.getElementById("mainCard");
+
+  window.__VAAN__ = {
+    stage, layerBg, layerDragon, canvas,
+    skipBtn, openLogo, flash, shockwave, cineTitle, scanline,
+    hudTL, hudTR, hudBL, hudBR, cardWrap, mainCard,
+    CFG, TIER, REDUCED, render: {}, state: {}
   };
-  if (navigator.share){
-    navigator.share(data).catch(()=>{});
-  } else {
-    navigator.clipboard.writeText(data.url).then(()=>alert("Link copied!"));
+
+  if (REDUCED){
+    document.body.classList.remove("locked");
+    stage.style.display = "none";
+    cardWrap.classList.add("revealed");
+    mainCard.classList.add("revealed");
+    return;
   }
-}
 
-function buildVCard(){
-  return [
-    "BEGIN:VCARD",
-    "VERSION:3.0",
-    "N:VAAN Marketing;;;;",
-    "FN:VAAN Marketing Partner",
-    "ORG:VAAN Consultancy",
-    "TITLE:Authorized Marketing Partner · India",
-    "TEL;TYPE=CELL,VOICE:+919671163712",
-    "TEL;TYPE=WORK,VOICE:+919671163712",
-    "EMAIL;TYPE=WORK:hello@vaanconsultancy.in",
-    "URL:https://vaanconsultancy.in/marketing",
-    "URL:https://vaanconsultancy.in",
-    "X-SOCIALPROFILE;type=instagram:https://www.instagram.com/vaa_enterprises",
-    "NOTE:VAAN Marketing Partner — Authorized representative. Bring businesses, earn referral rewards. Contact for partnerships.",
-    "ADR;TYPE=WORK:;;Karnal;Haryana;;132001;India",
-    "END:VCARD"
-  ].join("\r\n");
-}
+  let W = window.innerWidth, H = window.innerHeight;
+  let DPR = Math.min(window.devicePixelRatio, TIER === "low" ? 1.5 : 2);
+  const ctx = canvas.getContext("2d", { alpha: true });
 
-function saveContact(){
-  const vcf = buildVCard();
-  const blob = new Blob([vcf], { type: "text/vcard;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "VAAN-Marketing.vcf";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  setTimeout(()=>URL.revokeObjectURL(url), 5000);
-  const ua = navigator.userAgent;
-  if (/android/i.test(ua)){
-    alert("Open Downloads → tap VAAN-Marketing.vcf → Save contact");
-  } else if (/iPad|iPhone|iPod/.test(ua)){
-    alert("Open Files → tap VAAN-Marketing.vcf → Add Contact");
-  } else {
-    alert("Open Downloads → double-click the file → Add to contacts");
+  function resizeCanvas(){
+    W = window.innerWidth; H = window.innerHeight;
+    DPR = Math.min(window.devicePixelRatio, TIER === "low" ? 1.5 : 2);
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    canvas.style.width = W + "px"; canvas.style.height = H + "px";
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
   }
-}
+  resizeCanvas();
 
-function downloadVCard(){
-  const vcf = buildVCard();
-  const blob = new Blob([vcf], { type: "text/vcard;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "VAAN-Marketing.vcf";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  setTimeout(()=>URL.revokeObjectURL(url), 1500);
-}
+  const fireParticles = [];
+  function newFire(s){
+    return {
+      x: Math.random()*W,
+      y: s ? H - Math.random()*H*0.8 : H+20,
+      vy: -0.4 - Math.random()*1.4, vx: (Math.random()-0.5)*0.6,
+      life: 0, maxLife: 180 + Math.random()*200,
+      size: 1.5 + Math.random()*3.5,
+      hue: 25 + Math.random()*35, sat: 90 + Math.random()*10, light: 55 + Math.random()*25,
+      wobble: Math.random()*Math.PI*2, wobbleSpeed: 0.02 + Math.random()*0.04
+    };
+  }
+  for (let i=0;i<CFG.fire;i++) fireParticles.push(newFire(true));
 
-function copyLink(btn){
-  navigator.clipboard.writeText("https://vaanconsultancy.in/marketing").then(()=>{
-    btn.childNodes[btn.childNodes.length-1].textContent = " Copied!";
-    setTimeout(()=>{ btn.childNodes[btn.childNodes.length-1].textContent = " Copy"; }, 1800);
+  const embers = [];
+  function newEmber(s){
+    return {
+      x: W*0.5 + (Math.random()-0.5)*W,
+      y: s ? Math.random()*H : H*(0.75+Math.random()*0.2),
+      vx: (Math.random()-0.5)*2.5, vy: -0.8 - Math.random()*2.2,
+      life: 0, maxLife: 90 + Math.random()*160,
+      size: 0.8 + Math.random()*2, hue: 35 + Math.random()*25, alpha: 0.9
+    };
+  }
+  for (let i=0;i<CFG.embers;i++) embers.push(newEmber(true));
+
+  const sparks = [];
+  function newSpark(){
+    return {
+      x: Math.random()*W, y: Math.random()*H,
+      vx: (Math.random()-0.5)*0.4, vy: -0.2 - Math.random()*0.6,
+      life: 0, maxLife: 200 + Math.random()*300,
+      size: 0.6 + Math.random()*1.2,
+      alpha: 0.4 + Math.random()*0.5,
+      twinkle: Math.random()*Math.PI*2, twinkleSpeed: 0.04 + Math.random()*0.08
+    };
+  }
+  for (let i=0;i<CFG.sparks;i++) sparks.push(newSpark());
+
+  const rays = [];
+  for (let i=0;i<CFG.rays;i++){
+    rays.push({
+      angle: (i/CFG.rays)*Math.PI + Math.random()*0.3,
+      width: 40 + Math.random()*120, length: Math.max(W,H)*1.3,
+      alpha: 0.04 + Math.random()*0.06,
+      pulse: Math.random()*Math.PI*2, pulseSpeed: 0.01 + Math.random()*0.02,
+      hue: 35 + Math.random()*15
+    });
+  }
+
+  function updateFire(dt){
+    for (let i=0;i<fireParticles.length;i++){
+      const p = fireParticles[i];
+      p.life++; p.wobble += p.wobbleSpeed;
+      p.y += p.vy*dt*60;
+      p.x += Math.sin(p.wobble)*0.4 + p.vx*dt*60;
+      const t = p.life/p.maxLife;
+      p.alpha = t < 0.2 ? t*5 : (1-t)*1.2;
+      if (p.life > p.maxLife || p.y < -30) fireParticles[i] = newFire(false);
+    }
+  }
+  function updateEmbers(dt){
+    for (let i=0;i<embers.length;i++){
+      const p = embers[i];
+      p.life++;
+      p.x += p.vx*dt*60; p.y += p.vy*dt*60;
+      p.vy *= 0.995; p.vx *= 0.995;
+      const t = p.life/p.maxLife;
+      p.alpha = t < 0.1 ? t*10 : Math.max(0, 1-t);
+      if (p.life > p.maxLife || p.y < -30 || p.x < -30 || p.x > W+30) embers[i] = newEmber(false);
+    }
+  }
+  function updateSparks(dt){
+    for (let i=0;i<sparks.length;i++){
+      const p = sparks[i];
+      p.life++; p.twinkle += p.twinkleSpeed;
+      p.x += p.vx*dt*60; p.y += p.vy*dt*60;
+      if (p.life > p.maxLife || p.y < -20 || p.x < -20 || p.x > W+20) sparks[i] = newSpark();
+    }
+  }
+  function drawRays(t){
+    for (let i=0;i<rays.length;i++){
+      const r = rays[i];
+      const a = r.alpha * (0.7 + Math.sin(t*r.pulseSpeed*10 + r.pulse)*0.3);
+      ctx.save();
+      ctx.translate(W*0.5, H*0.65); ctx.rotate(r.angle);
+      const grad = ctx.createLinearGradient(0,0,0,-r.length);
+      grad.addColorStop(0, `hsla(${r.hue},95%,60%,${a})`);
+      grad.addColorStop(0.5, `hsla(${r.hue},95%,65%,${a*0.5})`);
+      grad.addColorStop(1, `hsla(${r.hue},95%,70%,0)`);
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.moveTo(-r.width*0.5,0);
+      ctx.lineTo(r.width*0.5,0);
+      ctx.lineTo(r.width*0.2,-r.length);
+      ctx.lineTo(-r.width*0.2,-r.length);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+  function drawSparks(){
+    for (let i=0;i<sparks.length;i++){
+      const p = sparks[i];
+      const tw = 0.5 + Math.sin(p.twinkle)*0.5;
+      const a = p.alpha*tw*(1 - p.life/p.maxLife);
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      ctx.fillStyle = `rgba(255,220,140,${a})`;
+      ctx.fill();
+    }
+  }
+  function drawFire(){
+    for (let i=0;i<fireParticles.length;i++){
+      const p = fireParticles[i];
+      const a = Math.max(0, Math.min(1, p.alpha))*0.7;
+      const grad = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.size*6);
+      grad.addColorStop(0, `hsla(${p.hue},${p.sat}%,${p.light}%,${a})`);
+      grad.addColorStop(0.4, `hsla(${p.hue},${p.sat}%,${p.light*0.85}%,${a*0.5})`);
+      grad.addColorStop(1, `hsla(${p.hue},${p.sat}%,${p.light*0.7}%,0)`);
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.size*6,0,Math.PI*2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+    }
+  }
+  function drawEmbers(){
+    for (let i=0;i<embers.length;i++){
+      const p = embers[i];
+      const a = Math.max(0, Math.min(1, p.alpha));
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      ctx.fillStyle = `hsla(${p.hue},100%,65%,${a})`;
+      ctx.shadowColor = `hsla(${p.hue},100%,65%,${a})`;
+      ctx.shadowBlur = 12;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+  }
+
+  const clock = { start: performance.now(), last: performance.now() };
+  let paused = false;
+  document.addEventListener("visibilitychange", () => { paused = document.hidden; });
+
+  function animate(now){
+    requestAnimationFrame(animate);
+    if (paused) return;
+    const dt = Math.min((now-clock.last)/1000, 0.05);
+    clock.last = now;
+    const t = (now-clock.start)/1000;
+    updateFire(dt); updateEmbers(dt); updateSparks(dt);
+    ctx.clearRect(0,0,W,H);
+    drawRays(t); drawSparks(); drawFire(); drawEmbers();
+    window.__VAAN__.state.time = t;
+    window.__VAAN__.state.dt = dt;
+  }
+  requestAnimationFrame(animate);
+
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { resizeCanvas(); }, 150);
   });
-}
+
+  window.__VAAN__.render = {
+    ctx, canvas, fireParticles, embers, sparks, rays,
+    resizeCanvas, getW: () => W, getH: () => H
+  };
+})();
+
+(function(){
+  "use strict";
+  const V = window.__VAAN__;
+  const R = V.render;
+  const ctx = R.ctx;
+  if (V.REDUCED) return;
+
+  const getW = R.getW, getH = R.getH;
+  const ASSEMBLY_COUNT = V.TIER === "low" ? 1200 : V.TIER === "mid" ? 1800 : 2500;
+
+  const assemblyTargets = [], assemblyPositions = [], assemblyColors = [], assemblySizes = [];
+
+  function buildVShapeTargets(){
+    assemblyTargets.length = 0; assemblyPositions.length = 0;
+    assemblyColors.length = 0; assemblySizes.length = 0;
+    const cx = getW()*0.5, cy = getH()*0.5;
+    const scale = Math.min(getW(), getH())*0.55;
+
+    for (let i=0;i<ASSEMBLY_COUNT;i++){
+      const t = i/ASSEMBLY_COUNT;
+      let x, y, isGold;
+      if (t < 0.5){
+        const u = t/0.5;
+        const thickness = 0.06 + (1-u)*0.06;
+        x = cx + (-0.5 + u*0.5 + (Math.random()-0.5)*thickness)*scale;
+        y = cy + (-0.5 + u*1.0 + (Math.random()-0.5)*0.02)*scale;
+        isGold = false;
+      } else {
+        const u = (t-0.5)/0.5;
+        const thickness = 0.06 + (1-u)*0.06;
+        x = cx + (0.5 - u*0.5 + (Math.random()-0.5)*thickness)*scale;
+        y = cy + (-0.5 + u*1.0 + (Math.random()-0.5)*0.02)*scale;
+        isGold = true;
+      }
+      assemblyTargets.push({ x, y, isGold });
+      const angle = Math.random()*Math.PI*2;
+      const dist = Math.max(getW(), getH())*(0.6 + Math.random()*0.5);
+      assemblyPositions.push({ x: cx + Math.cos(angle)*dist, y: cy + Math.sin(angle)*dist, vx: 0, vy: 0 });
+      if (isGold) assemblyColors.push({ r: 240+Math.random()*15, g: 180+Math.random()*30, b: 60+Math.random()*40 });
+      else assemblyColors.push({ r: 90+Math.random()*40, g: 150+Math.random()*40, b: 240+Math.random()*15 });
+      assemblySizes.push(1.2 + Math.random()*1.8);
+    }
+  }
+  buildVShapeTargets();
+
+  const BREATH_COUNT = V.CFG.sparks > 400 ? 220 : 150;
+  const breathParticles = [];
+  function fireBreath(x, y){
+    breathParticles.length = 0;
+    for (let i=0;i<BREATH_COUNT;i++){
+      const angle = (Math.random()-0.5)*1.2;
+      const speed = 5 + Math.random()*14;
+      breathParticles.push({
+        x, y,
+        vx: Math.cos(angle)*speed, vy: Math.sin(angle)*speed - 2,
+        life: 0, maxLife: 60 + Math.random()*80,
+        size: 1.5 + Math.random()*3.5,
+        hue: 30 + Math.random()*30, alpha: 1
+      });
+    }
+  }
+  function updateBreath(dt){
+    for (let i=breathParticles.length-1;i>=0;i--){
+      const p = breathParticles[i];
+      p.life++;
+      p.x += p.vx*dt*60; p.y += p.vy*dt*60;
+      p.vx *= 0.96; p.vy *= 0.96; p.vy -= 0.1;
+      p.alpha = Math.max(0, 1 - p.life/p.maxLife);
+      if (p.life > p.maxLife) breathParticles.splice(i,1);
+    }
+  }
+  function drawBreath(){
+    for (let i=0;i<breathParticles.length;i++){
+      const p = breathParticles[i];
+      const grad = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.size*5);
+      grad.addColorStop(0, `hsla(${p.hue},100%,70%,${p.alpha})`);
+      grad.addColorStop(0.4, `hsla(${p.hue},100%,60%,${p.alpha*0.6})`);
+      grad.addColorStop(1, `hsla(${p.hue},100%,50%,0)`);
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.size*5,0,Math.PI*2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+    }
+  }
+
+  const sceneState = {
+    bgZoom: 1.15, bgBlur: 24,
+    dragonZoom: 1.0, dragonY: 0,
+    sceneZoom: 1.0, sceneY: 0, sceneX: 0
+  };
+  function applyScene(){
+    V.layerBg.style.transform = `scale(${sceneState.bgZoom}) translate3d(${sceneState.sceneX*0.4}px, ${sceneState.sceneY*0.4}px, 0)`;
+    V.layerBg.style.filter = `blur(${sceneState.bgBlur}px) brightness(0.35) saturate(1.4)`;
+    V.layerDragon.style.transform = `scale(${sceneState.dragonZoom * sceneState.sceneZoom}) translate3d(${sceneState.sceneX}px, ${sceneState.sceneY + sceneState.dragonY}px, 0)`;
+    V.layerDragon.style.transformOrigin = "center center";
+  }
+  applyScene();
+
+  let assemblyProgress = 0;
+  let assemblyFade = 1;
+
+  function updateAssembly(dt){
+    for (let i=0;i<assemblyPositions.length;i++){
+      const pos = assemblyPositions[i], target = assemblyTargets[i];
+      const p = 0.02 + assemblyProgress*0.11;
+      pos.vx += (target.x - pos.x)*p;
+      pos.vy += (target.y - pos.y)*p;
+      pos.vx *= 0.86; pos.vy *= 0.86;
+      pos.x += pos.vx*dt*60; pos.y += pos.vy*dt*60;
+    }
+  }
+  function drawAssembly(){
+    if (assemblyFade <= 0) return;
+    for (let i=0;i<assemblyPositions.length;i++){
+      const pos = assemblyPositions[i];
+      const col = assemblyColors[i];
+      const size = assemblySizes[i];
+      const dist = Math.hypot(pos.x - assemblyTargets[i].x, pos.y - assemblyTargets[i].y);
+      const proximity = Math.max(0, 1 - dist/(getW()*0.5));
+      const alpha = (0.3 + proximity*0.7) * assemblyFade;
+      ctx.beginPath();
+      ctx.arc(pos.x,pos.y,size,0,Math.PI*2);
+      ctx.fillStyle = `rgba(${col.r},${col.g},${col.b},${alpha})`;
+      ctx.shadowColor = `rgba(${col.r},${col.g},${col.b},${alpha})`;
+      ctx.shadowBlur = 10;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+  }
+
+  function extendedDraw(dt){
+    updateAssembly(dt);
+    updateBreath(dt);
+    drawAssembly();
+    drawBreath();
+  }
+
+  V.state.scene = sceneState;
+  V.state.assembly = {
+    setProgress: (v) => { assemblyProgress = v; },
+    setFade: (v) => { assemblyFade = v; }
+  };
+  V.state.breath = { fire: fireBreath };
+  V.render.extendedDraw = extendedDraw;
+  V.render.applyScene = applyScene;
+
+  window.addEventListener("resize", () => {
+    clearTimeout(window.__VAAN__._rt);
+    window.__VAAN__._rt = setTimeout(() => { buildVShapeTargets(); }, 200);
+  });
+})();
+
+(function(){
+  "use strict";
+  const V = window.__VAAN__;
+  const S = V.state;
+  const R = V.render;
+
+  if (V.REDUCED){
+    document.body.classList.remove("locked");
+    V.cardWrap.classList.add("revealed");
+    V.mainCard.classList.add("revealed");
+    startLiveTime();
+    return;
+  }
+
+  function extendedLoop(){
+    requestAnimationFrame(extendedLoop);
+    if (S.paused) return;
+    if (R.extendedDraw) R.extendedDraw(S.dt || 0.016);
+  }
+  requestAnimationFrame(extendedLoop);
+
+  let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+  function onPointer(e){
+    const cx = (e.touches ? e.touches[0].clientX : e.clientX);
+    const cy = (e.touches ? e.touches[0].clientY : e.clientY);
+    mouseX = (cx / window.innerWidth - 0.5) * 2;
+    mouseY = (cy / window.innerHeight - 0.5) * 2;
+  }
+  window.addEventListener("mousemove", onPointer);
+  window.addEventListener("touchmove", onPointer, { passive: true });
+
+  function driftLoop(){
+    requestAnimationFrame(driftLoop);
+    if (S.paused) return;
+    if (V.cardWrap.classList.contains("revealed")) return;
+    targetX += (mouseX - targetX) * 0.04;
+    targetY += (mouseY - targetY) * 0.04;
+    if (S.scene && !S.parallaxLocked){
+      S.scene.sceneX = targetX * -18;
+      S.scene.sceneY = targetY * -12;
+      if (R.applyScene) R.applyScene();
+    }
+  }
+  requestAnimationFrame(driftLoop);
+
+  const tl = gsap.timeline({
+    defaults: { ease: "power2.out" },
+    onStart: () => { S.parallaxLocked = true; },
+    onComplete: () => { S.parallaxLocked = false; }
+  });
+
+  tl.fromTo(V.stage, { backgroundColor: "#000000" }, { backgroundColor: "#02040a", duration: 0.8 }, 0);
+
+  tl.set(V.layerDragon, { opacity: 0 });
+  tl.set(V.layerBg, { opacity: 0.4 });
+
+  tl.to(V.layerBg, { opacity: 1, duration: 1.0, ease: "power2.out" }, 1.4);
+  tl.to(V.layerDragon, { opacity: 1, duration: 1.2, ease: "power2.inOut" }, 1.4);
+
+  tl.fromTo(S.scene,
+    { sceneZoom: 1.4, bgZoom: 1.5, bgBlur: 40, dragonZoom: 1.3 },
+    { sceneZoom: 1.0, bgZoom: 1.25, bgBlur: 22, dragonZoom: 1.05,
+      duration: 2.0, ease: "power2.out",
+      onUpdate: () => { if (R.applyScene) R.applyScene(); }
+    }, 0);
+
+  tl.to(S.scene, {
+    sceneX: -40, sceneY: -20,
+    duration: 1.4, ease: "power2.inOut",
+    onUpdate: () => { if (R.applyScene) R.applyScene(); }
+  }, 0.6);
+
+  tl.add(() => { V.hudTL.classList.add("on"); }, 1.0);
+  tl.add(() => { V.hudTR.classList.add("on"); }, 1.15);
+  tl.add(() => { V.hudBL.classList.add("on"); }, 1.3);
+  tl.add(() => { V.hudBR.classList.add("on"); }, 1.45);
+  tl.add(() => { V.scanline.classList.add("on"); }, 1.0);
+
+  tl.add(() => { V.skipBtn.classList.add("visible"); }, 1.8);
+  tl.add(() => { canSkip = true; }, 1.8);
+
+  tl.to(S.scene, {
+    sceneX: 20, sceneY: 0,
+    duration: 0.8, ease: "power2.inOut",
+    onUpdate: () => { if (R.applyScene) R.applyScene(); }
+  }, 2.0);
+
+  tl.add(() => {
+    const cx = window.innerWidth * 0.5;
+    const cy = window.innerHeight * 0.52;
+    if (S.breath && S.breath.fire) S.breath.fire(cx, cy);
+  }, 2.6);
+
+  tl.add(() => { V.shockwave.classList.add("fire"); }, 2.7);
+
+  tl.to(S.scene, {
+    sceneZoom: 1.35, dragonZoom: 1.4, sceneY: 30,
+    duration: 0.8, ease: "power2.in",
+    onUpdate: () => { if (R.applyScene) R.applyScene(); }
+  }, 2.8);
+
+  tl.add(() => {
+    if (S.assembly && S.assembly.setProgress) S.assembly.setProgress(0.1);
+  }, 3.4);
+
+  tl.to({ p: 0.1 }, {
+    p: 1.0, duration: 1.4, ease: "power2.inOut",
+    onUpdate: function(){
+      if (S.assembly && S.assembly.setProgress) S.assembly.setProgress(this.targets()[0].p);
+    }
+  }, 3.4);
+
+  tl.add(() => { V.openLogo.classList.add("visible"); }, 3.6);
+  tl.add(() => { V.openLogo.classList.add("spin"); }, 3.6);
+
+  tl.to(S.scene, {
+    sceneZoom: 1.0, dragonZoom: 0.9, sceneY: 0, sceneX: 0,
+    duration: 1.0, ease: "power2.out",
+    onUpdate: () => { if (R.applyScene) R.applyScene(); }
+  }, 4.2);
+
+  tl.add(() => { V.cineTitle.classList.add("flash-in"); }, 4.5);
+
+  tl.to([V.layerDragon], {
+    duration: 1.0, opacity: 0.15, ease: "power2.in"
+  }, 5.2);
+
+  tl.add(() => { V.openLogo.classList.add("shimmer"); }, 5.5);
+
+  tl.to({}, {
+    duration: 0.6,
+    onUpdate: function(){
+      if (S.assembly && S.assembly.setFade) S.assembly.setFade(1 - this.progress());
+    }
+  }, 6.2);
+
+  tl.add(() => { V.openLogo.classList.add("zoom"); }, 6.4);
+  tl.add(() => { V.flash.classList.add("fire"); }, 6.4);
+
+  tl.add(() => {
+    V.stage.classList.add("hidden");
+    V.stage.classList.add("letterbox-off");
+    V.cardWrap.classList.add("revealed");
+    V.mainCard.classList.add("revealed");
+    document.body.classList.remove("locked");
+    startLiveTime();
+  }, 6.9);
+
+  tl.add(() => {
+    setTimeout(() => { V.stage.style.display = "none"; }, 900);
+  }, 8.0);
+
+  let canSkip = false;
+
+  function skipOpening(){
+    if (!canSkip) return;
+    tl.kill();
+    S.parallaxLocked = false;
+    if (S.assembly && S.assembly.setProgress) S.assembly.setProgress(1);
+    V.stage.classList.add("hidden");
+    V.stage.classList.add("letterbox-off");
+    V.cardWrap.classList.add("revealed");
+    V.mainCard.classList.add("revealed");
+    document.body.classList.remove("locked");
+    startLiveTime();
+    setTimeout(() => { V.stage.style.display = "none"; }, 700);
+  }
+  window.skipOpening = skipOpening;
+
+  V.stage.addEventListener("click", (e) => {
+    if (e.target.id === "skipBtn") return;
+    skipOpening();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") skipOpening();
+  });
+
+  function startLiveTime(){
+    updateLiveTime();
+    setInterval(updateLiveTime, 30000);
+  }
+  function updateLiveTime(){
+    const now = new Date();
+    const istOffset = 5.5 * 60;
+    const istTime = new Date(now.getTime() + (now.getTimezoneOffset() + istOffset) * 60000);
+    const hours = istTime.getHours();
+    const minutes = istTime.getMinutes();
+    const isPM = hours >= 12;
+    const h12 = hours % 12 || 12;
+    const mm = String(minutes).padStart(2, "0");
+    const ampm = isPM ? "PM" : "AM";
+    const timeEl = document.getElementById("liveTime");
+    if (timeEl) timeEl.textContent = h12 + ":" + mm + " " + ampm;
+    const statusEl = document.getElementById("liveStatus");
+    if (statusEl){
+      const isOpen = hours >= 9 && hours < 21;
+      statusEl.textContent = isOpen ? "Accepting Referrals" : "Replies Tomorrow";
+    }
+  }
+
+  window.shareCard = async function(){
+    const shareData = {
+      title: "VAAN Marketing Team — Authorized Partner",
+      text: "VAAN Marketing Team — bring businesses to VAAN and earn rewards. Authorized, verified, official.",
+      url: "https://vaanconsultancy.in/marketing"
+    };
+    if (navigator.share){
+      try { await navigator.share(shareData); } catch (err){}
+    } else {
+      try {
+        await navigator.clipboard.writeText(shareData.url);
+        showToast("Link copied — paste anywhere");
+      } catch (e){ prompt("Copy this link:", shareData.url); }
+    }
+  };
+
+  function buildVCard(){
+    return [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      "N:VAAN Marketing Team;;;;",
+      "FN:VAAN Marketing Team",
+      "ORG:VAAN Consultancy",
+      "TITLE:Authorized Marketing Partner · India",
+      "TEL;TYPE=CELL,VOICE:+919671163712",
+      "TEL;TYPE=WORK,VOICE:+919671163712",
+      "EMAIL;TYPE=WORK:hello@vaanconsultancy.in",
+      "URL:https://vaanconsultancy.in/marketing",
+      "URL:https://vaanconsultancy.in",
+      "X-SOCIALPROFILE;type=instagram:https://www.instagram.com/vaa_enterprises",
+      "NOTE:VAAN Marketing Team — Authorized representative. Bring businesses, earn referral rewards. Contact Vikas Sharma.",
+      "ADR;TYPE=WORK:;;Karnal;Haryana;;132001;India",
+      "END:VCARD"
+    ].join("\r\n");
+  }
+
+  window.saveContact = function(){
+    const vcf = buildVCard();
+    const blob = new Blob([vcf], { type: "text/vcard;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "VAAN-Marketing-Team.vcf";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url), 5000);
+    const ua = navigator.userAgent;
+    if (/android/i.test(ua)){
+      showToast("📱 Open Downloads → tap VAAN-Marketing-Team.vcf → Save");
+    } else if (/iPad|iPhone|iPod/.test(ua)){
+      showToast("📱 Open Files → tap VAAN-Marketing-Team.vcf → Add");
+    } else {
+      showToast("📁 Open Downloads → double-click the file");
+    }
+  };
+
+  window.downloadVCard = function(){
+    const vcf = buildVCard();
+    const blob = new Blob([vcf], { type: "text/vcard;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "VAAN-Marketing-Team.vcf";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url), 1500);
+    showToast("VAAN Marketing Team contact downloaded");
+  };
+
+  window.copyLink = async function(btn){
+    const link = "https://vaanconsultancy.in/marketing";
+    try {
+      await navigator.clipboard.writeText(link);
+      const lastChild = btn.lastChild;
+      if (lastChild && lastChild.nodeType === 3){
+        const original = lastChild.textContent;
+        lastChild.textContent = " Copied!";
+        setTimeout(() => {
+          lastChild.textContent = original;
+        }, 1800);
+      }
+    } catch (e){ prompt("Copy this link:", link); }
+  };
+
+  let toastEl = null, toastTimer = null;
+  function showToast(text){
+    if (!toastEl){
+      toastEl = document.createElement("div");
+      toastEl.style.cssText = [
+        "position:fixed",
+        "bottom:calc(28px + env(safe-area-inset-bottom,0px))",
+        "left:50%",
+        "transform:translateX(-50%) translateY(20px)",
+        "background:linear-gradient(135deg,#ffd966,#d4a017)",
+        "color:#0a1a3a",
+        "padding:14px 22px",
+        "border-radius:99px",
+        "font-size:13px",
+        "font-weight:700",
+        "z-index:99999",
+        "opacity:0",
+        "pointer-events:none",
+        "transition:opacity .35s ease, transform .35s cubic-bezier(.2,.9,.3,1.1)",
+        "box-shadow:0 15px 40px rgba(212,160,23,.6)",
+        "font-family:'Inter',sans-serif",
+        "max-width:92vw",
+        "text-align:center",
+        "line-height:1.4"
+      ].join(";");
+      document.body.appendChild(toastEl);
+    }
+    toastEl.textContent = text;
+    requestAnimationFrame(() => {
+      toastEl.style.opacity = "1";
+      toastEl.style.transform = "translateX(-50%) translateY(0)";
+    });
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toastEl.style.opacity = "0";
+      toastEl.style.transform = "translateX(-50%) translateY(20px)";
+    }, 4500);
+  }
+})();
 </script>
 
 </body>
