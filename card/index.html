@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>VAAN Consultancy — Digital Card</title>
+<meta name="description" content="VAAN Consultancy — Vision · Automation · Advancement · Network. Premium websites and QR systems built in Karnal, India.">
+<meta name="theme-color" content="#060f24">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="canonical" href="https://vaanconsultancy.in/card/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;overflow-x:hidden}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  background:#060f24;
+  color:#f5f5f5;
+  line-height:1.55;
+  min-height:100vh;
+  min-height:100dvh;
+  position:relative;
+}
+
+:root{
+  --navy-deep:#060f24;
+  --navy:#0a1a3a;
+  --navy-soft:#122448;
+  --gold:#d4a017;
+  --gold-bright:#f0c14b;
+  --gold-soft:#b8891a;
+  --cream:#fdfaf3;
+  --cream-dim:#a89a7a;
+  --green:#25b46e;
+  --line:rgba(212,160,23,.18);
+  --line-soft:rgba(255,255,255,.06);
+  --shadow-card:0 40px 80px rgba(0,0,0,.55);
+  --shadow-gold:0 0 30px rgba(212,160,23,.4);
+  --shadow-btn:0 8px 24px rgba(212,160,23,.35);
+}
+
+a{text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+img{max-width:100%;display:block}
+
+/* ===== STAGE ===== */
+#stage{position:fixed;inset:0;z-index:100;background:#000;overflow:hidden;transition:opacity .6s ease}
+#stage.hidden{opacity:0;pointer-events:none}
+#dragonCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#stage::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(212,160,23,.14),transparent 55%),radial-gradient(ellipse at 50% 100%,rgba(79,143,255,.06),transparent 60%);pointer-events:none;z-index:1}
+#stage::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 40%,rgba(6,15,36,.7) 90%);pointer-events:none;z-index:2}
+
+/* ===== SKIP BUTTON ===== */
+#skipBtn{position:absolute;bottom:calc(28px + env(safe-area-inset-bottom,0px));right:24px;z-index:10;color:rgba(212,160,23,.65);font-size:13px;font-weight:600;letter-spacing:.6px;padding:10px 16px;border-radius:99px;border:1px solid rgba(212,160,23,.25);background:rgba(10,26,58,.4);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;pointer-events:none;transition:opacity .5s ease,transform .3s ease,color .3s ease,border-color .3s ease}
+#skipBtn.visible{opacity:1;pointer-events:auto}
+#skipBtn:hover{color:var(--gold-bright);border-color:var(--gold);transform:translateY(-2px)}
+#skipBtn:active{transform:scale(.96)}
+
+/* ===== OPENING LOGO ===== */
+#openingLogo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.6);width:min(56vw,260px);z-index:5;opacity:0;pointer-events:none;filter:drop-shadow(0 0 40px rgba(212,160,23,.7));transition:opacity .4s ease}
+#openingLogo.visible{opacity:1}
+#openingLogo.shimmer{animation:shimmer 1s ease}
+#openingLogo.zoom{animation:logoZoom 1s cubic-bezier(.2,.9,.3,1.1) forwards}
+@keyframes shimmer{0%{filter:drop-shadow(0 0 40px rgba(212,160,23,.7)) brightness(1)}50%{filter:drop-shadow(0 0 60px rgba(240,193,75,1)) brightness(1.5)}100%{filter:drop-shadow(0 0 40px rgba(212,160,23,.7)) brightness(1)}}
+@keyframes logoZoom{0%{transform:translate(-50%,-50%) scale(.6)}60%{transform:translate(-50%,-50%) scale(1.15)}100%{transform:translate(-50%,-50%) scale(1);opacity:0}}
+
+/* ===== FLASH ===== */
+#flash{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(240,193,75,.9),rgba(212,160,23,.4) 40%,transparent 70%);opacity:0;z-index:15;pointer-events:none}
+#flash.fire{animation:flashPop .6s ease-out forwards}
+@keyframes flashPop{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
+
+/* ===== CARD WRAP ===== */
+#cardWrap{position:relative;z-index:50;min-height:100vh;min-height:100dvh;display:flex;align-items:flex-start;justify-content:center;padding:24px 16px calc(32px + env(safe-area-inset-bottom,0px));opacity:0;pointer-events:none;transition:opacity .5s ease .2s}
+#cardWrap.revealed{opacity:1;pointer-events:auto}
+
+.card{width:100%;max-width:440px;background:linear-gradient(165deg,#0f2447 0%,#0a1a3a 55%,#060f24 100%);border:1px solid var(--line);border-radius:28px;padding:38px 26px 26px;box-shadow:var(--shadow-card);position:relative;overflow:hidden;transform:translateY(60px);opacity:0}
+.card.revealed{animation:cardSlide 1s cubic-bezier(.2,.9,.3,1.1) forwards}
+@keyframes cardSlide{to{transform:translateY(0);opacity:1}}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(212,160,23,.12),transparent 55%),radial-gradient(ellipse at 50% 100%,rgba(79,143,255,.05),transparent 60%);pointer-events:none}
+.card::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(240,193,75,.7),transparent);pointer-events:none}
+
+/* ===== LOGO ===== */
+.card-logo{width:96px;height:96px;margin:0 auto 20px;position:relative;filter:drop-shadow(0 0 24px rgba(212,160,23,.45));animation:logoBreath 3.5s ease-in-out infinite}
+@keyframes logoBreath{0%,100%{filter:drop-shadow(0 0 24px rgba(212,160,23,.45))}50%{filter:drop-shadow(0 0 40px rgba(240,193,75,.75))}}
+.card-name{text-align:center;font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;font-weight:700;letter-spacing:2px;color:var(--cream);line-height:1;margin-bottom:6px}
+.card-name span{background:linear-gradient(135deg,var(--gold-bright),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.card-subtitle{text-align:center;font-size:9.5px;letter-spacing:4px;font-weight:700;color:var(--cream-dim);text-transform:uppercase;margin-bottom:22px}
+
+/* ===== TAGLINE ===== */
+.card-tagline{text-align:center;font-size:11px;letter-spacing:2px;font-weight:600;color:rgba(240,193,75,.85);text-transform:uppercase;padding:12px 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);margin-bottom:20px}
+
+/* ===== LIVE TIME ===== */
+.card-live{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12.5px;color:var(--cream-dim);margin-bottom:26px;letter-spacing:.3px}
+.card-live .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);animation:pulseGreen 2s infinite}
+@keyframes pulseGreen{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.card-live b{color:var(--cream);font-weight:600}
+
+/* ===== FOUNDER ===== */
+.card-founder{display:flex;align-items:center;gap:14px;padding:16px 18px;background:rgba(212,160,23,.06);border:1px solid rgba(212,160,23,.15);border-radius:16px;margin-bottom:24px}
+.founder-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--gold-bright),var(--gold-soft));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:700;color:#0a1a3a;flex-shrink:0;box-shadow:0 4px 14px rgba(212,160,23,.4)}
+.founder-info{display:flex;flex-direction:column;line-height:1.2}
+.founder-info b{font-size:15px;font-weight:700;color:var(--cream);letter-spacing:.2px}
+.founder-info span{font-size:9.5px;letter-spacing:2.5px;font-weight:700;color:var(--gold);text-transform:uppercase;margin-top:4px}
+
+/* ===== SECTION LABEL ===== */
+.card-label{font-size:9.5px;letter-spacing:3px;font-weight:800;color:var(--gold);text-transform:uppercase;margin-bottom:12px;padding-left:2px}
+
+/* ===== SERVICES ===== */
+.card-services{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}
+.svc-item{background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:12px;padding:12px 10px;text-align:center;font-size:11.5px;font-weight:600;color:rgba(253,250,243,.9);line-height:1.3;transition:all .3s ease;opacity:0;transform:translateY(12px)}
+.svc-item.revealed{animation:svcIn .5s cubic-bezier(.2,.9,.3,1.1) forwards}
+@keyframes svcIn{to{opacity:1;transform:translateY(0)}}
+.svc-item:hover{background:rgba(212,160,23,.08);border-color:rgba(212,160,23,.3);transform:translateY(-2px)}
+
+/* ===== QR ===== */
+.card-qr{display:flex;justify-content:center;margin-bottom:22px;opacity:0;transform:scale(.85)}
+.card-qr.revealed{animation:qrIn .7s cubic-bezier(.2,.9,.3,1.2) forwards}
+@keyframes qrIn{to{opacity:1;transform:scale(1)}}
+.qr-box{background:#0a1a3a;padding:12px;border-radius:20px;border:1px solid var(--line);box-shadow:0 0 30px rgba(212,160,23,.25),inset 0 0 20px rgba(212,160,23,.08);position:relative}
+.qr-box::before{content:"";position:absolute;inset:-3px;border-radius:22px;background:linear-gradient(135deg,var(--gold),transparent 40%,transparent 60%,var(--gold));z-index:-1;opacity:.4;filter:blur(6px)}
+.qr-box img{width:180px;height:180px;display:block;border-radius:10px}
+.qr-hint{text-align:center;font-size:10px;letter-spacing:2px;font-weight:700;color:var(--cream-dim);text-transform:uppercase;margin-top:-14px;margin-bottom:22px}
+
+/* ===== BUTTONS ===== */
+.card-actions{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 20px;border-radius:14px;font-size:14.5px;font-weight:700;letter-spacing:.3px;transition:all .25s cubic-bezier(.2,.9,.3,1.1);min-height:54px;text-align:center;opacity:0;transform:translateY(14px)}
+.btn.revealed{animation:btnIn .6s cubic-bezier(.2,.9,.3,1.1) forwards}
+@keyframes btnIn{to{opacity:1;transform:translateY(0)}}
+.btn-primary{background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#0a1a3a;box-shadow:var(--shadow-btn)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(212,160,23,.55)}
+.btn-primary:active{transform:translateY(-1px) scale(.98)}
+.btn-secondary{background:rgba(255,255,255,.04);color:var(--cream);border:1px solid rgba(212,160,23,.3)}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold-bright);transform:translateY(-3px)}
+.btn-secondary:active{transform:translateY(-1px) scale(.98)}
+.btn svg{width:20px;height:20px;flex-shrink:0}
+
+/* ===== SHARE ===== */
+.card-share{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:22px}
+.share-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:14px;color:var(--cream-dim);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;transition:all .25s ease;min-height:64px;justify-content:center}
+.share-btn svg{width:22px;height:22px;color:var(--gold)}
+.share-btn:hover{border-color:rgba(212,160,23,.35);background:rgba(212,160,23,.06);color:var(--cream);transform:translateY(-2px)}
+.share-btn:active{transform:scale(.96)}
+.share-btn.copied{border-color:var(--green);color:var(--green)}
+.share-btn.copied svg{color:var(--green)}
+
+/* ===== FOOTER ===== */
+.card-footer{text-align:center;padding-top:18px;border-top:1px solid var(--line-soft);font-size:10.5px;color:rgba(168,154,122,.7);letter-spacing:1.2px;line-height:1.6}
+.card-footer b{color:var(--gold);font-weight:700;letter-spacing:.5px}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:380px){
+  .card{padding:32px 20px 22px;border-radius:24px}
+  .card-logo{width:84px;height:84px;margin-bottom:16px}
+  .card-name{font-size:26px;letter-spacing:1.5px}
+  .svc-item{font-size:10.5px;padding:10px 8px}
+  .qr-box img{width:160px;height:160px}
+  .btn{font-size:13.5px;padding:14px 18px;min-height:50px}
+  .share-btn{font-size:9px;padding:12px 6px}
+}
+@media(min-width:640px){
+  #cardWrap{padding:40px 24px}
+  .card{max-width:460px;padding:44px 32px 28px}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  #stage{display:none}
+  #cardWrap{opacity:1 !important;pointer-events:auto !important}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== STAGE ===== -->
+<div id="stage" aria-hidden="true">
+  <canvas id="dragonCanvas"></canvas>
+  <div id="openingLogo">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="VAAN logo">
+      <defs>
+        <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#f0c14b"/>
+          <stop offset="50%" stop-color="#d4a017"/>
+          <stop offset="100%" stop-color="#b8891a"/>
+        </linearGradient>
+        <linearGradient id="goldGrad2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f0c14b"/>
+          <stop offset="100%" stop-color="#8a6610"/>
+        </linearGradient>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <g filter="url(#glow)">
+        <path d="M100 22 L168 170 L142 170 L100 68 L58 170 L32 170 Z" fill="url(#goldGrad)"/>
+        <path d="M100 42 L152 158 L138 158 L100 74 L62 158 L48 158 Z" fill="url(#goldGrad2)" opacity="0.85"/>
+      </g>
+      <g stroke="#f0c14b" stroke-width="1.2" fill="none" opacity="0.85">
+        <line x1="100" y1="60" x2="100" y2="150"/>
+        <line x1="100" y1="80" x2="72" y2="80"/>
+        <line x1="72" y1="80" x2="72" y2="100"/>
+        <line x1="100" y1="110" x2="60" y2="110"/>
+        <line x1="60" y1="110" x2="60" y2="132"/>
+        <line x1="100" y1="80" x2="128" y2="80"/>
+        <line x1="128" y1="80" x2="128" y2="100"/>
+        <line x1="100" y1="110" x2="140" y2="110"/>
+        <line x1="140" y1="110" x2="140" y2="132"/>
+      </g>
+      <g fill="#f0c14b" filter="url(#glow)">
+        <circle cx="100" cy="60" r="3.5"/>
+        <circle cx="72" cy="80" r="3"/>
+        <circle cx="72" cy="100" r="3"/>
+        <circle cx="128" cy="80" r="3"/>
+        <circle cx="128" cy="100" r="3"/>
+        <circle cx="60" cy="110" r="3"/>
+        <circle cx="60" cy="132" r="3"/>
+        <circle cx="140" cy="110" r="3"/>
+        <circle cx="140" cy="132" r="3"/>
+        <circle cx="100" cy="150" r="3.5"/>
+      </g>
+    </svg>
+  </div>
+  <div id="flash"></div>
+  <button id="skipBtn" onclick="skipOpening()" aria-label="Skip intro">Skip intro →</button>
+</div>
+
+<!-- ===== CARD ===== -->
+<div id="cardWrap">
+  <div class="card" id="mainCard">
+
+    <div class="card-logo" id="cardLogo">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="VAAN logo">
+        <defs>
+          <linearGradient id="goldGradCard" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f0c14b"/>
+            <stop offset="50%" stop-color="#d4a017"/>
+            <stop offset="100%" stop-color="#b8891a"/>
+          </linearGradient>
+          <linearGradient id="goldGradCard2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f0c14b"/>
+            <stop offset="100%" stop-color="#8a6610"/>
+          </linearGradient>
+        </defs>
+        <path d="M100 22 L168 170 L142 170 L100 68 L58 170 L32 170 Z" fill="url(#goldGradCard)"/>
+        <path d="M100 42 L152 158 L138 158 L100 74 L62 158 L48 158 Z" fill="url(#goldGradCard2)" opacity="0.85"/>
+        <g stroke="#f0c14b" stroke-width="1.2" fill="none" opacity="0.85">
+          <line x1="100" y1="60" x2="100" y2="150"/>
+          <line x1="100" y1="80" x2="72" y2="80"/>
+          <line x1="72" y1="80" x2="72" y2="100"/>
+          <line x1="100" y1="110" x2="60" y2="110"/>
+          <line x1="60" y1="110" x2="60" y2="132"/>
+          <line x1="100" y1="80" x2="128" y2="80"/>
+          <line x1="128" y1="80" x2="128" y2="100"/>
+          <line x1="100" y1="110" x2="140" y2="110"/>
+          <line x1="140" y1="110" x2="140" y2="132"/>
+        </g>
+        <g fill="#f0c14b">
+          <circle cx="100" cy="60" r="3.5"/>
+          <circle cx="72" cy="80" r="3"/>
+          <circle cx="72" cy="100" r="3"/>
+          <circle cx="128" cy="80" r="3"/>
+          <circle cx="128" cy="100" r="3"/>
+          <circle cx="60" cy="110" r="3"/>
+          <circle cx="60" cy="132" r="3"/>
+          <circle cx="140" cy="110" r="3"/>
+          <circle cx="140" cy="132" r="3"/>
+          <circle cx="100" cy="150" r="3.5"/>
+        </g>
+      </svg>
+    </div>
+
+    <h1 class="card-name"><span>VAAN</span> CONSULTANCY</h1>
+    <div class="card-subtitle">Digital Studio · Karnal</div>
+
+    <div class="card-tagline">Vision · Automation · Advancement · Network</div>
+
+    <div class="card-live">
+      <span class="dot"></span>
+      <span id="liveStatus">Open now</span>
+      <b id="liveTime">—:—</b>
+      <span>IST</span>
+    </div>
+
+    <div class="card-founder">
+      <div class="founder-avatar">VS</div>
+      <div class="founder-info">
+        <b>Vikas Sharma</b>
+        <span>Founder</span>
+      </div>
+    </div>
+
+    <div class="card-label">What we build</div>
+    <div class="card-services" id="servicesGrid">
+      <div class="svc-item" data-svc>Custom Websites</div>
+      <div class="svc-item" data-svc>QR Menu Systems</div>
+      <div class="svc-item" data-svc>WhatsApp Automation</div>
+      <div class="svc-item" data-svc>Google Reviews</div>
+      <div class="svc-item" data-svc>Social Media</div>
+      <div class="svc-item" data-svc>Admin Panels</div>
+    </div>
+
+    <div class="card-qr" id="qrBlock">
+      <div class="qr-box">
+        <img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?data=https%3A%2F%2Fvaanconsultancy.in&size=220x220&color=d4a017&bgcolor=0a1a3a&qzone=2" alt="Scan to visit vaanconsultancy.in" loading="lazy">
+      </div>
+    </div>
+    <div class="qr-hint">Scan · Save · Share</div>
+
+    <div class="card-actions">
+      <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20saw%20your%20digital%20card." class="btn btn-primary" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+        Chat on WhatsApp
+      </a>
+      <a href="tel:+919671163712" class="btn btn-secondary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        Call Now
+      </a>
+    </div>
+
+    <div class="card-share">
+      <button class="share-btn" id="shareBtn" onclick="shareCard()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+        Share
+      </button>
+      <button class="share-btn" id="saveBtn" onclick="saveContact()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Save
+      </button>
+      <button class="share-btn" id="copyBtn" onclick="copyLink(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+        Copy Link
+      </button>
+    </div>
+
+    <div class="card-footer">
+      Made with pride in <b>Karnal</b><br>
+      @vaa_enterprises · © 2026 VAAN Consultancy
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== LIBRARIES ===== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<script>
+(function(){
+  "use strict";
+
+  const IS_MOBILE   = window.matchMedia("(max-width: 700px)").matches;
+  const IS_TABLET   = window.matchMedia("(max-width: 1024px)").matches;
+  const REDUCED     = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const PARTICLE_COUNT = REDUCED ? 0 : (IS_MOBILE ? 600 : IS_TABLET ? 900 : 1200);
+  const BODY_SEGMENTS  = 32;
+  const SKIP_DELAY     = 3000;
+
+  const stage     = document.getElementById("stage");
+  const canvas    = document.getElementById("dragonCanvas");
+  const skipBtn   = document.getElementById("skipBtn");
+  const openLogo  = document.getElementById("openingLogo");
+  const flash     = document.getElementById("flash");
+  const cardWrap  = document.getElementById("cardWrap");
+  const mainCard  = document.getElementById("mainCard");
+
+  if (REDUCED){
+    stage.style.display = "none";
+    cardWrap.classList.add("revealed");
+    mainCard.classList.add("revealed");
+    revealEverything();
+    startLiveTime();
+    return;
+  }
+
+  /* ===== THREE.JS SETUP ===== */
+  const scene    = new THREE.Scene();
+  const camera   = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.set(0, 0, 12);
+
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x000000, 0);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+  const keyLight = new THREE.PointLight(0xf0c14b, 2.2, 40);
+  keyLight.position.set(5, 6, 8);
+  scene.add(keyLight);
+  const rimLight = new THREE.PointLight(0xd4a017, 1.6, 40);
+  rimLight.position.set(-6, -4, 5);
+  scene.add(rimLight);
+  const backLight = new THREE.PointLight(0x4f8fff, 0.8, 40);
+  backLight.position.set(0, 0, -8);
+  scene.add(backLight);
+
+  /* Spine base */
+  const baseSpine = [];
+  for (let i = 0; i < BODY_SEGMENTS; i++){
+    const t = i / (BODY_SEGMENTS - 1);
+    const x = Math.sin(t * Math.PI * 2) * 4.5 - 3;
+    const y = Math.cos(t * Math.PI * 1.5) * 1.8;
+    const z = Math.sin(t * Math.PI * 3) * 1.2;
+    baseSpine.push(new THREE.Vector3(x, y, z));
+  }
+  const spinePoints = baseSpine.map(p => p.clone());
+
+  function makeCurve(points){
+    return new THREE.CatmullRomCurve3(points, false, "catmullrom", 0.5);
+  }
+
+  /* Solid tube */
+  const tubeMat = new THREE.MeshPhysicalMaterial({
+    color: 0xd4a017, emissive: 0xb8891a, emissiveIntensity: 0.55,
+    metalness: 0.9, roughness: 0.25, clearcoat: 1, clearcoatRoughness: 0.15,
+    transparent: true, opacity: 0.0
+  });
+
+  let tubeMesh = new THREE.Mesh(new THREE.TubeGeometry(makeCurve(spinePoints), 96, 0.32, 12, false), tubeMat);
+  scene.add(tubeMesh);
+
+  const wireMat = new THREE.MeshBasicMaterial({ color: 0xf0c14b, wireframe: true, transparent: true, opacity: 0.0 });
+  let wireMesh = new THREE.Mesh(new THREE.TubeGeometry(makeCurve(spinePoints), 96, 0.34, 12, false), wireMat);
+  scene.add(wireMesh);
+
+  /* Particles */
+  const particleGeo = new THREE.BufferGeometry();
+  const positions  = new Float32Array(PARTICLE_COUNT * 3);
+  const basePos    = new Float32Array(PARTICLE_COUNT * 3);
+  const speeds     = new Float32Array(PARTICLE_COUNT);
+  const offsets    = new Float32Array(PARTICLE_COUNT);
+  const radii      = new Float32Array(PARTICLE_COUNT);
+
+  for (let i = 0; i < PARTICLE_COUNT; i++){
+    const segT = Math.random();
+    const baseIdx = Math.floor(segT * (BODY_SEGMENTS - 1));
+    const baseP = baseSpine[baseIdx];
+    const radius = 0.35 + Math.random() * 0.55;
+    const angle  = Math.random() * Math.PI * 2;
+    basePos[i*3]     = baseP.x + Math.cos(angle) * radius;
+    basePos[i*3 + 1] = baseP.y + Math.sin(angle) * radius;
+    basePos[i*3 + 2] = baseP.z + (Math.random() - 0.5) * 0.6;
+    positions[i*3]     = basePos[i*3];
+    positions[i*3 + 1] = basePos[i*3 + 1];
+    positions[i*3 + 2] = basePos[i*3 + 2];
+    speeds[i]  = 0.5 + Math.random() * 1.5;
+    offsets[i] = Math.random() * Math.PI * 2;
+    radii[i]   = radius;
+  }
+  particleGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+
+  const particleMat = new THREE.PointsMaterial({
+    color: 0xf0c14b, size: 0.075, transparent: true, opacity: 0.0,
+    sizeAttenuation: true, blending: THREE.AdditiveBlending, depthWrite: false
+  });
+  const particles = new THREE.Points(particleGeo, particleMat);
+  scene.add(particles);
+
+  /* Eyes */
+  const eyeGeo = new THREE.BufferGeometry();
+  const eyePositions = new Float32Array(6);
+  eyeGeo.setAttribute("position", new THREE.BufferAttribute(eyePositions, 3));
+  const eyeMat = new THREE.PointsMaterial({
+    color: 0xffffff, size: 0.22, transparent: true, opacity: 0.0,
+    sizeAttenuation: true, blending: THREE.AdditiveBlending, depthWrite: false
+  });
+  const eyes = new THREE.Points(eyeGeo, eyeMat);
+  scene.add(eyes);
+
+  /* Breath */
+  const BREATH_COUNT = 200;
+  const breathGeo = new THREE.BufferGeometry();
+  const breathPos = new Float32Array(BREATH_COUNT * 3);
+  const breathVel = new Float32Array(BREATH_COUNT * 3);
+  const breathLife = new Float32Array(BREATH_COUNT);
+  breathGeo.setAttribute("position", new THREE.BufferAttribute(breathPos, 3));
+  const breathMat = new THREE.PointsMaterial({
+    color: 0xffd966, size: 0.14, transparent: true, opacity: 0.0,
+    sizeAttenuation: true, blending: THREE.AdditiveBlending, depthWrite: false
+  });
+  const breath = new THREE.Points(breathGeo, breathMat);
+  scene.add(breath);
+  let breathActive = false;
+
+  function fireBreath(origin){
+    for (let i = 0; i < BREATH_COUNT; i++){
+      breathPos[i*3]     = origin.x;
+      breathPos[i*3 + 1] = origin.y;
+      breathPos[i*3 + 2] = origin.z;
+      breathVel[i*3]     = 4 + Math.random() * 6;
+      breathVel[i*3 + 1] = (Math.random() - 0.5) * 3;
+      breathVel[i*3 + 2] = (Math.random() - 0.5) * 3;
+      breathLife[i] = 1.0;
+    }
+    breathGeo.attributes.position.needsUpdate = true;
+    breathActive = true;
+    breathMat.opacity = 1.0;
+  }
+
+  /* State */
+  const clock = new THREE.Clock();
+  let dragonOpacity = 0;
+  let dragonSwimTime = 0;
+  const mouthPos = new THREE.Vector3();
+
+  const dragonState = { formProgress: 0, swimAmp: 0, eyeGlow: 0, dissolve: 0 };
+
+  const scatterPos = new Float32Array(PARTICLE_COUNT * 3);
+  for (let i = 0; i < PARTICLE_COUNT; i++){
+    scatterPos[i*3]     = (Math.random() - 0.5) * 24;
+    scatterPos[i*3 + 1] = (Math.random() - 0.5) * 18;
+    scatterPos[i*3 + 2] = (Math.random() - 0.5) * 12;
+  }
+
+  let paused = false;
+  document.addEventListener("visibilitychange", () => { paused = document.hidden; });
+
+  function animate(){
+    requestAnimationFrame(animate);
+    if (paused) return;
+
+    const dt = Math.min(clock.getDelta(), 0.05);
+    dragonSwimTime += dt;
+
+    /* Spine motion */
+    for (let i = 0; i < BODY_SEGMENTS; i++){
+      const t = i / (BODY_SEGMENTS - 1);
+      const phase = dragonSwimTime * 1.6 - t * Math.PI * 2.2;
+      const swim = dragonState.swimAmp;
+      spinePoints[i].set(
+        baseSpine[i].x + Math.sin(phase) * 0.6 * swim,
+        baseSpine[i].y + Math.cos(phase * 0.7) * 0.5 * swim,
+        baseSpine[i].z + Math.sin(phase * 1.3) * 0.4 * swim
+      );
+    }
+
+    /* Rebuild tube geometry */
+    if (dragonOpacity > 0.01 && dragonState.dissolve < 0.99){
+      const curve = makeCurve(spinePoints);
+      tubeMesh.geometry.dispose();
+      tubeMesh.geometry = new THREE.TubeGeometry(curve, 96, 0.32, 12, false);
+      wireMesh.geometry.dispose();
+      wireMesh.geometry = new THREE.TubeGeometry(curve, 96, 0.34, 12, false);
+    }
+
+    /* Particles */
+    const posArr = particleGeo.attributes.position.array;
+    const form = dragonState.formProgress;
+    const midSpine = spinePoints[Math.floor(BODY_SEGMENTS/2)];
+
+    for (let i = 0; i < PARTICLE_COUNT; i++){
+      const segIdx = i % BODY_SEGMENTS;
+      const anchor = spinePoints[segIdx];
+      const angle = dragonSwimTime * speeds[i] + offsets[i];
+      const r = radii[i];
+      const tx = anchor.x + Math.cos(angle) * r;
+      const ty = anchor.y + Math.sin(angle) * r * 0.8;
+      const tz = anchor.z + Math.sin(angle * 0.7) * r * 0.6;
+
+      const sx = scatterPos[i*3]     * (1 - form);
+      const sy = scatterPos[i*3 + 1] * (1 - form);
+      const sz = scatterPos[i*3 + 2] * (1 - form);
+
+      let px = tx * form + sx;
+      let py = ty * form + sy;
+      let pz = tz * form + sz;
+
+      if (dragonState.dissolve > 0.001){
+        const d = dragonState.dissolve;
+        const dx = px - midSpine.x;
+        const dy = py - midSpine.y;
+        const dz = pz - midSpine.z;
+        const len = Math.sqrt(dx*dx + dy*dy + dz*dz) || 1;
+        px += (dx / len) * d * 8;
+        py += (dy / len) * d * 8;
+        pz += (dz / len) * d * 8;
+      }
+
+      posArr[i*3]     = px;
+      posArr[i*3 + 1] = py;
+      posArr[i*3 + 2] = pz;
+    }
+    particleGeo.attributes.position.needsUpdate = true;
+
+    /* Eyes */
+    const head = spinePoints[0];
+    const neck = spinePoints[2] || spinePoints[1];
+    const dx2 = head.x - neck.x;
+    const dy2 = head.y - neck.y;
+    const perpX = -dy2, perpY = dx2;
+    const pLen = Math.sqrt(perpX*perpX + perpY*perpY) || 1;
+    const eyeOff = 0.18;
+    eyePositions[0] = head.x + (perpX / pLen) * eyeOff;
+    eyePositions[1] = head.y + (perpY / pLen) * eyeOff;
+    eyePositions[2] = head.z + 0.1;
+    eyePositions[3] = head.x - (perpX / pLen) * eyeOff;
+    eyePositions[4] = head.y - (perpY / pLen) * eyeOff;
+    eyePositions[5] = head.z + 0.1;
+    eyeGeo.attributes.position.needsUpdate = true;
+    mouthPos.copy(head);
+
+    if (dragonState.eyeGlow > 0.01){
+      const pulse = 0.75 + Math.sin(dragonSwimTime * 3.2) * 0.25;
+      eyeMat.opacity = dragonState.eyeGlow * pulse;
+    } else {
+      eyeMat.opacity = 0;
+    }
+
+    /* Opacities */
+    const dissolveMul = 1 - dragonState.dissolve;
+    tubeMat.opacity = dragonOpacity * dissolveMul * 0.95;
+    wireMat.opacity = dragonOpacity * dissolveMul * 0.35;
+    particleMat.opacity = (0.55 + form * 0.4) * (1 - dragonState.dissolve * 0.9);
+    particleMat.size = 0.075 - form * 0.015;
+
+    /* Breath */
+    if (breathActive){
+      let anyAlive = false;
+      for (let i = 0; i < BREATH_COUNT; i++){
+        if (breathLife[i] <= 0) continue;
+        anyAlive = true;
+        breathLife[i] -= dt * 1.6;
+        breathPos[i*3]     += breathVel[i*3] * dt;
+        breathPos[i*3 + 1] += breathVel[i*3 + 1] * dt;
+        breathPos[i*3 + 2] += breathVel[i*3 + 2] * dt;
+        breathVel[i*3 + 1] += 0.4 * dt;
+      }
+      breathGeo.attributes.position.needsUpdate = true;
+      breathMat.opacity = Math.max(0, breathMat.opacity - dt * 1.4);
+      if (!anyAlive || breathMat.opacity <= 0.01){
+        breathActive = false;
+        breathMat.opacity = 0;
+      }
+    }
+
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    }, 150);
+  });
+
+  /* ===== GSAP TIMELINE ===== */
+  const tl = gsap.timeline();
+
+  gsap.fromTo(stage, { backgroundColor: "#000000" }, { backgroundColor: "#060f24", duration: 0.6, ease: "power2.out" });
+
+  tl.to(particleMat, { opacity: 0.35, duration: 0.5, ease: "power2.out" }, 0.5);
+  tl.to(dragonState, { formProgress: 1, duration: 1.7, ease: "power3.inOut" }, 0.8);
+
+  tl.to({}, {
+    duration: 1.2,
+    onStart: () => { dragonOpacity = 0; },
+    onUpdate: function(){ dragonOpacity = this.progress(); }
+  }, 1.2);
+
+  tl.to(dragonState, { swimAmp: 1, duration: 1.0, ease: "power2.out" }, 2.5);
+  tl.to(dragonState, { eyeGlow: 1, duration: 0.4, ease: "power2.out" }, 3.5);
+  tl.add(() => { skipBtn.classList.add("visible"); }, 3.5);
+  tl.add(() => { fireBreath(mouthPos); }, 4.0);
+  tl.add(() => { openLogo.classList.add("visible"); }, 4.6);
+  tl.to(dragonState, { dissolve: 1, duration: 0.7, ease: "power2.in" }, 4.8);
+  tl.to(dragonState, { eyeGlow: 0, duration: 0.4 }, 4.8);
+  tl.add(() => { openLogo.classList.add("shimmer"); }, 5.4);
+  tl.add(() => {
+    openLogo.classList.add("zoom");
+    flash.classList.add("fire");
+  }, 6.0);
+  tl.add(() => {
+    stage.classList.add("hidden");
+    cardWrap.classList.add("revealed");
+    mainCard.classList.add("revealed");
+    revealEverything();
+    startLiveTime();
+  }, 6.3);
+  tl.add(() => {
+    setTimeout(() => { stage.style.display = "none"; }, 800);
+  }, 7.2);
+
+  /* ===== SKIP ===== */
+  let canSkip = false;
+  setTimeout(() => { canSkip = true; }, SKIP_DELAY);
+
+  function skipOpening(){
+    if (!canSkip) return;
+    tl.kill();
+    stage.classList.add("hidden");
+    cardWrap.classList.add("revealed");
+    mainCard.classList.add("revealed");
+    revealEverything();
+    startLiveTime();
+    setTimeout(() => { stage.style.display = "none"; }, 600);
+  }
+  window.skipOpening = skipOpening;
+
+  stage.addEventListener("click", (e) => {
+    if (e.target.id === "skipBtn") return;
+    skipOpening();
+  });
+
+  /* ===== REVEAL ===== */
+  function revealEverything(){
+    const svcs = document.querySelectorAll("[data-svc]");
+    svcs.forEach((el, i) => {
+      setTimeout(() => el.classList.add("revealed"), 300 + i * 80);
+    });
+    setTimeout(() => {
+      document.getElementById("qrBlock").classList.add("revealed");
+    }, 700);
+    const btns = document.querySelectorAll(".btn");
+    btns.forEach((el, i) => {
+      setTimeout(() => el.classList.add("revealed"), 900 + i * 120);
+    });
+    const shares = document.querySelectorAll(".share-btn");
+    shares.forEach((el, i) => {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(14px)";
+      el.style.transition = "opacity .6s ease, transform .6s cubic-bezier(.2,.9,.3,1.1)";
+      setTimeout(() => {
+        el.style.opacity = "1";
+        el.style.transform = "translateY(0)";
+      }, 1200 + i * 90);
+    });
+  }
+
+  /* ===== LIVE TIME ===== */
+  function startLiveTime(){
+    updateLiveTime();
+    setInterval(updateLiveTime, 30000);
+  }
+
+  function updateLiveTime(){
+    const now = new Date();
+    const istOffset = 5.5 * 60;
+    const istTime = new Date(now.getTime() + (now.getTimezoneOffset() + istOffset) * 60000);
+    const hours   = istTime.getHours();
+    const minutes = istTime.getMinutes();
+    const isPM    = hours >= 12;
+    const h12     = hours % 12 || 12;
+    const mm      = String(minutes).padStart(2, "0");
+    const ampm    = isPM ? "PM" : "AM";
+    document.getElementById("liveTime").textContent = h12 + ":" + mm + " " + ampm;
+    const statusEl = document.getElementById("liveStatus");
+    const isOpen = hours >= 9 && hours < 20;
+    statusEl.textContent = isOpen ? "Open now" : "Replies fast";
+  }
+
+  /* ===== SHARE ===== */
+  window.shareCard = async function(){
+    const shareData = {
+      title: "VAAN Consultancy — Digital Card",
+      text: "Vision · Automation · Advancement · Network. Websites & QR systems built in Karnal.",
+      url: "https://vaanconsultancy.in/card"
+    };
+    if (navigator.share){
+      try { await navigator.share(shareData); } catch (err){}
+    } else {
+      try {
+        await navigator.clipboard.writeText(shareData.url);
+        showToast("Link copied to clipboard");
+      } catch (e){
+        prompt("Copy this link:", shareData.url);
+      }
+    }
+  };
+
+  /* ===== SAVE CONTACT ===== */
+  window.saveContact = function(){
+    const vcf = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      "N:;VAAN Consultancy;;;",
+      "FN:VAAN Consultancy",
+      "ORG:VAAN Consultancy",
+      "TITLE:Digital Studio · Karnal",
+      "TEL;TYPE=CELL,VOICE:+919671163712",
+      "EMAIL;TYPE=WORK:hello@vaanconsultancy.in",
+      "URL:https://vaanconsultancy.in/card",
+      "NOTE:Vision · Automation · Advancement · Network",
+      "END:VCARD"
+    ].join("\r\n");
+    const blob = new Blob([vcf], { type: "text/vcard;charset=utf-8" });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement("a");
+    a.href = url;
+    a.download = "VAAN-Consultancy.vcf";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    showToast("Contact card downloading…");
+  };
+
+  /* ===== COPY LINK ===== */
+  window.copyLink = async function(btn){
+    const link = "https://vaanconsultancy.in/card";
+    try {
+      await navigator.clipboard.writeText(link);
+      btn.classList.add("copied");
+      const label = btn.childNodes[btn.childNodes.length - 1];
+      const prev = label.textContent;
+      label.textContent = " Copied!";
+      setTimeout(() => {
+        btn.classList.remove("copied");
+        label.textContent = " Copy Link";
+      }, 1800);
+    } catch (e){
+      const ta = document.createElement("textarea");
+      ta.value = link;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); showToast("Link copied"); }
+      catch (err){ prompt("Copy this link:", link); }
+      document.body.removeChild(ta);
+    }
+  };
+
+  /* ===== TOAST ===== */
+  let toastEl = null;
+  let toastTimer = null;
+  function showToast(text){
+    if (!toastEl){
+      toastEl = document.createElement("div");
+      toastEl.style.cssText = "position:fixed;bottom:calc(28px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%) translateY(20px);background:rgba(212,160,23,.95);color:#0a1a3a;padding:12px 22px;border-radius:99px;font-size:13px;font-weight:700;letter-spacing:.5px;z-index:99999;opacity:0;pointer-events:none;transition:opacity .3s ease, transform .3s ease;box-shadow:0 10px 30px rgba(212,160,23,.5);font-family:'Inter',sans-serif";
+      document.body.appendChild(toastEl);
+    }
+    toastEl.textContent = text;
+    requestAnimationFrame(() => {
+      toastEl.style.opacity = "1";
+      toastEl.style.transform = "translateX(-50%) translateY(0)";
+    });
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toastEl.style.opacity = "0";
+      toastEl.style.transform = "translateX(-50%) translateY(20px)";
+    }, 2200);
+  }
+
+  /* ===== ESC SKIP ===== */
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && canSkip) skipOpening();
+  });
+
+})();
+</script>
+
+</body>
+</html>
