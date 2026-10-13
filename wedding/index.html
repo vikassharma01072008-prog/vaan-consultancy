@@ -96,12 +96,10 @@ a { color: inherit; text-decoration: none; }
   height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 30px 50px rgba(0,0,0,0.6));
-  /* fallback if image missing */
   background: linear-gradient(135deg, #efe0c4, #d9c9a5);
   border-radius: 6px;
 }
 
-/* 3D glow ring behind envelope */
 .envelope-wrap::before {
   content: "";
   position: absolute;
@@ -153,7 +151,6 @@ a { color: inherit; text-decoration: none; }
 }
 #invite.visible { opacity: 1; }
 
-/* ---------- SECTION SHELL ---------- */
 .section {
   position: relative;
   padding: 90px 22px;
@@ -167,7 +164,6 @@ a { color: inherit; text-decoration: none; }
   transform-style: preserve-3d;
 }
 
-/* ---------- ORNAMENT DIVIDER ---------- */
 .ornament {
   display: flex;
   align-items: center;
@@ -222,7 +218,6 @@ a { color: inherit; text-decoration: none; }
   background-image: url('assets/img/peacock.png');
   background-size: cover;
   background-position: center;
-  /* fallback */
   background-color: #4a0e1a;
   transform: translateZ(-180px) scale(1.18);
   will-change: transform;
@@ -244,6 +239,7 @@ a { color: inherit; text-decoration: none; }
   padding: 0 22px;
   transform: translateZ(40px);
   transform-style: preserve-3d;
+  transition: transform 0.4s ease-out;
 }
 
 .hero-kicker {
@@ -329,9 +325,7 @@ a { color: inherit; text-decoration: none; }
   background:
     linear-gradient(180deg, #2a050c 0%, #3d0a14 50%, #2a050c 100%);
 }
-#save-date .section-inner {
-  text-align: center;
-}
+#save-date .section-inner { text-align: center; }
 
 .section-kicker {
   font-family: 'Cinzel', serif;
@@ -434,15 +428,13 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ============================================================
-   5. FORMAL INVITE CARD (3D tilt on scroll-ready)
+   5. FORMAL INVITE CARD
    ============================================================ */
 #invite-card {
   background:
     radial-gradient(ellipse at 50% 0%, #4a0e1a 0%, #2a050c 70%);
 }
-#invite-card .section-inner {
-  text-align: center;
-}
+#invite-card .section-inner { text-align: center; }
 
 .formal-card {
   position: relative;
@@ -484,7 +476,6 @@ a { color: inherit; text-decoration: none; }
   margin: 0 auto 20px;
   object-fit: contain;
   filter: drop-shadow(0 4px 10px rgba(122,74,26,0.35));
-  /* fallback: gold circle if image missing */
   background: radial-gradient(circle, rgba(201,163,73,0.15), transparent 70%);
   border-radius: 50%;
 }
@@ -553,7 +544,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ============================================================
-   6. EVENTS (3 cards with 3D hover/tilt)
+   6. EVENTS
    ============================================================ */
 #events {
   background:
@@ -825,7 +816,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ============================================================
-   10. FLOATING UI (petals canvas + music toggle)
+   10. FLOATING UI
    ============================================================ */
 #petal-canvas {
   position: fixed;
@@ -865,7 +856,6 @@ a { color: inherit; text-decoration: none; }
 #music-toggle.playing .icon-play { display: none; }
 #music-toggle.playing .icon-pause { display: block; }
 
-/* Pulsing ring when playing */
 #music-toggle.playing::after {
   content: "";
   position: absolute;
@@ -880,7 +870,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ============================================================
-   11. SCROLL-REVEAL (JS-driven)
+   11. SCROLL-REVEAL
    ============================================================ */
 .reveal {
   opacity: 0;
@@ -902,7 +892,6 @@ a { color: inherit; text-decoration: none; }
   .hero-names { font-size: clamp(4rem, 8vw, 7rem); }
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -911,12 +900,8 @@ a { color: inherit; text-decoration: none; }
   }
 }
 </style>
-</head>
-<body>
+</head><body>
 
-<!-- ============================================================
-     ENVELOPE OPENING SCREEN
-     ============================================================ -->
 <div id="envelope-screen">
   <div class="envelope-wrap" id="envelope-tap" role="button" aria-label="Tap to open invitation">
     <img src="assets/img/envelope.png" alt="" class="envelope-img" />
@@ -924,18 +909,13 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 
-<!-- ============================================================
-     MAIN INVITE
-     ============================================================ -->
 <main id="invite">
 
-  <!-- ---------- HERO ---------- -->
   <section class="section" id="hero">
     <div class="hero-parallax" id="hero-parallax">
       <div class="hero-bg"></div>
       <div class="hero-overlay"></div>
     </div>
-
     <div class="hero-content">
       <p class="hero-kicker">The Wedding Of</p>
       <h1 class="hero-names">
@@ -948,17 +928,14 @@ a { color: inherit; text-decoration: none; }
         <span>14</span><span>·</span><span>February</span><span>·</span><span>2027</span>
       </div>
     </div>
-
     <div class="hero-scroll">Scroll</div>
   </section>
 
-  <!-- ---------- SAVE THE DATE (scratch) ---------- -->
   <section class="section" id="save-date">
     <div class="section-inner reveal">
       <p class="section-kicker">Save The Date</p>
       <h2 class="section-title">Scratch to Reveal</h2>
       <div class="ornament"><span class="diamond"></span></div>
-
       <div class="scratch-card" id="scratch-card">
         <div class="scratch-under">
           <span class="stamp-label">Save the Date</span>
@@ -967,40 +944,32 @@ a { color: inherit; text-decoration: none; }
         </div>
         <canvas id="scratch-canvas"></canvas>
       </div>
-
       <p class="scratch-hint" id="scratch-hint">Swipe to Scratch</p>
     </div>
   </section>
 
-  <!-- ---------- FORMAL INVITE ---------- -->
   <section class="section" id="invite-card">
     <div class="section-inner reveal">
       <p class="section-kicker">Shubh Vivah</p>
       <h2 class="section-title">The Invitation</h2>
       <div class="ornament"><span class="diamond"></span></div>
-
       <div class="formal-card">
         <img src="assets/img/ganesha.png" alt="Ganesha" class="formal-ganesha" />
-
         <p class="formal-mantra">Om Shree Ganeshaya Namaha</p>
         <p class="formal-mantra-sanskrit">॥ श्री गणेशाय नमः ॥</p>
-
         <p class="formal-invite-text">
           With the blessings of Lord Ganesha and our elders,<br/>
           we cordially invite you to celebrate the wedding of
         </p>
-
         <p class="formal-names">
           Raghav
           <span class="formal-amp">&amp;</span>
           Riya
         </p>
-
         <p class="formal-invite-text">
           as they begin their journey together,<br/>
           bound by love, laughter and lifelong companionship.
         </p>
-
         <div class="formal-family">
           <span class="label">With warm regards</span>
           <p>Sharma Family &nbsp;·&nbsp; Verma Family</p>
@@ -1009,16 +978,13 @@ a { color: inherit; text-decoration: none; }
     </div>
   </section>
 
-  <!-- ---------- EVENTS ---------- -->
   <section class="section" id="events">
     <div class="section-inner reveal">
       <p class="section-kicker">Celebrations</p>
       <h2 class="section-title">Wedding Events</h2>
       <div class="ornament"><span class="diamond"></span></div>
-
       <div class="event-grid">
 
-        <!-- SAGAN / MEHENDI -->
         <article class="event-card" data-tilt>
           <img src="assets/img/marriage.png" alt="Sagan" class="event-img" />
           <div class="event-body">
@@ -1036,7 +1002,6 @@ a { color: inherit; text-decoration: none; }
           </div>
         </article>
 
-        <!-- HALDI -->
         <article class="event-card" data-tilt>
           <img src="assets/img/haldi.png" alt="Haldi" class="event-img" />
           <div class="event-body">
@@ -1054,7 +1019,6 @@ a { color: inherit; text-decoration: none; }
           </div>
         </article>
 
-        <!-- WEDDING -->
         <article class="event-card" data-tilt>
           <img src="assets/img/fire.png" alt="Wedding Ceremony" class="event-img" />
           <div class="event-body">
@@ -1077,20 +1041,17 @@ a { color: inherit; text-decoration: none; }
     </div>
   </section>
 
-  <!-- ---------- COUNTDOWN ---------- -->
   <section class="section" id="countdown">
     <div class="section-inner reveal">
       <p class="section-kicker">Counting Down</p>
       <h2 class="section-title">To Forever</h2>
       <div class="ornament"><span class="diamond"></span></div>
-
       <div class="countdown-grid" id="countdown-grid">
         <div class="cd-box"><span class="num" id="cd-days">00</span><span class="lbl">Days</span></div>
         <div class="cd-box"><span class="num" id="cd-hours">00</span><span class="lbl">Hours</span></div>
         <div class="cd-box"><span class="num" id="cd-mins">00</span><span class="lbl">Minutes</span></div>
         <div class="cd-box"><span class="num" id="cd-secs">00</span><span class="lbl">Seconds</span></div>
       </div>
-
       <a class="cal-btn" id="add-calendar" href="#" target="_blank" rel="noopener">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Add to Google Calendar
@@ -1098,23 +1059,19 @@ a { color: inherit; text-decoration: none; }
     </div>
   </section>
 
-  <!-- ---------- BLESSINGS ---------- -->
   <section class="section" id="blessings">
     <div class="section-inner reveal">
       <p class="section-kicker">With Love</p>
       <h2 class="section-title">Blessings</h2>
       <div class="ornament"><span class="diamond"></span></div>
-
       <div class="blessing-card">
         <img src="assets/img/flower.png" alt="" class="blessing-flower tl" />
         <img src="assets/img/flower.png" alt="" class="blessing-flower br" />
-
         <h3 class="blessing-title">With Warm Regards</h3>
         <p class="blessing-text">
           Your presence and blessings mean the world to us.<br/>
           We look forward to celebrating this beautiful beginning together.
         </p>
-
         <div class="blessing-families">
           <div class="family-block">
             <span class="label">Groom's Family</span>
@@ -1129,7 +1086,6 @@ a { color: inherit; text-decoration: none; }
     </div>
   </section>
 
-  <!-- ---------- FOOTER ---------- -->
   <footer id="footer">
     <p class="footer-crafted">Crafted by</p>
     <p class="footer-brand">
@@ -1139,9 +1095,6 @@ a { color: inherit; text-decoration: none; }
 
 </main>
 
-<!-- ============================================================
-     FLOATING UI
-     ============================================================ -->
 <canvas id="petal-canvas"></canvas>
 
 <button id="music-toggle" aria-label="Toggle music">
@@ -1153,11 +1106,422 @@ a { color: inherit; text-decoration: none; }
   <source src="assets/music/wedding-song.mp3" type="audio/mpeg" />
 </audio>
 
-<!-- ============================================================
-     JS placeholder — CHUNK 2 drops all behavior here
-     ============================================================ -->
 <script>
-/* CHUNK 2 — envelope opening, petals, scratch, countdown, music, reveal */
+/* ============================================================
+   VAAN WEDDINGS — FULL JS
+   Envelope · Petals · Scratch · Countdown · Music · Reveal · Parallax · 3D Tilt
+   ============================================================ */
+(function () {
+  'use strict';
+
+  /* -------- 0. CONFIG -------- */
+  var WEDDING_DATE = new Date('2027-02-14T20:30:00+05:30');
+  var ENVELOPE_FADE_MS = 1100;
+
+  /* -------- 1. ENVELOPE OPEN -------- */
+  var envelopeScreen = document.getElementById('envelope-screen');
+  var envelopeTap = document.getElementById('envelope-tap');
+  var invite = document.getElementById('invite');
+  var opened = false;
+
+  function openEnvelope() {
+    if (opened) return;
+    opened = true;
+    envelopeScreen.classList.add('opened');
+    setTimeout(function () {
+      invite.classList.add('visible');
+      document.body.style.overflow = '';
+      revealAll();
+    }, 350);
+    setTimeout(function () {
+      envelopeScreen.style.display = 'none';
+    }, ENVELOPE_FADE_MS + 300);
+  }
+
+  document.body.style.overflow = 'hidden';
+  envelopeTap.addEventListener('click', openEnvelope);
+  envelopeScreen.addEventListener('click', openEnvelope);
+
+  /* -------- 2. SCROLL REVEAL -------- */
+  var revealEls = document.querySelectorAll('.reveal');
+
+  function revealAll() {
+    if (!('IntersectionObserver' in window)) {
+      for (var i = 0; i < revealEls.length; i++) revealEls[i].classList.add('in');
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    for (var j = 0; j < revealEls.length; j++) io.observe(revealEls[j]);
+  }
+
+  /* -------- 3. HERO PARALLAX -------- */
+  var heroSection = document.getElementById('hero');
+  var heroParallax = document.getElementById('hero-parallax');
+  var heroBg = heroParallax ? heroParallax.querySelector('.hero-bg') : null;
+  var heroOverlay = heroParallax ? heroParallax.querySelector('.hero-overlay') : null;
+  var heroContent = document.querySelector('.hero-content');
+  var ticking = false;
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      ticking = false;
+      if (!heroSection) return;
+      var rect = heroSection.getBoundingClientRect();
+      var vh = window.innerHeight;
+      if (rect.bottom < 0 || rect.top > vh) return;
+      var progress = Math.max(0, Math.min(1, -rect.top / vh));
+      if (heroBg) heroBg.style.transform = 'translate3d(0,' + (progress * 90) + 'px,0) translateZ(-180px) scale(1.18)';
+      if (heroOverlay) heroOverlay.style.transform = 'translate3d(0,' + (progress * 50) + 'px,0) translateZ(-90px)';
+      if (heroContent) {
+        heroContent.style.transform = 'translate3d(0,' + (progress * -30) + 'px,0) translateZ(40px)';
+        heroContent.style.opacity = String(1 - progress * 0.85);
+      }
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+
+  /* -------- 4. HERO DEVICE TILT (3D gyro-feel on mouse) -------- */
+  if (heroSection && heroContent && window.matchMedia('(hover: hover)').matches) {
+    heroSection.addEventListener('mousemove', function (e) {
+      var cx = window.innerWidth / 2;
+      var cy = window.innerHeight / 2;
+      var dx = (e.clientX - cx) / cx;
+      var dy = (e.clientY - cy) / cy;
+      heroContent.style.transform =
+        'translate3d(' + (dx * 8) + 'px,' + (dy * 8) + 'px,40px) rotateY(' + (dx * 4) + 'deg) rotateX(' + (-dy * 4) + 'deg)';
+    });
+    heroSection.addEventListener('mouseleave', function () {
+      heroContent.style.transform = 'translate3d(0,0,40px)';
+    });
+  }
+
+  /* -------- 5. EVENT CARD 3D TILT -------- */
+  var tiltCards = document.querySelectorAll('[data-tilt]');
+  for (var t = 0; t < tiltCards.length; t++) {
+    (function (card) {
+      card.addEventListener('touchstart', function () {
+        card.classList.add('tilted');
+      }, { passive: true });
+      card.addEventListener('touchend', function () {
+        setTimeout(function () { card.classList.remove('tilted'); }, 500);
+      }, { passive: true });
+
+      if (window.matchMedia('(hover: hover)').matches) {
+        card.addEventListener('mouseenter', function () { card.classList.add('tilted'); });
+        card.addEventListener('mouseleave', function () { card.classList.remove('tilted'); });
+      }
+    })(tiltCards[t]);
+  }
+
+  /* -------- 6. COUNTDOWN -------- */
+  var elDays = document.getElementById('cd-days');
+  var elHours = document.getElementById('cd-hours');
+  var elMins = document.getElementById('cd-mins');
+  var elSecs = document.getElementById('cd-secs');
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+  function tick() {
+    var now = new Date().getTime();
+    var diff = WEDDING_DATE.getTime() - now;
+    if (diff < 0) diff = 0;
+    var days = Math.floor(diff / 86400000);
+    var hours = Math.floor((diff % 86400000) / 3600000);
+    var mins = Math.floor((diff % 3600000) / 60000);
+    var secs = Math.floor((diff % 60000) / 1000);
+    if (elDays) elDays.textContent = pad(days);
+    if (elHours) elHours.textContent = pad(hours);
+    if (elMins) elMins.textContent = pad(mins);
+    if (elSecs) elSecs.textContent = pad(secs);
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* -------- 7. ADD TO GOOGLE CALENDAR -------- */
+  var calBtn = document.getElementById('add-calendar');
+  if (calBtn) {
+    var start = '20270214T143000Z';
+    var end = '20270215T020000Z';
+    var calUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+      + '&text=' + encodeURIComponent('Wedding of Raghav & Riya')
+      + '&dates=' + start + '/' + end
+      + '&details=' + encodeURIComponent('Join us to celebrate the wedding of Raghav & Riya. Your blessings mean the world to us.')
+      + '&location=' + encodeURIComponent('The Grand Palace Lawns, Chattarpur, New Delhi');
+    calBtn.setAttribute('href', calUrl);
+  }
+
+  /* -------- 8. GET DIRECTIONS BUTTONS -------- */
+  var dirBtns = document.querySelectorAll('[data-directions]');
+  for (var d = 0; d < dirBtns.length; d++) {
+    (function (btn) {
+      var place = btn.getAttribute('data-directions');
+      btn.setAttribute('href', 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(place));
+      btn.setAttribute('target', '_blank');
+      btn.setAttribute('rel', 'noopener');
+    })(dirBtns[d]);
+  }
+
+  /* -------- 9. MUSIC TOGGLE -------- */
+  var musicBtn = document.getElementById('music-toggle');
+  var audio = document.getElementById('bg-music');
+  var musicPlaying = false;
+
+  function startMusic() {
+    if (!audio) return;
+    audio.volume = 0.55;
+    var p = audio.play();
+    if (p && p.catch) p.catch(function () { /* autoplay blocked, user must tap */ });
+    musicBtn.classList.add('playing');
+    musicPlaying = true;
+  }
+  function stopMusic() {
+    if (!audio) return;
+    audio.pause();
+    musicBtn.classList.remove('playing');
+    musicPlaying = false;
+  }
+
+  if (musicBtn && audio) {
+    musicBtn.addEventListener('click', function () {
+      if (musicPlaying) stopMusic(); else startMusic();
+    });
+    // Try to start music when envelope opens (first user gesture)
+    envelopeTap.addEventListener('click', function () {
+      setTimeout(function () { if (!musicPlaying) startMusic(); }, 900);
+    }, { once: true });
+  }
+
+  /* -------- 10. FLOATING PETALS (Canvas) -------- */
+  var petalCanvas = document.getElementById('petal-canvas');
+  if (petalCanvas) {
+    var pctx = petalCanvas.getContext('2d');
+    var petals = [];
+    var PETAL_COUNT = window.innerWidth < 500 ? 18 : 30;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    function resizePetalCanvas() {
+      petalCanvas.width = window.innerWidth * dpr;
+      petalCanvas.height = window.innerHeight * dpr;
+      petalCanvas.style.width = window.innerWidth + 'px';
+      petalCanvas.style.height = window.innerHeight + 'px';
+      pctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resizePetalCanvas();
+    window.addEventListener('resize', resizePetalCanvas);
+
+    var petalColors = ['#e6c273', '#d9a06b', '#f3c1c1', '#e8a4a4', '#c9a349'];
+
+    function makePetal() {
+      return {
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * -window.innerHeight,
+        size: 6 + Math.random() * 10,
+        speedY: 0.4 + Math.random() * 1.1,
+        speedX: -0.4 + Math.random() * 0.8,
+        rot: Math.random() * Math.PI * 2,
+        rotSpeed: (-0.02 + Math.random() * 0.04),
+        sway: Math.random() * Math.PI * 2,
+        swaySpeed: 0.01 + Math.random() * 0.02,
+        color: petalColors[Math.floor(Math.random() * petalColors.length)],
+        alpha: 0.5 + Math.random() * 0.4
+      };
+    }
+    for (var p = 0; p < PETAL_COUNT; p++) petals.push(makePetal());
+
+    function drawPetal(pt) {
+      pctx.save();
+      pctx.translate(pt.x, pt.y);
+      pctx.rotate(pt.rot);
+      pctx.globalAlpha = pt.alpha;
+      pctx.fillStyle = pt.color;
+      pctx.beginPath();
+      // simple petal shape (ellipse with tapered tip)
+      pctx.moveTo(0, -pt.size);
+      pctx.bezierCurveTo(pt.size * 0.7, -pt.size * 0.6, pt.size * 0.7, pt.size * 0.6, 0, pt.size);
+      pctx.bezierCurveTo(-pt.size * 0.7, pt.size * 0.6, -pt.size * 0.7, -pt.size * 0.6, 0, -pt.size);
+      pctx.fill();
+      pctx.restore();
+    }
+
+    function petalLoop() {
+      pctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      for (var i = 0; i < petals.length; i++) {
+        var pt = petals[i];
+        pt.sway += pt.swaySpeed;
+        pt.y += pt.speedY;
+        pt.x += pt.speedX + Math.sin(pt.sway) * 0.4;
+        pt.rot += pt.rotSpeed;
+        if (pt.y > window.innerHeight + 30) {
+          pt.y = -30;
+          pt.x = Math.random() * window.innerWidth;
+        }
+        if (pt.x < -40) pt.x = window.innerWidth + 20;
+        if (pt.x > window.innerWidth + 40) pt.x = -20;
+        drawPetal(pt);
+      }
+      requestAnimationFrame(petalLoop);
+    }
+    petalLoop();
+  }
+
+  /* -------- 11. SCRATCH TO REVEAL -------- */
+  var scratchCard = document.getElementById('scratch-card');
+  var scratchCanvas = document.getElementById('scratch-canvas');
+  var scratchHint = document.getElementById('scratch-hint');
+
+  if (scratchCard && scratchCanvas) {
+    var sctx = scratchCanvas.getContext('2d');
+    var scratching = false;
+    var lastX = 0, lastY = 0;
+    var revealed = false;
+
+    function setupScratch() {
+      var rect = scratchCard.getBoundingClientRect();
+      var w = rect.width;
+      var h = rect.height;
+      scratchCanvas.width = w * dpr;
+      scratchCanvas.height = h * dpr;
+      scratchCanvas.style.width = w + 'px';
+      scratchCanvas.style.height = h + 'px';
+      sctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      // Fill with metallic gold "foil" gradient
+      var grad = sctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, '#c9a349');
+      grad.addColorStop(0.3, '#e6c273');
+      grad.addColorStop(0.5, '#f4d99b');
+      grad.addColorStop(0.7, '#e6c273');
+      grad.addColorStop(1, '#a37f2e');
+      sctx.fillStyle = grad;
+      sctx.fillRect(0, 0, w, h);
+
+      // Add subtle texture sparkles
+      for (var i = 0; i < 120; i++) {
+        sctx.fillStyle = 'rgba(255,255,255,' + (Math.random() * 0.35) + ')';
+        sctx.beginPath();
+        sctx.arc(Math.random() * w, Math.random() * h, Math.random() * 1.4, 0, Math.PI * 2);
+        sctx.fill();
+      }
+
+      // Overlay text
+      sctx.fillStyle = 'rgba(122,74,26,0.55)';
+      sctx.font = '600 20px "Cinzel", serif';
+      sctx.textAlign = 'center';
+      sctx.textBaseline = 'middle';
+      sctx.fillText('SCRATCH', w / 2, h / 2 - 12);
+      sctx.font = '600 14px "Cinzel", serif';
+      sctx.fillText('TO REVEAL', w / 2, h / 2 + 14);
+
+      sctx.globalCompositeOperation = 'destination-out';
+    }
+
+    function getPos(e) {
+      var rect = scratchCanvas.getBoundingClientRect();
+      var clientX, clientY;
+      if (e.touches && e.touches.length) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
+      } else {
+        clientX = e.clientX;
+        clientY = e.clientY;
+      }
+      return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
+    function scratchAt(x, y) {
+      sctx.beginPath();
+      sctx.arc(x, y, 26, 0, Math.PI * 2);
+      sctx.fill();
+    }
+
+    function startScratch(e) {
+      if (revealed) return;
+      scratching = true;
+      var pos = getPos(e);
+      lastX = pos.x; lastY = pos.y;
+      scratchAt(lastX, lastY);
+    }
+    function moveScratch(e) {
+      if (!scratching || revealed) return;
+      e.preventDefault();
+      var pos = getPos(e);
+      // draw line between last and current for smoother scratch
+      var steps = 6;
+      for (var i = 0; i <= steps; i++) {
+        var ix = lastX + (pos.x - lastX) * (i / steps);
+        var iy = lastY + (pos.y - lastY) * (i / steps);
+        scratchAt(ix, iy);
+      }
+      lastX = pos.x; lastY = pos.y;
+      checkReveal();
+    }
+    function endScratch() {
+      scratching = false;
+      checkReveal();
+    }
+
+    function checkReveal() {
+      if (revealed) return;
+      var w = scratchCanvas.width;
+      var h = scratchCanvas.height;
+      var data;
+      try {
+        data = sctx.getImageData(0, 0, w, h).data;
+      } catch (err) { return; }
+      var cleared = 0;
+      var total = 0;
+      for (var i = 3; i < data.length; i += 4 * 16) {
+        total++;
+        if (data[i] < 40) cleared++;
+      }
+      if (total > 0 && cleared / total > 0.55) {
+        revealed = true;
+        scratchCard.classList.add('scratched');
+        if (scratchHint) scratchHint.textContent = 'Saved ✦';
+        // fade out canvas
+        scratchCanvas.style.transition = 'opacity 0.9s ease';
+        scratchCanvas.style.opacity = '0';
+        setTimeout(function () { scratchCanvas.style.display = 'none'; }, 950);
+      }
+    }
+
+    scratchCanvas.addEventListener('mousedown', startScratch);
+    scratchCanvas.addEventListener('mousemove', moveScratch);
+    scratchCanvas.addEventListener('mouseup', endScratch);
+    scratchCanvas.addEventListener('mouseleave', endScratch);
+
+    scratchCanvas.addEventListener('touchstart', startScratch, { passive: true });
+    scratchCanvas.addEventListener('touchmove', moveScratch, { passive: false });
+    scratchCanvas.addEventListener('touchend', endScratch, { passive: true });
+
+    // Wait for fonts + layout, then setup
+    window.addEventListener('load', function () {
+      setTimeout(setupScratch, 200);
+    });
+    // Fallback if load already fired
+    if (document.readyState === 'complete') setTimeout(setupScratch, 200);
+  }
+
+  /* -------- 12. INITIAL REVEAL (in case envelope never tapped) -------- */
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      if (!opened) return; // still waiting
+      revealAll();
+    }, 500);
+  });
+
+})();
 </script>
 
 </body>
