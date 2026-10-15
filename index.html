@@ -89,7 +89,7 @@
     {
       "@type": "Question",
       "name": "How much does a website cost?",
-      "acceptedAnswer": {"@type": "Answer", "text": "VAAN Consultancy builds business websites at affordable rates with no setup cost. Final pricing depends on pages, features and integrations. WhatsApp 9671163712 for a free quote."}
+      "acceptedAnswer": {"@type": "Answer", "text": "VAAN Consultancy builds business websites at affordable rates. Final pricing depends on pages, features and integrations. WhatsApp 9671163712 for a free quote."}
     },
     {
       "@type": "Question",
@@ -316,7 +316,7 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:60px 24p
       <p style="margin-top:-30px;margin-bottom:40px;font-size:11px;color:#8a8f9c;letter-spacing:1.5px;font-weight:600">ⓘ Journey is best viewed on desktop</p>
       <div class="hero-stats">
         <div class="hero-stat"><b>15+</b><span>Business Partners</span></div>
-        <div class="hero-stat"><b>3D</b><span>Animated Websites</span></div>
+        <div class="hero-stat"><b>3D</b><span>Animations</span></div>
         <div class="hero-stat"><b>24h</b><span>Response Time</span></div>
       </div>
     </div>
@@ -413,7 +413,7 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:60px 24p
     <div class="faq-wrap">
       <details class="faq-item">
         <summary>How much does a website cost?</summary>
-        <p>VAAN Consultancy builds business websites at affordable rates with no setup cost. Final pricing depends on pages, features and integrations you need. WhatsApp 9671163712 for a free quote — honest pricing, no hidden charges.</p>
+        <p>VAAN Consultancy builds business websites at affordable rates. Final pricing depends on pages, features and integrations you need. WhatsApp 9671163712 for a free quote — honest pricing, no hidden charges.</p>
       </details>
       <details class="faq-item">
         <summary>How long does it take to build a website?</summary>
@@ -720,6 +720,239 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+/* ==========================================================
+   AI CHAT WIDGET
+   ========================================================== */
+(function(){
+  const html = `
+    <div id="vaanChatBtn" onclick="vaanChatToggle()">
+      💬<span id="vaanChatBadge">AI</span>
+    </div>
+    <div id="vaanChatBox">
+      <div id="vaanChatHeader">
+        <div>
+          <b>VAAN Assistant</b>
+          <small>Powered by AI · Always online</small>
+        </div>
+        <button onclick="vaanChatToggle()">✕</button>
+      </div>
+      <div id="vaanChatMessages">
+        <div class="vaan-msg vaan-bot">Namaste! 🙏 I'm VAAN's AI assistant. Ask me about websites, QR systems, pricing, or anything else.</div>
+      </div>
+      <form id="vaanChatForm" onsubmit="vaanChatSend(event)">
+        <input id="vaanChatInput" placeholder="Type your message..." autocomplete="off" required>
+        <button type="submit">➤</button>
+      </form>
+    </div>
+  `;
+  document.body.insertAdjacentHTML("beforeend", html);
+
+  const css = `
+    #vaanChatBtn{position:fixed !important;bottom:24px !important;right:24px !important;width:60px !important;height:60px !important;border-radius:50% !important;background:linear-gradient(135deg,#ffd400,#ffa726) !important;display:flex !important;align-items:center !important;justify-content:center !important;cursor:pointer !important;z-index:99998 !important;box-shadow:0 12px 40px rgba(255,212,0,.5) !important;font-size:26px !important;margin:0 !important;padding:0 !important;transition:transform .25s ease !important}
+    #vaanChatBtn:hover{transform:scale(1.08) !important}
+    #vaanChatBadge{position:absolute !important;top:-3px !important;right:-3px !important;background:#0a0e1a !important;color:#ffd400 !important;font-size:10px !important;font-weight:900 !important;padding:3px 6px !important;border-radius:99px !important;border:2px solid #ffd400 !important}
+    #vaanChatBox{position:fixed !important;bottom:100px !important;right:24px !important;width:min(400px,92vw) !important;height:min(580px,80vh) !important;background:#0f1520 !important;border:1px solid rgba(255,212,0,.25) !important;border-radius:20px !important;display:none !important;flex-direction:column !important;overflow:hidden !important;z-index:99999 !important;box-shadow:0 30px 80px rgba(0,0,0,.8) !important}
+    #vaanChatBox.vaan-open{display:flex !important}
+    #vaanChatHeader{background:linear-gradient(135deg,#12192a,#0d1220) !important;color:white !important;padding:16px 18px !important;display:flex !important;justify-content:space-between !important;align-items:center !important;border-bottom:1px solid rgba(255,212,0,.15) !important}
+    #vaanChatHeader b{font-size:15px !important;color:#fff !important;display:block !important}
+    #vaanChatHeader small{color:#8a8f9c !important;font-size:11px !important;display:block !important;margin-top:2px !important}
+    #vaanChatHeader button{background:transparent !important;border:0 !important;color:#8a8f9c !important;font-size:18px !important;cursor:pointer !important;padding:6px !important}
+    #vaanChatMessages{flex:1 !important;overflow-y:auto !important;padding:18px !important;display:flex !important;flex-direction:column !important;gap:12px !important;background:#0a0e1a !important}
+    .vaan-msg{max-width:82% !important;padding:12px 16px !important;border-radius:14px !important;font-size:13.5px !important;line-height:1.55 !important;word-wrap:break-word !important;font-family:Inter,sans-serif !important}
+    .vaan-bot{background:#12192a !important;color:#e5e9ee !important;align-self:flex-start !important;border:1px solid rgba(255,212,0,.1) !important}
+    .vaan-user{background:linear-gradient(135deg,#ffd400,#ffa726) !important;color:#0a0e1a !important;align-self:flex-end !important;font-weight:600 !important}
+    .vaan-typing{background:#12192a !important;color:#8a8f9c !important;align-self:flex-start !important;padding:14px 18px !important;border-radius:14px !important;font-size:13px !important;border:1px solid rgba(255,212,0,.1) !important}
+    .vaan-typing::after{content:"...";animation:vaanDots 1.2s infinite}
+    @keyframes vaanDots{0%,20%{content:"."}40%{content:".."}60%,100%{content:"..."}}
+    #vaanChatForm{display:flex !important;gap:8px !important;padding:12px !important;background:#12192a !important;border-top:1px solid rgba(255,212,0,.15) !important}
+    #vaanChatInput{flex:1 !important;padding:13px 16px !important;border:1px solid rgba(255,255,255,.1) !important;border-radius:12px !important;background:#0a0e1a !important;color:#fff !important;font:inherit !important;font-size:14px !important;font-family:Inter,sans-serif !important}
+    #vaanChatInput:focus{outline:none !important;border-color:#ffd400 !important}
+    #vaanChatForm button{background:linear-gradient(135deg,#ffd400,#ffa726) !important;color:#0a0e1a !important;border:0 !important;border-radius:12px !important;padding:0 20px !important;font-weight:900 !important;font-size:16px !important;cursor:pointer !important}
+    #vaanChatForm button:disabled{opacity:.5 !important;cursor:not-allowed !important}
+    @media(max-width:600px){
+      #vaanChatBtn{bottom:16px !important;right:16px !important;width:54px !important;height:54px !important;font-size:22px !important}
+      #vaanChatBox{bottom:82px !important;right:8px !important;left:8px !important;width:auto !important;height:min(540px,78vh) !important}
+    }
+  `;
+  const styleEl = document.createElement("style");
+  styleEl.textContent = css;
+  document.head.appendChild(styleEl);
+
+  const CHAT_FN_URL = "https://xvtxpllmfwgnlrffbcqz.supabase.co/functions/v1/vaan-chat";
+  let vaanHistory = [];
+
+  window.vaanChatToggle = function(){
+    const box = document.getElementById("vaanChatBox");
+    box.classList.toggle("vaan-open");
+    if (box.classList.contains("vaan-open")) document.getElementById("vaanChatInput").focus();
+  };
+
+  function vaanAddMsg(text, cls){
+    const wrap = document.getElementById("vaanChatMessages");
+    const div = document.createElement("div");
+    div.className = "vaan-msg " + cls;
+    div.textContent = text;
+    wrap.appendChild(div);
+    wrap.scrollTop = wrap.scrollHeight;
+  }
+  function vaanAddTyping(){
+    const wrap = document.getElementById("vaanChatMessages");
+    const d = document.createElement("div");
+    d.className = "vaan-typing";
+    d.id = "vaanTyping";
+    d.textContent = "Thinking";
+    wrap.appendChild(d);
+    wrap.scrollTop = wrap.scrollHeight;
+  }
+  function vaanRemoveTyping(){
+    const t = document.getElementById("vaanTyping");
+    if (t) t.remove();
+  }
+
+  window.vaanChatSend = async function(e){
+    e.preventDefault();
+    const input = document.getElementById("vaanChatInput");
+    const text = input.value.trim();
+    if (!text) return;
+    vaanAddMsg(text, "vaan-user");
+    input.value = "";
+    input.disabled = true;
+    vaanAddTyping();
+    vaanHistory.push({ role: "user", parts: [{ text }] });
+
+    try {
+      const res = await fetch(CHAT_FN_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + SUPABASE_KEY,
+          "apikey": SUPABASE_KEY
+        },
+        body: JSON.stringify({ messages: vaanHistory })
+      });
+      const data = await res.json();
+      vaanRemoveTyping();
+      const reply = data?.reply || "Sorry, please WhatsApp us at 9671163712.";
+      vaanAddMsg(reply, "vaan-bot");
+      vaanHistory.push({ role: "model", parts: [{ text: reply }] });
+      if (vaanHistory.length > 20) vaanHistory = vaanHistory.slice(-20);
+    } catch (err){
+      console.error(err);
+      vaanRemoveTyping();
+      vaanAddMsg("Connection issue. Please WhatsApp 9671163712.", "vaan-bot");
+    } finally {
+      input.disabled = false;
+      input.focus();
+    }
+  };
+})();
+
+/* ==========================================================
+   FLOATING FEEDBACK BUTTON
+   ========================================================== */
+(function(){
+  const html = `
+    <div id="vaanFbBtn" onclick="vaanOpenFeedback()">
+      ⭐<span id="vaanFbBadge">Feedback</span>
+    </div>
+    <div id="vaanFbModal">
+      <div id="vaanFbBox">
+        <div id="vaanFbHead">
+          <b>Share Your Feedback</b>
+          <button onclick="vaanCloseFeedback()">✕</button>
+        </div>
+        <form id="vaanFbForm" onsubmit="vaanSubmitFeedback(event)">
+          <p style="color:#8a8f9c;font-size:13px;margin-bottom:18px;line-height:1.5">Help us improve. Your feedback is read personally.</p>
+          <label>Your Name</label>
+          <input id="fbName" placeholder="e.g. Rahul Sharma" required>
+          <label>Rating</label>
+          <div class="vaan-stars" id="fbStars">
+            <span data-r="1">★</span><span data-r="2">★</span><span data-r="3">★</span><span data-r="4">★</span><span data-r="5">★</span>
+          </div>
+          <label>Your Feedback</label>
+          <textarea id="fbFeedback" placeholder="What did you like? What can we improve?" required></textarea>
+          <button type="submit" class="vaan-fb-submit">Submit Feedback</button>
+        </form>
+      </div>
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML("beforeend", html);
+
+  const css = `
+    #vaanFbBtn{position:fixed !important;bottom:24px !important;left:24px !important;background:#12192a !important;border:1px solid rgba(255,212,0,.3) !important;color:#ffd400 !important;padding:12px 18px !important;border-radius:99px !important;font-weight:800 !important;font-size:13px !important;cursor:pointer !important;z-index:99997 !important;display:flex !important;align-items:center !important;gap:8px !important;box-shadow:0 10px 30px rgba(0,0,0,.5) !important;font-family:Inter,sans-serif !important;transition:.25s !important}
+    #vaanFbBtn:hover{transform:translateY(-3px) !important;border-color:#ffd400 !important}
+    #vaanFbBadge{font-size:11px !important;letter-spacing:.5px !important}
+    #vaanFbModal{display:none !important;position:fixed !important;inset:0 !important;background:rgba(0,0,0,.7) !important;backdrop-filter:blur(8px) !important;z-index:100000 !important;align-items:center !important;justify-content:center !important;padding:20px !important}
+    #vaanFbModal.vaan-open{display:flex !important}
+    #vaanFbBox{background:#0f1520 !important;border:1px solid rgba(255,212,0,.25) !important;border-radius:20px !important;padding:28px 24px !important;width:min(440px,100%) !important;max-height:90vh !important;overflow:auto !important}
+    #vaanFbHead{display:flex !important;justify-content:space-between !important;align-items:center !important;margin-bottom:6px !important}
+    #vaanFbHead b{font-size:19px !important;color:#fff !important;font-weight:900 !important}
+    #vaanFbHead button{background:transparent !important;border:0 !important;color:#8a8f9c !important;font-size:20px !important;cursor:pointer !important;padding:4px !important}
+    #vaanFbForm label{display:block !important;color:#8a8f9c !important;font-size:11px !important;font-weight:800 !important;letter-spacing:1px !important;text-transform:uppercase !important;margin:16px 0 6px !important}
+    #vaanFbForm input,#vaanFbForm textarea{width:100% !important;background:#0a0e1a !important;border:1px solid rgba(255,255,255,.1) !important;border-radius:10px !important;padding:12px 14px !important;color:#fff !important;font:inherit !important;font-size:14px !important;font-family:Inter,sans-serif !important}
+    #vaanFbForm input:focus,#vaanFbForm textarea:focus{outline:none !important;border-color:#ffd400 !important}
+    #vaanFbForm textarea{min-height:88px !important;resize:vertical !important}
+    .vaan-stars{display:flex !important;gap:6px !important;margin-top:4px !important}
+    .vaan-stars span{font-size:28px !important;color:#3a4152 !important;cursor:pointer !important;transition:.2s !important;line-height:1 !important}
+    .vaan-stars span.active,.vaan-stars span:hover{color:#ffd400 !important;text-shadow:0 0 12px rgba(255,212,0,.6) !important}
+    .vaan-fb-submit{width:100% !important;margin-top:20px !important;background:linear-gradient(135deg,#ffd400,#ffa726) !important;color:#0a0e1a !important;border:0 !important;border-radius:11px !important;padding:14px !important;font-weight:900 !important;font-size:14px !important;cursor:pointer !important;font-family:Inter,sans-serif !important;transition:.2s !important}
+    .vaan-fb-submit:hover{transform:translateY(-2px) !important;box-shadow:0 10px 30px rgba(255,212,0,.35) !important}
+    @media(max-width:600px){
+      #vaanFbBtn{bottom:80px !important;left:16px !important;font-size:11px !important;padding:10px 14px !important}
+    }
+  `;
+  const styleEl = document.createElement("style");
+  styleEl.textContent = css;
+  document.head.appendChild(styleEl);
+
+  let selectedRating = 5;
+
+  document.querySelectorAll("#fbStars span").forEach(s => {
+    s.addEventListener("click", () => {
+      selectedRating = parseInt(s.dataset.r);
+      document.querySelectorAll("#fbStars span").forEach(x => x.classList.remove("active"));
+      for (let i = 1; i <= selectedRating; i++){
+        document.querySelector(`#fbStars span[data-r="${i}"]`).classList.add("active");
+      }
+    });
+  });
+  document.querySelectorAll("#fbStars span").forEach(x => x.classList.add("active"));
+
+  window.vaanOpenFeedback = () => document.getElementById("vaanFbModal").classList.add("vaan-open");
+  window.vaanCloseFeedback = () => document.getElementById("vaanFbModal").classList.remove("vaan-open");
+
+  window.vaanSubmitFeedback = async function(e){
+    e.preventDefault();
+    const name = document.getElementById("fbName").value.trim();
+    const feedback = document.getElementById("fbFeedback").value.trim();
+    if (!name || !feedback) return;
+
+    const btn = e.target.querySelector(".vaan-fb-submit");
+    btn.disabled = true;
+    btn.textContent = "Sending...";
+
+    const { error } = await sb.from("vaan_feedback").insert({
+      name,
+      rating: selectedRating,
+      feedback,
+      source_page: window.location.pathname
+    });
+
+    btn.disabled = false;
+    btn.textContent = "Submit Feedback";
+
+    if (error){
+      alert("Could not submit. Please try again.");
+      return;
+    }
+
+    document.getElementById("vaanFbForm").reset();
+    document.querySelectorAll("#fbStars span").forEach(x => x.classList.add("active"));
+    window.vaanCloseFeedback();
+  };
+})();
 </script>
 
 </body>
