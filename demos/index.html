@@ -32,11 +32,17 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   --muted:#8a8f9c;
   --green:#25b46e;
   --purple:#a78bfa;
-  --rose:#e8b5ac;
 }
 
+/* ====== LOADER ====== */
+#loader{position:fixed;inset:0;background:#0a0e1a;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s ease}
+#loader.done{opacity:0;visibility:hidden;pointer-events:none}
+.loader-ring{width:60px;height:60px;border-radius:50%;border:2px solid rgba(255,212,0,.15);border-top-color:var(--gold);animation:spin 1s linear infinite;position:relative}
+.loader-ring::after{content:"";position:absolute;inset:6px;border-radius:50%;border:2px solid rgba(79,143,255,.15);border-bottom-color:var(--blue);animation:spin 1.5s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+
 /* ====== NAV ====== */
-.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;background:rgba(10,14,26,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--line-soft)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;background:rgba(10,14,26,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--line-soft);transition:transform .3s ease}
 .nav-in{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .brand{display:flex;align-items:center;gap:12px;font-weight:950;letter-spacing:-1.5px;color:#fff}
 .brand-logo{width:36px;height:36px}
@@ -45,9 +51,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .brand-text b{font-size:19px;letter-spacing:-1px}
 .brand-text small{font-size:9px;letter-spacing:2px;color:var(--muted);margin-top:3px;font-weight:600}
 .nav-links{display:flex;align-items:center;gap:26px;font-size:14px;font-weight:600}
-.nav-links a{color:var(--white);opacity:.85;transition:.2s}
+.nav-links a{color:var(--white);opacity:.85;transition:.2s;position:relative}
 .nav-links a:hover{opacity:1;color:var(--gold)}
 .nav-links a.active{opacity:1;color:var(--gold)}
+.nav-links a.active::after{content:"";position:absolute;bottom:-8px;left:0;right:0;height:2px;background:var(--gold);border-radius:2px}
 .nav-cta{background:var(--gold);color:#0a0e1a !important;padding:11px 20px;border-radius:99px;font-weight:800;font-size:13px;transition:.3s;opacity:1 !important;box-shadow:0 8px 24px rgba(255,212,0,.25)}
 .nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,212,0,.45)}
 .hamburger{display:none;background:transparent;border:0;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
@@ -56,20 +63,22 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-/* ====== HERO WITH 3D ====== */
+/* ====== HERO ====== */
 .hero-3d{position:relative;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 24px 60px;overflow:hidden;background:radial-gradient(ellipse at 30% 20%,rgba(79,143,255,.12),transparent 55%),radial-gradient(ellipse at 70% 80%,rgba(255,212,0,.1),transparent 55%),linear-gradient(180deg,#0a0e1a 0%,#0f1520 100%)}
 #crystalCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
-.hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(10,14,26,.6) 90%);z-index:1;pointer-events:none}
+.hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(10,14,26,.65) 90%);z-index:1;pointer-events:none}
 .hero-content{position:relative;z-index:2;text-align:center;max-width:900px;margin:0 auto;padding-top:40px}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,212,0,.1);border:1px solid rgba(255,212,0,.3);color:var(--gold);padding:8px 18px;border-radius:99px;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,212,0,.1);border:1px solid rgba(255,212,0,.3);color:var(--gold);padding:8px 18px;border-radius:99px;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px;opacity:0}
 .hero-badge::before{content:"";width:7px;height:7px;background:var(--gold);border-radius:50%;box-shadow:0 0 12px var(--gold);animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
-.hero-content h1{font-size:clamp(38px,6vw,72px);font-weight:950;line-height:1;letter-spacing:-3px;margin-bottom:22px;text-shadow:0 4px 40px rgba(0,0,0,.5)}
+.hero-content h1{font-size:clamp(38px,6vw,72px);font-weight:950;line-height:1;letter-spacing:-3px;margin-bottom:22px;text-shadow:0 4px 40px rgba(0,0,0,.5);opacity:0}
 .hero-content h1 .gold{color:var(--gold);text-shadow:0 0 60px rgba(255,212,0,.5)}
 .hero-content h1 .blue{color:var(--blue);text-shadow:0 0 60px rgba(79,143,255,.5)}
-.hero-content p{font-size:17px;color:#b8becc;max-width:620px;margin:0 auto 36px;line-height:1.65}
-.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
-.btn{border:0;border-radius:12px;padding:15px 26px;font-weight:800;font-size:14px;cursor:pointer;font-family:inherit;transition:all .25s;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.hero-content p{font-size:17px;color:#b8becc;max-width:620px;margin:0 auto 36px;line-height:1.65;opacity:0}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;opacity:0}
+.btn{border:0;border-radius:12px;padding:15px 26px;font-weight:800;font-size:14px;cursor:pointer;font-family:inherit;transition:all .25s;display:inline-flex;align-items:center;gap:8px;text-decoration:none;position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transition:left .6s ease}
+.btn:hover::after{left:100%}
 .btn-primary{background:var(--gold);color:#0a0e1a;box-shadow:0 10px 30px rgba(255,212,0,.3)}
 .btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(255,212,0,.5)}
 .btn-secondary{background:rgba(255,255,255,.06);color:var(--white);border:1px solid rgba(255,255,255,.15)}
@@ -84,13 +93,14 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .section-head h2 .gold{color:var(--gold)}
 .section-head p{color:var(--muted);font-size:16px;max-width:640px;margin:0 auto;line-height:1.6}
 .choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:60px}
-.choice-card{background:linear-gradient(145deg,#12192a,#0d1220);border:2px solid var(--line-soft);border-radius:22px;padding:40px 28px;cursor:pointer;transition:all .35s cubic-bezier(.2,.9,.3,1.1);text-align:center;position:relative;overflow:hidden}
+.choice-card{background:linear-gradient(145deg,#12192a,#0d1220);border:2px solid var(--line-soft);border-radius:22px;padding:40px 28px;cursor:pointer;transition:all .35s cubic-bezier(.2,.9,.3,1.1);text-align:center;position:relative;overflow:hidden;opacity:0}
 .choice-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--blue));transform:scaleX(0);transition:.4s;transform-origin:left}
 .choice-card:hover{transform:translateY(-6px);border-color:rgba(255,212,0,.4);box-shadow:0 30px 60px rgba(0,0,0,.5)}
 .choice-card:hover::before{transform:scaleX(1)}
 .choice-card.active{border-color:var(--gold);background:linear-gradient(145deg,#1a2136,#0d1220)}
 .choice-card.active::before{transform:scaleX(1)}
-.choice-icon{width:80px;height:80px;border-radius:20px;background:linear-gradient(135deg,rgba(255,212,0,.15),rgba(79,143,255,.08));border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 22px}
+.choice-icon{width:80px;height:80px;border-radius:20px;background:linear-gradient(135deg,rgba(255,212,0,.15),rgba(79,143,255,.08));border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 22px;transition:transform .4s cubic-bezier(.2,.9,.3,1.1)}
+.choice-card:hover .choice-icon{transform:scale(1.1) rotate(-5deg)}
 .choice-card h3{font-size:24px;font-weight:950;letter-spacing:-.8px;margin-bottom:10px}
 .choice-card p{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:16px}
 .choice-count{display:inline-block;background:rgba(79,143,255,.12);color:#8bb4ff;font-size:11px;font-weight:900;letter-spacing:1px;padding:5px 12px;border-radius:99px;text-transform:uppercase}
@@ -146,7 +156,8 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:50px 24p
   .choice-grid{grid-template-columns:repeat(2,1fr);gap:18px}
 }
 @media(max-width:700px){
-  .nav-links{position:fixed;top:70px;left:0;right:0;background:rgba(10,14,26,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);flex-direction:column;padding:24px;gap:20px;border-bottom:1px solid var(--line-soft);transform:translateY(-150%);transition:.4s cubic-bezier(.2,.9,.3,1.1)}
+  .nav{padding:12px 0}
+  .nav-links{position:fixed;top:64px;left:0;right:0;background:rgba(10,14,26,.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);flex-direction:column;padding:24px;gap:20px;border-bottom:1px solid var(--line-soft);transform:translateY(-150%);transition:.4s cubic-bezier(.2,.9,.3,1.1);align-items:flex-start}
   .nav-links.open{transform:translateY(0)}
   .hamburger{display:flex}
   .demo-grid{grid-template-columns:1fr}
@@ -156,9 +167,15 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:50px 24p
   .cta-box{padding:44px 24px}
   .foot-in{justify-content:center;text-align:center}
 }
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important}
+}
 </style>
 </head>
 <body>
+
+<!-- ====== LOADER ====== -->
+<div id="loader"><div class="loader-ring"></div></div>
 
 <!-- ====== NAV ====== -->
 <nav class="nav">
@@ -225,9 +242,9 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:50px 24p
 
       <div class="choice-card" data-target="cards" onclick="showDemos('cards', this)">
         <div class="choice-icon">💳</div>
-        <h3>Visiting Card Demos</h3>
-        <p>Interactive digital visiting cards with cinematic opening animations, WhatsApp/Call buttons, QR, and vCard download.</p>
-        <span class="choice-count">4 Live Demos</span>
+        <h3>Visiting Card Demo</h3>
+        <p>Interactive digital visiting card with cinematic dragon opening animation, WhatsApp/Call buttons, and vCard download.</p>
+        <span class="choice-count">1 Live Demo</span>
       </div>
 
       <div class="choice-card" data-target="wedding" onclick="showDemos('wedding', this)">
@@ -245,7 +262,6 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:50px 24p
       </div>
     </div>
 
-    <!-- WEBSITE DEMOS AREA -->
     <div class="demo-area" id="area-websites">
       <div class="demo-area-head">
         <h3>🌐 Website <span class="gold">Demos</span></h3>
@@ -254,7 +270,6 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:50px 24p
       <div class="demo-grid" id="grid-websites"></div>
     </div>
 
-    <!-- QR DEMOS AREA -->
     <div class="demo-area" id="area-qr">
       <div class="demo-area-head">
         <h3>📱 QR System <span class="gold">Demos</span></h3>
@@ -263,25 +278,22 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:50px 24p
       <div class="demo-grid" id="grid-qr"></div>
     </div>
 
-    <!-- VISITING CARD DEMOS AREA -->
     <div class="demo-area" id="area-cards">
       <div class="demo-area-head">
-        <h3>💳 Visiting Card <span class="gold">Demos</span></h3>
-        <p>Interactive digital cards with cinematic opening animations. Tap any to explore.</p>
+        <h3>💳 Visiting Card <span class="gold">Demo</span></h3>
+        <p>Interactive digital card with cinematic dragon opening. Tap to explore.</p>
       </div>
       <div class="demo-grid" id="grid-cards"></div>
     </div>
 
-    <!-- WEDDING CARD DEMO AREA -->
     <div class="demo-area" id="area-wedding">
       <div class="demo-area-head">
         <h3>💍 Wedding Card <span class="gold">Demo</span></h3>
-        <p>A cinematic digital wedding invitation — envelope opening, scratch to reveal, live countdown.</p>
+        <p>Cinematic digital wedding invitation — envelope opening, scratch to reveal, live countdown.</p>
       </div>
       <div class="demo-grid" id="grid-wedding"></div>
     </div>
 
-    <!-- BRANDING AREA -->
     <div class="demo-area" id="area-branding">
       <div class="demo-area-head">
         <h3>✨ Branding & <span class="gold">Social</span></h3>
@@ -316,12 +328,14 @@ footer{background:#070a14;border-top:1px solid var(--line-soft);padding:50px 24p
   </div>
 </footer>
 
-<!-- ====== THREE.JS CDN ====== -->
+<!-- ====== CDNs ====== -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-<!-- CHUNK 2 (JavaScript) goes here --><script>
+<!-- CHUNK 2 --><script>
 /* ============================================================
-   VAAN DEMOS HUB — FULL JAVASCRIPT
+   VAAN DEMOS HUB — FULL JAVASCRIPT (GSAP + THREE.JS)
    ============================================================ */
 'use strict';
 
@@ -332,134 +346,108 @@ function toggleNav(){
   nav.classList.toggle('open');
   ham.classList.toggle('open');
 }
-
-/* Close mobile nav when clicking any link inside it */
 document.addEventListener('click', function(e){
-  if(e.target.closest && e.target.closest('#navLinks a')){
-    var nav = document.getElementById('navLinks');
-    var ham = document.getElementById('hamburger');
-    if(nav) nav.classList.remove('open');
-    if(ham) ham.classList.remove('open');
+  var link = e.target.closest && e.target.closest('#navLinks a');
+  if(link){
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
   }
 });
 
-/* ====== DEMO DATA ====== */
+/* ============================================================
+   GSAP SETUP
+   ============================================================ */
+var hasGSAP = typeof gsap !== 'undefined';
+var hasScrollTrigger = typeof ScrollTrigger !== 'undefined';
+if(hasGSAP && hasScrollTrigger){
+  gsap.registerPlugin(ScrollTrigger);
+}
 
-/* --- 9 WEBSITE DEMOS --- */
+/* ============================================================
+   DEMO DATA
+   ============================================================ */
 var WEBSITE_DEMOS = [
   { icon:"🎓", name:"VAA Public School", category:"School / Education",
     description:"Complete school website with faculty, schedule, gallery and an online admission enquiry form.",
     features:["6-page full website","Faculty showcase","Exam & holiday schedule","Online admission form"],
     url:"school-demo/", status:"live" },
-
   { icon:"🏥", name:"VAA Hospital", category:"Multispeciality",
     description:"Full hospital website with departments, doctors, facilities, and appointment booking.",
     features:["Department showcase","Doctor profiles","Appointment form","24x7 emergency info"],
     url:"vaa-website-hospital/", status:"live" },
-
   { icon:"💎", name:"VAA Jewellers", category:"Jewellery Shop",
     description:"Premium jewellery website with collections, live gold rates, and custom design enquiry.",
     features:["Live gold rate widget","Collections gallery","Featured pieces","Book showroom visit"],
     url:"vaa-website-jewellery/", status:"live" },
-
   { icon:"🏨", name:"VAA Hotel", category:"Hospitality",
     description:"Hotel website with room categories, amenities, banquet halls, and instant booking.",
     features:["Room pricing tiers","Amenities showcase","Banquet enquiries","Booking form"],
     url:"vaa-website-hotel/", status:"live" },
-
   { icon:"🏢", name:"VAA Properties", category:"Real Estate",
     description:"Real estate website with featured listings, search filters, and free consultation.",
     features:["Property listings","Search by budget","Featured badges","Consultation form"],
     url:"vaa-website-realestate/", status:"live" },
-
   { icon:"🎓", name:"VAA Academy", category:"Coaching Institute",
     description:"Coaching academy website with courses, faculty, results, and free demo class booking.",
     features:["Course listings","Faculty profiles","Toppers showcase","Free demo booking"],
     url:"vaa-website-coaching/", status:"live" },
-
   { icon:"🚗", name:"VAA Motors", category:"Car Showroom",
     description:"Car dealership website with featured cars, brand showcase, and home test drive booking.",
     features:["Featured cars","Brand grid","Finance info","Home test drive"],
     url:"vaa-website-car-dealer/", status:"live" },
-
   { icon:"💪", name:"VAA Gym", category:"Fitness Center",
     description:"Gym website with programs, trainers, membership plans, and free trial signup.",
     features:["Program listings","Trainer profiles","Pricing plans","Free trial form"],
     url:"vaa-website-gym/", status:"live" },
-
   { icon:"✈️", name:"VAA Travels", category:"Travel Agency",
     description:"Travel agency website with tour packages, destinations, and instant quote requests.",
     features:["Package cards","Destination grid","Trip planner form","Visa assistance"],
     url:"vaa-website-travel/", status:"live" }
 ];
 
-/* --- 7 QR DEMOS --- */
 var QR_DEMOS = [
   { icon:"🍽️", name:"VAA Restaurants", category:"QR Menu System",
     description:"Digital menu customers scan with their phone. Update prices anytime — no reprinting.",
     features:["Full menu with categories","Veg / Non-veg badges","Call + WhatsApp order","Admin panel for updates"],
     url:"vaa-restaurants/", status:"live" },
-
   { icon:"🏋️", name:"VAA Gyms", category:"Check-in System",
     description:"QR check-in with member streaks, expiry warnings, and a full admin dashboard.",
     features:["Member check-in QR","Day streak counter","Expiry reminders","Ghost member detection"],
     url:"vaa-gyms/", status:"live" },
-
   { icon:"🏨", name:"VAA Hotels", category:"Room Concierge",
     description:"In-room QR giving guests instant access to WiFi, timings, room service, and nearby info.",
     features:["Room QR cards","WiFi + timings","Room service dialer","Nearby places + maps"],
     url:"vaa-hotels/", status:"live" },
-
   { icon:"📚", name:"VAA Academies", category:"Student Portal",
     description:"Teacher availability board with live status. Students see who's free — no more messages.",
     features:["Teacher FREE / BUSY","Subject-wise board","Student count","Notices"],
     url:"vaa-academies/", status:"live" },
-
   { icon:"💇", name:"VAA Salons", category:"Service Menu + Booking",
     description:"Customers scan, see all services with rates, and book directly on WhatsApp.",
     features:["Full service list","Prices upfront","WhatsApp booking","Instagram link"],
     url:"vaa-salons/", status:"live" },
-
   { icon:"⭐", name:"VAA Reviews", category:"Google Feedback QR",
     description:"Turn happy customers into 5-star Google reviews with one simple QR scan.",
     features:["Direct Google review link","Branded page","Works on any phone","Setup in 1 day"],
     url:"vaa-reviews/", status:"live" },
-
   { icon:"📱", name:"VAA Social", category:"Instagram + Content",
     description:"Full Instagram setup + monthly content design. Premium brand presence without an in-house designer.",
     features:["Profile optimization","Grid design","Content calendar","Reels covers"],
     url:"vaa-social/", status:"live" }
 ];
 
-/* --- 4 VISITING CARD DEMOS --- */
 var CARDS_DEMOS = [
-  { icon:"💳", name:"Quality Furnishers — Vinod", category:"Digital Visiting Card",
-    description:"Interactive digital visiting card with cinematic dragon opening animation, WhatsApp/Call buttons, and vCard download.",
-    features:["Cinematic opening","WhatsApp + Call","Share + Copy link","vCard download"],
-    url:"https://visiting-cards-5s9.pages.dev/quality-furnishers-vinod", status:"live", external:true },
-
-  { icon:"💳", name:"Quality Furnishers — Gagan", category:"Digital Visiting Card",
-    description:"Interactive digital visiting card with cinematic dragon opening animation and full contact buttons.",
-    features:["Cinematic opening","WhatsApp + Call","Share + Copy link","vCard download"],
-    url:"https://visiting-cards-5s9.pages.dev/quality-furnishers-gagan", status:"live", external:true },
-
-  { icon:"💳", name:"Quality Furnishers — Ajay", category:"Digital Visiting Card",
-    description:"Interactive digital visiting card with cinematic dragon opening animation and full contact buttons.",
-    features:["Cinematic opening","WhatsApp + Call","Share + Copy link","vCard download"],
-    url:"https://visiting-cards-5s9.pages.dev/quality-furnishers-ajay", status:"live", external:true },
-
-  { icon:"🚗", name:"Car Comfort — Charan", category:"Digital Visiting Card",
-    description:"Digital visiting card for Car Comfort car interior studio with animated intro and WhatsApp booking.",
-    features:["Animated intro","WhatsApp + Call","Share + Copy link","vCard download"],
-    url:"https://carcomfortknl.in", status:"live", external:true }
+  { icon:"💳", name:"VAAN Digital Card", category:"Digital Visiting Card",
+    description:"Interactive digital visiting card with cinematic dragon opening animation, WhatsApp/Call buttons, live IST clock, and vCard download.",
+    features:["Cinematic dragon opening","WhatsApp + Call","Share + Copy link","vCard download"],
+    url:"../card/", status:"live" }
 ];
 
-/* --- 1 WEDDING CARD DEMO --- */
 var WEDDING_DEMOS = [
   { icon:"💍", name:"Raghav & Riya — Wedding Invite", category:"Digital Wedding Card",
     description:"Cinematic digital wedding invitation — envelope opening, scratch-to-reveal date, live countdown, and event cards.",
     features:["Envelope opening animation","Scratch to reveal date","Live countdown timer","Add to Google Calendar"],
-    url:"../wedding/", status:"live" }
+    url:"wedding/", status:"live" }
 ];
 
 /* ============================================================
@@ -468,318 +456,307 @@ var WEDDING_DEMOS = [
 function renderCards(list, containerId){
   var grid = document.getElementById(containerId);
   if(!grid) return;
-
   grid.innerHTML = list.map(function(d){
     var isLive = d.status === 'live';
-    var statusBadge = isLive
+    var badge = isLive
       ? '<span class="demo-status live">● Live</span>'
       : '<span class="demo-status soon">Coming Soon</span>';
-
-    var ctaButton = isLive
-      ? '<a href="' + d.url + '" class="btn btn-primary"' +
-        (d.external ? ' target="_blank" rel="noopener"' : '') +
-        '>View Live Demo →</a>'
+    var cta = isLive
+      ? '<a href="' + d.url + '" class="btn btn-primary">View Live Demo →</a>'
       : '<button class="btn btn-primary" disabled>Coming Soon</button>';
-
-    var featuresHtml = d.features.map(function(f){
-      return '<li>' + f + '</li>';
-    }).join('');
-
-    return '<div class="demo-card">' +
-      statusBadge +
+    var feat = d.features.map(function(f){ return '<li>' + f + '</li>'; }).join('');
+    return '<div class="demo-card">' + badge +
       '<div class="demo-icon">' + d.icon + '</div>' +
       '<div class="cat">' + d.category + '</div>' +
       '<h4>' + d.name + '</h4>' +
       '<p>' + d.description + '</p>' +
-      '<ul class="demo-features">' + featuresHtml + '</ul>' +
-      '<div class="demo-cta">' + ctaButton + '</div>' +
+      '<ul class="demo-features">' + feat + '</ul>' +
+      '<div class="demo-cta">' + cta + '</div>' +
     '</div>';
   }).join('');
 }
-
-/* ============================================================
-   CHOICE TOGGLE — show/hide demo areas
-   ============================================================ */
-function showDemos(target, card){
-  document.querySelectorAll('.choice-card').forEach(function(c){
-    c.classList.remove('active');
-  });
-  if(card) card.classList.add('active');
-
-  document.querySelectorAll('.demo-area').forEach(function(a){
-    a.classList.remove('show');
-  });
-
-  var area = document.getElementById('area-' + target);
-  if(area){
-    area.classList.add('show');
-    setTimeout(function(){
-      area.scrollIntoView({ behavior:'smooth', block:'start' });
-    }, 100);
-  }
-}
-
-/* ============================================================
-   RENDER ALL DEMO GRIDS ON LOAD
-   ============================================================ */
 renderCards(WEBSITE_DEMOS, 'grid-websites');
 renderCards(QR_DEMOS, 'grid-qr');
 renderCards(CARDS_DEMOS, 'grid-cards');
 renderCards(WEDDING_DEMOS, 'grid-wedding');
 
 /* ============================================================
-   THREE.JS — 3D CRYSTAL HERO
-   Rotating gold + blue geometric shards + particle field
+   CHOICE TOGGLE
+   ============================================================ */
+function showDemos(target, card){
+  document.querySelectorAll('.choice-card').forEach(function(c){ c.classList.remove('active'); });
+  if(card) card.classList.add('active');
+  document.querySelectorAll('.demo-area').forEach(function(a){ a.classList.remove('show'); });
+  var area = document.getElementById('area-' + target);
+  if(area){
+    area.classList.add('show');
+    if(hasGSAP){
+      gsap.fromTo(area.querySelectorAll('.demo-card'),
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.06, ease: "power3.out" }
+      );
+    }
+    setTimeout(function(){
+      area.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+}
+
+/* ============================================================
+   GSAP — PAGE LOAD ANIMATIONS
+   ============================================================ */
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    var loader = document.getElementById('loader');
+    if(loader) loader.classList.add('done');
+
+    if(!hasGSAP) return;
+
+    var tl = gsap.timeline({ delay: 0.3 });
+    tl.to('.hero-badge', { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+    tl.fromTo('.hero-content h1',
+      { opacity: 0, y: 30, scale: 0.96 },
+      { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power3.out" }, 0.15);
+    tl.to('.hero-content p', { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 0.4);
+    tl.to('.hero-ctas', { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 0.6);
+  }, 700);
+});
+
+/* ============================================================
+   GSAP — SCROLL REVEALS
+   ============================================================ */
+if(hasGSAP && hasScrollTrigger){
+  gsap.utils.toArray('.section-head').forEach(function(el){
+    gsap.fromTo(el, { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 1, ease: "power3.out",
+        scrollTrigger: { trigger: el, start: "top 85%" }
+      });
+  });
+
+  gsap.utils.toArray('.choice-card').forEach(function(el, i){
+    gsap.to(el, { opacity: 1, y: 0, duration: 0.8, delay: i * 0.08, ease: "power3.out",
+      scrollTrigger: { trigger: el, start: "top 85%" }
+    });
+  });
+
+  gsap.utils.toArray('.cta-box').forEach(function(el){
+    gsap.fromTo(el, { opacity: 0, y: 40, scale: 0.98 },
+      { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power3.out",
+        scrollTrigger: { trigger: el, start: "top 85%" }
+      });
+  });
+}
+
+/* ============================================================
+   THREE.JS — GSAP-DRIVEN 3D CRYSTAL HERO
    ============================================================ */
 (function initCrystal(){
   var canvas = document.getElementById('crystalCanvas');
   if(!canvas || typeof THREE === 'undefined') return;
 
   var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.z = 6;
+  var camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.set(0, 0, 7);
 
   var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor(0x000000, 0);
 
-  /* --- Lights --- */
-  var ambient = new THREE.AmbientLight(0xffffff, 0.4);
-  scene.add(ambient);
-
-  var goldLight = new THREE.PointLight(0xffd400, 1.6, 20);
-  goldLight.position.set(4, 3, 5);
+  /* Lights */
+  scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+  var goldLight = new THREE.PointLight(0xffd400, 2.2, 25);
+  goldLight.position.set(5, 4, 6);
   scene.add(goldLight);
-
-  var blueLight = new THREE.PointLight(0x4f8fff, 1.6, 20);
-  blueLight.position.set(-4, -3, 5);
+  var blueLight = new THREE.PointLight(0x4f8fff, 2.2, 25);
+  blueLight.position.set(-5, -4, 6);
   scene.add(blueLight);
+  var rimLight = new THREE.PointLight(0xffffff, 0.8, 30);
+  rimLight.position.set(0, 0, -8);
+  scene.add(rimLight);
 
-  /* --- Materials --- */
+  /* Materials */
   var goldMat = new THREE.MeshStandardMaterial({
-    color: 0xffd400,
-    emissive: 0xc9a349,
-    emissiveIntensity: 0.35,
-    metalness: 0.9,
-    roughness: 0.2,
-    transparent: true,
-    opacity: 0.85
+    color: 0xffd400, emissive: 0xc9a349, emissiveIntensity: 0.4,
+    metalness: 0.95, roughness: 0.15, transparent: true, opacity: 0.9
   });
-
   var blueMat = new THREE.MeshStandardMaterial({
-    color: 0x4f8fff,
-    emissive: 0x1e4fbf,
-    emissiveIntensity: 0.35,
-    metalness: 0.9,
-    roughness: 0.2,
-    transparent: true,
-    opacity: 0.85
+    color: 0x4f8fff, emissive: 0x1e4fbf, emissiveIntensity: 0.4,
+    metalness: 0.95, roughness: 0.15, transparent: true, opacity: 0.9
   });
 
-  /* --- Crystal shards group --- */
+  /* Crystal group */
   var crystal = new THREE.Group();
   scene.add(crystal);
 
-  /* Central icosahedron */
-  var core = new THREE.Mesh(new THREE.IcosahedronGeometry(1.3, 0), goldMat);
+  /* Core */
+  var core = new THREE.Mesh(new THREE.IcosahedronGeometry(1.4, 0), goldMat);
   crystal.add(core);
 
-  /* Orbiting shards — mix of geometries */
+  /* Inner glowing core */
+  var innerCore = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(0.9, 0),
+    new THREE.MeshBasicMaterial({ color: 0xfff8dc, transparent: true, opacity: 0.35 })
+  );
+  crystal.add(innerCore);
+
+  /* Orbiting shards */
   var shardGeos = [
-    new THREE.OctahedronGeometry(0.55, 0),
-    new THREE.TetrahedronGeometry(0.6, 0),
-    new THREE.IcosahedronGeometry(0.45, 0),
-    new THREE.OctahedronGeometry(0.4, 0)
+    new THREE.OctahedronGeometry(0.6, 0),
+    new THREE.TetrahedronGeometry(0.65, 0),
+    new THREE.IcosahedronGeometry(0.5, 0),
+    new THREE.OctahedronGeometry(0.45, 0)
   ];
 
   var shards = [];
-  for(var i = 0; i < 14; i++){
+  var NUM_SHARDS = 16;
+  for(var i = 0; i < NUM_SHARDS; i++){
     var geo = shardGeos[i % shardGeos.length];
-    var mat = (i % 2 === 0) ? goldMat : blueMat;
+    var mat = (i % 2 === 0) ? goldMat.clone() : blueMat.clone();
     var mesh = new THREE.Mesh(geo, mat);
 
-    /* Distribute on a sphere */
-    var phi = Math.acos(-1 + (2 * i) / 14);
-    var theta = Math.sqrt(14 * Math.PI) * phi;
-    var radius = 2.6 + Math.random() * 0.8;
+    var phi = Math.acos(-1 + (2 * i) / NUM_SHARDS);
+    var theta = Math.sqrt(NUM_SHARDS * Math.PI) * phi;
+    var radius = 2.8 + Math.random() * 1.2;
 
-    mesh.position.x = radius * Math.cos(theta) * Math.sin(phi);
-    mesh.position.y = radius * Math.sin(theta) * Math.sin(phi);
-    mesh.position.z = radius * Math.cos(phi);
-
+    mesh.position.set(
+      radius * Math.cos(theta) * Math.sin(phi),
+      radius * Math.sin(theta) * Math.sin(phi),
+      radius * Math.cos(phi)
+    );
     mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
 
     mesh.userData = {
-      rotSpeedX: (Math.random() - 0.5) * 0.012,
-      rotSpeedY: (Math.random() - 0.5) * 0.012,
-      orbitSpeed: 0.002 + Math.random() * 0.003,
-      orbitAxis: Math.random() * Math.PI * 2,
-      basePos: mesh.position.clone()
+      basePos: mesh.position.clone(),
+      orbitPhase: Math.random() * Math.PI * 2,
+      orbitSpeed: 0.3 + Math.random() * 0.5,
+      rotSpeed: (Math.random() - 0.5) * 0.02
     };
-
     crystal.add(mesh);
     shards.push(mesh);
   }
 
-  /* --- Wireframe outer shell --- */
+  /* Wireframe shell */
   var shell = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(3.4, 1),
-    new THREE.MeshBasicMaterial({
-      color: 0xffd400,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.08
-    })
+    new THREE.IcosahedronGeometry(3.8, 1),
+    new THREE.MeshBasicMaterial({ color: 0xffd400, wireframe: true, transparent: true, opacity: 0.06 })
   );
   crystal.add(shell);
 
-  /* --- Particle field --- */
-  var particleCount = window.innerWidth < 700 ? 180 : 350;
-  var particleGeo = new THREE.BufferGeometry();
+  /* Second wireframe shell (blue) */
+  var shell2 = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(4.6, 1),
+    new THREE.MeshBasicMaterial({ color: 0x4f8fff, wireframe: true, transparent: true, opacity: 0.05 })
+  );
+  scene.add(shell2);
+
+  /* Particle field */
+  var particleCount = window.innerWidth < 700 ? 220 : 450;
+  var pGeo = new THREE.BufferGeometry();
   var positions = new Float32Array(particleCount * 3);
   var colors = new Float32Array(particleCount * 3);
-
-  var goldColor = new THREE.Color(0xffd400);
-  var blueColor = new THREE.Color(0x4f8fff);
-  var whiteColor = new THREE.Color(0xffffff);
+  var gold = new THREE.Color(0xffd400);
+  var blue = new THREE.Color(0x4f8fff);
+  var white = new THREE.Color(0xffffff);
 
   for(var p = 0; p < particleCount; p++){
-    positions[p * 3]     = (Math.random() - 0.5) * 22;
-    positions[p * 3 + 1] = (Math.random() - 0.5) * 22;
-    positions[p * 3 + 2] = (Math.random() - 0.5) * 22;
-
-    var rand = Math.random();
-    var col;
-    if(rand < 0.4) col = goldColor;
-    else if(rand < 0.75) col = blueColor;
-    else col = whiteColor;
-
-    colors[p * 3]     = col.r;
-    colors[p * 3 + 1] = col.g;
-    colors[p * 3 + 2] = col.b;
+    positions[p * 3]     = (Math.random() - 0.5) * 26;
+    positions[p * 3 + 1] = (Math.random() - 0.5) * 26;
+    positions[p * 3 + 2] = (Math.random() - 0.5) * 26;
+    var r = Math.random();
+    var c = r < 0.4 ? gold : r < 0.75 ? blue : white;
+    colors[p * 3] = c.r;
+    colors[p * 3 + 1] = c.g;
+    colors[p * 3 + 2] = c.b;
   }
-
-  particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-  var particleMat = new THREE.PointsMaterial({
-    size: 0.06,
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.85,
-    sizeAttenuation: true
-  });
-
-  var particles = new THREE.Points(particleGeo, particleMat);
+  pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  pGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+  var particles = new THREE.Points(pGeo, new THREE.PointsMaterial({
+    size: 0.07, vertexColors: true, transparent: true, opacity: 0.9, sizeAttenuation: true
+  }));
   scene.add(particles);
 
-  /* --- Mouse parallax --- */
+  /* Mouse/touch parallax */
   var mouseX = 0, mouseY = 0;
   var targetRotX = 0, targetRotY = 0;
 
   window.addEventListener('mousemove', function(e){
     mouseX = (e.clientX / window.innerWidth) * 2 - 1;
     mouseY = (e.clientY / window.innerHeight) * 2 - 1;
-    targetRotY = mouseX * 0.4;
-    targetRotX = -mouseY * 0.3;
+    targetRotY = mouseX * 0.5;
+    targetRotX = -mouseY * 0.35;
   });
-
-  /* --- Touch parallax for mobile --- */
   window.addEventListener('touchmove', function(e){
-    if(e.touches.length > 0){
+    if(e.touches.length){
       var t = e.touches[0];
       mouseX = (t.clientX / window.innerWidth) * 2 - 1;
       mouseY = (t.clientY / window.innerHeight) * 2 - 1;
-      targetRotY = mouseX * 0.4;
-      targetRotX = -mouseY * 0.3;
+      targetRotY = mouseX * 0.5;
+      targetRotX = -mouseY * 0.35;
     }
   }, { passive: true });
 
-  /* --- Animation loop --- */
+  /* GSAP entrance animation for crystal */
+  if(hasGSAP){
+    gsap.from(crystal.scale, {
+      x: 0.3, y: 0.3, z: 0.3,
+      duration: 2, ease: "power3.out", delay: 0.4
+    });
+    gsap.from(camera.position, {
+      z: 14, duration: 2.4, ease: "power3.out"
+    });
+    gsap.from(particles.material, {
+      opacity: 0, duration: 2, delay: 0.8
+    });
+  }
+
+  /* Animation loop */
   var clock = new THREE.Clock();
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function animate(){
     requestAnimationFrame(animate);
-
     var t = clock.getElapsedTime();
 
-    /* Rotate the whole crystal group */
-    crystal.rotation.y += 0.003;
-    crystal.rotation.x += 0.001;
+    if(!reducedMotion){
+      crystal.rotation.y += 0.003;
+      crystal.rotation.x += 0.001;
+      crystal.rotation.y += (targetRotY - crystal.rotation.y) * 0.02;
+      crystal.rotation.x += (targetRotX - crystal.rotation.x) * 0.02;
 
-    /* Parallax tilt (smooth) */
-    crystal.rotation.y += (targetRotY - crystal.rotation.y) * 0.02;
-    crystal.rotation.x += (targetRotX - crystal.rotation.x) * 0.02;
+      shards.forEach(function(s, idx){
+        s.rotation.x += s.userData.rotSpeed;
+        s.rotation.y += s.userData.rotSpeed * 0.7;
+        var phase = t * s.userData.orbitSpeed + s.userData.orbitPhase;
+        s.position.x = s.userData.basePos.x + Math.sin(phase) * 0.25;
+        s.position.y = s.userData.basePos.y + Math.cos(phase) * 0.25;
+        s.position.z = s.userData.basePos.z + Math.sin(phase * 0.7) * 0.15;
+      });
 
-    /* Rotate each shard */
-    shards.forEach(function(s){
-      s.rotation.x += s.userData.rotSpeedX;
-      s.rotation.y += s.userData.rotSpeedY;
+      var pulse = 1 + Math.sin(t * 1.5) * 0.05;
+      core.scale.set(pulse, pulse, pulse);
+      innerCore.scale.set(pulse * 1.15, pulse * 1.15, pulse * 1.15);
 
-      /* Gentle float */
-      s.position.x = s.userData.basePos.x + Math.sin(t + s.userData.orbitAxis) * 0.15;
-      s.position.y = s.userData.basePos.y + Math.cos(t + s.userData.orbitAxis) * 0.15;
-    });
+      particles.rotation.y += 0.0004;
+      shell.rotation.y -= 0.0012;
+      shell2.rotation.x += 0.0008;
+      shell2.rotation.y -= 0.0006;
+    }
 
-    /* Pulse the core */
-    var pulse = 1 + Math.sin(t * 1.5) * 0.04;
-    core.scale.set(pulse, pulse, pulse);
-
-    /* Slowly rotate particles */
-    particles.rotation.y += 0.0004;
-
-    /* Light orbit */
-    goldLight.position.x = Math.sin(t * 0.5) * 5;
-    goldLight.position.z = Math.cos(t * 0.5) * 5;
-    blueLight.position.x = Math.cos(t * 0.4) * 5;
-    blueLight.position.z = Math.sin(t * 0.4) * 5;
+    goldLight.position.x = Math.sin(t * 0.5) * 6;
+    goldLight.position.z = Math.cos(t * 0.5) * 6;
+    blueLight.position.x = Math.cos(t * 0.4) * 6;
+    blueLight.position.z = Math.sin(t * 0.4) * 6;
 
     renderer.render(scene, camera);
   }
-
   animate();
 
-  /* --- Resize --- */
   window.addEventListener('resize', function(){
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
-
-  /* --- Respect reduced motion --- */
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    /* Freeze rotation */
-    crystal.rotation.y = 0;
-    crystal.rotation.x = 0;
-  }
-})();
-
-/* ============================================================
-   SCROLL REVEAL — subtle fade-in for demo cards
-   ============================================================ */
-(function scrollReveal(){
-  if(!('IntersectionObserver' in window)) return;
-
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  /* Observe demo cards after they render */
-  setTimeout(function(){
-    document.querySelectorAll('.demo-card').forEach(function(el){
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity .6s ease, transform .6s ease';
-      io.observe(el);
-    });
-  }, 100);
 })();
 
 /* ============================================================
@@ -790,11 +767,10 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
     var target = document.querySelector(this.getAttribute('href'));
     if(target){
       e.preventDefault();
-      target.scrollIntoView({ behavior:'smooth', block:'start' });
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 });
 </script>
-
 </body>
 </html>
