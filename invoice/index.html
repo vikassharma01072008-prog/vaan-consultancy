@@ -310,7 +310,7 @@ input,select,textarea{font-family:inherit;font-size:inherit}
 }
 
 /* ============================================================
-   THE RECEIPT CARD — MATCHING TEMPLATE
+   THE RECEIPT CARD
    ============================================================ */
 #receiptCard{
   width:100%;
@@ -330,7 +330,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
   line-height:1.55;
 }
 
-/* Marble texture lines */
 #receiptCard::before{
   content:"";
   position:absolute;
@@ -396,7 +395,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
   color:var(--text-muted);
 }
 
-/* Right-side stamp column */
 .rec-stamps{
   display:flex;
   flex-direction:column;
@@ -404,7 +402,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
   gap:10px;
 }
 
-/* Circular PAID stamp */
 .stamp-circular{
   width:96px;
   height:96px;
@@ -417,7 +414,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
   filter:drop-shadow(0 2px 6px rgba(201,163,73,.35));
 }
 
-/* Navy pill stamp */
 .stamp-pill{
   display:inline-flex;
   align-items:center;
@@ -439,7 +435,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
   background:linear-gradient(135deg,#e11d2a,#8b1019);
 }
 
-/* Circuit line divider */
 .rec-circuit-divider{
   height:22px;
   position:relative;
@@ -539,7 +534,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
   text-align:center;
   width:140px;
 }
-.rec-table thead th:first-child{text-align:left}
 
 .rec-table tbody td{
   padding:16px 20px;
@@ -549,9 +543,7 @@ input,select,textarea{font-family:inherit;font-size:inherit}
   font-size:14px;
   vertical-align:middle;
 }
-.rec-table tbody td:first-child{
-  font-weight:500;
-}
+.rec-table tbody td:first-child{font-weight:500}
 .rec-table tbody td:nth-child(2){
   text-align:center;
   font-weight:600;
@@ -560,11 +552,9 @@ input,select,textarea{font-family:inherit;font-size:inherit}
   text-align:center;
   font-weight:700;
   color:var(--navy-deep);
-  font-family:'Inter',sans-serif;
 }
 .rec-table tbody tr:last-child td{border-bottom:0}
 
-/* Subtotal row inside table */
 .rec-table tbody tr.subtotal-row td{
   background:var(--marble);
   font-weight:700;
@@ -573,7 +563,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
   border-top:2px solid rgba(201,163,73,.3);
 }
 
-/* Total row */
 .rec-table tbody tr.total-row td{
   background:var(--navy-deep);
   color:#fff;
@@ -640,9 +629,7 @@ input,select,textarea{font-family:inherit;font-size:inherit}
   line-height:1.7;
   margin-bottom:6px;
 }
-.details-block .detail-line b{
-  font-weight:600;
-}
+.details-block .detail-line b{font-weight:600}
 
 .signature-block{
   padding:22px 26px;
@@ -686,7 +673,7 @@ input,select,textarea{font-family:inherit;font-size:inherit}
 }
 
 /* ============================================================
-   RECEIPT FOOTER (navy bar)
+   RECEIPT FOOTER
    ============================================================ */
 .rec-receipt-footer{
   background:var(--navy-deep);
@@ -718,20 +705,18 @@ input,select,textarea{font-family:inherit;font-size:inherit}
   color:rgba(255,255,255,.55);
 }
 
-/* ============================================================
-   PENDING STATE
-   ============================================================ */
+/* PENDING STATE */
 #receiptCard.pending .stamp-circular svg text,
 #receiptCard.pending .stamp-circular svg circle{
   stroke:#c04a4a;
-  fill:#c04a4a;
 }
-#receiptCard.pending .stamp-circular svg text[fill="#c9a349"]{
+#receiptCard.pending .stamp-circular svg text[fill="#c9a349"],
+#receiptCard.pending .stamp-circular svg text[fill="#a8842f"]{
   fill:#c04a4a;
 }
 
 /* ============================================================
-   HISTORY SECTION
+   HISTORY
    ============================================================ */
 .history-panel{
   background:linear-gradient(165deg,#0e1e35 0%,#0a1628 50%,#050810 100%);
@@ -790,9 +775,7 @@ input,select,textarea{font-family:inherit;font-size:inherit}
 }
 .history-item-delete:hover{background:rgba(225,29,42,.3)}
 
-/* ============================================================
-   TOAST
-   ============================================================ */
+/* TOAST */
 #toast{
   position:fixed;bottom:24px;left:50%;
   transform:translateX(-50%) translateY(100px);
@@ -902,9 +885,7 @@ input,select,textarea{font-family:inherit;font-size:inherit}
 </head>
 <body>
 
-<!-- ============================================================
-     TOPBAR
-     ============================================================ -->
+<!-- ===== TOPBAR ===== -->
 <div class="topbar">
   <div class="tb-in">
     <div class="tb-brand">
@@ -924,14 +905,10 @@ input,select,textarea{font-family:inherit;font-size:inherit}
   </div>
 </div>
 
-<!-- ============================================================
-     PAGE
-     ============================================================ -->
+<!-- ===== PAGE ===== -->
 <div class="page">
 
-  <!-- ============================================================
-       FORM PANEL
-       ============================================================ -->
+  <!-- ===== FORM ===== -->
   <div class="form-panel">
     <div class="section-label">Invoice Details</div>
 
@@ -1023,9 +1000,7 @@ input,select,textarea{font-family:inherit;font-size:inherit}
     </div>
   </div>
 
-  <!-- ============================================================
-       PREVIEW
-       ============================================================ -->
+  <!-- ===== PREVIEW ===== -->
   <div class="preview-wrap">
     <div class="preview-label">Live Preview</div>
     <div class="preview-container">
@@ -1055,20 +1030,16 @@ input,select,textarea{font-family:inherit;font-size:inherit}
                       <stop offset="100%" stop-color="#a8842f"/>
                     </linearGradient>
                   </defs>
-                  <!-- Outer scalloped circle (simulated with dashes) -->
                   <circle cx="60" cy="60" r="54" fill="none" stroke="url(#goldSeal)" stroke-width="2.5"/>
                   <circle cx="60" cy="60" r="50" fill="none" stroke="url(#goldSeal)" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.7"/>
                   <circle cx="60" cy="60" r="44" fill="none" stroke="url(#goldSeal)" stroke-width="1.5"/>
-                  <!-- Rotating text around the circle -->
                   <text fill="#a8842f" font-family="Inter, sans-serif" font-size="8" font-weight="700" letter-spacing="1.8">
                     <textPath href="#stampPath" startOffset="0">
                       ★ PAID SUCCESSFUL ★ VAAN CONSULTANCY ★
                     </textPath>
                   </text>
-                  <!-- Center checkmark circle -->
                   <circle cx="60" cy="60" r="22" fill="none" stroke="url(#goldSeal)" stroke-width="2"/>
                   <path d="M 50 60 L 57 67 L 71 52" fill="none" stroke="url(#goldSeal)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                  <!-- Small date text -->
                   <text x="60" y="90" text-anchor="middle" font-family="Inter, sans-serif" font-size="7" font-weight="700" fill="#a8842f" letter-spacing="0.5" id="stampDate">13 OCT 2026</text>
                 </svg>
               </div>
@@ -1091,18 +1062,14 @@ input,select,textarea{font-family:inherit;font-size:inherit}
               </defs>
               <line x1="0" y1="11" x2="160" y2="11" stroke="url(#circuitGrad)" stroke-width="1"/>
               <line x1="240" y1="11" x2="400" y2="11" stroke="url(#circuitGrad)" stroke-width="1"/>
-              <!-- Left circuit nodes -->
               <circle cx="30" cy="11" r="2.5" fill="#c9a349"/>
               <circle cx="80" cy="11" r="1.5" fill="#c9a349" opacity="0.7"/>
               <circle cx="130" cy="11" r="2" fill="#c9a349"/>
-              <!-- Right circuit nodes -->
               <circle cx="370" cy="11" r="2.5" fill="#c9a349"/>
               <circle cx="320" cy="11" r="1.5" fill="#c9a349" opacity="0.7"/>
               <circle cx="270" cy="11" r="2" fill="#c9a349"/>
-              <!-- Center diamond -->
               <path d="M 200 4 L 206 11 L 200 18 L 194 11 Z" fill="#c9a349"/>
               <path d="M 200 7 L 203.5 11 L 200 15 L 196.5 11 Z" fill="#f5efe3"/>
-              <!-- Small dots on either side of diamond -->
               <circle cx="185" cy="11" r="1.2" fill="#e6c273"/>
               <circle cx="215" cy="11" r="1.2" fill="#e6c273"/>
             </svg>
@@ -1174,19 +1141,17 @@ input,select,textarea{font-family:inherit;font-size:inherit}
 
         </div>
 
-        <!-- RECEIPT FOOTER (navy bar) -->
+        <!-- RECEIPT FOOTER -->
         <div class="rec-receipt-footer">
           <div class="thanks">— Thank you for your business —</div>
           <div class="foot-brand">VAAN CONSULTANCY</div>
-          <div class="foot-powered">Powered by VAAN — vaanconsultancy.pages.dev</div>
+          <div class="foot-powered">Powered by VAAN — vaanconsultancy.in</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ============================================================
-       HISTORY
-       ============================================================ -->
+  <!-- ===== HISTORY ===== -->
   <div class="history-panel">
     <div class="section-label">Saved Invoices</div>
     <div id="historyList">
@@ -1196,20 +1161,11 @@ input,select,textarea{font-family:inherit;font-size:inherit}
 
 </div>
 
-<!-- ============================================================
-     TOAST
-     ============================================================ -->
 <div id="toast"></div>
 
-<!-- ============================================================
-     LIBRARIES
-     ============================================================ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <script>
-/* ============================================================
-   VAAN INVOICE GENERATOR — JavaScript
-   ============================================================ */
 (function(){
   "use strict";
 
@@ -1245,9 +1201,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
     return y + "-" + m + "-" + day;
   }
 
-  /* ============================================================
-     AMOUNT IN WORDS
-     ============================================================ */
   function numberToWords(num){
     num = Math.round(num) || 0;
     if (num === 0) return "Rupees Zero Only";
@@ -1284,9 +1237,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
     return "Rupees " + result.trim() + " Only";
   }
 
-  /* ============================================================
-     SERVICE ROWS
-     ============================================================ */
   function addServiceRow(desc, qty, amount){
     const id = Date.now() + Math.random();
     services.push({
@@ -1347,9 +1297,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
       .replace(/'/g, "&#39;");
   }
 
-  /* ============================================================
-     LIVE PREVIEW UPDATE
-     ============================================================ */
   function updatePreview(){
     const clientName = $("clientName").value.trim();
     const clientBusiness = $("clientBusiness").value.trim();
@@ -1364,11 +1311,9 @@ input,select,textarea{font-family:inherit;font-size:inherit}
     const dateShort = formatDateShort(dateVal);
     $("receiptDateLine").textContent = "Date: " + dateLong + " • Payment Mode: " + paymentMode;
 
-    /* Stamp date */
     const stampDateEl = $("stampDate");
     if (stampDateEl) stampDateEl.textContent = dateShort;
 
-    /* Services table */
     const tbody = $("receiptServicesBody");
     if (services.length === 0){
       tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;color:#6b6b6b;padding:20px;font-style:italic;background:#fff">No services added yet</td></tr>`;
@@ -1396,17 +1341,14 @@ input,select,textarea{font-family:inherit;font-size:inherit}
       `;
     }
 
-    /* Amount in words */
     const subtotal = services.reduce((sum, s) => sum + (s.qty || 0) * (s.amount || 0), 0);
     $("receiptAmountWords").innerHTML = "Amount in Words: " + numberToWords(subtotal);
 
-    /* Service details */
     $("receiptServiceFor").textContent = clientBusiness || clientName || "—";
     $("receiptPaymentMode").textContent = paymentMode + " Payment";
     $("receiptStatus").textContent = paymentStatus === "Paid" ? "Paid Successfully ✅" : "Payment Pending ⏳";
     $("receiptPaidOn").textContent = dateLong;
 
-    /* Pill + card state */
     const pill = $("receiptPill");
     const card = $("receiptCard");
     if (paymentStatus === "Pending"){
@@ -1420,9 +1362,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
     }
   }
 
-  /* ============================================================
-     RESET
-     ============================================================ */
   function resetForm(){
     $("clientName").value = "";
     $("clientBusiness").value = "";
@@ -1438,9 +1377,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
     showToast("New invoice ready");
   }
 
-  /* ============================================================
-     TOAST
-     ============================================================ */
   let toastTimer = null;
   function showToast(text){
     const t = $("toast");
@@ -1450,9 +1386,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
     toastTimer = setTimeout(() => t.classList.remove("show"), 2400);
   }
 
-  /* ============================================================
-     HISTORY
-     ============================================================ */
   const STORAGE_KEY = "vaan_invoices_v1";
 
   function loadHistory(){
@@ -1554,9 +1487,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
     showToast("Deleted");
   }
 
-  /* ============================================================
-     BIND INPUTS
-     ============================================================ */
   function bindInputs(){
     ["clientName","clientBusiness","invoiceDate","paymentMode","paymentStatus","invoiceNotes"]
       .forEach(id => {
@@ -1568,9 +1498,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
       });
   }
 
-  /* ============================================================
-     DOWNLOAD PNG
-     ============================================================ */
   window.downloadPNG = async function(){
     const card = $("receiptCard");
     if (!card){ showToast("No receipt to download"); return; }
@@ -1606,9 +1533,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
     }
   };
 
-  /* ============================================================
-     COPY SUMMARY
-     ============================================================ */
   window.copySummary = function(){
     const clientName = ($("clientName").value || "").trim();
     const clientBusiness = ($("clientBusiness").value || "").trim();
@@ -1654,7 +1578,7 @@ input,select,textarea{font-family:inherit;font-size:inherit}
       "*VAAN Consultancy*",
       "Karnal, Haryana, India",
       "📞 9671163712",
-      "🌐 vaanconsultancy.pages.dev"
+      "🌐 vaanconsultancy.in"
     ].filter(Boolean);
 
     const text = lines.join("\n");
@@ -1684,16 +1608,10 @@ input,select,textarea{font-family:inherit;font-size:inherit}
     document.body.removeChild(ta);
   }
 
-  /* ============================================================
-     PRINT
-     ============================================================ */
   window.printInvoice = function(){
     setTimeout(() => window.print(), 60);
   };
 
-  /* ============================================================
-     EXPOSE GLOBALS
-     ============================================================ */
   window.addServiceRow = addServiceRow;
   window.removeServiceRow = removeServiceRow;
   window.updateServiceField = updateServiceField;
@@ -1703,9 +1621,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
   window.deleteInvoice = deleteInvoice;
   window.showToast = showToast;
 
-  /* ============================================================
-     UNSAVED CHANGES WARNING
-     ============================================================ */
   let dirty = false;
   document.querySelectorAll("input, select, textarea").forEach(el => {
     el.addEventListener("input", () => { dirty = true; });
@@ -1717,9 +1632,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
     }
   });
 
-  /* ============================================================
-     KEYBOARD SHORTCUTS
-     ============================================================ */
   document.addEventListener("keydown", (e) => {
     const mod = e.ctrlKey || e.metaKey;
     if (!mod) return;
@@ -1727,9 +1639,6 @@ input,select,textarea{font-family:inherit;font-size:inherit}
     else if (e.key === "d"){ e.preventDefault(); downloadPNG(); }
   });
 
-  /* ============================================================
-     INIT
-     ============================================================ */
   function init(){
     $("invoiceDate").value = todayISO();
     addServiceRow();
