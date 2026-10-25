@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Admin — VAAN Consultancy</title>
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#0a0e1a">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
+/* ====== RESET & VARS ====== */
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',-apple-system,Arial,sans-serif;background:#0a0e1a;color:#f5f5f5;min-height:100vh;-webkit-tap-highlight-color:transparent}
+body{font-family:'Inter',sans-serif;background:#0a0e1a;color:#f5f5f5;min-height:100vh;-webkit-tap-highlight-color:transparent}
 a{text-decoration:none;color:inherit}
-:root{--gold:#ffd400;--gold-soft:rgba(255,212,0,.15);--blue:#4f8fff;--blue-soft:rgba(79,143,255,.15);--card:#12192a;--card-2:#0d1220;--line:rgba(255,212,0,.15);--line-soft:rgba(255,255,255,.08);--white:#f5f5f5;--muted:#8a8f9c;--green:#25b46e;--red:#ff4d5e}
+:root{--gold:#ffd400;--gold-soft:rgba(255,212,0,.15);--blue:#4f8fff;--blue-soft:rgba(79,143,255,.15);--card:#12192a;--line:rgba(255,212,0,.15);--line-soft:rgba(255,255,255,.08);--white:#f5f5f5;--muted:#8a8f9c;--green:#25b46e;--red:#ff4d5e}
 
 /* ====== LOGIN GATE ====== */
 .gate{position:fixed;inset:0;background:radial-gradient(ellipse at center,rgba(79,143,255,.1),transparent 60%),#0a0e1a;display:flex;align-items:center;justify-content:center;padding:20px;z-index:9999}
@@ -24,11 +24,10 @@ a{text-decoration:none;color:inherit}
 .gate-box h1{font-size:26px;font-weight:950;letter-spacing:-1px;margin-bottom:8px;text-transform:uppercase}
 .gate-box h1 span{color:var(--gold)}
 .gate-box p{color:var(--muted);font-size:13px;margin-bottom:28px;line-height:1.5}
-.gate-box input{width:100%;padding:18px;background:#0a0e1a;border:2px solid var(--line-soft);border-radius:14px;color:var(--white);font-size:16px;font-family:inherit;text-align:center;letter-spacing:3px;font-weight:700;transition:.2s}
-.gate-box input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(255,212,0,.15)}
-.gate-box button{width:100%;margin-top:16px;padding:18px;background:linear-gradient(135deg,var(--gold),#ffa726);color:#0a0e1a;border:0;border-radius:14px;font-weight:950;font-size:15px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:.25s}
+.gate-box input{width:100%;padding:16px;background:#0a0e1a;border:1px solid var(--line-soft);border-radius:12px;color:var(--white);font-size:15px;font-family:inherit;margin-bottom:12px;transition:.2s}
+.gate-box input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,212,0,.15)}
+.gate-box button{width:100%;padding:16px;background:linear-gradient(135deg,var(--gold),#ffa726);color:#0a0e1a;border:0;border-radius:12px;font-weight:950;font-size:15px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:.25s}
 .gate-box button:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(255,212,0,.3)}
-.gate-box button:active{transform:none}
 .gate-err{color:var(--red);font-size:12px;font-weight:800;margin-top:14px;display:none}
 
 /* ====== PANEL ====== */
@@ -41,6 +40,7 @@ a{text-decoration:none;color:inherit}
 .hdr-brand-txt b{font-size:16px}
 .hdr-brand-txt small{font-size:9px;color:var(--gold);letter-spacing:2px;font-weight:800;margin-top:3px}
 .hdr-actions{display:flex;gap:10px;flex-wrap:wrap}
+
 .btn{border:0;border-radius:10px;padding:11px 18px;font-weight:850;font-size:12px;cursor:pointer;font-family:inherit;text-transform:uppercase;letter-spacing:1px;transition:.2s;display:inline-flex;align-items:center;gap:6px}
 .btn:hover{transform:translateY(-2px)}
 .btn-gold{background:linear-gradient(135deg,var(--gold),#ffa726);color:#0a0e1a}
@@ -49,7 +49,6 @@ a{text-decoration:none;color:inherit}
 .btn-danger{background:rgba(255,77,94,.15);color:#ff6b7a;border:1px solid rgba(255,77,94,.3)}
 .btn-sm{padding:8px 12px;font-size:11px}
 
-/* ====== MAIN ====== */
 main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 
 /* ====== TABS ====== */
@@ -58,7 +57,8 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 .tab:hover{color:var(--white)}
 .tab.active{background:linear-gradient(135deg,var(--gold),#ffa726);color:#0a0e1a}
 .tab-content{display:none}
-.tab-content.show{display:block}
+.tab-content.show{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 /* ====== STATS ====== */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:32px}
@@ -67,33 +67,47 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 .stat b{display:block;font-size:32px;font-weight:950;letter-spacing:-1.5px;line-height:1;color:var(--gold)}
 .stat span{display:block;color:var(--muted);font-size:10px;letter-spacing:1.5px;font-weight:900;text-transform:uppercase;margin-top:8px}
 
-/* ====== SECTION TITLE ====== */
+/* ====== FORM BOX ====== */
+.form-box{background:var(--card);border:1px solid var(--line-soft);border-radius:16px;padding:24px;margin-bottom:32px}
+.form-title{font-size:18px;font-weight:900;color:var(--gold);margin-bottom:20px}
+.form-row{margin-bottom:16px}
+.form-row label{display:block;color:var(--muted);font-size:11px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.form-row input,.form-row textarea,.form-row select{width:100%;padding:14px;background:#0a0e1a;border:1px solid var(--line-soft);border-radius:10px;color:var(--white);font:inherit;font-size:14px;font-family:inherit;transition:.2s}
+.form-row input:focus,.form-row textarea:focus,.form-row select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,212,0,.1)}
+.form-row textarea{min-height:90px;resize:vertical;line-height:1.5}
+.form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-check{display:flex;align-items:center;gap:10px;padding:14px;background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:10px;cursor:pointer}
+.form-check input{width:auto;margin:0;accent-color:var(--gold)}
+.form-check label{margin:0;cursor:pointer;text-transform:none;letter-spacing:0;font-size:13px;color:var(--white);font-weight:700}
+.img-preview{max-width:200px;margin-top:12px;border-radius:10px;display:none;border:1px solid var(--gold);box-shadow:0 4px 12px rgba(0,0,0,0.5)}
+
+/* ====== ITEM LISTS (SERVICES & PORTFOLIO & FEEDBACK) ====== */
 .sec-title{font-size:20px;font-weight:950;letter-spacing:-.5px;margin-bottom:6px;display:flex;align-items:center;gap:10px}
 .sec-title::before{content:"";width:4px;height:22px;background:var(--gold);border-radius:2px}
 .sec-sub{color:var(--muted);font-size:13px;margin-bottom:20px}
 
-/* ====== SERVICE ROW ====== */
-.svc-list{display:grid;gap:12px}
-.svc-row{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;transition:.2s}
-.svc-row:hover{border-color:rgba(255,212,0,.3)}
+.svc-list,.fb-list{display:grid;gap:12px}
+.svc-row,.item{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;transition:.2s}
+.svc-row:hover,.item:hover{border-color:rgba(255,212,0,.3)}
 .svc-row.off{opacity:.5}
-.svc-row-info{flex:1;min-width:200px}
-.svc-row-info b{font-size:15px;font-weight:850;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.svc-row-info small{color:var(--muted);font-size:12px;display:block;margin-top:4px}
+
+.svc-row-info,.item-info{flex:1;min-width:200px}
+.svc-row-info b,.item-info b{font-size:15px;font-weight:850;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.svc-row-info small,.item-info small{color:var(--muted);font-size:12px;display:block;margin-top:4px}
 .svc-row-tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
 .tag{font-size:9px;font-weight:900;letter-spacing:1px;padding:3px 8px;border-radius:99px;text-transform:uppercase;border:1px solid}
 .tag.gold{color:var(--gold);border-color:rgba(255,212,0,.4);background:var(--gold-soft)}
 .tag.blue{color:#8bb4ff;border-color:rgba(79,143,255,.4);background:var(--blue-soft)}
 .tag.green{color:var(--green);border-color:rgba(37,180,110,.4);background:rgba(37,180,110,.1)}
 .tag.red{color:#ff6b7a;border-color:rgba(255,77,94,.4);background:rgba(255,77,94,.1)}
-.tag.muted{color:var(--muted);border-color:var(--line-soft);background:rgba(255,255,255,.04)}
+
 .svc-row-price{text-align:right}
 .svc-row-price b{font-size:20px;font-weight:950;color:var(--gold);letter-spacing:-.8px;display:block}
 .svc-row-price small{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:800}
-.svc-row-actions{display:flex;gap:8px;flex-wrap:wrap}
 
-/* ====== FEEDBACK ====== */
-.fb-list{display:grid;gap:12px}
+.item-actions,.svc-row-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ====== FEEDBACK CARDS ====== */
 .fb-card{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:20px}
 .fb-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:12px}
 .fb-head b{font-size:15px;font-weight:850}
@@ -103,7 +117,7 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 .fb-empty,.svc-empty{padding:60px 20px;text-align:center;color:var(--muted);background:var(--card);border:1px dashed var(--line-soft);border-radius:14px}
 .fb-empty b,.svc-empty b{display:block;color:var(--white);font-size:16px;margin-bottom:6px}
 
-/* ====== MODAL (EDIT) ====== */
+/* ====== MODALS ====== */
 .modal{position:fixed;inset:0;background:rgba(5,8,16,.85);backdrop-filter:blur(10px);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
 .modal.open{display:flex}
 .modal-box{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid rgba(255,212,0,.25);border-radius:22px;width:min(560px,100%);max-height:90vh;overflow-y:auto;position:relative}
@@ -114,15 +128,6 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 .modal-close{background:rgba(255,255,255,.06);border:0;color:var(--muted);width:34px;height:34px;border-radius:50%;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .modal-close:hover{background:rgba(255,212,0,.15);color:var(--gold)}
 .modal-body{padding:22px 24px 24px}
-.form-row{margin-bottom:16px}
-.form-row label{display:block;color:var(--muted);font-size:11px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
-.form-row input,.form-row textarea,.form-row select{width:100%;padding:13px 15px;background:#0a0e1a;border:1px solid var(--line-soft);border-radius:10px;color:var(--white);font:inherit;font-size:14px;font-family:inherit;transition:.2s}
-.form-row input:focus,.form-row textarea:focus,.form-row select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,212,0,.1)}
-.form-row textarea{min-height:90px;resize:vertical;line-height:1.5}
-.form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form-check{display:flex;align-items:center;gap:10px;padding:14px;background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:10px;cursor:pointer}
-.form-check input{width:auto;margin:0;accent-color:var(--gold)}
-.form-check label{margin:0;cursor:pointer;text-transform:none;letter-spacing:0;font-size:13px;color:var(--white);font-weight:700}
 .modal-actions{display:flex;gap:10px;margin-top:22px}
 .modal-actions .btn{flex:1;padding:15px}
 
@@ -145,10 +150,10 @@ footer b{color:var(--gold)}
 }
 @media(max-width:550px){
   .stats{grid-template-columns:1fr}
-  .svc-row{flex-direction:column;align-items:stretch}
+  .svc-row,.item{flex-direction:column;align-items:stretch}
   .svc-row-price{text-align:left}
-  .svc-row-actions{width:100%}
-  .svc-row-actions .btn{flex:1}
+  .svc-row-actions,.item-actions{width:100%}
+  .svc-row-actions .btn,.item-actions .btn{flex:1}
   .gate-box{padding:32px 22px}
   .modal-head,.modal-body{padding-left:18px;padding-right:18px}
   .toast{left:20px;right:20px;bottom:20px;max-width:none}
@@ -157,24 +162,23 @@ footer b{color:var(--gold)}
 </head>
 <body>
 
-<!-- ====== LOGIN GATE ====== -->
+<!-- LOGIN -->
 <div class="gate" id="gate">
   <div class="gate-box">
     <div class="gate-logo">
       <svg viewBox="0 0 100 100" fill="none"><path d="M50 8 L92 92 L74 92 L50 42 L26 92 L8 92 Z" fill="url(#g1)"/><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffd400"/><stop offset="100%" stop-color="#4f8fff"/></linearGradient></defs></svg>
     </div>
     <h1>VAAN <span>Admin</span></h1>
-    <p>Enter admin password to continue</p>
-    <input id="pw" type="password" placeholder="••••••••" autofocus autocomplete="off">
-    <button onclick="checkPw()">Unlock Panel</button>
-    <div class="gate-err" id="gateErr">Wrong password. Try again.</div>
+    <p>Supabase Secure Login</p>
+    <input id="email" type="email" placeholder="admin@vaanconsultancy.in" value="admin@vaanconsultancy.in">
+    <input id="pw" type="password" placeholder="Password" onkeydown="if(event.key==='Enter') login()">
+    <button onclick="login()" id="loginBtn">Unlock Panel</button>
+    <div class="gate-err" id="gateErr">Invalid credentials</div>
   </div>
 </div>
 
-<!-- ====== PANEL ====== -->
+<!-- PANEL -->
 <div id="panel">
-
-  <!-- HEADER -->
   <header class="hdr">
     <div class="hdr-in">
       <div class="hdr-brand">
@@ -186,22 +190,22 @@ footer b{color:var(--gold)}
       </div>
       <div class="hdr-actions">
         <button class="btn btn-dark btn-sm" onclick="loadAll()">↻ Refresh</button>
-        <a href="services.html" target="_blank" class="btn btn-dark btn-sm">👁 View Site</a>
+        <a href="index.html" target="_blank" class="btn btn-dark btn-sm">👁 View Site</a>
         <button class="btn btn-danger btn-sm" onclick="logout()">Logout</button>
       </div>
     </div>
   </header>
 
-  <!-- MAIN -->
   <main>
     <!-- TABS -->
     <div class="tabs">
       <button class="tab active" data-tab="dashboard" onclick="switchTab('dashboard', this)">📊 Dashboard</button>
+      <button class="tab" data-tab="portfolio" onclick="switchTab('portfolio', this)">💼 Portfolio</button>
       <button class="tab" data-tab="pricing" onclick="switchTab('pricing', this)">💰 Pricing</button>
       <button class="tab" data-tab="feedback" onclick="switchTab('feedback', this)">💬 Feedback</button>
     </div>
 
-    <!-- DASHBOARD -->
+    <!-- DASHBOARD TAB -->
     <div class="tab-content show" id="tab-dashboard">
       <div class="stats">
         <div class="stat"><b id="statTotal">0</b><span>Total Services</span></div>
@@ -217,7 +221,55 @@ footer b{color:var(--gold)}
       </div>
     </div>
 
-    <!-- PRICING -->
+    <!-- PORTFOLIO TAB -->
+    <div class="tab-content" id="tab-portfolio">
+      <div class="form-box">
+        <h3 class="form-title" id="formTitle">Add New Portfolio Project</h3>
+        <input type="hidden" id="pId">
+        
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label>Category</label>
+            <select id="pCategory">
+              <option value="Websites">Websites</option>
+              <option value="QR Systems">QR Systems</option>
+              <option value="Digital Cards">Digital Cards</option>
+              <option value="VAAN RestoOS">VAAN RestoOS</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Title (Client Name)</label>
+            <input id="pTitle" placeholder="e.g. Shreeji Hotel">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label>Live Link (Leave blank if internal system)</label>
+          <input id="pLink" placeholder="https://...">
+        </div>
+
+        <div class="form-row">
+          <label>Description</label>
+          <textarea id="pDesc" placeholder="Short details..."></textarea>
+        </div>
+
+        <div class="form-row">
+          <label>Cover Image (Auto-compressed to WebP)</label>
+          <input type="file" id="pImage" accept="image/*" onchange="handleImage(this)">
+          <img id="imgPreview" class="img-preview">
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button class="btn btn-gold" onclick="saveProject()" id="saveProjectBtn">Save Project</button>
+          <button class="btn btn-dark" onclick="resetProjectForm()">Clear Form</button>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom:16px;font-size:18px;font-weight:900">Existing Projects</h3>
+      <div class="svc-list" id="projectList"></div>
+    </div>
+
+    <!-- PRICING TAB -->
     <div class="tab-content" id="tab-pricing">
       <div class="sec-title">Websites</div>
       <div class="sec-sub">Edit prices, names, features. Changes go live instantly.</div>
@@ -232,7 +284,7 @@ footer b{color:var(--gold)}
       <div class="svc-list" id="listBranding"><div class="svc-empty">Loading...</div></div>
     </div>
 
-    <!-- FEEDBACK -->
+    <!-- FEEDBACK TAB -->
     <div class="tab-content" id="tab-feedback">
       <div class="sec-title">All Feedback</div>
       <div class="sec-sub">Every submission from the site's feedback widget</div>
@@ -245,10 +297,9 @@ footer b{color:var(--gold)}
     <div><b>VAAN Consultancy</b> — Admin Panel</div>
     <div style="margin-top:6px">Vision · Automation · Advancement · Network</div>
   </footer>
-
 </div>
 
-<!-- ====== EDIT MODAL ====== -->
+<!-- EDIT SERVICE MODAL -->
 <div class="modal" id="editModal" onclick="if(event.target===this)closeEdit()">
   <div class="modal-box">
     <div class="modal-head">
@@ -260,55 +311,21 @@ footer b{color:var(--gold)}
     </div>
     <div class="modal-body">
       <input type="hidden" id="editId">
-
-      <div class="form-row">
-        <label>Service Name</label>
-        <input id="editName" placeholder="e.g. Restaurant QR Menu">
-      </div>
-
-      <div class="form-row">
-        <label>Short Description</label>
-        <input id="editDescription" placeholder="One-line description">
-      </div>
-
+      <div class="form-row"><label>Service Name</label><input id="editName"></div>
+      <div class="form-row"><label>Short Description</label><input id="editDescription"></div>
       <div class="form-grid-2">
-        <div class="form-row">
-          <label>Price (₹)</label>
-          <input id="editPrice" type="number" min="0" placeholder="4999">
-        </div>
-        <div class="form-row">
-          <label>Original Price (₹) — optional</label>
-          <input id="editOriginalPrice" type="number" min="0" placeholder="Leave blank if none">
-        </div>
+        <div class="form-row"><label>Price (₹)</label><input id="editPrice" type="number"></div>
+        <div class="form-row"><label>Original Price (₹)</label><input id="editOriginalPrice" type="number"></div>
       </div>
-
       <div class="form-grid-2">
-        <div class="form-row">
-          <label>Pages / Size Label</label>
-          <input id="editPages" placeholder="e.g. 1 page, Up to 6 pages">
-        </div>
-        <div class="form-row">
-          <label>Badge (optional)</label>
-          <input id="editBadge" placeholder="e.g. POPULAR, NEW">
-        </div>
+        <div class="form-row"><label>Pages / Size Label</label><input id="editPages"></div>
+        <div class="form-row"><label>Badge (optional)</label><input id="editBadge"></div>
       </div>
-
-      <div class="form-row">
-        <label>Features (one per line)</label>
-        <textarea id="editFeatures" placeholder="Custom design&#10;Mobile responsive&#10;Contact form"></textarea>
-      </div>
-
+      <div class="form-row"><label>Features (one per line)</label><textarea id="editFeatures"></textarea></div>
       <div class="form-grid-2">
-        <label class="form-check">
-          <input type="checkbox" id="editPopular">
-          <span style="color:var(--white);font-size:13px;font-weight:700">Mark as Popular</span>
-        </label>
-        <label class="form-check">
-          <input type="checkbox" id="editActive">
-          <span style="color:var(--white);font-size:13px;font-weight:700">Active (visible on site)</span>
-        </label>
+        <label class="form-check"><input type="checkbox" id="editPopular"><span style="color:var(--white);font-size:13px;font-weight:700">Mark as Popular</span></label>
+        <label class="form-check"><input type="checkbox" id="editActive"><span style="color:var(--white);font-size:13px;font-weight:700">Active (visible)</span></label>
       </div>
-
       <div class="modal-actions">
         <button class="btn btn-gold" onclick="saveEdit()">💾 Save Changes</button>
         <button class="btn btn-dark" onclick="closeEdit()">Cancel</button>
@@ -319,19 +336,18 @@ footer b{color:var(--gold)}
 
 <div class="toast" id="toast"></div>
 
-<!-- ====== SCRIPTS GO IN CHUNK 3 ====== -->
+<!-- SUPABASE SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-/* ==========================================================
-   VAAN ADMIN PANEL — CORE SCRIPT
-   ========================================================== */
-const ADMIN_PASSWORD = "vaan172008";
 const SUPABASE_URL = "https://xvtxpllmfwgnlrffbcqz.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2dHhwbGxtZndnbmxyZmZiY3F6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0Mzg2OTYsImV4cCI6MjEwNjAxNDY5Nn0.JC1Za7PdNGLngpupBovq_DqI-vHRVBOovLdEe-w1Ap0";
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 let allServices = [];
 let allFeedback = [];
+let allProjects = [];
+let compressedFile = null;
+let editingProjectId = null;
 
 function esc(v){return String(v||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 function toast(msg, isErr){
@@ -347,31 +363,37 @@ function fmtDate(d){
 }
 
 /* ====== AUTH ====== */
-function checkPw(){
-  const v = document.getElementById("pw").value.trim();
-  if (v === ADMIN_PASSWORD){
-    document.getElementById("gate").style.display = "none";
-    document.getElementById("panel").style.display = "block";
-    sessionStorage.setItem("vaanAdmin","ok");
-    loadAll();
-  } else {
+async function login(){
+  const email = document.getElementById("email").value;
+  const pw = document.getElementById("pw").value;
+  const btn = document.getElementById("loginBtn");
+  btn.textContent = "Verifying...";
+  
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: pw });
+  
+  if (error){
     document.getElementById("gateErr").style.display = "block";
-    document.getElementById("pw").value = "";
+    btn.textContent = "Unlock Panel";
+    return;
   }
+  
+  document.getElementById("gate").style.display = "none";
+  document.getElementById("panel").style.display = "block";
+  loadAll();
 }
-document.addEventListener("DOMContentLoaded", () => {
-  const pw = document.getElementById("pw");
-  if (pw) pw.addEventListener("keydown", e => { if (e.key === "Enter") checkPw(); });
-  if (sessionStorage.getItem("vaanAdmin") === "ok"){
+
+function logout(){
+  sb.auth.signOut();
+  location.reload();
+}
+
+sb.auth.getSession().then(({data:{session}}) => {
+  if(session){
     document.getElementById("gate").style.display = "none";
     document.getElementById("panel").style.display = "block";
     loadAll();
   }
 });
-function logout(){
-  sessionStorage.removeItem("vaanAdmin");
-  location.reload();
-}
 
 /* ====== TABS ====== */
 function switchTab(name, btn){
@@ -381,26 +403,30 @@ function switchTab(name, btn){
   document.getElementById("tab-" + name).classList.add("show");
 }
 
-/* ====== LOAD ALL ====== */
+/* ====== LOAD ALL DATA ====== */
 async function loadAll(){
   try {
-    const [pRes, fRes] = await Promise.all([
+    const [pRes, fRes, projRes] = await Promise.all([
       sb.from("vaan_pricing").select("*").order("display_order", { ascending: true }),
-      sb.from("vaan_feedback").select("*").order("created", { ascending: false }).limit(200)
+      sb.from("vaan_feedback").select("*").order("created", { ascending: false }).limit(200),
+      sb.from("portfolio_items").select("*").order("created_at", { ascending: false })
     ]);
-    if (pRes.error) throw pRes.error;
+    
     allServices = pRes.data || [];
     allFeedback = fRes.data || [];
+    allProjects = projRes.data || [];
+    
     renderStats();
     renderPricing();
     renderFeedback();
+    renderProjects();
   } catch (err){
     console.error(err);
     toast("Failed to load data", true);
   }
 }
 
-/* ====== STATS ====== */
+/* ====== DASHBOARD ====== */
 function renderStats(){
   document.getElementById("statTotal").textContent = allServices.length;
   document.getElementById("statActive").textContent = allServices.filter(s => s.active).length;
@@ -408,36 +434,24 @@ function renderStats(){
   const rated = allFeedback.filter(f => f.rating);
   const avg = rated.length ? (rated.reduce((sum, f) => sum + (f.rating || 0), 0) / rated.length).toFixed(1) : "0.0";
   document.getElementById("statRating").textContent = avg;
-  renderRecentFeedback();
-}
-
-function renderRecentFeedback(){
+  
   const wrap = document.getElementById("recentFeedback");
   const recent = allFeedback.slice(0, 5);
   if (recent.length === 0){
-    wrap.innerHTML = '<div class="fb-empty"><b>No feedback yet</b>When customers submit feedback, it appears here.</div>';
+    wrap.innerHTML = '<div class="fb-empty"><b>No feedback yet</b></div>';
     return;
   }
   wrap.innerHTML = recent.map(f => {
     const stars = "★".repeat(f.rating || 0) + "☆".repeat(5 - (f.rating || 0));
-    return '<div class="fb-card">' +
-      '<div class="fb-head">' +
-        '<div><b>' + esc(f.name) + '</b><small>' + fmtDate(f.created) + ' · ' + esc(f.source_page || "/") + '</small></div>' +
-        '<div class="fb-stars">' + stars + '</div>' +
-      '</div>' +
-      '<div class="fb-text">' + esc(f.feedback) + '</div>' +
-    '</div>';
+    return '<div class="fb-card"><div class="fb-head"><div><b>' + esc(f.name) + '</b><small>' + fmtDate(f.created) + '</small></div><div class="fb-stars">' + stars + '</div></div><div class="fb-text">' + esc(f.feedback) + '</div></div>';
   }).join("");
 }
 
 /* ====== PRICING ====== */
 function renderPricing(){
-  const website = allServices.filter(s => s.category === "website");
-  const qr = allServices.filter(s => s.category === "qr");
-  const branding = allServices.filter(s => s.category === "branding");
-  renderList("listWebsite", website);
-  renderList("listQr", qr);
-  renderList("listBranding", branding);
+  renderList("listWebsite", allServices.filter(s => s.category === "website"));
+  renderList("listQr", allServices.filter(s => s.category === "qr"));
+  renderList("listBranding", allServices.filter(s => s.category === "branding"));
 }
 
 function renderList(containerId, items){
@@ -454,50 +468,20 @@ function renderList(containerId, items){
     if (s.pages) tags.push('<span class="tag blue">' + esc(s.pages) + '</span>');
 
     return '<div class="svc-row ' + (s.active ? "" : "off") + '">' +
-      '<div class="svc-row-info">' +
-        '<b>' + esc(s.service_name) + '</b>' +
-        '<small>' + esc(s.description || "") + '</small>' +
-        '<div class="svc-row-tags">' + tags.join("") + '</div>' +
-      '</div>' +
-      '<div class="svc-row-price">' +
-        '<b>' + formatPrice(s.price) + '</b>' +
-        '<small>Starting</small>' +
-      '</div>' +
-      '<div class="svc-row-actions">' +
-        '<button class="btn btn-gold btn-sm" onclick="openEdit(' + s.id + ')">✏️ Edit</button>' +
-      '</div>' +
+      '<div class="svc-row-info"><b>' + esc(s.service_name) + '</b><small>' + esc(s.description || "") + '</small><div class="svc-row-tags">' + tags.join("") + '</div></div>' +
+      '<div class="svc-row-price"><b>' + formatPrice(s.price) + '</b><small>Starting</small></div>' +
+      '<div class="svc-row-actions"><button class="btn btn-gold btn-sm" onclick="openEdit(' + s.id + ')">✏️ Edit</button></div>' +
     '</div>';
   }).join("");
 }
 
-/* ====== FEEDBACK LIST ====== */
-function renderFeedback(){
-  const wrap = document.getElementById("allFeedback");
-  if (allFeedback.length === 0){
-    wrap.innerHTML = '<div class="fb-empty"><b>No feedback yet</b>When customers submit feedback, it appears here.</div>';
-    return;
-  }
-  wrap.innerHTML = allFeedback.map(f => {
-    const stars = "★".repeat(f.rating || 0) + "☆".repeat(5 - (f.rating || 0));
-    return '<div class="fb-card">' +
-      '<div class="fb-head">' +
-        '<div><b>' + esc(f.name) + '</b><small>' + fmtDate(f.created) + ' · Page: ' + esc(f.source_page || "/") + '</small></div>' +
-        '<div class="fb-stars">' + stars + '</div>' +
-      '</div>' +
-      '<div class="fb-text">' + esc(f.feedback) + '</div>' +
-    '</div>';
-  }).join("");
-}
-
-/* ====== EDIT ====== */
+/* ====== EDIT PRICING MODAL ====== */
 function openEdit(id){
   const s = allServices.find(x => x.id === id);
   if (!s) return;
 
   document.getElementById("editId").value = s.id;
   document.getElementById("editTitle").textContent = "Edit: " + s.service_name;
-  document.getElementById("editSubtitle").textContent = "Service Key: " + s.service_key + " · Category: " + s.category;
-
   document.getElementById("editName").value = s.service_name || "";
   document.getElementById("editDescription").value = s.description || "";
   document.getElementById("editPrice").value = s.price || 0;
@@ -522,50 +506,178 @@ function closeEdit(){
 
 async function saveEdit(){
   const id = parseInt(document.getElementById("editId").value);
-  if (!id) return;
-
   const name = document.getElementById("editName").value.trim();
-  const description = document.getElementById("editDescription").value.trim();
   const price = parseInt(document.getElementById("editPrice").value) || 0;
-  const originalPrice = document.getElementById("editOriginalPrice").value.trim();
-  const pages = document.getElementById("editPages").value.trim();
-  const badge = document.getElementById("editBadge").value.trim();
-  const featuresRaw = document.getElementById("editFeatures").value.trim();
-  const popular = document.getElementById("editPopular").checked;
-  const active = document.getElementById("editActive").checked;
+  const features = document.getElementById("editFeatures").value.trim().split("\n").map(f => f.trim()).filter(f => f).join("|");
 
-  if (!name){ toast("Service name is required", true); return; }
-
-  const features = featuresRaw.split("\n").map(f => f.trim()).filter(f => f).join("|");
+  if (!name){ toast("Name is required", true); return; }
 
   const updateData = {
     service_name: name,
-    description: description,
+    description: document.getElementById("editDescription").value.trim(),
     price: price,
-    original_price: originalPrice ? parseInt(originalPrice) : null,
-    pages: pages || null,
-    badge: badge || null,
+    original_price: document.getElementById("editOriginalPrice").value ? parseInt(document.getElementById("editOriginalPrice").value) : null,
+    pages: document.getElementById("editPages").value.trim() || null,
+    badge: document.getElementById("editBadge").value.trim() || null,
     features: features,
-    popular: popular,
-    active: active,
+    popular: document.getElementById("editPopular").checked,
+    active: document.getElementById("editActive").checked,
     updated: new Date().toISOString()
   };
 
   const { error } = await sb.from("vaan_pricing").update(updateData).eq("id", id);
-  if (error){
-    toast("Error: " + error.message, true);
-    return;
-  }
+  if (error){ toast("Error: " + error.message, true); return; }
 
-  toast("✅ Saved · Live on site now");
+  toast("✅ Saved!");
   closeEdit();
   loadAll();
 }
 
-/* Close modal on Escape */
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") closeEdit();
-});
+/* ====== FEEDBACK ====== */
+function renderFeedback(){
+  const wrap = document.getElementById("allFeedback");
+  if (allFeedback.length === 0){
+    wrap.innerHTML = '<div class="fb-empty"><b>No feedback yet</b></div>';
+    return;
+  }
+  wrap.innerHTML = allFeedback.map(f => {
+    const stars = "★".repeat(f.rating || 0) + "☆".repeat(5 - (f.rating || 0));
+    return '<div class="fb-card"><div class="fb-head"><div><b>' + esc(f.name) + '</b><small>' + fmtDate(f.created) + '</small></div><div class="fb-stars">' + stars + '</div></div><div class="fb-text">' + esc(f.feedback) + '</div></div>';
+  }).join("");
+}
+
+/* ====== PORTFOLIO MANAGER ====== */
+function renderProjects(){
+  const list = document.getElementById("projectList");
+  if (allProjects.length === 0) return list.innerHTML = '<div class="svc-empty"><b>No projects yet.</b></div>';
+
+  list.innerHTML = allProjects.map(item => `
+    <div class="item">
+      <div class="item-info">
+        <b>${item.title}</b>
+        <small>${item.category} ${item.link_url ? '· <a href="'+item.link_url+'" target="_blank" style="color:var(--gold)">Visit Link</a>' : '· Internal System'}</small>
+      </div>
+      <div class="item-actions">
+        <button class="btn btn-dark btn-sm" onclick="editProject(${item.id})">Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteProject(${item.id})">Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function handleImage(input){
+  const file = input.files[0];
+  if(!file) return;
+
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = (e) => {
+    const img = new Image();
+    img.src = e.target.result;
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const MAX = 800;
+      let w = img.width, h = img.height;
+      if(w > h && w > MAX){ h *= MAX/w; w = MAX; }
+      else if(h > MAX){ w *= MAX/h; h = MAX; }
+      
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      
+      canvas.toBlob((blob) => {
+        compressedFile = new File([blob], "portfolio.webp", { type: "image/webp" });
+        const preview = document.getElementById('imgPreview');
+        preview.src = URL.createObjectURL(blob);
+        preview.style.display = 'block';
+        toast(`Compressed: ${(blob.size / 1024).toFixed(0)} KB`);
+      }, 'image/webp', 0.75);
+    }
+  }
+}
+
+async function saveProject(){
+  const btn = document.getElementById("saveProjectBtn");
+  btn.textContent = "Saving...";
+  
+  const title = document.getElementById("pTitle").value;
+  const category = document.getElementById("pCategory").value;
+  const link = document.getElementById("pLink").value;
+  const desc = document.getElementById("pDesc").value;
+
+  if(!title){ toast("Title is required!", true); btn.textContent = "Save Project"; return; }
+
+  let imageUrl = null;
+
+  if(editingProjectId){
+    const existing = allProjects.find(p => p.id === editingProjectId);
+    if(existing) imageUrl = existing.image_url;
+  }
+
+  if(compressedFile){
+    const fileName = `proj_${Date.now()}.webp`;
+    const { error: upErr } = await sb.storage.from('portfolio-images').upload(fileName, compressedFile);
+    
+    if(upErr){ toast("Upload Error: " + upErr.message, true); btn.textContent = "Save Project"; return; }
+    
+    const { data: urlData } = sb.storage.from('portfolio-images').getPublicUrl(fileName);
+    imageUrl = urlData.publicUrl;
+  }
+
+  const payload = { category, title, description: desc, link_url: link || null, image_url: imageUrl };
+
+  if(editingProjectId){
+    const { error } = await sb.from('portfolio_items').update(payload).eq('id', editingProjectId);
+    if(error){ toast("DB Error: " + error.message, true); btn.textContent = "Save Project"; return; }
+    toast("✅ Project Updated!");
+  } else {
+    const { error } = await sb.from('portfolio_items').insert([payload]);
+    if(error){ toast("DB Error: " + error.message, true); btn.textContent = "Save Project"; return; }
+    toast("✅ Project Added!");
+  }
+
+  resetProjectForm();
+  loadAll();
+}
+
+function editProject(id){
+  const data = allProjects.find(p => p.id === id);
+  if(!data) return;
+
+  editingProjectId = id;
+  document.getElementById('formTitle').textContent = "Edit Project";
+  document.getElementById('pCategory').value = data.category;
+  document.getElementById('pTitle').value = data.title;
+  document.getElementById('pLink').value = data.link_url || '';
+  document.getElementById('pDesc').value = data.description || '';
+  
+  if(data.image_url){
+    document.getElementById('imgPreview').src = data.image_url;
+    document.getElementById('imgPreview').style.display = 'block';
+  }
+  
+  document.getElementById('saveProjectBtn').textContent = "Update Project";
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+async function deleteProject(id){
+  if(!confirm("Delete this project permanently?")) return;
+  await sb.from('portfolio_items').delete().eq('id', id);
+  toast("Project Deleted");
+  loadAll();
+}
+
+function resetProjectForm(){
+  editingProjectId = null;
+  document.getElementById('formTitle').textContent = "Add New Portfolio Project";
+  document.getElementById('pTitle').value = '';
+  document.getElementById('pLink').value = '';
+  document.getElementById('pDesc').value = '';
+  document.getElementById('pImage').value = '';
+  document.getElementById('imgPreview').style.display = 'none';
+  document.getElementById('saveProjectBtn').textContent = "Save Project";
+  compressedFile = null;
+}
 </script>
 
 </body>
