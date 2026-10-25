@@ -7,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <style>
@@ -16,7 +15,7 @@
   --gold: #d4a017; --gold-light: #f0c14b;
   --white: #ffffff; --text-dim: #a8b2c9; --text-mid: #cbd3e3;
   --border: rgba(212, 160, 23, 0.18); --border-soft: rgba(255, 255, 255, 0.08);
-  --card-bg: rgba(18, 36, 74, 0.4); --card-bg-hover: rgba(18, 36, 74, 0.85);
+  --card-bg: rgba(18, 36, 74, 0.5); --card-bg-hover: rgba(18, 36, 74, 0.9);
   --radius: 16px; --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -24,58 +23,69 @@
 html { scroll-behavior: smooth; }
 body { font-family: 'Inter', sans-serif; background: var(--navy-deep); color: var(--white); line-height: 1.6; overflow-x: hidden; min-height: 100vh; }
 
-/* 3D CANVAS */
+/* 3D CANVAS BACKGROUND */
 #bg-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
 
+/* DARK OVERLAY FOR TEXT READABILITY */
+.hero-overlay { position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(6, 15, 36, 0.4) 0%, rgba(6, 15, 36, 0.9) 100%); z-index: 1; pointer-events: none; }
+
 /* NAV */
-.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(6, 15, 36, 0.75); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-soft); padding: 14px 20px; }
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(6, 15, 36, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-soft); padding: 12px 20px; }
 .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-.nav-logo { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; color: var(--white); text-decoration: none; z-index: 2; }
-.nav-logo span { color: var(--gold); }
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; z-index: 2; }
+.nav-logo img { height: 36px; width: auto; object-fit: contain; filter: drop-shadow(0 0 10px rgba(212,160,23,0.4)); }
+.nav-logo-text { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; color: var(--white); line-height: 1; display: flex; flex-direction: column; }
+.nav-logo-text span { color: var(--gold); font-size: 12px; font-family: 'Inter', sans-serif; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; font-weight: 600; }
+
 .nav-links { display: flex; gap: 24px; align-items: center; z-index: 2; }
 .nav-links a { color: var(--text-mid); text-decoration: none; font-size: 14px; font-weight: 500; transition: var(--transition); position: relative; }
 .nav-links a:hover, .nav-links a.active { color: var(--gold); }
 .nav-links a.active::after { content: ''; position: absolute; bottom: -6px; left: 0; right: 0; height: 2px; background: var(--gold); border-radius: 2px; }
+
 .hamburger { display: none; background: transparent; border: 0; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; z-index: 2; }
 .hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: .3s; display: block; }
 .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-@media (max-width: 700px) {
-  .nav-links { position: fixed; top: 56px; left: 0; right: 0; background: rgba(6, 15, 36, 0.98); flex-direction: column; padding: 24px; gap: 20px; border-bottom: 1px solid var(--border-soft); transform: translateY(-150%); transition: .4s; }
+
+@media (max-width: 800px) {
+  .nav-links { position: fixed; top: 60px; left: 0; right: 0; background: rgba(6, 15, 36, 0.98); flex-direction: column; padding: 24px; gap: 20px; border-bottom: 1px solid var(--border-soft); transform: translateY(-150%); transition: .4s; }
   .nav-links.open { transform: translateY(0); }
   .hamburger { display: flex; }
 }
 
-.page { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+/* PAGE LAYOUT */
+.page { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-/* HERO */
-.hero { padding: 160px 0 80px; text-align: center; }
-.hero-badge { display: inline-block; padding: 8px 18px; background: rgba(212, 160, 23, 0.1); border: 1px solid var(--border); border-radius: 100px; font-size: 12px; font-weight: 700; color: var(--gold-light); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; backdrop-filter: blur(10px); }
-.hero-title { font-family: 'Playfair Display', serif; font-size: clamp(40px, 8vw, 76px); font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
-.hero-title .gold { color: var(--gold); display: block; margin-top: 8px; text-shadow: 0 0 40px rgba(212, 160, 23, 0.4); }
-.hero-sub { font-size: clamp(16px, 4vw, 19px); color: var(--text-mid); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+/* HERO - Digital Work Focus */
+.hero { padding: 180px 0 100px; text-align: center; position: relative; }
+.hero-badge { display: inline-block; padding: 8px 18px; background: rgba(212, 160, 23, 0.1); border: 1px solid var(--border); border-radius: 100px; font-size: 11px; font-weight: 800; color: var(--gold-light); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; backdrop-filter: blur(10px); }
+.hero-title { font-family: 'Playfair Display', serif; font-size: clamp(40px, 7vw, 72px); font-weight: 800; line-height: 1.1; margin-bottom: 24px; text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+.hero-title .gold { color: var(--gold); display: block; margin-top: 8px; text-shadow: 0 0 50px rgba(212, 160, 23, 0.5); }
+.hero-sub { font-size: clamp(16px, 3vw, 18px); color: var(--text-mid); max-width: 650px; margin: 0 auto; line-height: 1.7; text-shadow: 0 4px 10px rgba(0,0,0,0.8); }
 
 /* SECTIONS */
-.section { padding: 30px 0 50px; }
+.section { padding: 20px 0 60px; }
 .section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--border-soft); position: relative; }
 .section-head::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 80px; height: 2px; background: var(--gold); box-shadow: 0 0 15px var(--gold); }
-.section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 5vw, 38px); font-weight: 700; letter-spacing: -0.5px; }
-.section-count { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: var(--gold); background: rgba(212, 160, 23, 0.15); padding: 6px 14px; border-radius: 100px; border: 1px solid var(--border); margin-left: 12px; vertical-align: middle; }
+.section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 36px); font-weight: 700; }
+.section-count { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 800; color: var(--gold); background: rgba(212, 160, 23, 0.15); padding: 6px 14px; border-radius: 100px; border: 1px solid var(--border); margin-left: 12px; vertical-align: middle; }
 
 /* GRID & CARDS */
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
 @media (max-width: 400px) { .grid { grid-template-columns: 1fr; } }
 
-.card { position: relative; background: var(--card-bg); border: 1px solid var(--border-soft); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: var(--transition); backdrop-filter: blur(16px); opacity: 0; transform: translateY(30px); }
-.card:hover { background: var(--card-bg-hover); border-color: var(--border); transform: translateY(-6px); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 160, 23, 0.15); }
+.card { position: relative; background: var(--card-bg); border: 1px solid var(--border-soft); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: var(--transition); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); animation: cardFadeIn 0.6s ease both; }
+@keyframes cardFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.card:hover { background: var(--card-bg-hover); border-color: var(--border); transform: translateY(-6px); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 160, 23, 0.2); }
 
 .card-img-wrap { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #081020; position: relative; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border-soft); }
 .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
 .card:hover .card-img-wrap img { transform: scale(1.08); }
 
-/* Glowing text card for missing images */
-.card-no-img { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(212,160,23,0.15) 0%, transparent 70%); color: var(--gold-light); font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; letter-spacing: 1px; text-align: center; padding: 20px; text-shadow: 0 0 20px rgba(212,160,23,0.3); }
+/* TEXT FALLBACK IF NO IMAGE */
+.card-no-img { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(212,160,23,0.15) 0%, transparent 70%); color: var(--gold-light); font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; letter-spacing: 1px; text-align: center; padding: 20px; }
 
 .card-content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
 .card-tag { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold-light); background: rgba(212, 160, 23, 0.1); border: 1px solid var(--border); padding: 6px 12px; border-radius: 100px; align-self: flex-start; margin-bottom: 14px; }
@@ -102,7 +112,13 @@ body { font-family: 'Inter', sans-serif; background: var(--navy-deep); color: va
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">VAAN <span>Consultancy</span></a>
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="VAAN Logo" onerror="this.style.display='none'">
+      <div class="nav-logo-text">
+        VAAN Consultancy
+        <span>Digital Agency</span>
+      </div>
+    </a>
     <div class="nav-links" id="navLinks">
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
@@ -117,9 +133,10 @@ body { font-family: 'Inter', sans-serif; background: var(--navy-deep); color: va
 
 <main class="page">
   <section class="hero">
+    <div class="hero-overlay"></div>
     <div class="hero-badge">Real Clients · Live Systems</div>
-    <h1 class="hero-title">Our Work<span class="gold">Speaks For Itself</span></h1>
-    <p class="hero-sub">Websites, QR ecosystems, and custom digital tools — built fast, priced fair, and delivered live.</p>
+    <h1 class="hero-title">We Build Digital Ecosystems<span class="gold">That Drive Results</span></h1>
+    <p class="hero-sub">From full-scale restaurant operating systems to high-converting websites. No mockups. No templates. Just custom code, delivered live.</p>
   </section>
 
   <div id="portfolio-container">
@@ -186,13 +203,13 @@ function init3D() {
 }
 init3D();
 
-// Dynamic Rendering Logic
+// Dynamic Rendering
 async function loadPortfolio() {
   const container = document.getElementById('portfolio-container');
   const { data, error } = await sb.from('portfolio_items').select('*').order('created_at', { ascending: false });
   
   if (error || !data || data.length === 0) {
-    container.innerHTML = '<div class="loader" style="animation:none;color:var(--text-dim)">No projects added yet.</div>';
+    container.innerHTML = '<div class="loader" style="animation:none;color:var(--text-dim)">No projects added yet. Go to Admin to add some.</div>';
     return;
   }
 
@@ -219,12 +236,10 @@ async function loadPortfolio() {
     `;
 
     items.forEach((item, index) => {
-      // Check if image exists
       const imageHtml = item.image_url 
         ? `<div class="card-img-wrap"><img src="${item.image_url}" loading="lazy" alt="${item.title}"></div>`
         : `<div class="card-img-wrap"><div class="card-no-img">${item.title}</div></div>`;
 
-      // Hide items after the 4th one
       const hiddenStyle = index >= showInitially ? 'style="display:none;"' : '';
 
       html += `
@@ -245,7 +260,6 @@ async function loadPortfolio() {
     
     html += `</div>`;
     
-    // Add See More button if needed
     if (hasMore) {
       html += `<button class="btn-see-more" onclick="showAll('grid-${sectionIndex}', this)">See All ${items.length} Projects →</button>`;
     }
@@ -254,31 +268,20 @@ async function loadPortfolio() {
   }
 
   container.innerHTML = html;
-
-  // GSAP Entrance
-  gsap.to('.card', {
-    opacity: 1,
-    y: 0,
-    duration: 0.8,
-    stagger: 0.08,
-    ease: "power3.out",
-    clearProps: "opacity,transform" // ensures hover effects work perfectly after animation
-  });
 }
 
-// Function for the "See More" button
+// Reveal hidden items
 function showAll(gridId, btn) {
   const grid = document.getElementById(gridId);
   const hiddenCards = grid.querySelectorAll('a[style*="display:none"]');
   
   hiddenCards.forEach((card, index) => {
     card.style.display = 'flex';
-    // Animate them in
-    gsap.from(card, { opacity: 0, y: 30, duration: 0.5, delay: index * 0.05, ease: "power2.out" });
+    card.style.animation = `cardFadeIn 0.5s ease forwards`;
+    card.style.animationDelay = `${index * 0.05}s`;
   });
 
-  // Remove button after clicking
-  gsap.to(btn, { opacity: 0, duration: 0.3, onComplete: () => btn.remove() });
+  btn.remove();
 }
 
 loadPortfolio();
