@@ -227,15 +227,16 @@ footer b{color:var(--gold)}
         <h3 class="form-title" id="formTitle">Add New Portfolio Project</h3>
         <input type="hidden" id="pId">
         
-        <div class="form-grid-2">
+          <div class="form-grid-2">
           <div class="form-row">
-            <label>Category</label>
-            <select id="pCategory">
-              <option value="Websites">Websites</option>
-              <option value="QR Systems">QR Systems</option>
-              <option value="Digital Cards">Digital Cards</option>
-              <option value="VAAN RestoOS">VAAN RestoOS</option>
-            </select>
+            <label>Category (Type new or select)</label>
+            <input id="pCategory" list="category-list" placeholder="e.g. Logos, Apps, Websites">
+            <datalist id="category-list">
+              <option value="Websites">
+              <option value="QR Systems">
+              <option value="Digital Cards">
+              <option value="VAAN RestoOS">
+            </datalist>
           </div>
           <div class="form-row">
             <label>Title (Client Name)</label>
