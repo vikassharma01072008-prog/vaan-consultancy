@@ -78,13 +78,10 @@ body { font-family: 'Inter', sans-serif; background: var(--navy-deep); color: va
 
 .card:hover { background: var(--card-bg-hover); border-color: var(--border); transform: translateY(-6px); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 160, 23, 0.2); }
 
-/* 3:4 Portrait ratio to fit the posters perfectly without cutting text */
-.card-img-wrap { width: 100%; aspect-ratio: 3/4; overflow: hidden; background: #081020; position: relative; border-bottom: 1px solid var(--border-soft); }
-.card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
-.card:hover .card-img-wrap img { transform: scale(1.05); }
-
-/* TEXT FALLBACK IF NO IMAGE */
-.card-no-img { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(212,160,23,0.15) 0%, transparent 70%); color: var(--gold-light); font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; letter-spacing: 1px; text-align: center; padding: 20px; }
+/* THE FIX: 4:5 Portrait ratio + contain so tall posters show fully without cutting */
+.card-img-wrap { width: 100%; aspect-ratio: 4/5; overflow: hidden; background: #040812; position: relative; border-bottom: 1px solid var(--border-soft); padding: 16px; display: flex; align-items: center; justify-content: center; }
+.card-img-wrap img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.6s; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
+.card:hover .card-img-wrap img { transform: scale(1.04); }
 
 .card-content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
 .card-tag { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold-light); background: rgba(212, 160, 23, 0.1); border: 1px solid var(--border); padding: 6px 12px; border-radius: 100px; align-self: flex-start; margin-bottom: 14px; }
@@ -202,11 +199,11 @@ function init3D() {
 }
 init3D();
 
-// Dynamic Rendering with Custom Category Order
+// Dynamic Rendering
 async function loadPortfolio() {
   const container = document.getElementById('portfolio-container');
   
-  // THE FIX: Changed to ascending: true so old ones stay on top, new ones go down
+  // OLDEST STAYS ON TOP
   const { data, error } = await sb.from('portfolio_items').select('*').order('created_at', { ascending: true });
   
   if (error || !data || data.length === 0) {
@@ -214,16 +211,13 @@ async function loadPortfolio() {
     return;
   }
 
-  // Group data
   const grouped = {};
   data.forEach(item => {
     if (!grouped[item.category]) grouped[item.category] = [];
     grouped[item.category].push(item);
   });
 
-  // Define the EXACT order you requested
   const categoryOrder = ["Websites", "QR Systems", "Digital Cards", "VAAN RestoOS"];
-  
   const allCategories = Object.keys(grouped);
   const sortedCategories = [
     ...categoryOrder.filter(c => allCategories.includes(c)),
@@ -248,9 +242,11 @@ async function loadPortfolio() {
     `;
 
     items.forEach((item, index) => {
-      const imageHtml = item.image_url 
-        ? `<div class="card-img-wrap"><img src="${item.image_url}" loading="lazy" alt="${item.title}"></div>`
-        : `<div class="card-img-wrap"><div class="card-no-img">${item.title}</div></div>`;
+      // THE FIX: If image exists, render big poster. If not, render a smaller sleek text card.
+      let imageHtml = '';
+      if (item.image_url) {
+        imageHtml = `<div class="card-img-wrap"><img src="${item.image_url}" loading="lazy" alt="${item.title}"></div>`;
+      }
 
       const hiddenStyle = index >= showInitially ? 'style="display:none;"' : '';
 
