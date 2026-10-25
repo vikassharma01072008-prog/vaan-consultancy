@@ -25,8 +25,6 @@ body { font-family: 'Inter', sans-serif; background: var(--navy-deep); color: va
 
 /* 3D CANVAS BACKGROUND */
 #bg-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
-
-/* DARK OVERLAY FOR TEXT READABILITY */
 .hero-overlay { position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(6, 15, 36, 0.4) 0%, rgba(6, 15, 36, 0.9) 100%); z-index: 1; pointer-events: none; }
 
 /* NAV */
@@ -57,7 +55,7 @@ body { font-family: 'Inter', sans-serif; background: var(--navy-deep); color: va
 /* PAGE LAYOUT */
 .page { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-/* HERO - Digital Work Focus */
+/* HERO */
 .hero { padding: 180px 0 100px; text-align: center; position: relative; }
 .hero-badge { display: inline-block; padding: 8px 18px; background: rgba(212, 160, 23, 0.1); border: 1px solid var(--border); border-radius: 100px; font-size: 11px; font-weight: 800; color: var(--gold-light); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; backdrop-filter: blur(10px); }
 .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(40px, 7vw, 72px); font-weight: 800; line-height: 1.1; margin-bottom: 24px; text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
@@ -80,9 +78,10 @@ body { font-family: 'Inter', sans-serif; background: var(--navy-deep); color: va
 
 .card:hover { background: var(--card-bg-hover); border-color: var(--border); transform: translateY(-6px); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 160, 23, 0.2); }
 
-.card-img-wrap { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #081020; position: relative; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border-soft); }
+/* 3:4 Portrait ratio to fit the posters perfectly without cutting text */
+.card-img-wrap { width: 100%; aspect-ratio: 3/4; overflow: hidden; background: #081020; position: relative; border-bottom: 1px solid var(--border-soft); }
 .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
-.card:hover .card-img-wrap img { transform: scale(1.08); }
+.card:hover .card-img-wrap img { transform: scale(1.05); }
 
 /* TEXT FALLBACK IF NO IMAGE */
 .card-no-img { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(212,160,23,0.15) 0%, transparent 70%); color: var(--gold-light); font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; letter-spacing: 1px; text-align: center; padding: 20px; }
@@ -203,26 +202,39 @@ function init3D() {
 }
 init3D();
 
-// Dynamic Rendering
+// Dynamic Rendering with Custom Category Order
 async function loadPortfolio() {
   const container = document.getElementById('portfolio-container');
-  const { data, error } = await sb.from('portfolio_items').select('*').order('created_at', { ascending: false });
+  
+  // THE FIX: Changed to ascending: true so old ones stay on top, new ones go down
+  const { data, error } = await sb.from('portfolio_items').select('*').order('created_at', { ascending: true });
   
   if (error || !data || data.length === 0) {
     container.innerHTML = '<div class="loader" style="animation:none;color:var(--text-dim)">No projects added yet. Go to Admin to add some.</div>';
     return;
   }
 
+  // Group data
   const grouped = {};
   data.forEach(item => {
     if (!grouped[item.category]) grouped[item.category] = [];
     grouped[item.category].push(item);
   });
 
+  // Define the EXACT order you requested
+  const categoryOrder = ["Websites", "QR Systems", "Digital Cards", "VAAN RestoOS"];
+  
+  const allCategories = Object.keys(grouped);
+  const sortedCategories = [
+    ...categoryOrder.filter(c => allCategories.includes(c)),
+    ...allCategories.filter(c => !categoryOrder.includes(c))
+  ];
+
   let html = '';
   let sectionIndex = 0;
 
-  for (const [category, items] of Object.entries(grouped)) {
+  for (const category of sortedCategories) {
+    const items = grouped[category];
     sectionIndex++;
     const showInitially = 4;
     const hasMore = items.length > showInitially;
