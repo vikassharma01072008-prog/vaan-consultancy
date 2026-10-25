@@ -7,9 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-<!-- GSAP for entrance animations -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<!-- Three.js for 3D Background -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <style>
@@ -18,32 +16,18 @@
   --gold: #d4a017; --gold-light: #f0c14b;
   --white: #ffffff; --text-dim: #a8b2c9; --text-mid: #cbd3e3;
   --border: rgba(212, 160, 23, 0.18); --border-soft: rgba(255, 255, 255, 0.08);
-  --card-bg: rgba(18, 36, 74, 0.4); --card-bg-hover: rgba(18, 36, 74, 0.8);
+  --card-bg: rgba(18, 36, 74, 0.4); --card-bg-hover: rgba(18, 36, 74, 0.85);
   --radius: 16px; --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--navy-deep); color: var(--white); line-height: 1.6; overflow-x: hidden; min-height: 100vh; }
 
-body { 
-  font-family: 'Inter', sans-serif; 
-  background: var(--navy-deep); 
-  color: var(--white); 
-  line-height: 1.6; 
-  overflow-x: hidden; 
-  min-height: 100vh; 
-}
+/* 3D CANVAS */
+#bg-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
 
-/* 3D CANVAS BACKGROUND */
-#bg-canvas {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* NAV & LAYOUT */
+/* NAV */
 .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(6, 15, 36, 0.75); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-soft); padding: 14px 20px; }
 .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
 .nav-logo { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; color: var(--white); text-decoration: none; z-index: 2; }
@@ -57,7 +41,6 @@ body {
 .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
 @media (max-width: 700px) {
   .nav-links { position: fixed; top: 56px; left: 0; right: 0; background: rgba(6, 15, 36, 0.98); flex-direction: column; padding: 24px; gap: 20px; border-bottom: 1px solid var(--border-soft); transform: translateY(-150%); transition: .4s; }
   .nav-links.open { transform: translateY(0); }
@@ -67,39 +50,45 @@ body {
 .page { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
 /* HERO */
-.hero { padding: 160px 0 80px; text-align: center; position: relative; }
+.hero { padding: 160px 0 80px; text-align: center; }
 .hero-badge { display: inline-block; padding: 8px 18px; background: rgba(212, 160, 23, 0.1); border: 1px solid var(--border); border-radius: 100px; font-size: 12px; font-weight: 700; color: var(--gold-light); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; backdrop-filter: blur(10px); }
-.hero-title { font-family: 'Playfair Display', serif; font-size: clamp(40px, 8vw, 76px); font-weight: 800; line-height: 1.1; margin-bottom: 20px; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.hero-title { font-family: 'Playfair Display', serif; font-size: clamp(40px, 8vw, 76px); font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
 .hero-title .gold { color: var(--gold); display: block; margin-top: 8px; text-shadow: 0 0 40px rgba(212, 160, 23, 0.4); }
 .hero-sub { font-size: clamp(16px, 4vw, 19px); color: var(--text-mid); max-width: 600px; margin: 0 auto; line-height: 1.7; }
 
-/* SECTION & CARDS */
-.section { padding: 40px 0; }
-.section-head { display: flex; align-items: center; gap: 14px; margin-bottom: 32px; padding-bottom: 18px; border-bottom: 1px solid var(--border-soft); }
-.section-title { font-family: 'Playfair Display', serif; font-size: clamp(24px, 5vw, 32px); font-weight: 700; }
-.section-title .count { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--gold); background: rgba(212, 160, 23, 0.15); padding: 5px 12px; border-radius: 100px; margin-left: 12px; vertical-align: middle; border: 1px solid var(--border); }
+/* SECTIONS */
+.section { padding: 30px 0 50px; }
+.section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--border-soft); position: relative; }
+.section-head::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 80px; height: 2px; background: var(--gold); box-shadow: 0 0 15px var(--gold); }
+.section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 5vw, 38px); font-weight: 700; letter-spacing: -0.5px; }
+.section-count { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: var(--gold); background: rgba(212, 160, 23, 0.15); padding: 6px 14px; border-radius: 100px; border: 1px solid var(--border); margin-left: 12px; vertical-align: middle; }
 
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+/* GRID & CARDS */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
 @media (max-width: 400px) { .grid { grid-template-columns: 1fr; } }
 
-/* GLASSMORPHISM CARDS */
-.card { position: relative; background: var(--card-bg); border: 1px solid var(--border-soft); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: var(--transition); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); opacity: 0; transform: translateY(30px); }
+.card { position: relative; background: var(--card-bg); border: 1px solid var(--border-soft); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: var(--transition); backdrop-filter: blur(16px); opacity: 0; transform: translateY(30px); }
 .card:hover { background: var(--card-bg-hover); border-color: var(--border); transform: translateY(-6px); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 160, 23, 0.15); }
 
 .card-img-wrap { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #081020; position: relative; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border-soft); }
-.card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+.card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
 .card:hover .card-img-wrap img { transform: scale(1.08); }
 
-.card-no-img { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(212,160,23,0.1) 0%, transparent 70%); color: var(--gold-light); font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; letter-spacing: 1px; text-align: center; padding: 20px; }
+/* Glowing text card for missing images */
+.card-no-img { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(212,160,23,0.15) 0%, transparent 70%); color: var(--gold-light); font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; letter-spacing: 1px; text-align: center; padding: 20px; text-shadow: 0 0 20px rgba(212,160,23,0.3); }
 
-.card-content { padding: 26px; display: flex; flex-direction: column; flex-grow: 1; }
+.card-content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
 .card-tag { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold-light); background: rgba(212, 160, 23, 0.1); border: 1px solid var(--border); padding: 6px 12px; border-radius: 100px; align-self: flex-start; margin-bottom: 14px; }
-.card-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; color: var(--white); transition: var(--transition); }
+.card-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--white); transition: var(--transition); }
 .card:hover .card-title { color: var(--gold-light); }
-.card-desc { font-size: 14px; color: var(--text-dim); line-height: 1.6; margin-bottom: 24px; flex-grow: 1; }
-.card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 18px; border-top: 1px solid var(--border-soft); }
-.card-link { font-size: 13px; font-weight: 700; color: var(--gold); display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 1px; }
+.card-desc { font-size: 14px; color: var(--text-dim); line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
+.card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--border-soft); }
+.card-link { font-size: 12px; font-weight: 800; color: var(--gold); display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 1px; }
 .card-dot { width: 8px; height: 8px; border-radius: 50%; background: #2ecc71; box-shadow: 0 0 12px rgba(46, 204, 113, 0.8); }
+
+/* SEE MORE BUTTON */
+.btn-see-more { display: block; width: 100%; max-width: 300px; margin: 40px auto 0; padding: 16px; background: transparent; border: 1px solid var(--border); border-radius: 100px; color: var(--gold); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: var(--transition); text-align: center; text-decoration: none; }
+.btn-see-more:hover { background: rgba(212, 160, 23, 0.1); box-shadow: 0 0 20px rgba(212, 160, 23, 0.2); }
 
 /* LOADER */
 .loader { text-align: center; padding: 80px 20px; color: var(--gold); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 14px; animation: pulse 1.5s infinite; }
@@ -109,7 +98,6 @@ body {
 </head>
 <body>
 
-<!-- 3D BACKGROUND -->
 <canvas id="bg-canvas"></canvas>
 
 <nav class="nav">
@@ -131,7 +119,7 @@ body {
   <section class="hero">
     <div class="hero-badge">Real Clients · Live Systems</div>
     <h1 class="hero-title">Our Work<span class="gold">Speaks For Itself</span></h1>
-    <p class="hero-sub">Websites, QR ecosystems, and custom digital tools — built fast, priced fair, and delivered live. Explore our portfolio below.</p>
+    <p class="hero-sub">Websites, QR ecosystems, and custom digital tools — built fast, priced fair, and delivered live.</p>
   </section>
 
   <div id="portfolio-container">
@@ -150,9 +138,7 @@ function toggleNav() {
   document.getElementById('hamburger').classList.toggle('open');
 }
 
-/* =========================================
-   THREE.JS 3D HERO BACKGROUND
-   ========================================= */
+// 3D Background
 function init3D() {
   const canvas = document.getElementById('bg-canvas');
   const scene = new THREE.Scene();
@@ -161,24 +147,14 @@ function init3D() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  // Gold Wireframe Sphere
   const geometry = new THREE.IcosahedronGeometry(2.5, 1);
-  const material = new THREE.MeshBasicMaterial({ 
-    color: 0xd4a017, 
-    wireframe: true, 
-    transparent: true, 
-    opacity: 0.15 
-  });
+  const material = new THREE.MeshBasicMaterial({ color: 0xd4a017, wireframe: true, transparent: true, opacity: 0.15 });
   const sphere = new THREE.Mesh(geometry, material);
   scene.add(sphere);
 
-  // Inner particle cloud
   const particleGeo = new THREE.BufferGeometry();
-  const particleCount = 300;
-  const positions = new Float32Array(particleCount * 3);
-  for(let i=0; i<particleCount*3; i++) {
-    positions[i] = (Math.random() - 0.5) * 15;
-  }
+  const positions = new Float32Array(300 * 3);
+  for(let i=0; i<positions.length; i++) positions[i] = (Math.random() - 0.5) * 15;
   particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   const particleMat = new THREE.PointsMaterial({ color: 0xf0c14b, size: 0.05, transparent: true, opacity: 0.6 });
   const particles = new THREE.Points(particleGeo, particleMat);
@@ -186,7 +162,6 @@ function init3D() {
 
   camera.position.z = 5;
   let mouseX = 0, mouseY = 0;
-
   document.addEventListener('mousemove', (e) => {
     mouseX = (e.clientX / window.innerWidth) * 2 - 1;
     mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
@@ -194,16 +169,11 @@ function init3D() {
 
   function animate() {
     requestAnimationFrame(animate);
-    const time = Date.now() * 0.001;
-
     sphere.rotation.x += 0.001;
     sphere.rotation.y += 0.002;
     particles.rotation.y -= 0.0005;
-    
-    // Smooth mouse parallax
     sphere.position.x += (mouseX * 0.5 - sphere.position.x) * 0.05;
     sphere.position.y += (mouseY * 0.5 - sphere.position.y) * 0.05;
-
     renderer.render(scene, camera);
   }
   animate();
@@ -216,20 +186,16 @@ function init3D() {
 }
 init3D();
 
-/* =========================================
-   DYNAMIC PORTFOLIO ENGINE & GSAP
-   ========================================= */
+// Dynamic Rendering Logic
 async function loadPortfolio() {
   const container = document.getElementById('portfolio-container');
-  
-  const { data, error } = await sb.from('portfolio_items').select('*').order('sort_order', { ascending: true });
+  const { data, error } = await sb.from('portfolio_items').select('*').order('created_at', { ascending: false });
   
   if (error || !data || data.length === 0) {
-    container.innerHTML = '<div class="loader" style="animation:none;color:var(--text-dim)">No projects added yet.<br>Log into Admin to add them.</div>';
+    container.innerHTML = '<div class="loader" style="animation:none;color:var(--text-dim)">No projects added yet.</div>';
     return;
   }
 
-  // Group by category
   const grouped = {};
   data.forEach(item => {
     if (!grouped[item.category]) grouped[item.category] = [];
@@ -237,49 +203,82 @@ async function loadPortfolio() {
   });
 
   let html = '';
+  let sectionIndex = 0;
+
   for (const [category, items] of Object.entries(grouped)) {
+    sectionIndex++;
+    const showInitially = 4;
+    const hasMore = items.length > showInitially;
+
     html += `
       <section class="section">
         <div class="section-head">
-          <h2 class="section-title">${category} <span class="count">${items.length}</span></h2>
+          <h2 class="section-title">${category}<span class="section-count">${items.length}</span></h2>
         </div>
-        <div class="grid">
+        <div class="grid" id="grid-${sectionIndex}">
     `;
 
-    items.forEach(item => {
+    items.forEach((item, index) => {
+      // Check if image exists
       const imageHtml = item.image_url 
         ? `<div class="card-img-wrap"><img src="${item.image_url}" loading="lazy" alt="${item.title}"></div>`
         : `<div class="card-img-wrap"><div class="card-no-img">${item.title}</div></div>`;
 
+      // Hide items after the 4th one
+      const hiddenStyle = index >= showInitially ? 'style="display:none;"' : '';
+
       html += `
-        <a href="${item.link_url || '#'}" ${item.link_url ? 'target="_blank" rel="noopener"' : ''} class="card">
+        <a href="${item.link_url || '#'}" ${item.link_url ? 'target="_blank" rel="noopener"' : ''} class="card" ${hiddenStyle}>
           ${imageHtml}
           <div class="card-content">
             <div class="card-tag">${category}</div>
             <h3 class="card-title">${item.title}</h3>
             <p class="card-desc">${item.description || ''}</p>
             <div class="card-footer">
-              <span class="card-link">${item.link_url ? 'View Live →' : 'System Showcase'}</span>
+              <span class="card-link">${item.link_url ? 'View Live →' : 'Internal System'}</span>
               ${item.link_url ? '<span class="card-dot"></span>' : ''}
             </div>
           </div>
         </a>
       `;
     });
-    html += `</div></section>`;
+    
+    html += `</div>`;
+    
+    // Add See More button if needed
+    if (hasMore) {
+      html += `<button class="btn-see-more" onclick="showAll('grid-${sectionIndex}', this)">See All ${items.length} Projects →</button>`;
+    }
+    
+    html += `</section>`;
   }
 
   container.innerHTML = html;
 
-  // GSAP Staggered Entrance for the cards
+  // GSAP Entrance
   gsap.to('.card', {
     opacity: 1,
     y: 0,
     duration: 0.8,
-    stagger: 0.1,
+    stagger: 0.08,
     ease: "power3.out",
-    clearProps: "all" // removes inline styles after animation so hover effects work
+    clearProps: "opacity,transform" // ensures hover effects work perfectly after animation
   });
+}
+
+// Function for the "See More" button
+function showAll(gridId, btn) {
+  const grid = document.getElementById(gridId);
+  const hiddenCards = grid.querySelectorAll('a[style*="display:none"]');
+  
+  hiddenCards.forEach((card, index) => {
+    card.style.display = 'flex';
+    // Animate them in
+    gsap.from(card, { opacity: 0, y: 30, duration: 0.5, delay: index * 0.05, ease: "power2.out" });
+  });
+
+  // Remove button after clicking
+  gsap.to(btn, { opacity: 0, duration: 0.3, onComplete: () => btn.remove() });
 }
 
 loadPortfolio();
