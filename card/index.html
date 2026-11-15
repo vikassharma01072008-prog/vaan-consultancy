@@ -583,6 +583,16 @@ img{max-width:100%;display:block}
 .btn:active{transform:scale(.97)}
 .btn svg{width:19px;height:19px;flex-shrink:0}
 
+/* Add to Contact — white bg, blue logo */
+.btn-contact{
+  background:#ffffff;
+  color:#1a3c8c;
+  border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+  font-weight:800;
+}
+.btn-contact svg{color:#1a73e8}
+
 /* WhatsApp — true brand green */
 .btn-wa{
   background:linear-gradient(135deg,#25d366,#128c3e);
@@ -596,16 +606,6 @@ img{max-width:100%;display:block}
   color:#fff;
   box-shadow:0 10px 30px rgba(59,130,246,.4);
 }
-
-/* Add to Contact — white bg, blue logo (real "Add Contact" style) */
-.btn-contact{
-  background:#ffffff;
-  color:#1a3c8c;
-  border:1px solid rgba(255,255,255,.9);
-  box-shadow:0 10px 30px rgba(0,0,0,.4);
-  font-weight:800;
-}
-.btn-contact svg{color:#1a73e8}
 
 /* ===== SUB ACTION ROW (Copy + Share) ===== */
 .card-subactions{
@@ -635,50 +635,67 @@ img{max-width:100%;display:block}
 .sub-btn.copied{color:#6ee08a;border-color:rgba(110,224,138,.5)}
 .sub-btn.copied svg{color:#6ee08a}
 
-/* Instagram row */
-.card-ig{
-  display:block;
-  margin-bottom:18px;
+/* ===== CONNECT WITH US SECTION (Instagram + Gmail) ===== */
+.card-connect-section{
+  margin:22px 0 18px;
+  padding:18px 16px 16px;
+  background:linear-gradient(165deg,rgba(79,143,255,.1),rgba(79,143,255,.03));
+  border:1px solid rgba(79,143,255,.3);
+  border-radius:18px;
+  position:relative;
 }
-.ig-btn{
+.card-connect-section::before{
+  content:"";position:absolute;top:0;left:20%;right:20%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(79,143,255,.8),transparent);
+}
+.connect-heading{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9.5px;letter-spacing:2.5px;font-weight:800;
+  color:#7ab0ff;text-transform:uppercase;
+  text-align:center;margin-bottom:14px;
+}
+.connect-ig{
   display:flex;
   align-items:center;
   justify-content:center;
   gap:10px;
-  padding:15px 18px;
-  border-radius:15px;
+  padding:14px 18px;
+  border-radius:13px;
   background:linear-gradient(135deg,#feda75 0%,#fa7e1e 25%,#d62976 55%,#962fbf 80%,#4f5bd5 100%);
   color:#fff;
-  font-size:13px;
+  font-size:12.5px;
   font-weight:700;
-  letter-spacing:.4px;
-  box-shadow:0 10px 30px rgba(214,41,118,.3);
+  letter-spacing:.3px;
+  box-shadow:0 8px 24px rgba(214,41,118,.3);
   transition:transform .2s ease;
-  min-height:52px;
+  min-height:48px;
+  margin-bottom:10px;
 }
-.ig-btn:active{transform:scale(.98)}
-.ig-btn svg{width:20px;height:20px;flex-shrink:0}
+.connect-ig:active{transform:scale(.98)}
+.connect-ig svg{width:18px;height:18px;flex-shrink:0}
 
-/* Email row — neutral slate */
-.card-email{display:block;margin-bottom:18px;}
-.email-btn{
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  padding:15px 18px;border-radius:15px;
-  background:linear-gradient(135deg,#3a4659,#232b38);
-  border:1px solid rgba(255,255,255,.1);
-  color:#e8edf3;
+.connect-mail{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:14px 18px;
+  border-radius:13px;
+  background:linear-gradient(135deg,#ea4335,#c5221f);
+  color:#fff;
   font-family:'JetBrains Mono',monospace;
-  font-size:11.5px;font-weight:700;
-  letter-spacing:.5px;
-  transition:transform .2s ease,box-shadow .2s ease;
-  min-height:52px;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.3px;
+  box-shadow:0 8px 24px rgba(234,67,53,.3);
+  transition:transform .2s ease;
+  min-height:48px;
   word-break:break-all;
-  box-shadow:0 10px 30px rgba(0,0,0,.3);
 }
-.email-btn:active{transform:scale(.98);box-shadow:0 6px 20px rgba(0,0,0,.5)}
-.email-btn svg{width:18px;height:18px;color:#8fb4ff;flex-shrink:0}
+.connect-mail:active{transform:scale(.98)}
+.connect-mail svg{width:18px;height:18px;flex-shrink:0}
 
-/* ===== REVIEW SECTION (separate) ===== */
+/* ===== REVIEW SECTION ===== */
 .card-review-section{
   margin:22px 0 18px;
   padding:18px 16px 16px;
@@ -722,7 +739,7 @@ img{max-width:100%;display:block}
 .review-btn:active{transform:scale(.98);box-shadow:0 5px 16px rgba(251,188,4,.55)}
 .review-btn svg{width:20px;height:20px;color:#1a060d;flex-shrink:0}
 
-/* ===== HAVE A GOOD DAY — upgraded ===== */
+/* ===== HAVE A GOOD DAY ===== */
 .goodday-sticker{
   position:relative;
   display:flex;
@@ -816,8 +833,8 @@ img{max-width:100%;display:block}
   .sub-btn{font-size:11px;padding:12px 10px}
   .founder-avatar-wrap{width:50px;height:50px}
   .founder-name{font-size:19px}
-  .ig-btn{font-size:12px}
-  .email-btn{font-size:10px}
+  .connect-ig{font-size:11.5px}
+  .connect-mail{font-size:10px}
   .review-btn{font-size:12px}
   .goodday-title{font-size:19px}
   .goodday-emoji-row{font-size:22px}
@@ -909,28 +926,21 @@ img{max-width:100%;display:block}
     <div class="card-services-content" id="servicesContent">
       <div class="card-services-content-inner">
         <div class="card-services">
-          <!-- 1. Website Development -->
+          <!-- 1 -->
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Website%20Development." target="_blank" rel="noopener" class="svc-item"><span class="ico">🌐</span>Website Development</a>
-
-          <!-- 2. Social Media Management -->
+          <!-- 2 -->
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Social%20Media%20Management." target="_blank" rel="noopener" class="svc-item"><span class="ico">📱</span>Social Media Management</a>
-
-          <!-- 3. AI Agents -->
+          <!-- 3 -->
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20AI%20Agents." target="_blank" rel="noopener" class="svc-item"><span class="ico">🤖</span>AI Agents</a>
-
-          <!-- 4. Video Editing -->
+          <!-- 4 -->
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Video%20Editing." target="_blank" rel="noopener" class="svc-item"><span class="ico">🎬</span>Video Editing</a>
-
-          <!-- 5. Automation -->
+          <!-- 5 -->
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Automation." target="_blank" rel="noopener" class="svc-item"><span class="ico">⚙️</span>Automation</a>
-
-          <!-- 6. Meta Ads -->
+          <!-- 6 -->
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Meta%20Ads." target="_blank" rel="noopener" class="svc-item"><span class="ico">📢</span>Meta Ads</a>
-
-          <!-- 7. Thumbnail Designing -->
+          <!-- 7 -->
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Thumbnail%20Designing." target="_blank" rel="noopener" class="svc-item"><span class="ico">🖼️</span>Thumbnail Designing</a>
-
-          <!-- 8. Graphic Designing — custom pen nib SVG -->
+          <!-- 8: Graphic Designing — custom pen nib SVG -->
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Graphic%20Designing." target="_blank" rel="noopener" class="svc-item">
             <span class="ico-svg" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -942,11 +952,9 @@ img{max-width:100%;display:block}
             </span>
             Graphic Designing
           </a>
-
-          <!-- 9. Digital Visiting Cards -->
+          <!-- 9 -->
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Digital%20Visiting%20Cards." target="_blank" rel="noopener" class="svc-item"><span class="ico">💳</span>Digital Visiting Cards</a>
-
-          <!-- 10. Digital Invitation Cards — custom marriage invitation SVG -->
+          <!-- 10: Digital Invitation Cards — custom marriage invitation SVG -->
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Digital%20Invitation%20Cards." target="_blank" rel="noopener" class="svc-item">
             <span class="ico-svg" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -957,28 +965,22 @@ img{max-width:100%;display:block}
             </span>
             Digital Invitation Cards
           </a>
-
-          <!-- 11. Logo & Branding -->
+          <!-- 11 -->
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Logo%20and%20Branding." target="_blank" rel="noopener" class="svc-item"><span class="ico">✨</span>Logo &amp; Branding</a>
-
-          <!-- 12. VAAN Stay OS -->
+          <!-- 12 -->
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20VAAN%20Stay%20OS." target="_blank" rel="noopener" class="svc-item"><span class="ico">🏨</span>VAAN Stay OS</a>
-
-          <!-- 13. VAAN Salon OS -->
+          <!-- 13 -->
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20VAAN%20Salon%20OS." target="_blank" rel="noopener" class="svc-item"><span class="ico">💇</span>VAAN Salon OS</a>
-
-          <!-- 14. Hospital Portals + 15. Academy Portals — same line -->
+          <!-- 14 -->
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Hospital%20Portals." target="_blank" rel="noopener" class="svc-item"><span class="ico">🏥</span>Hospital Portals</a>
+          <!-- 15 -->
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Academy%20Portals." target="_blank" rel="noopener" class="svc-item"><span class="ico">🎓</span>Academy Portals</a>
-
-          <!-- 16. Custom Projects -->
-          <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Custom%20Projects." target="_blank" rel="noopener" class="svc-item"><span class="ico">🛠️</span>Custom Projects</a>
-
-          <!-- 17. VAAN Resto OS -->
+          <!-- 16: VAAN Resto OS -->
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20VAAN%20Resto%20OS." target="_blank" rel="noopener" class="svc-item"><span class="ico">🍽️</span>VAAN Resto OS</a>
-
-          <!-- 18. VAAN Loyalty OS -->
+          <!-- 17: VAAN Loyalty OS -->
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20VAAN%20Loyalty%20OS." target="_blank" rel="noopener" class="svc-item"><span class="ico">🎁</span>VAAN Loyalty OS</a>
+          <!-- 18: Custom Projects — LAST -->
+          <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Custom%20Projects." target="_blank" rel="noopener" class="svc-item"><span class="ico">🛠️</span>Custom Projects</a>
         </div>
       </div>
     </div>
@@ -991,8 +993,12 @@ img{max-width:100%;display:block}
     <div class="qr-hint">Scan · Save · Share</div>
     <a href="https://vaanconsultancy.in" class="qr-link">vaanconsultancy.in</a>
 
-    <!-- ACTION BUTTONS: WhatsApp + Call on one line, Add to Contact below -->
+    <!-- ACTION BUTTONS: Add to Contact first, then WhatsApp+Call -->
     <div class="card-actions">
+      <button class="btn btn-contact" onclick="addToContact()" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+        <span>Add to Contact</span>
+      </button>
       <div class="action-row-duo">
         <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20saw%20your%20digital%20card." class="btn btn-wa" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
@@ -1003,10 +1009,6 @@ img{max-width:100%;display:block}
           <span>Call</span>
         </a>
       </div>
-      <button class="btn btn-contact" onclick="addToContact()" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
-        <span>Add to Contact</span>
-      </button>
     </div>
 
     <div class="card-subactions">
@@ -1020,21 +1022,20 @@ img{max-width:100%;display:block}
       </button>
     </div>
 
-    <div class="card-ig">
-      <a class="ig-btn" href="https://www.instagram.com/vaan_consultancy" target="_blank" rel="noopener">
+    <!-- CONNECT WITH US (Instagram + Gmail) -->
+    <div class="card-connect-section">
+      <div class="connect-heading">Connect With Us</div>
+      <a class="connect-ig" href="https://www.instagram.com/vaan_consultancy" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         <span>@vaan_consultancy</span>
       </a>
-    </div>
-
-    <div class="card-email">
-      <a class="email-btn" href="mailto:vaanconsultancy05@gmail.com">
+      <a class="connect-mail" href="mailto:vaanconsultancy05@gmail.com">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         <span>vaanconsultancy05@gmail.com</span>
       </a>
     </div>
 
-    <!-- REVIEW US — separate section -->
+    <!-- REVIEW US -->
     <div class="card-review-section">
       <div class="review-heading">Loved Our Work?</div>
       <div class="review-sub">Your review helps us grow and serve you better.</div>
