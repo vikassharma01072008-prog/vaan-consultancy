@@ -394,6 +394,11 @@ img{max-width:100%;display:block}
   font-size:24px;font-weight:700;color:#2a0a12;
   position:relative;z-index:2;
   box-shadow:inset 0 0 12px rgba(255,255,255,.4);
+  overflow:hidden;
+}
+.founder-avatar img{
+  width:100%;height:100%;object-fit:cover;border-radius:50%;
+  display:block;
 }
 .founder-ring{
   position:absolute;inset:-5px;border-radius:50%;
@@ -443,7 +448,7 @@ img{max-width:100%;display:block}
   background:linear-gradient(90deg,rgba(212,160,23,.4),transparent);
 }
 
-/* SERVICES ACCORDION — with breathing room */
+/* SERVICES ACCORDION */
 .card-services-toggle{
   width:100%;
   padding:15px;
@@ -456,7 +461,7 @@ img{max-width:100%;display:block}
   letter-spacing:1.5px;text-transform:uppercase;
   display:flex;justify-content:center;align-items:center;gap:10px;
   transition:all .3s ease;
-  margin-bottom:20px; /* breathing room before QR */
+  margin-bottom:20px;
 }
 .card-services-toggle:active{background:rgba(212,160,23,.28);}
 .card-services-toggle svg{
@@ -479,7 +484,7 @@ img{max-width:100%;display:block}
   grid-template-columns:1fr 1fr;
   gap:9px;
   padding-top:4px;
-  padding-bottom:20px; /* space after last row before QR */
+  padding-bottom:20px;
 }
 .svc-item{
   background:rgba(255,255,255,.04);
@@ -535,7 +540,7 @@ img{max-width:100%;display:block}
   letter-spacing:1.3px;
 }
 
-/* ===== ACTION BUTTONS — stacked full width like original ===== */
+/* ===== ACTION BUTTONS — stacked full width ===== */
 .card-actions{
   display:flex;
   flex-direction:column;
@@ -575,12 +580,11 @@ img{max-width:100%;display:block}
   box-shadow:0 10px 30px rgba(212,160,23,.35);
 }
 
-/* Add to Contact — deep maroon + gold border */
+/* Add to Contact — teal/blue for visibility */
 .btn-contact{
-  background:linear-gradient(135deg,var(--maroon-soft),var(--maroon));
-  color:var(--gold-bright);
-  border:1.5px solid rgba(240,193,75,.55);
-  box-shadow:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.05);
+  background:linear-gradient(135deg,#2bb6c9,#1a7f8f);
+  color:#fff;
+  box-shadow:0 10px 30px rgba(43,182,201,.35),inset 0 1px 0 rgba(255,255,255,.15);
 }
 
 /* ===== SUB ACTION ROW (Copy + Share) ===== */
@@ -635,23 +639,80 @@ img{max-width:100%;display:block}
 .ig-btn:active{transform:scale(.98)}
 .ig-btn svg{width:20px;height:20px;flex-shrink:0}
 
-/* Email row */
+/* Email row — Gmail red */
 .card-email{display:block;margin-bottom:18px;}
 .email-btn{
   display:flex;align-items:center;justify-content:center;gap:10px;
   padding:15px 18px;border-radius:15px;
-  background:rgba(212,160,23,.1);
-  border:1px solid rgba(240,193,75,.3);
-  color:var(--cream);
+  background:linear-gradient(135deg,#ea4335,#c5221f);
+  border:1px solid rgba(255,255,255,.08);
+  color:#fff;
   font-family:'JetBrains Mono',monospace;
   font-size:11.5px;font-weight:700;
   letter-spacing:.5px;
-  transition:transform .2s ease,background .2s ease;
+  transition:transform .2s ease,box-shadow .2s ease;
   min-height:52px;
   word-break:break-all;
+  box-shadow:0 10px 30px rgba(234,67,53,.3);
 }
-.email-btn:active{transform:scale(.98);background:rgba(212,160,23,.22)}
-.email-btn svg{width:18px;height:18px;color:var(--gold-bright);flex-shrink:0}
+.email-btn:active{transform:scale(.98);box-shadow:0 6px 20px rgba(234,67,53,.5)}
+.email-btn svg{width:18px;height:18px;color:#fff;flex-shrink:0}
+
+/* Review row */
+.card-review{display:block;margin-bottom:18px;}
+.review-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 18px;border-radius:15px;
+  background:linear-gradient(135deg,#fbbc04,#f29900);
+  border:1px solid rgba(255,255,255,.1);
+  color:#1a060d;
+  font-family:'Inter',sans-serif;
+  font-size:13px;font-weight:800;
+  letter-spacing:.4px;
+  transition:transform .2s ease,box-shadow .2s ease;
+  min-height:52px;
+  box-shadow:0 10px 30px rgba(251,188,4,.35);
+}
+.review-btn:active{transform:scale(.98);box-shadow:0 6px 20px rgba(251,188,4,.55)}
+.review-btn svg{width:20px;height:20px;color:#1a060d;flex-shrink:0}
+
+/* Have a Good Day sticker */
+.goodday-sticker{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:14px 16px;
+  margin-bottom:18px;
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(255,217,102,.22),rgba(240,193,75,.12),rgba(255,157,46,.18));
+  border:1.5px dashed rgba(240,193,75,.55);
+  color:var(--gold-bright);
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:16px;
+  font-weight:600;
+  font-style:italic;
+  letter-spacing:.5px;
+  text-align:center;
+  box-shadow:inset 0 0 20px rgba(240,193,75,.08);
+  animation:gooddayGlow 4s ease-in-out infinite;
+}
+@keyframes gooddayGlow{
+  0%,100%{box-shadow:inset 0 0 20px rgba(240,193,75,.08),0 0 0 rgba(240,193,75,0)}
+  50%{box-shadow:inset 0 0 24px rgba(240,193,75,.2),0 0 24px rgba(240,193,75,.15)}
+}
+.goodday-sticker .emoji{
+  font-size:20px;
+  font-style:normal;
+  display:inline-block;
+  animation:waveHand 3s ease-in-out infinite;
+  transform-origin:70% 70%;
+}
+@keyframes waveHand{
+  0%,60%,100%{transform:rotate(0deg)}
+  10%,30%,50%{transform:rotate(14deg)}
+  20%,40%{transform:rotate(-8deg)}
+}
 
 /* Footer */
 .card-footer{
@@ -678,7 +739,9 @@ img{max-width:100%;display:block}
   .founder-avatar-wrap{width:50px;height:50px}
   .founder-name{font-size:19px}
   .ig-btn{font-size:12px}
-  .email-btn{font-size:10.5px}
+  .email-btn{font-size:10px}
+  .review-btn{font-size:12px}
+  .goodday-sticker{font-size:14px;padding:12px 14px}
 }
 </style>
 </head>
@@ -746,7 +809,9 @@ img{max-width:100%;display:block}
       <div class="founder-avatar-wrap">
         <div class="founder-ring-2"></div>
         <div class="founder-ring"></div>
-        <div class="founder-avatar">VS</div>
+        <div class="founder-avatar" id="founderAvatar">
+          <img src="founder.png" alt="Vikas Sharma" onerror="this.style.display='none';this.parentNode.textContent='VS';">
+        </div>
       </div>
       <div class="founder-info">
         <span class="founder-tag">Founder &amp; CEO</span>
@@ -770,13 +835,15 @@ img{max-width:100%;display:block}
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Automation." target="_blank" rel="noopener" class="svc-item"><span class="ico">⚙️</span>Automation</a>
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20AI%20Agents." target="_blank" rel="noopener" class="svc-item"><span class="ico">🤖</span>AI Agents</a>
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Meta%20Ads." target="_blank" rel="noopener" class="svc-item"><span class="ico">📢</span>Meta Ads</a>
-          <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Graphic%20Designing." target="_blank" rel="noopener" class="svc-item"><span class="ico">🎨</span>Graphic Designing</a>
+          <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Graphic%20Designing." target="_blank" rel="noopener" class="svc-item"><span class="ico">🖌️</span>Graphic Designing</a>
+          <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Thumbnail%20Designing." target="_blank" rel="noopener" class="svc-item"><span class="ico">🖼️</span>Thumbnail Designing</a>
+          <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Video%20Editing." target="_blank" rel="noopener" class="svc-item"><span class="ico">🎬</span>Video Editing</a>
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Digital%20Visiting%20Cards." target="_blank" rel="noopener" class="svc-item"><span class="ico">💳</span>Digital Visiting Cards</a>
-          <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Digital%20Invitation%20Cards." target="_blank" rel="noopener" class="svc-item"><span class="ico">💌</span>Digital Invitation Cards</a>
+          <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Digital%20Invitation%20Cards." target="_blank" rel="noopener" class="svc-item"><span class="ico">💒</span>Digital Invitation Cards</a>
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Logo%20and%20Branding." target="_blank" rel="noopener" class="svc-item"><span class="ico">✨</span>Logo &amp; Branding</a>
-          <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20VAAN%20Stay%20OS%20QR." target="_blank" rel="noopener" class="svc-item"><span class="ico">🏨</span>VAAN Stay OS QR</a>
-          <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20QR%20Menu." target="_blank" rel="noopener" class="svc-item"><span class="ico">📋</span>QR Menu</a>
-          <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20QR%20Check-In." target="_blank" rel="noopener" class="svc-item"><span class="ico">✅</span>QR Check-In</a>
+          <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20VAAN%20Stay%20OS." target="_blank" rel="noopener" class="svc-item"><span class="ico">🏨</span>VAAN Stay OS</a>
+          <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Hospital%20Portals." target="_blank" rel="noopener" class="svc-item"><span class="ico">🏥</span>Hospital Portals</a>
+          <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Custom%20Projects." target="_blank" rel="noopener" class="svc-item"><span class="ico">🛠️</span>Custom Projects</a>
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20Academy%20Portals." target="_blank" rel="noopener" class="svc-item"><span class="ico">🎓</span>Academy Portals</a>
           <a href="https://wa.me/919671163712?text=Hi%20VAAN%2C%20I%20want%20to%20enquire%20about%20VAAN%20Salon%20OS." target="_blank" rel="noopener" class="svc-item"><span class="ico">💇</span>VAAN Salon OS</a>
         </div>
@@ -831,8 +898,21 @@ img{max-width:100%;display:block}
       </a>
     </div>
 
+    <div class="card-review">
+      <a class="review-btn" href="https://share.google/CFvhKRlFbipIEqzwH" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        <span>Review Us on Google</span>
+      </a>
+    </div>
+
+    <div class="goodday-sticker">
+      <span class="emoji">👋</span>
+      <span>Have a Good Day!</span>
+      <span class="emoji">😊</span>
+    </div>
+
     <div class="card-footer">
-      🇮🇳 Made in <b>India</b><br>
+      All Rights Reserved<br>
       © 2026 VAAN Consultancy
     </div>
 
@@ -1469,16 +1549,16 @@ img{max-width:100%;display:block}
     setTimeout(()=>URL.revokeObjectURL(url), 5000);
     const ua = navigator.userAgent;
     if (/android/i.test(ua)){
-      showToast("📱 Open the downloaded file → tap Save to add VAAN");
+      showToast("📱 File downloaded — open it & tap Save to add VAAN", 3000);
     } else if (/iPad|iPhone|iPod/.test(ua)){
-      showToast("📱 Open Files → tap VAAN-Consultancy.vcf → Add Contact");
+      showToast("📱 Open Files → tap VAAN-Consultancy.vcf → Add Contact", 3000);
     } else {
-      showToast("📁 Open Downloads → double-click VAAN-Consultancy.vcf");
+      showToast("📁 Open Downloads → double-click VAAN-Consultancy.vcf", 3000);
     }
   }
   window.addToContact = addToContact;
 
-  /* ===== COPY NUMBER ===== */
+  /* ===== COPY NUMBER — 2s feedback ===== */
   function copyNumber(btn){
     const num = "+919671163712";
     const done = () => {
@@ -1490,9 +1570,9 @@ img{max-width:100%;display:block}
         setTimeout(() => {
           btn.classList.remove("copied");
           if (span) span.textContent = original;
-        }, 1800);
+        }, 2000);
       }
-      showToast("Number copied — paste to call or save");
+      showToast("Number copied — paste to call or save", 2000);
     };
     if (navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(num).then(done).catch(() => {
@@ -1535,9 +1615,9 @@ img{max-width:100%;display:block}
           setTimeout(() => {
             btn.classList.remove("copied");
             if (span) span.textContent = original;
-          }, 1800);
+          }, 2000);
         }
-        showToast("Link copied — paste anywhere");
+        showToast("Link copied — paste anywhere", 2000);
       };
       if (navigator.clipboard && navigator.clipboard.writeText){
         navigator.clipboard.writeText(shareData.url).then(done).catch(() => {
@@ -1554,7 +1634,7 @@ img{max-width:100%;display:block}
 
   /* ===== TOAST ===== */
   let toastEl = null, toastTimer = null;
-  function showToast(text){
+  function showToast(text, duration){
     if (!toastEl){
       toastEl = document.createElement("div");
       toastEl.style.cssText = [
@@ -1586,10 +1666,11 @@ img{max-width:100%;display:block}
       toastEl.style.transform = "translateX(-50%) translateY(0)";
     });
     clearTimeout(toastTimer);
+    const dur = duration || 4500;
     toastTimer = setTimeout(() => {
       toastEl.style.opacity = "0";
       toastEl.style.transform = "translateX(-50%) translateY(20px)";
-    }, 4500);
+    }, dur);
   }
 })();
 </script>
