@@ -1,0 +1,1700 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Design Your Digital Visiting Card — VAAN Consultancy</title>
+<meta name="description" content="Create your own digital visiting card. Pick colors, choose a design, see a live preview — then pay just ₹1,500. Built by VAAN Consultancy.">
+<meta name="theme-color" content="#1a060d">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   VAAN ORDER BUILDER — STYLES (Chunk 1)
+   Matches card.html: deep maroon + gold + cream. Mobile-first.
+   ============================================================ */
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  background:#1a060d;color:#f5f5f5;line-height:1.55;
+  min-height:100vh;min-height:100dvh;
+  overscroll-behavior-y:none;
+}
+:root{
+  --bg-deep:#1a060d;--maroon:#2a0a12;--maroon-soft:#3d0f1a;--maroon-deep:#0f0307;
+  --gold:#d4a017;--gold-bright:#f0c14b;--gold-hot:#ffd966;--gold-soft:#b8891a;
+  --amber:#ff9d2e;--blue:#4f8fff;--cyan:#5fd9ff;
+  --green:#25d366;--green-dark:#128c3e;
+  --cream:#fdfaf3;--cream-dim:#c9a98a;
+  --line:rgba(212,160,23,.25);--line-soft:rgba(255,255,255,.08);
+  --red:#ff4d5e;--white:#f5f5f5;
+}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+img{max-width:100%;display:block}
+input,textarea,select{font-family:inherit}
+
+/* TOPBAR */
+.topbar{
+  position:sticky;top:0;z-index:80;
+  background:rgba(10,6,13,.92);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line-soft);
+  padding:12px 16px 10px;
+}
+.topbar-in{max-width:560px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:950;letter-spacing:-.5px;font-size:15px}
+.brand-mark{
+  width:26px;height:26px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--gold-bright),var(--gold));
+  color:#1a060d;border-radius:8px;font-size:14px;font-weight:950;
+}
+.brand small{display:block;color:var(--gold);font-size:8.5px;letter-spacing:2.4px;font-weight:800;margin-top:-1px}
+.help-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 12px;border-radius:99px;
+  background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.4);
+  color:#6ee08a;font-size:11.5px;font-weight:800;letter-spacing:.2px;
+  transition:transform .15s ease;
+}
+.help-btn:active{transform:scale(.96)}
+.help-btn svg{width:14px;height:14px}
+.progress-wrap{
+  max-width:560px;margin:10px auto 0;
+  display:flex;align-items:center;gap:10px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9.5px;letter-spacing:1.5px;color:var(--cream-dim);
+  text-transform:uppercase;font-weight:700;
+}
+.progress-bar{flex:1;height:4px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}
+.progress-fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--gold),var(--gold-bright),var(--gold-hot));
+  border-radius:99px;transition:width .4s cubic-bezier(.6,0,.2,1);
+}
+
+/* WRAP */
+.wrap{max-width:560px;margin:0 auto;padding:18px 16px 120px}
+.screen{display:none;animation:fadeUp .35s ease}
+.screen.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* HERO / LANDING */
+.hero{
+  position:relative;padding:32px 20px 28px;text-align:center;
+  border-radius:22px;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 0%,rgba(240,193,75,.22),transparent 65%),linear-gradient(165deg,rgba(61,15,26,.95),rgba(26,6,13,.98));
+  border:1px solid var(--line);margin-bottom:18px;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(212,160,23,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(212,160,23,.05) 1px,transparent 1px);
+  background-size:24px 24px;pointer-events:none;
+  mask-image:radial-gradient(ellipse at 50% 30%,#000 20%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 20%,transparent 75%);
+}
+.hero > *{position:relative;z-index:1}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 14px;border-radius:99px;
+  background:rgba(240,193,75,.12);border:1px solid rgba(240,193,75,.4);
+  color:var(--gold-bright);font-size:9px;font-weight:800;
+  letter-spacing:2.2px;text-transform:uppercase;margin-bottom:14px;
+}
+.hero-badge::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--gold-bright);box-shadow:0 0 10px var(--gold-bright);
+  animation:pulseDot 2s infinite;
+}
+@keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:32px;font-weight:700;line-height:1.1;
+  letter-spacing:1px;margin-bottom:12px;
+  background:linear-gradient(135deg,var(--gold-hot),var(--gold-bright) 40%,var(--gold));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero p{font-size:13.5px;color:var(--cream-dim);line-height:1.6;margin-bottom:20px;max-width:400px;margin-left:auto;margin-right:auto}
+.hero-price{display:inline-flex;align-items:baseline;gap:8px;margin-bottom:22px}
+.hero-price b{font-family:'Cormorant Garamond',Georgia,serif;font-size:38px;font-weight:700;letter-spacing:-1px;color:var(--gold-bright)}
+.hero-price s{font-size:16px;color:var(--cream-dim);font-weight:500;text-decoration-color:var(--red)}
+.hero-price small{font-size:10px;letter-spacing:2px;font-weight:800;color:var(--cream-dim);text-transform:uppercase;margin-left:2px}
+.hero-perks{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:24px}
+.perk{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 12px;border-radius:99px;
+  background:rgba(255,255,255,.04);border:1px solid var(--line-soft);
+  font-size:11px;color:var(--cream);font-weight:600;
+}
+.perk svg{width:13px;height:13px;color:var(--gold-bright);flex-shrink:0}
+
+/* BUTTONS */
+.btn-primary{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:16px 24px;border-radius:16px;
+  background:linear-gradient(135deg,var(--gold-bright),var(--gold));
+  color:#1a060d;font-weight:900;font-size:14px;
+  letter-spacing:.6px;text-transform:uppercase;
+  width:100%;min-height:56px;
+  box-shadow:0 10px 32px rgba(212,160,23,.35);
+  transition:transform .15s ease,box-shadow .15s ease;
+}
+.btn-primary:active{transform:scale(.98);box-shadow:0 5px 18px rgba(212,160,23,.5)}
+.btn-primary svg{width:18px;height:18px}
+.btn-primary:disabled{opacity:.45;cursor:not-allowed;pointer-events:none}
+.btn-secondary{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px 20px;border-radius:14px;
+  background:rgba(255,255,255,.04);border:1px solid var(--line-soft);
+  color:var(--cream);font-weight:700;font-size:13px;
+  letter-spacing:.3px;min-height:50px;
+  transition:background .15s ease,border-color .15s ease,transform .15s ease;
+}
+.btn-secondary:active{transform:scale(.98);background:rgba(212,160,23,.16);border-color:rgba(240,193,75,.4)}
+.btn-skip{
+  background:none;border:0;color:var(--cream-dim);
+  font-size:13px;font-weight:700;letter-spacing:.3px;
+  padding:14px 16px;text-decoration:underline;
+  text-decoration-color:rgba(201,169,138,.4);text-underline-offset:3px;
+  cursor:pointer;min-height:50px;
+}
+.btn-skip:hover{color:var(--gold-bright);text-decoration-color:var(--gold-bright)}
+.btn-row{display:flex;flex-direction:column;gap:8px;margin-top:22px}
+.btn-row-inline{display:flex;align-items:center;gap:10px;margin-top:22px}
+.btn-row-inline .btn-primary{flex:1}
+
+/* STEP HEADINGS */
+.step-head{text-align:center;margin-bottom:22px;padding-top:6px}
+.step-num{
+  display:inline-block;font-family:'JetBrains Mono',monospace;
+  font-size:9.5px;letter-spacing:2.5px;font-weight:800;
+  color:var(--gold);text-transform:uppercase;
+  padding:4px 12px;border-radius:99px;
+  background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.3);
+  margin-bottom:10px;
+}
+.step-head h2{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:26px;font-weight:700;line-height:1.15;
+  letter-spacing:.3px;margin-bottom:8px;color:var(--cream);
+}
+.step-head p{font-size:13px;color:var(--cream-dim);line-height:1.55;max-width:400px;margin:0 auto}
+.step-head p em{color:var(--gold-bright);font-style:normal;font-weight:700}
+
+/* FORM */
+.field{margin-bottom:14px}
+.field label{display:block;font-size:10.5px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--cream-dim);margin-bottom:8px}
+.field input[type="text"],.field input[type="tel"],.field input[type="email"],.field input[type="url"],.field textarea,.field select{
+  width:100%;padding:16px 18px;background:rgba(255,255,255,.03);
+  border:1.5px solid var(--line-soft);border-radius:14px;
+  color:var(--white);font-size:15.5px;
+  transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
+  -webkit-appearance:none;appearance:none;
+}
+.field input:focus,.field textarea:focus,.field select:focus{
+  outline:none;border-color:var(--gold-bright);
+  background:rgba(240,193,75,.04);box-shadow:0 0 0 3px rgba(240,193,75,.12);
+}
+.field input::placeholder,.field textarea::placeholder{color:rgba(201,169,138,.5)}
+.field textarea{min-height:96px;resize:vertical;line-height:1.5}
+.field .char-count{text-align:right;font-size:10.5px;color:var(--cream-dim);font-family:'JetBrains Mono',monospace;margin-top:6px;letter-spacing:1px}
+.field .char-count.over{color:var(--red);font-weight:700}
+
+/* CATEGORY CHIPS */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;max-height:220px;overflow-y:auto;padding:4px 2px}
+.chip{
+  padding:9px 14px;border-radius:99px;
+  background:rgba(255,255,255,.04);border:1px solid var(--line-soft);
+  color:var(--cream);font-size:12.5px;font-weight:600;
+  letter-spacing:.2px;cursor:pointer;transition:all .15s ease;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.chip:active{transform:scale(.96)}
+.chip.selected{background:linear-gradient(135deg,var(--gold-bright),var(--gold));border-color:var(--gold-bright);color:#1a060d;font-weight:800}
+.chip .emoji{font-size:13px}
+
+/* UPLOAD */
+.upload{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;padding:26px 20px;
+  background:rgba(255,255,255,.02);border:2px dashed var(--line);
+  border-radius:16px;cursor:pointer;text-align:center;
+  transition:all .2s ease;min-height:140px;
+}
+.upload:active{background:rgba(212,160,23,.08)}
+.upload.has-file{border-style:solid;border-color:var(--gold-bright);background:rgba(212,160,23,.06);padding:14px}
+.upload input[type="file"]{display:none}
+.upload-icon{width:44px;height:44px;border-radius:50%;background:rgba(240,193,75,.12);display:flex;align-items:center;justify-content:center}
+.upload-icon svg{width:22px;height:22px;color:var(--gold-bright)}
+.upload-label{font-size:13.5px;font-weight:700;color:var(--cream)}
+.upload-hint{font-size:11px;color:var(--cream-dim);line-height:1.4}
+.upload-preview{display:flex;align-items:center;gap:12px;width:100%;text-align:left}
+.upload-preview img{width:64px;height:64px;border-radius:12px;object-fit:cover;background:rgba(0,0,0,.3);flex-shrink:0;border:1px solid var(--gold)}
+.upload-preview-info{flex:1;min-width:0}
+.upload-preview-info b{display:block;font-size:13px;color:var(--cream);font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.upload-preview-info small{font-size:10.5px;color:var(--green);font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.upload-remove{background:rgba(255,77,94,.15);border:1px solid rgba(255,77,94,.3);color:#ff6b7a;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+
+/* DYNAMIC LIST */
+.dyn-list{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.dyn-row{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:12px;padding:4px}
+.dyn-row input{flex:1;padding:12px 14px;background:transparent;border:0;color:var(--white);font-size:14.5px;min-width:0}
+.dyn-row input:focus{outline:none}
+.dyn-row input::placeholder{color:rgba(201,169,138,.45)}
+.dyn-row .remove{width:36px;height:36px;border-radius:10px;background:rgba(255,77,94,.12);color:#ff6b7a;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dyn-add{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;border-radius:12px;background:rgba(212,160,23,.08);border:1.5px dashed rgba(240,193,75,.4);color:var(--gold-bright);font-size:13px;font-weight:700;letter-spacing:.3px;width:100%;min-height:50px}
+.dyn-add:active{background:rgba(212,160,23,.16)}
+.dyn-add svg{width:16px;height:16px}
+
+/* SOCIAL LINK ROWS */
+.link-row{background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.link-row-head{display:flex;align-items:center;gap:8px}
+.link-row-head select{flex:1;padding:10px 12px;border-radius:10px;background:rgba(26,6,13,.6);border:1px solid var(--line-soft);color:var(--white);font-size:13px}
+.link-row-head select:focus{outline:none;border-color:var(--gold-bright)}
+.link-row-head .remove{width:34px;height:34px;border-radius:10px;background:rgba(255,77,94,.12);color:#ff6b7a;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.link-row input[type="url"]{width:100%;padding:11px 13px;background:rgba(26,6,13,.5);border:1px solid var(--line-soft);border-radius:10px;color:var(--white);font-size:13px}
+.link-row input[type="url"]:focus{outline:none;border-color:var(--gold-bright)}
+
+/* PALETTE PICKER */
+.palettes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:10px;margin-bottom:16px}
+.palette-card{
+  background:rgba(255,255,255,.03);border:2px solid var(--line-soft);
+  border-radius:14px;padding:8px;cursor:pointer;text-align:center;
+  transition:all .18s ease;position:relative;overflow:hidden;
+}
+.palette-card:active{transform:scale(.97)}
+.palette-card.selected{border-color:var(--gold-bright);background:rgba(240,193,75,.08);box-shadow:0 0 0 3px rgba(240,193,75,.16)}
+.palette-card.selected::after{content:"✓";position:absolute;top:4px;right:4px;width:18px;height:18px;border-radius:50%;background:var(--gold-bright);color:#1a060d;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.palette-swatches{display:flex;gap:2px;margin-bottom:6px;border-radius:8px;overflow:hidden;height:38px}
+.palette-swatches span{flex:1}
+.palette-name{font-size:9px;font-weight:800;letter-spacing:.5px;color:var(--cream-dim);text-transform:uppercase;line-height:1.2;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.palette-card.selected .palette-name{color:var(--gold-bright)}
+
+/* TEMPLATE PICKER */
+.templates-grid{display:flex;flex-direction:column;gap:14px;margin-bottom:16px}
+.template-card{background:rgba(255,255,255,.03);border:2px solid var(--line-soft);border-radius:18px;padding:14px;cursor:pointer;display:flex;gap:14px;align-items:center;transition:all .18s ease}
+.template-card:active{transform:scale(.985)}
+.template-card.selected{border-color:var(--gold-bright);background:rgba(240,193,75,.06);box-shadow:0 0 0 3px rgba(240,193,75,.14)}
+.template-thumb{width:80px;height:130px;border-radius:12px;background:#0a0608;border:1px solid var(--line);flex-shrink:0;overflow:hidden;display:flex;flex-direction:column;padding:8px 6px;gap:4px}
+.template-thumb .t-bar{height:5px;border-radius:3px;background:rgba(240,193,75,.4)}
+.template-thumb .t-bar.short{width:60%}
+.template-thumb .t-block{flex:1;border-radius:5px;background:rgba(240,193,75,.14);border:1px solid rgba(240,193,75,.2);display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--gold-bright);font-family:'JetBrains Mono',monospace;font-weight:800;letter-spacing:.5px}
+.template-info{flex:1;min-width:0}
+.template-info b{display:block;font-size:15px;font-weight:800;color:var(--cream);margin-bottom:4px;letter-spacing:-.2px}
+.template-info small{font-size:11.5px;color:var(--cream-dim);line-height:1.45;display:block}
+.template-card.selected .template-info b{color:var(--gold-bright)}
+
+/* ANIMATION OPTIONS */
+.anim-options{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.anim-option{background:rgba(255,255,255,.03);border:2px solid var(--line-soft);border-radius:16px;padding:16px;cursor:pointer;display:flex;gap:14px;align-items:flex-start;transition:all .18s ease}
+.anim-option:active{transform:scale(.985)}
+.anim-option.selected{border-color:var(--gold-bright);background:rgba(240,193,75,.06);box-shadow:0 0 0 3px rgba(240,193,75,.14)}
+.anim-radio{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);flex-shrink:0;margin-top:2px;position:relative;transition:all .15s ease}
+.anim-option.selected .anim-radio{border-color:var(--gold-bright);background:var(--gold-bright)}
+.anim-option.selected .anim-radio::after{content:"";position:absolute;inset:5px;border-radius:50%;background:#1a060d}
+.anim-info{flex:1;min-width:0}
+.anim-info b{display:block;font-size:14.5px;font-weight:800;color:var(--cream);margin-bottom:4px}
+.anim-option.selected .anim-info b{color:var(--gold-bright)}
+.anim-info small{font-size:12px;color:var(--cream-dim);line-height:1.45;display:block}
+.anim-note{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:12px;background:rgba(79,143,255,.08);border:1px solid rgba(79,143,255,.3);margin-top:6px}
+.anim-note svg{width:16px;height:16px;color:#7ab0ff;flex-shrink:0;margin-top:2px}
+.anim-note p{font-size:11.5px;color:#a8c4ff;line-height:1.5}
+
+/* LIVE PREVIEW */
+.preview-outer{position:relative;background:linear-gradient(165deg,#0a0608,#1a060d);border-radius:22px;padding:20px 14px;margin-bottom:16px;border:1px solid var(--line);overflow:hidden}
+.preview-outer::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(212,160,23,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(212,160,23,.04) 1px,transparent 1px);background-size:20px 20px;pointer-events:none}
+.preview-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:99px;background:rgba(212,160,23,.15);border:1px solid rgba(240,193,75,.4);color:var(--gold-bright);font-size:8.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;position:relative;z-index:1}
+.preview-badge::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--red);box-shadow:0 0 8px var(--red);animation:pulseDot 1.4s infinite}
+.preview-wrap{position:relative;z-index:1;max-width:340px;margin:0 auto;border-radius:18px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.preview-card{padding:22px 18px 18px;border-radius:18px;font-size:12px;line-height:1.4;position:relative;overflow:hidden;min-height:380px;transition:background .3s ease,color .3s ease}
+.preview-watermark{position:absolute;bottom:12px;right:12px;display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:99px;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.85);font-size:8.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;pointer-events:none;z-index:10}
+.preview-watermark svg{width:11px;height:11px}
+.preview-actions{display:flex;gap:10px;margin-top:14px;position:relative;z-index:1}
+.preview-actions .btn-secondary{flex:1}
+
+/* COUPON */
+.coupon-wrap{display:flex;gap:8px;margin-bottom:12px}
+.coupon-wrap input{flex:1;padding:14px 16px;background:rgba(255,255,255,.03);border:1.5px solid var(--line-soft);border-radius:12px;color:var(--white);font-size:13px;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.coupon-wrap input:focus{outline:none;border-color:var(--gold-bright)}
+.coupon-wrap button{padding:14px 20px;border-radius:12px;background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1a060d;font-weight:900;font-size:12px;letter-spacing:.8px;text-transform:uppercase;white-space:nowrap}
+.coupon-wrap button:disabled{opacity:.5;pointer-events:none}
+.coupon-msg{font-size:11.5px;margin-bottom:12px;padding:8px 12px;border-radius:8px;display:none;line-height:1.4}
+.coupon-msg.show{display:block}
+.coupon-msg.ok{background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.3);color:#6ee08a}
+.coupon-msg.err{background:rgba(255,77,94,.1);border:1px solid rgba(255,77,94,.3);color:#ff8a95}
+
+/* SUMMARY */
+.summary{background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:16px;padding:16px;margin-bottom:16px}
+.summary-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:13.5px}
+.summary-row span:first-child{color:var(--cream-dim)}
+.summary-row span:last-child{color:var(--cream);font-weight:700}
+.summary-row.discount span:last-child{color:var(--green)}
+.summary-row.total{border-top:1.5px solid var(--line);margin-top:8px;padding-top:14px;font-size:16px}
+.summary-row.total span:first-child{color:var(--cream);font-weight:800}
+.summary-row.total span:last-child{font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;color:var(--gold-bright);font-weight:700}
+
+/* SUCCESS */
+.success-wrap{text-align:center;padding:30px 10px}
+.success-check{width:90px;height:90px;margin:0 auto 20px;border-radius:50%;background:linear-gradient(135deg,rgba(37,211,102,.2),rgba(37,211,102,.05));border:2px solid var(--green);display:flex;align-items:center;justify-content:center;animation:successPop .6s cubic-bezier(.2,.9,.3,1.1);box-shadow:0 0 40px rgba(37,211,102,.3)}
+.success-check svg{width:44px;height:44px;color:var(--green);stroke-width:3}
+@keyframes successPop{0%{transform:scale(0) rotate(-45deg);opacity:0}60%{transform:scale(1.15) rotate(0deg);opacity:1}100%{transform:scale(1) rotate(0deg)}}
+.success-wrap h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:28px;font-weight:700;color:var(--gold-bright);margin-bottom:10px}
+.success-wrap .order-id{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:2px;padding:8px 16px;border-radius:99px;background:rgba(240,193,75,.1);border:1px solid rgba(240,193,75,.35);color:var(--gold-bright);margin-bottom:18px}
+.success-wrap p{font-size:13.5px;color:var(--cream-dim);line-height:1.65;margin-bottom:20px;max-width:400px;margin-left:auto;margin-right:auto}
+.success-wrap p b{color:var(--cream);font-weight:700}
+.success-steps{display:flex;flex-direction:column;gap:12px;text-align:left;margin:24px 0;background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:16px;padding:18px}
+.success-step{display:flex;gap:12px;align-items:flex-start}
+.success-step-num{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1a060d;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'JetBrains Mono',monospace}
+.success-step p{font-size:12.5px;color:var(--cream-dim);line-height:1.5;margin:0}
+.success-step p b{color:var(--cream);font-weight:700}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;left:20px;right:20px;max-width:440px;margin:0 auto;background:#1a060d;border:1px solid var(--line);border-left:3px solid var(--gold);padding:14px 18px;border-radius:12px;font-size:13px;font-weight:700;color:var(--white);z-index:2000;box-shadow:0 20px 50px rgba(0,0,0,.6);display:none}
+.toast.show{display:block;animation:toastIn .3s ease}
+.toast.err{border-left-color:var(--red)}
+.toast.ok{border-left-color:var(--green)}
+@keyframes toastIn{from{transform:translateY(20px);opacity:0}to{transform:none;opacity:1}}
+
+/* SPINNER */
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(26,6,13,.3);border-top-color:#1a060d;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.text-center{text-align:center}
+.mt-16{margin-top:16px}
+.hidden{display:none!important}
+
+@media(max-width:380px){
+  .hero h1{font-size:28px}
+  .hero-price b{font-size:32px}
+  .step-head h2{font-size:22px}
+  .palette-card{padding:6px}
+  .palette-swatches{height:32px}
+  .palette-name{font-size:8px}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand">
+      <div class="brand-mark">▲</div>
+      <div>
+        <b style="font-size:13px">VAAN</b>
+        <small>ORDER BUILDER</small>
+      </div>
+    </div>
+    <a class="help-btn" id="helpBtn" href="https://wa.me/919671163712" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Help
+    </a>
+  </div>
+  <div class="progress-wrap" id="progressWrap" style="display:none">
+    <span id="progressLabel">Step 1 / 12</span>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+</header>
+
+<main class="wrap" id="app">
+  <div style="text-align:center;padding:80px 20px;color:var(--cream-dim)">
+    <div class="spinner" style="width:32px;height:32px;border-width:3px;border-top-color:var(--gold-bright);margin:0 auto 16px"></div>
+    Loading builder…
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<!-- CHUNK2_INSERT_HERE --><!-- ============================================================
+     SCREEN: LANDING
+     ============================================================ -->
+<section class="screen active" id="screen-landing">
+  <div class="hero">
+    <div class="hero-badge">Digital Visiting Card</div>
+    <h1>Design Your Own<br>Digital Visiting Card</h1>
+    <p>Pick your colors, choose a design, see a live preview of your own card — <em>free</em>. Pay only when you love it.</p>
+    <div class="hero-price">
+      <b id="landingPrice">₹1,500</b>
+      <s id="landingOriginal" class="hidden">₹2,000</s>
+      <small>one-time</small>
+    </div>
+    <div class="hero-perks">
+      <span class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Free Live Preview</span>
+      <span class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Custom Link + QR</span>
+      <span class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Delivery in 12 hrs</span>
+    </div>
+    <button class="btn-primary" onclick="goToStep(1)">
+      Start Designing
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ============================================================
+     STEP 1: FULL NAME (required)
+     ============================================================ -->
+<section class="screen" id="screen-1">
+  <div class="step-head">
+    <span class="step-num">Step 1 of 12</span>
+    <h2>What's your name?</h2>
+    <p>This will appear on your digital card.</p>
+  </div>
+  <div class="field">
+    <label>Full Name *</label>
+    <input type="text" id="inputName" placeholder="e.g. Vikas Sharma" autocomplete="name" oninput="onNameInput()">
+  </div>
+  <div class="btn-row">
+    <button class="btn-primary" id="next-1" onclick="nextStep(1)" disabled>
+      Next
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ============================================================
+     STEP 2: PROFESSION (skip)
+     ============================================================ -->
+<section class="screen" id="screen-2">
+  <div class="step-head">
+    <span class="step-num">Step 2 of 12</span>
+    <h2>What's your profession?</h2>
+    <p>Helps us design your card better.</p>
+  </div>
+  <div class="field">
+    <label>Profession / Designation</label>
+    <input type="text" id="inputProfession" placeholder="e.g. Hotel Owner, Doctor, CA, Photographer" oninput="saveField('profession', this.value)">
+  </div>
+  <div class="btn-row-inline">
+    <button class="btn-primary" onclick="nextStep(2)">Next →</button>
+    <button class="btn-skip" onclick="skipStep(2)">Skip</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     STEP 3: BUSINESS NAME (skip)
+     ============================================================ -->
+<section class="screen" id="screen-3">
+  <div class="step-head">
+    <span class="step-num">Step 3 of 12</span>
+    <h2>Your business name?</h2>
+    <p>Leave blank if you work as an individual.</p>
+  </div>
+  <div class="field">
+    <label>Business / Company Name</label>
+    <input type="text" id="inputBusiness" placeholder="e.g. Shreeji Hotel" oninput="saveField('businessName', this.value)">
+  </div>
+  <div class="btn-row-inline">
+    <button class="btn-primary" onclick="nextStep(3)">Next →</button>
+    <button class="btn-skip" onclick="skipStep(3)">Skip</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     STEP 4: CATEGORY (chips + custom)
+     ============================================================ -->
+<section class="screen" id="screen-4">
+  <div class="step-head">
+    <span class="step-num">Step 4 of 12</span>
+    <h2>What's your category?</h2>
+    <p>Pick one, or type your own.</p>
+  </div>
+  <div class="chips" id="categoryChips">
+    <div class="chip" style="opacity:.4;pointer-events:none">Loading categories…</div>
+  </div>
+  <div class="field">
+    <label>Or type your own</label>
+    <input type="text" id="inputCategoryCustom" placeholder="e.g. Drone Photography" oninput="onCustomCategoryInput()">
+  </div>
+  <div class="btn-row-inline">
+    <button class="btn-primary" onclick="nextStep(4)">Next →</button>
+    <button class="btn-skip" onclick="skipStep(4)">Skip</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     STEP 5: MOBILE (required)
+     ============================================================ -->
+<section class="screen" id="screen-5">
+  <div class="step-head">
+    <span class="step-num">Step 5 of 12</span>
+    <h2>Your mobile number?</h2>
+    <p>For WhatsApp and calls. We'll deliver your final card here.</p>
+  </div>
+  <div class="field">
+    <label>Mobile Number *</label>
+    <input type="tel" id="inputPhone" placeholder="e.g. 9876543210" maxlength="13" autocomplete="tel" inputmode="numeric" oninput="onPhoneInput()">
+  </div>
+  <div class="btn-row">
+    <button class="btn-primary" id="next-5" onclick="nextStep(5)" disabled>
+      Next
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ============================================================
+     STEP 6: EMAIL (skip)
+     ============================================================ -->
+<section class="screen" id="screen-6">
+  <div class="step-head">
+    <span class="step-num">Step 6 of 12</span>
+    <h2>Your email address?</h2>
+    <p>Optional — for order confirmation.</p>
+  </div>
+  <div class="field">
+    <label>Email Address</label>
+    <input type="email" id="inputEmail" placeholder="you@example.com" autocomplete="email" oninput="saveField('email', this.value)">
+  </div>
+  <div class="btn-row-inline">
+    <button class="btn-primary" onclick="nextStep(6)">Next →</button>
+    <button class="btn-skip" onclick="skipStep(6)">Skip</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     STEP 7: LOGO UPLOAD (skip)
+     ============================================================ -->
+<section class="screen" id="screen-7">
+  <div class="step-head">
+    <span class="step-num">Step 7 of 12</span>
+    <h2>Upload your business logo</h2>
+    <p>Auto-compressed. PNG, JPG, or WebP.</p>
+  </div>
+  <label class="upload" id="uploadLogo" for="fileLogo">
+    <input type="file" id="fileLogo" accept="image/*" onchange="onLogoUpload(this)">
+    <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+    <div class="upload-label">Tap to upload logo</div>
+    <div class="upload-hint">Max size auto-handled · We compress it for you</div>
+  </label>
+  <div class="btn-row-inline" style="margin-top:16px">
+    <button class="btn-primary" onclick="nextStep(7)">Next →</button>
+    <button class="btn-skip" onclick="skipStep(7)">Skip</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     STEP 8: FOUNDER PHOTO (skip)
+     ============================================================ -->
+<section class="screen" id="screen-8">
+  <div class="step-head">
+    <span class="step-num">Step 8 of 12</span>
+    <h2>Upload your photo</h2>
+    <p>Optional — shown in the founder section of your card.</p>
+  </div>
+  <label class="upload" id="uploadFounder" for="fileFounder">
+    <input type="file" id="fileFounder" accept="image/*" onchange="onFounderUpload(this)">
+    <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+    <div class="upload-label">Tap to upload your photo</div>
+    <div class="upload-hint">Optional · Auto-compressed</div>
+  </label>
+  <div class="btn-row-inline" style="margin-top:16px">
+    <button class="btn-primary" onclick="nextStep(8)">Next →</button>
+    <button class="btn-skip" onclick="skipStep(8)">Skip</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     STEP 9: SERVICES LIST (skip)
+     ============================================================ -->
+<section class="screen" id="screen-9">
+  <div class="step-head">
+    <span class="step-num">Step 9 of 12</span>
+    <h2>Your services or products</h2>
+    <p>Add one per line. Skip if you want to discuss later.</p>
+  </div>
+  <div class="dyn-list" id="servicesList">
+    <div class="dyn-row">
+      <input type="text" placeholder="e.g. Website Development" oninput="saveServices()">
+      <button class="remove" onclick="removeService(this)" aria-label="Remove">×</button>
+    </div>
+  </div>
+  <button class="dyn-add" onclick="addServiceRow()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Add another service
+  </button>
+  <div class="btn-row-inline" style="margin-top:16px">
+    <button class="btn-primary" onclick="nextStep(9)">Next →</button>
+    <button class="btn-skip" onclick="skipStep(9)">Skip</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     STEP 10: SOCIAL LINKS (skip)
+     ============================================================ -->
+<section class="screen" id="screen-10">
+  <div class="step-head">
+    <span class="step-num">Step 10 of 12</span>
+    <h2>Your social links</h2>
+    <p>Instagram, Facebook, website, YouTube, LinkedIn — add as many as you like.</p>
+  </div>
+  <div class="dyn-list" id="linksList">
+    <div class="link-row">
+      <div class="link-row-head">
+        <select onchange="saveSocialLinks()">
+          <option value="instagram">Instagram</option>
+          <option value="facebook">Facebook</option>
+          <option value="website">Website</option>
+          <option value="youtube">YouTube</option>
+          <option value="linkedin">LinkedIn</option>
+          <option value="whatsapp">WhatsApp</option>
+          <option value="custom">Custom</option>
+        </select>
+        <button class="remove" onclick="removeLink(this)" aria-label="Remove">×</button>
+      </div>
+      <input type="url" placeholder="https://..." oninput="saveSocialLinks()">
+    </div>
+  </div>
+  <button class="dyn-add" onclick="addLinkRow()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Add another link
+  </button>
+  <div class="btn-row-inline" style="margin-top:16px">
+    <button class="btn-primary" onclick="nextStep(10)">Next →</button>
+    <button class="btn-skip" onclick="skipStep(10)">Skip</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     STEP 11: ADDRESS (skip)
+     ============================================================ -->
+<section class="screen" id="screen-11">
+  <div class="step-head">
+    <span class="step-num">Step 11 of 12</span>
+    <h2>Your shop or office address</h2>
+    <p>Optional — shown on your card.</p>
+  </div>
+  <div class="field">
+    <label>Shop / Office Address</label>
+    <textarea id="inputAddress" placeholder="e.g. 12, MG Road, Karnal, Haryana 132001" oninput="saveField('address', this.value)"></textarea>
+  </div>
+  <div class="btn-row-inline">
+    <button class="btn-primary" onclick="nextStep(11)">Next →</button>
+    <button class="btn-skip" onclick="skipStep(11)">Skip</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     STEP 12: GOOGLE REVIEW LINK (skip)
+     ============================================================ -->
+<section class="screen" id="screen-12">
+  <div class="step-head">
+    <span class="step-num">Step 12 of 12</span>
+    <h2>Your Google review link</h2>
+    <p>Optional — we'll add a "Review us" button on your card.</p>
+  </div>
+  <div class="field">
+    <label>Google Review Link</label>
+    <input type="url" id="inputGoogleReview" placeholder="https://g.page/r/..." oninput="saveField('googleReviewLink', this.value)">
+  </div>
+  <div class="btn-row-inline">
+    <button class="btn-primary" onclick="nextStep(12)">Next →</button>
+    <button class="btn-skip" onclick="skipStep(12)">Skip</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     PALETTE PICKER
+     ============================================================ -->
+<section class="screen" id="screen-palette">
+  <div class="step-head">
+    <span class="step-num">Design · 1 of 3</span>
+    <h2>Pick a color palette</h2>
+    <p>Tap any palette to see it applied live.</p>
+  </div>
+  <div class="palettes-grid" id="palettesGrid">
+    <div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--cream-dim)">Loading palettes…</div>
+  </div>
+  <div class="btn-row">
+    <button class="btn-primary" onclick="goToScreen('template')">Next: Choose template →</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     TEMPLATE PICKER
+     ============================================================ -->
+<section class="screen" id="screen-template">
+  <div class="step-head">
+    <span class="step-num">Design · 2 of 3</span>
+    <h2>Pick a layout</h2>
+    <p>Choose how your card is arranged.</p>
+  </div>
+  <div class="templates-grid" id="templatesGrid">
+    <div style="text-align:center;padding:30px;color:var(--cream-dim)">Loading templates…</div>
+  </div>
+  <div class="btn-row">
+    <button class="btn-primary" onclick="goToScreen('animation')">Next: Opening animation →</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     ANIMATION PICKER
+     ============================================================ -->
+<section class="screen" id="screen-animation">
+  <div class="step-head">
+    <span class="step-num">Design · 3 of 3</span>
+    <h2>Opening animation</h2>
+    <p>How should your card open when someone visits it?</p>
+  </div>
+  <div class="anim-options" id="animOptions">
+    <div class="anim-option" onclick="selectAnimation('none')" data-anim="none">
+      <div class="anim-radio"></div>
+      <div class="anim-info">
+        <b>No animation</b>
+        <small>Clean, instant load. Best for older audiences.</small>
+      </div>
+    </div>
+    <div class="anim-option" onclick="selectAnimation('auto')" data-anim="auto">
+      <div class="anim-radio"></div>
+      <div class="anim-info">
+        <b>Based on your business</b>
+        <small>We'll pick the perfect animation for your profession.</small>
+      </div>
+    </div>
+    <div class="anim-option" onclick="selectAnimation('custom')" data-anim="custom">
+      <div class="anim-radio"></div>
+      <div class="anim-info">
+        <b>Describe your own idea</b>
+        <small>Tell us what you want (max 600 characters).</small>
+      </div>
+    </div>
+  </div>
+  <div class="field hidden" id="animCustomField">
+    <label>Describe your animation idea</label>
+    <textarea id="inputAnimCustom" placeholder="e.g. Golden dragon breathing fire that reveals my logo…" maxlength="600" oninput="onAnimCustomInput()"></textarea>
+    <div class="char-count" id="animCharCount">0 / 600</div>
+  </div>
+  <div class="anim-note">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    <p>Animations are not shown in the free preview. Final animated card will be built after payment.</p>
+  </div>
+  <div class="btn-row">
+    <button class="btn-primary" onclick="goToScreen('preview')">See my live preview →</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     LIVE PREVIEW
+     ============================================================ -->
+<section class="screen" id="screen-preview">
+  <div class="step-head">
+    <span class="step-num">Your Card</span>
+    <h2>Here's your preview</h2>
+    <p>This is exactly how your card will look.</p>
+  </div>
+  <div class="preview-outer">
+    <div class="preview-badge">Live Preview</div>
+    <div class="preview-wrap">
+      <div class="preview-card" id="previewCard">
+        <div class="preview-watermark">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+          VAAN Preview
+        </div>
+        <div style="text-align:center;color:rgba(255,255,255,.4);padding:120px 20px;font-size:13px">Generating preview…</div>
+      </div>
+    </div>
+    <div class="preview-actions">
+      <button class="btn-secondary" onclick="downloadPreview()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Free
+      </button>
+      <button class="btn-secondary" onclick="goToScreen('palette')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        Edit
+      </button>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn-primary" onclick="goToScreen('checkout')">
+      Looks good — Continue to payment →
+    </button>
+  </div>
+</section>
+
+<!-- ============================================================
+     CHECKOUT
+     ============================================================ -->
+<section class="screen" id="screen-checkout">
+  <div class="step-head">
+    <span class="step-num">Final Step</span>
+    <h2>Complete your order</h2>
+    <p>Secure payment via Cashfree. We deliver within 12 hours.</p>
+  </div>
+  <div class="field" style="margin-bottom:20px">
+    <label>Have a coupon?</label>
+    <div class="coupon-wrap">
+      <input type="text" id="couponInput" placeholder="ENTER CODE" maxlength="20">
+      <button id="couponBtn" onclick="applyCoupon()">Apply</button>
+    </div>
+    <div class="coupon-msg" id="couponMsg"></div>
+  </div>
+  <div class="summary">
+    <div class="summary-row"><span>Subtotal</span><span id="sumSubtotal">₹1,500</span></div>
+    <div class="summary-row discount hidden" id="sumDiscountRow"><span>Discount</span><span id="sumDiscount">-₹0</span></div>
+    <div class="summary-row total"><span>Total</span><span id="sumTotal">₹1,500</span></div>
+  </div>
+  <div class="btn-row">
+    <button class="btn-primary" id="payBtn" onclick="startPayment()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      Pay <span id="payAmount">₹1,500</span> Securely
+    </button>
+    <button class="btn-secondary" onclick="goToScreen('preview')">← Back to preview</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     SUCCESS
+     ============================================================ -->
+<section class="screen" id="screen-success">
+  <div class="success-wrap">
+    <div class="success-check">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2>Payment received! 🎉</h2>
+    <div class="order-id" id="successOrderId">VAAN-XXXX</div>
+    <p>Thank you, <b id="successName">there</b>! Your order is confirmed. We'll start building your full animated card right away.</p>
+    <div class="success-steps">
+      <div class="success-step">
+        <div class="success-step-num">1</div>
+        <p><b>Within 12 hours</b> (max 2 days) — we build your full animated digital card.</p>
+      </div>
+      <div class="success-step">
+        <div class="success-step-num">2</div>
+        <p>You'll receive your <b>custom link + QR code</b> on WhatsApp at <b id="successPhone">your number</b>.</p>
+      </div>
+      <div class="success-step">
+        <div class="success-step-num">3</div>
+        <p>Share your card with anyone, anywhere — no app needed. <b>Lifetime access.</b></p>
+      </div>
+    </div>
+    <a class="btn-primary" href="https://wa.me/919671163712" target="_blank" rel="noopener" style="text-decoration:none">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Message us on WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- CHUNK3_INSERT_HERE --><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ============================================================
+   VAAN ORDER BUILDER — JAVASCRIPT
+   ============================================================ */
+
+var SUPABASE_URL = "https://xvtxpllmfwgnlrffbcqz.supabase.co";
+var SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh2dHhwbGxtZndnbmxyZmZiY3F6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0Mzg2OTYsImV4cCI6MjEwNjAxNDY5Nn0.JC1Za7PdNGLngpupBovq_DqI-vHRVBOovLdEe-w1Ap0";
+var sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+var WHATSAPP_HELP = "919671163712";
+
+var state = {
+  sessionId: null,
+  currentStep: 0,
+  currentScreen: "landing",
+  product: null,
+  categories: [],
+  palettes: [],
+  templates: [],
+  data: {
+    name: "",
+    profession: "",
+    businessName: "",
+    category: "",
+    phone: "",
+    email: "",
+    address: "",
+    googleReviewLink: "",
+    services: [""],
+    socialLinks: [{ platform: "instagram", url: "" }],
+    logoFile: null,
+    logoUrl: "",
+    founderFile: null,
+    founderUrl: "",
+    paletteId: null,
+    paletteData: null,
+    templateId: null,
+    templateSlug: null,
+    animationChoice: null,
+    animationCustom: ""
+  },
+  coupon: null,
+  discount: 0,
+  subtotal: 1500
+};
+
+var DEFAULT_PRICE = 1500;
+var DEFAULT_ORIGINAL = 2000;
+
+/* ---- HELPERS ---- */
+function $(id) { return document.getElementById(id); }
+function esc(v) { return String(v || "").replace(/[&<>"']/g, function(m) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]; }); }
+function showToast(msg, type) {
+  var t = $("toast");
+  t.textContent = msg;
+  t.className = "toast show" + (type ? " " + type : "");
+  setTimeout(function() { t.className = "toast"; }, 3200);
+}
+function fmtPrice(n) { return "₹" + Number(n || 0).toLocaleString("en-IN"); }
+
+/* ---- FUNNEL TRACKING (no sensitive values) ---- */
+function newSessionId() {
+  return "s_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 8);
+}
+function trackEvent(eventType, stepNumber, fieldName) {
+  if (!state.sessionId) state.sessionId = newSessionId();
+  try {
+    sb.from("vaan_funnel_events").insert([{
+      session_id: state.sessionId,
+      event_type: eventType,
+      step_number: stepNumber || null,
+      field_name: fieldName || null
+    }]).then(function() {}).catch(function() {});
+  } catch (e) {}
+}
+
+/* ---- LOAD DATA FROM SUPABASE ---- */
+async function loadInitialData() {
+  try {
+    var results = await Promise.all([
+      sb.from("vaan_categories").select("*").eq("is_active", true).order("sort_order"),
+      sb.from("vaan_palettes").select("*").eq("is_active", true).order("sort_order"),
+      sb.from("vaan_templates").select("*").eq("is_active", true).order("sort_order"),
+      sb.from("vaan_products").select("*").eq("is_active", true).order("sort_order").limit(1)
+    ]);
+
+    state.categories = results[0].data || [];
+    state.palettes = results[1].data || [];
+    state.templates = results[2].data || [];
+    var products = results[3].data || [];
+
+    if (products.length > 0) {
+      state.product = products[0];
+      state.subtotal = products[0].discount_price || products[0].price || DEFAULT_PRICE;
+      var original = products[0].price || DEFAULT_ORIGINAL;
+      if (original > state.subtotal) {
+        $("landingOriginal").textContent = fmtPrice(original);
+        $("landingOriginal").classList.remove("hidden");
+      }
+      $("landingPrice").textContent = fmtPrice(state.subtotal);
+      $("payAmount").textContent = fmtPrice(state.subtotal);
+      $("sumSubtotal").textContent = fmtPrice(state.subtotal);
+      $("sumTotal").textContent = fmtPrice(state.subtotal);
+    }
+
+    if (state.palettes.length > 0) {
+      state.data.paletteId = state.palettes[0].id;
+      state.data.paletteData = state.palettes[0];
+    }
+    if (state.templates.length > 0) {
+      state.data.templateId = state.templates[0].id;
+      state.data.templateSlug = state.templates[0].slug;
+    }
+
+    renderCategoryChips();
+    renderPalettes();
+    renderTemplates();
+  } catch (err) {
+    console.error("loadInitialData error:", err);
+    showToast("Failed to load data. Check connection.", "err");
+  }
+}
+
+/* ---- SCREEN / STEP NAVIGATION ---- */
+function showScreen(name) {
+  document.querySelectorAll(".screen").forEach(function(s) { s.classList.remove("active"); });
+  var el = $("screen-" + name);
+  if (el) el.classList.add("active");
+  state.currentScreen = name;
+
+  var progressSteps = ["1","2","3","4","5","6","7","8","9","10","11","12","palette","template","animation","preview","checkout"];
+  var idx = progressSteps.indexOf(name);
+  if (idx === -1) {
+    $("progressWrap").style.display = "none";
+  } else {
+    $("progressWrap").style.display = "flex";
+    var totalSteps = 12;
+    var displayLabel = name.match(/^\d+$/) ? ("Step " + name + " / " + totalSteps) : name.toUpperCase();
+    if (name === "palette") displayLabel = "COLORS";
+    if (name === "template") displayLabel = "LAYOUT";
+    if (name === "animation") displayLabel = "ANIMATION";
+    if (name === "preview") displayLabel = "PREVIEW";
+    if (name === "checkout") displayLabel = "PAYMENT";
+    $("progressLabel").textContent = displayLabel;
+    var pct = Math.min(100, Math.round(((idx + 1) / progressSteps.length) * 100));
+    $("progressFill").style.width = pct + "%";
+  }
+  updateHelpLink(name);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function goToStep(step) {
+  if (step === 1) trackEvent("started", 1, null);
+  showScreen(String(step));
+  state.currentStep = step;
+  setTimeout(function() { focusFirstInput(step); }, 300);
+}
+
+function nextStep(step) {
+  trackEvent("step_completed", step, null);
+  if (step >= 12) {
+    showScreen("palette");
+  } else {
+    goToStep(step + 1);
+  }
+}
+
+function skipStep(step) {
+  trackEvent("step_skipped", step, null);
+  if (step >= 12) {
+    showScreen("palette");
+  } else {
+    goToStep(step + 1);
+  }
+}
+
+function goToScreen(name) {
+  if (name === "preview") {
+    renderPreview();
+    trackEvent("preview_shown", null, null);
+  }
+  if (name === "checkout") {
+    updateCheckoutTotals();
+    trackEvent("checkout_reached", null, null);
+  }
+  showScreen(name);
+}
+
+function focusFirstInput(step) {
+  var input = document.querySelector("#screen-" + step + " input[type=text], #screen-" + step + " input[type=tel], #screen-" + step + " input[type=email], #screen-" + step + " input[type=url]");
+  if (input) input.focus();
+}
+
+function updateHelpLink(screen) {
+  var msgs = {
+    "landing": "Hi VAAN, I want to design my digital visiting card.",
+    "1": "Hi VAAN, I have a question about the name field.",
+    "5": "Hi VAAN, I have a question about the mobile number field.",
+    "palette": "Hi VAAN, can you help me choose colors for my card?",
+    "template": "Hi VAAN, can you help me choose a layout?",
+    "animation": "Hi VAAN, I need help with the animation option.",
+    "preview": "Hi VAAN, I want to discuss my preview.",
+    "checkout": "Hi VAAN, I need help with payment."
+  };
+  var msg = msgs[screen] || "Hi VAAN, I need help with my digital visiting card.";
+  $("helpBtn").href = "https://wa.me/" + WHATSAPP_HELP + "?text=" + encodeURIComponent(msg);
+}
+
+/* ---- FIELD SAVERS ---- */
+function saveField(key, value) {
+  state.data[key] = value;
+}
+function onNameInput() {
+  var v = $("inputName").value.trim();
+  state.data.name = v;
+  $("next-1").disabled = v.length < 2;
+  if (v.length >= 2) trackEvent("field_filled", 1, "full_name");
+}
+function onPhoneInput() {
+  var v = $("inputPhone").value.replace(/[^0-9]/g, "").slice(0, 13);
+  $("inputPhone").value = v;
+  state.data.phone = v;
+  $("next-5").disabled = v.length < 10;
+  if (v.length >= 10) trackEvent("field_filled", 5, "mobile");
+}
+
+/* ---- CATEGORY CHIPS ---- */
+function renderCategoryChips() {
+  var wrap = $("categoryChips");
+  if (!state.categories.length) {
+    wrap.innerHTML = '<div class="chip" style="opacity:.4;pointer-events:none">No categories</div>';
+    return;
+  }
+  wrap.innerHTML = state.categories.map(function(c) {
+    return '<div class="chip" data-slug="' + esc(c.slug) + '" data-name="' + esc(c.name) + '" onclick="selectCategory(this)"><span class="emoji">' + esc(c.icon || "✨") + '</span>' + esc(c.name) + '</div>';
+  }).join("");
+}
+function selectCategory(el) {
+  document.querySelectorAll("#categoryChips .chip").forEach(function(c) { c.classList.remove("selected"); });
+  el.classList.add("selected");
+  state.data.category = el.dataset.name;
+  $("inputCategoryCustom").value = "";
+  trackEvent("field_filled", 4, "category");
+}
+function onCustomCategoryInput() {
+  var v = $("inputCategoryCustom").value.trim();
+  if (v) {
+    state.data.category = v;
+    document.querySelectorAll("#categoryChips .chip").forEach(function(c) { c.classList.remove("selected"); });
+  }
+}
+
+/* ---- DYNAMIC SERVICES LIST ---- */
+function addServiceRow() {
+  var list = $("servicesList");
+  var row = document.createElement("div");
+  row.className = "dyn-row";
+  row.innerHTML = '<input type="text" placeholder="Another service" oninput="saveServices()"><button class="remove" onclick="removeService(this)" aria-label="Remove">×</button>';
+  list.appendChild(row);
+  row.querySelector("input").focus();
+}
+function removeService(btn) {
+  var list = $("servicesList");
+  if (list.children.length > 1) {
+    btn.parentElement.remove();
+    saveServices();
+  } else {
+    btn.parentElement.querySelector("input").value = "";
+    saveServices();
+  }
+}
+function saveServices() {
+  state.data.services = Array.from(document.querySelectorAll("#servicesList input")).map(function(i) { return i.value.trim(); }).filter(function(v) { return v.length > 0; });
+}
+
+/* ---- DYNAMIC SOCIAL LINKS ---- */
+function addLinkRow() {
+  var list = $("linksList");
+  var row = document.createElement("div");
+  row.className = "link-row";
+  row.innerHTML = '<div class="link-row-head"><select onchange="saveSocialLinks()"><option value="instagram">Instagram</option><option value="facebook">Facebook</option><option value="website">Website</option><option value="youtube">YouTube</option><option value="linkedin">LinkedIn</option><option value="whatsapp">WhatsApp</option><option value="custom">Custom</option></select><button class="remove" onclick="removeLink(this)" aria-label="Remove">×</button></div><input type="url" placeholder="https://..." oninput="saveSocialLinks()">';
+  list.appendChild(row);
+}
+function removeLink(btn) {
+  var list = $("linksList");
+  if (list.children.length > 1) {
+    btn.closest(".link-row").remove();
+    saveSocialLinks();
+  } else {
+    btn.closest(".link-row").querySelector("input").value = "";
+    saveSocialLinks();
+  }
+}
+function saveSocialLinks() {
+  state.data.socialLinks = Array.from(document.querySelectorAll("#linksList .link-row")).map(function(row) {
+    return {
+      platform: row.querySelector("select").value,
+      url: row.querySelector("input").value.trim()
+    };
+  }).filter(function(l) { return l.url.length > 0; });
+}
+
+/* ---- IMAGE AUTO-COMPRESS + UPLOAD ---- */
+function compressImage(file, maxSize, callback) {
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var img = new Image();
+    img.onload = function() {
+      var canvas = document.createElement("canvas");
+      var w = img.width, h = img.height;
+      if (w > h && w > maxSize) { h *= maxSize / w; w = maxSize; }
+      else if (h > maxSize) { w *= maxSize / h; h = maxSize; }
+      canvas.width = w;
+      canvas.height = h;
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, w, h);
+      canvas.toBlob(function(blob) {
+        callback(blob);
+      }, "image/webp", 0.75);
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+async function uploadImage(blob, prefix) {
+  var fileName = prefix + "_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6) + ".webp";
+  var result = await sb.storage.from("vaan-uploads").upload(fileName, blob, { contentType: "image/webp" });
+  if (result.error) throw result.error;
+  var urlData = sb.storage.from("vaan-uploads").getPublicUrl(fileName);
+  return urlData.data.publicUrl;
+}
+
+function onLogoUpload(input) {
+  var file = input.files[0];
+  if (!file) return;
+  var uploadEl = $("uploadLogo");
+  uploadEl.innerHTML = '<div style="color:var(--cream-dim);padding:20px">Compressing…</div>';
+  compressImage(file, 600, async function(blob) {
+    try {
+      var url = await uploadImage(blob, "logo");
+      state.data.logoUrl = url;
+      state.data.logoFile = file;
+      uploadEl.classList.add("has-file");
+      uploadEl.innerHTML =
+        '<div class="upload-preview">' +
+          '<img src="' + esc(url) + '" alt="Logo">' +
+          '<div class="upload-preview-info"><b>' + esc(file.name) + '</b><small>✓ Uploaded · ' + (blob.size / 1024).toFixed(0) + ' KB</small></div>' +
+          '<button class="upload-remove" type="button" onclick="removeLogo(event)">×</button>' +
+        '</div>' +
+        '<input type="file" id="fileLogo" accept="image/*" style="display:none" onchange="onLogoUpload(this)">';
+      trackEvent("field_filled", 7, "logo");
+    } catch (err) {
+      console.error(err);
+      showToast("Logo upload failed. Try again.", "err");
+      resetLogoUpload();
+    }
+  });
+}
+function removeLogo(ev) {
+  ev.preventDefault();
+  ev.stopPropagation();
+  state.data.logoUrl = "";
+  state.data.logoFile = null;
+  resetLogoUpload();
+}
+function resetLogoUpload() {
+  var el = $("uploadLogo");
+  el.classList.remove("has-file");
+  el.innerHTML =
+    '<input type="file" id="fileLogo" accept="image/*" onchange="onLogoUpload(this)">' +
+    '<div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>' +
+    '<div class="upload-label">Tap to upload logo</div>' +
+    '<div class="upload-hint">Max size auto-handled · We compress it for you</div>';
+}
+
+function onFounderUpload(input) {
+  var file = input.files[0];
+  if (!file) return;
+  var uploadEl = $("uploadFounder");
+  uploadEl.innerHTML = '<div style="color:var(--cream-dim);padding:20px">Compressing…</div>';
+  compressImage(file, 600, async function(blob) {
+    try {
+      var url = await uploadImage(blob, "founder");
+      state.data.founderUrl = url;
+      state.data.founderFile = file;
+      uploadEl.classList.add("has-file");
+      uploadEl.innerHTML =
+        '<div class="upload-preview">' +
+          '<img src="' + esc(url) + '" alt="Founder">' +
+          '<div class="upload-preview-info"><b>' + esc(file.name) + '</b><small>✓ Uploaded · ' + (blob.size / 1024).toFixed(0) + ' KB</small></div>' +
+          '<button class="upload-remove" type="button" onclick="removeFounder(event)">×</button>' +
+        '</div>' +
+        '<input type="file" id="fileFounder" accept="image/*" style="display:none" onchange="onFounderUpload(this)">';
+      trackEvent("field_filled", 8, "founder_photo");
+    } catch (err) {
+      console.error(err);
+      showToast("Photo upload failed. Try again.", "err");
+      resetFounderUpload();
+    }
+  });
+}
+function removeFounder(ev) {
+  ev.preventDefault();
+  ev.stopPropagation();
+  state.data.founderUrl = "";
+  state.data.founderFile = null;
+  resetFounderUpload();
+}
+function resetFounderUpload() {
+  var el = $("uploadFounder");
+  el.classList.remove("has-file");
+  el.innerHTML =
+    '<input type="file" id="fileFounder" accept="image/*" onchange="onFounderUpload(this)">' +
+    '<div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>' +
+    '<div class="upload-label">Tap to upload your photo</div>' +
+    '<div class="upload-hint">Optional · Auto-compressed</div>';
+}
+
+/* ---- PALETTES ---- */
+function renderPalettes() {
+  var grid = $("palettesGrid");
+  if (!state.palettes.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--cream-dim)">No palettes available</div>';
+    return;
+  }
+  grid.innerHTML = state.palettes.map(function(p) {
+    var sel = p.id === state.data.paletteId ? " selected" : "";
+    return '<div class="palette-card' + sel + '" data-id="' + p.id + '" onclick="selectPalette(this, \'' + p.id + '\')">' +
+      '<div class="palette-swatches">' +
+        '<span style="background:' + esc(p.bg) + '"></span>' +
+        '<span style="background:' + esc(p.surface) + '"></span>' +
+        '<span style="background:' + esc(p.accent) + '"></span>' +
+        '<span style="background:' + esc(p.accent_secondary) + '"></span>' +
+        '<span style="background:' + esc(p.text_primary) + '"></span>' +
+      '</div>' +
+      '<div class="palette-name">' + esc(p.name) + '</div>' +
+    '</div>';
+  }).join("");
+}
+function selectPalette(el, id) {
+  document.querySelectorAll("#palettesGrid .palette-card").forEach(function(c) { c.classList.remove("selected"); });
+  el.classList.add("selected");
+  var p = state.palettes.find(function(x) { return x.id === id; });
+  if (p) {
+    state.data.paletteId = p.id;
+    state.data.paletteData = p;
+    trackEvent("palette_selected", null, p.name);
+  }
+}
+
+/* ---- TEMPLATES ---- */
+function renderTemplates() {
+  var grid = $("templatesGrid");
+  if (!state.templates.length) {
+    grid.innerHTML = '<div style="text-align:center;padding:30px;color:var(--cream-dim)">No templates available</div>';
+    return;
+  }
+  grid.innerHTML = state.templates.map(function(t) {
+    var sel = t.id === state.data.templateId ? " selected" : "";
+    var blocks = (t.layout_order || []).slice(0, 4).map(function(b) { return '<div class="t-block">' + esc(b) + '</div>'; }).join("");
+    return '<div class="template-card' + sel + '" data-id="' + t.id + '" data-slug="' + esc(t.slug) + '" onclick="selectTemplate(this)">' +
+      '<div class="template-thumb"><div class="t-bar"></div><div class="t-bar short"></div>' + blocks + '</div>' +
+      '<div class="template-info"><b>' + esc(t.name) + '</b><small>' + esc(t.description || "") + '</small></div>' +
+    '</div>';
+  }).join("");
+}
+function selectTemplate(el) {
+  document.querySelectorAll("#templatesGrid .template-card").forEach(function(c) { c.classList.remove("selected"); });
+  el.classList.add("selected");
+  state.data.templateId = el.dataset.id;
+  state.data.templateSlug = el.dataset.slug;
+  trackEvent("template_selected", null, el.dataset.slug);
+}
+
+/* ---- ANIMATION ---- */
+function selectAnimation(choice) {
+  document.querySelectorAll("#animOptions .anim-option").forEach(function(o) { o.classList.remove("selected"); });
+  var el = document.querySelector('#animOptions .anim-option[data-anim="' + choice + '"]');
+  if (el) el.classList.add("selected");
+  state.data.animationChoice = choice;
+  $("animCustomField").classList.toggle("hidden", choice !== "custom");
+  trackEvent("animation_selected", null, choice);
+}
+function onAnimCustomInput() {
+  var v = $("inputAnimCustom").value;
+  if (v.length > 600) { v = v.slice(0, 600); $("inputAnimCustom").value = v; }
+  state.data.animationCustom = v;
+  var counter = $("animCharCount");
+  counter.textContent = v.length + " / 600";
+  counter.classList.toggle("over", v.length > 560);
+}
+
+/* ---- BUILD PREVIEW CARD ---- */
+function renderPreview() {
+  var card = $("previewCard");
+  var d = state.data;
+  var p = d.paletteData || { bg: "#1a060d", surface: "#2a0a12", text_primary: "#fdfaf3", text_secondary: "#c9a98a", accent: "#d4a017", accent_secondary: "#4f8fff" };
+
+  card.style.background = "linear-gradient(165deg, " + p.surface + ", " + p.bg + ")";
+  card.style.color = p.text_primary;
+
+  var html = '<div class="preview-watermark"><svg viewBox="0 0 24 24" fill="currentColor" style="width:11px;height:11px"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>VAAN Preview</div>';
+
+  if (d.logoUrl) {
+    html += '<div style="text-align:center;margin-bottom:14px"><img src="' + esc(d.logoUrl) + '" style="width:64px;height:64px;object-fit:contain;border-radius:12px;margin:0 auto;background:' + p.surface + ';padding:8px;box-shadow:0 0 20px ' + p.accent + '33"></div>';
+  }
+
+  html += '<h3 style="text-align:center;font-family:\'Cormorant Garamond\',serif;font-size:22px;font-weight:700;letter-spacing:1.5px;color:' + p.accent + ';margin-bottom:4px">' + esc(d.name || "Your Name") + '</h3>';
+
+  if (d.profession) {
+    html += '<div style="text-align:center;font-size:9px;letter-spacing:2.5px;color:' + p.text_secondary + ';text-transform:uppercase;font-family:\'JetBrains Mono\',monospace;margin-bottom:12px">' + esc(d.profession) + '</div>';
+  }
+
+  if (d.businessName) {
+    html += '<div style="text-align:center;font-size:13px;color:' + p.text_primary + ';font-weight:600;margin-bottom:12px;padding:8px 14px;background:' + p.accent + '15;border:1px solid ' + p.accent + '33;border-radius:10px">' + esc(d.businessName) + '</div>';
+  }
+
+  if (d.founderUrl) {
+    html += '<div style="display:flex;align-items:center;gap:12px;padding:12px;background:' + p.accent + '10;border:1px solid ' + p.accent + '33;border-radius:12px;margin-bottom:12px">' +
+      '<img src="' + esc(d.founderUrl) + '" style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid ' + p.accent + '">' +
+      '<div><div style="font-size:9px;letter-spacing:2px;color:' + p.accent_secondary + ';text-transform:uppercase;font-family:\'JetBrains Mono\',monospace">Founder</div><div style="font-size:14px;color:' + p.text_primary + ';font-weight:700">' + esc(d.name) + '</div></div>' +
+    '</div>';
+  }
+
+  if (d.services.length && d.services.some(function(s) { return s.trim(); })) {
+    var validServices = d.services.filter(function(s) { return s.trim(); });
+    html += '<div style="margin-bottom:12px"><div style="font-size:9px;letter-spacing:2px;color:' + p.accent + ';text-transform:uppercase;font-family:\'JetBrains Mono\',monospace;margin-bottom:8px">Services</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">';
+    validServices.slice(0, 8).forEach(function(s) {
+      html += '<div style="background:' + p.surface + ';border:1px solid ' + p.accent + '33;border-radius:8px;padding:7px;text-align:center;font-size:10px;color:' + p.text_primary + '">' + esc(s) + '</div>';
+    });
+    html += '</div></div>';
+  }
+
+  if (d.socialLinks.length && d.socialLinks.some(function(l) { return l.url; })) {
+    html += '<div style="margin-bottom:12px"><div style="font-size:9px;letter-spacing:2px;color:' + p.accent_secondary + ';text-transform:uppercase;font-family:\'JetBrains Mono\',monospace;margin-bottom:8px">Connect</div><div style="display:flex;flex-wrap:wrap;gap:6px">';
+    d.socialLinks.filter(function(l) { return l.url; }).slice(0, 5).forEach(function(l) {
+      html += '<div style="padding:6px 10px;background:' + p.accent_secondary + '22;border:1px solid ' + p.accent_secondary + '44;border-radius:6px;font-size:9.5px;color:' + p.text_primary + '">' + esc(l.platform) + '</div>';
+    });
+    html += '</div></div>';
+  }
+
+  if (d.address) {
+    html += '<div style="font-size:10px;color:' + p.text_secondary + ';text-align:center;padding:8px;border-top:1px solid ' + p.text_secondary + '22;margin-top:10px">' + esc(d.address) + '</div>';
+  }
+
+  html += '<div style="text-align:center;font-size:8px;color:' + p.text_secondary + ';letter-spacing:1.5px;margin-top:14px;font-family:\'JetBrains Mono\',monospace;opacity:.6">POWERED BY VAAN CONSULTANCY</div>';
+
+  card.innerHTML = html;
+}
+
+/* ---- DOWNLOAD PREVIEW ---- */
+function downloadPreview() {
+  showToast("Preparing your preview…");
+  var card = $("previewCard");
+
+  if (typeof html2canvas === "undefined") {
+    var s = document.createElement("script");
+    s.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js";
+    s.onload = function() { captureCard(); };
+    document.head.appendChild(s);
+  } else {
+    captureCard();
+  }
+
+  function captureCard() {
+    html2canvas(card, { backgroundColor: null, scale: 2, logging: false }).then(function(canvas) {
+      canvas.toBlob(function(blob) {
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "vaan-card-preview.png";
+        a.click();
+        setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+        showToast("✓ Preview downloaded!", "ok");
+      });
+    }).catch(function(err) {
+      console.error(err);
+      showToast("Download failed. Try screenshot instead.", "err");
+    });
+  }
+}
+
+/* ---- COUPON ---- */
+async function applyCoupon() {
+  var code = $("couponInput").value.trim().toUpperCase();
+  var msg = $("couponMsg");
+  if (!code) { msg.textContent = "Enter a code first"; msg.className = "coupon-msg show err"; return; }
+  $("couponBtn").disabled = true;
+  try {
+    var result = await sb.from("vaan_coupons").select("*").eq("code", code).eq("is_active", true).maybeSingle();
+    if (result.error) throw result.error;
+    var c = result.data;
+    if (!c) {
+      msg.textContent = "Invalid coupon code";
+      msg.className = "coupon-msg show err";
+      return;
+    }
+    if (c.expiry && new Date(c.expiry) < new Date()) {
+      msg.textContent = "This coupon has expired";
+      msg.className = "coupon-msg show err";
+      return;
+    }
+    if (c.usage_limit && c.used_count >= c.usage_limit) {
+      msg.textContent = "This coupon has reached its limit";
+      msg.className = "coupon-msg show err";
+      return;
+    }
+    if (c.min_order && state.subtotal < c.min_order) {
+      msg.textContent = "Min order " + fmtPrice(c.min_order) + " required";
+      msg.className = "coupon-msg show err";
+      return;
+    }
+    var disc = 0;
+    if (c.type === "flat") disc = c.value;
+    else if (c.type === "percent") {
+      disc = Math.round(state.subtotal * c.value / 100);
+      if (c.max_discount && disc > c.max_discount) disc = c.max_discount;
+    }
+    if (disc > state.subtotal) disc = state.subtotal;
+    state.coupon = c;
+    state.discount = disc;
+    msg.textContent = "✓ Coupon applied — save " + fmtPrice(disc);
+    msg.className = "coupon-msg show ok";
+    updateCheckoutTotals();
+    trackEvent("coupon_applied", null, c.code);
+  } catch (err) {
+    console.error(err);
+    msg.textContent = "Could not verify coupon";
+    msg.className = "coupon-msg show err";
+  } finally {
+    $("couponBtn").disabled = false;
+  }
+}
+
+function updateCheckoutTotals() {
+  var total = state.subtotal - state.discount;
+  if (total < 0) total = 0;
+  $("sumSubtotal").textContent = fmtPrice(state.subtotal);
+  $("sumTotal").textContent = fmtPrice(total);
+  $("payAmount").textContent = fmtPrice(total);
+  if (state.discount > 0) {
+    $("sumDiscount").textContent = "-" + fmtPrice(state.discount);
+    $("sumDiscountRow").classList.remove("hidden");
+  } else {
+    $("sumDiscountRow").classList.add("hidden");
+  }
+}
+
+/* ---- PAYMENT ---- */
+async function startPayment() {
+  if (!state.data.name || !state.data.phone) {
+    showToast("Missing required fields", "err");
+    return;
+  }
+  var btn = $("payBtn");
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Processing…';
+
+  try {
+    var total = state.subtotal - state.discount;
+    if (total < 0) total = 0;
+
+    var orderResult = await sb.from("vaan_orders").insert([{
+      product_id: state.product ? state.product.id : null,
+      customer_name: state.data.name,
+      customer_phone: state.data.phone,
+      customer_email: state.data.email || null,
+      profession: state.data.profession || null,
+      business_name: state.data.businessName || null,
+      category: state.data.category || null,
+      address: state.data.address || null,
+      google_review_link: state.data.googleReviewLink || null,
+      palette_id: state.data.paletteId,
+      template_id: state.data.templateId,
+      animation_choice: state.data.animationChoice,
+      animation_custom_text: state.data.animationChoice === "custom" ? state.data.animationCustom : null,
+      coupon_code: state.coupon ? state.coupon.code : null,
+      subtotal: state.subtotal,
+      discount: state.discount,
+      amount_paid: total,
+      payment_status: "pending"
+    }]).select().single();
+
+    if (orderResult.error) throw orderResult.error;
+    var order = orderResult.data;
+
+    var answers = [];
+    if (state.data.services.length) {
+      state.data.services.filter(function(s) { return s.trim(); }).forEach(function(s, i) {
+        answers.push({ order_id: order.id, field_key: "service", field_value: { name: s }, sort_order: i });
+      });
+    }
+    if (state.data.socialLinks.length) {
+      state.data.socialLinks.filter(function(l) { return l.url; }).forEach(function(l, i) {
+        answers.push({ order_id: order.id, field_key: "social_link", field_value: l, sort_order: i });
+      });
+    }
+    if (state.data.logoUrl) {
+      answers.push({ order_id: order.id, field_key: "logo", file_url: state.data.logoUrl });
+    }
+    if (state.data.founderUrl) {
+      answers.push({ order_id: order.id, field_key: "founder_photo", file_url: state.data.founderUrl });
+    }
+    if (answers.length) {
+      await sb.from("vaan_order_answers").insert(answers);
+    }
+
+    trackEvent("order_created", null, order.order_number);
+
+    var fnUrl = SUPABASE_URL + "/functions/v1/create-cashfree-order";
+    var fnRes = await fetch(fnUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + SUPABASE_KEY
+      },
+      body: JSON.stringify({
+        order_id: order.id,
+        order_number: order.order_number,
+        amount: total,
+        customer_name: state.data.name,
+        customer_phone: state.data.phone,
+        customer_email: state.data.email || "noreply@vaanconsultancy.in"
+      })
+    });
+
+    if (!fnRes.ok) {
+      var errText = await fnRes.text();
+      console.error("Edge fn error:", errText);
+      throw new Error("Payment gateway not configured yet. Please contact us on WhatsApp.");
+    }
+
+    var fnData = await fnRes.json();
+    if (!fnData.payment_session_id) {
+      throw new Error("No payment session received");
+    }
+
+    openCashfreeCheckout(fnData.payment_session_id, order);
+
+  } catch (err) {
+    console.error(err);
+    btn.disabled = false;
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> Pay <span id="payAmount">' + fmtPrice(state.subtotal - state.discount) + '</span> Securely';
+    showToast(err.message || "Payment failed. Try again.", "err");
+  }
+}
+
+function openCashfreeCheckout(sessionId, order) {
+  if (typeof Cashfree === "undefined") {
+    var s = document.createElement("script");
+    s.src = "https://sdk.cashfree.com/js/v3/cashfree.js";
+    s.onload = function() { launchCashfree(sessionId, order); };
+    document.head.appendChild(s);
+  } else {
+    launchCashfree(sessionId, order);
+  }
+}
+
+function launchCashfree(sessionId, order) {
+  try {
+    var cashfree = Cashfree({ mode: "sandbox" });
+    cashfree.checkout({
+      paymentSessionId: sessionId,
+      redirectTarget: "_modal"
+    }).then(function(result) {
+      if (result.error) {
+        showToast("Payment cancelled or failed", "err");
+        var btn = $("payBtn");
+        btn.disabled = false;
+        btn.innerHTML = 'Pay ' + fmtPrice(state.subtotal - state.discount) + ' Securely';
+      } else {
+        pollOrderStatus(order.id, order.order_number);
+      }
+    });
+  } catch (err) {
+    console.error("Cashfree launch error:", err);
+    showToast("Payment could not start", "err");
+    var btn = $("payBtn");
+    btn.disabled = false;
+    btn.innerHTML = 'Pay ' + fmtPrice(state.subtotal - state.discount) + ' Securely';
+  }
+}
+
+async function pollOrderStatus(orderId, orderNumber) {
+  showToast("Verifying payment…");
+  var attempts = 0;
+  var maxAttempts = 15;
+  var interval = setInterval(async function() {
+    attempts++;
+    var res = await sb.from("vaan_orders").select("payment_status").eq("id", orderId).maybeSingle();
+    if (res.data && res.data.payment_status === "paid") {
+      clearInterval(interval);
+      showSuccess(orderNumber);
+    } else if (attempts >= maxAttempts) {
+      clearInterval(interval);
+      showSuccess(orderNumber);
+    }
+  }, 2000);
+}
+
+function showSuccess(orderNumber) {
+  $("successOrderId").textContent = orderNumber;
+  $("successName").textContent = state.data.name || "there";
+  $("successPhone").textContent = "+91 " + state.data.phone;
+  showScreen("success");
+  trackEvent("payment_success", null, orderNumber);
+}
+
+/* ---- INIT ---- */
+async function init() {
+  state.sessionId = newSessionId();
+  trackEvent("page_view", null, null);
+  await loadInitialData();
+  showScreen("landing");
+}
+
+window.addEventListener("DOMContentLoaded", init);
+</script>
+</body>
+</html>
