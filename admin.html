@@ -187,6 +187,7 @@ footer b{color:var(--gold)}
 .crud-info{flex:1;min-width:200px}
 .crud-info b{font-size:14.5px;font-weight:850;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .crud-info small{color:var(--muted);font-size:11.5px;display:block;margin-top:4px}
+.crud-info code{background:rgba(255,255,255,.06);padding:1px 6px;border-radius:4px;font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#ffd400}
 .crud-swatches{display:flex;gap:3px;margin-top:8px}
 .crud-swatches span{width:22px;height:22px;border-radius:6px;border:1px solid rgba(255,255,255,.15)}
 .crud-actions{display:flex;gap:8px;flex-wrap:wrap}
@@ -277,14 +278,14 @@ footer b{color:var(--gold)}
       </div>
     </div>
 
-    <!-- ORDERS TAB (NEW) -->
+    <!-- ORDERS TAB -->
     <div class="tab-content" id="tab-orders">
       <div class="orders-subnav">
         <button class="osub active" data-osub="orders" onclick="switchOrdersSub('orders', this)">Orders</button>
+        <button class="osub" data-osub="products" onclick="switchOrdersSub('products', this)">Products</button>
         <button class="osub" data-osub="categories" onclick="switchOrdersSub('categories', this)">Categories</button>
         <button class="osub" data-osub="palettes" onclick="switchOrdersSub('palettes', this)">Palettes</button>
         <button class="osub" data-osub="templates" onclick="switchOrdersSub('templates', this)">Templates</button>
-        <button class="osub" data-osub="products" onclick="switchOrdersSub('products', this)">Products</button>
         <button class="osub" data-osub="coupons" onclick="switchOrdersSub('coupons', this)">Coupons</button>
         <button class="osub" data-osub="funnel" onclick="switchOrdersSub('funnel', this)">Funnel</button>
       </div>
@@ -304,6 +305,33 @@ footer b{color:var(--gold)}
           <button class="btn btn-dark btn-sm" onclick="loadOrders()">↻ Refresh</button>
         </div>
         <div id="ordersList"><div class="svc-empty"><b>Loading orders...</b></div></div>
+      </div>
+
+      <!-- Products (main list) -->
+      <div class="osub-panel" id="osub-products">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+          <div>
+            <div class="sec-title">Products</div>
+            <div class="sec-sub">Each product has its own price &amp; custom question flow</div>
+          </div>
+          <button class="btn btn-gold" onclick="openProductModal()">+ Add Product</button>
+        </div>
+        <div class="crud-grid" id="productsList"><div class="svc-empty"><b>Loading...</b></div></div>
+      </div>
+
+      <!-- Fields editor for a selected product -->
+      <div class="osub-panel" id="osub-fields">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+          <div>
+            <div class="sec-title" id="fieldsTitle">Product Fields</div>
+            <div class="sec-sub" id="fieldsSub">Define what customers are asked for this product</div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-dark btn-sm" onclick="backToProducts()">← Back to products</button>
+            <button class="btn btn-gold" onclick="openFieldModal()">+ Add Field</button>
+          </div>
+        </div>
+        <div class="crud-grid" id="fieldsList"><div class="svc-empty"><b>Pick a product first</b></div></div>
       </div>
 
       <!-- Categories -->
@@ -340,13 +368,6 @@ footer b{color:var(--gold)}
           <button class="btn btn-gold" onclick="openTemplateModal()">+ Add Template</button>
         </div>
         <div class="crud-grid" id="templatesList"><div class="svc-empty"><b>Loading...</b></div></div>
-      </div>
-
-      <!-- Products -->
-      <div class="osub-panel" id="osub-products">
-        <div class="sec-title">Product / Pricing</div>
-        <div class="sec-sub">Price shown on the order builder landing screen</div>
-        <div class="crud-grid" id="productsList"><div class="svc-empty"><b>Loading...</b></div></div>
       </div>
 
       <!-- Coupons -->
@@ -483,7 +504,7 @@ footer b{color:var(--gold)}
   </div>
 </div>
 
-<!-- ORDER DETAIL MODAL (NEW) -->
+<!-- ORDER DETAIL MODAL -->
 <div class="modal" id="orderModal" onclick="if(event.target===this)closeOrderModal()">
   <div class="modal-box" style="width:min(720px,100%)">
     <div class="modal-head">
@@ -497,7 +518,7 @@ footer b{color:var(--gold)}
   </div>
 </div>
 
-<!-- CATEGORY MODAL (NEW) -->
+<!-- CATEGORY MODAL -->
 <div class="modal" id="categoryModal" onclick="if(event.target===this)closeCategoryModal()">
   <div class="modal-box">
     <div class="modal-head">
@@ -523,7 +544,7 @@ footer b{color:var(--gold)}
   </div>
 </div>
 
-<!-- PALETTE MODAL (NEW) -->
+<!-- PALETTE MODAL -->
 <div class="modal" id="paletteModal" onclick="if(event.target===this)closePaletteModal()">
   <div class="modal-box">
     <div class="modal-head">
@@ -557,7 +578,7 @@ footer b{color:var(--gold)}
   </div>
 </div>
 
-<!-- TEMPLATE MODAL (NEW) -->
+<!-- TEMPLATE MODAL -->
 <div class="modal" id="templateModal" onclick="if(event.target===this)closeTemplateModal()">
   <div class="modal-box">
     <div class="modal-head">
@@ -584,7 +605,7 @@ footer b{color:var(--gold)}
   </div>
 </div>
 
-<!-- COUPON MODAL (NEW) -->
+<!-- COUPON MODAL -->
 <div class="modal" id="couponModal" onclick="if(event.target===this)closeCouponModal()">
   <div class="modal-box">
     <div class="modal-head">
@@ -612,6 +633,78 @@ footer b{color:var(--gold)}
       <div class="modal-actions">
         <button class="btn btn-gold" onclick="saveCoupon()">💾 Save</button>
         <button class="btn btn-dark" onclick="closeCouponModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal" id="productModal" onclick="if(event.target===this)closeProductModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div><h3 id="prodModalTitle">Add Product</h3><small>e.g. Digital Visiting Card, QR Menu</small></div>
+      <button class="modal-close" onclick="closeProductModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="prodId">
+      <div class="form-grid-2">
+        <div class="form-row"><label>Name</label><input id="prodName" placeholder="QR Menu"></div>
+        <div class="form-row"><label>Slug</label><input id="prodSlug" placeholder="qr-menu"></div>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-row"><label>Icon (emoji)</label><input id="prodIcon" placeholder="🍽️" maxlength="4"></div>
+        <div class="form-row"><label>Sort Order</label><input id="prodSort" type="number" value="0"></div>
+      </div>
+      <div class="form-row"><label>Short Description</label><input id="prodDesc" placeholder="Restaurant menu on a QR code"></div>
+      <div class="form-grid-2">
+        <div class="form-row"><label>Price (₹)</label><input id="prodPrice" type="number" value="1500"></div>
+        <div class="form-row"><label>Discount Price (₹, optional)</label><input id="prodDiscount" type="number"></div>
+      </div>
+      <label class="form-check"><input type="checkbox" id="prodActive" checked><span style="color:var(--white);font-size:13px;font-weight:700">Active (shown in builder)</span></label>
+      <div class="modal-actions">
+        <button class="btn btn-gold" onclick="saveProduct()">💾 Save Product</button>
+        <button class="btn btn-dark" onclick="closeProductModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FIELD MODAL -->
+<div class="modal" id="fieldModal" onclick="if(event.target===this)closeFieldModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div><h3 id="fldModalTitle">Add Field</h3><small>One question in this product's flow</small></div>
+      <button class="modal-close" onclick="closeFieldModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="fldId">
+      <div class="form-grid-2">
+        <div class="form-row"><label>Field Key</label><input id="fldKey" placeholder="menu_items"></div>
+        <div class="form-row"><label>Sort Order</label><input id="fldSort" type="number" value="0"></div>
+      </div>
+      <div class="form-row"><label>Label (shown to customer)</label><input id="fldLabel" placeholder="Menu items"></div>
+      <div class="form-row">
+        <label>Field Type</label>
+        <select id="fldType">
+          <option value="text">Text</option>
+          <option value="tel">Phone</option>
+          <option value="email">Email</option>
+          <option value="url">URL</option>
+          <option value="textarea">Long Text</option>
+          <option value="image">Image Upload</option>
+          <option value="list">Multi-line List</option>
+          <option value="chips">Choice Chips</option>
+          <option value="color_palette">Color Palette Picker</option>
+          <option value="template_picker">Template Picker</option>
+          <option value="animation_picker">Animation Picker</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Placeholder (optional)</label><input id="fldPlaceholder"></div>
+      <div class="form-row"><label>Options (chips only, comma-separated)</label><input id="fldOptions" placeholder="Veg, Non-Veg, Beverages"></div>
+      <label class="form-check"><input type="checkbox" id="fldRequired"><span style="color:var(--white);font-size:13px;font-weight:700">Required</span></label>
+      <div class="modal-actions">
+        <button class="btn btn-gold" onclick="saveField()">💾 Save Field</button>
+        <button class="btn btn-dark" onclick="closeFieldModal()">Cancel</button>
       </div>
     </div>
   </div>
@@ -972,20 +1065,26 @@ let allTemplates = [];
 let allProducts = [];
 let allCoupons = [];
 let allFunnelEvents = [];
+let currentProductId = null;
+let allProductFields = [];
 
 /* ---- SUB-NAV ---- */
 function switchOrdersSub(name, btn){
   document.querySelectorAll(".osub").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
+  if (btn) btn.classList.add("active");
   document.querySelectorAll(".osub-panel").forEach(p => p.classList.remove("show"));
   document.getElementById("osub-" + name).classList.add("show");
   if (name === "orders") loadOrders();
+  if (name === "products") loadProducts();
   if (name === "categories") loadCategories();
   if (name === "palettes") loadPalettes();
   if (name === "templates") loadTemplates();
-  if (name === "products") loadProducts();
   if (name === "coupons") loadCoupons();
   if (name === "funnel") loadFunnel();
+}
+
+function backToProducts(){
+  switchOrdersSub("products", document.querySelector('.osub[data-osub="products"]'));
 }
 
 /* ---- LOADERS ---- */
@@ -1015,13 +1114,6 @@ async function loadTemplates(){
   if (error){ console.error(error); return; }
   allTemplates = data || [];
   renderTemplates();
-}
-
-async function loadProducts(){
-  const { data, error } = await sb.from("vaan_products").select("*").order("sort_order", { ascending: true });
-  if (error){ console.error(error); return; }
-  allProducts = data || [];
-  renderProducts();
 }
 
 async function loadCoupons(){
@@ -1073,7 +1165,7 @@ function renderOrders(){
       '<div class="ord-actions">' +
         '<button class="btn btn-gold btn-sm" onclick="openOrderModal(\'' + o.id + '\')">👁 View</button>' +
         '<button class="btn btn-dark btn-sm" onclick="quickMarkPaid(\'' + o.id + '\')">✓ Mark Paid</button>' +
-        '<a class="btn btn-dark btn-sm" href="https://wa.me/91' + esc((o.customer_phone||"").replace(/\D/g,"").slice(-10)) + '?text=' + encodeURIComponent("Hi " + (o.customer_name||"there") + ", your VAAN digital card order " + (o.order_number||"") + " is ready. Thank you!") + '" target="_blank" rel="noopener">💬 WhatsApp</a>' +
+        '<a class="btn btn-dark btn-sm" href="https://wa.me/91' + esc((o.customer_phone||"").replace(/\D/g,"").slice(-10)) + '?text=' + encodeURIComponent("Hi " + (o.customer_name||"there") + ", your VAAN order " + (o.order_number||"") + " is ready. Thank you!") + '" target="_blank" rel="noopener">💬 WhatsApp</a>' +
       '</div>' +
     '</div>';
   }).join("");
@@ -1092,7 +1184,7 @@ async function openOrderModal(orderId){
   if (!o) return;
 
   document.getElementById("ordModalTitle").textContent = "Order " + (o.order_number || "");
-  document.getElementById("ordModalSub").textContent = o.customer_name + " · " + fmtDate(o.created_at);
+  document.getElementById("ordModalSub").textContent = (o.customer_name || "") + " · " + fmtDate(o.created_at);
   document.getElementById("orderModalBody").innerHTML = '<div class="svc-empty"><b>Loading details...</b></div>';
   document.getElementById("orderModal").classList.add("open");
   document.body.style.overflow = "hidden";
@@ -1182,7 +1274,205 @@ async function saveOrderUpdate(orderId){
   loadOrders();
 }
 
-/* ---- RENDER CATEGORIES ---- */
+/* ---- PRODUCTS (with field flow) ---- */
+async function loadProducts(){
+  const { data, error } = await sb.from("vaan_products").select("*").order("sort_order", { ascending: true });
+  if (error){ console.error(error); return; }
+  allProducts = data || [];
+  renderProducts();
+}
+
+function renderProducts(){
+  const wrap = document.getElementById("productsList");
+  if (!allProducts.length){ wrap.innerHTML = '<div class="svc-empty"><b>No products yet</b><br><small>Click + Add Product to create the first one</small></div>'; return; }
+  wrap.innerHTML = allProducts.map(p =>
+    '<div class="crud-row ' + (p.is_active ? "" : "off") + '">' +
+      '<div class="crud-info"><b>' + esc(p.icon || "📦") + ' ' + esc(p.name) + (p.is_active ? "" : ' <span class="tag red">OFF</span>') + '</b>' +
+        '<small>₹' + Number(p.price||0).toLocaleString("en-IN") + (p.discount_price ? ' → ₹' + Number(p.discount_price).toLocaleString("en-IN") : '') + ' · slug: ' + esc(p.slug||"—") + '</small></div>' +
+      '<div class="crud-actions">' +
+        '<button class="btn btn-dark btn-sm" onclick="editProductFields(\'' + p.id + '\')">🧩 Fields</button>' +
+        '<button class="btn btn-gold btn-sm" onclick="editProduct(\'' + p.id + '\')">✏️ Edit</button>' +
+        '<button class="btn btn-danger btn-sm" onclick="deleteProduct(\'' + p.id + '\')">🗑</button>' +
+      '</div>' +
+    '</div>'
+  ).join("");
+}
+
+function openProductModal(){
+  document.getElementById("prodId").value = "";
+  document.getElementById("prodModalTitle").textContent = "Add Product";
+  document.getElementById("prodName").value = "";
+  document.getElementById("prodSlug").value = "";
+  document.getElementById("prodIcon").value = "";
+  document.getElementById("prodSort").value = 0;
+  document.getElementById("prodDesc").value = "";
+  document.getElementById("prodPrice").value = 1500;
+  document.getElementById("prodDiscount").value = "";
+  document.getElementById("prodActive").checked = true;
+  document.getElementById("productModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function editProduct(id){
+  const p = allProducts.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById("prodId").value = p.id;
+  document.getElementById("prodModalTitle").textContent = "Edit Product";
+  document.getElementById("prodName").value = p.name || "";
+  document.getElementById("prodSlug").value = p.slug || "";
+  document.getElementById("prodIcon").value = p.icon || "";
+  document.getElementById("prodSort").value = p.sort_order || 0;
+  document.getElementById("prodDesc").value = p.description || "";
+  document.getElementById("prodPrice").value = p.price || 0;
+  document.getElementById("prodDiscount").value = p.discount_price || "";
+  document.getElementById("prodActive").checked = !!p.is_active;
+  document.getElementById("productModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeProductModal(){
+  document.getElementById("productModal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+async function saveProduct(){
+  const id = document.getElementById("prodId").value;
+  const name = document.getElementById("prodName").value.trim();
+  if (!name){ toast("Name required", true); return; }
+  const slug = document.getElementById("prodSlug").value.trim() || name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+  const payload = {
+    name, slug,
+    icon: document.getElementById("prodIcon").value.trim() || null,
+    description: document.getElementById("prodDesc").value.trim() || null,
+    price: parseInt(document.getElementById("prodPrice").value) || 0,
+    discount_price: document.getElementById("prodDiscount").value ? parseInt(document.getElementById("prodDiscount").value) : null,
+    sort_order: parseInt(document.getElementById("prodSort").value) || 0,
+    is_active: document.getElementById("prodActive").checked
+  };
+  const op = id ? sb.from("vaan_products").update(payload).eq("id", id) : sb.from("vaan_products").insert([payload]);
+  const { error } = await op;
+  if (error){ toast("Error: " + error.message, true); return; }
+  toast("✅ Product saved");
+  closeProductModal();
+  loadProducts();
+}
+
+async function deleteProduct(id){
+  if (!confirm("Delete this product AND its fields?")) return;
+  const { error } = await sb.from("vaan_products").delete().eq("id", id);
+  if (error){ toast("Error: " + error.message, true); return; }
+  toast("Deleted");
+  loadProducts();
+}
+
+/* ---- FIELDS for a product ---- */
+async function editProductFields(productId){
+  const p = allProducts.find(x => x.id === productId);
+  if (!p) return;
+  currentProductId = productId;
+  document.getElementById("fieldsTitle").textContent = "Fields — " + p.name;
+  document.getElementById("fieldsSub").textContent = "Questions the customer will be asked for " + p.name;
+  switchOrdersSub("fields", null);
+  await loadProductFields();
+}
+
+async function loadProductFields(){
+  if (!currentProductId) return;
+  const { data, error } = await sb.from("vaan_product_fields").select("*").eq("product_id", currentProductId).order("sort_order", { ascending: true });
+  if (error){ console.error(error); return; }
+  allProductFields = data || [];
+  renderProductFields();
+}
+
+function renderProductFields(){
+  const wrap = document.getElementById("fieldsList");
+  if (!allProductFields.length){
+    wrap.innerHTML = '<div class="svc-empty"><b>No fields yet</b><br><small>Click + Add Field to define the first question</small></div>';
+    return;
+  }
+  wrap.innerHTML = allProductFields.map(f =>
+    '<div class="crud-row">' +
+      '<div class="crud-info"><b>' + esc(f.label) + (f.is_required ? ' <span class="tag red">REQ</span>' : '') + '</b>' +
+        '<small>key: <code>' + esc(f.field_key) + '</code> · type: ' + esc(f.field_type) + ' · sort: ' + (f.sort_order||0) + '</small></div>' +
+      '<div class="crud-actions">' +
+        '<button class="btn btn-gold btn-sm" onclick="editField(\'' + f.id + '\')">✏️ Edit</button>' +
+        '<button class="btn btn-danger btn-sm" onclick="deleteField(\'' + f.id + '\')">🗑</button>' +
+      '</div>' +
+    '</div>'
+  ).join("");
+}
+
+function openFieldModal(){
+  document.getElementById("fldId").value = "";
+  document.getElementById("fldModalTitle").textContent = "Add Field";
+  document.getElementById("fldKey").value = "";
+  document.getElementById("fldLabel").value = "";
+  document.getElementById("fldType").value = "text";
+  document.getElementById("fldPlaceholder").value = "";
+  document.getElementById("fldOptions").value = "";
+  document.getElementById("fldSort").value = allProductFields.length;
+  document.getElementById("fldRequired").checked = false;
+  document.getElementById("fieldModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function editField(id){
+  const f = allProductFields.find(x => x.id === id);
+  if (!f) return;
+  document.getElementById("fldId").value = f.id;
+  document.getElementById("fldModalTitle").textContent = "Edit Field";
+  document.getElementById("fldKey").value = f.field_key || "";
+  document.getElementById("fldLabel").value = f.label || "";
+  document.getElementById("fldType").value = f.field_type || "text";
+  document.getElementById("fldPlaceholder").value = f.placeholder || "";
+  document.getElementById("fldOptions").value = Array.isArray(f.options) ? f.options.join(", ") : "";
+  document.getElementById("fldSort").value = f.sort_order || 0;
+  document.getElementById("fldRequired").checked = !!f.is_required;
+  document.getElementById("fieldModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeFieldModal(){
+  document.getElementById("fieldModal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+async function saveField(){
+  if (!currentProductId){ toast("No product selected", true); return; }
+  const id = document.getElementById("fldId").value;
+  const label = document.getElementById("fldLabel").value.trim();
+  const key = document.getElementById("fldKey").value.trim() || label.toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_|_$/g,"");
+  if (!label){ toast("Label required", true); return; }
+  const type = document.getElementById("fldType").value;
+  const optionsRaw = document.getElementById("fldOptions").value.trim();
+  const options = (type === "chips" && optionsRaw) ? optionsRaw.split(",").map(s => s.trim()).filter(Boolean) : null;
+  const payload = {
+    product_id: currentProductId,
+    field_key: key,
+    label,
+    field_type: type,
+    is_required: document.getElementById("fldRequired").checked,
+    placeholder: document.getElementById("fldPlaceholder").value.trim() || null,
+    options,
+    sort_order: parseInt(document.getElementById("fldSort").value) || 0
+  };
+  const op = id ? sb.from("vaan_product_fields").update(payload).eq("id", id) : sb.from("vaan_product_fields").insert([payload]);
+  const { error } = await op;
+  if (error){ toast("Error: " + error.message, true); return; }
+  toast("✅ Field saved");
+  closeFieldModal();
+  loadProductFields();
+}
+
+async function deleteField(id){
+  if (!confirm("Delete this field?")) return;
+  const { error } = await sb.from("vaan_product_fields").delete().eq("id", id);
+  if (error){ toast("Error: " + error.message, true); return; }
+  toast("Deleted");
+  loadProductFields();
+}
+
+/* ---- CATEGORIES ---- */
 function renderCategories(){
   const wrap = document.getElementById("categoriesList");
   if (!allCategories.length){ wrap.innerHTML = '<div class="svc-empty"><b>No categories yet</b></div>'; return; }
@@ -1196,7 +1486,6 @@ function renderCategories(){
     '</div>'
   ).join("");
 }
-
 function openCategoryModal(){
   document.getElementById("catId").value = "";
   document.getElementById("catModalTitle").textContent = "Add Category";
@@ -1251,7 +1540,7 @@ async function deleteCategory(id){
   loadCategories();
 }
 
-/* ---- RENDER PALETTES ---- */
+/* ---- PALETTES ---- */
 function renderPalettes(){
   const wrap = document.getElementById("palettesList");
   if (!allPalettes.length){ wrap.innerHTML = '<div class="svc-empty"><b>No palettes yet</b></div>'; return; }
@@ -1338,7 +1627,7 @@ async function deletePalette(id){
   loadPalettes();
 }
 
-/* ---- RENDER TEMPLATES ---- */
+/* ---- TEMPLATES ---- */
 function renderTemplates(){
   const wrap = document.getElementById("templatesList");
   if (!allTemplates.length){ wrap.innerHTML = '<div class="svc-empty"><b>No templates yet</b></div>'; return; }
@@ -1412,40 +1701,7 @@ async function deleteTemplate(id){
   loadTemplates();
 }
 
-/* ---- RENDER PRODUCTS ---- */
-function renderProducts(){
-  const wrap = document.getElementById("productsList");
-  if (!allProducts.length){ wrap.innerHTML = '<div class="svc-empty"><b>No products</b></div>'; return; }
-  wrap.innerHTML = allProducts.map(p =>
-    '<div class="crud-row ' + (p.is_active ? "" : "off") + '">' +
-      '<div class="crud-info"><b>' + esc(p.name || "Untitled") + (p.is_active ? "" : ' <span class="tag red">OFF</span>') + '</b><small>Price: ₹' + Number(p.price||0).toLocaleString("en-IN") + (p.discount_price ? ' · Discount: ₹' + Number(p.discount_price).toLocaleString("en-IN") : '') + '</small></div>' +
-      '<div class="crud-actions">' +
-        '<button class="btn btn-gold btn-sm" onclick="editProduct(\'' + p.id + '\')">✏️ Edit</button>' +
-      '</div>' +
-    '</div>'
-  ).join("");
-}
-function editProduct(id){
-  const p = allProducts.find(x => x.id === id);
-  if (!p) return;
-  const name = prompt("Product name:", p.name || "");
-  if (name === null) return;
-  const price = prompt("Price (₹):", p.price || 0);
-  if (price === null) return;
-  const discount = prompt("Discount price (₹, blank = none):", p.discount_price || "");
-  if (discount === null) return;
-  sb.from("vaan_products").update({
-    name,
-    price: parseInt(price) || 0,
-    discount_price: discount ? parseInt(discount) : null
-  }).eq("id", id).then(({error}) => {
-    if (error){ toast("Error: " + error.message, true); return; }
-    toast("✅ Product saved");
-    loadProducts();
-  });
-}
-
-/* ---- RENDER COUPONS ---- */
+/* ---- COUPONS ---- */
 function renderCoupons(){
   const wrap = document.getElementById("couponsList");
   if (!allCoupons.length){ wrap.innerHTML = '<div class="svc-empty"><b>No coupons yet</b></div>'; return; }
@@ -1529,7 +1785,7 @@ async function deleteCoupon(id){
   loadCoupons();
 }
 
-/* ---- RENDER FUNNEL ---- */
+/* ---- FUNNEL ---- */
 function renderFunnel(){
   const wrap = document.getElementById("funnelList");
   if (!allFunnelEvents.length){ wrap.innerHTML = '<div class="svc-empty"><b>No events yet</b></div>'; return; }
