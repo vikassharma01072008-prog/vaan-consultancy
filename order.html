@@ -92,7 +92,7 @@ input,textarea,select{font-family:inherit}
 .product-card{
   background:linear-gradient(165deg,rgba(61,15,26,.95),rgba(26,6,13,.98));
   border:1.5px solid var(--line);border-radius:20px;
-  padding:20px 18px;display:flex;flex-direction:column;gap:12px;
+  padding:20px 18px;display:flex;flex-direction:column;gap:14px;
   position:relative;overflow:hidden;
 }
 .product-card::before{
@@ -119,7 +119,6 @@ input,textarea,select{font-family:inherit}
 .product-price b{font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-weight:700;color:var(--gold-bright);letter-spacing:-.5px}
 .product-price s{font-size:14px;color:var(--cream-dim);text-decoration-color:var(--red)}
 .product-price small{font-size:9px;letter-spacing:1.5px;font-weight:800;color:var(--cream-dim);text-transform:uppercase}
-.product-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
 /* ===== BUTTONS ===== */
 .btn-primary{
@@ -252,8 +251,8 @@ input,textarea,select{font-family:inherit}
 .link-row-head select{flex:1;padding:9px 11px;border-radius:9px;background:rgba(26,6,13,.6);border:1px solid var(--line-soft);color:var(--white);font-size:12.5px}
 .link-row-head select:focus{outline:none;border-color:var(--gold-bright)}
 .link-row-head .remove{width:32px;height:32px;border-radius:9px;background:rgba(255,77,94,.12);color:#ff6b7a;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.link-row input[type="url"]{width:100%;padding:10px 12px;background:rgba(26,6,13,.5);border:1px solid var(--line-soft);border-radius:9px;color:var(--white);font-size:12.5px}
-.link-row input[type="url"]:focus{outline:none;border-color:var(--gold-bright)}
+.link-row input[type="url"],.link-row input[type="text"]{width:100%;padding:10px 12px;background:rgba(26,6,13,.5);border:1px solid var(--line-soft);border-radius:9px;color:var(--white);font-size:12.5px}
+.link-row input[type="url"]:focus,.link-row input[type="text"]:focus{outline:none;border-color:var(--gold-bright)}
 
 /* ===== PREVIEW PANEL ===== */
 .preview-panel{
@@ -290,15 +289,18 @@ input,textarea,select{font-family:inherit}
 .preview-scroll::-webkit-scrollbar{width:6px}
 .preview-scroll::-webkit-scrollbar-thumb{background:rgba(212,160,23,.4);border-radius:3px}
 
-/* ===== CARD PREVIEW (mirrors real card.html) ===== */
+/* ===== CARD PREVIEW ===== */
 .pvCard{
   --pv-bg:#2a0a12;--pv-bg2:#0f0307;
   --pv-accent:#d4a017;--pv-accent-bright:#f0c14b;--pv-accent-hot:#ffd966;
   --pv-text:#fdfaf3;--pv-text-dim:#c9a98a;
   --pv-box-radius:16px;
+  --pv-box-bg:rgba(255,255,255,.04);
   --pv-name-color:#fdfaf3;
   --pv-tagline-color:#f0c14b;
   --pv-body-color:#fdfaf3;
+  --pv-live-color:#c9a98a;
+  --pv-footer-color:#c9a98a;
   background:linear-gradient(165deg,var(--pv-bg),var(--pv-bg2));
   color:var(--pv-text);
   padding:22px 16px 20px;
@@ -344,7 +346,7 @@ input,textarea,select{font-family:inherit}
   background:var(--pv-accent-bright);box-shadow:0 0 8px var(--pv-accent-bright);
 }
 
-.pv-logo-wrap{position:relative;width:76px;height:76px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center}
+.pv-logo-wrap{position:relative;width:76px;height:76px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center}
 .pv-logo-wrap::before{
   content:"";position:absolute;inset:-5px;border-radius:50%;
   border:1.5px solid rgba(240,193,75,.55);
@@ -365,7 +367,7 @@ input,textarea,select{font-family:inherit}
   font-size:19px;font-weight:700;letter-spacing:2.5px;
   color:var(--pv-text);
   text-transform:uppercase;
-  line-height:1.15;margin-bottom:10px;
+  line-height:1.15;margin-bottom:8px;
   position:relative;
 }
 .pv-biz-name::before,
@@ -381,7 +383,8 @@ input,textarea,select{font-family:inherit}
   background:linear-gradient(135deg,rgba(79,143,255,.14),rgba(212,160,23,.1));
   border:1px solid rgba(240,193,75,.3);
   border-radius:var(--pv-box-radius);
-  margin-bottom:14px;display:flex;align-items:center;gap:12px;
+  margin-bottom:12px;display:flex;align-items:center;gap:12px;
+  transition:background .2s ease;
 }
 .pv-founder-avatar{
   width:44px;height:44px;border-radius:50%;
@@ -409,9 +412,9 @@ input,textarea,select{font-family:inherit}
 
 .pv-live{
   display:flex;align-items:center;justify-content:center;gap:8px;
-  font-size:10px;color:var(--pv-text-dim);margin-bottom:14px;
+  font-size:10px;color:var(--pv-live-color);margin-bottom:12px;
   font-family:'JetBrains Mono',monospace;text-transform:uppercase;
-  letter-spacing:.5px;
+  letter-spacing:.5px;transition:color .2s ease;
 }
 .pv-live .dot{
   width:6px;height:6px;border-radius:50%;background:#25d366;
@@ -423,7 +426,7 @@ input,textarea,select{font-family:inherit}
   text-align:center;font-size:8.5px;letter-spacing:1.6px;font-weight:600;
   color:var(--pv-tagline-color);text-transform:uppercase;
   padding:10px 4px;border-top:1px solid rgba(255,255,255,.08);
-  border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:14px;
+  border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:12px;
   font-family:'JetBrains Mono',monospace;line-height:1.55;
   transition:color .2s ease;
 }
@@ -446,22 +449,17 @@ input,textarea,select{font-family:inherit}
   font-size:10.5px;font-weight:700;
   letter-spacing:1.4px;text-transform:uppercase;
   display:flex;justify-content:center;align-items:center;gap:8px;
-  margin-bottom:12px;
-  transition:background .2s ease;
+  margin-bottom:12px;transition:background .2s ease;
 }
 .pv-services-toggle svg{width:14px;height:14px;transition:transform .3s ease}
 .pv-services-toggle.open svg{transform:rotate(180deg)}
 
-.pv-services-content{
-  display:grid;grid-template-rows:0fr;
-  transition:grid-template-rows .35s ease-out;
-  margin-bottom:14px;
-}
+.pv-services-content{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease-out;margin-bottom:12px}
 .pv-services-content.open{grid-template-rows:1fr}
 .pv-services-content-inner{overflow:hidden;min-height:0}
 .pv-services{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:2px 0 4px}
 .pv-svc{
-  background:rgba(255,255,255,.04);
+  background:var(--pv-box-bg);
   border:1px solid rgba(255,255,255,.08);
   border-radius:var(--pv-box-radius);
   padding:9px 6px;
@@ -469,179 +467,102 @@ input,textarea,select{font-family:inherit}
   color:var(--pv-body-color);line-height:1.35;
   min-height:46px;
   display:flex;align-items:center;justify-content:center;
-  transition:color .2s ease;
+  transition:color .2s ease,background .2s ease;
 }
 
-.pv-qr{display:flex;flex-direction:column;align-items:center;margin-bottom:14px}
-.pv-qr-box{
-  background:var(--pv-bg);
-  padding:7px;border-radius:12px;
-  border:1px solid var(--pv-accent);
-  box-shadow:0 0 20px rgba(212,160,23,.3);
-}
+.pv-qr{display:flex;flex-direction:column;align-items:center;margin-bottom:12px}
+.pv-qr-box{background:var(--pv-bg);padding:7px;border-radius:12px;border:1px solid var(--pv-accent);box-shadow:0 0 20px rgba(212,160,23,.3)}
 .pv-qr-box img{width:96px;height:96px;display:block;border-radius:6px}
-.pv-qr-hint{
-  text-align:center;font-size:7.5px;letter-spacing:2.2px;font-weight:700;
-  color:var(--pv-text-dim);text-transform:uppercase;margin-top:6px;
-  font-family:'JetBrains Mono',monospace;
-}
+.pv-qr-hint{text-align:center;font-size:7.5px;letter-spacing:2.2px;font-weight:700;color:var(--pv-text-dim);text-transform:uppercase;margin-top:6px;font-family:'JetBrains Mono',monospace}
 
 .pv-actions{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
 .pv-actions-row{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.pv-btn{
-  display:flex;align-items:center;justify-content:center;gap:6px;
-  padding:11px 8px;border-radius:11px;
-  font-size:11px;font-weight:700;letter-spacing:.2px;
-  min-height:42px;
-}
+.pv-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:11px 8px;border-radius:11px;font-size:11px;font-weight:700;letter-spacing:.2px;min-height:42px}
 .pv-btn svg{width:14px;height:14px;flex-shrink:0}
 .pv-btn-contact{background:#fff;color:#1a3c8c;font-weight:800}
 .pv-btn-contact svg{color:#1a73e8}
 .pv-btn-wa{background:linear-gradient(135deg,#25d366,#128c3e);color:#fff}
 .pv-btn-call{background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff}
 
-/* Visit Us section (website + map) */
-.pv-visit{
-  margin:12px 0;
-  padding:12px 12px 10px;
-  background:linear-gradient(165deg,rgba(37,211,102,.1),rgba(37,211,102,.03));
-  border:1px solid rgba(37,211,102,.3);
-  border-radius:var(--pv-box-radius);
-}
-.pv-visit-head{
-  font-family:'JetBrains Mono',monospace;
-  font-size:8px;letter-spacing:2.2px;font-weight:800;
-  color:#6ee08a;text-transform:uppercase;
-  text-align:center;margin-bottom:10px;
-}
-.pv-visit-btn{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  padding:10px 14px;border-radius:10px;
-  font-size:11px;font-weight:700;
-  min-height:40px;margin-bottom:7px;
-}
+.pv-visit{margin:12px 0;padding:12px 12px 10px;background:linear-gradient(165deg,rgba(37,211,102,.1),rgba(37,211,102,.03));border:1px solid rgba(37,211,102,.3);border-radius:var(--pv-box-radius)}
+.pv-visit-head{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:2.2px;font-weight:800;color:#6ee08a;text-transform:uppercase;text-align:center;margin-bottom:10px}
+.pv-visit-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 14px;border-radius:10px;font-size:11px;font-weight:700;min-height:40px;margin-bottom:7px}
 .pv-visit-btn:last-child{margin-bottom:0}
 .pv-visit-website{background:linear-gradient(135deg,#4f8fff,#1d4ed8);color:#fff}
 .pv-visit-map{background:linear-gradient(135deg,#ea4335,#c5221f);color:#fff}
 .pv-visit-btn svg{width:14px;height:14px}
 
-/* Connect section */
-.pv-connect{
-  margin:12px 0;
-  padding:12px 12px 10px;
-  background:linear-gradient(165deg,rgba(79,143,255,.1),rgba(79,143,255,.03));
-  border:1px solid rgba(79,143,255,.3);
-  border-radius:var(--pv-box-radius);
-}
-.pv-connect-head{
-  font-family:'JetBrains Mono',monospace;
-  font-size:8px;letter-spacing:2.2px;font-weight:800;
-  color:#7ab0ff;text-transform:uppercase;
-  text-align:center;margin-bottom:10px;
-}
-.pv-connect-btn{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  padding:10px 14px;border-radius:10px;
-  font-size:11px;font-weight:700;
-  min-height:40px;margin-bottom:7px;
-}
+.pv-connect{margin:12px 0;padding:12px 12px 10px;background:linear-gradient(165deg,rgba(79,143,255,.1),rgba(79,143,255,.03));border:1px solid rgba(79,143,255,.3);border-radius:var(--pv-box-radius)}
+.pv-connect-head{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:2.2px;font-weight:800;color:#7ab0ff;text-transform:uppercase;text-align:center;margin-bottom:10px}
+.pv-connect-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 14px;border-radius:10px;font-size:11px;font-weight:700;min-height:40px;margin-bottom:7px}
 .pv-connect-btn:last-child{margin-bottom:0}
 .pv-connect-btn svg{width:14px;height:14px;flex-shrink:0}
 .pv-connect-ig{background:linear-gradient(135deg,#feda75,#fa7e1e 25%,#d62976 55%,#962fbf 80%,#4f5bd5);color:#fff}
-.pv-connect-mail{background:linear-gradient(135deg,#ea4335,#c5221f);color:#fff;word-break:break-all;font-family:'JetBrains Mono',monospace;font-size:10px}
+.pv-connect-mail{background:linear-gradient(135deg,#ea4335,#c5221f);color:#fff}
 .pv-connect-fb{background:linear-gradient(135deg,#1877f2,#0c4fa3);color:#fff}
 .pv-connect-yt{background:linear-gradient(135deg,#ff0000,#c00);color:#fff}
 .pv-connect-li{background:linear-gradient(135deg,#0a66c2,#004182);color:#fff}
-.pv-connect-web{background:linear-gradient(135deg,#4f8fff,#1d4ed8);color:#fff}
+.pv-connect-tw{background:linear-gradient(135deg,#000,#333);color:#fff}
+.pv-connect-tg{background:linear-gradient(135deg,#229ED9,#0088cc);color:#fff}
+.pv-connect-custom{background:linear-gradient(135deg,#6a6a6a,#333);color:#fff}
 
-.pv-review{
-  margin:12px 0;
-  padding:14px 12px 12px;
-  background:linear-gradient(165deg,rgba(251,188,4,.1),rgba(251,188,4,.03));
-  border:1px solid rgba(251,188,4,.3);
-  border-radius:var(--pv-box-radius);
-}
-.pv-review-head{
-  font-family:'JetBrains Mono',monospace;
-  font-size:8px;letter-spacing:2.2px;font-weight:800;
-  color:#fbbc04;text-transform:uppercase;
-  text-align:center;margin-bottom:4px;
-}
+.pv-review{margin:12px 0;padding:14px 12px 12px;background:linear-gradient(165deg,rgba(251,188,4,.1),rgba(251,188,4,.03));border:1px solid rgba(251,188,4,.3);border-radius:var(--pv-box-radius)}
+.pv-review-head{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:2.2px;font-weight:800;color:#fbbc04;text-transform:uppercase;text-align:center;margin-bottom:4px}
 .pv-review-sub{font-size:9.5px;color:rgba(253,250,243,.65);text-align:center;line-height:1.45;margin-bottom:10px}
-.pv-review-btn{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  padding:11px 14px;border-radius:10px;
-  background:linear-gradient(135deg,#fbbc04,#f29900);
-  color:#1a060d;font-size:11.5px;font-weight:800;
-  letter-spacing:.3px;min-height:42px;
-  box-shadow:0 6px 18px rgba(251,188,4,.35);
-}
+.pv-review-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 14px;border-radius:10px;background:linear-gradient(135deg,#fbbc04,#f29900);color:#1a060d;font-size:11.5px;font-weight:800;letter-spacing:.3px;min-height:42px;box-shadow:0 6px 18px rgba(251,188,4,.35)}
 .pv-review-btn svg{width:16px;height:16px}
 
 .pv-goodday{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:5px;padding:16px 14px 14px;margin:6px 0 12px;
   border-radius:var(--pv-box-radius);
-  background:
-    radial-gradient(ellipse at 50% 0%,rgba(255,217,102,.28),transparent 70%),
-    linear-gradient(135deg,rgba(255,217,102,.16),rgba(240,193,75,.08),rgba(255,157,46,.14));
-  border:1.5px solid rgba(240,193,75,.45);
-  text-align:center;
+  background:radial-gradient(ellipse at 50% 0%,rgba(255,217,102,.28),transparent 70%),linear-gradient(135deg,rgba(255,217,102,.16),rgba(240,193,75,.08),rgba(255,157,46,.14));
+  border:1.5px solid rgba(240,193,75,.45);text-align:center;
   box-shadow:inset 0 0 22px rgba(240,193,75,.1);
 }
 .pv-goodday-emoji{font-size:20px;letter-spacing:2px}
-.pv-goodday-title{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:18px;font-weight:700;font-style:italic;
-  background:linear-gradient(135deg,#ffd966,#f0c14b 50%,#ff9d2e);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-}
-.pv-goodday-sub{
-  font-family:'JetBrains Mono',monospace;
-  font-size:7.5px;letter-spacing:2.5px;
-  color:rgba(240,193,75,.7);text-transform:uppercase;
-}
+.pv-goodday-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-weight:700;font-style:italic;background:linear-gradient(135deg,#ffd966,#f0c14b 50%,#ff9d2e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.pv-goodday-sub{font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:2.5px;color:rgba(240,193,75,.7);text-transform:uppercase}
 
-.pv-footer{
-  text-align:center;padding-top:12px;
-  border-top:1px solid rgba(255,255,255,.08);
-  font-size:8px;color:rgba(201,169,138,.75);
-  letter-spacing:1.4px;line-height:1.7;
-  font-family:'JetBrains Mono',monospace;
-  text-transform:uppercase;
-}
+.pv-footer{text-align:center;padding-top:12px;border-top:1px solid rgba(255,255,255,.08);font-size:8px;color:var(--pv-footer-color);letter-spacing:1.4px;line-height:1.7;font-family:'JetBrains Mono',monospace;text-transform:uppercase;transition:color .2s ease}
 .pv-footer b{color:var(--pv-accent);font-weight:700}
 
-/* Tap-to-color-mode hints */
-.pvCard.tap-color-mode [data-color-target]{
-  cursor:pointer;
-  transition:outline .15s ease;
-  position:relative;
+.pvCard.tap-color-mode [data-color-group]{
+  cursor:pointer;transition:outline .15s ease;position:relative;
 }
-.pvCard.tap-color-mode [data-color-target]:hover{
-  outline:2px dashed var(--pv-accent-bright);
-  outline-offset:3px;
-  border-radius:4px;
+.pvCard.tap-color-mode [data-color-group]:hover{
+  outline:2px dashed var(--pv-accent-bright);outline-offset:3px;border-radius:6px;
 }
-.pvCard.tap-color-mode [data-color-target]::after{
-  content:"tap to change";position:absolute;top:-20px;left:0;
-  font-family:'JetBrains Mono',monospace;
-  font-size:7px;font-weight:700;letter-spacing:1px;
-  color:var(--pv-accent-bright);
-  background:rgba(0,0,0,.85);padding:2px 6px;border-radius:4px;
-  white-space:nowrap;opacity:0;pointer-events:none;
-  transition:opacity .15s ease;
-}
-.pvCard.tap-color-mode [data-color-target]:hover::after{opacity:1}
 
-/* ===== PALETTE PICKER ===== */
+/* ===== CUSTOMISE SUB-TABS ===== */
+.subtab-bar{
+  display:flex;gap:6px;overflow-x:auto;
+  margin-bottom:16px;padding-bottom:6px;
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.subtab-bar::-webkit-scrollbar{display:none}
+.subtab{
+  flex-shrink:0;
+  padding:9px 15px;border-radius:99px;
+  background:rgba(255,255,255,.03);border:1px solid var(--line-soft);
+  color:var(--cream-dim);font-size:11.5px;font-weight:800;
+  letter-spacing:.5px;text-transform:uppercase;cursor:pointer;
+  transition:all .18s ease;
+}
+.subtab.active{
+  background:linear-gradient(135deg,var(--gold-bright),var(--gold));
+  border-color:var(--gold-bright);color:#1a060d;
+}
+.subtab-panel{display:none}
+.subtab-panel.show{display:block;animation:fadeIn .25s ease}
+
+/* ===== PALETTE PRESETS ===== */
 .palette-presets{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
 .palette-preset{
   background:rgba(255,255,255,.03);border:2px solid var(--line-soft);
   border-radius:16px;padding:14px;display:flex;gap:14px;align-items:center;
   cursor:pointer;transition:all .18s ease;position:relative;
 }
-.palette-preset:active{transform:scale(.99)}
 .palette-preset.selected{border-color:var(--gold-bright);background:rgba(240,193,75,.08);box-shadow:0 0 0 3px rgba(240,193,75,.16)}
 .palette-preset.selected::after{
   content:"✓";position:absolute;top:10px;right:12px;
@@ -657,11 +578,44 @@ input,textarea,select{font-family:inherit}
 .palette-preset.selected .palette-info b{color:var(--gold-bright)}
 .palette-info small{font-size:11px;color:var(--cream-dim);line-height:1.4}
 
-.custom-colors{background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:14px;padding:16px;display:none;margin-top:6px}
-.custom-colors.show{display:block}
-.custom-colors-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.custom-color-cell label{display:block;font-size:9.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--cream-dim);margin-bottom:6px}
-.custom-color-cell input[type=color]{width:100%;height:42px;padding:3px;background:transparent;border:1px solid var(--line-soft);border-radius:8px;cursor:pointer}
+/* ===== COLOR TAP SCREEN ===== */
+.color-hint{
+  text-align:center;padding:14px 16px;
+  background:rgba(212,160,23,.08);
+  border:1px dashed rgba(240,193,75,.4);
+  border-radius:12px;margin-bottom:14px;
+  font-size:12px;color:var(--gold-bright);line-height:1.5;
+}
+.color-hint b{color:var(--cream)}
+
+.color-swatches-grid{
+  display:grid;grid-template-columns:repeat(8,1fr);gap:6px;
+  margin-bottom:14px;
+}
+.color-swatch{
+  aspect-ratio:1;border-radius:8px;
+  border:2px solid rgba(255,255,255,.1);cursor:pointer;
+  transition:transform .12s ease,border-color .12s ease;
+}
+.color-swatch:active{transform:scale(.92);border-color:var(--gold-bright)}
+
+.color-picker-row{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--line-soft);
+  border-radius:12px;padding:10px;
+  margin-bottom:12px;
+}
+.color-picker-row label{
+  font-size:11px;font-weight:800;letter-spacing:1px;
+  color:var(--cream-dim);text-transform:uppercase;
+  flex-shrink:0;
+}
+.color-picker-row input[type=color]{
+  width:100%;height:42px;padding:3px;
+  background:transparent;border:1px solid var(--line-soft);
+  border-radius:8px;cursor:pointer;flex:1;
+}
 
 /* ===== BOX STYLE ===== */
 .style-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
@@ -671,10 +625,7 @@ input,textarea,select{font-family:inherit}
   transition:all .18s ease;
 }
 .style-card.selected{border-color:var(--gold-bright);background:rgba(240,193,75,.08)}
-.style-preview{
-  width:100%;height:40px;margin-bottom:6px;
-  background:rgba(240,193,75,.18);border:1px solid rgba(240,193,75,.4);
-}
+.style-preview{width:100%;height:40px;margin-bottom:6px;background:rgba(240,193,75,.18);border:1px solid rgba(240,193,75,.4)}
 .style-preview.square{border-radius:0}
 .style-preview.rounded{border-radius:10px}
 .style-preview.circle{border-radius:50%;width:40px;margin:0 auto 6px}
@@ -682,14 +633,13 @@ input,textarea,select{font-family:inherit}
 .style-label{font-size:9.5px;font-weight:800;letter-spacing:.5px;color:var(--cream-dim);text-transform:uppercase}
 .style-card.selected .style-label{color:var(--gold-bright)}
 
-/* ===== DRAG LIST (real preview thumbs) ===== */
+/* ===== DRAG LIST ===== */
 .drag-list{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
 .drag-item{
   display:flex;align-items:center;gap:12px;
-  padding:10px;
-  background:rgba(255,255,255,.03);border:1.5px solid var(--line-soft);
-  border-radius:12px;cursor:grab;
-  transition:border-color .15s ease,background .15s ease;
+  padding:10px;background:rgba(255,255,255,.03);
+  border:1.5px solid var(--line-soft);border-radius:12px;
+  cursor:grab;transition:border-color .15s ease,background .15s ease;
   touch-action:none;user-select:none;
 }
 .drag-item.dragging{opacity:.5;border-color:var(--gold-bright);background:rgba(240,193,75,.12)}
@@ -707,12 +657,7 @@ input,textarea,select{font-family:inherit}
 .drag-info{flex:1;min-width:0}
 .drag-info b{font-size:13px;font-weight:800;color:var(--cream);display:block;margin-bottom:2px}
 .drag-info small{font-size:10.5px;color:var(--cream-dim);line-height:1.3}
-
-.drag-hint{
-  font-size:10.5px;color:var(--cream-dim);
-  text-align:center;font-family:'JetBrains Mono',monospace;
-  letter-spacing:1px;margin-bottom:14px;
-}
+.drag-hint{font-size:10.5px;color:var(--cream-dim);text-align:center;font-family:'JetBrains Mono',monospace;letter-spacing:1px;margin-bottom:14px}
 
 /* ===== SUMMARY / CHECKOUT ===== */
 .summary{background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:14px;padding:16px;margin-bottom:16px}
@@ -736,14 +681,7 @@ input,textarea,select{font-family:inherit}
 
 /* ===== SUCCESS ===== */
 .success-wrap{text-align:center;padding:24px 10px}
-.success-check{
-  width:80px;height:80px;margin:0 auto 18px;border-radius:50%;
-  background:linear-gradient(135deg,rgba(37,211,102,.2),rgba(37,211,102,.05));
-  border:2px solid var(--green);
-  display:flex;align-items:center;justify-content:center;
-  animation:successPop .6s cubic-bezier(.2,.9,.3,1.1);
-  box-shadow:0 0 40px rgba(37,211,102,.3);
-}
+.success-check{width:80px;height:80px;margin:0 auto 18px;border-radius:50%;background:linear-gradient(135deg,rgba(37,211,102,.2),rgba(37,211,102,.05));border:2px solid var(--green);display:flex;align-items:center;justify-content:center;animation:successPop .6s cubic-bezier(.2,.9,.3,1.1);box-shadow:0 0 40px rgba(37,211,102,.3)}
 .success-check svg{width:38px;height:38px;color:var(--green);stroke-width:3}
 @keyframes successPop{0%{transform:scale(0) rotate(-45deg);opacity:0}60%{transform:scale(1.15) rotate(0);opacity:1}100%{transform:scale(1) rotate(0)}}
 .success-wrap h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-weight:700;color:var(--gold-bright);margin-bottom:8px}
@@ -763,6 +701,22 @@ input,textarea,select{font-family:inherit}
 
 .empty{text-align:center;padding:40px 20px;color:var(--cream-dim);font-size:13px}
 
+/* ===== MODAL (color picker) ===== */
+.modal{position:fixed;inset:0;background:rgba(5,8,16,.85);backdrop-filter:blur(10px);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+.modal.open{display:flex}
+.modal-box{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid rgba(255,212,0,.25);border-radius:22px;width:min(560px,100%);max-height:90vh;overflow-y:auto;position:relative}
+.modal-box::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--blue))}
+.modal-head{padding:20px 20px 14px;border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:flex-start;gap:14px;position:sticky;top:0;background:linear-gradient(180deg,#12192a 85%,rgba(18,25,42,0));z-index:2}
+.modal-head h3{font-size:18px;font-weight:900;letter-spacing:-.4px;color:var(--cream)}
+.modal-head small{color:var(--cream-dim);font-size:11px;display:block;margin-top:4px}
+.modal-close{background:rgba(255,255,255,.06);border:0;color:var(--cream-dim);width:32px;height:32px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:rgba(240,193,75,.15);color:var(--gold-bright)}
+.modal-body{padding:18px 20px 20px}
+.modal-actions{display:flex;gap:10px;margin-top:16px}
+.modal-actions .btn{flex:1;padding:13px;border-radius:10px;font-weight:850;font-size:12px;letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;border:0;font-family:inherit}
+.btn-gold{background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1a060d}
+.btn-dark{background:rgba(255,255,255,.06);color:var(--cream);border:1px solid var(--line-soft)}
+
 @media(max-width:380px){
   .landing-hero h1{font-size:24px}
   .step-head h2{font-size:22px}
@@ -771,7 +725,7 @@ input,textarea,select{font-family:inherit}
   .style-grid{gap:6px}
   .style-preview{height:34px}
   .style-preview.circle{width:34px}
-  .product-actions{grid-template-columns:1fr}
+  .color-swatches-grid{grid-template-columns:repeat(6,1fr)}
 }
 </style></head>
 <body>
@@ -798,12 +752,12 @@ input,textarea,select{font-family:inherit}
 
 <main class="wrap" id="app">
 
-  <!-- ============ LANDING (product picker) ============ -->
+  <!-- ============ LANDING ============ -->
   <section class="screen active" id="screen-landing">
     <div class="landing-hero">
       <img src="logo.png" alt="VAAN" onerror="this.style.display='none'">
       <h1>Choose Your Product</h1>
-      <p>Pick what you want to order. Fill details, see a live preview, customize your card, then pay securely.</p>
+      <p>Fill your details, watch your card build live, then pay securely.</p>
     </div>
     <div class="products-grid" id="productsGrid">
       <div class="empty">Loading products…</div>
@@ -812,7 +766,7 @@ input,textarea,select{font-family:inherit}
 
   <!-- ============ STEP FORM ============ -->
   <section class="screen" id="screen-step">
-    <button class="btn-back" id="stepBackBtn" onclick="goBackFromStep()">
+    <button class="btn-back" onclick="goBackFromStep()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
       Back
     </button>
@@ -827,136 +781,128 @@ input,textarea,select{font-family:inherit}
       <button class="btn-skip" id="stepSkipBtn" style="display:none">Skip this step</button>
     </div>
 
-    <!-- LIVE PREVIEW -->
-    <div class="preview-panel">
-      <div class="preview-panel-head">
-        <b>Live Preview</b>
-        <span class="live-dot">Live</span>
-      </div>
-      <div class="preview-frame">
-        <div class="preview-scroll">
-          <div class="pvCard" id="pvCard"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ PALETTE PICKER ============ -->
-  <section class="screen" id="screen-palette">
-    <button class="btn-back" onclick="gotoStep('preview')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-      Back
-    </button>
-    <div class="step-head">
-      <span class="step-num">Design · Colors</span>
-      <h2>Pick a color theme</h2>
-      <p>Choose a preset, or <em>customize your own</em> colors.</p>
-    </div>
-    <div class="palette-presets" id="palettePresets"></div>
-    <div class="custom-colors" id="customColors">
-      <div class="custom-colors-grid">
-        <div class="custom-color-cell"><label>Background</label><input type="color" id="ccBg" value="#2a0a12"></div>
-        <div class="custom-color-cell"><label>Accent</label><input type="color" id="ccAccent" value="#d4a017"></div>
-        <div class="custom-color-cell"><label>Text</label><input type="color" id="ccText" value="#fdfaf3"></div>
-        <div class="custom-color-cell"><label>Text (dim)</label><input type="color" id="ccTextDim" value="#c9a98a"></div>
-      </div>
-    </div>
-    <div class="btn-row">
-      <button class="btn-primary" onclick="gotoStep('style')">Next: Box Style →</button>
-    </div>
     <div class="preview-panel">
       <div class="preview-panel-head"><b>Live Preview</b><span class="live-dot">Live</span></div>
-      <div class="preview-frame"><div class="preview-scroll"><div class="pvCard" id="pvCardPalette"></div></div></div>
+      <div class="preview-frame"><div class="preview-scroll"><div class="pvCard" id="pvCard"></div></div></div>
     </div>
   </section>
 
-  <!-- ============ BOX STYLE ============ -->
-  <section class="screen" id="screen-style">
-    <button class="btn-back" onclick="gotoStep('palette')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-      Back
-    </button>
-    <div class="step-head">
-      <span class="step-num">Design · Shape</span>
-      <h2>Choose box style</h2>
-      <p>How should the sections look?</p>
-    </div>
-    <div class="style-grid" id="styleGrid">
-      <div class="style-card" data-style="square"><div class="style-preview square"></div><div class="style-label">Square</div></div>
-      <div class="style-card" data-style="rounded"><div class="style-preview rounded"></div><div class="style-label">Rounded</div></div>
-      <div class="style-card" data-style="rect"><div class="style-preview rect"></div><div class="style-label">Rect</div></div>
-      <div class="style-card" data-style="circle"><div class="style-preview circle"></div><div class="style-label">Circle</div></div>
-    </div>
-    <div class="btn-row">
-      <button class="btn-primary" onclick="gotoStep('layout')">Next: Arrange Sections →</button>
-    </div>
-    <div class="preview-panel">
-      <div class="preview-panel-head"><b>Live Preview</b><span class="live-dot">Live</span></div>
-      <div class="preview-frame"><div class="preview-scroll"><div class="pvCard" id="pvCardStyle"></div></div></div>
-    </div>
-  </section>
-
-  <!-- ============ LAYOUT (drag reorder with real preview thumbs) ============ -->
-  <section class="screen" id="screen-layout">
-    <button class="btn-back" onclick="gotoStep('style')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-      Back
-    </button>
-    <div class="step-head">
-      <span class="step-num">Design · Layout</span>
-      <h2>Arrange your sections</h2>
-      <p>Drag to reorder. Preview updates instantly.</p>
-    </div>
-    <div class="drag-list" id="dragList"></div>
-    <div class="drag-hint">↑ drag to reorder ↑</div>
-    <div class="btn-row">
-      <button class="btn-primary" onclick="gotoStep('textcolor')">Next: Text Colors →</button>
-    </div>
-    <div class="preview-panel">
-      <div class="preview-panel-head"><b>Live Preview</b><span class="live-dot">Live</span></div>
-      <div class="preview-frame"><div class="preview-scroll"><div class="pvCard" id="pvCardLayout"></div></div></div>
-    </div>
-  </section>
-
-  <!-- ============ TEXT COLOR (tap-to-cycle) ============ -->
-  <section class="screen" id="screen-textcolor">
-    <button class="btn-back" onclick="gotoStep('layout')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-      Back
-    </button>
-    <div class="step-head">
-      <span class="step-num">Design · Text Color</span>
-      <h2>Tap any text to change color</h2>
-      <p>Each tap cycles through the palette — <em>name, tagline, and body text</em> are editable.</p>
-    </div>
-    <div class="preview-panel" style="margin-top:0">
-      <div class="preview-panel-head"><b>Tap to edit</b><span class="live-dot">Live</span></div>
-      <div class="preview-frame"><div class="preview-scroll" style="max-height:600px"><div class="pvCard tap-color-mode" id="pvCardTextColor"></div></div></div>
-    </div>
-    <div class="btn-row">
-      <button class="btn-primary" onclick="gotoStep('preview')">See Final Preview →</button>
-    </div>
-  </section>
-
-  <!-- ============ FINAL PREVIEW ============ -->
+  <!-- ============ PREVIEW (Pay / Customise split) ============ -->
   <section class="screen" id="screen-preview">
-    <button class="btn-back" onclick="gotoStep('textcolor')">
+    <button class="btn-back" onclick="gotoStep('step')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-      Back to design
+      Back to details
     </button>
     <div class="step-head">
       <span class="step-num">Your Card</span>
-      <h2>Looks good?</h2>
-      <p>This is exactly how your card will look.</p>
+      <h2>Here's your card</h2>
+      <p>Love it? Pay now. Want to tweak design? Customise.</p>
     </div>
     <div class="preview-panel" style="margin-top:0">
       <div class="preview-frame"><div class="preview-scroll" style="max-height:640px"><div class="pvCard" id="pvCardFinal"></div></div></div>
     </div>
     <div class="btn-row">
-      <button class="btn-primary" onclick="gotoStep('checkout')">Looks good — Pay now →</button>
-      <button class="btn-secondary" onclick="gotoStep('palette')">← Edit design</button>
+      <button class="btn-primary" onclick="gotoStep('checkout')">Pay Now →</button>
+      <button class="btn-secondary" onclick="gotoCustomise()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        Customise design
+      </button>
     </div>
   </section>
+
+  <!-- ============ CUSTOMISE (sub-tabs) ============ -->
+  <section class="screen" id="screen-customise">
+    <button class="btn-back" onclick="gotoStep('preview')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back to card
+    </button>
+    <div class="step-head">
+      <span class="step-num">Design</span>
+      <h2>Customise your card</h2>
+      <p>Pick a section below to edit.</p>
+    </div>
+
+    <div class="subtab-bar">
+      <button class="subtab active" data-subtab="bg" onclick="switchSubtab('bg', this)">Background</button>
+      <button class="subtab" data-subtab="main" onclick="switchSubtab('main', this)">Main Color</button>
+      <button class="subtab" data-subtab="boxes" onclick="switchSubtab('boxes', this)">Box Colors</button>
+      <button class="subtab" data-subtab="text" onclick="switchSubtab('text', this)">Text Colors</button>
+      <button class="subtab" data-subtab="layout" onclick="switchSubtab('layout', this)">Layout</button>
+    </div>
+
+    <!-- BACKGROUND -->
+    <div class="subtab-panel show" id="subtab-bg">
+      <div class="color-hint">Pick a <b>theme preset</b> or choose your own background colors below.</div>
+      <div class="palette-presets" id="palettePresets"></div>
+      <div class="color-picker-row"><label>Background</label><input type="color" id="ccBg" value="#2a0a12"></div>
+      <div class="color-picker-row"><label>Background (dark)</label><input type="color" id="ccBg2" value="#0f0307"></div>
+    </div>
+
+    <!-- MAIN COLOR -->
+    <div class="subtab-panel" id="subtab-main">
+      <div class="color-hint">Your <b>main accent color</b> — used on borders, buttons, labels.</div>
+      <div class="color-picker-row"><label>Main Accent</label><input type="color" id="ccAccent" value="#d4a017"></div>
+      <div class="color-picker-row"><label>Accent (bright)</label><input type="color" id="ccAccentBright" value="#f0c14b"></div>
+      <div class="color-picker-row"><label>Accent (hot)</label><input type="color" id="ccAccentHot" value="#ffd966"></div>
+    </div>
+
+    <!-- BOX COLORS -->
+    <div class="subtab-panel" id="subtab-boxes">
+      <div class="color-hint">Tap any box in the preview below to change <b>all boxes of that type</b>.</div>
+      <div class="preview-panel" style="margin-top:0">
+        <div class="preview-frame"><div class="preview-scroll" style="max-height:520px"><div class="pvCard tap-color-mode" id="pvCardBoxes"></div></div></div>
+      </div>
+      <div style="margin-top:16px">
+        <div style="font-size:10.5px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:var(--cream-dim);margin-bottom:10px">Box Shape</div>
+        <div class="style-grid" id="styleGrid">
+          <div class="style-card" data-style="square"><div class="style-preview square"></div><div class="style-label">Square</div></div>
+          <div class="style-card" data-style="rounded"><div class="style-preview rounded"></div><div class="style-label">Rounded</div></div>
+          <div class="style-card" data-style="rect"><div class="style-preview rect"></div><div class="style-label">Rect</div></div>
+          <div class="style-card" data-style="circle"><div class="style-preview circle"></div><div class="style-label">Circle</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEXT COLORS -->
+    <div class="subtab-panel" id="subtab-text">
+      <div class="color-hint">Tap any text in the preview below to change its color.</div>
+      <div class="preview-panel" style="margin-top:0">
+        <div class="preview-frame"><div class="preview-scroll" style="max-height:520px"><div class="pvCard tap-color-mode" id="pvCardText"></div></div></div>
+      </div>
+    </div>
+
+    <!-- LAYOUT -->
+    <div class="subtab-panel" id="subtab-layout">
+      <div class="color-hint">Drag to <b>reorder sections</b>. Preview updates instantly.</div>
+      <div class="drag-list" id="dragList"></div>
+      <div class="drag-hint">↑ drag to reorder ↑</div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" onclick="gotoStep('preview')">Done — See Card →</button>
+    </div>
+  </section>
+
+  <!-- ============ COLOR PICKER MODAL ============ -->
+  <div class="modal" id="colorModal" onclick="if(event.target===this)closeColorModal()">
+    <div class="modal-box" style="width:min(380px,100%)">
+      <div class="modal-head">
+        <div><h3 id="colorModalTitle">Choose Color</h3><small id="colorModalSub">Tap any swatch or pick your own</small></div>
+        <button class="modal-close" onclick="closeColorModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="color-swatches-grid" id="colorSwatches"></div>
+        <div class="color-picker-row">
+          <label>Custom</label>
+          <input type="color" id="customColorPicker" value="#d4a017">
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-gold" onclick="applyColorModal()">Apply</button>
+          <button class="btn btn-dark" onclick="closeColorModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ============ CHECKOUT ============ -->
   <section class="screen" id="screen-checkout">
@@ -998,7 +944,7 @@ input,textarea,select{font-family:inherit}
       </div>
       <h2>Payment received! 🎉</h2>
       <div class="order-id" id="successOrderId">VAAN-XXXX</div>
-      <p>Thank you, <b id="successName">there</b>! Your order is confirmed. We'll start building your full animated card right away.</p>
+      <p>Thank you, <b id="successName">there</b>! Your order is confirmed.</p>
       <a class="btn-primary" href="https://wa.me/919671163712" target="_blank" rel="noopener" style="text-decoration:none;margin-top:8px">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
         Message us on WhatsApp
@@ -1009,7 +955,6 @@ input,textarea,select{font-family:inherit}
 </main>
 
 <div class="toast" id="toast"></div>
-
 <img src="logo.png" id="logoWatermarkSrc" style="display:none" alt=""><!-- SUPABASE SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -1031,7 +976,6 @@ var state = {
   product: null,
   products: [],
   categories: [],
-  mode: "full", // "full" (Order Now) | "design" (Customise)
   stepIndex: 0,
   stepDefs: [],
   currentScreen: "landing",
@@ -1050,19 +994,34 @@ var state = {
     mapLink: "",
     googleReviewLink: "",
     services: [""],
-    socialLinks: [{ platform: "instagram", url: "" }],
+    socialLinks: [{ platform: "instagram", url: "", customLabel: "" }],
     logoUrl: "",
     founderUrl: ""
   },
   design: {
-    paletteKey: "royal",
-    customColors: { bg: "#2a0a12", accent: "#d4a017", text: "#fdfaf3", textDim: "#c9a98a" },
+    bg: "#2a0a12",
+    bg2: "#0f0307",
+    accent: "#d4a017",
+    accentBright: "#f0c14b",
+    accentHot: "#ffd966",
+    text: "#fdfaf3",
+    textDim: "#c9a98a",
     boxStyle: "rounded",
-    layoutOrder: ["badge", "logo", "bizName", "founder", "tagline", "live", "services", "qr", "actions", "visit", "connect", "review", "goodday", "footer"],
-    textColors: {
-      name: "",
-      tagline: "",
-      body: ""
+    boxBg: "rgba(255,255,255,.04)",
+    layoutOrder: ["badge","logo","bizName","founder","tagline","live","services","qr","actions","visit","connect","review","goodday","footer"],
+    nameColor: "",
+    taglineColor: "",
+    bodyColor: "",
+    liveColor: "",
+    footerColor: "",
+    // per-box group overrides
+    boxColors: {
+      founder: "",
+      service: "",
+      connect: "",
+      visit: "",
+      review: "",
+      goodday: ""
     }
   },
   coupon: null,
@@ -1073,16 +1032,18 @@ var state = {
 var TITLE_OPTIONS = ["CEO", "Founder", "Owner", "Director", "Manager", "Marketing Team", "Freelancer"];
 
 var TAGLINE_EXAMPLES = [
-  "Vision · Automation · Advancement · Network",
-  "Building brands that stand out",
-  "Quality you can trust"
+  { text: "Vision · Automation · Advancement · Network", emoji: "✨" },
+  { text: "Building brands that stand out", emoji: "🚀" },
+  { text: "Quality you can trust", emoji: "💎" },
+  { text: "Have a Good Day!", emoji: "😊" },
+  { text: "Where ideas become reality", emoji: "💡" },
+  { text: "Your success is our mission", emoji: "🎯" }
 ];
 
 var PRESETS = {
   royal:    { bg:"#2a0a12", bg2:"#0f0307", accent:"#d4a017", accentBright:"#f0c14b", accentHot:"#ffd966", text:"#fdfaf3", textDim:"#c9a98a", name:"Royal Maroon", desc:"Your current card — deep maroon & gold" },
   midnight: { bg:"#0f1a2e", bg2:"#050a14", accent:"#4f8fff", accentBright:"#7ab0ff", accentHot:"#bcd6ff", text:"#eaf2ff", textDim:"#8ba5c9", name:"Midnight Blue", desc:"Cool navy & electric blue" },
-  emerald:  { bg:"#0d2818", bg2:"#04120b", accent:"#d4a017", accentBright:"#f0c14b", accentHot:"#ffd966", text:"#f5fbf5", textDim:"#a8c9a8", name:"Emerald Gold", desc:"Deep green & gold" },
-  custom:   { bg:"#2a0a12", bg2:"#0f0307", accent:"#d4a017", accentBright:"#f0c14b", accentHot:"#ffd966", text:"#fdfaf3", textDim:"#c9a98a", name:"Customize yours", desc:"Pick your own colors" }
+  emerald:  { bg:"#0d2818", bg2:"#04120b", accent:"#d4a017", accentBright:"#f0c14b", accentHot:"#ffd966", text:"#f5fbf5", textDim:"#a8c9a8", name:"Emerald Gold", desc:"Deep green & gold" }
 };
 
 /* ============================================================
@@ -1113,10 +1074,13 @@ function getGenderPrefix(){
   return "";
 }
 
-function getDisplayTitle(){
-  var t = state.data.titleCustom || state.data.title || "Founder";
+function getDisplayName(){
   var prefix = getGenderPrefix();
-  return prefix ? prefix + " " + t : t;
+  return prefix ? prefix + " " + (state.data.name || "") : (state.data.name || "");
+}
+
+function getDisplayTitle(){
+  return state.data.titleCustom || state.data.title || "Founder";
 }
 
 function getDisplayBizName(){
@@ -1126,7 +1090,7 @@ function getDisplayBizName(){
 /* ============================================================
    SCREEN NAVIGATION
    ============================================================ */
-var FLOW_SCREENS = ["step","palette","style","layout","textcolor","preview","checkout"];
+var FLOW_SCREENS = ["step","preview","customise","checkout"];
 
 function showScreen(name){
   document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("active"); });
@@ -1140,40 +1104,27 @@ function showScreen(name){
 }
 
 function updateProgress(){
-  var stepCount = state.stepDefs.length;
-  if (!stepCount) stepCount = 14;
-  var totalStages = stepCount + 6;
+  var stepCount = state.stepDefs.length || 16;
+  var totalStages = stepCount + 3;
   var completed = 0;
 
   if (state.currentScreen === "step"){
     completed = state.stepIndex + 1;
-  } else if (state.currentScreen === "palette"){
-    completed = stepCount + 1;
-  } else if (state.currentScreen === "style"){
-    completed = stepCount + 2;
-  } else if (state.currentScreen === "layout"){
-    completed = stepCount + 3;
-  } else if (state.currentScreen === "textcolor"){
-    completed = stepCount + 4;
   } else if (state.currentScreen === "preview"){
-    completed = stepCount + 5;
+    completed = stepCount + 1;
+  } else if (state.currentScreen === "customise"){
+    completed = stepCount + 2;
   } else if (state.currentScreen === "checkout"){
-    completed = stepCount + 6;
-  } else {
-    completed = 0;
+    completed = stepCount + 3;
   }
 
   var pct = Math.min(100, Math.round((completed / totalStages) * 100));
   $("progressFill").style.width = pct + "%";
 
   var label = "STEP";
-  if (state.currentScreen === "step"){
-    label = "Step " + (state.stepIndex + 1) + " / " + stepCount;
-  } else if (state.currentScreen === "palette"){ label = "Colors"; }
-  else if (state.currentScreen === "style"){ label = "Shape"; }
-  else if (state.currentScreen === "layout"){ label = "Layout"; }
-  else if (state.currentScreen === "textcolor"){ label = "Text Color"; }
+  if (state.currentScreen === "step"){ label = "Step " + (state.stepIndex + 1) + " / " + stepCount; }
   else if (state.currentScreen === "preview"){ label = "Preview"; }
+  else if (state.currentScreen === "customise"){ label = "Design"; }
   else if (state.currentScreen === "checkout"){ label = "Payment"; }
   $("progressLabel").textContent = label;
 }
@@ -1213,49 +1164,26 @@ function renderProducts(){
           '</div>' +
         '</div>' +
       '</div>' +
-      '<div class="product-actions">' +
-        '<button class="btn-primary" onclick="selectProduct(\'' + p.id + '\',\'full\')">Order Now →</button>' +
-        '<button class="btn-secondary" onclick="selectProduct(\'' + p.id + '\',\'design\')">Customise</button>' +
-      '</div>' +
+      '<button class="btn-primary" onclick="selectProduct(\'' + p.id + '\')">Order Now →</button>' +
     '</div>';
   }).join("");
   $("productsGrid").innerHTML = html;
 }
 
-async function selectProduct(productId, mode){
+async function selectProduct(productId){
   var p = state.products.find(function(x){ return x.id === productId; });
   if (!p) return;
   state.product = p;
-  state.mode = mode;
   state.subtotal = Number(p.discount_price || p.price || 0);
-
-  trackEvent("product_selected", null, (p.slug || p.name) + "_" + mode);
+  trackEvent("product_selected", null, p.slug || p.name);
 
   await Promise.all([loadCategories(), loadProductFields(p.id)]);
   buildStepDefs();
 
-  if (mode === "design"){
-    // Skip form — jump straight to preview with placeholder data
-    applyPlaceholderData();
-    state.currentScreen = "preview";
-    gotoStep("preview");
-  } else {
-    state.stepIndex = 0;
-    renderStep();
-    showScreen("step");
-  }
-  trackEvent("builder_started", null, (p.slug || p.name) + "_" + mode);
-}
-
-function applyPlaceholderData(){
-  if (!state.data.name) state.data.name = "Your Name";
-  if (!state.data.businessName) state.data.businessName = "Your Business";
-  if (!state.data.category) state.data.category = "Digital Card";
-  if (!state.data.title) state.data.title = "Founder";
-  if (!state.data.tagline) state.data.tagline = TAGLINE_EXAMPLES[0];
-  if (!state.data.phone) state.data.phone = "9876543210";
-  if (!state.data.services.filter(function(s){ return s && s.trim(); }).length) state.data.services = ["Service One", "Service Two", "Service Three", "Service Four"];
-  if (!state.data.socialLinks.filter(function(l){ return l.url; }).length) state.data.socialLinks = [{ platform: "instagram", url: "https://instagram.com/vaan_consultancy" }];
+  state.stepIndex = 0;
+  renderStep();
+  showScreen("step");
+  trackEvent("builder_started", null, p.slug || p.name);
 }
 
 async function loadCategories(){
@@ -1291,9 +1219,9 @@ function defaultFields(){
     { field_key: "logo",             label: "Upload your logo",         field_type: "image",    is_required: false, is_skippable: true },
     { field_key: "founder",          label: "Upload your photo",        field_type: "image",    is_required: false, is_skippable: true },
     { field_key: "services",         label: "Your services / products", field_type: "list",     is_required: false, is_skippable: true },
-    { field_key: "socialLinks",      label: "Your social links",        field_type: "links",    is_required: false, is_skippable: true },
     { field_key: "website",          label: "Your website (optional)",  field_type: "url",      is_required: false, is_skippable: true },
     { field_key: "mapLink",          label: "Your Google Map link",     field_type: "url",      is_required: false, is_skippable: true },
+    { field_key: "socialLinks",      label: "Your social links",        field_type: "links",    is_required: false, is_skippable: true },
     { field_key: "googleReviewLink", label: "Google review link",       field_type: "url",      is_required: false, is_skippable: true }
   ];
 }
@@ -1309,7 +1237,7 @@ function buildStepDefs(){
    ============================================================ */
 function renderStep(){
   var f = state.stepDefs[state.stepIndex];
-  if (!f){ gotoStep("palette"); return; }
+  if (!f){ gotoStep("preview"); return; }
 
   $("stepNum").textContent = "Step " + (state.stepIndex + 1) + " of " + state.stepDefs.length;
   $("stepTitle").textContent = f.label;
@@ -1322,10 +1250,9 @@ function renderStep(){
     case "chips":
       if (f.field_key === "gender"){
         html = '<div class="chips" id="chipWrap">' +
-          ["Male","Female","Prefer not to say"].map(function(g){
-            var key = g.toLowerCase().replace(/\s+/g,"_");
-            var sel = state.data.gender === key ? " selected" : "";
-            return '<div class="chip' + sel + '" onclick="selectGenderChip(this,\'' + key + '\')">' + esc(g) + '</div>';
+          [["male","Male"],["female","Female"],["prefer_not_to_say","Prefer not to say"]].map(function(g){
+            var sel = state.data.gender === g[0] ? " selected" : "";
+            return '<div class="chip' + sel + '" onclick="selectGenderChip(this,\'' + g[0] + '\')">' + esc(g[1]) + '</div>';
           }).join("") +
         '</div>';
       } else if (f.field_key === "title"){
@@ -1346,10 +1273,9 @@ function renderStep(){
         '<div class="field"><label>Or type your own</label><input type="text" id="customCategory" placeholder="e.g. Drone Photography" value="' + esc(state.data.category) + '" oninput="state.data.category=this.value;refreshPreview();"></div>';
       } else if (f.field_key === "type"){
         html = '<div class="chips" id="chipWrap">' +
-          ["Service-based","Product-based","Both"].map(function(t){
-            var key = t.toLowerCase().replace(/-/g,"_");
-            var sel = state.data.type === key ? " selected" : "";
-            return '<div class="chip' + sel + '" onclick="selectTypeChip(this,\'' + key + '\')">' + esc(t) + '</div>';
+          [["service_based","Service-based"],["product_based","Product-based"],["both","Both"]].map(function(t){
+            var sel = state.data.type === t[0] ? " selected" : "";
+            return '<div class="chip' + sel + '" onclick="selectTypeChip(this,\'' + t[0] + '\')">' + esc(t[1]) + '</div>';
           }).join("") +
         '</div>';
       }
@@ -1363,18 +1289,19 @@ function renderStep(){
       var placeholder = f.placeholder || ("Enter your " + f.label.toLowerCase());
       if (f.field_key === "website") placeholder = "https://yourwebsite.com";
       if (f.field_key === "mapLink") placeholder = "https://maps.app.goo.gl/...";
+      if (f.field_key === "googleReviewLink") placeholder = "https://g.page/r/...";
       var val = state.data[f.field_key] || "";
       html = '<div class="field">' +
         '<label>' + esc(f.label) + (f.is_required ? " *" : "") + '</label>' +
-        '<input type="' + inputType + '" id="stepInput" placeholder="' + esc(placeholder) + '" value="' + esc(val) + '" oninput="onStepInput(\'' + f.field_key + '\', this.value)">' +
+        '<input type="' + inputType + '" id="stepInput" placeholder="' + esc(placeholder) + '" value="' + esc(val) + '" oninput="onStepInput(\'' + f.field_key + '\', this.value)"' + (f.field_type === "tel" ? ' inputmode="numeric"' : '') + '>' +
       '</div>';
       break;
 
     case "tagline":
       html = '<div class="chips" style="margin-bottom:12px">' +
         TAGLINE_EXAMPLES.map(function(t){
-          var sel = state.data.tagline === t ? " selected" : "";
-          return '<div class="chip' + sel + '" onclick="selectTaglineChip(this,\'' + esc(t).replace(/'/g,"\\'") + '\')">' + esc(t) + '</div>';
+          var sel = state.data.tagline === t.text ? " selected" : "";
+          return '<div class="chip' + sel + '" onclick="selectTaglineChip(this,\'' + esc(t.text).replace(/'/g,"\\'") + '\')"><span>' + t.emoji + '</span>' + esc(t.text) + '</div>';
         }).join("") +
       '</div>' +
       '<div class="field"><label>Or type your own tagline</label><input type="text" id="stepInput" placeholder="Your tagline…" value="' + esc(state.data.tagline) + '" oninput="state.data.tagline=this.value;refreshPreview();"></div>';
@@ -1394,7 +1321,7 @@ function renderStep(){
         '<input type="file" id="file_' + f.field_key + '" accept="image/*" onchange="onImageUpload(this, \'' + f.field_key + '\')">' +
         (currentUrl
           ? '<div class="upload-preview"><img src="' + esc(currentUrl) + '" alt="upload"><div class="upload-preview-info"><b>Uploaded</b><small>✓ Ready</small></div><button type="button" class="upload-remove" onclick="removeImage(event,\'' + f.field_key + '\')">×</button></div>'
-          : '<div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div><div class="upload-label">Tap to upload</div><div class="upload-hint">' + (isLogo ? "White background auto-removed" : "Auto-compressed · PNG, JPG, WebP") + '</div>') +
+          : '<div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div><div class="upload-label">Tap to upload</div><div class="upload-hint">' + (isLogo ? "White background auto-removed · PNG, JPG, WebP" : "Auto-compressed · PNG, JPG, WebP") + '</div>') +
       '</label>';
       break;
 
@@ -1402,7 +1329,7 @@ function renderStep(){
       html = '<div class="dyn-list" id="servicesList">' +
         state.data.services.map(function(s, i){
           return '<div class="dyn-row">' +
-            '<input type="text" placeholder="e.g. Website Development" value="' + esc(s) + '" oninput="onServiceInput(' + i + ', this.value)">' +
+            '<input type="text" id="svcInput_' + i + '" placeholder="e.g. Website Development" value="' + esc(s) + '" oninput="onServiceInput(' + i + ', this.value)">' +
             '<button type="button" class="remove" onclick="removeServiceRow(' + i + ')">×</button>' +
           '</div>';
         }).join("") +
@@ -1416,15 +1343,17 @@ function renderStep(){
     case "links":
       html = '<div class="dyn-list" id="linksList">' +
         state.data.socialLinks.map(function(l, i){
+          var showCustom = l.platform === "custom";
           return '<div class="link-row">' +
             '<div class="link-row-head">' +
               '<select onchange="onLinkPlatform(' + i + ', this.value)">' +
-                ["instagram","facebook","website","youtube","linkedin","whatsapp","custom"].map(function(k){
-                  return '<option value="' + k + '"' + (l.platform === k ? " selected" : "") + '>' + k.charAt(0).toUpperCase() + k.slice(1) + '</option>';
+                [["instagram","Instagram"],["facebook","Facebook"],["youtube","YouTube"],["linkedin","LinkedIn"],["twitter","X (Twitter)"],["telegram","Telegram"],["website","Website"],["custom","Custom"]].map(function(k){
+                  return '<option value="' + k[0] + '"' + (l.platform === k[0] ? " selected" : "") + '>' + k[1] + '</option>';
                 }).join("") +
               '</select>' +
               '<button type="button" class="remove" onclick="removeLinkRow(' + i + ')">×</button>' +
             '</div>' +
+            (showCustom ? '<input type="text" placeholder="Display name (e.g. My Blog)" value="' + esc(l.customLabel || "") + '" oninput="onLinkCustomLabel(' + i + ', this.value)">' : '') +
             '<input type="url" placeholder="https://..." value="' + esc(l.url) + '" oninput="onLinkUrl(' + i + ', this.value)">' +
           '</div>';
         }).join("") +
@@ -1450,7 +1379,7 @@ function renderStep(){
   updateNextButton();
 
   if (state.stepIndex === state.stepDefs.length - 1){
-    $("stepNextBtn").innerHTML = 'Continue to Design →';
+    $("stepNextBtn").innerHTML = 'See My Card →';
   } else {
     $("stepNextBtn").innerHTML = 'Next →';
   }
@@ -1481,6 +1410,10 @@ function updateNextButton(){
 function onStepInput(key, val){
   if (key === "phone"){
     val = val.replace(/[^0-9]/g, "").slice(0, 13);
+    if (val !== state.data[key]) {
+      var inp = $("stepInput");
+      if (inp) inp.value = val;
+    }
   }
   state.data[key] = val;
   updateNextButton();
@@ -1523,23 +1456,40 @@ function selectTaglineChip(el, text){
 }
 
 function onServiceInput(i, val){ state.data.services[i] = val; refreshPreview(); }
-function addServiceRow(){ state.data.services.push(""); renderStep(); }
+function addServiceRow(){
+  state.data.services.push("");
+  renderStep();
+  setTimeout(function(){
+    var newIdx = state.data.services.length - 1;
+    var newInput = $("svcInput_" + newIdx);
+    if (newInput) newInput.focus();
+  }, 50);
+}
 function removeServiceRow(i){
   if (state.data.services.length <= 1) state.data.services[0] = "";
   else state.data.services.splice(i, 1);
   renderStep();
 }
-function onLinkPlatform(i, val){ state.data.socialLinks[i].platform = val; refreshPreview(); }
+function onLinkPlatform(i, val){
+  state.data.socialLinks[i].platform = val;
+  if (val !== "custom") state.data.socialLinks[i].customLabel = "";
+  renderStep();
+  refreshPreview();
+}
 function onLinkUrl(i, val){ state.data.socialLinks[i].url = val; refreshPreview(); }
-function addLinkRow(){ state.data.socialLinks.push({ platform: "instagram", url: "" }); renderStep(); }
+function onLinkCustomLabel(i, val){ state.data.socialLinks[i].customLabel = val; refreshPreview(); }
+function addLinkRow(){
+  state.data.socialLinks.push({ platform: "instagram", url: "", customLabel: "" });
+  renderStep();
+}
 function removeLinkRow(i){
-  if (state.data.socialLinks.length <= 1) state.data.socialLinks[0] = { platform: "instagram", url: "" };
+  if (state.data.socialLinks.length <= 1) state.data.socialLinks[0] = { platform: "instagram", url: "", customLabel: "" };
   else state.data.socialLinks.splice(i, 1);
   renderStep();
 }
 
 /* ============================================================
-   IMAGE UPLOAD (with white-bg removal for logos)
+   IMAGE UPLOAD
    ============================================================ */
 function onImageUpload(input, key){
   var file = input.files[0];
@@ -1549,9 +1499,7 @@ function onImageUpload(input, key){
 
   compressImage(file, 600, async function(blob){
     try {
-      if (key === "logo"){
-        blob = await removeWhiteBg(blob);
-      }
+      if (key === "logo"){ blob = await removeWhiteBg(blob); }
       var fileName = "card_" + key + "_" + Date.now() + "_" + Math.random().toString(36).slice(2,6) + ".webp";
       var up = await sb.storage.from("vaan-uploads").upload(fileName, blob, { contentType: "image/webp" });
       if (up.error) throw up.error;
@@ -1582,11 +1530,8 @@ function removeWhiteBg(blob){
         ctx.drawImage(img, 0, 0);
         var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         var d = imageData.data;
-        // Remove near-white pixels (threshold 240)
         for (var i = 0; i < d.length; i += 4){
-          if (d[i] > 240 && d[i+1] > 240 && d[i+2] > 240){
-            d[i+3] = 0;
-          }
+          if (d[i] > 240 && d[i+1] > 240 && d[i+2] > 240){ d[i+3] = 0; }
         }
         ctx.putImageData(imageData, 0, 0);
         canvas.toBlob(function(newBlob){ resolve(newBlob); }, "image/webp", 0.85);
@@ -1642,7 +1587,7 @@ function nextStepFromForm(){
     renderStep();
     window.scrollTo({ top: 0, behavior: "smooth" });
   } else {
-    gotoStep("palette");
+    gotoStep("preview");
   }
 }
 function skipCurrentStep(){
@@ -1653,29 +1598,16 @@ function skipCurrentStep(){
     renderStep();
     window.scrollTo({ top: 0, behavior: "smooth" });
   } else {
-    gotoStep("palette");
+    gotoStep("preview");
   }
 }
 
 function gotoStep(name){
-  if (name === "palette"){
-    renderPaletteScreen();
-    showScreen("palette");
-    refreshPreview("pvCardPalette");
-  } else if (name === "style"){
-    renderStyleScreen();
-    showScreen("style");
-    refreshPreview("pvCardStyle");
-  } else if (name === "layout"){
-    renderLayoutScreen();
-    showScreen("layout");
-    refreshPreview("pvCardLayout");
-  } else if (name === "textcolor"){
-    showScreen("textcolor");
-    renderTextColorPreview();
-  } else if (name === "preview"){
+  if (name === "preview"){
     showScreen("preview");
     refreshPreview("pvCardFinal");
+  } else if (name === "customise"){
+    gotoCustomise();
   } else if (name === "checkout"){
     updateCheckoutTotals();
     showScreen("checkout");
@@ -1685,92 +1617,135 @@ function gotoStep(name){
   }
 }
 
+function gotoCustomise(){
+  showScreen("customise");
+  renderPalettePresets();
+  renderStyleScreen();
+  renderDragList();
+  refreshPreview("pvCardBoxes");
+  refreshPreview("pvCardText");
+  attachBoxColorHandlers();
+  attachTextColorHandlers();
+  syncCustomColorInputs();
+}
+
+function switchSubtab(name, btn){
+  document.querySelectorAll(".subtab").forEach(function(t){ t.classList.remove("active"); });
+  if (btn) btn.classList.add("active");
+  document.querySelectorAll(".subtab-panel").forEach(function(p){ p.classList.remove("show"); });
+  var panel = $("subtab-" + name);
+  if (panel) panel.classList.add("show");
+}
+
 /* ============================================================
-   PALETTE
+   PALETTE PRESETS (Background tab)
    ============================================================ */
-function renderPaletteScreen(){
-  var html = ["royal","midnight","emerald","custom"].map(function(key){
+function renderPalettePresets(){
+  var current = detectCurrentPreset();
+  var html = "";
+  ["royal","midnight","emerald"].forEach(function(key){
     var p = PRESETS[key];
-    var sel = state.design.paletteKey === key ? " selected" : "";
-    var swatches = '<div class="palette-swatches">' +
-      '<span style="background:' + p.bg + '"></span>' +
-      '<span style="background:' + p.accent + '"></span>' +
-      '<span style="background:' + p.text + '"></span>' +
-      '<span style="background:' + p.textDim + '"></span>' +
-      '</div>';
-    return '<div class="palette-preset' + sel + '" onclick="selectPalettePreset(\'' + key + '\')">' +
-      swatches +
+    var sel = current === key ? " selected" : "";
+    html += '<div class="palette-preset' + sel + '" onclick="applyPreset(\'' + key + '\')">' +
+      '<div class="palette-swatches">' +
+        '<span style="background:' + p.bg + '"></span>' +
+        '<span style="background:' + p.accent + '"></span>' +
+        '<span style="background:' + p.text + '"></span>' +
+        '<span style="background:' + p.textDim + '"></span>' +
+      '</div>' +
       '<div class="palette-info"><b>' + esc(p.name) + '</b><small>' + esc(p.desc) + '</small></div>' +
     '</div>';
-  }).join("");
-  $("palettePresets").innerHTML = html;
-
-  var c = state.design.customColors;
-  $("ccBg").value = c.bg;
-  $("ccAccent").value = c.accent;
-  $("ccText").value = c.text;
-  $("ccTextDim").value = c.textDim;
-  $("customColors").classList.toggle("show", state.design.paletteKey === "custom");
-  ["ccBg","ccAccent","ccText","ccTextDim"].forEach(function(id){
-    $(id).oninput = function(){
-      state.design.customColors = {
-        bg: $("ccBg").value, accent: $("ccAccent").value,
-        text: $("ccText").value, textDim: $("ccTextDim").value
-      };
-      refreshPreview("pvCardPalette");
-    };
   });
+  $("palettePresets").innerHTML = html;
 }
-function selectPalettePreset(key){
-  state.design.paletteKey = key;
-  if (key === "custom"){
-    state.design.customColors = {
-      bg: PRESETS.custom.bg, accent: PRESETS.custom.accent,
-      text: PRESETS.custom.text, textDim: PRESETS.custom.textDim
-    };
+
+function detectCurrentPreset(){
+  for (var key in PRESETS){
+    var p = PRESETS[key];
+    if (p.bg === state.design.bg && p.accent === state.design.accent) return key;
   }
-  renderPaletteScreen();
-  refreshPreview("pvCardPalette");
+  return null;
 }
+
+function applyPreset(key){
+  var p = PRESETS[key];
+  if (!p) return;
+  state.design.bg = p.bg;
+  state.design.bg2 = p.bg2;
+  state.design.accent = p.accent;
+  state.design.accentBright = p.accentBright;
+  state.design.accentHot = p.accentHot;
+  state.design.text = p.text;
+  state.design.textDim = p.textDim;
+  // reset text overrides when preset changes
+  state.design.nameColor = "";
+  state.design.taglineColor = "";
+  state.design.bodyColor = "";
+  state.design.liveColor = "";
+  state.design.footerColor = "";
+  syncCustomColorInputs();
+  renderPalettePresets();
+  refreshAllPreviews();
+}
+
+function syncCustomColorInputs(){
+  $("ccBg").value = state.design.bg;
+  $("ccBg2").value = state.design.bg2;
+  $("ccAccent").value = state.design.accent;
+  $("ccAccentBright").value = state.design.accentBright;
+  $("ccAccentHot").value = state.design.accentHot;
+}
+
+["ccBg","ccBg2","ccAccent","ccAccentBright","ccAccentHot"].forEach(function(id){
+  document.addEventListener("input", function(e){
+    if (e.target && e.target.id === id){
+      var key = id.replace("cc","");
+      key = key.charAt(0).toLowerCase() + key.slice(1);
+      state.design[key] = e.target.value;
+      renderPalettePresets();
+      refreshAllPreviews();
+    }
+  });
+});
 
 /* ============================================================
-   STYLE
+   BOX STYLE
    ============================================================ */
 function renderStyleScreen(){
-  document.querySelectorAll(".style-card").forEach(function(c){
+  document.querySelectorAll("#styleGrid .style-card").forEach(function(c){
     c.classList.toggle("selected", c.getAttribute("data-style") === state.design.boxStyle);
     c.onclick = function(){
       state.design.boxStyle = c.getAttribute("data-style");
       renderStyleScreen();
-      refreshPreview("pvCardStyle");
+      refreshAllPreviews();
     };
   });
 }
 
 /* ============================================================
-   LAYOUT (drag reorder with real preview thumbs)
+   DRAG LAYOUT
    ============================================================ */
 var SECTION_META = {
-  badge:    { label: "Digital Card badge", desc: "Top 'Digital Visiting Card' pill", icon: '<path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><line x1="2" y1="10" x2="22" y2="10"/>' },
-  logo:     { label: "Logo", desc: "Circular logo with gold ring", icon: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/>' },
-  bizName:  { label: "Business name", desc: "Uppercase business name with lines", icon: '<path d="M3 6h18M3 12h12M3 18h8"/>' },
-  founder:  { label: "Founder block", desc: "Avatar + name + title", icon: '<circle cx="12" cy="8" r="4"/><path d="M4 22v-2a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v2"/>' },
-  tagline:  { label: "Tagline", desc: "Short line under name", icon: '<path d="M4 7h16M4 12h12M4 17h8"/>' },
-  live:     { label: "Live timer", desc: "Open now + IST clock", icon: '<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/>' },
-  services: { label: "Services grid", desc: "Accordion 'Show Services'", icon: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>' },
-  qr:       { label: "QR code", desc: "Scan-to-share QR", icon: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3M21 21v-3M18 21h3"/>' },
-  actions:  { label: "Contact buttons", desc: "Add to Contact / WhatsApp / Call", icon: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>' },
-  visit:    { label: "Visit Us", desc: "Website / Google Map buttons", icon: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>' },
-  connect:  { label: "Connect With Us", desc: "Instagram, email & other links", icon: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>' },
-  review:   { label: "Review section", desc: "Google review CTA", icon: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>' },
-  goodday:  { label: "Good day sticker", desc: "Warm closing message", icon: '<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>' },
-  footer:   { label: "Footer", desc: "Copyright line", icon: '<line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="14" y2="18"/>' }
+  badge:    { label:"Digital Card badge", desc:"Top pill", icon:'<path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><line x1="2" y1="10" x2="22" y2="10"/>' },
+  logo:     { label:"Logo", desc:"Circular logo with gold ring", icon:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/>' },
+  bizName:  { label:"Business name", desc:"Uppercase with lines", icon:'<path d="M3 6h18M3 12h12M3 18h8"/>' },
+  founder:  { label:"Name + Title", desc:"Avatar, name, title", icon:'<circle cx="12" cy="8" r="4"/><path d="M4 22v-2a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v2"/>' },
+  tagline:  { label:"Tagline", desc:"Short line under name", icon:'<path d="M4 7h16M4 12h12M4 17h8"/>' },
+  live:     { label:"Live timer", desc:"Open now + IST clock", icon:'<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/>' },
+  services: { label:"Services grid", desc:"Accordion show services", icon:'<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>' },
+  qr:       { label:"QR code", desc:"Scan-to-share", icon:'<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3M21 21v-3M18 21h3"/>' },
+  actions:  { label:"Contact buttons", desc:"Add to Contact / WhatsApp / Call", icon:'<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>' },
+  visit:    { label:"Visit Us", desc:"Website + Get Directions", icon:'<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>' },
+  connect:  { label:"Connect With Us", desc:"Social links", icon:'<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>' },
+  review:   { label:"Review section", desc:"Google review CTA", icon:'<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>' },
+  goodday:  { label:"Good day sticker", desc:"Warm closing message", icon:'<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>' },
+  footer:   { label:"Footer", desc:"Copyright line", icon:'<line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="14" y2="18"/>' }
 };
 
-function renderLayoutScreen(){
+function renderDragList(){
   var wrap = $("dragList");
   wrap.innerHTML = state.design.layoutOrder.map(function(key){
-    var meta = SECTION_META[key] || { label: key, desc: "", icon: '<circle cx="12" cy="12" r="6"/>' };
+    var meta = SECTION_META[key] || { label: key, desc: "", icon: '' };
     return '<div class="drag-item" data-key="' + key + '" draggable="true">' +
       '<span class="drag-handle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/></svg></span>' +
       '<div class="drag-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + meta.icon + '</svg></div>' +
@@ -1789,10 +1764,7 @@ function renderLayoutScreen(){
       item.classList.remove("dragging");
       document.querySelectorAll(".drag-item.over").forEach(function(el){ el.classList.remove("over"); });
     });
-    item.addEventListener("dragover", function(e){
-      e.preventDefault();
-      item.classList.add("over");
-    });
+    item.addEventListener("dragover", function(e){ e.preventDefault(); item.classList.add("over"); });
     item.addEventListener("dragleave", function(){ item.classList.remove("over"); });
     item.addEventListener("drop", function(e){
       e.preventDefault();
@@ -1805,96 +1777,237 @@ function renderLayoutScreen(){
       if (fromIdx < 0 || toIdx < 0) return;
       order.splice(fromIdx, 1);
       order.splice(toIdx, 0, draggedKey);
-      renderLayoutScreen();
-      refreshPreview("pvCardLayout");
+      renderDragList();
+      refreshAllPreviews();
     });
   });
 }
 
 /* ============================================================
-   TEXT COLOR (tap-to-cycle)
+   BOX / TEXT COLOR TAP HANDLERS
    ============================================================ */
-function renderTextColorPreview(){
-  var el = $("pvCardTextColor");
-  if (!el) return;
-  el.innerHTML = buildPreviewHTML();
-  el.classList.add("tap-color-mode");
+var colorModalTarget = null;
+var colorModalType = null; // "box" or "text"
+var colorModalTemp = "#d4a017";
 
-  el.querySelectorAll("[data-color-target]").forEach(function(node){
-    node.onclick = function(){
-      cycleTextColor(node.getAttribute("data-color-target"));
-    };
+function attachBoxColorHandlers(){
+  var el = $("pvCardBoxes");
+  if (!el) return;
+  el.querySelectorAll("[data-color-group]").forEach(function(node){
+    node.onclick = function(){ openColorModal("box", node.getAttribute("data-color-group")); };
   });
 }
 
-function cycleTextColor(target){
-  var p = getEffectivePalette();
-  var colorOptions = [p.text, p.accent, p.accentBright, p.textDim, "#ffffff", "#000000"];
-  var current = state.design.textColors[target] || "";
-  var idx = colorOptions.indexOf(current);
-  var next = colorOptions[(idx + 1) % colorOptions.length];
-  state.design.textColors[target] = next;
-  refreshPreview();
-  renderTextColorPreview();
+function attachTextColorHandlers(){
+  var el = $("pvCardText");
+  if (!el) return;
+  el.querySelectorAll("[data-color-group]").forEach(function(node){
+    node.onclick = function(){ openColorModal("text", node.getAttribute("data-color-group")); };
+  });
 }
 
-/* ============================================================
-   LIVE PREVIEW
-   ============================================================ */
-function getEffectivePalette(){
-  if (state.design.paletteKey === "custom") return state.design.customColors;
-  return PRESETS[state.design.paletteKey] || PRESETS.royal;
+var BOX_GROUP_LABELS = {
+  founder: "Name / founder box",
+  service: "Service boxes",
+  connect: "Connect With Us box",
+  visit: "Visit Us box",
+  review: "Review box",
+  goodday: "Good day sticker"
+};
+
+var TEXT_GROUP_LABELS = {
+  name: "Your name",
+  tagline: "Tagline",
+  body: "Body text (services, etc.)",
+  live: "Live timer bar",
+  footer: "Footer"
+};
+
+var COLOR_SWATCHES = [
+  "#ffffff","#fdfaf3","#ffd966","#f0c14b","#d4a017","#ff9d2e","#ff6b6b","#ff4d5e",
+  "#25d366","#128c3e","#4f8fff","#7ab0ff","#5fd9ff","#a78bfa","#ec4899","#c9a98a",
+  "#2a0a12","#0f0307","#1a1a1a","#333333","#666666","#999999","#cccccc","#e5e5e5"
+];
+
+function openColorModal(type, group){
+  colorModalType = type;
+  colorModalTarget = group;
+  var label = type === "box" ? (BOX_GROUP_LABELS[group] || group) : (TEXT_GROUP_LABELS[group] || group);
+  $("colorModalTitle").textContent = "Change " + label;
+  $("colorModalSub").textContent = type === "box" ? "Applies to all " + label.toLowerCase() : "Applies to " + label.toLowerCase();
+
+  var current = "";
+  if (type === "box"){
+    current = state.design.boxColors[group] || "";
+  } else {
+    var map = { name: "nameColor", tagline: "taglineColor", body: "bodyColor", live: "liveColor", footer: "footerColor" };
+    current = state.design[map[group]] || "";
+  }
+
+  var swatchesHtml = COLOR_SWATCHES.map(function(c){
+    return '<div class="color-swatch" style="background:' + c + '" data-color="' + c + '" onclick="selectSwatch(\'' + c + '\')"></div>';
+  }).join("");
+  $("colorSwatches").innerHTML = swatchesHtml;
+
+  colorModalTemp = current || "#d4a017";
+  $("customColorPicker").value = colorModalTemp;
+
+  // highlight current swatch
+  if (current){
+    $("colorSwatches").querySelectorAll(".color-swatch").forEach(function(s){
+      if (s.getAttribute("data-color").toLowerCase() === current.toLowerCase()){
+        s.style.borderColor = "var(--gold-bright)";
+      }
+    });
+  }
+
+  $("colorModal").classList.add("open");
 }
 
-function refreshPreview(targetId){
-  var ids = targetId ? [targetId] : ["pvCard","pvCardPalette","pvCardStyle","pvCardLayout","pvCardFinal"];
-  ids.forEach(function(id){
-    var el = $(id);
-    if (!el) return;
-    el.innerHTML = buildPreviewHTML();
-    if (el.classList.contains("tap-color-mode")){
-      el.querySelectorAll("[data-color-target]").forEach(function(node){
-        node.onclick = function(){ cycleTextColor(node.getAttribute("data-color-target")); };
-      });
+function selectSwatch(c){
+  colorModalTemp = c;
+  $("customColorPicker").value = c;
+  $("colorSwatches").querySelectorAll(".color-swatch").forEach(function(s){
+    if (s.getAttribute("data-color").toLowerCase() === c.toLowerCase()){
+      s.style.borderColor = "var(--gold-bright)";
+    } else {
+      s.style.borderColor = "rgba(255,255,255,.1)";
     }
   });
 }
 
-function buildPreviewHTML(){
-  var p = getEffectivePalette();
-  var preset = PRESETS[state.design.paletteKey] || PRESETS.royal;
-  var d = state.data;
-  var roleDisplay = getDisplayTitle();
-  var bizName = getDisplayBizName();
-  var services = (d.services || []).filter(function(s){ return s && s.trim(); });
-  var links = (d.socialLinks || []).filter(function(l){ return l && l.url && l.url.trim(); });
-  var radius = state.design.boxStyle === "square" ? "0" :
-               state.design.boxStyle === "circle" ? "999px" :
-               state.design.boxStyle === "rect" ? "4px" : "16px";
+document.addEventListener("input", function(e){
+  if (e.target && e.target.id === "customColorPicker"){
+    colorModalTemp = e.target.value;
+  }
+});
 
-  var tc = state.design.textColors;
+function applyColorModal(){
+  if (!colorModalType || !colorModalTarget){ closeColorModal(); return; }
+  if (colorModalType === "box"){
+    state.design.boxColors[colorModalTarget] = colorModalTemp;
+  } else {
+    var map = { name: "nameColor", tagline: "taglineColor", body: "bodyColor", live: "liveColor", footer: "footerColor" };
+    if (map[colorModalTarget]) state.design[map[colorModalTarget]] = colorModalTemp;
+  }
+  closeColorModal();
+  refreshAllPreviews();
+}
+
+function closeColorModal(){
+  $("colorModal").classList.remove("open");
+  colorModalTarget = null;
+  colorModalType = null;
+}
+
+/* ============================================================
+   LIVE CLOCK
+   ============================================================ */
+var clockInterval = null;
+function startLiveClock(){
+  if (clockInterval) clearInterval(clockInterval);
+  clockInterval = setInterval(function(){
+    document.querySelectorAll(".pv-live b").forEach(function(el){
+      el.textContent = getISTTimeString();
+    });
+  }, 30000);
+}
+
+function getISTTimeString(){
+  var now = new Date();
+  var ist = new Date(now.getTime() + (now.getTimezoneOffset() + 330) * 60000);
+  var h = ist.getHours();
+  var m = String(ist.getMinutes()).padStart(2,"0");
+  var h12 = h % 12 || 12;
+  var ampm = h >= 12 ? "PM" : "AM";
+  return h12 + ":" + m + " " + ampm;
+}
+
+function isOpenNow(){
+  var now = new Date();
+  var ist = new Date(now.getTime() + (now.getTimezoneOffset() + 330) * 60000);
+  var h = ist.getHours();
+  return h >= 9 && h < 20;
+}
+
+/* ============================================================
+   PREVIEW RENDER
+   ============================================================ */
+function refreshAllPreviews(){
+  refreshPreview("pvCard");
+  refreshPreview("pvCardFinal");
+  refreshPreview("pvCardBoxes");
+  refreshPreview("pvCardText");
+}
+
+function refreshPreview(targetId){
+  var ids = targetId ? [targetId] : ["pvCard","pvCardFinal","pvCardBoxes","pvCardText"];
+  ids.forEach(function(id){
+    var el = $(id);
+    if (!el) return;
+    var isBoxesMode = id === "pvCardBoxes";
+    var isTextMode = id === "pvCardText";
+    el.innerHTML = buildPreviewHTML(isBoxesMode, isTextMode);
+    if (isBoxesMode){
+      el.classList.add("tap-color-mode");
+      attachBoxColorHandlers();
+    } else if (isTextMode){
+      el.classList.add("tap-color-mode");
+      attachTextColorHandlers();
+    }
+  });
+}
+
+function getBoxStyleRadius(){
+  if (state.design.boxStyle === "square") return "0";
+  if (state.design.boxStyle === "circle") return "999px";
+  if (state.design.boxStyle === "rect") return "4px";
+  return "16px";
+}
+
+function buildPreviewHTML(forBoxColorMode, forTextColorMode){
+  var d = state.design;
+  var p = state.data;
+  var radius = getBoxStyleRadius();
+  var displayName = getDisplayName();
+  var displayTitle = getDisplayTitle();
+  var bizName = getDisplayBizName();
+  var services = (p.services || []).filter(function(s){ return s && s.trim(); });
+  var links = (p.socialLinks || []).filter(function(l){ return l && l.url && l.url.trim(); });
+
   var styleVars =
-    '--pv-bg:' + p.bg + ';' +
-    '--pv-bg2:' + (preset.bg2 || p.bg) + ';' +
-    '--pv-accent:' + p.accent + ';' +
-    '--pv-accent-bright:' + (preset.accentBright || p.accent) + ';' +
-    '--pv-accent-hot:' + (preset.accentHot || p.accent) + ';' +
-    '--pv-text:' + p.text + ';' +
-    '--pv-text-dim:' + p.textDim + ';' +
+    '--pv-bg:' + d.bg + ';' +
+    '--pv-bg2:' + d.bg2 + ';' +
+    '--pv-accent:' + d.accent + ';' +
+    '--pv-accent-bright:' + d.accentBright + ';' +
+    '--pv-accent-hot:' + d.accentHot + ';' +
+    '--pv-text:' + d.text + ';' +
+    '--pv-text-dim:' + d.textDim + ';' +
     '--pv-box-radius:' + radius + ';' +
-    '--pv-name-color:' + (tc.name || p.text) + ';' +
-    '--pv-tagline-color:' + (tc.tagline || preset.accentBright || p.accent) + ';' +
-    '--pv-body-color:' + (tc.body || p.text) + ';';
+    '--pv-box-bg:' + d.boxBg + ';' +
+    '--pv-name-color:' + (d.nameColor || d.text) + ';' +
+    '--pv-tagline-color:' + (d.taglineColor || d.accentBright) + ';' +
+    '--pv-body-color:' + (d.bodyColor || d.text) + ';' +
+    '--pv-live-color:' + (d.liveColor || d.textDim) + ';' +
+    '--pv-footer-color:' + (d.footerColor || d.textDim) + ';';
+
+  var boxStyle = function(group, base){
+    var c = d.boxColors[group];
+    var style = base || "";
+    if (c) style += "background:" + c + " !important;";
+    if (forBoxColorMode) style += ' data-color-group="' + group + '"';
+    return style;
+  };
 
   var sections = {
     badge: function(){
       return '<div class="pv-badge"><span>Digital Visiting Card</span></div>';
     },
     logo: function(){
-      if (d.logoUrl){
-        return '<div class="pv-logo-wrap"><div class="pv-logo"><img src="' + esc(d.logoUrl) + '" alt="logo"></div></div>';
+      if (p.logoUrl){
+        return '<div class="pv-logo-wrap"><div class="pv-logo"><img src="' + esc(p.logoUrl) + '" alt="logo"></div></div>';
       }
-      var init = (d.name || "V").charAt(0).toUpperCase();
+      var init = (p.name || "V").charAt(0).toUpperCase();
       return '<div class="pv-logo-wrap"><div class="pv-logo placeholder">' + esc(init) + '</div></div>';
     },
     bizName: function(){
@@ -1902,40 +2015,38 @@ function buildPreviewHTML(){
       return '<div class="pv-biz-name">' + esc(bizName) + '</div>';
     },
     founder: function(){
-      if (!d.name) return '';
-      var initials = d.name.split(" ").map(function(x){ return x[0] || ""; }).slice(0,2).join("").toUpperCase();
-      var avatar = d.founderUrl
-        ? '<div class="pv-founder-avatar"><img src="' + esc(d.founderUrl) + '" alt=""></div>'
+      if (!p.name) return '';
+      var initials = p.name.split(" ").map(function(x){ return x[0] || ""; }).slice(0,2).join("").toUpperCase();
+      var avatar = p.founderUrl
+        ? '<div class="pv-founder-avatar"><img src="' + esc(p.founderUrl) + '" alt=""></div>'
         : '<div class="pv-founder-avatar">' + esc(initials) + '</div>';
-      return '<div class="pv-founder" style="border-radius:' + radius + '">' + avatar +
+      var boxAttr = forBoxColorMode ? ' data-color-group="founder"' : '';
+      var nameAttr = forTextColorMode ? ' data-color-group="name"' : '';
+      return '<div class="pv-founder" style="border-radius:' + radius + ';' + (d.boxColors.founder ? 'background:' + d.boxColors.founder + ';' : '') + '"' + boxAttr + '>' + avatar +
         '<div class="pv-founder-info">' +
-          '<span class="pv-founder-name" data-color-target="name">' + esc(d.name) + '</span>' +
-          '<span class="pv-founder-role">' + esc(roleDisplay.toUpperCase()) + '</span>' +
+          '<span class="pv-founder-name"' + nameAttr + '>' + esc(displayName) + '</span>' +
+          '<span class="pv-founder-role">' + esc(displayTitle.toUpperCase()) + '</span>' +
         '</div>' +
       '</div>';
     },
     tagline: function(){
-      if (!d.tagline) return '';
-      return '<div class="pv-tagline" data-color-target="tagline">' + esc(d.tagline) + '</div>';
+      if (!p.tagline) return '';
+      var attr = forTextColorMode ? ' data-color-group="tagline"' : '';
+      return '<div class="pv-tagline"' + attr + '>' + esc(p.tagline) + '</div>';
     },
     live: function(){
-      var now = new Date();
-      var ist = new Date(now.getTime() + (now.getTimezoneOffset() + 330) * 60000);
-      var h = ist.getHours();
-      var m = String(ist.getMinutes()).padStart(2,"0");
-      var h12 = h % 12 || 12;
-      var ampm = h >= 12 ? "PM" : "AM";
-      var isOpen = h >= 9 && h < 20;
-      return '<div class="pv-live"><span class="dot"></span> ' + (isOpen ? "Open now" : "Replies fast") + ' <b>' + h12 + ':' + m + ' ' + ampm + '</b> <span>IST</span></div>';
+      var attr = forTextColorMode ? ' data-color-group="live"' : '';
+      return '<div class="pv-live"' + attr + '><span class="dot"></span> ' + (isOpenNow() ? "Open now" : "Replies fast") + ' <b>' + getISTTimeString() + '</b> <span>IST</span></div>';
     },
     services: function(){
       if (!services.length) return '';
       var grid = services.slice(0, 12).map(function(s){
-        return '<div class="pv-svc" style="border-radius:' + radius + '" data-color-target="body">' + esc(s) + '</div>';
+        return '<div class="pv-svc" style="border-radius:' + radius + ';' + (d.boxColors.service ? 'background:' + d.boxColors.service + ';' : '') + '"' + (forTextColorMode ? ' data-color-group="body"' : '') + '>' + esc(s) + '</div>';
       }).join("");
+      var svcLabel = p.type === "product_based" ? "Products" : "Services";
       return '<div class="pv-label">What we offer</div>' +
         '<button type="button" class="pv-services-toggle" onclick="toggleServicesPreview(this)">' +
-          '<span>Show ' + esc(d.type === "product_based" ? "Products" : "Services") + '</span>' +
+          '<span>Show ' + esc(svcLabel) + '</span>' +
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>' +
         '</button>' +
         '<div class="pv-services-content"><div class="pv-services-content-inner">' +
@@ -1944,7 +2055,7 @@ function buildPreviewHTML(){
     },
     qr: function(){
       var url = "https://vaanconsultancy.in/card";
-      var qrSrc = "https://api.qrserver.com/v1/create-qr-code/?data=" + encodeURIComponent(url) + "&size=200x200&color=" + p.accent.replace("#","") + "&bgcolor=" + p.bg.replace("#","") + "&qzone=2";
+      var qrSrc = "https://api.qrserver.com/v1/create-qr-code/?data=" + encodeURIComponent(url) + "&size=200x200&color=" + d.accent.replace("#","") + "&bgcolor=" + d.bg.replace("#","") + "&qzone=2";
       return '<div class="pv-qr"><div class="pv-qr-box"><img src="' + qrSrc + '" alt="QR"></div><div class="pv-qr-hint">Scan · Save · Share</div></div>';
     },
     actions: function(){
@@ -1957,62 +2068,72 @@ function buildPreviewHTML(){
       '</div>';
     },
     visit: function(){
-      var hasWebsite = !!(d.website && d.website.trim());
-      var hasMap = !!(d.mapLink && d.mapLink.trim());
+      var hasWebsite = !!(p.website && p.website.trim());
+      var hasMap = !!(p.mapLink && p.mapLink.trim());
       if (!hasWebsite && !hasMap) return '';
       var btns = '';
       if (hasWebsite){
-        var domain = d.website.replace(/^https?:\/\//,"").replace(/\/$/,"").split("/")[0];
-        btns += '<div class="pv-visit-btn pv-visit-website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> ' + esc(domain) + '</div>';
+        var domain = p.website.replace(/^https?:\/\//,"").replace(/\/$/,"").split("/")[0];
+        btns += '<div class="pv-visit-btn pv-visit-website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Visit ' + esc(domain) + '</div>';
       }
       if (hasMap){
-        btns += '<div class="pv-visit-btn pv-visit-map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Visit Us on Map</div>';
+        btns += '<div class="pv-visit-btn pv-visit-map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Get Directions</div>';
       }
-      return '<div class="pv-visit" style="border-radius:' + radius + '"><div class="pv-visit-head">Visit Us</div>' + btns + '</div>';
+      var boxAttr = forBoxColorMode ? ' data-color-group="visit"' : '';
+      return '<div class="pv-visit" style="border-radius:' + radius + ';' + (d.boxColors.visit ? 'background:' + d.boxColors.visit + ';' : '') + '"' + boxAttr + '><div class="pv-visit-head">Visit Us</div>' + btns + '</div>';
     },
     connect: function(){
       var ig = links.find(function(l){ return l.platform === "instagram"; });
       var fb = links.find(function(l){ return l.platform === "facebook"; });
       var yt = links.find(function(l){ return l.platform === "youtube"; });
       var li = links.find(function(l){ return l.platform === "linkedin"; });
+      var tw = links.find(function(l){ return l.platform === "twitter"; });
+      var tg = links.find(function(l){ return l.platform === "telegram"; });
       var web = links.find(function(l){ return l.platform === "website"; });
-      var email = d.email;
-      var any = ig || fb || yt || li || web || email;
+      var custom = links.find(function(l){ return l.platform === "custom"; });
+      var email = p.email;
+      var any = ig || fb || yt || li || tw || tg || web || custom || email;
       if (!any) return '';
-      var btns = '';
-      var handle = function(url){
-        var p = url.split("/").filter(Boolean);
-        return "@" + (p[p.length-1] || "").replace("@","");
-      };
-      if (ig) btns += '<div class="pv-connect-btn pv-connect-ig"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg> ' + esc(handle(ig.url)) + '</div>';
-      if (fb) btns += '<div class="pv-connect-btn pv-connect-fb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> ' + esc(handle(fb.url)) + '</div>';
-      if (yt) btns += '<div class="pv-connect-btn pv-connect-yt"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.92 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33zM9.75 15.02V8.48l5.75 3.27z"/></svg> ' + esc(handle(yt.url)) + '</div>';
-      if (li) btns += '<div class="pv-connect-btn pv-connect-li"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg> ' + esc(handle(li.url)) + '</div>';
-      if (web) btns += '<div class="pv-connect-btn pv-connect-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> ' + esc(handle(web.url)) + '</div>';
+      var btns = "";
+      if (ig) btns += '<div class="pv-connect-btn pv-connect-ig"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg> Visit us on Instagram</div>';
+      if (fb) btns += '<div class="pv-connect-btn pv-connect-fb"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> Visit us on Facebook</div>';
+      if (yt) btns += '<div class="pv-connect-btn pv-connect-yt"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.92 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33zM9.75 15.02V8.48l5.75 3.27z"/></svg> Visit us on YouTube</div>';
+      if (li) btns += '<div class="pv-connect-btn pv-connect-li"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg> Visit us on LinkedIn</div>';
+      if (tw) btns += '<div class="pv-connect-btn pv-connect-tw"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Visit us on X</div>';
+      if (tg) btns += '<div class="pv-connect-btn pv-connect-tg"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg> Visit us on Telegram</div>';
+      if (web) btns += '<div class="pv-connect-btn pv-connect-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Visit Website</div>';
+      if (custom) {
+        var label = custom.customLabel || "Website";
+        btns += '<div class="pv-connect-btn pv-connect-custom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Visit ' + esc(label) + '</div>';
+      }
       if (email) btns += '<div class="pv-connect-btn pv-connect-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> ' + esc(email) + '</div>';
-      return '<div class="pv-connect" style="border-radius:' + radius + '"><div class="pv-connect-head">Connect With Us</div>' + btns + '</div>';
+      var boxAttr = forBoxColorMode ? ' data-color-group="connect"' : '';
+      return '<div class="pv-connect" style="border-radius:' + radius + ';' + (d.boxColors.connect ? 'background:' + d.boxColors.connect + ';' : '') + '"' + boxAttr + '><div class="pv-connect-head">Connect With Us</div>' + btns + '</div>';
     },
     review: function(){
-      if (!d.googleReviewLink) return '';
-      return '<div class="pv-review" style="border-radius:' + radius + '">' +
+      if (!p.googleReviewLink) return '';
+      var boxAttr = forBoxColorMode ? ' data-color-group="review"' : '';
+      return '<div class="pv-review" style="border-radius:' + radius + ';' + (d.boxColors.review ? 'background:' + d.boxColors.review + ';' : '') + '"' + boxAttr + '>' +
         '<div class="pv-review-head">Loved Our Work?</div>' +
         '<div class="pv-review-sub">Your review helps us grow.</div>' +
         '<div class="pv-review-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> Review Us on Google</div>' +
       '</div>';
     },
     goodday: function(){
-      return '<div class="pv-goodday" style="border-radius:' + radius + '">' +
+      var boxAttr = forBoxColorMode ? ' data-color-group="goodday"' : '';
+      return '<div class="pv-goodday" style="border-radius:' + radius + ';' + (d.boxColors.goodday ? 'background:' + d.boxColors.goodday + ';' : '') + '"' + boxAttr + '>' +
         '<div class="pv-goodday-emoji">👋 ✨ 😊</div>' +
         '<div class="pv-goodday-title">Have a Good Day!</div>' +
         '<div class="pv-goodday-sub">Thanks for stopping by</div>' +
       '</div>';
     },
     footer: function(){
-      return '<div class="pv-footer">All Rights Reserved<br><b>© ' + new Date().getFullYear() + ' ' + esc(bizName || "VAAN Consultancy") + '</b></div>';
+      var attr = forTextColorMode ? ' data-color-group="footer"' : '';
+      return '<div class="pv-footer"' + attr + '>All Rights Reserved<br><b>© ' + new Date().getFullYear() + ' ' + esc(bizName || "VAAN Consultancy") + '</b></div>';
     }
   };
 
-  var body = state.design.layoutOrder.map(function(key){
+  var body = d.layoutOrder.map(function(key){
     return sections[key] ? sections[key]() : '';
   }).join("");
 
@@ -2099,11 +2220,22 @@ async function startPayment(){
       amount_paid: total,
       payment_status: "pending",
       customization: {
-        paletteKey: state.design.paletteKey,
-        customColors: state.design.customColors,
+        bg: state.design.bg,
+        bg2: state.design.bg2,
+        accent: state.design.accent,
+        accentBright: state.design.accentBright,
+        accentHot: state.design.accentHot,
+        text: state.design.text,
+        textDim: state.design.textDim,
         boxStyle: state.design.boxStyle,
+        boxBg: state.design.boxBg,
+        boxColors: state.design.boxColors,
         layoutOrder: state.design.layoutOrder,
-        textColors: state.design.textColors
+        nameColor: state.design.nameColor,
+        taglineColor: state.design.taglineColor,
+        bodyColor: state.design.bodyColor,
+        liveColor: state.design.liveColor,
+        footerColor: state.design.footerColor
       }
     }]).select().single();
     if (orderRes.error) throw orderRes.error;
@@ -2200,6 +2332,8 @@ async function init(){
   $("stepSkipBtn").onclick = skipCurrentStep;
 
   $("helpBtn").href = "https://wa.me/" + WHATSAPP_HELP + "?text=" + encodeURIComponent("Hi VAAN, I need help with my digital card order.");
+
+  startLiveClock();
 
   await loadProducts();
   showScreen("landing");
