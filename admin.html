@@ -141,12 +141,68 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 footer{text-align:center;padding:40px 20px 30px;color:var(--muted);font-size:11px;border-top:1px solid var(--line-soft);margin-top:60px}
 footer b{color:var(--gold)}
 
+/* ====== ORDERS TAB (additions) ====== */
+.orders-subnav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px;background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:12px;padding:5px;width:fit-content}
+.osub{background:transparent;border:0;color:var(--muted);padding:9px 14px;border-radius:8px;font-weight:850;font-size:12px;cursor:pointer;font-family:inherit;transition:.2s;text-transform:uppercase;letter-spacing:.5px}
+.osub:hover{color:var(--white)}
+.osub.active{background:var(--gold-soft);color:var(--gold);border:1px solid rgba(255,212,0,.35)}
+.osub-panel{display:none}
+.osub-panel.show{display:block;animation:fadeIn .25s ease}
+
+.ord-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.ord-toolbar select,.ord-toolbar input{background:#0a0e1a;border:1px solid var(--line-soft);border-radius:10px;color:var(--white);padding:11px 14px;font-family:inherit;font-size:13px;transition:.2s}
+.ord-toolbar select:focus,.ord-toolbar input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,212,0,.1)}
+.ord-toolbar input{flex:1;min-width:160px}
+
+.ord-card{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:18px 20px;margin-bottom:12px;transition:.2s}
+.ord-card:hover{border-color:rgba(255,212,0,.3)}
+.ord-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:10px}
+.ord-card-head b{font-size:15px;font-weight:850}
+.ord-card-head small{color:var(--muted);font-size:11.5px;display:block;margin-top:3px}
+.ord-id{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:800;color:var(--gold);letter-spacing:1px}
+.ord-meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 12px}
+.ord-meta .tag{font-size:10px;padding:4px 9px}
+.ord-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* Order detail modal */
+.ord-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.ord-detail-grid .form-row{margin-bottom:0}
+.ord-block{background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:12px;padding:14px;margin-bottom:14px}
+.ord-block h4{font-size:11px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.ord-block .kv{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:5px 0;border-bottom:1px dashed rgba(255,255,255,.06)}
+.ord-block .kv:last-child{border-bottom:0}
+.ord-block .kv span:first-child{color:var(--muted);flex-shrink:0}
+.ord-block .kv span:last-child{color:var(--white);font-weight:700;text-align:right;word-break:break-word}
+.ord-block a{color:var(--gold);text-decoration:underline;text-underline-offset:2px}
+.ord-chip{display:inline-block;padding:5px 10px;margin:3px 4px 3px 0;border-radius:8px;font-size:11.5px;background:var(--blue-soft);border:1px solid rgba(79,143,255,.3);color:#cfe0ff}
+.ord-img{width:64px;height:64px;border-radius:10px;object-fit:cover;border:1px solid var(--gold);background:#0a0e1a}
+.ord-img-wrap{display:flex;gap:14px;flex-wrap:wrap}
+.ord-img-cell{text-align:center;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;font-weight:800}
+
+/* Simple CRUD grid for categories/palettes/templates/coupons */
+.crud-grid{display:grid;gap:12px}
+.crud-row{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:16px 18px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;transition:.2s}
+.crud-row:hover{border-color:rgba(255,212,0,.3)}
+.crud-row.off{opacity:.5}
+.crud-info{flex:1;min-width:200px}
+.crud-info b{font-size:14.5px;font-weight:850;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.crud-info small{color:var(--muted);font-size:11.5px;display:block;margin-top:4px}
+.crud-swatches{display:flex;gap:3px;margin-top:8px}
+.crud-swatches span{width:22px;height:22px;border-radius:6px;border:1px solid rgba(255,255,255,.15)}
+.crud-actions{display:flex;gap:8px;flex-wrap:wrap}
+.funnel-step{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.funnel-step-label{width:90px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);flex-shrink:0}
+.funnel-bar-wrap{flex:1;height:26px;background:rgba(255,255,255,.04);border-radius:8px;overflow:hidden;position:relative}
+.funnel-bar{height:100%;background:linear-gradient(90deg,var(--gold),#ffa726);border-radius:8px;transition:width .4s ease}
+.funnel-step-count{width:70px;text-align:right;font-size:12px;font-weight:800;color:var(--gold);font-family:'JetBrains Mono',monospace;flex-shrink:0}
+
 /* ====== RESPONSIVE ====== */
 @media(max-width:800px){
   .stats{grid-template-columns:1fr 1fr}
   .hdr-in{justify-content:center;text-align:center}
   .tab{padding:10px 14px;font-size:12px}
   .form-grid-2{grid-template-columns:1fr}
+  .ord-detail-grid{grid-template-columns:1fr}
 }
 @media(max-width:550px){
   .stats{grid-template-columns:1fr}
@@ -158,8 +214,7 @@ footer b{color:var(--gold)}
   .modal-head,.modal-body{padding-left:18px;padding-right:18px}
   .toast{left:20px;right:20px;bottom:20px;max-width:none}
 }
-</style>
-</head>
+</style></head>
 <body>
 
 <!-- LOGIN -->
@@ -200,6 +255,7 @@ footer b{color:var(--gold)}
     <!-- TABS -->
     <div class="tabs">
       <button class="tab active" data-tab="dashboard" onclick="switchTab('dashboard', this)">📊 Dashboard</button>
+      <button class="tab" data-tab="orders" onclick="switchTab('orders', this)">📦 Orders</button>
       <button class="tab" data-tab="portfolio" onclick="switchTab('portfolio', this)">💼 Portfolio</button>
       <button class="tab" data-tab="pricing" onclick="switchTab('pricing', this)">💰 Pricing</button>
       <button class="tab" data-tab="feedback" onclick="switchTab('feedback', this)">💬 Feedback</button>
@@ -218,6 +274,98 @@ footer b{color:var(--gold)}
       <div class="sec-sub">Latest customer feedback across the site</div>
       <div class="fb-list" id="recentFeedback">
         <div class="fb-empty"><b>Loading...</b></div>
+      </div>
+    </div>
+
+    <!-- ORDERS TAB (NEW) -->
+    <div class="tab-content" id="tab-orders">
+      <div class="orders-subnav">
+        <button class="osub active" data-osub="orders" onclick="switchOrdersSub('orders', this)">Orders</button>
+        <button class="osub" data-osub="categories" onclick="switchOrdersSub('categories', this)">Categories</button>
+        <button class="osub" data-osub="palettes" onclick="switchOrdersSub('palettes', this)">Palettes</button>
+        <button class="osub" data-osub="templates" onclick="switchOrdersSub('templates', this)">Templates</button>
+        <button class="osub" data-osub="products" onclick="switchOrdersSub('products', this)">Products</button>
+        <button class="osub" data-osub="coupons" onclick="switchOrdersSub('coupons', this)">Coupons</button>
+        <button class="osub" data-osub="funnel" onclick="switchOrdersSub('funnel', this)">Funnel</button>
+      </div>
+
+      <!-- Orders list -->
+      <div class="osub-panel show" id="osub-orders">
+        <div class="ord-toolbar">
+          <select id="ordFilterStatus" onchange="renderOrders()">
+            <option value="">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="paid">Paid</option>
+            <option value="in_progress">In Progress</option>
+            <option value="delivered">Delivered</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <input id="ordSearch" placeholder="Search name / phone / order #" oninput="renderOrders()">
+          <button class="btn btn-dark btn-sm" onclick="loadOrders()">↻ Refresh</button>
+        </div>
+        <div id="ordersList"><div class="svc-empty"><b>Loading orders...</b></div></div>
+      </div>
+
+      <!-- Categories -->
+      <div class="osub-panel" id="osub-categories">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+          <div>
+            <div class="sec-title">Categories</div>
+            <div class="sec-sub">Chips shown in Step 4 of the order builder</div>
+          </div>
+          <button class="btn btn-gold" onclick="openCategoryModal()">+ Add Category</button>
+        </div>
+        <div class="crud-grid" id="categoriesList"><div class="svc-empty"><b>Loading...</b></div></div>
+      </div>
+
+      <!-- Palettes -->
+      <div class="osub-panel" id="osub-palettes">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+          <div>
+            <div class="sec-title">Color Palettes</div>
+            <div class="sec-sub">5-color palettes shown in the design step</div>
+          </div>
+          <button class="btn btn-gold" onclick="openPaletteModal()">+ Add Palette</button>
+        </div>
+        <div class="crud-grid" id="palettesList"><div class="svc-empty"><b>Loading...</b></div></div>
+      </div>
+
+      <!-- Templates -->
+      <div class="osub-panel" id="osub-templates">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+          <div>
+            <div class="sec-title">Layout Templates</div>
+            <div class="sec-sub">Card layouts shown in the design step</div>
+          </div>
+          <button class="btn btn-gold" onclick="openTemplateModal()">+ Add Template</button>
+        </div>
+        <div class="crud-grid" id="templatesList"><div class="svc-empty"><b>Loading...</b></div></div>
+      </div>
+
+      <!-- Products -->
+      <div class="osub-panel" id="osub-products">
+        <div class="sec-title">Product / Pricing</div>
+        <div class="sec-sub">Price shown on the order builder landing screen</div>
+        <div class="crud-grid" id="productsList"><div class="svc-empty"><b>Loading...</b></div></div>
+      </div>
+
+      <!-- Coupons -->
+      <div class="osub-panel" id="osub-coupons">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+          <div>
+            <div class="sec-title">Coupons</div>
+            <div class="sec-sub">Discount codes usable at checkout</div>
+          </div>
+          <button class="btn btn-gold" onclick="openCouponModal()">+ Add Coupon</button>
+        </div>
+        <div class="crud-grid" id="couponsList"><div class="svc-empty"><b>Loading...</b></div></div>
+      </div>
+
+      <!-- Funnel -->
+      <div class="osub-panel" id="osub-funnel">
+        <div class="sec-title">Funnel Analytics</div>
+        <div class="sec-sub">Drop-off across the order builder steps (last 2000 events)</div>
+        <div id="funnelList"><div class="svc-empty"><b>Loading...</b></div></div>
       </div>
     </div>
 
@@ -335,9 +483,141 @@ footer b{color:var(--gold)}
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<!-- ORDER DETAIL MODAL (NEW) -->
+<div class="modal" id="orderModal" onclick="if(event.target===this)closeOrderModal()">
+  <div class="modal-box" style="width:min(720px,100%)">
+    <div class="modal-head">
+      <div>
+        <h3 id="ordModalTitle">Order Details</h3>
+        <small id="ordModalSub">—</small>
+      </div>
+      <button class="modal-close" onclick="closeOrderModal()">✕</button>
+    </div>
+    <div class="modal-body" id="orderModalBody"></div>
+  </div>
+</div>
 
-<!-- SUPABASE SDK -->
+<!-- CATEGORY MODAL (NEW) -->
+<div class="modal" id="categoryModal" onclick="if(event.target===this)closeCategoryModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div><h3 id="catModalTitle">Add Category</h3><small>Appears as a chip in Step 4</small></div>
+      <button class="modal-close" onclick="closeCategoryModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="catId">
+      <div class="form-grid-2">
+        <div class="form-row"><label>Name</label><input id="catName" placeholder="e.g. Hotel Owner"></div>
+        <div class="form-row"><label>Slug</label><input id="catSlug" placeholder="hotel-owner"></div>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-row"><label>Icon (emoji)</label><input id="catIcon" placeholder="🏨" maxlength="4"></div>
+        <div class="form-row"><label>Sort Order</label><input id="catSort" type="number" value="0"></div>
+      </div>
+      <label class="form-check"><input type="checkbox" id="catActive" checked><span style="color:var(--white);font-size:13px;font-weight:700">Active (visible in builder)</span></label>
+      <div class="modal-actions">
+        <button class="btn btn-gold" onclick="saveCategory()">💾 Save</button>
+        <button class="btn btn-dark" onclick="closeCategoryModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PALETTE MODAL (NEW) -->
+<div class="modal" id="paletteModal" onclick="if(event.target===this)closePaletteModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div><h3 id="palModalTitle">Add Palette</h3><small>5-color palette for the card</small></div>
+      <button class="modal-close" onclick="closePaletteModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="palId">
+      <div class="form-grid-2">
+        <div class="form-row"><label>Name</label><input id="palName" placeholder="e.g. Royal Gold"></div>
+        <div class="form-row"><label>Sort Order</label><input id="palSort" type="number" value="0"></div>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-row"><label>Background (bg)</label><input id="palBg" type="color" value="#1a060d" style="height:48px;padding:4px"></div>
+        <div class="form-row"><label>Surface</label><input id="palSurface" type="color" value="#2a0a12" style="height:48px;padding:4px"></div>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-row"><label>Accent</label><input id="palAccent" type="color" value="#d4a017" style="height:48px;padding:4px"></div>
+        <div class="form-row"><label>Accent Secondary</label><input id="palAccent2" type="color" value="#4f8fff" style="height:48px;padding:4px"></div>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-row"><label>Text Primary</label><input id="palText" type="color" value="#fdfaf3" style="height:48px;padding:4px"></div>
+        <div class="form-row"><label>Text Secondary</label><input id="palText2" type="color" value="#c9a98a" style="height:48px;padding:4px"></div>
+      </div>
+      <label class="form-check"><input type="checkbox" id="palActive" checked><span style="color:var(--white);font-size:13px;font-weight:700">Active</span></label>
+      <div class="modal-actions">
+        <button class="btn btn-gold" onclick="savePalette()">💾 Save</button>
+        <button class="btn btn-dark" onclick="closePaletteModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TEMPLATE MODAL (NEW) -->
+<div class="modal" id="templateModal" onclick="if(event.target===this)closeTemplateModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div><h3 id="tplModalTitle">Add Template</h3><small>Card layout option</small></div>
+      <button class="modal-close" onclick="closeTemplateModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="tplId">
+      <div class="form-grid-2">
+        <div class="form-row"><label>Name</label><input id="tplName" placeholder="e.g. Classic"></div>
+        <div class="form-row"><label>Slug</label><input id="tplSlug" placeholder="classic"></div>
+      </div>
+      <div class="form-row"><label>Description</label><input id="tplDesc" placeholder="Short description"></div>
+      <div class="form-row"><label>Layout Order (comma-separated block keys)</label><input id="tplOrder" placeholder="hero,about,services,social,contact"></div>
+      <div class="form-grid-2">
+        <div class="form-row"><label>Sort Order</label><input id="tplSort" type="number" value="0"></div>
+        <div class="form-row" style="display:flex;align-items:flex-end"><label class="form-check" style="width:100%"><input type="checkbox" id="tplActive" checked><span style="color:var(--white);font-size:13px;font-weight:700">Active</span></label></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-gold" onclick="saveTemplate()">💾 Save</button>
+        <button class="btn btn-dark" onclick="closeTemplateModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COUPON MODAL (NEW) -->
+<div class="modal" id="couponModal" onclick="if(event.target===this)closeCouponModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div><h3 id="cpnModalTitle">Add Coupon</h3><small>Discount at checkout</small></div>
+      <button class="modal-close" onclick="closeCouponModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="cpnId">
+      <div class="form-grid-2">
+        <div class="form-row"><label>Code</label><input id="cpnCode" placeholder="SAVE20" style="text-transform:uppercase"></div>
+        <div class="form-row"><label>Type</label><select id="cpnType"><option value="flat">Flat ₹</option><option value="percent">Percent %</option></select></div>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-row"><label>Value</label><input id="cpnValue" type="number" placeholder="100"></div>
+        <div class="form-row"><label>Max Discount (₹, optional)</label><input id="cpnMax" type="number" placeholder=""></div>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-row"><label>Min Order (₹, optional)</label><input id="cpnMin" type="number" placeholder=""></div>
+        <div class="form-row"><label>Usage Limit (optional)</label><input id="cpnLimit" type="number" placeholder=""></div>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-row"><label>Expiry (optional)</label><input id="cpnExpiry" type="date"></div>
+        <div class="form-row" style="display:flex;align-items:flex-end"><label class="form-check" style="width:100%"><input type="checkbox" id="cpnActive" checked><span style="color:var(--white);font-size:13px;font-weight:700">Active</span></label></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-gold" onclick="saveCoupon()">💾 Save</button>
+        <button class="btn btn-dark" onclick="closeCouponModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div><!-- SUPABASE SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL = "https://xvtxpllmfwgnlrffbcqz.supabase.co";
@@ -421,6 +701,7 @@ async function loadAll(){
     renderPricing();
     renderFeedback();
     renderProjects();
+    loadOrders();
   } catch (err){
     console.error(err);
     toast("Failed to load data", true);
@@ -678,6 +959,618 @@ function resetProjectForm(){
   document.getElementById('imgPreview').style.display = 'none';
   document.getElementById('saveProjectBtn').textContent = "Save Project";
   compressedFile = null;
+}
+
+/* ============================================================
+   ORDERS TAB — Digital Visiting Card order builder management
+   ============================================================ */
+
+let allOrders = [];
+let allCategories = [];
+let allPalettes = [];
+let allTemplates = [];
+let allProducts = [];
+let allCoupons = [];
+let allFunnelEvents = [];
+
+/* ---- SUB-NAV ---- */
+function switchOrdersSub(name, btn){
+  document.querySelectorAll(".osub").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  document.querySelectorAll(".osub-panel").forEach(p => p.classList.remove("show"));
+  document.getElementById("osub-" + name).classList.add("show");
+  if (name === "orders") loadOrders();
+  if (name === "categories") loadCategories();
+  if (name === "palettes") loadPalettes();
+  if (name === "templates") loadTemplates();
+  if (name === "products") loadProducts();
+  if (name === "coupons") loadCoupons();
+  if (name === "funnel") loadFunnel();
+}
+
+/* ---- LOADERS ---- */
+async function loadOrders(){
+  const { data, error } = await sb.from("vaan_orders").select("*").order("created_at", { ascending: false }).limit(500);
+  if (error){ console.error(error); document.getElementById("ordersList").innerHTML = '<div class="svc-empty"><b>Failed to load orders</b><small>' + esc(error.message) + '</small></div>'; return; }
+  allOrders = data || [];
+  renderOrders();
+}
+
+async function loadCategories(){
+  const { data, error } = await sb.from("vaan_categories").select("*").order("sort_order", { ascending: true });
+  if (error){ console.error(error); return; }
+  allCategories = data || [];
+  renderCategories();
+}
+
+async function loadPalettes(){
+  const { data, error } = await sb.from("vaan_palettes").select("*").order("sort_order", { ascending: true });
+  if (error){ console.error(error); return; }
+  allPalettes = data || [];
+  renderPalettes();
+}
+
+async function loadTemplates(){
+  const { data, error } = await sb.from("vaan_templates").select("*").order("sort_order", { ascending: true });
+  if (error){ console.error(error); return; }
+  allTemplates = data || [];
+  renderTemplates();
+}
+
+async function loadProducts(){
+  const { data, error } = await sb.from("vaan_products").select("*").order("sort_order", { ascending: true });
+  if (error){ console.error(error); return; }
+  allProducts = data || [];
+  renderProducts();
+}
+
+async function loadCoupons(){
+  const { data, error } = await sb.from("vaan_coupons").select("*").order("created_at", { ascending: false });
+  if (error){ console.error(error); return; }
+  allCoupons = data || [];
+  renderCoupons();
+}
+
+async function loadFunnel(){
+  const { data, error } = await sb.from("vaan_funnel_events").select("event_type,step_number,field_name").order("created_at", { ascending: false }).limit(2000);
+  if (error){ console.error(error); return; }
+  allFunnelEvents = data || [];
+  renderFunnel();
+}
+
+/* ---- RENDER ORDERS ---- */
+function renderOrders(){
+  const wrap = document.getElementById("ordersList");
+  const statusFilter = document.getElementById("ordFilterStatus").value;
+  const q = document.getElementById("ordSearch").value.trim().toLowerCase();
+
+  let list = allOrders;
+  if (statusFilter) list = list.filter(o => (o.payment_status || "pending") === statusFilter);
+  if (q){
+    list = list.filter(o =>
+      (o.customer_name || "").toLowerCase().includes(q) ||
+      (o.customer_phone || "").toLowerCase().includes(q) ||
+      (o.order_number || "").toLowerCase().includes(q)
+    );
+  }
+
+  if (!list.length){ wrap.innerHTML = '<div class="svc-empty"><b>No orders found</b></div>'; return; }
+
+  wrap.innerHTML = list.map(o => {
+    const status = o.payment_status || "pending";
+    const statusClass = status === "paid" || status === "delivered" ? "green" : status === "cancelled" ? "red" : status === "in_progress" ? "blue" : "gold";
+    return '<div class="ord-card">' +
+      '<div class="ord-card-head">' +
+        '<div><span class="ord-id">' + esc(o.order_number || "—") + '</span><b style="display:block;margin-top:4px">' + esc(o.customer_name || "—") + '</b><small>📱 ' + esc(o.customer_phone || "—") + ' · ' + fmtDate(o.created_at) + '</small></div>' +
+        '<span class="tag ' + statusClass + '">' + status.toUpperCase().replace("_"," ") + '</span>' +
+      '</div>' +
+      '<div class="ord-meta">' +
+        (o.category ? '<span class="tag blue">' + esc(o.category) + '</span>' : '') +
+        (o.business_name ? '<span class="tag gold">' + esc(o.business_name) + '</span>' : '') +
+        '<span class="tag green">₹' + Number(o.amount_paid || 0).toLocaleString("en-IN") + '</span>' +
+        (o.coupon_code ? '<span class="tag red">🎟 ' + esc(o.coupon_code) + '</span>' : '') +
+      '</div>' +
+      '<div class="ord-actions">' +
+        '<button class="btn btn-gold btn-sm" onclick="openOrderModal(\'' + o.id + '\')">👁 View</button>' +
+        '<button class="btn btn-dark btn-sm" onclick="quickMarkPaid(\'' + o.id + '\')">✓ Mark Paid</button>' +
+        '<a class="btn btn-dark btn-sm" href="https://wa.me/91' + esc((o.customer_phone||"").replace(/\D/g,"").slice(-10)) + '?text=' + encodeURIComponent("Hi " + (o.customer_name||"there") + ", your VAAN digital card order " + (o.order_number||"") + " is ready. Thank you!") + '" target="_blank" rel="noopener">💬 WhatsApp</a>' +
+      '</div>' +
+    '</div>';
+  }).join("");
+}
+
+async function quickMarkPaid(orderId){
+  const { error } = await sb.from("vaan_orders").update({ payment_status: "paid" }).eq("id", orderId);
+  if (error){ toast("Error: " + error.message, true); return; }
+  toast("✅ Marked paid");
+  loadOrders();
+}
+
+/* ---- ORDER DETAIL MODAL ---- */
+async function openOrderModal(orderId){
+  const o = allOrders.find(x => x.id === orderId);
+  if (!o) return;
+
+  document.getElementById("ordModalTitle").textContent = "Order " + (o.order_number || "");
+  document.getElementById("ordModalSub").textContent = o.customer_name + " · " + fmtDate(o.created_at);
+  document.getElementById("orderModalBody").innerHTML = '<div class="svc-empty"><b>Loading details...</b></div>';
+  document.getElementById("orderModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+
+  const { data: answers } = await sb.from("vaan_order_answers").select("*").eq("order_id", orderId);
+  const ans = answers || [];
+  const services = ans.filter(a => a.field_key === "service").map(a => a.field_value && a.field_value.name).filter(Boolean);
+  const links = ans.filter(a => a.field_key === "social_link").map(a => a.field_value).filter(Boolean);
+  const logo = ans.find(a => a.field_key === "logo");
+  const founder = ans.find(a => a.field_key === "founder_photo");
+
+  const status = o.payment_status || "pending";
+  const statusOptions = ["pending","paid","in_progress","delivered","cancelled"].map(s =>
+    '<option value="' + s + '"' + (s === status ? " selected" : "") + '>' + s.replace("_"," ").toUpperCase() + '</option>'
+  ).join("");
+
+  let html = "";
+
+  html += '<div class="ord-block"><h4>Customer</h4>' +
+    '<div class="kv"><span>Name</span><span>' + esc(o.customer_name || "—") + '</span></div>' +
+    '<div class="kv"><span>Phone</span><span><a href="https://wa.me/91' + esc((o.customer_phone||"").replace(/\D/g,"").slice(-10)) + '" target="_blank">' + esc(o.customer_phone || "—") + '</a></span></div>' +
+    '<div class="kv"><span>Email</span><span>' + esc(o.customer_email || "—") + '</span></div>' +
+    '<div class="kv"><span>Profession</span><span>' + esc(o.profession || "—") + '</span></div>' +
+    '<div class="kv"><span>Business</span><span>' + esc(o.business_name || "—") + '</span></div>' +
+    '<div class="kv"><span>Category</span><span>' + esc(o.category || "—") + '</span></div>' +
+    '<div class="kv"><span>Address</span><span>' + esc(o.address || "—") + '</span></div>' +
+    '<div class="kv"><span>Google Review</span><span>' + (o.google_review_link ? '<a href="'+esc(o.google_review_link)+'" target="_blank">Open</a>' : '—') + '</span></div>' +
+  '</div>';
+
+  html += '<div class="ord-block"><h4>Design Choices</h4>' +
+    '<div class="kv"><span>Palette ID</span><span>' + esc(o.palette_id || "—") + '</span></div>' +
+    '<div class="kv"><span>Template ID</span><span>' + esc(o.template_id || "—") + '</span></div>' +
+    '<div class="kv"><span>Animation</span><span>' + esc(o.animation_choice || "—") + '</span></div>' +
+    (o.animation_custom_text ? '<div class="kv"><span>Custom Anim</span><span>' + esc(o.animation_custom_text) + '</span></div>' : '') +
+  '</div>';
+
+  if (services.length){
+    html += '<div class="ord-block"><h4>Services</h4>' + services.map(s => '<span class="ord-chip">' + esc(s) + '</span>').join("") + '</div>';
+  }
+
+  if (links.length){
+    html += '<div class="ord-block"><h4>Social Links</h4>' +
+      links.map(l => '<div class="kv"><span>' + esc(l.platform || "") + '</span><span><a href="' + esc(l.url || "#") + '" target="_blank">' + esc((l.url || "").slice(0, 40)) + (l.url && l.url.length > 40 ? "…" : "") + '</a></span></div>').join("") +
+    '</div>';
+  }
+
+  if (logo || founder){
+    html += '<div class="ord-block"><h4>Uploads</h4><div class="ord-img-wrap">';
+    if (logo && logo.file_url) html += '<div class="ord-img-cell"><a href="' + esc(logo.file_url) + '" target="_blank"><img class="ord-img" src="' + esc(logo.file_url) + '"></a><div style="margin-top:4px">Logo</div></div>';
+    if (founder && founder.file_url) html += '<div class="ord-img-cell"><a href="' + esc(founder.file_url) + '" target="_blank"><img class="ord-img" src="' + esc(founder.file_url) + '"></a><div style="margin-top:4px">Founder</div></div>';
+    html += '</div></div>';
+  }
+
+  html += '<div class="ord-block"><h4>Payment</h4>' +
+    '<div class="kv"><span>Subtotal</span><span>₹' + Number(o.subtotal || 0).toLocaleString("en-IN") + '</span></div>' +
+    '<div class="kv"><span>Discount</span><span>₹' + Number(o.discount || 0).toLocaleString("en-IN") + '</span></div>' +
+    '<div class="kv"><span>Amount Paid</span><span style="color:var(--gold)">₹' + Number(o.amount_paid || 0).toLocaleString("en-IN") + '</span></div>' +
+    (o.coupon_code ? '<div class="kv"><span>Coupon</span><span>' + esc(o.coupon_code) + '</span></div>' : '') +
+  '</div>';
+
+  html += '<div class="ord-block"><h4>Update Status & Delivery</h4>' +
+    '<div class="form-row"><label>Payment Status</label><select id="ordStatusSel">' + statusOptions + '</select></div>' +
+    '<div class="form-row"><label>Delivery URL (final card link)</label><input id="ordDeliveryUrl" placeholder="https://..." value="' + esc(o.delivery_url || "") + '"></div>' +
+    '<div style="display:flex;gap:10px;margin-top:14px">' +
+      '<button class="btn btn-gold" style="flex:1" onclick="saveOrderUpdate(\'' + o.id + '\')">💾 Save Changes</button>' +
+    '</div>' +
+  '</div>';
+
+  document.getElementById("orderModalBody").innerHTML = html;
+}
+
+function closeOrderModal(){
+  document.getElementById("orderModal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+async function saveOrderUpdate(orderId){
+  const status = document.getElementById("ordStatusSel").value;
+  const deliveryUrl = document.getElementById("ordDeliveryUrl").value.trim();
+  const { error } = await sb.from("vaan_orders").update({
+    payment_status: status,
+    delivery_url: deliveryUrl || null
+  }).eq("id", orderId);
+  if (error){ toast("Error: " + error.message, true); return; }
+  toast("✅ Order updated");
+  closeOrderModal();
+  loadOrders();
+}
+
+/* ---- RENDER CATEGORIES ---- */
+function renderCategories(){
+  const wrap = document.getElementById("categoriesList");
+  if (!allCategories.length){ wrap.innerHTML = '<div class="svc-empty"><b>No categories yet</b></div>'; return; }
+  wrap.innerHTML = allCategories.map(c =>
+    '<div class="crud-row ' + (c.is_active ? "" : "off") + '">' +
+      '<div class="crud-info"><b>' + esc(c.icon || "✨") + ' ' + esc(c.name) + (c.is_active ? "" : ' <span class="tag red">OFF</span>') + '</b><small>slug: ' + esc(c.slug) + ' · sort: ' + (c.sort_order || 0) + '</small></div>' +
+      '<div class="crud-actions">' +
+        '<button class="btn btn-gold btn-sm" onclick="editCategory(\'' + c.id + '\')">✏️ Edit</button>' +
+        '<button class="btn btn-danger btn-sm" onclick="deleteCategory(\'' + c.id + '\')">🗑</button>' +
+      '</div>' +
+    '</div>'
+  ).join("");
+}
+
+function openCategoryModal(){
+  document.getElementById("catId").value = "";
+  document.getElementById("catModalTitle").textContent = "Add Category";
+  document.getElementById("catName").value = "";
+  document.getElementById("catSlug").value = "";
+  document.getElementById("catIcon").value = "";
+  document.getElementById("catSort").value = 0;
+  document.getElementById("catActive").checked = true;
+  document.getElementById("categoryModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function editCategory(id){
+  const c = allCategories.find(x => x.id === id);
+  if (!c) return;
+  document.getElementById("catId").value = c.id;
+  document.getElementById("catModalTitle").textContent = "Edit Category";
+  document.getElementById("catName").value = c.name || "";
+  document.getElementById("catSlug").value = c.slug || "";
+  document.getElementById("catIcon").value = c.icon || "";
+  document.getElementById("catSort").value = c.sort_order || 0;
+  document.getElementById("catActive").checked = !!c.is_active;
+  document.getElementById("categoryModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeCategoryModal(){
+  document.getElementById("categoryModal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+async function saveCategory(){
+  const id = document.getElementById("catId").value;
+  const name = document.getElementById("catName").value.trim();
+  const slug = document.getElementById("catSlug").value.trim() || name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+  if (!name){ toast("Name required", true); return; }
+  const payload = {
+    name, slug,
+    icon: document.getElementById("catIcon").value.trim() || null,
+    sort_order: parseInt(document.getElementById("catSort").value) || 0,
+    is_active: document.getElementById("catActive").checked
+  };
+  const op = id ? sb.from("vaan_categories").update(payload).eq("id", id) : sb.from("vaan_categories").insert([payload]);
+  const { error } = await op;
+  if (error){ toast("Error: " + error.message, true); return; }
+  toast("✅ Saved");
+  closeCategoryModal();
+  loadCategories();
+}
+async function deleteCategory(id){
+  if (!confirm("Delete this category?")) return;
+  const { error } = await sb.from("vaan_categories").delete().eq("id", id);
+  if (error){ toast("Error: " + error.message, true); return; }
+  toast("Deleted");
+  loadCategories();
+}
+
+/* ---- RENDER PALETTES ---- */
+function renderPalettes(){
+  const wrap = document.getElementById("palettesList");
+  if (!allPalettes.length){ wrap.innerHTML = '<div class="svc-empty"><b>No palettes yet</b></div>'; return; }
+  wrap.innerHTML = allPalettes.map(p =>
+    '<div class="crud-row ' + (p.is_active ? "" : "off") + '">' +
+      '<div class="crud-info"><b>' + esc(p.name) + (p.is_active ? "" : ' <span class="tag red">OFF</span>') + '</b>' +
+      '<div class="crud-swatches">' +
+        '<span style="background:' + esc(p.bg) + '"></span>' +
+        '<span style="background:' + esc(p.surface) + '"></span>' +
+        '<span style="background:' + esc(p.accent) + '"></span>' +
+        '<span style="background:' + esc(p.accent_secondary) + '"></span>' +
+        '<span style="background:' + esc(p.text_primary) + '"></span>' +
+      '</div></div>' +
+      '<div class="crud-actions">' +
+        '<button class="btn btn-gold btn-sm" onclick="editPalette(\'' + p.id + '\')">✏️ Edit</button>' +
+        '<button class="btn btn-danger btn-sm" onclick="deletePalette(\'' + p.id + '\')">🗑</button>' +
+      '</div>' +
+    '</div>'
+  ).join("");
+}
+function openPaletteModal(){
+  document.getElementById("palId").value = "";
+  document.getElementById("palModalTitle").textContent = "Add Palette";
+  document.getElementById("palName").value = "";
+  document.getElementById("palBg").value = "#1a060d";
+  document.getElementById("palSurface").value = "#2a0a12";
+  document.getElementById("palAccent").value = "#d4a017";
+  document.getElementById("palAccent2").value = "#4f8fff";
+  document.getElementById("palText").value = "#fdfaf3";
+  document.getElementById("palText2").value = "#c9a98a";
+  document.getElementById("palSort").value = 0;
+  document.getElementById("palActive").checked = true;
+  document.getElementById("paletteModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function editPalette(id){
+  const p = allPalettes.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById("palId").value = p.id;
+  document.getElementById("palModalTitle").textContent = "Edit Palette";
+  document.getElementById("palName").value = p.name || "";
+  document.getElementById("palBg").value = p.bg || "#1a060d";
+  document.getElementById("palSurface").value = p.surface || "#2a0a12";
+  document.getElementById("palAccent").value = p.accent || "#d4a017";
+  document.getElementById("palAccent2").value = p.accent_secondary || "#4f8fff";
+  document.getElementById("palText").value = p.text_primary || "#fdfaf3";
+  document.getElementById("palText2").value = p.text_secondary || "#c9a98a";
+  document.getElementById("palSort").value = p.sort_order || 0;
+  document.getElementById("palActive").checked = !!p.is_active;
+  document.getElementById("paletteModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closePaletteModal(){
+  document.getElementById("paletteModal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+async function savePalette(){
+  const id = document.getElementById("palId").value;
+  const name = document.getElementById("palName").value.trim();
+  if (!name){ toast("Name required", true); return; }
+  const payload = {
+    name,
+    bg: document.getElementById("palBg").value,
+    surface: document.getElementById("palSurface").value,
+    accent: document.getElementById("palAccent").value,
+    accent_secondary: document.getElementById("palAccent2").value,
+    text_primary: document.getElementById("palText").value,
+    text_secondary: document.getElementById("palText2").value,
+    sort_order: parseInt(document.getElementById("palSort").value) || 0,
+    is_active: document.getElementById("palActive").checked
+  };
+  const op = id ? sb.from("vaan_palettes").update(payload).eq("id", id) : sb.from("vaan_palettes").insert([payload]);
+  const { error } = await op;
+  if (error){ toast("Error: " + error.message, true); return; }
+  toast("✅ Saved");
+  closePaletteModal();
+  loadPalettes();
+}
+async function deletePalette(id){
+  if (!confirm("Delete this palette?")) return;
+  const { error } = await sb.from("vaan_palettes").delete().eq("id", id);
+  if (error){ toast("Error: " + error.message, true); return; }
+  toast("Deleted");
+  loadPalettes();
+}
+
+/* ---- RENDER TEMPLATES ---- */
+function renderTemplates(){
+  const wrap = document.getElementById("templatesList");
+  if (!allTemplates.length){ wrap.innerHTML = '<div class="svc-empty"><b>No templates yet</b></div>'; return; }
+  wrap.innerHTML = allTemplates.map(t =>
+    '<div class="crud-row ' + (t.is_active ? "" : "off") + '">' +
+      '<div class="crud-info"><b>' + esc(t.name) + (t.is_active ? "" : ' <span class="tag red">OFF</span>') + '</b><small>' + esc(t.slug || "") + ' · ' + esc(t.description || "") + '</small></div>' +
+      '<div class="crud-actions">' +
+        '<button class="btn btn-gold btn-sm" onclick="editTemplate(\'' + t.id + '\')">✏️ Edit</button>' +
+        '<button class="btn btn-danger btn-sm" onclick="deleteTemplate(\'' + t.id + '\')">🗑</button>' +
+      '</div>' +
+    '</div>'
+  ).join("");
+}
+function openTemplateModal(){
+  document.getElementById("tplId").value = "";
+  document.getElementById("tplModalTitle").textContent = "Add Template";
+  document.getElementById("tplName").value = "";
+  document.getElementById("tplSlug").value = "";
+  document.getElementById("tplDesc").value = "";
+  document.getElementById("tplOrder").value = "hero,about,services,social,contact";
+  document.getElementById("tplSort").value = 0;
+  document.getElementById("tplActive").checked = true;
+  document.getElementById("templateModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function editTemplate(id){
+  const t = allTemplates.find(x => x.id === id);
+  if (!t) return;
+  document.getElementById("tplId").value = t.id;
+  document.getElementById("tplModalTitle").textContent = "Edit Template";
+  document.getElementById("tplName").value = t.name || "";
+  document.getElementById("tplSlug").value = t.slug || "";
+  document.getElementById("tplDesc").value = t.description || "";
+  const order = Array.isArray(t.layout_order) ? t.layout_order.join(",") : (t.layout_order || "");
+  document.getElementById("tplOrder").value = order;
+  document.getElementById("tplSort").value = t.sort_order || 0;
+  document.getElementById("tplActive").checked = !!t.is_active;
+  document.getElementById("templateModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeTemplateModal(){
+  document.getElementById("templateModal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+async function saveTemplate(){
+  const id = document.getElementById("tplId").value;
+  const name = document.getElementById("tplName").value.trim();
+  const slug = document.getElementById("tplSlug").value.trim() || name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+  if (!name){ toast("Name required", true); return; }
+  const orderRaw = document.getElementById("tplOrder").value.trim();
+  const layout_order = orderRaw ? orderRaw.split(",").map(s => s.trim()).filter(Boolean) : [];
+  const payload = {
+    name, slug,
+    description: document.getElementById("tplDesc").value.trim() || null,
+    layout_order,
+    sort_order: parseInt(document.getElementById("tplSort").value) || 0,
+    is_active: document.getElementById("tplActive").checked
+  };
+  const op = id ? sb.from("vaan_templates").update(payload).eq("id", id) : sb.from("vaan_templates").insert([payload]);
+  const { error } = await op;
+  if (error){ toast("Error: " + error.message, true); return; }
+  toast("✅ Saved");
+  closeTemplateModal();
+  loadTemplates();
+}
+async function deleteTemplate(id){
+  if (!confirm("Delete this template?")) return;
+  const { error } = await sb.from("vaan_templates").delete().eq("id", id);
+  if (error){ toast("Error: " + error.message, true); return; }
+  toast("Deleted");
+  loadTemplates();
+}
+
+/* ---- RENDER PRODUCTS ---- */
+function renderProducts(){
+  const wrap = document.getElementById("productsList");
+  if (!allProducts.length){ wrap.innerHTML = '<div class="svc-empty"><b>No products</b></div>'; return; }
+  wrap.innerHTML = allProducts.map(p =>
+    '<div class="crud-row ' + (p.is_active ? "" : "off") + '">' +
+      '<div class="crud-info"><b>' + esc(p.name || "Untitled") + (p.is_active ? "" : ' <span class="tag red">OFF</span>') + '</b><small>Price: ₹' + Number(p.price||0).toLocaleString("en-IN") + (p.discount_price ? ' · Discount: ₹' + Number(p.discount_price).toLocaleString("en-IN") : '') + '</small></div>' +
+      '<div class="crud-actions">' +
+        '<button class="btn btn-gold btn-sm" onclick="editProduct(\'' + p.id + '\')">✏️ Edit</button>' +
+      '</div>' +
+    '</div>'
+  ).join("");
+}
+function editProduct(id){
+  const p = allProducts.find(x => x.id === id);
+  if (!p) return;
+  const name = prompt("Product name:", p.name || "");
+  if (name === null) return;
+  const price = prompt("Price (₹):", p.price || 0);
+  if (price === null) return;
+  const discount = prompt("Discount price (₹, blank = none):", p.discount_price || "");
+  if (discount === null) return;
+  sb.from("vaan_products").update({
+    name,
+    price: parseInt(price) || 0,
+    discount_price: discount ? parseInt(discount) : null
+  }).eq("id", id).then(({error}) => {
+    if (error){ toast("Error: " + error.message, true); return; }
+    toast("✅ Product saved");
+    loadProducts();
+  });
+}
+
+/* ---- RENDER COUPONS ---- */
+function renderCoupons(){
+  const wrap = document.getElementById("couponsList");
+  if (!allCoupons.length){ wrap.innerHTML = '<div class="svc-empty"><b>No coupons yet</b></div>'; return; }
+  wrap.innerHTML = allCoupons.map(c =>
+    '<div class="crud-row ' + (c.is_active ? "" : "off") + '">' +
+      '<div class="crud-info"><b>' + esc(c.code) + (c.is_active ? "" : ' <span class="tag red">OFF</span>') + '</b>' +
+        '<small>' + (c.type === "flat" ? "₹" + c.value + " off" : c.value + "% off") +
+        (c.max_discount ? ' (max ₹' + c.max_discount + ')' : '') +
+        (c.min_order ? ' · min ₹' + c.min_order : '') +
+        (c.usage_limit ? ' · ' + (c.used_count||0) + '/' + c.usage_limit + ' used' : '') +
+        (c.expiry ? ' · exp ' + c.expiry : '') + '</small></div>' +
+      '<div class="crud-actions">' +
+        '<button class="btn btn-gold btn-sm" onclick="editCoupon(\'' + c.id + '\')">✏️ Edit</button>' +
+        '<button class="btn btn-danger btn-sm" onclick="deleteCoupon(\'' + c.id + '\')">🗑</button>' +
+      '</div>' +
+    '</div>'
+  ).join("");
+}
+function openCouponModal(){
+  document.getElementById("cpnId").value = "";
+  document.getElementById("cpnModalTitle").textContent = "Add Coupon";
+  document.getElementById("cpnCode").value = "";
+  document.getElementById("cpnType").value = "flat";
+  document.getElementById("cpnValue").value = "";
+  document.getElementById("cpnMax").value = "";
+  document.getElementById("cpnMin").value = "";
+  document.getElementById("cpnLimit").value = "";
+  document.getElementById("cpnExpiry").value = "";
+  document.getElementById("cpnActive").checked = true;
+  document.getElementById("couponModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function editCoupon(id){
+  const c = allCoupons.find(x => x.id === id);
+  if (!c) return;
+  document.getElementById("cpnId").value = c.id;
+  document.getElementById("cpnModalTitle").textContent = "Edit Coupon";
+  document.getElementById("cpnCode").value = c.code || "";
+  document.getElementById("cpnType").value = c.type || "flat";
+  document.getElementById("cpnValue").value = c.value || "";
+  document.getElementById("cpnMax").value = c.max_discount || "";
+  document.getElementById("cpnMin").value = c.min_order || "";
+  document.getElementById("cpnLimit").value = c.usage_limit || "";
+  document.getElementById("cpnExpiry").value = c.expiry || "";
+  document.getElementById("cpnActive").checked = !!c.is_active;
+  document.getElementById("couponModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeCouponModal(){
+  document.getElementById("couponModal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+async function saveCoupon(){
+  const id = document.getElementById("cpnId").value;
+  const code = document.getElementById("cpnCode").value.trim().toUpperCase();
+  const value = parseFloat(document.getElementById("cpnValue").value);
+  if (!code){ toast("Code required", true); return; }
+  if (!value || value <= 0){ toast("Value must be > 0", true); return; }
+  const payload = {
+    code,
+    type: document.getElementById("cpnType").value,
+    value,
+    max_discount: document.getElementById("cpnMax").value ? parseFloat(document.getElementById("cpnMax").value) : null,
+    min_order: document.getElementById("cpnMin").value ? parseFloat(document.getElementById("cpnMin").value) : null,
+    usage_limit: document.getElementById("cpnLimit").value ? parseInt(document.getElementById("cpnLimit").value) : null,
+    expiry: document.getElementById("cpnExpiry").value || null,
+    is_active: document.getElementById("cpnActive").checked
+  };
+  const op = id ? sb.from("vaan_coupons").update(payload).eq("id", id) : sb.from("vaan_coupons").insert([payload]);
+  const { error } = await op;
+  if (error){ toast("Error: " + error.message, true); return; }
+  toast("✅ Saved");
+  closeCouponModal();
+  loadCoupons();
+}
+async function deleteCoupon(id){
+  if (!confirm("Delete this coupon?")) return;
+  const { error } = await sb.from("vaan_coupons").delete().eq("id", id);
+  if (error){ toast("Error: " + error.message, true); return; }
+  toast("Deleted");
+  loadCoupons();
+}
+
+/* ---- RENDER FUNNEL ---- */
+function renderFunnel(){
+  const wrap = document.getElementById("funnelList");
+  if (!allFunnelEvents.length){ wrap.innerHTML = '<div class="svc-empty"><b>No events yet</b></div>'; return; }
+
+  const counts = {};
+  allFunnelEvents.forEach(e => {
+    const key = e.event_type === "step_completed" || e.event_type === "step_skipped"
+      ? e.event_type + "_" + (e.step_number || "?")
+      : e.event_type;
+    counts[key] = (counts[key] || 0) + 1;
+  });
+
+  const orderedSteps = [];
+  for (let i = 1; i <= 12; i++){
+    orderedSteps.push({ label: "Step " + i, done: counts["step_completed_" + i] || 0, skip: counts["step_skipped_" + i] || 0 });
+  }
+
+  const maxVal = Math.max(...orderedSteps.map(s => s.done + s.skip), 1);
+
+  let html = '<div class="ord-block"><h4>Top-level events</h4>' +
+    '<div class="kv"><span>Page views</span><span>' + (counts["page_view"] || 0) + '</span></div>' +
+    '<div class="kv"><span>Builder started</span><span>' + (counts["started"] || 0) + '</span></div>' +
+    '<div class="kv"><span>Preview shown</span><span>' + (counts["preview_shown"] || 0) + '</span></div>' +
+    '<div class="kv"><span>Checkout reached</span><span>' + (counts["checkout_reached"] || 0) + '</span></div>' +
+    '<div class="kv"><span>Orders created</span><span>' + (counts["order_created"] || 0) + '</span></div>' +
+    '<div class="kv"><span>Payments success</span><span>' + (counts["payment_success"] || 0) + '</span></div>' +
+  '</div>';
+
+  html += '<div class="ord-block"><h4>Step-by-step completion</h4>';
+  orderedSteps.forEach(s => {
+    const total = s.done + s.skip;
+    const pct = Math.round((total / maxVal) * 100);
+    html += '<div class="funnel-step">' +
+      '<div class="funnel-step-label">' + s.label + '</div>' +
+      '<div class="funnel-bar-wrap"><div class="funnel-bar" style="width:' + pct + '%"></div></div>' +
+      '<div class="funnel-step-count">' + total + '</div>' +
+    '</div>';
+  });
+  html += '</div>';
+
+  wrap.innerHTML = html;
 }
 </script>
 
