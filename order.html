@@ -1781,41 +1781,140 @@ async function applyCoupon(){
 }
 
 /* ============================================================
-   PAYMENT & INVOICE GENERATION
+   PAYMENT & INVOICE GENERATION (REAL CASHFREE GATEWAY)
    ============================================================ */
 async function startPayment(){
-  var btn = $("payBtn"); btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Processing…';
+  if (!state.data.name || !state.data.phone){ showToast("Name and phone required", "err"); return; }
+  
+  var btn = $("payBtn"); 
+  btn.disabled = true; 
+  btn.innerHTML = '<span class="spinner"></span> Processing…';
+  
   try {
-    var orderNum = "VAAN-" + Math.floor(1000 + Math.random()*9000);
-    var res = await sb.from("vaan_orders").insert([{
-      product_id: state.product.id, customer_name: state.data["name"] || "Unknown", customer_phone: state.data["phone"] || "0000000000",
-      amount_paid: state.subtotal, payment_status: "paid", receipt_name: orderNum,
-      form_data: state.data, customization: state.design, company_name: state.data["businessName"] || null
+    var total = Math.max(0, state.subtotal - state.discount);
+    
+    // 1. Create order in Supabase (Pending Status)
+    var orderRes = await sb.from("vaan_orders").insert([{
+      product_id: state.product ? state.product.id : null,
+      customer_name: state.data.name,
+      customer_phone: state.data.phone,
+      customer_email: state.data.email || null,
+      business_name: state.data.businessName || null,
+      category: state.data.category || null,
+      address: state.data.mapLink || null,
+      google_review_link: state.data.googleReviewLink || null,
+      coupon_code: state.coupon ? state.coupon.code : null,
+      subtotal: state.subtotal,
+      discount: state.discount,
+      amount_paid: total,
+      payment_status: "pending",
+      form_data: state.data, 
+      customization: state.design
     }]).select().single();
     
-    if (res.error) throw res.error;
-    var order = res.data;
+    if (orderRes.error) throw orderRes.error;
+    var order = orderRes.data;
 
-    var answers = Object.keys(state.data).map(k => ({ order_id: order.id, field_key: k, field_value: typeof state.data[k] === 'object' ? JSON.stringify(state.data[k]) : state.data[k] }));
-    await sb.from("vaan_order_answers").insert(answers);
+    // 2. Save the form answers
+    var answers = [];
+    (state.data.services || []).filter(function(s){ return s && s.trim(); }).forEach(function(s, i){
+      answers.push({ order_id: order.id, field_key: "service", field_value: { name: s }, sort_order: i });
+    });
+    (state.data.socialLinks || []).filter(function(l){ return l.url; }).forEach(function(l, i){
+      answers.push({ order_id: order.id, field_key: "social_link", field_value: l, sort_order: i });
+    });
+    if (state.data.website) answers.push({ order_id: order.id, field_key: "website", field_value: { url: state.data.website } });
+    if (state.data.logoUrl) answers.push({ order_id: order.id, field_key: "logo", file_url: state.data.logoUrl });
+    if (state.data.founderUrl) answers.push({ order_id: order.id, field_key: "founder_photo", file_url: state.data.founderUrl });
+    if (answers.length) await sb.from("vaan_order_answers").insert(answers);
 
-    $("successOrderId").textContent = order.receipt_name;
-    $("successName").textContent = order.customer_name;
+    // 3. Call Edge Function to get Cashfree Session ID
+    var fnRes = await fetch(SUPABASE_URL + "/functions/v1/create-cashfree-order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + SUPABASE_KEY },
+      body: JSON.stringify({
+        order_id: order.id,
+        order_number: order.order_number,
+        amount: total,
+        customer_name: state.data.name,
+        customer_phone: state.data.phone,
+        customer_email: state.data.email || "noreply@vaanconsultancy.in"
+      })
+    });
     
-    var today = new Date();
-    $("invDate").textContent = "Date: " + today.toLocaleDateString("en-IN", {day:'numeric', month:'long', year:'numeric'}) + " • Payment Mode: UPI";
-    $("invCustName").textContent = order.customer_name;
-    $("invCustCompany").textContent = state.data["businessName"] || "Individual";
-    $("invProdName").textContent = state.product.name;
-    $("invAmount").textContent = state.subtotal.toLocaleString("en-IN");
-    $("invTotal").textContent = "₹" + state.subtotal.toLocaleString("en-IN");
-    $("invWords").textContent = "Amount in Words: " + numberToWords(state.subtotal);
-    $("invServiceFor").textContent = order.customer_name;
-    $("invPaidOn").textContent = today.toLocaleDateString("en-IN", {day:'numeric', month:'long', year:'numeric'});
-    
-    showScreen("success");
-  } catch (e) { showToast("Payment failed: " + e.message); }
-  finally { btn.disabled = false; btn.innerHTML = 'Pay ' + fmtPrice(state.subtotal) + ' Securely'; }
+    if (!fnRes.ok) throw new Error("Payment gateway not ready — contact us on WhatsApp.");
+    var fnData = await fnRes.json();
+    if (!fnData.payment_session_id) throw new Error("No payment session");
+
+    // 4. Open Cashfree Checkout
+    openCashfree(fnData.payment_session_id, order);
+
+  } catch(err){
+    console.error(err);
+    btn.disabled = false;
+    btn.innerHTML = 'Pay ' + fmtPrice(Math.max(0, state.subtotal - state.discount)) + ' Securely';
+    showToast(err.message || "Payment failed", "err");
+  }
+}
+
+function openCashfree(sessionId, order){
+  if (typeof Cashfree === "undefined"){
+    var s = document.createElement("script");
+    s.src = "https://sdk.cashfree.com/js/v3/cashfree.js";
+    s.onload = function(){ launchCashfree(sessionId, order); };
+    document.head.appendChild(s);
+  } else launchCashfree(sessionId, order);
+}
+
+function launchCashfree(sessionId, order){
+  try {
+    var cf = Cashfree({ mode: "production" }); 
+    cf.checkout({ paymentSessionId: sessionId, redirectTarget: "_modal" }).then(function(result){
+      if (result.error){
+        showToast("Payment cancelled", "err");
+        var btn = $("payBtn");
+        btn.disabled = false;
+        btn.innerHTML = 'Pay ' + fmtPrice(Math.max(0, state.subtotal - state.discount)) + ' Securely';
+      } else {
+        pollOrder(order.id, order.order_number);
+      }
+    });
+  } catch(err){
+    showToast("Payment could not start", "err");
+    var btn = $("payBtn");
+    btn.disabled = false;
+    btn.innerHTML = 'Pay ' + fmtPrice(Math.max(0, state.subtotal - state.discount)) + ' Securely';
+  }
+}
+
+function pollOrder(orderId, orderNumber){
+  showToast("Verifying payment…");
+  var attempts = 0;
+  var iv = setInterval(async function(){
+    attempts++;
+    var res = await sb.from("vaan_orders").select("payment_status").eq("id", orderId).maybeSingle();
+    if ((res.data && res.data.payment_status === "paid") || attempts >= 15){
+      clearInterval(iv);
+      
+      // Update UI for Success & Invoice
+      $("successOrderId").textContent = orderNumber;
+      $("successName").textContent = state.data.name || "there";
+      
+      var today = new Date();
+      $("invDate").textContent = "Date: " + today.toLocaleDateString("en-IN", {day:'numeric', month:'long', year:'numeric'}) + " • Payment Mode: UPI";
+      $("invCustName").textContent = state.data.name;
+      $("invCustCompany").textContent = state.data.businessName || "Individual";
+      $("invProdName").textContent = state.product.name;
+      $("invAmount").textContent = state.subtotal.toLocaleString("en-IN");
+      $("invTotal").textContent = "₹" + state.subtotal.toLocaleString("en-IN");
+      $("invWords").textContent = "Amount in Words: " + numberToWords(state.subtotal);
+      $("invServiceFor").textContent = state.data.name;
+      $("invPaidOn").textContent = today.toLocaleDateString("en-IN", {day:'numeric', month:'long', year:'numeric'});
+      
+      showScreen("success");
+      trackEvent("payment_success", null, orderNumber);
+    }
+  }, 2000);
 }
 
 function downloadInvoice(){
