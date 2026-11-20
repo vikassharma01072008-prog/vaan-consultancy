@@ -43,6 +43,25 @@ input,textarea,select{font-family:inherit;font-size:16px !important}
 .landing-hero{position:relative;overflow:hidden}
 .landing-hero-content{position:relative;z-index:2}
 
+/* ===== PRODUCT BACKGROUND ANIMATION ===== */
+.product-card{
+  position:relative;overflow:hidden;
+  background:linear-gradient(165deg,rgba(61,15,26,.95),rgba(26,6,13,.98));
+  border:1.5px solid var(--line);border-radius:20px;
+  padding:20px 18px;display:flex;flex-direction:column;gap:14px;
+}
+.product-card::before{
+  content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:conic-gradient(from 0deg, transparent 0deg, transparent 320deg, rgba(240,193,75,0.15) 360deg);
+  animation:rotateCardBg 4s linear infinite;
+  z-index:0;pointer-events:none;
+}
+.product-card::after{
+  content:"";position:absolute;inset:1.5px;background:#1a060d;border-radius:18px;z-index:1;
+}
+.product-card > *{position:relative;z-index:2;}
+@keyframes rotateCardBg{100%{transform:rotate(360deg)}}
+
 /* ===== TOPBAR ===== */
 .topbar{
   position:sticky;top:0;z-index:80;
@@ -99,16 +118,6 @@ input,textarea,select{font-family:inherit;font-size:16px !important}
 .landing-hero p{font-size:13px;color:var(--cream-dim);line-height:1.55;max-width:400px;margin:0 auto}
 
 .products-grid{display:flex;flex-direction:column;gap:14px;margin-top:22px}
-.product-card{
-  background:linear-gradient(165deg,rgba(61,15,26,.95),rgba(26,6,13,.98));
-  border:1.5px solid var(--line);border-radius:20px;
-  padding:20px 18px;display:flex;flex-direction:column;gap:14px;
-  position:relative;overflow:hidden;
-}
-.product-card::before{
-  content:"";position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(240,193,75,.6),transparent);
-}
 .product-head{display:flex;align-items:flex-start;gap:14px}
 .product-icon{
   width:56px;height:56px;border-radius:16px;
@@ -129,6 +138,13 @@ input,textarea,select{font-family:inherit;font-size:16px !important}
 .product-price b{font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-weight:700;color:var(--gold-bright);letter-spacing:-.5px}
 .product-price s{font-size:14px;color:var(--cream-dim);text-decoration-color:var(--red)}
 .product-price small{font-size:9px;letter-spacing:1.5px;font-weight:800;color:var(--cream-dim);text-transform:uppercase}
+
+/* ===== TRACK ORDER ===== */
+.track-box{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:16px;padding:20px;margin-top:20px}
+.track-box input{width:100%;padding:14px;background:rgba(0,0,0,.2);border:1px solid var(--line-soft);border-radius:10px;color:white;margin-bottom:12px;text-transform:uppercase;font-family:monospace;letter-spacing:2px;font-weight:bold}
+.track-box button{width:100%;padding:14px;border-radius:10px;background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1a060d;font-weight:900;text-transform:uppercase}
+.track-result{margin-top:20px;padding:16px;background:rgba(240,193,75,.1);border:1px solid var(--gold);border-radius:12px;font-size:13px;display:none}
+.track-result.show{display:block}
 
 /* ===== BUTTONS ===== */
 .btn-primary{
@@ -171,8 +187,6 @@ input,textarea,select{font-family:inherit;font-size:16px !important}
 .btn-back:hover{color:var(--gold-bright)}
 .btn-back svg{width:16px;height:16px}
 .btn-row{display:flex;flex-direction:column;gap:10px;margin-top:20px}
-.btn-row-inline{display:flex;align-items:center;gap:10px;margin-top:20px}
-.btn-row-inline .btn-primary{flex:1}
 
 /* ===== STEP HEADINGS ===== */
 .step-head{text-align:center;margin-bottom:18px;padding-top:4px}
@@ -802,8 +816,17 @@ input,textarea,select{font-family:inherit;font-size:16px !important}
         <p>Fill your details, watch your card build live, then pay securely.</p>
       </div>
     </div>
+    
     <div class="products-grid" id="productsGrid">
       <div class="empty">Loading products…</div>
+    </div>
+
+    <!-- TRACK MY ORDER -->
+    <div class="track-box">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:10px;color:var(--gold-bright);text-align:center">Track Your Order</h3>
+      <input type="text" id="trackInput" placeholder="Enter Receipt No (e.g. VAAN-1000)">
+      <button onclick="trackOrder()">Track Status</button>
+      <div class="track-result" id="trackResult"></div>
     </div>
   </section>
 
@@ -845,7 +868,7 @@ input,textarea,select{font-family:inherit;font-size:16px !important}
       <div class="preview-frame"><div class="preview-scroll" style="max-height:640px"><div class="pvCard" id="pvCardFinal"></div></div></div>
     </div>
     
-    <!-- ADDITIONAL NOTE STEP (Added before Customise) -->
+    <!-- ADDITIONAL NOTE STEP -->
     <div class="field" style="margin-top:20px">
       <label style="color:var(--gold-bright)">Additional Note (Skippable)</label>
       <textarea id="additionalNoteInput" placeholder="Any specific instructions or notes for the designer?" style="min-height:100px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:16px;color:white;font-size:16px" oninput="state.data.additionalNote = this.value; refreshPreview('pvCardFinal')"></textarea>
@@ -1298,10 +1321,8 @@ async function loadCategories(){
    ============================================================ */
 var allProductFields = [];
 async function loadProductFields(productId){
-  // First check if the product has a form_config from the new Admin panel
   var p = state.product;
   if (p.form_config && Array.isArray(p.form_config) && p.form_config.length > 0) {
-    // Map the Admin form_config to the field structure the Order panel expects
     allProductFields = [];
     p.form_config.forEach(step => {
       if (step.type === 'step' && step.fields) {
@@ -1321,7 +1342,6 @@ async function loadProductFields(productId){
       }
     });
   } else {
-    // Fallback to DB or default
     var res = await sb.from("vaan_product_fields").select("*").eq("product_id", productId).order("sort_order", { ascending: true });
     if (res.error || !res.data || !res.data.length){ allProductFields = defaultFields(); } 
     else { allProductFields = res.data; }
@@ -1935,6 +1955,41 @@ function numberToWords(n) {
   if (n < 100) return b[Math.floor(n/10)] + (n%10 ? " " + a[n%10] : "") + " Rupees Only";
   if (n < 1000) return a[Math.floor(n/100)] + " Hundred " + (n%100 ? "and " + numberToWords(n%100) : "") + " Rupees Only";
   return "Amount Too Large";
+}
+
+/* ============================================================
+   TRACK ORDER FUNCTION
+   ============================================================ */
+async function trackOrder(){
+  var input = document.getElementById("trackInput").value.trim().toUpperCase();
+  var resultDiv = document.getElementById("trackResult");
+  if(!input){ showToast("Please enter a receipt number"); return; }
+
+  resultDiv.className = "track-result";
+  resultDiv.innerHTML = "Searching...";
+  resultDiv.classList.add("show");
+
+  var res = await sb.from("vaan_orders").select("*").eq("receipt_name", input).maybeSingle();
+  
+  if (res.error || !res.data) {
+    resultDiv.innerHTML = "<span style='color:var(--red)'>Order not found. Please check the receipt number.</span>";
+    return;
+  }
+
+  var o = res.data;
+  var statusText = "PAID (Processing)";
+  var statusColor = "var(--blue)";
+  if (o.status === "building") { statusText = "BUILDING"; statusColor = "var(--gold)"; }
+  if (o.status === "delivered") { statusText = "DELIVERED"; statusColor = "var(--green)"; }
+
+  var html = `
+    <div style="margin-bottom:10px"><b>Order:</b> ${o.receipt_name}</div>
+    <div style="margin-bottom:10px"><b>Name:</b> ${esc(o.customer_name)}</div>
+    <div style="margin-bottom:10px"><b>Status:</b> <span style="color:${statusColor};font-weight:800">${statusText}</span></div>
+    ${o.approx_delivery_time ? `<div style="margin-bottom:10px"><b>Est. Delivery:</b> ${esc(o.approx_delivery_time)}</div>` : ''}
+    ${o.status === "delivered" && o.delivery_url ? `<div style="margin-top:15px"><a href="${esc(o.delivery_url)}" target="_blank" class="btn-secondary" style="display:inline-block;text-decoration:none;width:100%;text-align:center">View Final Link</a></div>` : ''}
+  `;
+  resultDiv.innerHTML = html;
 }
 </script>
 </body>
