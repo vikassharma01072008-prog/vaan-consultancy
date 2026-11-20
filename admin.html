@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex,nofollow">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 /* ====== RESET & VARS ====== */
 *{box-sizing:border-box;margin:0;padding:0}
@@ -30,7 +30,7 @@ a{text-decoration:none;color:inherit}
 .gate-box button:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(255,212,0,.3)}
 .gate-err{color:var(--red);font-size:12px;font-weight:800;margin-top:14px;display:none}
 
-/* ====== PANEL ====== */
+/* ====== PANEL & HEADER ====== */
 #panel{display:none}
 .hdr{background:rgba(10,14,26,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--line-soft);padding:16px 20px;position:sticky;top:0;z-index:100}
 .hdr-in{max-width:1300px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
@@ -60,14 +60,14 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 .tab-content.show{display:block;animation:fadeIn .3s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-/* ====== STATS ====== */
+/* ====== DASHBOARD STATS ====== */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:32px}
 .stat{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:16px;padding:20px;position:relative;overflow:hidden}
 .stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--gold),var(--blue))}
 .stat b{display:block;font-size:32px;font-weight:950;letter-spacing:-1.5px;line-height:1;color:var(--gold)}
 .stat span{display:block;color:var(--muted);font-size:10px;letter-spacing:1.5px;font-weight:900;text-transform:uppercase;margin-top:8px}
 
-/* ====== FORM BOX ====== */
+/* ====== FORMS & MODALS ====== */
 .form-box{background:var(--card);border:1px solid var(--line-soft);border-radius:16px;padding:24px;margin-bottom:32px}
 .form-title{font-size:18px;font-weight:900;color:var(--gold);margin-bottom:20px}
 .form-row{margin-bottom:16px}
@@ -76,17 +76,18 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 .form-row input:focus,.form-row textarea:focus,.form-row select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,212,0,.1)}
 .form-row textarea{min-height:90px;resize:vertical;line-height:1.5}
 .form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .form-check{display:flex;align-items:center;gap:10px;padding:14px;background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:10px;cursor:pointer}
 .form-check input{width:auto;margin:0;accent-color:var(--gold)}
 .form-check label{margin:0;cursor:pointer;text-transform:none;letter-spacing:0;font-size:13px;color:var(--white);font-weight:700}
 .img-preview{max-width:200px;margin-top:12px;border-radius:10px;display:none;border:1px solid var(--gold);box-shadow:0 4px 12px rgba(0,0,0,0.5)}
 
-/* ====== ITEM LISTS (SERVICES & PORTFOLIO & FEEDBACK) ====== */
+/* ====== LISTS & ITEMS ====== */
 .sec-title{font-size:20px;font-weight:950;letter-spacing:-.5px;margin-bottom:6px;display:flex;align-items:center;gap:10px}
 .sec-title::before{content:"";width:4px;height:22px;background:var(--gold);border-radius:2px}
 .sec-sub{color:var(--muted);font-size:13px;margin-bottom:20px}
 
-.svc-list,.fb-list{display:grid;gap:12px}
+.svc-list{display:grid;gap:12px}
 .svc-row,.item{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;transition:.2s}
 .svc-row:hover,.item:hover{border-color:rgba(255,212,0,.3)}
 .svc-row.off{opacity:.5}
@@ -107,7 +108,8 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 
 .item-actions,.svc-row-actions{display:flex;gap:8px;flex-wrap:wrap}
 
-/* ====== FEEDBACK CARDS ====== */
+/* ====== FEEDBACK ====== */
+.fb-list{display:grid;gap:12px}
 .fb-card{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:20px}
 .fb-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:12px}
 .fb-head b{font-size:15px;font-weight:850}
@@ -120,7 +122,7 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 /* ====== MODALS ====== */
 .modal{position:fixed;inset:0;background:rgba(5,8,16,.85);backdrop-filter:blur(10px);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
 .modal.open{display:flex}
-.modal-box{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid rgba(255,212,0,.25);border-radius:22px;width:min(560px,100%);max-height:90vh;overflow-y:auto;position:relative}
+.modal-box{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid rgba(255,212,0,.25);border-radius:22px;width:min(800px,100%);max-height:90vh;overflow-y:auto;position:relative}
 .modal-box::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--blue))}
 .modal-head{padding:24px 24px 18px;border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:flex-start;gap:14px;position:sticky;top:0;background:linear-gradient(180deg,#12192a 85%,rgba(18,25,42,0));z-index:2}
 .modal-head h3{font-size:20px;font-weight:950;letter-spacing:-.6px}
@@ -131,79 +133,36 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 .modal-actions{display:flex;gap:10px;margin-top:22px}
 .modal-actions .btn{flex:1;padding:15px}
 
-/* ====== TOAST ====== */
+/* ====== TOAST & FOOTER ====== */
 .toast{position:fixed;bottom:24px;right:24px;background:#12192a;border:1px solid var(--line);border-left:3px solid var(--green);padding:16px 20px;border-radius:12px;font-size:13px;font-weight:800;display:none;z-index:2000;color:var(--white);max-width:340px;box-shadow:0 20px 50px rgba(0,0,0,.6)}
 .toast.err{border-left-color:var(--red)}
 .toast.show{display:block;animation:slideIn .3s ease}
 @keyframes slideIn{from{transform:translateX(110%);opacity:0}to{transform:none;opacity:1}}
 
-/* ====== FOOTER ====== */
 footer{text-align:center;padding:40px 20px 30px;color:var(--muted);font-size:11px;border-top:1px solid var(--line-soft);margin-top:60px}
 footer b{color:var(--gold)}
 
-/* ====== ORDERS TAB (additions) ====== */
-.orders-subnav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px;background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:12px;padding:5px;width:fit-content}
-.osub{background:transparent;border:0;color:var(--muted);padding:9px 14px;border-radius:8px;font-weight:850;font-size:12px;cursor:pointer;font-family:inherit;transition:.2s;text-transform:uppercase;letter-spacing:.5px}
-.osub:hover{color:var(--white)}
-.osub.active{background:var(--gold-soft);color:var(--gold);border:1px solid rgba(255,212,0,.35)}
-.osub-panel{display:none}
-.osub-panel.show{display:block;animation:fadeIn .25s ease}
+/* ====== NEW E-COMMERCE & ULP ENGINE STYLES ====== */
+.ulp-editor{width:100%;height:350px;background:#0a0e1a;border:1.5px solid var(--line-soft);border-radius:12px;padding:16px;color:#a8c4ff;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.6;resize:vertical}
+.ulp-editor:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,212,0,.1)}
 
-.ord-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
-.ord-toolbar select,.ord-toolbar input{background:#0a0e1a;border:1px solid var(--line-soft);border-radius:10px;color:var(--white);padding:11px 14px;font-family:inherit;font-size:13px;transition:.2s}
-.ord-toolbar select:focus,.ord-toolbar input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,212,0,.1)}
-.ord-toolbar input{flex:1;min-width:160px}
+.copy-field{display:flex;justify-content:space-between;align-items:flex-start;background:#0a0e1a;border:1px solid var(--line-soft);border-radius:8px;padding:10px 12px;margin-bottom:8px;gap:12px}
+.copy-field-content{flex:1;font-size:13px;color:var(--white);word-break:break-word;line-height:1.4}
+.copy-field-content b{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;margin-bottom:4px;letter-spacing:1px}
+.copy-field-btn{background:rgba(255,255,255,.05);border:1px solid var(--line-soft);color:var(--muted);width:32px;height:32px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.copy-field-btn:hover{background:var(--gold);color:#0a0e1a;border-color:var(--gold)}
 
-.ord-card{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:18px 20px;margin-bottom:12px;transition:.2s}
-.ord-card:hover{border-color:rgba(255,212,0,.3)}
-.ord-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:10px}
-.ord-card-head b{font-size:15px;font-weight:850}
-.ord-card-head small{color:var(--muted);font-size:11.5px;display:block;margin-top:3px}
-.ord-id{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:800;color:var(--gold);letter-spacing:1px}
-.ord-meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 12px}
-.ord-meta .tag{font-size:10px;padding:4px 9px}
-.ord-actions{display:flex;gap:8px;flex-wrap:wrap}
-
-/* Order detail modal */
-.ord-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
-.ord-detail-grid .form-row{margin-bottom:0}
-.ord-block{background:rgba(255,255,255,.03);border:1px solid var(--line-soft);border-radius:12px;padding:14px;margin-bottom:14px}
-.ord-block h4{font-size:11px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-.ord-block .kv{display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:5px 0;border-bottom:1px dashed rgba(255,255,255,.06)}
-.ord-block .kv:last-child{border-bottom:0}
-.ord-block .kv span:first-child{color:var(--muted);flex-shrink:0}
-.ord-block .kv span:last-child{color:var(--white);font-weight:700;text-align:right;word-break:break-word}
-.ord-block a{color:var(--gold);text-decoration:underline;text-underline-offset:2px}
-.ord-chip{display:inline-block;padding:5px 10px;margin:3px 4px 3px 0;border-radius:8px;font-size:11.5px;background:var(--blue-soft);border:1px solid rgba(79,143,255,.3);color:#cfe0ff}
-.ord-img{width:64px;height:64px;border-radius:10px;object-fit:cover;border:1px solid var(--gold);background:#0a0e1a}
-.ord-img-wrap{display:flex;gap:14px;flex-wrap:wrap}
-.ord-img-cell{text-align:center;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;font-weight:800}
-
-/* Simple CRUD grid for categories/palettes/templates/coupons */
-.crud-grid{display:grid;gap:12px}
-.crud-row{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:16px 18px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;transition:.2s}
-.crud-row:hover{border-color:rgba(255,212,0,.3)}
-.crud-row.off{opacity:.5}
-.crud-info{flex:1;min-width:200px}
-.crud-info b{font-size:14.5px;font-weight:850;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.crud-info small{color:var(--muted);font-size:11.5px;display:block;margin-top:4px}
-.crud-info code{background:rgba(255,255,255,.06);padding:1px 6px;border-radius:4px;font-size:10.5px;font-family:'JetBrains Mono',monospace;color:#ffd400}
-.crud-swatches{display:flex;gap:3px;margin-top:8px}
-.crud-swatches span{width:22px;height:22px;border-radius:6px;border:1px solid rgba(255,255,255,.15)}
-.crud-actions{display:flex;gap:8px;flex-wrap:wrap}
-.funnel-step{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.funnel-step-label{width:90px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);flex-shrink:0}
-.funnel-bar-wrap{flex:1;height:26px;background:rgba(255,255,255,.04);border-radius:8px;overflow:hidden;position:relative}
-.funnel-bar{height:100%;background:linear-gradient(90deg,var(--gold),#ffa726);border-radius:8px;transition:width .4s ease}
-.funnel-step-count{width:70px;text-align:right;font-size:12px;font-weight:800;color:var(--gold);font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.order-img-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:10px}
+.order-img-box{background:#0a0e1a;border:1px solid var(--line-soft);border-radius:10px;padding:6px;text-align:center}
+.order-img-box img{width:100%;height:100px;object-fit:cover;border-radius:6px;margin-bottom:6px;cursor:pointer}
+.order-img-box a{display:block;font-size:10px;color:var(--gold);font-weight:800;text-transform:uppercase;text-decoration:none}
 
 /* ====== RESPONSIVE ====== */
 @media(max-width:800px){
   .stats{grid-template-columns:1fr 1fr}
   .hdr-in{justify-content:center;text-align:center}
   .tab{padding:10px 14px;font-size:12px}
-  .form-grid-2{grid-template-columns:1fr}
-  .ord-detail-grid{grid-template-columns:1fr}
+  .form-grid-2,.form-grid-3{grid-template-columns:1fr}
 }
 @media(max-width:550px){
   .stats{grid-template-columns:1fr}
@@ -215,10 +174,9 @@ footer b{color:var(--gold)}
   .modal-head,.modal-body{padding-left:18px;padding-right:18px}
   .toast{left:20px;right:20px;bottom:20px;max-width:none}
 }
-</style></head>
-<body>
+</style><body>
 
-<!-- LOGIN -->
+<!-- LOGIN GATE -->
 <div class="gate" id="gate">
   <div class="gate-box">
     <div class="gate-logo">
@@ -233,7 +191,7 @@ footer b{color:var(--gold)}
   </div>
 </div>
 
-<!-- PANEL -->
+<!-- MAIN PANEL -->
 <div id="panel">
   <header class="hdr">
     <div class="hdr-in">
@@ -256,13 +214,13 @@ footer b{color:var(--gold)}
     <!-- TABS -->
     <div class="tabs">
       <button class="tab active" data-tab="dashboard" onclick="switchTab('dashboard', this)">📊 Dashboard</button>
-      <button class="tab" data-tab="orders" onclick="switchTab('orders', this)">📦 Orders</button>
+      <button class="tab" data-tab="ecommerce" onclick="switchTab('ecommerce', this)">🛒 E-Commerce</button>
       <button class="tab" data-tab="portfolio" onclick="switchTab('portfolio', this)">💼 Portfolio</button>
       <button class="tab" data-tab="pricing" onclick="switchTab('pricing', this)">💰 Pricing</button>
       <button class="tab" data-tab="feedback" onclick="switchTab('feedback', this)">💬 Feedback</button>
     </div>
 
-    <!-- DASHBOARD TAB -->
+    <!-- ================= DASHBOARD TAB ================= -->
     <div class="tab-content show" id="tab-dashboard">
       <div class="stats">
         <div class="stat"><b id="statTotal">0</b><span>Total Services</span></div>
@@ -270,195 +228,88 @@ footer b{color:var(--gold)}
         <div class="stat"><b id="statFeedback">0</b><span>Feedback Received</span></div>
         <div class="stat"><b id="statRating">0.0</b><span>Avg Rating</span></div>
       </div>
-
       <div class="sec-title">Recent Feedback</div>
       <div class="sec-sub">Latest customer feedback across the site</div>
-      <div class="fb-list" id="recentFeedback">
-        <div class="fb-empty"><b>Loading...</b></div>
-      </div>
+      <div class="fb-list" id="recentFeedback"><div class="fb-empty"><b>Loading...</b></div></div>
     </div>
 
-    <!-- ORDERS TAB -->
-    <div class="tab-content" id="tab-orders">
-      <div class="orders-subnav">
-        <button class="osub active" data-osub="orders" onclick="switchOrdersSub('orders', this)">Orders</button>
-        <button class="osub" data-osub="products" onclick="switchOrdersSub('products', this)">Products</button>
-        <button class="osub" data-osub="categories" onclick="switchOrdersSub('categories', this)">Categories</button>
-        <button class="osub" data-osub="palettes" onclick="switchOrdersSub('palettes', this)">Palettes</button>
-        <button class="osub" data-osub="templates" onclick="switchOrdersSub('templates', this)">Templates</button>
-        <button class="osub" data-osub="coupons" onclick="switchOrdersSub('coupons', this)">Coupons</button>
-        <button class="osub" data-osub="funnel" onclick="switchOrdersSub('funnel', this)">Funnel</button>
+    <!-- ================= E-COMMERCE TAB ================= -->
+    <div class="tab-content" id="tab-ecommerce">
+      
+      <!-- E-COMMERCE SUB-TABS -->
+      <div style="display:flex;gap:10px;margin-bottom:20px;border-bottom:1px solid var(--line-soft);padding-bottom:12px">
+        <button class="btn btn-gold btn-sm" id="btnTabOrders" onclick="switchEcomTab('orders')">📦 Paid Orders</button>
+        <button class="btn btn-dark btn-sm" id="btnTabProducts" onclick="switchEcomTab('products')">🛍️ Products (ULP)</button>
       </div>
 
-      <!-- Orders list -->
-      <div class="osub-panel show" id="osub-orders">
-        <div class="ord-toolbar">
-          <select id="ordFilterStatus" onchange="renderOrders()">
-            <option value="">All statuses</option>
-            <option value="pending">Pending</option>
-            <option value="paid">Paid</option>
-            <option value="in_progress">In Progress</option>
-            <option value="delivered">Delivered</option>
-            <option value="cancelled">Cancelled</option>
-          </select>
-          <input id="ordSearch" placeholder="Search name / phone / order #" oninput="renderOrders()">
-          <button class="btn btn-dark btn-sm" onclick="loadOrders()">↻ Refresh</button>
+      <!-- ECOM: ORDERS SUB-TAB -->
+      <div id="ecom-orders" style="display:block">
+        <div class="sec-title">Paid Orders</div>
+        <div class="sec-sub">Only showing orders where payment is successful. You can mark them as delivered here.</div>
+        <div class="svc-list" id="ecomOrdersList">
+          <div class="svc-empty"><b>Loading orders...</b></div>
         </div>
-        <div id="ordersList"><div class="svc-empty"><b>Loading orders...</b></div></div>
       </div>
 
-      <!-- Products (main list) -->
-      <div class="osub-panel" id="osub-products">
+      <!-- ECOM: PRODUCTS SUB-TAB -->
+      <div id="ecom-products" style="display:none">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
           <div>
-            <div class="sec-title">Products</div>
-            <div class="sec-sub">Each product has its own price &amp; custom question flow</div>
+            <div class="sec-title">Products & Form Builder</div>
+            <div class="sec-sub">Create products using the Universal Layout Protocol (ULP) blueprint.</div>
           </div>
-          <button class="btn btn-gold" onclick="openProductModal()">+ Add Product</button>
+          <button class="btn btn-gold" onclick="openProductModal()">+ Add New Product</button>
         </div>
-        <div class="crud-grid" id="productsList"><div class="svc-empty"><b>Loading...</b></div></div>
+        <div class="svc-list" id="ecomProductsList"></div>
       </div>
 
-      <!-- Fields editor for a selected product -->
-      <div class="osub-panel" id="osub-fields">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-          <div>
-            <div class="sec-title" id="fieldsTitle">Product Fields</div>
-            <div class="sec-sub" id="fieldsSub">Define what customers are asked for this product</div>
-          </div>
-          <div style="display:flex;gap:8px">
-            <button class="btn btn-dark btn-sm" onclick="backToProducts()">← Back to products</button>
-            <button class="btn btn-gold" onclick="openFieldModal()">+ Add Field</button>
-          </div>
-        </div>
-        <div class="crud-grid" id="fieldsList"><div class="svc-empty"><b>Pick a product first</b></div></div>
-      </div>
-
-      <!-- Categories -->
-      <div class="osub-panel" id="osub-categories">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-          <div>
-            <div class="sec-title">Categories</div>
-            <div class="sec-sub">Chips shown in Step 4 of the order builder</div>
-          </div>
-          <button class="btn btn-gold" onclick="openCategoryModal()">+ Add Category</button>
-        </div>
-        <div class="crud-grid" id="categoriesList"><div class="svc-empty"><b>Loading...</b></div></div>
-      </div>
-
-      <!-- Palettes -->
-      <div class="osub-panel" id="osub-palettes">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-          <div>
-            <div class="sec-title">Color Palettes</div>
-            <div class="sec-sub">5-color palettes shown in the design step</div>
-          </div>
-          <button class="btn btn-gold" onclick="openPaletteModal()">+ Add Palette</button>
-        </div>
-        <div class="crud-grid" id="palettesList"><div class="svc-empty"><b>Loading...</b></div></div>
-      </div>
-
-      <!-- Templates -->
-      <div class="osub-panel" id="osub-templates">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-          <div>
-            <div class="sec-title">Layout Templates</div>
-            <div class="sec-sub">Card layouts shown in the design step</div>
-          </div>
-          <button class="btn btn-gold" onclick="openTemplateModal()">+ Add Template</button>
-        </div>
-        <div class="crud-grid" id="templatesList"><div class="svc-empty"><b>Loading...</b></div></div>
-      </div>
-
-      <!-- Coupons -->
-      <div class="osub-panel" id="osub-coupons">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-          <div>
-            <div class="sec-title">Coupons</div>
-            <div class="sec-sub">Discount codes usable at checkout</div>
-          </div>
-          <button class="btn btn-gold" onclick="openCouponModal()">+ Add Coupon</button>
-        </div>
-        <div class="crud-grid" id="couponsList"><div class="svc-empty"><b>Loading...</b></div></div>
-      </div>
-
-      <!-- Funnel -->
-      <div class="osub-panel" id="osub-funnel">
-        <div class="sec-title">Funnel Analytics</div>
-        <div class="sec-sub">Drop-off across the order builder steps (last 2000 events)</div>
-        <div id="funnelList"><div class="svc-empty"><b>Loading...</b></div></div>
-      </div>
     </div>
 
-    <!-- PORTFOLIO TAB -->
+    <!-- ================= PORTFOLIO TAB ================= -->
     <div class="tab-content" id="tab-portfolio">
       <div class="form-box">
         <h3 class="form-title" id="formTitle">Add New Portfolio Project</h3>
         <input type="hidden" id="pId">
-        
-          <div class="form-grid-2">
+        <div class="form-grid-2">
           <div class="form-row">
-            <label>Category (Type new or select)</label>
-            <input id="pCategory" list="category-list" placeholder="e.g. Logos, Apps, Websites">
+            <label>Category</label>
+            <input id="pCategory" list="category-list" placeholder="e.g. Websites">
             <datalist id="category-list">
-              <option value="Websites">
-              <option value="QR Systems">
-              <option value="Digital Cards">
-              <option value="VAAN RestoOS">
+              <option value="Websites"><option value="QR Systems"><option value="Digital Cards"><option value="VAAN RestoOS">
             </datalist>
           </div>
-          <div class="form-row">
-            <label>Title (Client Name)</label>
-            <input id="pTitle" placeholder="e.g. Shreeji Hotel">
-          </div>
+          <div class="form-row"><label>Title (Client Name)</label><input id="pTitle" placeholder="e.g. Shreeji Hotel"></div>
         </div>
-
+        <div class="form-row"><label>Live Link (Optional)</label><input id="pLink" placeholder="https://..."></div>
+        <div class="form-row"><label>Description</label><textarea id="pDesc"></textarea></div>
         <div class="form-row">
-          <label>Live Link (Leave blank if internal system)</label>
-          <input id="pLink" placeholder="https://...">
-        </div>
-
-        <div class="form-row">
-          <label>Description</label>
-          <textarea id="pDesc" placeholder="Short details..."></textarea>
-        </div>
-
-        <div class="form-row">
-          <label>Cover Image (Auto-compressed to WebP)</label>
+          <label>Cover Image</label>
           <input type="file" id="pImage" accept="image/*" onchange="handleImage(this)">
           <img id="imgPreview" class="img-preview">
         </div>
-
         <div style="display:flex;gap:10px;margin-top:20px">
           <button class="btn btn-gold" onclick="saveProject()" id="saveProjectBtn">Save Project</button>
           <button class="btn btn-dark" onclick="resetProjectForm()">Clear Form</button>
         </div>
       </div>
-
       <h3 style="margin-bottom:16px;font-size:18px;font-weight:900">Existing Projects</h3>
       <div class="svc-list" id="projectList"></div>
     </div>
 
-    <!-- PRICING TAB -->
+    <!-- ================= PRICING TAB ================= -->
     <div class="tab-content" id="tab-pricing">
       <div class="sec-title">Websites</div>
-      <div class="sec-sub">Edit prices, names, features. Changes go live instantly.</div>
-      <div class="svc-list" id="listWebsite"><div class="svc-empty">Loading...</div></div>
-
+      <div class="svc-list" id="listWebsite"></div>
       <div class="sec-title" style="margin-top:32px">QR Systems</div>
-      <div class="sec-sub">Restaurant menu, gym, hotel, academy, salon, feedback QR</div>
-      <div class="svc-list" id="listQr"><div class="svc-empty">Loading...</div></div>
-
+      <div class="svc-list" id="listQr"></div>
       <div class="sec-title" style="margin-top:32px">Branding & Social</div>
-      <div class="sec-sub">Logos, Instagram setup, content design</div>
-      <div class="svc-list" id="listBranding"><div class="svc-empty">Loading...</div></div>
+      <div class="svc-list" id="listBranding"></div>
     </div>
 
-    <!-- FEEDBACK TAB -->
+    <!-- ================= FEEDBACK TAB ================= -->
     <div class="tab-content" id="tab-feedback">
       <div class="sec-title">All Feedback</div>
-      <div class="sec-sub">Every submission from the site's feedback widget</div>
-      <div class="fb-list" id="allFeedback"><div class="fb-empty">Loading...</div></div>
+      <div class="fb-list" id="allFeedback"></div>
     </div>
 
   </main>
@@ -469,14 +320,13 @@ footer b{color:var(--gold)}
   </footer>
 </div>
 
-<!-- EDIT SERVICE MODAL -->
+<!-- ================= MODALS ================= -->
+
+<!-- EDIT PRICING MODAL -->
 <div class="modal" id="editModal" onclick="if(event.target===this)closeEdit()">
-  <div class="modal-box">
+  <div class="modal-box" style="width:min(560px,100%)">
     <div class="modal-head">
-      <div>
-        <h3 id="editTitle">Edit Service</h3>
-        <small id="editSubtitle">Changes go live instantly</small>
-      </div>
+      <div><h3 id="editTitle">Edit Service</h3></div>
       <button class="modal-close" onclick="closeEdit()">✕</button>
     </div>
     <div class="modal-body">
@@ -489,178 +339,48 @@ footer b{color:var(--gold)}
       </div>
       <div class="form-grid-2">
         <div class="form-row"><label>Pages / Size Label</label><input id="editPages"></div>
-        <div class="form-row"><label>Badge (optional)</label><input id="editBadge"></div>
+        <div class="form-row"><label>Badge</label><input id="editBadge"></div>
       </div>
       <div class="form-row"><label>Features (one per line)</label><textarea id="editFeatures"></textarea></div>
       <div class="form-grid-2">
-        <label class="form-check"><input type="checkbox" id="editPopular"><span style="color:var(--white);font-size:13px;font-weight:700">Mark as Popular</span></label>
-        <label class="form-check"><input type="checkbox" id="editActive"><span style="color:var(--white);font-size:13px;font-weight:700">Active (visible)</span></label>
+        <label class="form-check"><input type="checkbox" id="editPopular"><span style="font-size:13px;font-weight:700">Popular</span></label>
+        <label class="form-check"><input type="checkbox" id="editActive"><span style="font-size:13px;font-weight:700">Active</span></label>
       </div>
       <div class="modal-actions">
-        <button class="btn btn-gold" onclick="saveEdit()">💾 Save Changes</button>
+        <button class="btn btn-gold" onclick="saveEdit()">💾 Save</button>
         <button class="btn btn-dark" onclick="closeEdit()">Cancel</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ORDER DETAIL MODAL -->
-<div class="modal" id="orderModal" onclick="if(event.target===this)closeOrderModal()">
-  <div class="modal-box" style="width:min(720px,100%)">
-    <div class="modal-head">
-      <div>
-        <h3 id="ordModalTitle">Order Details</h3>
-        <small id="ordModalSub">—</small>
-      </div>
-      <button class="modal-close" onclick="closeOrderModal()">✕</button>
-    </div>
-    <div class="modal-body" id="orderModalBody"></div>
-  </div>
-</div>
-
-<!-- CATEGORY MODAL -->
-<div class="modal" id="categoryModal" onclick="if(event.target===this)closeCategoryModal()">
-  <div class="modal-box">
-    <div class="modal-head">
-      <div><h3 id="catModalTitle">Add Category</h3><small>Appears as a chip in Step 4</small></div>
-      <button class="modal-close" onclick="closeCategoryModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <input type="hidden" id="catId">
-      <div class="form-grid-2">
-        <div class="form-row"><label>Name</label><input id="catName" placeholder="e.g. Hotel Owner"></div>
-        <div class="form-row"><label>Slug</label><input id="catSlug" placeholder="hotel-owner"></div>
-      </div>
-      <div class="form-grid-2">
-        <div class="form-row"><label>Icon (emoji)</label><input id="catIcon" placeholder="🏨" maxlength="4"></div>
-        <div class="form-row"><label>Sort Order</label><input id="catSort" type="number" value="0"></div>
-      </div>
-      <label class="form-check"><input type="checkbox" id="catActive" checked><span style="color:var(--white);font-size:13px;font-weight:700">Active (visible in builder)</span></label>
-      <div class="modal-actions">
-        <button class="btn btn-gold" onclick="saveCategory()">💾 Save</button>
-        <button class="btn btn-dark" onclick="closeCategoryModal()">Cancel</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- PALETTE MODAL -->
-<div class="modal" id="paletteModal" onclick="if(event.target===this)closePaletteModal()">
-  <div class="modal-box">
-    <div class="modal-head">
-      <div><h3 id="palModalTitle">Add Palette</h3><small>5-color palette for the card</small></div>
-      <button class="modal-close" onclick="closePaletteModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <input type="hidden" id="palId">
-      <div class="form-grid-2">
-        <div class="form-row"><label>Name</label><input id="palName" placeholder="e.g. Royal Gold"></div>
-        <div class="form-row"><label>Sort Order</label><input id="palSort" type="number" value="0"></div>
-      </div>
-      <div class="form-grid-2">
-        <div class="form-row"><label>Background (bg)</label><input id="palBg" type="color" value="#1a060d" style="height:48px;padding:4px"></div>
-        <div class="form-row"><label>Surface</label><input id="palSurface" type="color" value="#2a0a12" style="height:48px;padding:4px"></div>
-      </div>
-      <div class="form-grid-2">
-        <div class="form-row"><label>Accent</label><input id="palAccent" type="color" value="#d4a017" style="height:48px;padding:4px"></div>
-        <div class="form-row"><label>Accent Secondary</label><input id="palAccent2" type="color" value="#4f8fff" style="height:48px;padding:4px"></div>
-      </div>
-      <div class="form-grid-2">
-        <div class="form-row"><label>Text Primary</label><input id="palText" type="color" value="#fdfaf3" style="height:48px;padding:4px"></div>
-        <div class="form-row"><label>Text Secondary</label><input id="palText2" type="color" value="#c9a98a" style="height:48px;padding:4px"></div>
-      </div>
-      <label class="form-check"><input type="checkbox" id="palActive" checked><span style="color:var(--white);font-size:13px;font-weight:700">Active</span></label>
-      <div class="modal-actions">
-        <button class="btn btn-gold" onclick="savePalette()">💾 Save</button>
-        <button class="btn btn-dark" onclick="closePaletteModal()">Cancel</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- TEMPLATE MODAL -->
-<div class="modal" id="templateModal" onclick="if(event.target===this)closeTemplateModal()">
-  <div class="modal-box">
-    <div class="modal-head">
-      <div><h3 id="tplModalTitle">Add Template</h3><small>Card layout option</small></div>
-      <button class="modal-close" onclick="closeTemplateModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <input type="hidden" id="tplId">
-      <div class="form-grid-2">
-        <div class="form-row"><label>Name</label><input id="tplName" placeholder="e.g. Classic"></div>
-        <div class="form-row"><label>Slug</label><input id="tplSlug" placeholder="classic"></div>
-      </div>
-      <div class="form-row"><label>Description</label><input id="tplDesc" placeholder="Short description"></div>
-      <div class="form-row"><label>Layout Order (comma-separated block keys)</label><input id="tplOrder" placeholder="hero,about,services,social,contact"></div>
-      <div class="form-grid-2">
-        <div class="form-row"><label>Sort Order</label><input id="tplSort" type="number" value="0"></div>
-        <div class="form-row" style="display:flex;align-items:flex-end"><label class="form-check" style="width:100%"><input type="checkbox" id="tplActive" checked><span style="color:var(--white);font-size:13px;font-weight:700">Active</span></label></div>
-      </div>
-      <div class="modal-actions">
-        <button class="btn btn-gold" onclick="saveTemplate()">💾 Save</button>
-        <button class="btn btn-dark" onclick="closeTemplateModal()">Cancel</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- COUPON MODAL -->
-<div class="modal" id="couponModal" onclick="if(event.target===this)closeCouponModal()">
-  <div class="modal-box">
-    <div class="modal-head">
-      <div><h3 id="cpnModalTitle">Add Coupon</h3><small>Discount at checkout</small></div>
-      <button class="modal-close" onclick="closeCouponModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <input type="hidden" id="cpnId">
-      <div class="form-grid-2">
-        <div class="form-row"><label>Code</label><input id="cpnCode" placeholder="SAVE20" style="text-transform:uppercase"></div>
-        <div class="form-row"><label>Type</label><select id="cpnType"><option value="flat">Flat ₹</option><option value="percent">Percent %</option></select></div>
-      </div>
-      <div class="form-grid-2">
-        <div class="form-row"><label>Value</label><input id="cpnValue" type="number" placeholder="100"></div>
-        <div class="form-row"><label>Max Discount (₹, optional)</label><input id="cpnMax" type="number" placeholder=""></div>
-      </div>
-      <div class="form-grid-2">
-        <div class="form-row"><label>Min Order (₹, optional)</label><input id="cpnMin" type="number" placeholder=""></div>
-        <div class="form-row"><label>Usage Limit (optional)</label><input id="cpnLimit" type="number" placeholder=""></div>
-      </div>
-      <div class="form-grid-2">
-        <div class="form-row"><label>Expiry (optional)</label><input id="cpnExpiry" type="date"></div>
-        <div class="form-row" style="display:flex;align-items:flex-end"><label class="form-check" style="width:100%"><input type="checkbox" id="cpnActive" checked><span style="color:var(--white);font-size:13px;font-weight:700">Active</span></label></div>
-      </div>
-      <div class="modal-actions">
-        <button class="btn btn-gold" onclick="saveCoupon()">💾 Save</button>
-        <button class="btn btn-dark" onclick="closeCouponModal()">Cancel</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- PRODUCT MODAL -->
+<!-- PRODUCT MODAL (CREATE/EDIT) -->
 <div class="modal" id="productModal" onclick="if(event.target===this)closeProductModal()">
   <div class="modal-box">
     <div class="modal-head">
-      <div><h3 id="prodModalTitle">Add Product</h3><small>e.g. Digital Visiting Card, QR Menu</small></div>
+      <div><h3 id="prodModalTitle">Add New Product</h3><small>Product details & ULP Blueprint</small></div>
       <button class="modal-close" onclick="closeProductModal()">✕</button>
     </div>
     <div class="modal-body">
       <input type="hidden" id="prodId">
-      <div class="form-grid-2">
-        <div class="form-row"><label>Name</label><input id="prodName" placeholder="QR Menu"></div>
-        <div class="form-row"><label>Slug</label><input id="prodSlug" placeholder="qr-menu"></div>
+      
+      <div class="form-grid-3">
+        <div class="form-row"><label>Product Name</label><input id="prodName" placeholder="e.g. Digital Card"></div>
+        <div class="form-row"><label>Price (₹)</label><input id="prodPrice" type="number" placeholder="1499"></div>
+        <div class="form-row"><label>Icon (Emoji)</label><input id="prodIcon" placeholder="💳" maxlength="2"></div>
       </div>
-      <div class="form-grid-2">
-        <div class="form-row"><label>Icon (emoji)</label><input id="prodIcon" placeholder="🍽️" maxlength="4"></div>
-        <div class="form-row"><label>Sort Order</label><input id="prodSort" type="number" value="0"></div>
+      <div class="form-row"><label>Short Description</label><input id="prodDesc" placeholder="A premium digital visiting card..."></div>
+      
+      <div class="form-row" style="margin-top:24px">
+        <label style="color:var(--gold);font-size:13px;display:flex;justify-content:space-between">
+          <span>ULP JSON Blueprint</span>
+          <span style="color:var(--muted);text-transform:none;letter-spacing:0">Paste the 50-line JSON from the AI here</span>
+        </label>
+        <textarea id="prodULP" class="ulp-editor" placeholder='{ "product_name": "...", "theme": {...}, "blocks": [...] }'></textarea>
       </div>
-      <div class="form-row"><label>Short Description</label><input id="prodDesc" placeholder="Restaurant menu on a QR code"></div>
-      <div class="form-grid-2">
-        <div class="form-row"><label>Price (₹)</label><input id="prodPrice" type="number" value="1500"></div>
-        <div class="form-row"><label>Discount Price (₹, optional)</label><input id="prodDiscount" type="number"></div>
-      </div>
-      <label class="form-check"><input type="checkbox" id="prodActive" checked><span style="color:var(--white);font-size:13px;font-weight:700">Active (shown in builder)</span></label>
+
+      <label class="form-check" style="margin-top:12px"><input type="checkbox" id="prodActive" checked><span style="font-size:13px;font-weight:700">Active (visible on store)</span></label>
+
       <div class="modal-actions">
         <button class="btn btn-gold" onclick="saveProduct()">💾 Save Product</button>
         <button class="btn btn-dark" onclick="closeProductModal()">Cancel</button>
@@ -669,42 +389,19 @@ footer b{color:var(--gold)}
   </div>
 </div>
 
-<!-- FIELD MODAL -->
-<div class="modal" id="fieldModal" onclick="if(event.target===this)closeFieldModal()">
+<!-- ORDER DETAILS MODAL (Read-Only) -->
+<div class="modal" id="orderDetailModal" onclick="if(event.target===this)closeOrderDetail()">
   <div class="modal-box">
     <div class="modal-head">
-      <div><h3 id="fldModalTitle">Add Field</h3><small>One question in this product's flow</small></div>
-      <button class="modal-close" onclick="closeFieldModal()">✕</button>
+      <div><h3 id="ordDetailTitle">Order Details</h3><small id="ordDetailSub">—</small></div>
+      <button class="modal-close" onclick="closeOrderDetail()">✕</button>
     </div>
-    <div class="modal-body">
-      <input type="hidden" id="fldId">
-      <div class="form-grid-2">
-        <div class="form-row"><label>Field Key</label><input id="fldKey" placeholder="menu_items"></div>
-        <div class="form-row"><label>Sort Order</label><input id="fldSort" type="number" value="0"></div>
-      </div>
-      <div class="form-row"><label>Label (shown to customer)</label><input id="fldLabel" placeholder="Menu items"></div>
-      <div class="form-row">
-        <label>Field Type</label>
-        <select id="fldType">
-          <option value="text">Text</option>
-          <option value="tel">Phone</option>
-          <option value="email">Email</option>
-          <option value="url">URL</option>
-          <option value="textarea">Long Text</option>
-          <option value="image">Image Upload</option>
-          <option value="list">Multi-line List</option>
-          <option value="chips">Choice Chips</option>
-          <option value="color_palette">Color Palette Picker</option>
-          <option value="template_picker">Template Picker</option>
-          <option value="animation_picker">Animation Picker</option>
-        </select>
-      </div>
-      <div class="form-row"><label>Placeholder (optional)</label><input id="fldPlaceholder"></div>
-      <div class="form-row"><label>Options (chips only, comma-separated)</label><input id="fldOptions" placeholder="Veg, Non-Veg, Beverages"></div>
-      <label class="form-check"><input type="checkbox" id="fldRequired"><span style="color:var(--white);font-size:13px;font-weight:700">Required</span></label>
-      <div class="modal-actions">
-        <button class="btn btn-gold" onclick="saveField()">💾 Save Field</button>
-        <button class="btn btn-dark" onclick="closeFieldModal()">Cancel</button>
+    <div class="modal-body" id="ordDetailBody">
+      <!-- Filled dynamically -->
+    </div>
+    <div style="padding:0 24px 24px">
+      <div class="modal-actions" id="ordDetailActions">
+        <!-- Filled dynamically -->
       </div>
     </div>
   </div>
@@ -720,6 +417,8 @@ const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 let allServices = [];
 let allFeedback = [];
 let allProjects = [];
+let allProducts = [];
+let allOrders = [];
 let compressedFile = null;
 let editingProjectId = null;
 
@@ -780,21 +479,26 @@ function switchTab(name, btn){
 /* ====== LOAD ALL DATA ====== */
 async function loadAll(){
   try {
-    const [pRes, fRes, projRes] = await Promise.all([
+    const [pRes, fRes, projRes, prodRes] = await Promise.all([
       sb.from("vaan_pricing").select("*").order("display_order", { ascending: true }),
       sb.from("vaan_feedback").select("*").order("created", { ascending: false }).limit(200),
-      sb.from("portfolio_items").select("*").order("created_at", { ascending: false })
+      sb.from("portfolio_items").select("*").order("created_at", { ascending: false }),
+      sb.from("vaan_products").select("*").order("created_at", { ascending: false })
     ]);
     
     allServices = pRes.data || [];
     allFeedback = fRes.data || [];
     allProjects = projRes.data || [];
+    allProducts = prodRes.data || [];
     
     renderStats();
     renderPricing();
     renderFeedback();
     renderProjects();
-    loadOrders();
+    renderProducts();
+    
+    // Load orders separately since it requires filtering
+    loadEcomOrders();
   } catch (err){
     console.error(err);
     toast("Failed to load data", true);
@@ -850,11 +554,9 @@ function renderList(containerId, items){
   }).join("");
 }
 
-/* ====== EDIT PRICING MODAL ====== */
 function openEdit(id){
   const s = allServices.find(x => x.id === id);
   if (!s) return;
-
   document.getElementById("editId").value = s.id;
   document.getElementById("editTitle").textContent = "Edit: " + s.service_name;
   document.getElementById("editName").value = s.service_name || "";
@@ -863,13 +565,9 @@ function openEdit(id){
   document.getElementById("editOriginalPrice").value = s.original_price || "";
   document.getElementById("editPages").value = s.pages || "";
   document.getElementById("editBadge").value = s.badge || "";
-
-  const feats = (s.features || "").split("|").filter(f => f.trim());
-  document.getElementById("editFeatures").value = feats.join("\n");
-
+  document.getElementById("editFeatures").value = (s.features || "").split("|").filter(f => f.trim()).join("\n");
   document.getElementById("editPopular").checked = !!s.popular;
   document.getElementById("editActive").checked = !!s.active;
-
   document.getElementById("editModal").classList.add("open");
   document.body.style.overflow = "hidden";
 }
@@ -921,7 +619,7 @@ function renderFeedback(){
   }).join("");
 }
 
-/* ====== PORTFOLIO MANAGER ====== */
+/* ====== PORTFOLIO ====== */
 function renderProjects(){
   const list = document.getElementById("projectList");
   if (allProjects.length === 0) return list.innerHTML = '<div class="svc-empty"><b>No projects yet.</b></div>';
@@ -929,8 +627,8 @@ function renderProjects(){
   list.innerHTML = allProjects.map(item => `
     <div class="item">
       <div class="item-info">
-        <b>${item.title}</b>
-        <small>${item.category} ${item.link_url ? '· <a href="'+item.link_url+'" target="_blank" style="color:var(--gold)">Visit Link</a>' : '· Internal System'}</small>
+        <b>${esc(item.title)}</b>
+        <small>${esc(item.category)} ${item.link_url ? '· <a href="'+esc(item.link_url)+'" target="_blank" style="color:var(--gold)">Visit Link</a>' : '· Internal System'}</small>
       </div>
       <div class="item-actions">
         <button class="btn btn-dark btn-sm" onclick="editProject(${item.id})">Edit</button>
@@ -943,7 +641,6 @@ function renderProjects(){
 function handleImage(input){
   const file = input.files[0];
   if(!file) return;
-
   const reader = new FileReader();
   reader.readAsDataURL(file);
   reader.onload = (e) => {
@@ -955,11 +652,8 @@ function handleImage(input){
       let w = img.width, h = img.height;
       if(w > h && w > MAX){ h *= MAX/w; w = MAX; }
       else if(h > MAX){ w *= MAX/h; h = MAX; }
-      
       canvas.width = w; canvas.height = h;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, w, h);
-      
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
       canvas.toBlob((blob) => {
         compressedFile = new File([blob], "portfolio.webp", { type: "image/webp" });
         const preview = document.getElementById('imgPreview');
@@ -974,7 +668,6 @@ function handleImage(input){
 async function saveProject(){
   const btn = document.getElementById("saveProjectBtn");
   btn.textContent = "Saving...";
-  
   const title = document.getElementById("pTitle").value;
   const category = document.getElementById("pCategory").value;
   const link = document.getElementById("pLink").value;
@@ -983,7 +676,6 @@ async function saveProject(){
   if(!title){ toast("Title is required!", true); btn.textContent = "Save Project"; return; }
 
   let imageUrl = null;
-
   if(editingProjectId){
     const existing = allProjects.find(p => p.id === editingProjectId);
     if(existing) imageUrl = existing.image_url;
@@ -992,9 +684,7 @@ async function saveProject(){
   if(compressedFile){
     const fileName = `proj_${Date.now()}.webp`;
     const { error: upErr } = await sb.storage.from('portfolio-images').upload(fileName, compressedFile);
-    
     if(upErr){ toast("Upload Error: " + upErr.message, true); btn.textContent = "Save Project"; return; }
-    
     const { data: urlData } = sb.storage.from('portfolio-images').getPublicUrl(fileName);
     imageUrl = urlData.publicUrl;
   }
@@ -1018,19 +708,16 @@ async function saveProject(){
 function editProject(id){
   const data = allProjects.find(p => p.id === id);
   if(!data) return;
-
   editingProjectId = id;
   document.getElementById('formTitle').textContent = "Edit Project";
   document.getElementById('pCategory').value = data.category;
   document.getElementById('pTitle').value = data.title;
   document.getElementById('pLink').value = data.link_url || '';
   document.getElementById('pDesc').value = data.description || '';
-  
   if(data.image_url){
     document.getElementById('imgPreview').src = data.image_url;
     document.getElementById('imgPreview').style.display = 'block';
   }
-  
   document.getElementById('saveProjectBtn').textContent = "Update Project";
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1054,780 +741,360 @@ function resetProjectForm(){
   compressedFile = null;
 }
 
-/* ============================================================
-   ORDERS TAB — Digital Visiting Card order builder management
-   ============================================================ */
-
-let allOrders = [];
-let allCategories = [];
-let allPalettes = [];
-let allTemplates = [];
-let allProducts = [];
-let allCoupons = [];
-let allFunnelEvents = [];
-let currentProductId = null;
-let allProductFields = [];
-
-/* ---- SUB-NAV ---- */
-function switchOrdersSub(name, btn){
-  document.querySelectorAll(".osub").forEach(b => b.classList.remove("active"));
-  if (btn) btn.classList.add("active");
-  document.querySelectorAll(".osub-panel").forEach(p => p.classList.remove("show"));
-  document.getElementById("osub-" + name).classList.add("show");
-  if (name === "orders") loadOrders();
-  if (name === "products") loadProducts();
-  if (name === "categories") loadCategories();
-  if (name === "palettes") loadPalettes();
-  if (name === "templates") loadTemplates();
-  if (name === "coupons") loadCoupons();
-  if (name === "funnel") loadFunnel();
-}
-
-function backToProducts(){
-  switchOrdersSub("products", document.querySelector('.osub[data-osub="products"]'));
-}
-
-/* ---- LOADERS ---- */
-async function loadOrders(){
-  const { data, error } = await sb.from("vaan_orders").select("*").order("created_at", { ascending: false }).limit(500);
-  if (error){ console.error(error); document.getElementById("ordersList").innerHTML = '<div class="svc-empty"><b>Failed to load orders</b><small>' + esc(error.message) + '</small></div>'; return; }
-  allOrders = data || [];
-  renderOrders();
-}
-
-async function loadCategories(){
-  const { data, error } = await sb.from("vaan_categories").select("*").order("sort_order", { ascending: true });
-  if (error){ console.error(error); return; }
-  allCategories = data || [];
-  renderCategories();
-}
-
-async function loadPalettes(){
-  const { data, error } = await sb.from("vaan_palettes").select("*").order("sort_order", { ascending: true });
-  if (error){ console.error(error); return; }
-  allPalettes = data || [];
-  renderPalettes();
-}
-
-async function loadTemplates(){
-  const { data, error } = await sb.from("vaan_templates").select("*").order("sort_order", { ascending: true });
-  if (error){ console.error(error); return; }
-  allTemplates = data || [];
-  renderTemplates();
-}
-
-async function loadCoupons(){
-  const { data, error } = await sb.from("vaan_coupons").select("*").order("created_at", { ascending: false });
-  if (error){ console.error(error); return; }
-  allCoupons = data || [];
-  renderCoupons();
-}
-
-async function loadFunnel(){
-  const { data, error } = await sb.from("vaan_funnel_events").select("event_type,step_number,field_name").order("created_at", { ascending: false }).limit(2000);
-  if (error){ console.error(error); return; }
-  allFunnelEvents = data || [];
-  renderFunnel();
-}
-
-/* ---- RENDER ORDERS ---- */
-function renderOrders(){
-  const wrap = document.getElementById("ordersList");
-  const statusFilter = document.getElementById("ordFilterStatus").value;
-  const q = document.getElementById("ordSearch").value.trim().toLowerCase();
-
-  let list = allOrders;
-  if (statusFilter) list = list.filter(o => (o.payment_status || "pending") === statusFilter);
-  if (q){
-    list = list.filter(o =>
-      (o.customer_name || "").toLowerCase().includes(q) ||
-      (o.customer_phone || "").toLowerCase().includes(q) ||
-      (o.order_number || "").toLowerCase().includes(q)
-    );
+/* ====== E-COMMERCE TAB LOGIC ====== */
+function switchEcomTab(tab) {
+  document.getElementById('ecom-orders').style.display = tab === 'orders' ? 'block' : 'none';
+  document.getElementById('ecom-products').style.display = tab === 'products' ? 'block' : 'none';
+  
+  if (tab === 'orders') {
+    document.getElementById('btnTabOrders').className = 'btn btn-gold btn-sm';
+    document.getElementById('btnTabProducts').className = 'btn btn-dark btn-sm';
+    loadEcomOrders();
+  } else {
+    document.getElementById('btnTabOrders').className = 'btn btn-dark btn-sm';
+    document.getElementById('btnTabProducts').className = 'btn btn-gold btn-sm';
+    renderProducts();
   }
-
-  if (!list.length){ wrap.innerHTML = '<div class="svc-empty"><b>No orders found</b></div>'; return; }
-
-  wrap.innerHTML = list.map(o => {
-    const status = o.payment_status || "pending";
-    const statusClass = status === "paid" || status === "delivered" ? "green" : status === "cancelled" ? "red" : status === "in_progress" ? "blue" : "gold";
-    return '<div class="ord-card">' +
-      '<div class="ord-card-head">' +
-        '<div><span class="ord-id">' + esc(o.order_number || "—") + '</span><b style="display:block;margin-top:4px">' + esc(o.customer_name || "—") + '</b><small>📱 ' + esc(o.customer_phone || "—") + ' · ' + fmtDate(o.created_at) + '</small></div>' +
-        '<span class="tag ' + statusClass + '">' + status.toUpperCase().replace("_"," ") + '</span>' +
-      '</div>' +
-      '<div class="ord-meta">' +
-        (o.category ? '<span class="tag blue">' + esc(o.category) + '</span>' : '') +
-        (o.business_name ? '<span class="tag gold">' + esc(o.business_name) + '</span>' : '') +
-        '<span class="tag green">₹' + Number(o.amount_paid || 0).toLocaleString("en-IN") + '</span>' +
-        (o.coupon_code ? '<span class="tag red">🎟 ' + esc(o.coupon_code) + '</span>' : '') +
-      '</div>' +
-      '<div class="ord-actions">' +
-        '<button class="btn btn-gold btn-sm" onclick="openOrderModal(\'' + o.id + '\')">👁 View</button>' +
-        '<button class="btn btn-dark btn-sm" onclick="quickMarkPaid(\'' + o.id + '\')">✓ Mark Paid</button>' +
-        '<a class="btn btn-dark btn-sm" href="https://wa.me/91' + esc((o.customer_phone||"").replace(/\D/g,"").slice(-10)) + '?text=' + encodeURIComponent("Hi " + (o.customer_name||"there") + ", your VAAN order " + (o.order_number||"") + " is ready. Thank you!") + '" target="_blank" rel="noopener">💬 WhatsApp</a>' +
-      '</div>' +
-    '</div>';
-  }).join("");
 }
 
-async function quickMarkPaid(orderId){
-  const { error } = await sb.from("vaan_orders").update({ payment_status: "paid" }).eq("id", orderId);
-  if (error){ toast("Error: " + error.message, true); return; }
-  toast("✅ Marked paid");
-  loadOrders();
-}
-
-/* ---- ORDER DETAIL MODAL ---- */
-async function openOrderModal(orderId){
-  const o = allOrders.find(x => x.id === orderId);
-  if (!o) return;
-
-  document.getElementById("ordModalTitle").textContent = "Order " + (o.order_number || "");
-  document.getElementById("ordModalSub").textContent = (o.customer_name || "") + " · " + fmtDate(o.created_at);
-  document.getElementById("orderModalBody").innerHTML = '<div class="svc-empty"><b>Loading details...</b></div>';
-  document.getElementById("orderModal").classList.add("open");
-  document.body.style.overflow = "hidden";
-
-  const { data: answers } = await sb.from("vaan_order_answers").select("*").eq("order_id", orderId);
-  const ans = answers || [];
-  const services = ans.filter(a => a.field_key === "service").map(a => a.field_value && a.field_value.name).filter(Boolean);
-  const links = ans.filter(a => a.field_key === "social_link").map(a => a.field_value).filter(Boolean);
-  const logo = ans.find(a => a.field_key === "logo");
-  const founder = ans.find(a => a.field_key === "founder_photo");
-
-  const status = o.payment_status || "pending";
-  const statusOptions = ["pending","paid","in_progress","delivered","cancelled"].map(s =>
-    '<option value="' + s + '"' + (s === status ? " selected" : "") + '>' + s.replace("_"," ").toUpperCase() + '</option>'
-  ).join("");
-
-  let html = "";
-
-  html += '<div class="ord-block"><h4>Customer</h4>' +
-    '<div class="kv"><span>Name</span><span>' + esc(o.customer_name || "—") + '</span></div>' +
-    '<div class="kv"><span>Phone</span><span><a href="https://wa.me/91' + esc((o.customer_phone||"").replace(/\D/g,"").slice(-10)) + '" target="_blank">' + esc(o.customer_phone || "—") + '</a></span></div>' +
-    '<div class="kv"><span>Email</span><span>' + esc(o.customer_email || "—") + '</span></div>' +
-    '<div class="kv"><span>Profession</span><span>' + esc(o.profession || "—") + '</span></div>' +
-    '<div class="kv"><span>Business</span><span>' + esc(o.business_name || "—") + '</span></div>' +
-    '<div class="kv"><span>Category</span><span>' + esc(o.category || "—") + '</span></div>' +
-    '<div class="kv"><span>Address</span><span>' + esc(o.address || "—") + '</span></div>' +
-    '<div class="kv"><span>Google Review</span><span>' + (o.google_review_link ? '<a href="'+esc(o.google_review_link)+'" target="_blank">Open</a>' : '—') + '</span></div>' +
-  '</div>';
-
-  html += '<div class="ord-block"><h4>Design Choices</h4>' +
-    '<div class="kv"><span>Palette ID</span><span>' + esc(o.palette_id || "—") + '</span></div>' +
-    '<div class="kv"><span>Template ID</span><span>' + esc(o.template_id || "—") + '</span></div>' +
-    '<div class="kv"><span>Animation</span><span>' + esc(o.animation_choice || "—") + '</span></div>' +
-    (o.animation_custom_text ? '<div class="kv"><span>Custom Anim</span><span>' + esc(o.animation_custom_text) + '</span></div>' : '') +
-  '</div>';
-
-  if (services.length){
-    html += '<div class="ord-block"><h4>Services</h4>' + services.map(s => '<span class="ord-chip">' + esc(s) + '</span>').join("") + '</div>';
-  }
-
-  if (links.length){
-    html += '<div class="ord-block"><h4>Social Links</h4>' +
-      links.map(l => '<div class="kv"><span>' + esc(l.platform || "") + '</span><span><a href="' + esc(l.url || "#") + '" target="_blank">' + esc((l.url || "").slice(0, 40)) + (l.url && l.url.length > 40 ? "…" : "") + '</a></span></div>').join("") +
-    '</div>';
-  }
-
-  if (logo || founder){
-    html += '<div class="ord-block"><h4>Uploads</h4><div class="ord-img-wrap">';
-    if (logo && logo.file_url) html += '<div class="ord-img-cell"><a href="' + esc(logo.file_url) + '" target="_blank"><img class="ord-img" src="' + esc(logo.file_url) + '"></a><div style="margin-top:4px">Logo</div></div>';
-    if (founder && founder.file_url) html += '<div class="ord-img-cell"><a href="' + esc(founder.file_url) + '" target="_blank"><img class="ord-img" src="' + esc(founder.file_url) + '"></a><div style="margin-top:4px">Founder</div></div>';
-    html += '</div></div>';
-  }
-
-  html += '<div class="ord-block"><h4>Payment</h4>' +
-    '<div class="kv"><span>Subtotal</span><span>₹' + Number(o.subtotal || 0).toLocaleString("en-IN") + '</span></div>' +
-    '<div class="kv"><span>Discount</span><span>₹' + Number(o.discount || 0).toLocaleString("en-IN") + '</span></div>' +
-    '<div class="kv"><span>Amount Paid</span><span style="color:var(--gold)">₹' + Number(o.amount_paid || 0).toLocaleString("en-IN") + '</span></div>' +
-    (o.coupon_code ? '<div class="kv"><span>Coupon</span><span>' + esc(o.coupon_code) + '</span></div>' : '') +
-  '</div>';
-
-  html += '<div class="ord-block"><h4>Update Status & Delivery</h4>' +
-    '<div class="form-row"><label>Payment Status</label><select id="ordStatusSel">' + statusOptions + '</select></div>' +
-    '<div class="form-row"><label>Delivery URL (final card link)</label><input id="ordDeliveryUrl" placeholder="https://..." value="' + esc(o.delivery_url || "") + '"></div>' +
-    '<div style="display:flex;gap:10px;margin-top:14px">' +
-      '<button class="btn btn-gold" style="flex:1" onclick="saveOrderUpdate(\'' + o.id + '\')">💾 Save Changes</button>' +
-    '</div>' +
-  '</div>';
-
-  document.getElementById("orderModalBody").innerHTML = html;
-}
-
-function closeOrderModal(){
-  document.getElementById("orderModal").classList.remove("open");
-  document.body.style.overflow = "";
-}
-
-async function saveOrderUpdate(orderId){
-  const status = document.getElementById("ordStatusSel").value;
-  const deliveryUrl = document.getElementById("ordDeliveryUrl").value.trim();
-  const { error } = await sb.from("vaan_orders").update({
-    payment_status: status,
-    delivery_url: deliveryUrl || null
-  }).eq("id", orderId);
-  if (error){ toast("Error: " + error.message, true); return; }
-  toast("✅ Order updated");
-  closeOrderModal();
-  loadOrders();
-}
-
-/* ---- PRODUCTS (with field flow) ---- */
-async function loadProducts(){
-  const { data, error } = await sb.from("vaan_products").select("*").order("sort_order", { ascending: true });
-  if (error){ console.error(error); return; }
-  allProducts = data || [];
-  renderProducts();
-}
-
+/* ====== PRODUCTS (ULP) ====== */
 function renderProducts(){
-  const wrap = document.getElementById("productsList");
-  if (!allProducts.length){ wrap.innerHTML = '<div class="svc-empty"><b>No products yet</b><br><small>Click + Add Product to create the first one</small></div>'; return; }
-  wrap.innerHTML = allProducts.map(p =>
-    '<div class="crud-row ' + (p.is_active ? "" : "off") + '">' +
-      '<div class="crud-info"><b>' + esc(p.icon || "📦") + ' ' + esc(p.name) + (p.is_active ? "" : ' <span class="tag red">OFF</span>') + '</b>' +
-        '<small>₹' + Number(p.price||0).toLocaleString("en-IN") + (p.discount_price ? ' → ₹' + Number(p.discount_price).toLocaleString("en-IN") : '') + ' · slug: ' + esc(p.slug||"—") + '</small></div>' +
-      '<div class="crud-actions">' +
-        '<button class="btn btn-dark btn-sm" onclick="editProductFields(\'' + p.id + '\')">🧩 Fields</button>' +
-        '<button class="btn btn-gold btn-sm" onclick="editProduct(\'' + p.id + '\')">✏️ Edit</button>' +
-        '<button class="btn btn-danger btn-sm" onclick="deleteProduct(\'' + p.id + '\')">🗑</button>' +
-      '</div>' +
-    '</div>'
-  ).join("");
+  const wrap = document.getElementById("ecomProductsList");
+  if (!allProducts.length) {
+    wrap.innerHTML = '<div class="svc-empty"><b>No products yet</b><br><small>Click + Add New Product to start</small></div>';
+    return;
+  }
+  wrap.innerHTML = allProducts.map(p => `
+    <div class="item">
+      <div class="item-info">
+        <b>${esc(p.icon || "📦")} ${esc(p.name)}</b>
+        <small>₹${Number(p.price||0).toLocaleString("en-IN")} · ${p.is_active ? 'Active' : 'Inactive'}</small>
+      </div>
+      <div class="item-actions">
+        <button class="btn btn-dark btn-sm" onclick="editProduct('${p.id}')">Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteProduct('${p.id}')">Delete</button>
+      </div>
+    </div>
+  `).join("");
 }
 
-function openProductModal(){
+function openProductModal() {
   document.getElementById("prodId").value = "";
-  document.getElementById("prodModalTitle").textContent = "Add Product";
+  document.getElementById("prodModalTitle").textContent = "Add New Product";
   document.getElementById("prodName").value = "";
-  document.getElementById("prodSlug").value = "";
+  document.getElementById("prodPrice").value = "";
   document.getElementById("prodIcon").value = "";
-  document.getElementById("prodSort").value = 0;
   document.getElementById("prodDesc").value = "";
-  document.getElementById("prodPrice").value = 1500;
-  document.getElementById("prodDiscount").value = "";
+  document.getElementById("prodULP").value = "";
   document.getElementById("prodActive").checked = true;
   document.getElementById("productModal").classList.add("open");
-  document.body.style.overflow = "hidden";
 }
 
-function editProduct(id){
+function editProduct(id) {
   const p = allProducts.find(x => x.id === id);
   if (!p) return;
   document.getElementById("prodId").value = p.id;
   document.getElementById("prodModalTitle").textContent = "Edit Product";
   document.getElementById("prodName").value = p.name || "";
-  document.getElementById("prodSlug").value = p.slug || "";
-  document.getElementById("prodIcon").value = p.icon || "";
-  document.getElementById("prodSort").value = p.sort_order || 0;
-  document.getElementById("prodDesc").value = p.description || "";
   document.getElementById("prodPrice").value = p.price || 0;
-  document.getElementById("prodDiscount").value = p.discount_price || "";
+  document.getElementById("prodIcon").value = p.icon || "";
+  document.getElementById("prodDesc").value = p.description || "";
+  document.getElementById("prodULP").value = p.ulp_blueprint ? JSON.stringify(p.ulp_blueprint, null, 2) : "";
   document.getElementById("prodActive").checked = !!p.is_active;
   document.getElementById("productModal").classList.add("open");
-  document.body.style.overflow = "hidden";
 }
 
-function closeProductModal(){
+function closeProductModal() {
   document.getElementById("productModal").classList.remove("open");
-  document.body.style.overflow = "";
 }
 
-async function saveProduct(){
+async function saveProduct() {
   const id = document.getElementById("prodId").value;
   const name = document.getElementById("prodName").value.trim();
-  if (!name){ toast("Name required", true); return; }
-  const slug = document.getElementById("prodSlug").value.trim() || name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
-  const payload = {
-    name, slug,
-    icon: document.getElementById("prodIcon").value.trim() || null,
-    description: document.getElementById("prodDesc").value.trim() || null,
-    price: parseInt(document.getElementById("prodPrice").value) || 0,
-    discount_price: document.getElementById("prodDiscount").value ? parseInt(document.getElementById("prodDiscount").value) : null,
-    sort_order: parseInt(document.getElementById("prodSort").value) || 0,
-    is_active: document.getElementById("prodActive").checked
-  };
-  const op = id ? sb.from("vaan_products").update(payload).eq("id", id) : sb.from("vaan_products").insert([payload]);
-  const { error } = await op;
-  if (error){ toast("Error: " + error.message, true); return; }
-  toast("✅ Product saved");
-  closeProductModal();
-  loadProducts();
-}
+  const price = parseInt(document.getElementById("prodPrice").value) || 0;
+  const icon = document.getElementById("prodIcon").value.trim();
+  const desc = document.getElementById("prodDesc").value.trim();
+  const ulpText = document.getElementById("prodULP").value.trim();
+  const isActive = document.getElementById("prodActive").checked;
 
-async function deleteProduct(id){
-  if (!confirm("Delete this product AND its fields?")) return;
-  const { error } = await sb.from("vaan_products").delete().eq("id", id);
-  if (error){ toast("Error: " + error.message, true); return; }
-  toast("Deleted");
-  loadProducts();
-}
-
-/* ---- FIELDS for a product ---- */
-async function editProductFields(productId){
-  const p = allProducts.find(x => x.id === productId);
-  if (!p) return;
-  currentProductId = productId;
-  document.getElementById("fieldsTitle").textContent = "Fields — " + p.name;
-  document.getElementById("fieldsSub").textContent = "Questions the customer will be asked for " + p.name;
-  switchOrdersSub("fields", null);
-  await loadProductFields();
-}
-
-async function loadProductFields(){
-  if (!currentProductId) return;
-  const { data, error } = await sb.from("vaan_product_fields").select("*").eq("product_id", currentProductId).order("sort_order", { ascending: true });
-  if (error){ console.error(error); return; }
-  allProductFields = data || [];
-  renderProductFields();
-}
-
-function renderProductFields(){
-  const wrap = document.getElementById("fieldsList");
-  if (!allProductFields.length){
-    wrap.innerHTML = '<div class="svc-empty"><b>No fields yet</b><br><small>Click + Add Field to define the first question</small></div>';
+  if (!name || !price || !ulpText) {
+    toast("Name, Price, and ULP JSON are required.", true);
     return;
   }
-  wrap.innerHTML = allProductFields.map(f =>
-    '<div class="crud-row">' +
-      '<div class="crud-info"><b>' + esc(f.label) + (f.is_required ? ' <span class="tag red">REQ</span>' : '') + '</b>' +
-        '<small>key: <code>' + esc(f.field_key) + '</code> · type: ' + esc(f.field_type) + ' · sort: ' + (f.sort_order||0) + '</small></div>' +
-      '<div class="crud-actions">' +
-        '<button class="btn btn-gold btn-sm" onclick="editField(\'' + f.id + '\')">✏️ Edit</button>' +
-        '<button class="btn btn-danger btn-sm" onclick="deleteField(\'' + f.id + '\')">🗑</button>' +
-      '</div>' +
-    '</div>'
-  ).join("");
-}
 
-function openFieldModal(){
-  document.getElementById("fldId").value = "";
-  document.getElementById("fldModalTitle").textContent = "Add Field";
-  document.getElementById("fldKey").value = "";
-  document.getElementById("fldLabel").value = "";
-  document.getElementById("fldType").value = "text";
-  document.getElementById("fldPlaceholder").value = "";
-  document.getElementById("fldOptions").value = "";
-  document.getElementById("fldSort").value = allProductFields.length;
-  document.getElementById("fldRequired").checked = false;
-  document.getElementById("fieldModal").classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-
-function editField(id){
-  const f = allProductFields.find(x => x.id === id);
-  if (!f) return;
-  document.getElementById("fldId").value = f.id;
-  document.getElementById("fldModalTitle").textContent = "Edit Field";
-  document.getElementById("fldKey").value = f.field_key || "";
-  document.getElementById("fldLabel").value = f.label || "";
-  document.getElementById("fldType").value = f.field_type || "text";
-  document.getElementById("fldPlaceholder").value = f.placeholder || "";
-  document.getElementById("fldOptions").value = Array.isArray(f.options) ? f.options.join(", ") : "";
-  document.getElementById("fldSort").value = f.sort_order || 0;
-  document.getElementById("fldRequired").checked = !!f.is_required;
-  document.getElementById("fieldModal").classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-
-function closeFieldModal(){
-  document.getElementById("fieldModal").classList.remove("open");
-  document.body.style.overflow = "";
-}
-
-async function saveField(){
-  if (!currentProductId){ toast("No product selected", true); return; }
-  const id = document.getElementById("fldId").value;
-  const label = document.getElementById("fldLabel").value.trim();
-  const key = document.getElementById("fldKey").value.trim() || label.toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_|_$/g,"");
-  if (!label){ toast("Label required", true); return; }
-  const type = document.getElementById("fldType").value;
-  const optionsRaw = document.getElementById("fldOptions").value.trim();
-  const options = (type === "chips" && optionsRaw) ? optionsRaw.split(",").map(s => s.trim()).filter(Boolean) : null;
-  const payload = {
-    product_id: currentProductId,
-    field_key: key,
-    label,
-    field_type: type,
-    is_required: document.getElementById("fldRequired").checked,
-    placeholder: document.getElementById("fldPlaceholder").value.trim() || null,
-    options,
-    sort_order: parseInt(document.getElementById("fldSort").value) || 0
-  };
-  const op = id ? sb.from("vaan_product_fields").update(payload).eq("id", id) : sb.from("vaan_product_fields").insert([payload]);
-  const { error } = await op;
-  if (error){ toast("Error: " + error.message, true); return; }
-  toast("✅ Field saved");
-  closeFieldModal();
-  loadProductFields();
-}
-
-async function deleteField(id){
-  if (!confirm("Delete this field?")) return;
-  const { error } = await sb.from("vaan_product_fields").delete().eq("id", id);
-  if (error){ toast("Error: " + error.message, true); return; }
-  toast("Deleted");
-  loadProductFields();
-}
-
-/* ---- CATEGORIES ---- */
-function renderCategories(){
-  const wrap = document.getElementById("categoriesList");
-  if (!allCategories.length){ wrap.innerHTML = '<div class="svc-empty"><b>No categories yet</b></div>'; return; }
-  wrap.innerHTML = allCategories.map(c =>
-    '<div class="crud-row ' + (c.is_active ? "" : "off") + '">' +
-      '<div class="crud-info"><b>' + esc(c.icon || "✨") + ' ' + esc(c.name) + (c.is_active ? "" : ' <span class="tag red">OFF</span>') + '</b><small>slug: ' + esc(c.slug) + ' · sort: ' + (c.sort_order || 0) + '</small></div>' +
-      '<div class="crud-actions">' +
-        '<button class="btn btn-gold btn-sm" onclick="editCategory(\'' + c.id + '\')">✏️ Edit</button>' +
-        '<button class="btn btn-danger btn-sm" onclick="deleteCategory(\'' + c.id + '\')">🗑</button>' +
-      '</div>' +
-    '</div>'
-  ).join("");
-}
-function openCategoryModal(){
-  document.getElementById("catId").value = "";
-  document.getElementById("catModalTitle").textContent = "Add Category";
-  document.getElementById("catName").value = "";
-  document.getElementById("catSlug").value = "";
-  document.getElementById("catIcon").value = "";
-  document.getElementById("catSort").value = 0;
-  document.getElementById("catActive").checked = true;
-  document.getElementById("categoryModal").classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-function editCategory(id){
-  const c = allCategories.find(x => x.id === id);
-  if (!c) return;
-  document.getElementById("catId").value = c.id;
-  document.getElementById("catModalTitle").textContent = "Edit Category";
-  document.getElementById("catName").value = c.name || "";
-  document.getElementById("catSlug").value = c.slug || "";
-  document.getElementById("catIcon").value = c.icon || "";
-  document.getElementById("catSort").value = c.sort_order || 0;
-  document.getElementById("catActive").checked = !!c.is_active;
-  document.getElementById("categoryModal").classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-function closeCategoryModal(){
-  document.getElementById("categoryModal").classList.remove("open");
-  document.body.style.overflow = "";
-}
-async function saveCategory(){
-  const id = document.getElementById("catId").value;
-  const name = document.getElementById("catName").value.trim();
-  const slug = document.getElementById("catSlug").value.trim() || name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
-  if (!name){ toast("Name required", true); return; }
-  const payload = {
-    name, slug,
-    icon: document.getElementById("catIcon").value.trim() || null,
-    sort_order: parseInt(document.getElementById("catSort").value) || 0,
-    is_active: document.getElementById("catActive").checked
-  };
-  const op = id ? sb.from("vaan_categories").update(payload).eq("id", id) : sb.from("vaan_categories").insert([payload]);
-  const { error } = await op;
-  if (error){ toast("Error: " + error.message, true); return; }
-  toast("✅ Saved");
-  closeCategoryModal();
-  loadCategories();
-}
-async function deleteCategory(id){
-  if (!confirm("Delete this category?")) return;
-  const { error } = await sb.from("vaan_categories").delete().eq("id", id);
-  if (error){ toast("Error: " + error.message, true); return; }
-  toast("Deleted");
-  loadCategories();
-}
-
-/* ---- PALETTES ---- */
-function renderPalettes(){
-  const wrap = document.getElementById("palettesList");
-  if (!allPalettes.length){ wrap.innerHTML = '<div class="svc-empty"><b>No palettes yet</b></div>'; return; }
-  wrap.innerHTML = allPalettes.map(p =>
-    '<div class="crud-row ' + (p.is_active ? "" : "off") + '">' +
-      '<div class="crud-info"><b>' + esc(p.name) + (p.is_active ? "" : ' <span class="tag red">OFF</span>') + '</b>' +
-      '<div class="crud-swatches">' +
-        '<span style="background:' + esc(p.bg) + '"></span>' +
-        '<span style="background:' + esc(p.surface) + '"></span>' +
-        '<span style="background:' + esc(p.accent) + '"></span>' +
-        '<span style="background:' + esc(p.accent_secondary) + '"></span>' +
-        '<span style="background:' + esc(p.text_primary) + '"></span>' +
-      '</div></div>' +
-      '<div class="crud-actions">' +
-        '<button class="btn btn-gold btn-sm" onclick="editPalette(\'' + p.id + '\')">✏️ Edit</button>' +
-        '<button class="btn btn-danger btn-sm" onclick="deletePalette(\'' + p.id + '\')">🗑</button>' +
-      '</div>' +
-    '</div>'
-  ).join("");
-}
-function openPaletteModal(){
-  document.getElementById("palId").value = "";
-  document.getElementById("palModalTitle").textContent = "Add Palette";
-  document.getElementById("palName").value = "";
-  document.getElementById("palBg").value = "#1a060d";
-  document.getElementById("palSurface").value = "#2a0a12";
-  document.getElementById("palAccent").value = "#d4a017";
-  document.getElementById("palAccent2").value = "#4f8fff";
-  document.getElementById("palText").value = "#fdfaf3";
-  document.getElementById("palText2").value = "#c9a98a";
-  document.getElementById("palSort").value = 0;
-  document.getElementById("palActive").checked = true;
-  document.getElementById("paletteModal").classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-function editPalette(id){
-  const p = allPalettes.find(x => x.id === id);
-  if (!p) return;
-  document.getElementById("palId").value = p.id;
-  document.getElementById("palModalTitle").textContent = "Edit Palette";
-  document.getElementById("palName").value = p.name || "";
-  document.getElementById("palBg").value = p.bg || "#1a060d";
-  document.getElementById("palSurface").value = p.surface || "#2a0a12";
-  document.getElementById("palAccent").value = p.accent || "#d4a017";
-  document.getElementById("palAccent2").value = p.accent_secondary || "#4f8fff";
-  document.getElementById("palText").value = p.text_primary || "#fdfaf3";
-  document.getElementById("palText2").value = p.text_secondary || "#c9a98a";
-  document.getElementById("palSort").value = p.sort_order || 0;
-  document.getElementById("palActive").checked = !!p.is_active;
-  document.getElementById("paletteModal").classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-function closePaletteModal(){
-  document.getElementById("paletteModal").classList.remove("open");
-  document.body.style.overflow = "";
-}
-async function savePalette(){
-  const id = document.getElementById("palId").value;
-  const name = document.getElementById("palName").value.trim();
-  if (!name){ toast("Name required", true); return; }
-  const payload = {
-    name,
-    bg: document.getElementById("palBg").value,
-    surface: document.getElementById("palSurface").value,
-    accent: document.getElementById("palAccent").value,
-    accent_secondary: document.getElementById("palAccent2").value,
-    text_primary: document.getElementById("palText").value,
-    text_secondary: document.getElementById("palText2").value,
-    sort_order: parseInt(document.getElementById("palSort").value) || 0,
-    is_active: document.getElementById("palActive").checked
-  };
-  const op = id ? sb.from("vaan_palettes").update(payload).eq("id", id) : sb.from("vaan_palettes").insert([payload]);
-  const { error } = await op;
-  if (error){ toast("Error: " + error.message, true); return; }
-  toast("✅ Saved");
-  closePaletteModal();
-  loadPalettes();
-}
-async function deletePalette(id){
-  if (!confirm("Delete this palette?")) return;
-  const { error } = await sb.from("vaan_palettes").delete().eq("id", id);
-  if (error){ toast("Error: " + error.message, true); return; }
-  toast("Deleted");
-  loadPalettes();
-}
-
-/* ---- TEMPLATES ---- */
-function renderTemplates(){
-  const wrap = document.getElementById("templatesList");
-  if (!allTemplates.length){ wrap.innerHTML = '<div class="svc-empty"><b>No templates yet</b></div>'; return; }
-  wrap.innerHTML = allTemplates.map(t =>
-    '<div class="crud-row ' + (t.is_active ? "" : "off") + '">' +
-      '<div class="crud-info"><b>' + esc(t.name) + (t.is_active ? "" : ' <span class="tag red">OFF</span>') + '</b><small>' + esc(t.slug || "") + ' · ' + esc(t.description || "") + '</small></div>' +
-      '<div class="crud-actions">' +
-        '<button class="btn btn-gold btn-sm" onclick="editTemplate(\'' + t.id + '\')">✏️ Edit</button>' +
-        '<button class="btn btn-danger btn-sm" onclick="deleteTemplate(\'' + t.id + '\')">🗑</button>' +
-      '</div>' +
-    '</div>'
-  ).join("");
-}
-function openTemplateModal(){
-  document.getElementById("tplId").value = "";
-  document.getElementById("tplModalTitle").textContent = "Add Template";
-  document.getElementById("tplName").value = "";
-  document.getElementById("tplSlug").value = "";
-  document.getElementById("tplDesc").value = "";
-  document.getElementById("tplOrder").value = "hero,about,services,social,contact";
-  document.getElementById("tplSort").value = 0;
-  document.getElementById("tplActive").checked = true;
-  document.getElementById("templateModal").classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-function editTemplate(id){
-  const t = allTemplates.find(x => x.id === id);
-  if (!t) return;
-  document.getElementById("tplId").value = t.id;
-  document.getElementById("tplModalTitle").textContent = "Edit Template";
-  document.getElementById("tplName").value = t.name || "";
-  document.getElementById("tplSlug").value = t.slug || "";
-  document.getElementById("tplDesc").value = t.description || "";
-  const order = Array.isArray(t.layout_order) ? t.layout_order.join(",") : (t.layout_order || "");
-  document.getElementById("tplOrder").value = order;
-  document.getElementById("tplSort").value = t.sort_order || 0;
-  document.getElementById("tplActive").checked = !!t.is_active;
-  document.getElementById("templateModal").classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-function closeTemplateModal(){
-  document.getElementById("templateModal").classList.remove("open");
-  document.body.style.overflow = "";
-}
-async function saveTemplate(){
-  const id = document.getElementById("tplId").value;
-  const name = document.getElementById("tplName").value.trim();
-  const slug = document.getElementById("tplSlug").value.trim() || name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
-  if (!name){ toast("Name required", true); return; }
-  const orderRaw = document.getElementById("tplOrder").value.trim();
-  const layout_order = orderRaw ? orderRaw.split(",").map(s => s.trim()).filter(Boolean) : [];
-  const payload = {
-    name, slug,
-    description: document.getElementById("tplDesc").value.trim() || null,
-    layout_order,
-    sort_order: parseInt(document.getElementById("tplSort").value) || 0,
-    is_active: document.getElementById("tplActive").checked
-  };
-  const op = id ? sb.from("vaan_templates").update(payload).eq("id", id) : sb.from("vaan_templates").insert([payload]);
-  const { error } = await op;
-  if (error){ toast("Error: " + error.message, true); return; }
-  toast("✅ Saved");
-  closeTemplateModal();
-  loadTemplates();
-}
-async function deleteTemplate(id){
-  if (!confirm("Delete this template?")) return;
-  const { error } = await sb.from("vaan_templates").delete().eq("id", id);
-  if (error){ toast("Error: " + error.message, true); return; }
-  toast("Deleted");
-  loadTemplates();
-}
-
-/* ---- COUPONS ---- */
-function renderCoupons(){
-  const wrap = document.getElementById("couponsList");
-  if (!allCoupons.length){ wrap.innerHTML = '<div class="svc-empty"><b>No coupons yet</b></div>'; return; }
-  wrap.innerHTML = allCoupons.map(c =>
-    '<div class="crud-row ' + (c.is_active ? "" : "off") + '">' +
-      '<div class="crud-info"><b>' + esc(c.code) + (c.is_active ? "" : ' <span class="tag red">OFF</span>') + '</b>' +
-        '<small>' + (c.type === "flat" ? "₹" + c.value + " off" : c.value + "% off") +
-        (c.max_discount ? ' (max ₹' + c.max_discount + ')' : '') +
-        (c.min_order ? ' · min ₹' + c.min_order : '') +
-        (c.usage_limit ? ' · ' + (c.used_count||0) + '/' + c.usage_limit + ' used' : '') +
-        (c.expiry ? ' · exp ' + c.expiry : '') + '</small></div>' +
-      '<div class="crud-actions">' +
-        '<button class="btn btn-gold btn-sm" onclick="editCoupon(\'' + c.id + '\')">✏️ Edit</button>' +
-        '<button class="btn btn-danger btn-sm" onclick="deleteCoupon(\'' + c.id + '\')">🗑</button>' +
-      '</div>' +
-    '</div>'
-  ).join("");
-}
-function openCouponModal(){
-  document.getElementById("cpnId").value = "";
-  document.getElementById("cpnModalTitle").textContent = "Add Coupon";
-  document.getElementById("cpnCode").value = "";
-  document.getElementById("cpnType").value = "flat";
-  document.getElementById("cpnValue").value = "";
-  document.getElementById("cpnMax").value = "";
-  document.getElementById("cpnMin").value = "";
-  document.getElementById("cpnLimit").value = "";
-  document.getElementById("cpnExpiry").value = "";
-  document.getElementById("cpnActive").checked = true;
-  document.getElementById("couponModal").classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-function editCoupon(id){
-  const c = allCoupons.find(x => x.id === id);
-  if (!c) return;
-  document.getElementById("cpnId").value = c.id;
-  document.getElementById("cpnModalTitle").textContent = "Edit Coupon";
-  document.getElementById("cpnCode").value = c.code || "";
-  document.getElementById("cpnType").value = c.type || "flat";
-  document.getElementById("cpnValue").value = c.value || "";
-  document.getElementById("cpnMax").value = c.max_discount || "";
-  document.getElementById("cpnMin").value = c.min_order || "";
-  document.getElementById("cpnLimit").value = c.usage_limit || "";
-  document.getElementById("cpnExpiry").value = c.expiry || "";
-  document.getElementById("cpnActive").checked = !!c.is_active;
-  document.getElementById("couponModal").classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-function closeCouponModal(){
-  document.getElementById("couponModal").classList.remove("open");
-  document.body.style.overflow = "";
-}
-async function saveCoupon(){
-  const id = document.getElementById("cpnId").value;
-  const code = document.getElementById("cpnCode").value.trim().toUpperCase();
-  const value = parseFloat(document.getElementById("cpnValue").value);
-  if (!code){ toast("Code required", true); return; }
-  if (!value || value <= 0){ toast("Value must be > 0", true); return; }
-  const payload = {
-    code,
-    type: document.getElementById("cpnType").value,
-    value,
-    max_discount: document.getElementById("cpnMax").value ? parseFloat(document.getElementById("cpnMax").value) : null,
-    min_order: document.getElementById("cpnMin").value ? parseFloat(document.getElementById("cpnMin").value) : null,
-    usage_limit: document.getElementById("cpnLimit").value ? parseInt(document.getElementById("cpnLimit").value) : null,
-    expiry: document.getElementById("cpnExpiry").value || null,
-    is_active: document.getElementById("cpnActive").checked
-  };
-  const op = id ? sb.from("vaan_coupons").update(payload).eq("id", id) : sb.from("vaan_coupons").insert([payload]);
-  const { error } = await op;
-  if (error){ toast("Error: " + error.message, true); return; }
-  toast("✅ Saved");
-  closeCouponModal();
-  loadCoupons();
-}
-async function deleteCoupon(id){
-  if (!confirm("Delete this coupon?")) return;
-  const { error } = await sb.from("vaan_coupons").delete().eq("id", id);
-  if (error){ toast("Error: " + error.message, true); return; }
-  toast("Deleted");
-  loadCoupons();
-}
-
-/* ---- FUNNEL ---- */
-function renderFunnel(){
-  const wrap = document.getElementById("funnelList");
-  if (!allFunnelEvents.length){ wrap.innerHTML = '<div class="svc-empty"><b>No events yet</b></div>'; return; }
-
-  const counts = {};
-  allFunnelEvents.forEach(e => {
-    const key = e.event_type === "step_completed" || e.event_type === "step_skipped"
-      ? e.event_type + "_" + (e.step_number || "?")
-      : e.event_type;
-    counts[key] = (counts[key] || 0) + 1;
-  });
-
-  const orderedSteps = [];
-  for (let i = 1; i <= 12; i++){
-    orderedSteps.push({ label: "Step " + i, done: counts["step_completed_" + i] || 0, skip: counts["step_skipped_" + i] || 0 });
+  // Validate JSON
+  let ulpJson;
+  try {
+    ulpJson = JSON.parse(ulpText);
+  } catch(e) {
+    toast("Invalid JSON format. Please check the ULP Blueprint.", true);
+    return;
   }
 
-  const maxVal = Math.max(...orderedSteps.map(s => s.done + s.skip), 1);
+  const payload = {
+    name, price, icon, description: desc, ulp_blueprint: ulpJson, is_active: isActive
+  };
 
-  let html = '<div class="ord-block"><h4>Top-level events</h4>' +
-    '<div class="kv"><span>Page views</span><span>' + (counts["page_view"] || 0) + '</span></div>' +
-    '<div class="kv"><span>Builder started</span><span>' + (counts["started"] || 0) + '</span></div>' +
-    '<div class="kv"><span>Preview shown</span><span>' + (counts["preview_shown"] || 0) + '</span></div>' +
-    '<div class="kv"><span>Checkout reached</span><span>' + (counts["checkout_reached"] || 0) + '</span></div>' +
-    '<div class="kv"><span>Orders created</span><span>' + (counts["order_created"] || 0) + '</span></div>' +
-    '<div class="kv"><span>Payments success</span><span>' + (counts["payment_success"] || 0) + '</span></div>' +
-  '</div>';
-
-  html += '<div class="ord-block"><h4>Step-by-step completion</h4>';
-  orderedSteps.forEach(s => {
-    const total = s.done + s.skip;
-    const pct = Math.round((total / maxVal) * 100);
-    html += '<div class="funnel-step">' +
-      '<div class="funnel-step-label">' + s.label + '</div>' +
-      '<div class="funnel-bar-wrap"><div class="funnel-bar" style="width:' + pct + '%"></div></div>' +
-      '<div class="funnel-step-count">' + total + '</div>' +
-    '</div>';
-  });
-  html += '</div>';
-
-  wrap.innerHTML = html;
+  const op = id ? sb.from("vaan_products").update(payload).eq("id", id) : sb.from("vaan_products").insert([payload]);
+  const { error } = await op;
+  
+  if (error) { toast("Error: " + error.message, true); return; }
+  toast("✅ Product saved!");
+  closeProductModal();
+  loadAll();
 }
+
+async function deleteProduct(id) {
+  if(!confirm("Delete this product permanently?")) return;
+  const { error } = await sb.from("vaan_products").delete().eq("id", id);
+  if (error) { toast("Error: " + error.message, true); return; }
+  toast("Deleted");
+  loadAll();
+}
+
+/* ====== E-COMMERCE ORDERS ====== */
+async function loadEcomOrders() {
+  // Only load PAID orders
+  const { data, error } = await sb.from("vaan_orders")
+    .select("*")
+    .eq("payment_status", "paid")
+    .order("created_at", { ascending: false });
+    
+  if (error) {
+    console.error("Orders load error:", error);
+    document.getElementById("ecomOrdersList").innerHTML = '<div class="svc-empty"><b>Failed to load orders</b></div>';
+    return;
+  }
+  
+  allOrders = data || [];
+  renderEcomOrders();
+}
+
+function renderEcomOrders() {
+  const wrap = document.getElementById("ecomOrdersList");
+  if (!allOrders.length) {
+    wrap.innerHTML = '<div class="svc-empty"><b>No paid orders yet.</b></div>';
+    return;
+  }
+  
+  wrap.innerHTML = allOrders.map(o => {
+    const isDelivered = o.delivery_url ? true : false; // Assuming delivery_url means it's delivered
+    return `
+    <div class="item">
+      <div class="item-info">
+        <b>${esc(o.customer_name)} · ${esc(o.customer_phone)}</b>
+        <small>${esc(o.order_number)} · ${fmtDate(o.created_at)}</small>
+        <div class="svc-row-tags">
+          <span class="tag green">PAID</span>
+          ${isDelivered ? '<span class="tag blue">DELIVERED</span>' : '<span class="tag gold">PENDING DELIVERY</span>'}
+        </div>
+      </div>
+      <div class="item-actions">
+        <button class="btn btn-gold btn-sm" onclick="viewOrderDetails('${o.id}')">👁 See Details</button>
+      </div>
+    </div>
+    `;
+  }).join("");
+}
+
+/* Logic for viewing orders will be in Chunk 4 */
+</script>
+</head><script>
+/* ============================================================
+   CHUNK 4: ORDER DETAILS, DELIVERY, & INIT
+   ============================================================ */
+
+let currentViewingOrder = null;
+
+async function viewOrderDetails(orderId) {
+  const o = allOrders.find(x => x.id === orderId);
+  if (!o) return;
+  
+  currentViewingOrder = o;
+  
+  document.getElementById("ordDetailTitle").textContent = "Order: " + o.order_number;
+  document.getElementById("ordDetailSub").textContent = o.customer_name + " · " + fmtDate(o.created_at);
+  
+  const body = document.getElementById("ordDetailBody");
+  body.innerHTML = '<div class="svc-empty"><b>Loading details...</b></div>';
+  
+  document.getElementById("orderDetailModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+
+  // Fetch the answers the customer submitted
+  const { data: answers, error } = await sb.from("vaan_order_answers").select("*").eq("order_id", orderId);
+  
+  if (error) {
+    body.innerHTML = '<div class="svc-empty"><b>Error loading answers</b></div>';
+    return;
+  }
+
+  const ans = answers || [];
+  
+  // Separate standard fields from uploaded files
+  const textFields = ans.filter(a => a.field_value !== null);
+  const imageFields = ans.filter(a => a.file_url !== null && a.file_url !== "");
+  
+  // Build the HTML for text fields (Copyable)
+  let textHtml = '<div class="sec-title" style="font-size:16px;margin:20px 0 10px">Submitted Details</div>';
+  if (textFields.length === 0) {
+    textHtml += '<div style="font-size:12px;color:var(--muted);margin-bottom:12px">No text fields submitted.</div>';
+  } else {
+    textFields.forEach(f => {
+      let val = f.field_value;
+      if (typeof val === 'object') val = JSON.stringify(val); // In case it's an array or object
+      
+      textHtml += `
+        <div class="copy-field">
+          <div class="copy-field-content">
+            <b>${esc(f.field_key)}</b>
+            ${esc(val)}
+          </div>
+          <button class="copy-field-btn" onclick="copyToClipboard('${esc(String(val).replace(/'/g, "\\'"))}', this)" title="Copy">
+            📋
+          </button>
+        </div>
+      `;
+    });
+  }
+
+  // Build the HTML for uploaded images
+  let imgHtml = '';
+  if (imageFields.length > 0) {
+    imgHtml += '<div class="sec-title" style="font-size:16px;margin:20px 0 10px">Uploaded Files</div>';
+    imgHtml += '<div class="order-img-gallery">';
+    imageFields.forEach(f => {
+      imgHtml += `
+        <div class="order-img-box">
+          <a href="${esc(f.file_url)}" target="_blank">
+            <img src="${esc(f.file_url)}" alt="${esc(f.field_key)}">
+          </a>
+          <a href="${esc(f.file_url)}" download target="_blank">⬇ Download</a>
+        </div>
+      `;
+    });
+    imgHtml += '</div>';
+  }
+
+  // Build Customization section (If they applied custom colors/layout)
+  let customHtml = '';
+  if (o.customization) {
+    customHtml += '<div class="sec-title" style="font-size:16px;margin:20px 0 10px">Customization Data</div>';
+    customHtml += `
+      <div class="copy-field">
+        <div class="copy-field-content">
+          <b>Design Preferences</b>
+          <pre style="font-size:11px;margin-top:6px;color:var(--muted)">${JSON.stringify(o.customization, null, 2)}</pre>
+        </div>
+        <button class="copy-field-btn" onclick='copyToClipboard(${JSON.stringify(JSON.stringify(o.customization))}, this)' title="Copy">
+          📋
+        </button>
+      </div>
+    `;
+  }
+
+  // Build the Action Buttons (Delivery)
+  const actions = document.getElementById("ordDetailActions");
+  if (o.delivery_url) {
+    // Already delivered
+    actions.innerHTML = `
+      <div style="width:100%;text-align:center;padding:14px;background:rgba(37,180,110,.1);border:1px solid var(--green);border-radius:10px;color:var(--green);font-weight:800;font-size:13px;margin-bottom:10px">
+        ✅ Delivered to: <br><a href="${esc(o.delivery_url)}" target="_blank" style="color:var(--white);text-decoration:underline">${esc(o.delivery_url)}</a>
+      </div>
+      <button class="btn btn-dark" onclick="closeOrderDetail()">Close</button>
+    `;
+  } else {
+    // Not delivered yet
+    actions.innerHTML = `
+      <div class="form-row" style="width:100%;margin-bottom:0">
+        <label>Final Delivery Link (e.g., yourdomain.com/card/vikas)</label>
+        <input id="deliveryUrlInput" placeholder="https://..." style="background:#0a0e1a;padding:14px;border-radius:10px;border:1px solid var(--line-soft);color:white;width:100%">
+      </div>
+      <div style="display:flex;gap:10px;width:100%;margin-top:16px">
+        <button class="btn btn-gold" style="flex:1" onclick="markAsDelivered('${o.id}')">📩 Mark Delivered & Notify</button>
+        <button class="btn btn-dark" onclick="closeOrderDetail()">Close</button>
+      </div>
+    `;
+  }
+
+  body.innerHTML = textHtml + imgHtml + customHtml;
+}
+
+function closeOrderDetail() {
+  document.getElementById("orderDetailModal").classList.remove("open");
+  document.body.style.overflow = "";
+  currentViewingOrder = null;
+}
+
+function copyToClipboard(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    const original = btn.innerHTML;
+    btn.innerHTML = "✅";
+    btn.style.background = "var(--green)";
+    btn.style.color = "#fff";
+    btn.style.borderColor = "var(--green)";
+    setTimeout(() => {
+      btn.innerHTML = original;
+      btn.style.background = "";
+      btn.style.color = "";
+      btn.style.borderColor = "";
+    }, 2000);
+    toast("Copied to clipboard!");
+  }).catch(err => {
+    toast("Failed to copy", true);
+  });
+}
+
+async function markAsDelivered(orderId) {
+  const urlInput = document.getElementById("deliveryUrlInput");
+  const url = urlInput ? urlInput.value.trim() : "";
+  
+  if (!url) {
+    toast("Please enter the delivery URL first.", true);
+    return;
+  }
+
+  const { error } = await sb.from("vaan_orders").update({ delivery_url: url }).eq("id", orderId);
+  
+  if (error) {
+    toast("Error updating order: " + error.message, true);
+    return;
+  }
+
+  toast("✅ Order marked as Delivered!");
+  
+  // Optional: Trigger a WhatsApp message to the customer
+  if (currentViewingOrder && currentViewingOrder.customer_phone) {
+    const phone = currentViewingOrder.customer_phone.replace(/\D/g, "").slice(-10);
+    const name = currentViewingOrder.customer_name;
+    const msg = encodeURIComponent(`Hi ${name}, your VAAN order is ready! 🎉\n\nHere is your final link:\n${url}\n\nThank you for choosing VAAN.`);
+    window.open(`https://wa.me/91${phone}?text=${msg}`, "_blank");
+  }
+
+  closeOrderDetail();
+  loadEcomOrders(); // Refresh the list
+}
+
+/* ====== INIT ====== */
+// Ensure the E-Commerce tab loads orders when clicked
+const originalSwitchTab = switchTab;
+switchTab = function(name, btn) {
+  originalSwitchTab(name, btn);
+  if (name === 'ecommerce') {
+    // Default to orders sub-tab
+    switchEcomTab('orders');
+  }
+};
+
+// Close modals on escape
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeEdit();
+    closeProductModal();
+    closeOrderDetail();
+  }
+});
+
 </script>
 
 </body>
