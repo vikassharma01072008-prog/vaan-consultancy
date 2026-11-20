@@ -101,19 +101,18 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 .ulp-editor:focus{outline:none;border-color:var(--gold)}
 .img-preview{max-width:200px;margin-top:12px;border-radius:10px;display:none;border:1px solid var(--gold);box-shadow:0 4px 12px rgba(0,0,0,0.5)}
 
-/* Modals - Full Screen Mobile Friendly */
-.modal{position:fixed;inset:0;background:rgba(5,8,16,.95);backdrop-filter:blur(10px);z-index:1000;display:none;align-items:center;justify-content:center;padding:0}
+/* Modals - Full Screen Mobile Friendly with top/bottom spacing */
+.modal{position:fixed;inset:0;background:rgba(5,8,16,.95);backdrop-filter:blur(10px);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}
 .modal.open{display:flex}
-.modal-box{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid rgba(255,212,0,.25);width:100%;height:100vh;max-height:100vh;overflow-y:auto;position:relative;display:flex;flex-direction:column;-webkit-overflow-scrolling:touch}
-@media(min-width:800px){.modal-box{width:min(1000px,90vw);height:90vh;border-radius:22px}}
-.modal-box::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--blue))}
-.modal-head{padding:24px 24px 18px;border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:flex-start;gap:14px;position:sticky;top:0;background:linear-gradient(180deg,#12192a 85%,rgba(18,25,42,0));z-index:10}
+.modal-box{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid rgba(255,212,0,.25);width:100%;height:calc(100vh - 40px);max-height:calc(100vh - 40px);overflow:hidden;position:relative;display:flex;flex-direction:column;border-radius:22px}
+.modal-box::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--blue));flex-shrink:0}
+.modal-head{padding:20px 24px;border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-shrink:0;background:#12192a;border-radius:22px 22px 0 0;z-index:10}
 .modal-head h3{font-size:22px;font-weight:950;letter-spacing:-.6px}
 .modal-head small{color:var(--muted);font-size:12px;display:block;margin-top:4px}
 .modal-close{background:rgba(255,255,255,.06);border:0;color:var(--muted);width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .modal-close:hover{background:rgba(255,212,0,.15);color:var(--gold)}
-.modal-body{padding:22px 24px 120px;flex:1;overflow-y:auto}
-.modal-actions{display:flex;gap:10px;position:absolute;bottom:0;left:0;right:0;background:#12192a;padding:20px 24px;border-top:1px solid var(--line-soft);z-index:10}
+.modal-body{padding:22px 24px;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.modal-actions{display:flex;gap:10px;padding:20px 24px;border-top:1px solid var(--line-soft);background:#12192a;flex-shrink:0;border-radius:0 0 22px 22px;z-index:10}
 .modal-actions .btn{flex:1;padding:16px}
 
 /* ====== PRODUCT WIZARD ====== */
@@ -155,10 +154,10 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 .ord-section h4{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;font-weight:900}
 .ord-grid{display:grid;grid-template-columns:1fr;gap:12px}
 @media(min-width:600px){.ord-grid{grid-template-columns:1fr 1fr}}
-.ord-item{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(255,255,255,.03);border-radius:8px;font-size:14px;color:var(--white);word-break:break-word}
+.ord-item{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(255,255,255,.03);border-radius:8px;font-size:14px;color:var(--white);word-break:break-word;gap:10px}
 .ord-item b{color:var(--muted);font-size:11px;text-transform:uppercase;display:block;margin-bottom:4px}
 .ord-item span{font-weight:600;font-size:15px}
-.ord-item button{background:rgba(255,212,0,.1);color:var(--gold);border:1px solid rgba(255,212,0,.3);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:bold}
+.ord-item button{background:rgba(255,212,0,.1);color:var(--gold);border:1px solid rgba(255,212,0,.3);padding:8px 12px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:bold;flex-shrink:0}
 .ord-item-big{grid-column:1 / -1}
 .ord-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
 .ord-photo{width:100%;height:120px;border-radius:8px;object-fit:cover;cursor:pointer;border:1px solid var(--line-soft)}
@@ -710,7 +709,6 @@ function openProductWizard() {
   document.getElementById("wizPreviewCanvas").innerHTML = '<div style="color:var(--muted);text-align:center;padding:40px">Preview will render here</div>';
   document.getElementById("wizImagePreview").style.display = "none"; document.getElementById("wizImageText").style.display = "block"; compressedWizFile = null;
   
-  // Clear builder state
   fbSteps = []; currentProductFields = []; activeStepIndex = 0;
   
   document.getElementById("productWizardModal").classList.add("open"); document.body.style.overflow = "hidden";
@@ -728,7 +726,6 @@ function editProduct(id) {
   if (p.image_url) { document.getElementById("wizImagePreview").src = p.image_url; document.getElementById("wizImagePreview").style.display = "block"; document.getElementById("wizImageText").style.display = "none"; } 
   else { document.getElementById("wizImagePreview").style.display = "none"; document.getElementById("wizImageText").style.display = "block"; }
   
-  // Load form builder steps if they exist
   fbSteps = p.form_config ? JSON.parse(JSON.stringify(p.form_config)) : [];
   activeStepIndex = 0;
   
@@ -898,6 +895,13 @@ function addFBStep() { fbSteps.push({ title: "", type: "step", fields: [] }); ac
 function addFBPayment() { fbSteps.push({ title: "Payment", type: "payment" }); activeStepIndex = fbSteps.length - 1; renderFBSidebar(); }
 function deleteFBStep(index) { if(fbSteps.length<=1) return toast("Need at least 1 step", true); fbSteps.splice(index, 1); if(activeStepIndex >= fbSteps.length) activeStepIndex = fbSteps.length - 1; renderFBSidebar(); }
 
+// FIX: Keep input reference so we don't rebuild the whole DOM on each keystroke
+function updateFBTitle(val) { 
+  fbSteps[activeStepIndex].title = val; 
+  const sidebarBtn = document.querySelectorAll('.fb-step-btn')[activeStepIndex];
+  if (sidebarBtn) { const small = sidebarBtn.querySelector('small'); if (small) small.textContent = val || 'Untitled'; }
+}
+
 function renderFBMain() {
   const main = document.getElementById("fbMainArea");
   if (!fbSteps[activeStepIndex]) return main.innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted)">Click "+ Add Step" to begin.</div>';
@@ -955,8 +959,8 @@ function renderFBMain() {
       </div>
     </div>
 
-    <div class="form-row" style="margin-top:20px">
-      <label>Allowed Photos (if Photo Upload)</label>
+    <div class="form-row" style="margin-top:20px; display: ${step.mode === 'image' ? 'block' : 'none'}">
+      <label>Allowed Photos</label>
       <select onchange="updateFBPhotoLimit(this.value)" style="padding:16px;border-radius:10px;background:#0a0e1a;border:1px solid var(--line-soft);color:white;width:100%">
         <option value="1" ${step.photo_limit == 1 ? 'selected' : ''}>1 Photo</option>
         <option value="3" ${step.photo_limit == 3 ? 'selected' : ''}>3 Photos</option>
@@ -972,12 +976,13 @@ function renderFBMain() {
   `;
 }
 
-function updateFBTitle(val) { fbSteps[activeStepIndex].title = val; renderFBSidebar(); }
 function updateFBPaymentTime(val) { fbSteps[activeStepIndex].approx_time = val; }
 function updateFBMode(val) {
   fbSteps[activeStepIndex].mode = val;
   document.getElementById("fbSelectBox").classList.toggle("active", val === "select" || val === "both");
   document.getElementById("fbLinkBox").classList.toggle("active", val === "link");
+  const photoRow = document.getElementById("fbPhotoRow");
+  if (photoRow) photoRow.style.display = val === 'image' ? 'block' : 'none';
 }
 function updateFBSkippable(val) { fbSteps[activeStepIndex].skippable = val; }
 function updateFBPhotoLimit(val) { fbSteps[activeStepIndex].photo_limit = parseInt(val); }
@@ -1018,7 +1023,10 @@ function renderEcomOrders() {
     return `
     <div class="item">
       <div class="item-info"><b>${esc(o.customer_name)} · ${esc(o.customer_phone)}</b><small>Ref: ${esc(ref)} · ${fmtDate(o.created_at)}</small><div style="margin-top:6px">${statusTag}</div></div>
-      <div class="item-actions"><button class="btn btn-gold btn-sm" onclick="viewOrderDetails('${o.id}')">👁 See Details</button></div>
+      <div class="item-actions">
+        <button class="btn btn-gold btn-sm" onclick="viewOrderDetails('${o.id}')">👁 See Details</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteOrder('${o.id}')">🗑 Delete</button>
+      </div>
     </div>`;
   }).join("");
 }
@@ -1060,7 +1068,7 @@ async function viewOrderDetails(orderId) {
     html += '</div></div>';
   }
 
-  if (o.customization) {
+  if (o.customization && Object.keys(o.customization).length > 0) {
     html += '<div class="ord-section"><h4>Customisation (Code)</h4><div class="ord-custom-code">' + JSON.stringify(o.customization, null, 2) + '</div></div>';
   }
 
@@ -1087,7 +1095,14 @@ function closeOrderDetail() { document.getElementById("orderDetailModal").classL
 async function saveOrderNote(orderId) { const note = document.getElementById("adminOrderNote").value; if (!note) return; await sb.from("vaan_order_notes").insert([{ order_id: orderId, note }]); toast("✅ Note saved."); document.getElementById("adminOrderNote").value = ""; }
 async function markAsBuilding(orderId) { const time = document.getElementById("adminApproxTime").value; await sb.from("vaan_orders").update({ status: 'building', approx_delivery_time: time }).eq("id", orderId); toast("✅ Marked as Building"); closeOrderDetail(); loadEcomOrders(); }
 async function markAsDelivered(orderId) {
-  const url = document.getElementById("deliveryUrlInput").value.trim(); if (!url) return toast("Enter delivery URL first.", true);
+  const url = document.getElementById("deliveryUrlInput").value.trim();
+  if (!url) {
+    if (confirm("No delivery URL entered. Mark as delivered anyway?")) {
+      await sb.from("vaan_orders").update({ status: 'delivered', delivered_at: new Date().toISOString() }).eq("id", orderId);
+      toast("✅ Order marked as Delivered!");
+      closeOrderDetail(); loadEcomOrders(); return;
+    } else return;
+  }
   await sb.from("vaan_orders").update({ status: 'delivered', delivery_url: url, delivered_at: new Date().toISOString() }).eq("id", orderId);
   toast("✅ Order marked as Delivered!");
   if (currentViewingOrder && currentViewingOrder.customer_phone) {
