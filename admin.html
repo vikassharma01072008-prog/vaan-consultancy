@@ -15,12 +15,11 @@ body{font-family:'Inter',sans-serif;background:#0a0e1a;color:#f5f5f5;min-height:
 a{text-decoration:none;color:inherit}
 :root{--gold:#ffd400;--gold-soft:rgba(255,212,0,.15);--blue:#4f8fff;--blue-soft:rgba(79,143,255,.15);--card:#12192a;--line:rgba(255,212,0,.15);--line-soft:rgba(255,255,255,.08);--white:#f5f5f5;--muted:#8a8f9c;--green:#25b46e;--red:#ff4d5e}
 
-/* ====== LOGIN GATE ====== */
+/* ====== LOGIN ====== */
 .gate{position:fixed;inset:0;background:radial-gradient(ellipse at center,rgba(79,143,255,.1),transparent 60%),#0a0e1a;display:flex;align-items:center;justify-content:center;padding:20px;z-index:9999}
 .gate-box{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line);border-radius:24px;padding:40px 32px;max-width:440px;width:100%;text-align:center;position:relative;overflow:hidden}
 .gate-box::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--blue))}
 .gate-logo{width:64px;height:64px;margin:0 auto 20px}
-.gate-logo svg{width:100%;height:100%;filter:drop-shadow(0 0 20px rgba(255,212,0,.5))}
 .gate-box h1{font-size:26px;font-weight:950;letter-spacing:-1px;margin-bottom:8px;text-transform:uppercase}
 .gate-box h1 span{color:var(--gold)}
 .gate-box p{color:var(--muted);font-size:13px;margin-bottom:28px;line-height:1.5}
@@ -60,7 +59,7 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 .tab-content.show{display:block;animation:fadeIn .3s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-/* ====== DASHBOARD STATS ====== */
+/* ====== DASHBOARD ====== */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:32px}
 .stat{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid var(--line-soft);border-radius:16px;padding:20px;position:relative;overflow:hidden}
 .stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--gold),var(--blue))}
@@ -73,7 +72,7 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 .form-row{margin-bottom:16px}
 .form-row label{display:block;color:var(--muted);font-size:11px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
 .form-row input,.form-row textarea,.form-row select{width:100%;padding:14px;background:#0a0e1a;border:1px solid var(--line-soft);border-radius:10px;color:var(--white);font:inherit;font-size:14px;font-family:inherit;transition:.2s}
-.form-row input:focus,.form-row textarea:focus,.form-row select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,212,0,.1)}
+.form-row input:focus,.form-row textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,212,0,.1)}
 .form-row textarea{min-height:90px;resize:vertical;line-height:1.5}
 .form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .form-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
@@ -82,30 +81,27 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 .form-check label{margin:0;cursor:pointer;text-transform:none;letter-spacing:0;font-size:13px;color:var(--white);font-weight:700}
 .img-preview{max-width:200px;margin-top:12px;border-radius:10px;display:none;border:1px solid var(--gold);box-shadow:0 4px 12px rgba(0,0,0,0.5)}
 
-/* ====== LISTS & ITEMS ====== */
+/* ====== LISTS ====== */
 .sec-title{font-size:20px;font-weight:950;letter-spacing:-.5px;margin-bottom:6px;display:flex;align-items:center;gap:10px}
 .sec-title::before{content:"";width:4px;height:22px;background:var(--gold);border-radius:2px}
 .sec-sub{color:var(--muted);font-size:13px;margin-bottom:20px}
-
 .svc-list{display:grid;gap:12px}
 .svc-row,.item{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;transition:.2s}
 .svc-row:hover,.item:hover{border-color:rgba(255,212,0,.3)}
 .svc-row.off{opacity:.5}
-
 .svc-row-info,.item-info{flex:1;min-width:200px}
 .svc-row-info b,.item-info b{font-size:15px;font-weight:850;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .svc-row-info small,.item-info small{color:var(--muted);font-size:12px;display:block;margin-top:4px}
 .svc-row-tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
 .tag{font-size:9px;font-weight:900;letter-spacing:1px;padding:3px 8px;border-radius:99px;text-transform:uppercase;border:1px solid}
 .tag.gold{color:var(--gold);border-color:rgba(255,212,0,.4);background:var(--gold-soft)}
-.tag.blue{color:#8bb4ff;border-color:rgba(79,143,255,.4);background:var(--blue-soft)}
 .tag.green{color:var(--green);border-color:rgba(37,180,110,.4);background:rgba(37,180,110,.1)}
 .tag.red{color:#ff6b7a;border-color:rgba(255,77,94,.4);background:rgba(255,77,94,.1)}
+.tag.blue{color:#8bb4ff;border-color:rgba(79,143,255,.4);background:var(--blue-soft)}
 
 .svc-row-price{text-align:right}
 .svc-row-price b{font-size:20px;font-weight:950;color:var(--gold);letter-spacing:-.8px;display:block}
 .svc-row-price small{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:800}
-
 .item-actions,.svc-row-actions{display:flex;gap:8px;flex-wrap:wrap}
 
 /* ====== FEEDBACK ====== */
@@ -133,48 +129,36 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 .modal-actions{display:flex;gap:10px;margin-top:22px}
 .modal-actions .btn{flex:1;padding:15px}
 
-/* ====== TOAST & FOOTER ====== */
-.toast{position:fixed;bottom:24px;right:24px;background:#12192a;border:1px solid var(--line);border-left:3px solid var(--green);padding:16px 20px;border-radius:12px;font-size:13px;font-weight:800;display:none;z-index:2000;color:var(--white);max-width:340px;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+/* ====== E-COMMERCE DETAILS ====== */
+.ulp-editor{width:100%;height:300px;background:#0a0e1a;border:1.5px solid var(--line-soft);border-radius:12px;padding:16px;color:#a8c4ff;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.6;resize:vertical}
+.ulp-editor:focus{outline:none;border-color:var(--gold)}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.detail-box{background:#0a0e1a;border:1px solid var(--line-soft);border-radius:10px;padding:12px}
+.detail-box b{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.detail-box span{font-size:14px;color:var(--white);font-weight:600;word-break:break-word}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-bottom:20px}
+.photo-box{background:#0a0e1a;border:1px solid var(--line-soft);border-radius:10px;padding:6px;text-align:center;cursor:pointer}
+.photo-box img{width:100%;height:120px;object-fit:cover;border-radius:6px}
+.photo-box span{display:block;font-size:11px;color:var(--muted);margin-top:6px;text-transform:uppercase;font-weight:800}
+.photo-modal{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:2000;display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px}
+.photo-modal.open{display:flex}
+.photo-modal img{max-width:100%;max-height:80vh;object-fit:contain;border-radius:8px}
+.photo-modal-actions{margin-top:20px;display:flex;gap:12px}
+.photo-modal-actions a{background:var(--gold);color:#0a0e1a;padding:12px 24px;border-radius:99px;font-weight:900;text-decoration:none;font-size:14px;text-transform:uppercase}
+.photo-modal-actions button{background:rgba(255,255,255,.1);color:white;border:0;padding:12px 24px;border-radius:99px;font-weight:900;font-size:14px;cursor:pointer;text-transform:uppercase}
+
+/* ====== TOAST ====== */
+.toast{position:fixed;bottom:24px;right:24px;background:#12192a;border:1px solid var(--line);border-left:3px solid var(--green);padding:16px 20px;border-radius:12px;font-size:13px;font-weight:800;display:none;z-index:3000;color:var(--white);max-width:340px;box-shadow:0 20px 50px rgba(0,0,0,.6)}
 .toast.err{border-left-color:var(--red)}
 .toast.show{display:block;animation:slideIn .3s ease}
 @keyframes slideIn{from{transform:translateX(110%);opacity:0}to{transform:none;opacity:1}}
-
 footer{text-align:center;padding:40px 20px 30px;color:var(--muted);font-size:11px;border-top:1px solid var(--line-soft);margin-top:60px}
 footer b{color:var(--gold)}
 
-/* ====== NEW E-COMMERCE & ULP ENGINE STYLES ====== */
-.ulp-editor{width:100%;height:350px;background:#0a0e1a;border:1.5px solid var(--line-soft);border-radius:12px;padding:16px;color:#a8c4ff;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.6;resize:vertical}
-.ulp-editor:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,212,0,.1)}
-
-.copy-field{display:flex;justify-content:space-between;align-items:flex-start;background:#0a0e1a;border:1px solid var(--line-soft);border-radius:8px;padding:10px 12px;margin-bottom:8px;gap:12px}
-.copy-field-content{flex:1;font-size:13px;color:var(--white);word-break:break-word;line-height:1.4}
-.copy-field-content b{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;margin-bottom:4px;letter-spacing:1px}
-.copy-field-btn{background:rgba(255,255,255,.05);border:1px solid var(--line-soft);color:var(--muted);width:32px;height:32px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.copy-field-btn:hover{background:var(--gold);color:#0a0e1a;border-color:var(--gold)}
-
-.order-img-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:10px}
-.order-img-box{background:#0a0e1a;border:1px solid var(--line-soft);border-radius:10px;padding:6px;text-align:center}
-.order-img-box img{width:100%;height:100px;object-fit:cover;border-radius:6px;margin-bottom:6px;cursor:pointer}
-.order-img-box a{display:block;font-size:10px;color:var(--gold);font-weight:800;text-transform:uppercase;text-decoration:none}
-
-/* ====== RESPONSIVE ====== */
-@media(max-width:800px){
-  .stats{grid-template-columns:1fr 1fr}
-  .hdr-in{justify-content:center;text-align:center}
-  .tab{padding:10px 14px;font-size:12px}
-  .form-grid-2,.form-grid-3{grid-template-columns:1fr}
-}
-@media(max-width:550px){
-  .stats{grid-template-columns:1fr}
-  .svc-row,.item{flex-direction:column;align-items:stretch}
-  .svc-row-price{text-align:left}
-  .svc-row-actions,.item-actions{width:100%}
-  .svc-row-actions .btn,.item-actions .btn{flex:1}
-  .gate-box{padding:32px 22px}
-  .modal-head,.modal-body{padding-left:18px;padding-right:18px}
-  .toast{left:20px;right:20px;bottom:20px;max-width:none}
-}
-</style><body>
+@media(max-width:800px){.stats{grid-template-columns:1fr 1fr}.form-grid-2,.form-grid-3{grid-template-columns:1fr}}
+@media(max-width:550px){.stats{grid-template-columns:1fr}.svc-row,.item{flex-direction:column;align-items:stretch}}
+</style>
+</head><body>
 
 <!-- LOGIN GATE -->
 <div class="gate" id="gate">
@@ -213,15 +197,68 @@ footer b{color:var(--gold)}
   <main>
     <!-- TABS -->
     <div class="tabs">
-      <button class="tab active" data-tab="dashboard" onclick="switchTab('dashboard', this)">📊 Dashboard</button>
-      <button class="tab" data-tab="ecommerce" onclick="switchTab('ecommerce', this)">🛒 E-Commerce</button>
+      <button class="tab active" data-tab="ecommerce" onclick="switchTab('ecommerce', this)">🛒 E-Commerce</button>
+      <button class="tab" data-tab="settings" onclick="switchTab('settings', this)">⚙️ Customisation</button>
+      <button class="tab" data-tab="dashboard" onclick="switchTab('dashboard', this)">📊 Dashboard</button>
       <button class="tab" data-tab="portfolio" onclick="switchTab('portfolio', this)">💼 Portfolio</button>
       <button class="tab" data-tab="pricing" onclick="switchTab('pricing', this)">💰 Pricing</button>
       <button class="tab" data-tab="feedback" onclick="switchTab('feedback', this)">💬 Feedback</button>
     </div>
 
-    <!-- ================= DASHBOARD TAB ================= -->
-    <div class="tab-content show" id="tab-dashboard">
+    <!-- ================= E-COMMERCE TAB ================= -->
+    <div class="tab-content show" id="tab-ecommerce">
+      <div style="display:flex;gap:10px;margin-bottom:20px;border-bottom:1px solid var(--line-soft);padding-bottom:12px">
+        <button class="btn btn-gold btn-sm" id="btnTabOrders" onclick="switchEcomTab('orders')">📦 Orders</button>
+        <button class="btn btn-dark btn-sm" id="btnTabProducts" onclick="switchEcomTab('products')">🛍️ Products (ULP)</button>
+      </div>
+
+      <!-- ORDERS SUB-TAB -->
+      <div id="ecom-orders" style="display:block">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+          <div>
+            <div class="sec-title">Customer Orders</div>
+            <div class="sec-sub">Manage paid orders and mark them as Building or Delivered.</div>
+          </div>
+          <button class="btn btn-dark btn-sm" onclick="loadEcomOrders()">↻ Refresh</button>
+        </div>
+        <div class="svc-list" id="ecomOrdersList"></div>
+      </div>
+
+      <!-- PRODUCTS SUB-TAB -->
+      <div id="ecom-products" style="display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+          <div>
+            <div class="sec-title">Products</div>
+            <div class="sec-sub">Create products using ULP JSON.</div>
+          </div>
+          <button class="btn btn-gold" onclick="openProductModal()">+ Add New Product</button>
+        </div>
+        <div class="svc-list" id="ecomProductsList"></div>
+      </div>
+    </div>
+
+    <!-- ================= SETTINGS TAB ================= -->
+    <div class="tab-content" id="tab-settings">
+      <div class="sec-title">Customisation Options</div>
+      <div class="sec-sub">These colors and shapes appear in the Customer Customizer for ALL products.</div>
+      
+      <div class="form-box">
+        <h3 class="form-title">Color Palettes</h3>
+        <div class="form-row">
+          <label>JSON Format: [{"name":"Royal","bg":"#000","accent":"#fff"}]</label>
+          <textarea id="settingsPalettes" style="min-height:120px;font-family:monospace"></textarea>
+        </div>
+        <h3 class="form-title" style="margin-top:20px">Box Shapes</h3>
+        <div class="form-row">
+          <label>JSON Format: ["square","rounded","circle"]</label>
+          <textarea id="settingsShapes" style="min-height:80px;font-family:monospace"></textarea>
+        </div>
+        <button class="btn btn-gold" onclick="saveSettings()">💾 Save Settings</button>
+      </div>
+    </div>
+
+    <!-- ================= DASHBOARD ================= -->
+    <div class="tab-content" id="tab-dashboard">
       <div class="stats">
         <div class="stat"><b id="statTotal">0</b><span>Total Services</span></div>
         <div class="stat"><b id="statActive">0</b><span>Active Services</span></div>
@@ -229,40 +266,7 @@ footer b{color:var(--gold)}
         <div class="stat"><b id="statRating">0.0</b><span>Avg Rating</span></div>
       </div>
       <div class="sec-title">Recent Feedback</div>
-      <div class="sec-sub">Latest customer feedback across the site</div>
       <div class="fb-list" id="recentFeedback"><div class="fb-empty"><b>Loading...</b></div></div>
-    </div>
-
-    <!-- ================= E-COMMERCE TAB ================= -->
-    <div class="tab-content" id="tab-ecommerce">
-      
-      <!-- E-COMMERCE SUB-TABS -->
-      <div style="display:flex;gap:10px;margin-bottom:20px;border-bottom:1px solid var(--line-soft);padding-bottom:12px">
-        <button class="btn btn-gold btn-sm" id="btnTabOrders" onclick="switchEcomTab('orders')">📦 Paid Orders</button>
-        <button class="btn btn-dark btn-sm" id="btnTabProducts" onclick="switchEcomTab('products')">🛍️ Products (ULP)</button>
-      </div>
-
-      <!-- ECOM: ORDERS SUB-TAB -->
-      <div id="ecom-orders" style="display:block">
-        <div class="sec-title">Paid Orders</div>
-        <div class="sec-sub">Only showing orders where payment is successful. You can mark them as delivered here.</div>
-        <div class="svc-list" id="ecomOrdersList">
-          <div class="svc-empty"><b>Loading orders...</b></div>
-        </div>
-      </div>
-
-      <!-- ECOM: PRODUCTS SUB-TAB -->
-      <div id="ecom-products" style="display:none">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-          <div>
-            <div class="sec-title">Products & Form Builder</div>
-            <div class="sec-sub">Create products using the Universal Layout Protocol (ULP) blueprint.</div>
-          </div>
-          <button class="btn btn-gold" onclick="openProductModal()">+ Add New Product</button>
-        </div>
-        <div class="svc-list" id="ecomProductsList"></div>
-      </div>
-
     </div>
 
     <!-- ================= PORTFOLIO TAB ================= -->
@@ -309,7 +313,7 @@ footer b{color:var(--gold)}
     <!-- ================= FEEDBACK TAB ================= -->
     <div class="tab-content" id="tab-feedback">
       <div class="sec-title">All Feedback</div>
-      <div class="fb-list" id="allFeedback"></div>
+      <div class="fb-list" id="allFeedback"><div class="fb-empty">Loading...</div></div>
     </div>
 
   </main>
@@ -321,6 +325,57 @@ footer b{color:var(--gold)}
 </div>
 
 <!-- ================= MODALS ================= -->
+
+<!-- PRODUCT MODAL (ULP + FORM BUILDER) -->
+<div class="modal" id="productModal" onclick="if(event.target===this)closeProductModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div><h3 id="prodModalTitle">Add New Product</h3><small>Product details & ULP Blueprint</small></div>
+      <button class="modal-close" onclick="closeProductModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="prodId">
+      <div class="form-grid-3">
+        <div class="form-row"><label>Product Name</label><input id="prodName" placeholder="Digital Card"></div>
+        <div class="form-row"><label>Price (₹)</label><input id="prodPrice" type="number" placeholder="1499"></div>
+        <div class="form-row"><label>Icon</label><input id="prodIcon" placeholder="💳" maxlength="2"></div>
+      </div>
+      <div class="form-row"><label>Short Description</label><input id="prodDesc" placeholder="A premium digital visiting card..."></div>
+      
+      <div class="form-row" style="margin-top:24px">
+        <label style="color:var(--gold)">ULP JSON Blueprint</label>
+        <textarea id="prodULP" class="ulp-editor" placeholder='{ "product_name": "...", "theme": {...}, "blocks": [...] }' oninput="generateFormBuilder()"></textarea>
+      </div>
+
+      <div id="formBuilderContainer" style="display:none;margin-top:24px;border-top:1px dashed var(--line-soft);padding-top:20px">
+        <div class="sec-title" style="font-size:16px;margin-bottom:10px">Auto-Generated Form Builder</div>
+        <div class="sec-sub">Based on your ULP JSON, these questions will be asked.</div>
+        <div id="dynamicFormList" class="svc-list"></div>
+      </div>
+
+      <label class="form-check" style="margin-top:24px"><input type="checkbox" id="prodActive" checked><span>Active</span></label>
+
+      <div class="modal-actions">
+        <button class="btn btn-gold" onclick="saveProduct()">💾 Save Product</button>
+        <button class="btn btn-dark" onclick="closeProductModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER DETAILS MODAL -->
+<div class="modal" id="orderDetailModal" onclick="if(event.target===this)closeOrderDetail()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div><h3 id="ordDetailTitle">Order Details</h3><small id="ordDetailSub">—</small></div>
+      <button class="modal-close" onclick="closeOrderDetail()">✕</button>
+    </div>
+    <div class="modal-body" id="ordDetailBody"></div>
+    <div style="padding:0 24px 24px">
+      <div class="modal-actions" id="ordDetailActions"></div>
+    </div>
+  </div>
+</div>
 
 <!-- EDIT PRICING MODAL -->
 <div class="modal" id="editModal" onclick="if(event.target===this)closeEdit()">
@@ -354,56 +409,12 @@ footer b{color:var(--gold)}
   </div>
 </div>
 
-<!-- PRODUCT MODAL (CREATE/EDIT) -->
-<div class="modal" id="productModal" onclick="if(event.target===this)closeProductModal()">
-  <div class="modal-box">
-    <div class="modal-head">
-      <div><h3 id="prodModalTitle">Add New Product</h3><small>Product details & ULP Blueprint</small></div>
-      <button class="modal-close" onclick="closeProductModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <input type="hidden" id="prodId">
-      
-      <div class="form-grid-3">
-        <div class="form-row"><label>Product Name</label><input id="prodName" placeholder="e.g. Digital Card"></div>
-        <div class="form-row"><label>Price (₹)</label><input id="prodPrice" type="number" placeholder="1499"></div>
-        <div class="form-row"><label>Icon (Emoji)</label><input id="prodIcon" placeholder="💳" maxlength="2"></div>
-      </div>
-      <div class="form-row"><label>Short Description</label><input id="prodDesc" placeholder="A premium digital visiting card..."></div>
-      
-      <div class="form-row" style="margin-top:24px">
-        <label style="color:var(--gold);font-size:13px;display:flex;justify-content:space-between">
-          <span>ULP JSON Blueprint</span>
-          <span style="color:var(--muted);text-transform:none;letter-spacing:0">Paste the 50-line JSON from the AI here</span>
-        </label>
-        <textarea id="prodULP" class="ulp-editor" placeholder='{ "product_name": "...", "theme": {...}, "blocks": [...] }'></textarea>
-      </div>
-
-      <label class="form-check" style="margin-top:12px"><input type="checkbox" id="prodActive" checked><span style="font-size:13px;font-weight:700">Active (visible on store)</span></label>
-
-      <div class="modal-actions">
-        <button class="btn btn-gold" onclick="saveProduct()">💾 Save Product</button>
-        <button class="btn btn-dark" onclick="closeProductModal()">Cancel</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ORDER DETAILS MODAL (Read-Only) -->
-<div class="modal" id="orderDetailModal" onclick="if(event.target===this)closeOrderDetail()">
-  <div class="modal-box">
-    <div class="modal-head">
-      <div><h3 id="ordDetailTitle">Order Details</h3><small id="ordDetailSub">—</small></div>
-      <button class="modal-close" onclick="closeOrderDetail()">✕</button>
-    </div>
-    <div class="modal-body" id="ordDetailBody">
-      <!-- Filled dynamically -->
-    </div>
-    <div style="padding:0 24px 24px">
-      <div class="modal-actions" id="ordDetailActions">
-        <!-- Filled dynamically -->
-      </div>
-    </div>
+<!-- FULLSCREEN PHOTO VIEWER -->
+<div class="photo-modal" id="photoViewer" onclick="if(event.target===this)closePhotoViewer()">
+  <img id="fullPhotoImg" src="" alt="Uploaded File">
+  <div class="photo-modal-actions">
+    <a id="downloadPhotoBtn" href="" download target="_blank">⬇ Save to Photos</a>
+    <button onclick="closePhotoViewer()">Close</button>
   </div>
 </div>
 
@@ -419,9 +430,11 @@ let allFeedback = [];
 let allProjects = [];
 let allProducts = [];
 let allOrders = [];
+let allSettings = {};
 let compressedFile = null;
 let editingProjectId = null;
 
+/* ====== HELPERS ====== */
 function esc(v){return String(v||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 function toast(msg, isErr){
   const t = document.getElementById("toast");
@@ -479,11 +492,12 @@ function switchTab(name, btn){
 /* ====== LOAD ALL DATA ====== */
 async function loadAll(){
   try {
-    const [pRes, fRes, projRes, prodRes] = await Promise.all([
+    const [pRes, fRes, projRes, prodRes, setRes] = await Promise.all([
       sb.from("vaan_pricing").select("*").order("display_order", { ascending: true }),
       sb.from("vaan_feedback").select("*").order("created", { ascending: false }).limit(200),
       sb.from("portfolio_items").select("*").order("created_at", { ascending: false }),
-      sb.from("vaan_products").select("*").order("created_at", { ascending: false })
+      sb.from("vaan_products").select("*").order("created_at", { ascending: false }),
+      sb.from("vaan_settings").select("*")
     ]);
     
     allServices = pRes.data || [];
@@ -491,13 +505,17 @@ async function loadAll(){
     allProjects = projRes.data || [];
     allProducts = prodRes.data || [];
     
+    if (setRes.data) {
+      setRes.data.forEach(row => { allSettings[row.key] = row.value; });
+      document.getElementById("settingsPalettes").value = JSON.stringify(allSettings.customisation_options?.palettes || [], null, 2);
+      document.getElementById("settingsShapes").value = JSON.stringify(allSettings.customisation_options?.shapes || [], null, 2);
+    }
+    
     renderStats();
     renderPricing();
     renderFeedback();
     renderProjects();
     renderProducts();
-    
-    // Load orders separately since it requires filtering
     loadEcomOrders();
   } catch (err){
     console.error(err);
@@ -524,6 +542,27 @@ function renderStats(){
     const stars = "★".repeat(f.rating || 0) + "☆".repeat(5 - (f.rating || 0));
     return '<div class="fb-card"><div class="fb-head"><div><b>' + esc(f.name) + '</b><small>' + fmtDate(f.created) + '</small></div><div class="fb-stars">' + stars + '</div></div><div class="fb-text">' + esc(f.feedback) + '</div></div>';
   }).join("");
+}
+
+/* ====== SETTINGS ====== */
+async function saveSettings() {
+  try {
+    const palettes = JSON.parse(document.getElementById("settingsPalettes").value || "[]");
+    const shapes = JSON.parse(document.getElementById("settingsShapes").value || "[]");
+    const value = { palettes, shapes };
+    
+    const { error } = await sb.from("vaan_settings").upsert({ 
+      key: 'customisation_options', 
+      value: value,
+      updated_at: new Date().toISOString()
+    }, { onConflict: 'key' });
+    
+    if (error) throw error;
+    toast("✅ Settings saved!");
+    allSettings['customisation_options'] = value;
+  } catch(e) {
+    toast("Invalid JSON format. Check your code.", true);
+  }
 }
 
 /* ====== PRICING ====== */
@@ -740,8 +779,14 @@ function resetProjectForm(){
   document.getElementById('saveProjectBtn').textContent = "Save Project";
   compressedFile = null;
 }
+</script><script>
+/* ============================================================
+   CHUNK 4: E-COMMERCE, ORDERS, FORM BUILDER, PHOTO VIEWER
+   ============================================================ */
 
-/* ====== E-COMMERCE TAB LOGIC ====== */
+let currentViewingOrder = null;
+
+/* ====== E-COMMERCE TABS ====== */
 function switchEcomTab(tab) {
   document.getElementById('ecom-orders').style.display = tab === 'orders' ? 'block' : 'none';
   document.getElementById('ecom-products').style.display = tab === 'products' ? 'block' : 'none';
@@ -757,7 +802,7 @@ function switchEcomTab(tab) {
   }
 }
 
-/* ====== PRODUCTS (ULP) ====== */
+/* ====== PRODUCTS & ULP FORM BUILDER ====== */
 function renderProducts(){
   const wrap = document.getElementById("ecomProductsList");
   if (!allProducts.length) {
@@ -772,7 +817,7 @@ function renderProducts(){
       </div>
       <div class="item-actions">
         <button class="btn btn-dark btn-sm" onclick="editProduct('${p.id}')">Edit</button>
-        <button class="btn btn-danger btn-sm" onclick="deleteProduct('${p.id}')">Delete</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteProduct('${p.id}')">🗑 Delete</button>
       </div>
     </div>
   `).join("");
@@ -786,8 +831,11 @@ function openProductModal() {
   document.getElementById("prodIcon").value = "";
   document.getElementById("prodDesc").value = "";
   document.getElementById("prodULP").value = "";
+  document.getElementById("formBuilderContainer").style.display = "none";
+  document.getElementById("dynamicFormList").innerHTML = "";
   document.getElementById("prodActive").checked = true;
   document.getElementById("productModal").classList.add("open");
+  document.body.style.overflow = "hidden";
 }
 
 function editProduct(id) {
@@ -801,11 +849,16 @@ function editProduct(id) {
   document.getElementById("prodDesc").value = p.description || "";
   document.getElementById("prodULP").value = p.ulp_blueprint ? JSON.stringify(p.ulp_blueprint, null, 2) : "";
   document.getElementById("prodActive").checked = !!p.is_active;
+  
+  generateFormBuilder(); // Generate the preview of questions
+  
   document.getElementById("productModal").classList.add("open");
+  document.body.style.overflow = "hidden";
 }
 
 function closeProductModal() {
   document.getElementById("productModal").classList.remove("open");
+  document.body.style.overflow = "";
 }
 
 async function saveProduct() {
@@ -822,7 +875,6 @@ async function saveProduct() {
     return;
   }
 
-  // Validate JSON
   let ulpJson;
   try {
     ulpJson = JSON.parse(ulpText);
@@ -831,10 +883,7 @@ async function saveProduct() {
     return;
   }
 
-  const payload = {
-    name, price, icon, description: desc, ulp_blueprint: ulpJson, is_active: isActive
-  };
-
+  const payload = { name, price, icon, description: desc, ulp_blueprint: ulpJson, is_active: isActive };
   const op = id ? sb.from("vaan_products").update(payload).eq("id", id) : sb.from("vaan_products").insert([payload]);
   const { error } = await op;
   
@@ -852,13 +901,68 @@ async function deleteProduct(id) {
   loadAll();
 }
 
+/* ====== AUTO-GENERATE FORM BUILDER ====== */
+function generateFormBuilder() {
+  const ulpText = document.getElementById("prodULP").value.trim();
+  const container = document.getElementById("formBuilderContainer");
+  const list = document.getElementById("dynamicFormList");
+  
+  if (!ulpText) {
+    container.style.display = "none";
+    return;
+  }
+
+  try {
+    const ulp = JSON.parse(ulpText);
+    container.style.display = "block";
+    
+    let requiredVars = new Set();
+    requiredVars.add("name"); 
+    requiredVars.add("phone"); 
+    
+    ulp.blocks.forEach(block => {
+      if (block.variable) {
+        const matches = block.variable.match(/{{(.*?)}}/g);
+        if (matches) matches.forEach(m => requiredVars.add(m.replace(/[{}]/g, '')));
+      }
+      if (block.title && block.title.match(/{{.*}}/)) {
+          const matches = block.title.match(/{{(.*?)}}/g);
+          if (matches) matches.forEach(m => requiredVars.add(m.replace(/[{}]/g, '')));
+      }
+    });
+
+    let html = '';
+    requiredVars.forEach(v => {
+      let label = v.replace(/_/g, ' ').toUpperCase();
+      let type = "text";
+      if(v.includes("logo") || v.includes("gallery")) type = "image";
+      if(v === "phone") type = "tel";
+      if(v === "email") type = "email";
+      
+      html += `
+        <div class="item" style="padding:12px 16px">
+          <div class="item-info">
+            <b>${label}</b>
+            <small>Variable: <code>{{${v}}}</code> · Type: ${type}</small>
+          </div>
+          <div class="item-actions">
+            <span class="tag blue">Auto</span>
+          </div>
+        </div>
+      `;
+    });
+    list.innerHTML = html;
+
+  } catch(e) {
+    container.style.display = "none";
+  }
+}
+
 /* ====== E-COMMERCE ORDERS ====== */
 async function loadEcomOrders() {
-  // Only load PAID orders
   const { data, error } = await sb.from("vaan_orders")
     .select("*")
-    .eq("payment_status", "paid")
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false }); 
     
   if (error) {
     console.error("Orders load error:", error);
@@ -873,38 +977,30 @@ async function loadEcomOrders() {
 function renderEcomOrders() {
   const wrap = document.getElementById("ecomOrdersList");
   if (!allOrders.length) {
-    wrap.innerHTML = '<div class="svc-empty"><b>No paid orders yet.</b></div>';
+    wrap.innerHTML = '<div class="svc-empty"><b>No orders yet.</b></div>';
     return;
   }
   
   wrap.innerHTML = allOrders.map(o => {
-    const isDelivered = o.delivery_url ? true : false; // Assuming delivery_url means it's delivered
+    let statusTag = '<span class="tag gold">PENDING PAYMENT</span>';
+    if (o.payment_status === 'paid') statusTag = '<span class="tag green">PAID</span>';
+    if (o.status === 'building') statusTag = '<span class="tag blue">BUILDING</span>';
+    if (o.status === 'delivered') statusTag = '<span class="tag green">DELIVERED</span>';
+
     return `
     <div class="item">
       <div class="item-info">
         <b>${esc(o.customer_name)} · ${esc(o.customer_phone)}</b>
         <small>${esc(o.order_number)} · ${fmtDate(o.created_at)}</small>
-        <div class="svc-row-tags">
-          <span class="tag green">PAID</span>
-          ${isDelivered ? '<span class="tag blue">DELIVERED</span>' : '<span class="tag gold">PENDING DELIVERY</span>'}
-        </div>
+        <div class="svc-row-tags" style="margin-top:8px">${statusTag}</div>
       </div>
       <div class="item-actions">
-        <button class="btn btn-gold btn-sm" onclick="viewOrderDetails('${o.id}')">👁 See Details</button>
+        <button class="btn btn-gold btn-sm" onclick="viewOrderDetails('${o.id}')">👁 Details</button>
       </div>
     </div>
     `;
   }).join("");
 }
-
-/* Logic for viewing orders will be in Chunk 4 */
-</script>
-</head><script>
-/* ============================================================
-   CHUNK 4: ORDER DETAILS, DELIVERY, & INIT
-   ============================================================ */
-
-let currentViewingOrder = null;
 
 async function viewOrderDetails(orderId) {
   const o = allOrders.find(x => x.id === orderId);
@@ -921,7 +1017,6 @@ async function viewOrderDetails(orderId) {
   document.getElementById("orderDetailModal").classList.add("open");
   document.body.style.overflow = "hidden";
 
-  // Fetch the answers the customer submitted
   const { data: answers, error } = await sb.from("vaan_order_answers").select("*").eq("order_id", orderId);
   
   if (error) {
@@ -930,73 +1025,67 @@ async function viewOrderDetails(orderId) {
   }
 
   const ans = answers || [];
-  
-  // Separate standard fields from uploaded files
   const textFields = ans.filter(a => a.field_value !== null);
   const imageFields = ans.filter(a => a.file_url !== null && a.file_url !== "");
   
-  // Build the HTML for text fields (Copyable)
-  let textHtml = '<div class="sec-title" style="font-size:16px;margin:20px 0 10px">Submitted Details</div>';
+  let html = `
+    <div class="sec-title" style="font-size:16px;margin-bottom:12px">Customer Info</div>
+    <div class="detail-grid">
+      <div class="detail-box"><b>Name</b><span>${esc(o.customer_name)}</span></div>
+      <div class="detail-box"><b>Phone</b><span>${esc(o.customer_phone)}</span></div>
+      <div class="detail-box"><b>Email</b><span>${esc(o.customer_email || 'N/A')}</span></div>
+      <div class="detail-box"><b>Company</b><span>${esc(o.company_name || 'N/A')}</span></div>
+    </div>
+  `;
+
+  html += '<div class="sec-title" style="font-size:16px;margin:20px 0 12px">Form Answers</div>';
   if (textFields.length === 0) {
-    textHtml += '<div style="font-size:12px;color:var(--muted);margin-bottom:12px">No text fields submitted.</div>';
+    html += '<div style="font-size:12px;color:var(--muted);margin-bottom:12px">No text answers.</div>';
   } else {
     textFields.forEach(f => {
       let val = f.field_value;
-      if (typeof val === 'object') val = JSON.stringify(val); // In case it's an array or object
+      if (typeof val === 'object') val = JSON.stringify(val); 
       
-      textHtml += `
-        <div class="copy-field">
-          <div class="copy-field-content">
+      html += `
+        <div class="detail-box" style="margin-bottom:8px;display:flex;justify-content:space-between;align-items:center">
+          <div>
             <b>${esc(f.field_key)}</b>
-            ${esc(val)}
+            <span>${esc(val)}</span>
           </div>
-          <button class="copy-field-btn" onclick="copyToClipboard('${esc(String(val).replace(/'/g, "\\'"))}', this)" title="Copy">
-            📋
-          </button>
+          <button class="btn btn-dark btn-sm" onclick="copyToClipboard('${esc(String(val).replace(/'/g, "\\'"))}', this)">📋 Copy</button>
         </div>
       `;
     });
   }
 
-  // Build the HTML for uploaded images
-  let imgHtml = '';
   if (imageFields.length > 0) {
-    imgHtml += '<div class="sec-title" style="font-size:16px;margin:20px 0 10px">Uploaded Files</div>';
-    imgHtml += '<div class="order-img-gallery">';
+    html += '<div class="sec-title" style="font-size:16px;margin:20px 0 12px">Uploaded Photos</div>';
+    html += '<div class="photo-grid">';
     imageFields.forEach(f => {
-      imgHtml += `
-        <div class="order-img-box">
-          <a href="${esc(f.file_url)}" target="_blank">
-            <img src="${esc(f.file_url)}" alt="${esc(f.field_key)}">
-          </a>
-          <a href="${esc(f.file_url)}" download target="_blank">⬇ Download</a>
+      html += `
+        <div class="photo-box" onclick="openPhotoViewer('${esc(f.file_url)}')">
+          <img src="${esc(f.file_url)}" alt="${esc(f.field_key)}">
+          <span>${esc(f.field_key)}</span>
         </div>
       `;
     });
-    imgHtml += '</div>';
+    html += '</div>';
   }
 
-  // Build Customization section (If they applied custom colors/layout)
-  let customHtml = '';
   if (o.customization) {
-    customHtml += '<div class="sec-title" style="font-size:16px;margin:20px 0 10px">Customization Data</div>';
-    customHtml += `
-      <div class="copy-field">
-        <div class="copy-field-content">
-          <b>Design Preferences</b>
-          <pre style="font-size:11px;margin-top:6px;color:var(--muted)">${JSON.stringify(o.customization, null, 2)}</pre>
-        </div>
-        <button class="copy-field-btn" onclick='copyToClipboard(${JSON.stringify(JSON.stringify(o.customization))}, this)' title="Copy">
-          📋
-        </button>
+    html += '<div class="sec-title" style="font-size:16px;margin:20px 0 12px">Customisation (Code)</div>';
+    html += `
+      <div class="detail-box" style="background:#0a0e1a">
+        <pre style="font-size:11px;color:#a8c4ff;white-space:pre-wrap;">${JSON.stringify(o.customization, null, 2)}</pre>
       </div>
     `;
   }
 
-  // Build the Action Buttons (Delivery)
+  body.innerHTML = html;
+
   const actions = document.getElementById("ordDetailActions");
-  if (o.delivery_url) {
-    // Already delivered
+  
+  if (o.status === 'delivered') {
     actions.innerHTML = `
       <div style="width:100%;text-align:center;padding:14px;background:rgba(37,180,110,.1);border:1px solid var(--green);border-radius:10px;color:var(--green);font-weight:800;font-size:13px;margin-bottom:10px">
         ✅ Delivered to: <br><a href="${esc(o.delivery_url)}" target="_blank" style="color:var(--white);text-decoration:underline">${esc(o.delivery_url)}</a>
@@ -1004,10 +1093,14 @@ async function viewOrderDetails(orderId) {
       <button class="btn btn-dark" onclick="closeOrderDetail()">Close</button>
     `;
   } else {
-    // Not delivered yet
     actions.innerHTML = `
+      <div style="width:100%;display:flex;gap:10px;margin-bottom:12px">
+        <button class="btn btn-dark" style="flex:1;background:${o.status === 'building' ? 'var(--gold)' : ''};color:${o.status === 'building' ? '#000' : ''}" onclick="markAsBuilding('${o.id}')">
+          🔨 Mark as Building
+        </button>
+      </div>
       <div class="form-row" style="width:100%;margin-bottom:0">
-        <label>Final Delivery Link (e.g., yourdomain.com/card/vikas)</label>
+        <label>Final Delivery Link</label>
         <input id="deliveryUrlInput" placeholder="https://..." style="background:#0a0e1a;padding:14px;border-radius:10px;border:1px solid var(--line-soft);color:white;width:100%">
       </div>
       <div style="display:flex;gap:10px;width:100%;margin-top:16px">
@@ -1016,8 +1109,6 @@ async function viewOrderDetails(orderId) {
       </div>
     `;
   }
-
-  body.innerHTML = textHtml + imgHtml + customHtml;
 }
 
 function closeOrderDetail() {
@@ -1030,19 +1121,17 @@ function copyToClipboard(text, btn) {
   navigator.clipboard.writeText(text).then(() => {
     const original = btn.innerHTML;
     btn.innerHTML = "✅";
-    btn.style.background = "var(--green)";
-    btn.style.color = "#fff";
-    btn.style.borderColor = "var(--green)";
-    setTimeout(() => {
-      btn.innerHTML = original;
-      btn.style.background = "";
-      btn.style.color = "";
-      btn.style.borderColor = "";
-    }, 2000);
-    toast("Copied to clipboard!");
-  }).catch(err => {
-    toast("Failed to copy", true);
+    setTimeout(() => { btn.innerHTML = original; }, 2000);
+    toast("Copied!");
   });
+}
+
+async function markAsBuilding(orderId) {
+  const { error } = await sb.from("vaan_orders").update({ status: 'building' }).eq("id", orderId);
+  if (error) { toast("Error: " + error.message, true); return; }
+  toast("✅ Marked as Building");
+  closeOrderDetail();
+  loadEcomOrders();
 }
 
 async function markAsDelivered(orderId) {
@@ -1054,16 +1143,12 @@ async function markAsDelivered(orderId) {
     return;
   }
 
-  const { error } = await sb.from("vaan_orders").update({ delivery_url: url }).eq("id", orderId);
+  const { error } = await sb.from("vaan_orders").update({ status: 'delivered', delivery_url: url }).eq("id", orderId);
   
-  if (error) {
-    toast("Error updating order: " + error.message, true);
-    return;
-  }
+  if (error) { toast("Error updating order: " + error.message, true); return; }
 
   toast("✅ Order marked as Delivered!");
   
-  // Optional: Trigger a WhatsApp message to the customer
   if (currentViewingOrder && currentViewingOrder.customer_phone) {
     const phone = currentViewingOrder.customer_phone.replace(/\D/g, "").slice(-10);
     const name = currentViewingOrder.customer_name;
@@ -1072,29 +1157,38 @@ async function markAsDelivered(orderId) {
   }
 
   closeOrderDetail();
-  loadEcomOrders(); // Refresh the list
+  loadEcomOrders();
+}
+
+/* ====== PHOTO VIEWER ====== */
+function openPhotoViewer(url) {
+  document.getElementById("fullPhotoImg").src = url;
+  document.getElementById("downloadPhotoBtn").href = url;
+  document.getElementById("photoViewer").classList.add("open");
+}
+
+function closePhotoViewer() {
+  document.getElementById("photoViewer").classList.remove("open");
+  document.getElementById("fullPhotoImg").src = "";
 }
 
 /* ====== INIT ====== */
-// Ensure the E-Commerce tab loads orders when clicked
 const originalSwitchTab = switchTab;
 switchTab = function(name, btn) {
   originalSwitchTab(name, btn);
   if (name === 'ecommerce') {
-    // Default to orders sub-tab
     switchEcomTab('orders');
   }
 };
 
-// Close modals on escape
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
-    closeEdit();
     closeProductModal();
     closeOrderDetail();
+    closePhotoViewer();
+    closeEdit();
   }
 });
-
 </script>
 
 </body>
