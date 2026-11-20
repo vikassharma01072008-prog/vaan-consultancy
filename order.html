@@ -760,6 +760,16 @@ input,textarea,select{font-family:inherit;font-size:16px !important}
 .btn-gold{background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1a060d}
 .btn-dark{background:rgba(255,255,255,.06);color:var(--cream);border:1px solid var(--line-soft)}
 
+/* Track Order Custom Styles */
+.track-step { position:relative; padding-bottom:20px; padding-left:30px; border-left:2px solid var(--line); }
+.track-step:last-child { border-left-color:transparent; padding-bottom:0; }
+.track-step-dot { position:absolute; left:-11px; top:0; width:20px; height:20px; border-radius:50%; background:var(--bg-deep); border:2px solid var(--line); display:flex; align-items:center; justify-content:center; }
+.track-step.active .track-step-dot { border-color:var(--gold-bright); background:var(--gold-bright); box-shadow:0 0 10px rgba(240,193,75,.5); }
+.track-step.done .track-step-dot { border-color:var(--green); background:var(--green); }
+.track-step.done .track-step-dot::after { content:"✓"; color:#1a060d; font-size:11px; font-weight:900; }
+.track-step h5 { font-size:14px; color:var(--cream); margin-bottom:2px; }
+.track-step p { font-size:12px; color:var(--cream-dim); }
+
 @media(max-width:380px){
   .landing-hero h1{font-size:24px}
   .step-head h2{font-size:22px}
@@ -1009,6 +1019,7 @@ input,textarea,select{font-family:inherit;font-size:16px !important}
       <h2>Payment received! 🎉</h2>
       <div class="order-id" id="successOrderId">VAAN-XXXX</div>
       <p>Thank you, <b id="successName">there</b>! Your order is confirmed.</p>
+      <p style="font-size:12px;opacity:0.8">Save your Order ID to track your progress. You can also track it via the "Track Order" button at the top.</p>
     </div>
 
     <!-- INVOICE -->
@@ -1086,9 +1097,9 @@ input,textarea,select{font-family:inherit;font-size:16px !important}
 
 <!-- TRACK ORDER MODAL -->
 <div class="modal" id="trackModal" onclick="if(event.target===this)closeTrackModal()">
-  <div class="modal-box" style="width:min(400px,100%);height:auto;max-height:80vh">
+  <div class="modal-box" style="width:min(400px,100%);height:auto;max-height:90vh">
     <div class="modal-head">
-      <div><h3>Track Order</h3><small>Enter your receipt number</small></div>
+      <div><h3>Track Order</h3><small>Enter your Order ID (e.g. VAAN-1234)</small></div>
       <button class="modal-close" onclick="closeTrackModal()">✕</button>
     </div>
     <div class="modal-body">
@@ -1096,7 +1107,10 @@ input,textarea,select{font-family:inherit;font-size:16px !important}
         <input type="text" id="trackInput" placeholder="VAAN-XXXX" style="text-transform:uppercase;text-align:center;font-family:monospace;letter-spacing:2px;font-weight:bold">
       </div>
       <button class="btn-primary" onclick="trackOrder()">Track Status</button>
-      <div class="track-result" id="trackResult" style="margin-top:20px"></div>
+      
+      <div class="track-result" id="trackResult" style="margin-top:24px;display:none">
+        <!-- Filled by JS -->
+      </div>
     </div>
   </div>
 </div>
@@ -1282,17 +1296,20 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 async function loadProducts(){
-  // Removed .eq("is_active", true) to prevent crashes if the column is named differently
   var res = await sb.from("vaan_products").select("*");
   if (res.error){ 
     console.error("Products load error:", res.error);
     $("productsGrid").innerHTML = '<div class="empty">Could not load products. ' + esc(res.error.message) + '</div>'; 
     return; 
   }
-  // Filter out inactive products in JavaScript instead
-  state.products = (res.data || []).filter(function(p){ return p.is_active !== false; });
   
-  if (!state.products.length){ $("productsGrid").innerHTML = '<div class="empty">No products available yet. Please add one in the Admin Panel.</div>'; return; }
+  // Filter active products using 'active' column based on your screenshot
+  state.products = (res.data || []).filter(function(p){ return p.active !== false; });
+  
+  if (!state.products.length){ 
+    $("productsGrid").innerHTML = '<div class="empty">No products available yet. Please add one in the Admin Panel.</div>'; 
+    return; 
+  }
   renderProducts();
 }
 
@@ -1772,7 +1789,7 @@ function buildPreviewHTML(forBoxColorMode, forTextColorMode){
     footer: function(){ var attr = forTextColorMode ? ' data-color-group="footer"' : ''; return '<div class="pv-footer"' + attr + '>All Rights Reserved<br><b>© ' + new Date().getFullYear() + ' ' + esc(bizName || "VAAN Consultancy") + '</b></div>'; },
     note: function(){
       if (!p.additionalNote) return '';
-      return '<div class="pv-note" style="margin-top:16px;padding:14px;background:rgba(240,193,75,0.1);border:1px solid rgba(240,193,75,0.4);border-radius:' + radius + ';font-size:11px;line-height:1.5"><div style="font-family:\\'JetBrains Mono\\',monospace;font-size:8px;letter-spacing:2px;color:var(--pv-accent-bright);text-transform:uppercase;margin-bottom:6px">Additional Note</div><div style="color:var(--pv-text)">' + esc(p.additionalNote) + '</div></div>';
+      return '<div class="pv-note" style="margin-top:16px;padding:14px;background:rgba(240,193,75,0.1);border:1px solid rgba(240,193,75,0.4);border-radius:' + radius + ';font-size:11px;line-height:1.5"><div style="font-family:\'JetBrains Mono\',monospace;font-size:8px;letter-spacing:2px;color:var(--pv-accent-bright);text-transform:uppercase;margin-bottom:6px">Additional Note</div><div style="color:var(--pv-text)">' + esc(p.additionalNote) + '</div></div>';
     }
   };
   var body = d.layoutOrder.map(function(key){ return sections[key] ? sections[key]() : ''; }).join("");
@@ -1972,22 +1989,28 @@ function numberToWords(n) {
 /* ============================================================
    TRACK ORDER FUNCTIONS
    ============================================================ */
-function openTrackModal() { document.getElementById("trackModal").classList.add("open"); }
-function closeTrackModal() { document.getElementById("trackModal").classList.remove("open"); document.getElementById("trackResult").classList.remove("show"); }
+function openTrackModal() { 
+  document.getElementById("trackInput").value = "";
+  document.getElementById("trackResult").style.display = "none";
+  document.getElementById("trackModal").classList.add("open"); 
+}
+function closeTrackModal() { 
+  document.getElementById("trackModal").classList.remove("open"); 
+}
 
 async function trackOrder(){
   var input = document.getElementById("trackInput").value.trim().toUpperCase();
   var resultDiv = document.getElementById("trackResult");
-  if(!input){ showToast("Please enter a receipt number"); return; }
+  if(!input){ showToast("Please enter an Order Number", "err"); return; }
 
-  resultDiv.className = "track-result";
-  resultDiv.innerHTML = "Searching...";
-  resultDiv.classList.add("show");
+  resultDiv.style.display = "block";
+  resultDiv.innerHTML = "<div style='text-align:center;padding:20px;color:var(--cream-dim)'><span class='spinner' style='border-top-color:var(--gold)'></span><br>Searching...</div>";
 
+  // Use receipt_name or order_number as the tracking ID
   var res = await sb.from("vaan_orders").select("*").eq("receipt_name", input).maybeSingle();
   
   if (res.error || !res.data) {
-    resultDiv.innerHTML = "<span style='color:var(--red)'>Order not found. Please check the receipt number.</span>";
+    resultDiv.innerHTML = "<div style='text-align:center;padding:20px;color:var(--red);font-weight:bold'>Order not found.<br><small style='font-weight:normal'>Please check the ID and try again.</small></div>";
     return;
   }
 
@@ -1997,30 +2020,47 @@ async function trackOrder(){
   var isDelivered = (o.status === 'delivered');
 
   var html = `
-    <div style="margin-bottom:10px"><b>Order:</b> ${o.receipt_name}</div>
-    <div style="margin-bottom:15px"><b>Name:</b> ${esc(o.customer_name)}</div>
-    
-    <div style="display:flex;justify-content:space-between;margin-bottom:20px;text-align:center;position:relative">
-      <div style="position:absolute;top:10px;left:10%;right:10%;height:2px;background:rgba(255,255,255,0.1);z-index:0"></div>
-      
-      <div style="z-index:1;width:33%">
-        <div style="width:24px;height:24px;border-radius:50%;background:${isPaid||isBuilding||isDelivered ? 'var(--green)' : 'var(--line-soft)'};margin:0 auto 8px;border:2px solid #1a060d"></div>
-        <div style="font-size:10px;color:${isPaid||isBuilding||isDelivered ? 'var(--white)' : 'var(--muted)'};font-weight:bold">ORDERED</div>
+    <div style="background:rgba(255,255,255,0.03);border:1px solid var(--line-soft);border-radius:12px;padding:16px;margin-bottom:20px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+        <b style="color:var(--cream)">Order Ref:</b>
+        <span style="color:var(--gold-bright);font-family:'JetBrains Mono',monospace;font-weight:bold">${o.receipt_name}</span>
       </div>
-      
-      <div style="z-index:1;width:33%">
-        <div style="width:24px;height:24px;border-radius:50%;background:${isBuilding||isDelivered ? 'var(--blue)' : 'var(--line-soft)'};margin:0 auto 8px;border:2px solid #1a060d"></div>
-        <div style="font-size:10px;color:${isBuilding||isDelivered ? 'var(--white)' : 'var(--muted)'};font-weight:bold">BUILDING</div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+        <b style="color:var(--cream)">Name:</b>
+        <span>${esc(o.customer_name)}</span>
       </div>
-      
-      <div style="z-index:1;width:33%">
-        <div style="width:24px;height:24px;border-radius:50%;background:${isDelivered ? 'var(--gold)' : 'var(--line-soft)'};margin:0 auto 8px;border:2px solid #1a060d"></div>
-        <div style="font-size:10px;color:${isDelivered ? 'var(--white)' : 'var(--muted)'};font-weight:bold">DELIVERED</div>
+      <div style="display:flex;justify-content:space-between">
+        <b style="color:var(--cream)">Status:</b>
+        <span style="color:${isDelivered ? 'var(--green)' : (isBuilding ? 'var(--blue)' : 'var(--gold)')};font-weight:bold">
+          ${isDelivered ? 'DELIVERED' : (isBuilding ? 'BUILDING' : 'PAID (Processing)')}
+        </span>
       </div>
     </div>
 
-    ${o.approx_delivery_time ? `<div style="margin-bottom:10px"><b>Est. Delivery:</b> ${esc(o.approx_delivery_time)}</div>` : ''}
-    ${isDelivered && o.delivery_url ? `<div style="margin-top:15px"><a href="${esc(o.delivery_url)}" target="_blank" class="btn-secondary" style="display:inline-block;text-decoration:none;width:100%;text-align:center">View Final Link</a></div>` : ''}
+    <div style="padding-left:10px">
+      <!-- Step 1 -->
+      <div class="track-step ${isPaid||isBuilding||isDelivered ? 'done' : ''}">
+        <div class="track-step-dot"></div>
+        <h5>Order Received & Paid</h5>
+        <p>We have received your payment and requirements.</p>
+      </div>
+      
+      <!-- Step 2 -->
+      <div class="track-step ${isBuilding||isDelivered ? (isDelivered ? 'done' : 'active') : ''}">
+        <div class="track-step-dot"></div>
+        <h5>Building in Progress</h5>
+        <p>Our team is working on your design.</p>
+        ${o.approx_delivery_time ? `<p style="color:var(--gold-bright);margin-top:4px;font-size:11px;font-weight:bold">Est. Delivery: ${esc(o.approx_delivery_time)}</p>` : ''}
+      </div>
+
+      <!-- Step 3 -->
+      <div class="track-step ${isDelivered ? 'done' : ''}">
+        <div class="track-step-dot"></div>
+        <h5>Delivered</h5>
+        <p>Your final product is ready!</p>
+        ${(isDelivered && o.delivery_url) ? `<a href="${esc(o.delivery_url)}" target="_blank" class="btn-secondary" style="margin-top:8px;padding:8px 12px;font-size:11px;min-height:auto;display:inline-block;text-decoration:none;border-color:var(--green);color:var(--green)">🔗 Open Final Link</a>` : ''}
+      </div>
+    </div>
   `;
   resultDiv.innerHTML = html;
 }
