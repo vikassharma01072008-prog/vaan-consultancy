@@ -139,13 +139,6 @@ input,textarea,select{font-family:inherit;font-size:16px !important}
 .product-price s{font-size:14px;color:var(--cream-dim);text-decoration-color:var(--red)}
 .product-price small{font-size:9px;letter-spacing:1.5px;font-weight:800;color:var(--cream-dim);text-transform:uppercase}
 
-/* ===== TRACK ORDER ===== */
-.track-box{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:16px;padding:20px;margin-top:20px}
-.track-box input{width:100%;padding:14px;background:rgba(0,0,0,.2);border:1px solid var(--line-soft);border-radius:10px;color:white;margin-bottom:12px;text-transform:uppercase;font-family:monospace;letter-spacing:2px;font-weight:bold}
-.track-box button{width:100%;padding:14px;border-radius:10px;background:linear-gradient(135deg,var(--gold-bright),var(--gold));color:#1a060d;font-weight:900;text-transform:uppercase}
-.track-result{margin-top:20px;padding:16px;background:rgba(240,193,75,.1);border:1px solid var(--gold);border-radius:12px;font-size:13px;display:none}
-.track-result.show{display:block}
-
 /* ===== BUTTONS ===== */
 .btn-primary{
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
@@ -794,10 +787,16 @@ input,textarea,select{font-family:inherit;font-size:16px !important}
         <small>ORDER BUILDER</small>
       </div>
     </div>
-    <a class="help-btn" id="helpBtn" href="https://wa.me/919671163712" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-      Help
-    </a>
+    <div style="display:flex;gap:8px">
+      <button class="help-btn" onclick="openTrackModal()" style="background:rgba(240,193,75,.12);border-color:rgba(240,193,75,.4);color:var(--gold-bright);cursor:pointer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Track Order
+      </button>
+      <a class="help-btn" id="helpBtn" href="https://wa.me/919671163712" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Help
+      </a>
+    </div>
   </div>
   <div class="progress-wrap" id="progressWrap" style="display:none">
     <span id="progressLabel">Step 1</span>
@@ -819,14 +818,6 @@ input,textarea,select{font-family:inherit;font-size:16px !important}
     
     <div class="products-grid" id="productsGrid">
       <div class="empty">Loading products…</div>
-    </div>
-
-    <!-- TRACK MY ORDER -->
-    <div class="track-box">
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:10px;color:var(--gold-bright);text-align:center">Track Your Order</h3>
-      <input type="text" id="trackInput" placeholder="Enter Receipt No (e.g. VAAN-1000)">
-      <button onclick="trackOrder()">Track Status</button>
-      <div class="track-result" id="trackResult"></div>
     </div>
   </section>
 
@@ -1093,6 +1084,23 @@ input,textarea,select{font-family:inherit;font-size:16px !important}
 
 </main>
 
+<!-- TRACK ORDER MODAL -->
+<div class="modal" id="trackModal" onclick="if(event.target===this)closeTrackModal()">
+  <div class="modal-box" style="width:min(400px,100%);height:auto;max-height:80vh">
+    <div class="modal-head">
+      <div><h3>Track Order</h3><small>Enter your receipt number</small></div>
+      <button class="modal-close" onclick="closeTrackModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <input type="text" id="trackInput" placeholder="VAAN-XXXX" style="text-transform:uppercase;text-align:center;font-family:monospace;letter-spacing:2px;font-weight:bold">
+      </div>
+      <button class="btn-primary" onclick="trackOrder()">Track Status</button>
+      <div class="track-result" id="trackResult" style="margin-top:20px"></div>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 <img src="logo.png" id="logoWatermarkSrc" style="display:none" alt="">
 
@@ -1274,16 +1282,20 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 async function loadProducts(){
-  var res = await sb.from("vaan_products").select("*").eq("is_active", true);
+  // Removed .eq("is_active", true) to prevent crashes if the column is named differently
+  var res = await sb.from("vaan_products").select("*");
   if (res.error){ 
     console.error("Products load error:", res.error);
     $("productsGrid").innerHTML = '<div class="empty">Could not load products. ' + esc(res.error.message) + '</div>'; 
     return; 
   }
-  state.products = res.data || [];
+  // Filter out inactive products in JavaScript instead
+  state.products = (res.data || []).filter(function(p){ return p.is_active !== false; });
+  
   if (!state.products.length){ $("productsGrid").innerHTML = '<div class="empty">No products available yet. Please add one in the Admin Panel.</div>'; return; }
   renderProducts();
 }
+
 function renderProducts(){
   var html = state.products.map(function(p){
     var price = Number(p.discount_price || p.price || 0);
@@ -1958,8 +1970,11 @@ function numberToWords(n) {
 }
 
 /* ============================================================
-   TRACK ORDER FUNCTION
+   TRACK ORDER FUNCTIONS
    ============================================================ */
+function openTrackModal() { document.getElementById("trackModal").classList.add("open"); }
+function closeTrackModal() { document.getElementById("trackModal").classList.remove("open"); document.getElementById("trackResult").classList.remove("show"); }
+
 async function trackOrder(){
   var input = document.getElementById("trackInput").value.trim().toUpperCase();
   var resultDiv = document.getElementById("trackResult");
@@ -1977,17 +1992,35 @@ async function trackOrder(){
   }
 
   var o = res.data;
-  var statusText = "PAID (Processing)";
-  var statusColor = "var(--blue)";
-  if (o.status === "building") { statusText = "BUILDING"; statusColor = "var(--gold)"; }
-  if (o.status === "delivered") { statusText = "DELIVERED"; statusColor = "var(--green)"; }
+  var isPaid = (o.payment_status === 'paid');
+  var isBuilding = (o.status === 'building');
+  var isDelivered = (o.status === 'delivered');
 
   var html = `
     <div style="margin-bottom:10px"><b>Order:</b> ${o.receipt_name}</div>
-    <div style="margin-bottom:10px"><b>Name:</b> ${esc(o.customer_name)}</div>
-    <div style="margin-bottom:10px"><b>Status:</b> <span style="color:${statusColor};font-weight:800">${statusText}</span></div>
+    <div style="margin-bottom:15px"><b>Name:</b> ${esc(o.customer_name)}</div>
+    
+    <div style="display:flex;justify-content:space-between;margin-bottom:20px;text-align:center;position:relative">
+      <div style="position:absolute;top:10px;left:10%;right:10%;height:2px;background:rgba(255,255,255,0.1);z-index:0"></div>
+      
+      <div style="z-index:1;width:33%">
+        <div style="width:24px;height:24px;border-radius:50%;background:${isPaid||isBuilding||isDelivered ? 'var(--green)' : 'var(--line-soft)'};margin:0 auto 8px;border:2px solid #1a060d"></div>
+        <div style="font-size:10px;color:${isPaid||isBuilding||isDelivered ? 'var(--white)' : 'var(--muted)'};font-weight:bold">ORDERED</div>
+      </div>
+      
+      <div style="z-index:1;width:33%">
+        <div style="width:24px;height:24px;border-radius:50%;background:${isBuilding||isDelivered ? 'var(--blue)' : 'var(--line-soft)'};margin:0 auto 8px;border:2px solid #1a060d"></div>
+        <div style="font-size:10px;color:${isBuilding||isDelivered ? 'var(--white)' : 'var(--muted)'};font-weight:bold">BUILDING</div>
+      </div>
+      
+      <div style="z-index:1;width:33%">
+        <div style="width:24px;height:24px;border-radius:50%;background:${isDelivered ? 'var(--gold)' : 'var(--line-soft)'};margin:0 auto 8px;border:2px solid #1a060d"></div>
+        <div style="font-size:10px;color:${isDelivered ? 'var(--white)' : 'var(--muted)'};font-weight:bold">DELIVERED</div>
+      </div>
+    </div>
+
     ${o.approx_delivery_time ? `<div style="margin-bottom:10px"><b>Est. Delivery:</b> ${esc(o.approx_delivery_time)}</div>` : ''}
-    ${o.status === "delivered" && o.delivery_url ? `<div style="margin-top:15px"><a href="${esc(o.delivery_url)}" target="_blank" class="btn-secondary" style="display:inline-block;text-decoration:none;width:100%;text-align:center">View Final Link</a></div>` : ''}
+    ${isDelivered && o.delivery_url ? `<div style="margin-top:15px"><a href="${esc(o.delivery_url)}" target="_blank" class="btn-secondary" style="display:inline-block;text-decoration:none;width:100%;text-align:center">View Final Link</a></div>` : ''}
   `;
   resultDiv.innerHTML = html;
 }
