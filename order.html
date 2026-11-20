@@ -2287,7 +2287,7 @@ function openCashfree(sessionId, order){
 }
 function launchCashfree(sessionId, order){
   try {
-    var cf = Cashfree({ mode: "sandbox" });
+   var cf = Cashfree({ mode: "production" });
     cf.checkout({ paymentSessionId: sessionId, redirectTarget: "_modal" }).then(function(result){
       if (result.error){
         showToast("Payment cancelled", "err");
