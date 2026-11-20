@@ -1251,10 +1251,14 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 async function loadProducts(){
-  var res = await sb.from("vaan_products").select("*").eq("is_active", true).order("sort_order", { ascending: true });
-  if (res.error){ $("productsGrid").innerHTML = '<div class="empty">Could not load products. ' + esc(res.error.message) + '</div>'; return; }
+  var res = await sb.from("vaan_products").select("*").eq("is_active", true);
+  if (res.error){ 
+    console.error("Products load error:", res.error);
+    $("productsGrid").innerHTML = '<div class="empty">Could not load products. ' + esc(res.error.message) + '</div>'; 
+    return; 
+  }
   state.products = res.data || [];
-  if (!state.products.length){ $("productsGrid").innerHTML = '<div class="empty">No products available yet.</div>'; return; }
+  if (!state.products.length){ $("productsGrid").innerHTML = '<div class="empty">No products available yet. Please add one in the Admin Panel.</div>'; return; }
   renderProducts();
 }
 function renderProducts(){
