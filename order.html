@@ -522,6 +522,7 @@ input,textarea,select{font-family:inherit;font-size:16px !important}
 .pv-connect-tw{background:linear-gradient(135deg,#000,#333);color:#fff}
 .pv-connect-tg{background:linear-gradient(135deg,#229ED9,#0088cc);color:#fff}
 .pv-connect-custom{background:linear-gradient(135deg,#6a6a6a,#333);color:#fff}
+.pv-connect-web{background:linear-gradient(135deg,#4f8fff,#1d4ed8);color:#fff}
 
 .pv-review{margin:12px 0;padding:14px 12px 12px;background:linear-gradient(165deg,rgba(251,188,4,.1),rgba(251,188,4,.03));border:1px solid rgba(251,188,4,.3);border-radius:var(--pv-box-radius)}
 .pv-review-head{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:2.2px;font-weight:800;color:#fbbc04;text-transform:uppercase;text-align:center;margin-bottom:4px}
@@ -848,7 +849,8 @@ input,textarea,select{font-family:inherit;font-size:16px !important}
       <button class="btn-skip" id="stepSkipBtn" style="display:none">Skip this step</button>
     </div>
 
-    <div class="preview-panel" id="livePreviewPanel" style="display:none">
+    <!-- Live Preview Panel -->
+    <div class="preview-panel" id="livePreviewPanel">
       <div class="preview-panel-head"><b>Live Preview</b><span class="live-dot">Live</span></div>
       <div class="preview-frame"><div class="preview-scroll"><div class="pvCard" id="pvCard"></div></div></div>
     </div>
@@ -1053,20 +1055,16 @@ input,textarea,select{font-family:inherit;font-size:16px !important}
 
       <table class="inv-table">
         <thead><tr><th>DESCRIPTION</th><th style="text-align:center">QTY</th><th style="text-align:right">AMOUNT (₹)</th></tr></thead>
-        <tbody>
-          <tr>
-            <td id="invProdName">Digital Visiting Card (package price)</td>
-            <td style="text-align:center">1</td>
-            <td style="text-align:right" id="invAmount">1,200</td>
-          </tr>
+        <tbody id="invTableBody">
+          <!-- Filled dynamically -->
         </tbody>
       </table>
 
       <div class="inv-total">
         <span>TOTAL AMOUNT PAID</span>
-        <span id="invTotal">₹8,000</span>
+        <span id="invTotal">₹0</span>
       </div>
-      <div class="inv-words" id="invWords">Amount in Words: Rupees Eight Thousand Only</div>
+      <div class="inv-words" id="invWords">Amount in Words: Rupees Zero Only</div>
 
       <div class="inv-footer">
         <div>
@@ -1303,7 +1301,6 @@ async function loadProducts(){
     return; 
   }
   
-  // Filter active products using 'active' column based on your screenshot
   state.products = (res.data || []).filter(function(p){ return p.active !== false; });
   
   if (!state.products.length){ 
@@ -1440,13 +1437,13 @@ function renderStep(){
             var sel = state.data.title === t ? " selected" : "";
             return '<div class="chip' + sel + '" onclick="selectTitleChip(this,\'' + esc(t) + '\')">' + esc(t) + '</div>';
           }).join("") + '</div>' +
-        '<div class="field"><label>Or type your own title</label><input type="text" id="customTitle" placeholder="e.g. Creative Director" value="' + esc(state.data.titleCustom) + '" oninput="state.data.titleCustom=this.value;state.data.title=\'\';refreshPreview();"></div>';
+        '<div class="field"><label>Or type your own title</label><input type="text" id="customTitle" placeholder="e.g. Creative Director" value="' + esc(state.data.titleCustom) + '" oninput="state.data.titleCustom=this.value;state.data.title=\'\';refreshPreview(\'pvCard\');"></div>';
       } else if (f.field_key === "category"){
         html = '<div class="chips" id="chipWrap">' + state.categories.map(function(c){
             var sel = state.data.category === c.name ? " selected" : "";
             return '<div class="chip' + sel + '" onclick="selectCategoryChip(this,\'' + esc(c.name) + '\')"><span>' + esc(c.icon || "✨") + '</span>' + esc(c.name) + '</div>';
           }).join("") + '</div>' +
-        '<div class="field"><label>Or type your own</label><input type="text" id="customCategory" placeholder="e.g. Drone Photography" value="' + esc(state.data.category) + '" oninput="state.data.category=this.value;refreshPreview();"></div>';
+        '<div class="field"><label>Or type your own</label><input type="text" id="customCategory" placeholder="e.g. Drone Photography" value="' + esc(state.data.category) + '" oninput="state.data.category=this.value;refreshPreview(\'pvCard\');"></div>';
       } else if (f.field_key === "type"){
         html = '<div class="chips" id="chipWrap">' + [["service_based","Service-based"],["product_based","Product-based"],["both","Both"]].map(function(t){
             var sel = state.data.type === t[0] ? " selected" : "";
@@ -1474,7 +1471,7 @@ function renderStep(){
           var sel = state.data.tagline === t.text ? " selected" : "";
           return '<div class="chip' + sel + '" onclick="selectTaglineChip(this,\'' + esc(t.text).replace(/'/g,"\\'") + '\')"><span>' + t.emoji + '</span>' + esc(t.text) + '</div>';
         }).join("") + '</div>' +
-      '<div class="field"><label>Or type your own tagline</label><input type="text" id="stepInput" placeholder="Your tagline…" value="' + esc(state.data.tagline) + '" oninput="state.data.tagline=this.value;refreshPreview();"></div>';
+      '<div class="field"><label>Or type your own tagline</label><input type="text" id="stepInput" placeholder="Your tagline…" value="' + esc(state.data.tagline) + '" oninput="state.data.tagline=this.value;refreshPreview(\'pvCard\');"></div>';
       break;
     case "textarea":
       html = '<div class="field"><label>' + esc(f.label) + (f.is_required ? " *" : "") + '</label><textarea id="stepInput" placeholder="' + esc(f.placeholder || "") + '" oninput="onStepInput(\'' + f.field_key + '\', this.value)">' + esc(state.data[f.field_key] || "") + '</textarea></div>';
@@ -1514,7 +1511,13 @@ function renderStep(){
   $("stepSkipBtn").style.display = canSkip ? "inline-block" : "none";
   updateNextButton();
   $("stepNextBtn").innerHTML = (state.stepIndex === state.stepDefs.length - 1) ? 'See My Card →' : 'Next →';
-  refreshPreview();
+  
+  refreshPreview("pvCard");
+
+  // Ensure the live preview panel is always visible on the step screen
+  var previewPanel = $("livePreviewPanel");
+  if (previewPanel) { previewPanel.style.display = "block"; }
+
   setTimeout(function(){ var inp = body.querySelector("input[type=text],input[type=tel],input[type=email],input[type=url]"); if (inp) inp.focus(); }, 200);
 }
 
@@ -1530,19 +1533,28 @@ function updateNextButton(){
   $("stepNextBtn").disabled = !canProceed;
 }
 
-function onStepInput(key, val){ if (key === "phone"){ val = val.replace(/[^0-9]/g, "").slice(0, 13); var inp = $("stepInput"); if (inp) inp.value = val; } state.data[key] = val; updateNextButton(); refreshPreview(); }
-function selectGenderChip(el, key){ document.querySelectorAll("#chipWrap .chip").forEach(function(c){ c.classList.remove("selected"); }); el.classList.add("selected"); state.data.gender = key; refreshPreview(); }
-function selectTitleChip(el, title){ document.querySelectorAll("#chipWrap .chip").forEach(function(c){ c.classList.remove("selected"); }); el.classList.add("selected"); state.data.title = title; state.data.titleCustom = ""; var inp = $("customTitle"); if (inp) inp.value = ""; refreshPreview(); }
-function selectCategoryChip(el, name){ document.querySelectorAll("#chipWrap .chip").forEach(function(c){ c.classList.remove("selected"); }); el.classList.add("selected"); state.data.category = name; var inp = $("customCategory"); if (inp) inp.value = ""; refreshPreview(); }
-function selectTypeChip(el, key){ document.querySelectorAll("#chipWrap .chip").forEach(function(c){ c.classList.remove("selected"); }); el.classList.add("selected"); state.data.type = key; refreshPreview(); }
-function selectChip(el, fieldKey, val){ document.querySelectorAll("#chipWrap .chip").forEach(function(c){ c.classList.remove("selected"); }); el.classList.add("selected"); state.data[fieldKey] = val; refreshPreview(); }
-function selectTaglineChip(el, text){ document.querySelectorAll(".chip").forEach(function(c){ c.classList.remove("selected"); }); el.classList.add("selected"); state.data.tagline = text; var inp = $("stepInput"); if (inp) inp.value = text; refreshPreview(); }
-function onServiceInput(i, val){ state.data.services[i] = val; refreshPreview(); }
+function onStepInput(key, val){ 
+  if (key === "phone"){ 
+    val = val.replace(/[^0-9]/g, "").slice(0, 13); 
+    var inp = $("stepInput"); 
+    if (inp) inp.value = val; 
+  } 
+  state.data[key] = val; 
+  updateNextButton(); 
+  refreshPreview("pvCard"); 
+}
+function selectGenderChip(el, key){ document.querySelectorAll("#chipWrap .chip").forEach(function(c){ c.classList.remove("selected"); }); el.classList.add("selected"); state.data.gender = key; refreshPreview("pvCard"); }
+function selectTitleChip(el, title){ document.querySelectorAll("#chipWrap .chip").forEach(function(c){ c.classList.remove("selected"); }); el.classList.add("selected"); state.data.title = title; state.data.titleCustom = ""; var inp = $("customTitle"); if (inp) inp.value = ""; refreshPreview("pvCard"); }
+function selectCategoryChip(el, name){ document.querySelectorAll("#chipWrap .chip").forEach(function(c){ c.classList.remove("selected"); }); el.classList.add("selected"); state.data.category = name; var inp = $("customCategory"); if (inp) inp.value = ""; refreshPreview("pvCard"); }
+function selectTypeChip(el, key){ document.querySelectorAll("#chipWrap .chip").forEach(function(c){ c.classList.remove("selected"); }); el.classList.add("selected"); state.data.type = key; refreshPreview("pvCard"); }
+function selectChip(el, fieldKey, val){ document.querySelectorAll("#chipWrap .chip").forEach(function(c){ c.classList.remove("selected"); }); el.classList.add("selected"); state.data[fieldKey] = val; refreshPreview("pvCard"); }
+function selectTaglineChip(el, text){ document.querySelectorAll(".chip").forEach(function(c){ c.classList.remove("selected"); }); el.classList.add("selected"); state.data.tagline = text; var inp = $("stepInput"); if (inp) inp.value = text; refreshPreview("pvCard"); }
+function onServiceInput(i, val){ state.data.services[i] = val; refreshPreview("pvCard"); }
 function addServiceRow(){ state.data.services.push(""); renderStep(); setTimeout(function(){ var newIdx = state.data.services.length - 1; var newInput = $("svcInput_" + newIdx); if (newInput) newInput.focus(); }, 50); }
 function removeServiceRow(i){ if (state.data.services.length <= 1) state.data.services[0] = ""; else state.data.services.splice(i, 1); renderStep(); }
-function onLinkPlatform(i, val){ state.data.socialLinks[i].platform = val; if (val !== "custom") state.data.socialLinks[i].customLabel = ""; renderStep(); refreshPreview(); }
-function onLinkUrl(i, val){ state.data.socialLinks[i].url = val; refreshPreview(); }
-function onLinkCustomLabel(i, val){ state.data.socialLinks[i].customLabel = val; refreshPreview(); }
+function onLinkPlatform(i, val){ state.data.socialLinks[i].platform = val; if (val !== "custom") state.data.socialLinks[i].customLabel = ""; renderStep(); refreshPreview("pvCard"); }
+function onLinkUrl(i, val){ state.data.socialLinks[i].url = val; refreshPreview("pvCard"); }
+function onLinkCustomLabel(i, val){ state.data.socialLinks[i].customLabel = val; refreshPreview("pvCard"); }
 function addLinkRow(){ state.data.socialLinks.push({ platform: "instagram", url: "", customLabel: "" }); renderStep(); }
 function removeLinkRow(i){ if (state.data.socialLinks.length <= 1) state.data.socialLinks[0] = { platform: "instagram", url: "", customLabel: "" }; else state.data.socialLinks.splice(i, 1); renderStep(); }
 
@@ -1562,7 +1574,7 @@ function onImageUpload(input, key){
       var url = urlData.data.publicUrl;
       if (key === "logo") state.data.logoUrl = url;
       else if (key === "founder") state.data.founderUrl = url;
-      renderStep(); refreshPreview(); trackEvent("field_filled", null, key);
+      renderStep(); refreshPreview("pvCard"); trackEvent("field_filled", null, key);
     } catch(err){ showToast("Upload failed: " + (err.message || "try again"), "err"); renderStep(); }
   });
 }
@@ -1584,7 +1596,7 @@ function removeWhiteBg(blob){
     reader.readAsDataURL(blob);
   });
 }
-function removeImage(ev, key){ ev.preventDefault(); ev.stopPropagation(); if (key === "logo") state.data.logoUrl = ""; else if (key === "founder") state.data.founderUrl = ""; renderStep(); refreshPreview(); }
+function removeImage(ev, key){ ev.preventDefault(); ev.stopPropagation(); if (key === "logo") state.data.logoUrl = ""; else if (key === "founder") state.data.founderUrl = ""; renderStep(); refreshPreview("pvCard"); }
 function compressImage(file, maxSize, cb){
   var reader = new FileReader();
   reader.onload = function(e){
@@ -1846,7 +1858,7 @@ async function startPayment(){
   try {
     var total = Math.max(0, state.subtotal - state.discount);
     
-        // 1. Create order in Supabase (Pending Status)
+    // 1. Create order in Supabase (Pending Status) - SAFE COLUMNS ONLY
     var orderRes = await sb.from("vaan_orders").insert([{
       product_id: state.product ? state.product.id : null,
       customer_name: state.data.name,
@@ -1876,15 +1888,14 @@ async function startPayment(){
     });
     if (state.data.website) answers.push({ order_id: order.id, field_key: "website", field_value: { url: state.data.website } });
     
-    // Save image URLs inside the jsonb field_value
     if (state.data.logoUrl) answers.push({ order_id: order.id, field_key: "logo", field_value: { url: state.data.logoUrl } });
     if (state.data.founderUrl) answers.push({ order_id: order.id, field_key: "founder_photo", field_value: { url: state.data.founderUrl } });
     
-    // Only insert if there are answers to save
     if (answers.length > 0) {
       var ansRes = await sb.from("vaan_order_answers").insert(answers);
       if (ansRes.error) console.error("Answers save error:", ansRes.error);
     }
+
     // 3. Call Edge Function to get Cashfree Session ID
     var fnRes = await fetch(SUPABASE_URL + "/functions/v1/create-cashfree-order", {
       method: "POST",
@@ -1953,6 +1964,8 @@ function pollOrder(orderId, orderNumber){
     if ((res.data && res.data.payment_status === "paid") || attempts >= 15){
       clearInterval(iv);
       
+      var totalPaid = Math.max(0, state.subtotal - state.discount);
+
       // Update UI for Success & Invoice
       $("successOrderId").textContent = orderNumber;
       $("successName").textContent = state.data.name || "there";
@@ -1961,12 +1974,31 @@ function pollOrder(orderId, orderNumber){
       $("invDate").textContent = "Date: " + today.toLocaleDateString("en-IN", {day:'numeric', month:'long', year:'numeric'}) + " • Payment Mode: UPI";
       $("invCustName").textContent = state.data.name;
       $("invCustCompany").textContent = state.data.businessName || "Individual";
-      $("invProdName").textContent = state.product.name;
-      $("invAmount").textContent = state.subtotal.toLocaleString("en-IN");
-      $("invTotal").textContent = "₹" + state.subtotal.toLocaleString("en-IN");
-      $("invWords").textContent = "Amount in Words: " + numberToWords(state.subtotal);
       $("invServiceFor").textContent = state.data.name;
       $("invPaidOn").textContent = today.toLocaleDateString("en-IN", {day:'numeric', month:'long', year:'numeric'});
+      
+      // Build the Invoice Table (Shows Discount if used)
+      var tableHtml = `
+        <tr>
+          <td>${state.product.name}</td>
+          <td style="text-align:center">1</td>
+          <td style="text-align:right">₹${state.subtotal.toLocaleString("en-IN")}</td>
+        </tr>
+      `;
+      
+      if (state.discount > 0) {
+        tableHtml += `
+        <tr>
+          <td>Discount (${state.coupon ? state.coupon.code : 'Coupon Applied'})</td>
+          <td style="text-align:center">-</td>
+          <td style="text-align:right; color:#25b46e">-₹${state.discount.toLocaleString("en-IN")}</td>
+        </tr>
+        `;
+      }
+      
+      $("invTableBody").innerHTML = tableHtml;
+      $("invTotal").textContent = "₹" + totalPaid.toLocaleString("en-IN");
+      $("invWords").textContent = "Amount in Words: " + numberToWords(totalPaid);
       
       showScreen("success");
       trackEvent("payment_success", null, orderNumber);
@@ -1980,14 +2012,22 @@ function downloadInvoice(){
   html2pdf().set(opt).from(element).save();
 }
 
+// UNLIMITED NUMBER TO WORDS FUNCTION (Handles Lakhs/Crores)
 function numberToWords(n) {
   if (n === 0) return "Zero Rupees Only";
   var a = ["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
   var b = ["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
-  if (n < 20) return a[n] + " Rupees Only";
-  if (n < 100) return b[Math.floor(n/10)] + (n%10 ? " " + a[n%10] : "") + " Rupees Only";
-  if (n < 1000) return a[Math.floor(n/100)] + " Hundred " + (n%100 ? "and " + numberToWords(n%100) : "") + " Rupees Only";
-  return "Amount Too Large";
+  
+  function inWords(num) {
+    if (num < 20) return a[num];
+    if (num < 100) return b[Math.floor(num/10)] + (num%10 ? " " + a[num%10] : "");
+    if (num < 1000) return a[Math.floor(num/100)] + " Hundred" + (num%100 ? " and " + inWords(num%100) : "");
+    if (num < 100000) return inWords(Math.floor(num/1000)) + " Thousand" + (num%1000 ? " " + inWords(num%1000) : "");
+    if (num < 10000000) return inWords(Math.floor(num/100000)) + " Lakh" + (num%100000 ? " " + inWords(num%100000) : "");
+    return inWords(Math.floor(num/10000000)) + " Crore" + (num%10000000 ? " " + inWords(num%10000000) : "");
+  }
+  
+  return inWords(n) + " Rupees Only";
 }
 
 /* ============================================================
@@ -2010,7 +2050,6 @@ async function trackOrder(){
   resultDiv.style.display = "block";
   resultDiv.innerHTML = "<div style='text-align:center;padding:20px;color:var(--cream-dim)'><span class='spinner' style='border-top-color:var(--gold)'></span><br>Searching...</div>";
 
-  // Use receipt_name or order_number as the tracking ID
   var res = await sb.from("vaan_orders").select("*").eq("receipt_name", input).maybeSingle();
   
   if (res.error || !res.data) {
