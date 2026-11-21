@@ -1846,7 +1846,7 @@ async function startPayment(){
   try {
     var total = Math.max(0, state.subtotal - state.discount);
     
-    // 1. Create order in Supabase (Pending Status)
+        // 1. Create order in Supabase (Pending Status)
     var orderRes = await sb.from("vaan_orders").insert([{
       product_id: state.product ? state.product.id : null,
       customer_name: state.data.name,
@@ -1860,15 +1860,13 @@ async function startPayment(){
       subtotal: state.subtotal,
       discount: state.discount,
       amount_paid: total,
-      payment_status: "pending",
-      form_data: state.data, 
-      customization: state.design
+      payment_status: "pending"
     }]).select().single();
     
     if (orderRes.error) throw orderRes.error;
     var order = orderRes.data;
 
-    // 2. Save the form answers
+    // 2. Save the form answers (Fixed to match your database columns)
     var answers = [];
     (state.data.services || []).filter(function(s){ return s && s.trim(); }).forEach(function(s, i){
       answers.push({ order_id: order.id, field_key: "service", field_value: { name: s }, sort_order: i });
@@ -1877,10 +1875,16 @@ async function startPayment(){
       answers.push({ order_id: order.id, field_key: "social_link", field_value: l, sort_order: i });
     });
     if (state.data.website) answers.push({ order_id: order.id, field_key: "website", field_value: { url: state.data.website } });
-    if (state.data.logoUrl) answers.push({ order_id: order.id, field_key: "logo", file_url: state.data.logoUrl });
-    if (state.data.founderUrl) answers.push({ order_id: order.id, field_key: "founder_photo", file_url: state.data.founderUrl });
-    if (answers.length) await sb.from("vaan_order_answers").insert(answers);
-
+    
+    // Save image URLs inside the jsonb field_value
+    if (state.data.logoUrl) answers.push({ order_id: order.id, field_key: "logo", field_value: { url: state.data.logoUrl } });
+    if (state.data.founderUrl) answers.push({ order_id: order.id, field_key: "founder_photo", field_value: { url: state.data.founderUrl } });
+    
+    // Only insert if there are answers to save
+    if (answers.length > 0) {
+      var ansRes = await sb.from("vaan_order_answers").insert(answers);
+      if (ansRes.error) console.error("Answers save error:", ansRes.error);
+    }
     // 3. Call Edge Function to get Cashfree Session ID
     var fnRes = await fetch(SUPABASE_URL + "/functions/v1/create-cashfree-order", {
       method: "POST",
