@@ -101,7 +101,7 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 .ulp-editor:focus{outline:none;border-color:var(--gold)}
 .img-preview{max-width:200px;margin-top:12px;border-radius:10px;display:none;border:1px solid var(--gold);box-shadow:0 4px 12px rgba(0,0,0,0.5)}
 
-/* Modals - Full Screen Mobile Friendly with top/bottom spacing */
+/* Modals */
 .modal{position:fixed;inset:0;background:rgba(5,8,16,.95);backdrop-filter:blur(10px);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}
 .modal.open{display:flex}
 .modal-box{background:linear-gradient(145deg,#12192a,#0d1220);border:1px solid rgba(255,212,0,.25);width:100%;height:calc(100vh - 40px);max-height:calc(100vh - 40px);overflow:hidden;position:relative;display:flex;flex-direction:column;border-radius:22px}
@@ -162,6 +162,16 @@ main{max-width:1300px;margin:0 auto;padding:28px 20px 80px}
 .ord-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
 .ord-photo{width:100%;height:120px;border-radius:8px;object-fit:cover;cursor:pointer;border:1px solid var(--line-soft)}
 .ord-custom-code{font-family:'JetBrains Mono',monospace;font-size:12px !important;color:#a8c4ff;background:#0a0e1a;padding:16px;border-radius:8px;white-space:pre-wrap;word-break:break-all;max-height:250px;overflow-y:auto;border:1px solid var(--line-soft)}
+
+/* ====== CUSTOMISATION ====== */
+.custom-group{background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:24px;margin-bottom:16px}
+.custom-group-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.custom-group-head b{font-size:18px;color:var(--gold)}
+.custom-list{display:grid;gap:12px}
+.custom-item{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.03);border:1px solid var(--line-soft);padding:16px;border-radius:10px;flex-wrap:wrap;gap:10px}
+.custom-item-info{display:flex;align-items:center;gap:12px}
+.custom-swatches{display:flex;gap:6px}
+.custom-swatches span{width:24px;height:24px;border-radius:50%;border:1px solid rgba(255,255,255,.2)}
 
 /* ====== TOAST & PHOTO VIEWER ====== */
 .toast{position:fixed;bottom:24px;right:24px;background:#12192a;border:1px solid var(--line);border-left:3px solid var(--green);padding:16px 20px;border-radius:12px;font-size:13px;font-weight:800;display:none;z-index:3000;color:var(--white);max-width:340px;box-shadow:0 20px 50px rgba(0,0,0,.6)}
@@ -246,10 +256,34 @@ footer b{color:var(--gold)}
         </div>
         <div class="svc-list" id="ecomProductsList"></div>
       </div>
-      
-      <!-- Other tabs kept unchanged -->
-      <div id="ecom-customisation" style="display:none"><div class="sec-title">Customisation Options</div><div class="sec-sub">These options appear in the customer preview.</div></div>
-      <div id="ecom-views" style="display:none"><div class="sec-title">Page Views & Clicks</div><div class="sec-sub">Track customer engagement per product.</div></div>
+
+      <!-- CUSTOMISATION -->
+      <div id="ecom-customisation" style="display:none">
+        <div class="sec-title">Customisation Options</div>
+        <div class="sec-sub">These options appear in the customer preview for ALL products where Customisation is enabled.</div>
+        <div class="custom-group">
+          <div class="custom-group-head"><b>Color Palettes (Presets)</b><button class="btn btn-outline btn-sm" onclick="addCustomisation('palette')">+ Add Palette</button></div>
+          <div class="custom-list" id="customPalettesList"></div>
+        </div>
+        <div class="custom-group">
+          <div class="custom-group-head"><b>Box Shapes</b><button class="btn btn-outline btn-sm" onclick="addCustomisation('shape')">+ Add Shape</button></div>
+          <div class="custom-list" id="customShapesList"></div>
+        </div>
+      </div>
+
+      <!-- PAGE VIEWS -->
+      <div id="ecom-views" style="display:none">
+        <div class="sec-title">Page Views & Clicks</div>
+        <div class="sec-sub">Track customer engagement per product.</div>
+        <div class="form-box" style="padding:16px;margin-bottom:20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <label style="font-size:12px;font-weight:800;color:var(--muted)">Date Range:</label>
+          <select class="form-row" style="padding:8px;border-radius:8px;width:auto;margin:0" id="viewDateRange" onchange="loadPageViews()">
+            <option value="today">Today</option><option value="7days" selected>Last 7 Days</option><option value="30days">Last 30 Days</option><option value="all">All Time</option>
+          </select>
+          <button class="btn btn-dark btn-sm" onclick="loadPageViews()">↻ Refresh</button>
+        </div>
+        <div class="svc-list" id="pageViewsList"></div>
+      </div>
     </div>
 
     <!-- ================= DASHBOARD ================= -->
@@ -425,6 +459,23 @@ Phone: 9671163712</textarea></div>
   </div>
 </div>
 
+<!-- EDIT CUSTOMISATION ITEM MODAL -->
+<div class="modal" id="customEditModal">
+  <div class="modal-box" style="height:auto;max-height:90vh;width:min(500px,100%)">
+    <div class="modal-head">
+      <div><h3 id="customEditTitle">Edit Option</h3></div>
+      <button class="modal-close" onclick="closeCustomEdit()">✕</button>
+    </div>
+    <div class="modal-body" style="padding-bottom:20px">
+      <div id="customEditFields"></div>
+      <div class="modal-actions" style="position:relative;padding:0;border:none;margin-top:20px">
+        <button class="btn btn-gold" onclick="saveCustomEdit()">Save</button>
+        <button class="btn btn-dark" onclick="closeCustomEdit()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ORDER DETAILS MODAL -->
 <div class="modal" id="orderDetailModal">
   <div class="modal-box">
@@ -433,7 +484,7 @@ Phone: 9671163712</textarea></div>
       <button class="modal-close" onclick="closeOrderDetail()">✕</button>
     </div>
     <div class="modal-body" id="ordDetailBody"></div>
-    <div class="modal-actions" id="ordDetailActions"></div>
+    <div class="modal-actions" id="ordDetailActions" style="flex-direction:column"></div>
   </div>
 </div>
 
@@ -506,6 +557,8 @@ function switchEcomTab(tab) {
   });
   if (tab === 'orders') loadEcomOrders();
   if (tab === 'products') renderProducts();
+  if (tab === 'customisation') renderCustomisation();
+  if (tab === 'views') loadPageViews();
 }
 
 /* ====== LOAD ALL ====== */
@@ -521,11 +574,16 @@ async function loadAll(){
     allServices = pRes.data || []; allFeedback = fRes.data || []; allProjects = projRes.data || []; allProducts = prodRes.data || [];
     if (setRes.data) setRes.data.forEach(row => { allSettings[row.key] = row.value; });
     
-    renderStats(); renderPricing(); renderFeedback(); renderProjects(); renderProducts();
+    renderStats(); renderPricing(); renderFeedback(); renderProjects(); renderProducts(); renderCustomisation();
+    
+    if (allSettings.invoice_config) {
+      document.getElementById("settingsSignature").value = allSettings.invoice_config.signature || "Vikas Sharma";
+      document.getElementById("settingsCompany").value = allSettings.invoice_config.company || "";
+    }
   } catch (err){ console.error(err); toast("Failed to load data", true); }
 }
 
-/* ====== DASHBOARD / PORTFOLIO / SETTINGS (UNCHANGED) ====== */
+/* ====== DASHBOARD / PORTFOLIO / SETTINGS ====== */
 function renderStats(){
   document.getElementById("statTotal").textContent = allServices.length;
   document.getElementById("statActive").textContent = allServices.filter(s => s.active).length;
@@ -614,13 +672,43 @@ async function saveSettings() {
   const signature = document.getElementById("settingsSignature").value;
   const company = document.getElementById("settingsCompany").value;
   await sb.from("vaan_settings").upsert({ key: 'invoice_config', value: { signature, company }, updated_at: new Date().toISOString() }, { onConflict: 'key' });
-  toast("✅ Settings saved!");
+  toast("✅ Settings saved!"); allSettings['invoice_config'] = { signature, company };
 }
 
+/* ====== CUSTOMISATION ====== */
+function renderCustomisation() {
+  const opts = allSettings.customisation_options || {};
+  const palettes = opts.palettes || [{ name: "Royal Maroon", bg: "#2a0a12", accent: "#d4a017" }];
+  document.getElementById("customPalettesList").innerHTML = palettes.map((p, i) => `
+    <div class="custom-item"><div class="custom-item-info"><div class="custom-swatches"><span style="background:${p.bg}"></span><span style="background:${p.accent}"></span></div><b>${esc(p.name)}</b></div>
+    <div class="item-actions"><button class="btn btn-dark btn-sm" onclick="editCustomisation('palette', ${i})">Edit</button><button class="btn btn-danger btn-sm" onclick="deleteCustomisation('palette', ${i})">×</button></div></div>
+  `).join("");
 
-/* ============================================================
-   PRODUCTS & WIZARD (UPDATED WITH NEW TOGGLES)
-   ============================================================ */
+  const shapes = opts.shapes || ["square", "rounded", "rect", "circle"];
+  document.getElementById("customShapesList").innerHTML = shapes.map((s, i) => `
+    <div class="custom-item"><div class="custom-item-info"><b>${esc(s)}</b></div>
+    <div class="item-actions"><button class="btn btn-dark btn-sm" onclick="editCustomisation('shape', ${i})">Edit</button><button class="btn btn-danger btn-sm" onclick="deleteCustomisation('shape', ${i})">×</button></div></div>
+  `).join("");
+}
+function addCustomisation(type) {
+  let opts = allSettings.customisation_options || {};
+  if (type === 'palette') { if (!opts.palettes) opts.palettes = []; opts.palettes.push({ name: "New Theme", bg: "#000000", accent: "#ffffff" }); }
+  else if (type === 'shape') { if (!opts.shapes) opts.shapes = []; opts.shapes.push("new-shape"); }
+  saveCustomisationOptions(opts);
+}
+function deleteCustomisation(type, index) {
+  if (!confirm("Delete this option? It will be removed from all products.")) return;
+  let opts = allSettings.customisation_options;
+  if (type === 'palette') opts.palettes.splice(index, 1);
+  if (type === 'shape') opts.shapes.splice(index, 1);
+  saveCustomisationOptions(opts);
+}
+async function saveCustomisationOptions(opts) {
+  await sb.from("vaan_settings").upsert({ key: 'customisation_options', value: opts }, { onConflict: 'key' });
+  allSettings.customisation_options = opts; renderCustomisation(); toast("✅ Options updated.");
+}
+
+/* ====== PRODUCTS & WIZARD ====== */
 function renderProducts(){
   const wrap = document.getElementById("ecomProductsList");
   if (!allProducts.length) return wrap.innerHTML = '<div class="svc-empty"><b>No products yet</b></div>';
@@ -628,7 +716,7 @@ function renderProducts(){
     <div class="item">
       <div class="item-info">
         <b>${esc(p.icon || "📦")} ${esc(p.name)}</b>
-        <small>₹${Number(p.price||0).toLocaleString("en-IN")} · ${p.is_active !== false ? '<span class="tag green">ACTIVE</span>' : '<span class="tag red">HIDDEN</span>'}</small>
+        <small>₹${Number(p.price||0).toLocaleString("en-IN")} · ${p.active !== false ? '<span class="tag green">ACTIVE</span>' : '<span class="tag red">HIDDEN</span>'}</small>
       </div>
       <div class="item-actions">
         <button class="btn btn-dark btn-sm" onclick="editProduct('${p.id}')">Edit</button>
@@ -636,7 +724,6 @@ function renderProducts(){
       </div>
     </div>`).join("");
 }
-
 async function deleteProduct(id) {
   if(!confirm("Delete this product permanently?")) return;
   await sb.from("vaan_products").delete().eq("id", id); toast("Deleted"); loadAll();
@@ -649,7 +736,6 @@ function openProductWizard() {
   document.getElementById("wizCustomAllowed").checked = true; document.getElementById("wizActive").checked = true;
   document.getElementById("wizPreviewArea").style.display = "none";
   
-  // New Toggles
   document.getElementById("wizAskDetails").checked = true;
   document.getElementById("wizShowOrderNow").checked = true;
   document.getElementById("wizShowAddToCart").checked = true;
@@ -668,7 +754,6 @@ function editProduct(id) {
   document.getElementById("wizName").value = p.name || ""; document.getElementById("wizPrice").value = p.price || 0;
   document.getElementById("wizIcon").value = p.icon || ""; document.getElementById("wizDesc").value = p.description || "";
   
-  // New Toggles
   document.getElementById("wizAskDetails").checked = p.ask_details !== false;
   document.getElementById("wizShowOrderNow").checked = p.show_order_now !== false;
   document.getElementById("wizShowAddToCart").checked = p.show_add_to_cart !== false;
@@ -680,7 +765,7 @@ function editProduct(id) {
   else { document.getElementById("wizPreviewArea").style.display = "none"; }
   
   document.getElementById("wizCustomAllowed").checked = p.customization_allowed !== false;
-  document.getElementById("wizActive").checked = p.is_active !== false;
+  document.getElementById("wizActive").checked = p.active !== false;
   if (p.image_url) { document.getElementById("wizImagePreview").src = p.image_url; document.getElementById("wizImagePreview").style.display = "block"; document.getElementById("wizImageText").style.display = "none"; } 
   else { document.getElementById("wizImagePreview").style.display = "none"; document.getElementById("wizImageText").style.display = "block"; }
   
@@ -694,13 +779,33 @@ function closeProductWizard() { document.getElementById("productWizardModal").cl
 function toggleWizPreview() {
   const isOn = document.getElementById("wizPreviewEnabled").checked;
   document.getElementById("wizPreviewArea").style.display = isOn ? "block" : "none";
+  if (isOn && !document.getElementById("wizULP").value) {
+    const fakeJSON = {
+      "product_name": "Digital Visiting Card", "theme": { "bg": "#2a0a12", "text_primary": "#ffffff", "accent": "#ffd400" },
+      "blocks": [
+        { "type": "logo", "variable": "{{logo}}" }, { "type": "hero_text", "title": "{{business_name}}", "subtitle": "{{name}}", "role": "{{title}}" },
+        { "type": "tagline", "text": "{{tagline}}" }, { "type": "list_grid", "variable": "{{services}}", "columns": 2 },
+        { "type": "action_buttons", "buttons": [ { "label": "WhatsApp", "type": "whatsapp" } ] }
+      ]
+    };
+    document.getElementById("wizULP").value = JSON.stringify(fakeJSON, null, 2); renderWizPreview();
+  }
 }
 document.getElementById("wizULP")?.addEventListener("input", renderWizPreview);
 function renderWizPreview() {
-  // Kept logic unchanged
   const jsonStr = document.getElementById("wizULP").value; const canvas = document.getElementById("wizPreviewCanvas");
   if (!jsonStr) return canvas.innerHTML = '<div style="color:var(--muted);text-align:center;padding:40px">Paste JSON to see preview</div>';
-  try { const data = JSON.parse(jsonStr); canvas.innerHTML = '<div style="color:var(--green);text-align:center;padding:40px;font-size:12px">Valid JSON format.</div>'; } catch(e) { canvas.innerHTML = '<div style="color:var(--red);text-align:center;padding:40px;font-size:12px">Invalid JSON format.</div>'; }
+  try {
+    const data = JSON.parse(jsonStr); let html = `<div style="background:${data.theme?.bg || '#111'};color:${data.theme?.text_primary || '#fff'};padding:20px;border-radius:10px;min-height:100%">`;
+    data.blocks.forEach(b => {
+      if (b.type === 'logo') html += `<div style="text-align:center;margin-bottom:15px"><div style="width:60px;height:60px;border-radius:50%;background:${data.theme?.accent || '#ffd400'};margin:0 auto;opacity:0.5"></div></div>`;
+      if (b.type === 'hero_text') html += `<div style="text-align:center;margin-bottom:15px"><div style="font-size:20px;font-weight:bold;margin-bottom:4px">${b.title}</div><div style="font-size:14px;opacity:0.8">${b.subtitle}</div><div style="font-size:12px;color:${data.theme?.accent || '#ffd400'};margin-top:4px">${b.role}</div></div>`;
+      if (b.type === 'tagline') html += `<div style="text-align:center;border-top:1px solid rgba(255,255,255,0.1);border-bottom:1px solid rgba(255,255,255,0.1);padding:10px 0;font-size:12px;margin-bottom:15px;opacity:0.7">${b.text}</div>`;
+      if (b.type === 'list_grid') html += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px"><div style="background:rgba(255,255,255,0.1);padding:10px;border-radius:6px;font-size:11px;text-align:center">Item 1</div><div style="background:rgba(255,255,255,0.1);padding:10px;border-radius:6px;font-size:11px;text-align:center">Item 2</div></div>`;
+      if (b.type === 'action_buttons') html += `<div style="display:flex;gap:10px"><div style="flex:1;background:${data.theme?.accent || '#ffd400'};color:#000;padding:10px;border-radius:8px;text-align:center;font-weight:bold;font-size:12px">${b.buttons[0]?.label || 'Button'}</div></div>`;
+    });
+    html += `</div>`; canvas.innerHTML = html;
+  } catch(e) { canvas.innerHTML = '<div style="color:var(--red);text-align:center;padding:40px;font-size:12px">Invalid JSON format.</div>'; }
 }
 function handleWizImage(input) {
   const file = input.files[0]; if(!file) return;
@@ -714,7 +819,7 @@ function handleWizImage(input) {
       canvas.toBlob((blob) => {
         compressedWizFile = new File([blob], "product_logo.webp", { type: "image/webp" });
         document.getElementById("wizImagePreview").src = URL.createObjectURL(blob); document.getElementById("wizImagePreview").style.display = 'block';
-        document.getElementById("wizImageText").style.display = 'none';
+        document.getElementById("wizImageText").style.display = 'none'; toast(`Compressed: ${(blob.size / 1024).toFixed(0)} KB`);
       }, 'image/webp', 0.8);
     }
   }
@@ -741,9 +846,8 @@ async function saveProduct() {
     name, price, icon: document.getElementById("wizIcon").value.trim(), description: document.getElementById("wizDesc").value.trim(), image_url: imageUrl,
     preview_enabled: previewEnabled, ulp_blueprint: ulpJson, form_config: fbSteps,
     customization_allowed: document.getElementById("wizCustomAllowed").checked,
-    is_active: document.getElementById("wizActive").checked,
+    active: document.getElementById("wizActive").checked, // CHANGED TO MATCH DB
     
-    // NEW COLUMNS
     ask_details: document.getElementById("wizAskDetails").checked,
     show_order_now: document.getElementById("wizShowOrderNow").checked,
     show_add_to_cart: document.getElementById("wizShowAddToCart").checked,
@@ -757,9 +861,7 @@ async function saveProduct() {
   toast("✅ Product saved!"); closeProductWizard(); loadAll();
 }
 
-/* ============================================================
-   FORM BUILDER (UPDATED)
-   ============================================================ */
+/* ====== FORM BUILDER ====== */
 function openFormBuilder() { renderFBSidebar(); document.getElementById("formBuilderModal").classList.add("open"); }
 function closeFormBuilder() { document.getElementById("formBuilderModal").classList.remove("open"); }
 
@@ -767,7 +869,7 @@ function renderFBSidebar() {
   const list = document.getElementById("fbStepsList");
   list.innerHTML = fbSteps.map((step, i) => `
     <div class="fb-step-btn ${i === activeStepIndex ? 'active' : ''}" onclick="selectFBStep(${i})">
-      <div><b>Step ${i + 1}</b><br><small style="font-size:10px;color:var(--muted)">${esc(step.title || 'Untitled')}</small></div>
+      <div><b>Q ${i + 1}</b><br><small style="font-size:10px;color:var(--muted)">${esc(step.title || 'Untitled')}</small></div>
       <button class="btn btn-danger btn-sm" onclick="event.stopPropagation(); deleteFBStep(${i})" style="padding:4px 8px;margin-left:10px">×</button>
     </div>
   `).join("") + `
@@ -778,7 +880,7 @@ function renderFBSidebar() {
   renderFBMain();
 }
 function selectFBStep(index) { activeStepIndex = index; renderFBSidebar(); }
-function addFBStep() { fbSteps.push({ title: "", type: "step", fields: [] }); activeStepIndex = fbSteps.length - 1; renderFBSidebar(); }
+function addFBStep() { fbSteps.push({ title: "", type: "step", fields: [], mode: "write", required: false }); activeStepIndex = fbSteps.length - 1; renderFBSidebar(); }
 function deleteFBStep(index) { if(fbSteps.length<=1) return toast("Need at least 1 step", true); fbSteps.splice(index, 1); if(activeStepIndex >= fbSteps.length) activeStepIndex = fbSteps.length - 1; renderFBSidebar(); }
 
 function updateFBTitle(val) { 
@@ -801,7 +903,6 @@ function renderFBMain() {
         <option value="write" ${step.mode === 'write' || !step.mode ? 'selected' : ''}>Text Box (User types)</option>
         <option value="select" ${step.mode === 'select' ? 'selected' : ''}>Dropdown/Chips (User selects)</option>
         <option value="image" ${step.mode === 'image' ? 'selected' : ''}>Photo Upload</option>
-        <option value="link" ${step.mode === 'link' ? 'selected' : ''}>Link / URL</option>
       </select>
     </div>
 
@@ -825,18 +926,14 @@ function renderFBMain() {
   `;
 }
 
-function updateFBMode(val) {
-  fbSteps[activeStepIndex].mode = val;
-  document.getElementById("fbSelectBox").classList.toggle("active", val === "select");
-}
+function updateFBMode(val) { fbSteps[activeStepIndex].mode = val; document.getElementById("fbSelectBox").classList.toggle("active", val === "select"); }
 function updateFBRequired(val) { fbSteps[activeStepIndex].required = val; }
 function addFBOption() { if(!fbSteps[activeStepIndex].options) fbSteps[activeStepIndex].options = []; fbSteps[activeStepIndex].options.push(""); renderFBMain(); }
 function updateFBOption(idx, val) { fbSteps[activeStepIndex].options[idx] = val; }
 function deleteFBOption(idx) { fbSteps[activeStepIndex].options.splice(idx, 1); renderFBMain(); }
 
-/* ============================================================
-   ORDERS (FIXED: IMAGES & CUSTOM FIELDS)
-   ============================================================ */
+
+/* ====== ORDERS (FULLY FIXED) ====== */
 async function loadEcomOrders() {
   const { data, error } = await sb.from("vaan_orders").select("*").in("payment_status", ["paid", "success"]).order("created_at", { ascending: false });
   if (error) { document.getElementById("ecomOrdersList").innerHTML = '<div class="svc-empty"><b>Failed to load orders</b></div>'; return; }
@@ -873,9 +970,29 @@ async function viewOrderDetails(orderId) {
   const { data: answers } = await sb.from("vaan_order_answers").select("*").eq("order_id", orderId);
   const ans = answers || [];
   
-  // FIXED: Look for images inside field_value OR file_url
-  let textFields = ans.filter(a => a.field_value && typeof a.field_value !== 'object');
-  let imageFields = ans.filter(a => (a.file_url && a.file_url !== "") || (a.field_value && typeof a.field_value === 'object' && a.field_value.url));
+  let textAnswers = [];
+  let imageUrls = [];
+  let linkUrls = [];
+
+  ans.forEach(a => {
+    if (!a.field_value) return;
+    let val = a.field_value;
+    
+    // Check if value is JSON/object
+    if (typeof val === 'object' && val !== null) {
+      if (val.url) {
+        imageUrls.push({ key: a.field_key, url: val.url });
+      } else {
+        textAnswers.push({ key: a.field_key, val: JSON.stringify(val) });
+      }
+    } else if (typeof val === 'string') {
+      if (val.startsWith('http')) {
+        linkUrls.push({ key: a.field_key, url: val });
+      } else {
+        textAnswers.push({ key: a.field_key, val: val });
+      }
+    }
+  });
 
   let html = `<div class="ord-section"><h4>Customer Info</h4><div class="ord-grid">
     <div class="ord-item"><div><b>Name</b><span>${esc(o.customer_name)}</span></div><button onclick="copyText('${esc(o.customer_name)}')">📋</button></div>
@@ -883,42 +1000,65 @@ async function viewOrderDetails(orderId) {
     ${o.customer_email ? `<div class="ord-item"><div><b>Email</b><span>${esc(o.customer_email)}</span></div><button onclick="copyText('${esc(o.customer_email)}')">📋</button></div>` : ''}
   </div></div>`;
 
-  // Custom Form Fields
-  if (textFields.length > 0) {
-    html += '<div class="ord-section"><h4>Form Answers</h4><div class="ord-grid">';
-    textFields.forEach(f => {
-      const fieldName = f.field_key.replace(/_/g, ' ').toUpperCase();
-      html += `<div class="ord-item"><div><b>${esc(fieldName)}</b><span>${esc(f.field_value)}</span></div><button onclick="copyText('${esc(f.field_value).replace(/'/g, "\\'")}')">📋</button></div>`;
+  // Custom Form Fields (Surname, etc)
+  if (textAnswers.length > 0) {
+    html += '<div class="ord-section"><h4>Custom Form Answers</h4><div class="ord-grid">';
+    textAnswers.forEach(f => {
+      const fieldName = f.key.replace(/_/g, ' ').toUpperCase();
+      html += `<div class="ord-item"><div><b>${esc(fieldName)}</b><span>${esc(f.val)}</span></div><button onclick="copyText('${esc(f.val).replace(/'/g, "\\'")}')">📋</button></div>`;
+    });
+    html += '</div></div>';
+  }
+
+  // Links
+  if (linkUrls.length > 0) {
+    html += '<div class="ord-section"><h4>Links Provided</h4><div class="ord-grid">';
+    linkUrls.forEach(f => {
+      const fieldName = f.key.replace(/_/g, ' ').toUpperCase();
+      html += `<div class="ord-item"><div><b>${esc(fieldName)}</b><a href="${esc(f.url)}" target="_blank" style="font-weight:600;font-size:15px;color:var(--gold)">${esc(f.url)}</a></div><button onclick="copyText('${esc(f.url)}')">📋</button></div>`;
     });
     html += '</div></div>';
   }
 
   // Photos
-  if (imageFields.length > 0) {
-    html += '<div class="ord-section"><h4>Uploaded Photos</h4><div class="ord-photos">';
-    imageFields.forEach(f => { 
-      const url = f.file_url || f.field_value.url;
-      html += `<img src="${esc(url)}" class="ord-photo" onclick="openPhotoViewer('${esc(url)}')">`; 
+  if (imageUrls.length > 0) {
+    html += '<div class="ord-section"><h4>Uploaded Photos (Click to Download)</h4><div class="ord-photos">';
+    imageUrls.forEach(f => { 
+      html += `<div><img src="${esc(f.url)}" class="ord-photo" onclick="openPhotoViewer('${esc(f.url)}')"><div style="font-size:10px;color:var(--muted);text-align:center;margin-top:4px;">${esc(f.key)}</div></div>`; 
     });
     html += '</div></div>';
   }
 
+  // Design Customisation JSON
+  if (o.customization && Object.keys(o.customization).length > 0) {
+    html += '<div class="ord-section"><h4>Live Design Preferences (Code)</h4><div class="ord-custom-code">' + JSON.stringify(o.customization, null, 2) + '</div></div>';
+  }
+
+  // Hidden Details at bottom
+  html += `<div class="ord-section"><h4>Additional Details</h4><div class="ord-grid">
+    ${o.business_name ? `<div class="ord-item"><div><b>Business Name</b><span>${esc(o.business_name)}</span></div><button onclick="copyText('${esc(o.business_name)}')">📋</button></div>` : ''}
+    ${o.category ? `<div class="ord-item"><div><b>Category</b><span>${esc(o.category)}</span></div><button onclick="copyText('${esc(o.category)}')">📋</button></div>` : ''}
+  </div></div>`;
+
   body.innerHTML = html;
 
-  // Actions
+  // Actions (FIXED LAYOUT)
   const actions = document.getElementById("ordDetailActions");
   if (o.status === 'delivered') {
     actions.innerHTML = `
       <div style="width:100%;text-align:center;padding:14px;background:rgba(37,180,110,.1);border:1px solid var(--green);border-radius:10px;color:var(--green);font-weight:800;font-size:13px;margin-bottom:10px">✅ Delivered to: <a href="${esc(o.delivery_url)}" target="_blank" style="color:white;text-decoration:underline">Link</a></div>
-      <button class="btn btn-danger" onclick="deleteOrder('${o.id}')">🗑 Delete</button><button class="btn btn-dark" onclick="closeOrderDetail()">Close</button>`;
+      <button class="btn btn-dark" onclick="closeOrderDetail()" style="width:100%">Close</button>`;
   } else {
     actions.innerHTML = `
-      <div style="width:100%;display:flex;gap:10px;margin-bottom:12px"><button class="btn btn-dark" style="flex:1;background:${o.status === 'building' ? 'var(--blue)' : ''};color:${o.status === 'building' ? '#fff' : ''}" onclick="markAsBuilding('${o.id}')">🔨 Mark as Building</button></div>
-      <div class="form-row" style="width:100%;margin-bottom:0">
-        <input type="text" id="adminApproxTime" placeholder="Approx delivery time" value="${esc(o.approx_delivery_time || '')}" style="background:#0a0e1a;padding:14px;border-radius:8px;border:1px solid var(--line-soft);color:white;width:100%;margin-bottom:10px">
-        <input type="url" id="deliveryUrlInput" placeholder="Final Delivery Link" style="background:#0a0e1a;padding:14px;border-radius:8px;border:1px solid var(--line-soft);color:white;width:100%">
+      <div style="display:flex;gap:10px;width:100%;margin-bottom:12px">
+        <button class="btn btn-dark" style="flex:1;background:${o.status === 'building' ? 'var(--blue)' : ''};color:${o.status === 'building' ? '#fff' : ''}" onclick="markAsBuilding('${o.id}')">🔨 Mark Building</button>
+        <button class="btn btn-gold" style="flex:1" onclick="markAsDelivered('${o.id}')">📩 Mark Delivered</button>
       </div>
-      <div style="display:flex;gap:10px;width:100%;margin-top:16px"><button class="btn btn-gold" style="flex:1" onclick="markAsDelivered('${o.id}')">📩 Mark Delivered</button><button class="btn btn-dark" onclick="closeOrderDetail()">Close</button></div>`;
+      <div class="form-row" style="width:100%;display:flex;gap:10px;margin-bottom:12px">
+        <input type="text" id="adminApproxTime" placeholder="Approx time" value="${esc(o.approx_delivery_time || '')}" style="flex:1;background:#0a0e1a;padding:14px;border-radius:8px;border:1px solid var(--line-soft);color:white;">
+        <input type="url" id="deliveryUrlInput" placeholder="Final Link" style="flex:1;background:#0a0e1a;padding:14px;border-radius:8px;border:1px solid var(--line-soft);color:white;">
+      </div>
+      <button class="btn btn-dark" onclick="closeOrderDetail()" style="width:100%">Close</button>`;
   }
 }
 
@@ -926,6 +1066,7 @@ function closeOrderDetail() { document.getElementById("orderDetailModal").classL
 async function markAsBuilding(orderId) { const time = document.getElementById("adminApproxTime").value; await sb.from("vaan_orders").update({ status: 'building', approx_delivery_time: time }).eq("id", orderId); toast("✅ Marked as Building"); closeOrderDetail(); loadEcomOrders(); }
 async function markAsDelivered(orderId) {
   const url = document.getElementById("deliveryUrlInput").value.trim();
+  if (!url) return toast("Please enter delivery link", true);
   await sb.from("vaan_orders").update({ status: 'delivered', delivery_url: url, delivered_at: new Date().toISOString() }).eq("id", orderId);
   toast("✅ Order marked as Delivered!");
   closeOrderDetail(); loadEcomOrders();
@@ -933,6 +1074,38 @@ async function markAsDelivered(orderId) {
 async function deleteOrder(orderId) { if (!confirm("Permanently delete this order?")) return; await sb.from("vaan_orders").delete().eq("id", orderId); toast("Order deleted."); closeOrderDetail(); loadEcomOrders(); }
 function openPhotoViewer(url) { document.getElementById("fullPhotoImg").src = url; document.getElementById("downloadPhotoBtn").href = url; document.getElementById("photoViewer").classList.add("open"); }
 function closePhotoViewer() { document.getElementById("photoViewer").classList.remove("open"); document.getElementById("fullPhotoImg").src = ""; }
+
+/* ====== PAGE VIEWS ====== */
+async function loadPageViews() {
+  const range = document.getElementById("viewDateRange").value;
+  const wrap = document.getElementById("pageViewsList"); wrap.innerHTML = '<div class="svc-empty"><b>Loading analytics...</b></div>';
+  let dateFilter = new Date(); if (range === 'today') dateFilter.setHours(0,0,0,0); if (range === '7days') dateFilter.setDate(dateFilter.getDate() - 7); if (range === '30days') dateFilter.setDate(dateFilter.getDate() - 30); if (range === 'all') dateFilter = new Date(0);
+  const { data, error } = await sb.from("vaan_funnel_events").select("product_id, event_type, session_id").gte("created_at", dateFilter.toISOString());
+  if (error) return wrap.innerHTML = '<div class="svc-empty"><b>Error loading analytics</b></div>';
+  
+  const stats = {}; allProducts.forEach(p => stats[p.id] = { name: p.name, views: 0, clicks: 0, sessions: new Set() });
+  (data || []).forEach(ev => {
+    if (stats[ev.product_id]) {
+      if (ev.event_type === 'page_view') stats[ev.product_id].views++;
+      if (ev.event_type === 'product_selected') stats[ev.product_id].clicks++;
+      if (ev.session_id) stats[ev.product_id].sessions.add(ev.session_id);
+    }
+  });
+  const { data: orders } = await sb.from("vaan_orders").select("product_id").eq("payment_status", "paid");
+  const orderCounts = {}; (orders || []).forEach(o => orderCounts[o.product_id] = (orderCounts[o.product_id] || 0) + 1);
+
+  wrap.innerHTML = Object.keys(stats).map(prodId => {
+    const s = stats[prodId]; const ords = orderCounts[prodId] || 0; const convRate = s.clicks > 0 ? ((ords / s.clicks) * 100).toFixed(1) : "0.0";
+    if (s.views === 0 && s.clicks === 0 && ords === 0) return '';
+    return `<div class="item"><div class="item-info"><b>${esc(s.name)}</b><small>Unique Visitors: ${s.sessions.size}</small></div>
+      <div style="display:flex;gap:20px;text-align:center">
+        <div><b style="color:var(--blue);font-size:18px">${s.views}</b><br><small style="font-size:10px;color:var(--muted)">VIEWS</small></div>
+        <div><b style="color:var(--gold);font-size:18px">${s.clicks}</b><br><small style="font-size:10px;color:var(--muted)">CLICKS</small></div>
+        <div><b style="color:var(--green);font-size:18px">${ords}</b><br><small style="font-size:10px;color:var(--muted)">ORDERS</small></div>
+        <div><b style="color:var(--purple);font-size:18px">${convRate}%</b><br><small style="font-size:10px;color:var(--muted)">CONV.</small></div>
+      </div></div>`;
+  }).join("") || '<div class="svc-empty"><b>No analytics data for this period.</b></div>';
+}
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") { closeProductWizard(); closeFormBuilder(); closeOrderDetail(); closePhotoViewer(); }
